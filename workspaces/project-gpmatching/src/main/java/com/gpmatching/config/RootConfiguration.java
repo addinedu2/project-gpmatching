@@ -10,9 +10,13 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+
 import com.gpmatching.mapper.UserMapper;
 import com.gpmatching.service.AccountServiceImpl;
-import com.gpmatching.service.AccountService;
+import com.gpmatching.service.BoardCommentService;
+import com.gpmatching.service.BoardCommentServiceImpl;
+import com.gpmatching.service.CommonBoardService;
+import com.gpmatching.service.CommonBoardServiceImpl;
 import com.gpmatching.service.MatchingBoardService;
 import com.gpmatching.service.MatchingBoardServiceImpl;
 import com.gpmatching.service.MatchingCommentService;
@@ -84,6 +88,18 @@ public class RootConfiguration implements ApplicationContextAware {
 		AccountServiceImpl accountService = new AccountServiceImpl();
 		accountService.setUsermapper(applicationContext.getBean(UserMapper.class));
 		return accountService;
+	}
+	
+	@Bean
+	public CommonBoardService commonBoardService() {
+		CommonBoardService commonBoardService = new CommonBoardServiceImpl();
+		return commonBoardService;
+	}
+	
+	@Bean
+	public BoardCommentService boardCommentService() {
+		BoardCommentService commentService = new BoardCommentServiceImpl();
+		return commentService;
 	}
 	
 
