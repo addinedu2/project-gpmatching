@@ -37,6 +37,6 @@ public class MatchingCommentController {
 		
 		matchingCommentService.writeMatchingComment(matchingComment);
 		
-		return "redirect:/test";
+		return "redirect:/list";
 	}
 }
