@@ -19,6 +19,7 @@
 			<artifactId>spring-context</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -32,12 +33,14 @@
 			<version>4.0.1</version>
 			<scope>provided</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>javax.servlet.jsp-api</artifactId>
 			<version>2.3.3</version>
 			<scope>provided</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -52,7 +55,6 @@
 		    <version>1.18.22</version>
 		    <scope>provided</scope>
 		</dependency>
-		
 				
 		<dependency>
 		    <groupId>com.mysql</groupId>
@@ -85,8 +87,6 @@
 		    <artifactId>mybatis-spring</artifactId>
 		    <version>2.1.1</version>
 		</dependency>
-
-		
 
 	</dependencies>
 

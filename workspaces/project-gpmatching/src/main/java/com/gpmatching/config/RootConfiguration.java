@@ -13,6 +13,10 @@ import org.springframework.core.io.ClassPathResource;
 
 import com.gpmatching.service.MatchingBoardService;
 import com.gpmatching.service.MatchingBoardServiceImpl;
+import com.gpmatching.service.MatchingCommentService;
+import com.gpmatching.service.MatchingCommentServiceImpl;
+import com.gpmatching.service.MatchingReviewService;
+import com.gpmatching.service.MatchingReviewServiceImpl;
 
 
 @Configuration
@@ -60,5 +64,19 @@ public class RootConfiguration implements ApplicationContextAware {
 		return new MatchingBoardServiceImpl();
 	}
 	
-
+	@Bean
+	public MatchingCommentService matchingCommentService() {
+		
+		MatchingCommentService matchingCommentService = new MatchingCommentServiceImpl();
+		
+		return matchingCommentService;
+	}
+	
+	@Bean
+	public MatchingReviewService matchingReviewService() {
+		
+		MatchingReviewService matchingReviewService = new MatchingReviewServiceImpl();
+		
+		return matchingReviewService;
+	}
 }
