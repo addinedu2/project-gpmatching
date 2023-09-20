@@ -70,7 +70,7 @@
                             <div id="navAuthentication" class="collapse " data-bs-parent="#sideNavbar">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link " href="/project-gpmatching/resources/pages/sign-in.html"> Sign In</a>
+                                        <a class="nav-link " href="/project-gpmatching/account/login"> Sign In</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link  " href="/project-gpmatching/account/register"> Sign Up</a>

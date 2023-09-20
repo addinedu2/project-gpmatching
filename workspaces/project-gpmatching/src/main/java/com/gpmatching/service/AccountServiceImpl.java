@@ -1,9 +1,6 @@
 package com.gpmatching.service;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-
 import com.gpmatching.common.Util;
 import com.gpmatching.dto.UserDto;
 import com.gpmatching.mapper.UserMapper;
@@ -27,9 +24,7 @@ public class AccountServiceImpl implements AccountService {
 	@Override 
 	//로그인한 유저 저장
 	public UserDto findLoginUser(UserDto user) {
-		
-		String hashedPasswd = Util.getHashedString(user.getUserPwd(), "SHA-256");
-		user.setUserPwd(hashedPasswd);
+	
 		
 		UserDto loginUser = usermapper.selectUserByIdAnduserPwd(user.getUserId(), user.getUserPwd());
 		return loginUser;  //컨트롤러에서 보자
