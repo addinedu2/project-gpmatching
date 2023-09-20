@@ -1,8 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="UTF-8"%>
-
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -14,15 +12,15 @@
 
 
 <!-- Favicon icon-->
-<link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="/project-gpmatching/resource/assets/images/favicon/favicon.ico">
 
 <!-- Libs CSS -->
 
 
-<link href="../assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-<link href="../assets/libs/dropzone/dist/dropzone.css"  rel="stylesheet">
-<link href="../assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
-<link href="../assets/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet">
+<link href="/project-gpmatching/resource/assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="/project-gpmatching/resource/assets/libs/dropzone/dist/dropzone.css"  rel="stylesheet">
+<link href="/project-gpmatching/resource/assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
+<link href="/project-gpmatching/resource/assets/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet">
 
 
 
@@ -32,8 +30,8 @@
 
 
 <!-- Theme CSS -->
-<link rel="stylesheet" href="../assets/css/theme.min.css">
-  <title>Sign Up | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
+<link rel="stylesheet" href="/project-gpmatching/resource/assets/css/theme.min.css">
+  <title>register | 회원가입</title>
 </head>
 
 <body class="bg-light">
@@ -47,33 +45,48 @@
           <!-- Card body -->
           <div class="card-body p-6">
             <div class="mb-4">
-              <a href="../index.html"><img src="../assets/images/brand/logo/logo-primary.svg" class="mb-2" alt=""></a>
+              <a href="/project-gpmatching/resource/index.html"><img src="/project-gpmatching/resource/assets/images/brand/logo/logo-primary.svg" class="mb-2" alt=""></a>
               <p class="mb-6">Please enter your user information.</p>
 
-            </div>
+            </div>      
             <!-- Form -->
-            <form:form id="registerform" action="register" method="post" modelAttribute="user" >
-              <!-- Username -->
+         
+            <form:form id="registerform" action="register" method="post" modelAttribute="user">
+              <!-- userId -->
               <div class="mb-3">
-                <label for="username" class="form-label">User Name</label>
-                <input type="text" id="username" class="form-control" name="username" placeholder="User Name" required="required">
-              </div>
-              <!-- Email -->
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" id="email" class="form-control" name="email" placeholder="Email address here" required="">
+                <label for="userId" class="form-label">User Id</label>
+                <input type="text" id="userId" class="form-control" name="userId" placeholder="User Name" >
               </div>
               <!-- Password -->
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" id="password" class="form-control" name="password" placeholder="**************" required="">
+                <input type="password" id="userPwd" class="form-control" name="userPwd" placeholder="**************" required="">
               </div>
               <!-- Password -->
               <div class="mb-3">
                 <label for="confirm-password" class="form-label">Confirm
                     Password</label>
-                <input type="password" id="confirm-password" class="form-control" name="password" placeholder="**************" required="">
+                <input type="password" id="confirm-password" class="form-control" name="confirm-password" placeholder="**************" required="">
               </div>
+              <!-- Email -->
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="userEmail" class="form-control" name="userEmail" placeholder="Email address here" required="">
+              </div>
+              <!-- nickname -->
+              <div class="mb-3">
+                <label for="nickname" class="form-label">Nick Name</label>
+                <input type="text" id="nickname" class="form-control" name="nickname" placeholder="닉네임을넣어주세요" required="">
+              </div>
+              <!-- userPhone -->
+              <div class="mb-3">
+                <label for="userPhone" class="form-label">userPhone</label>
+                <input type="text" id="userPhone" class="form-control" name="userPhone" placeholder="000-0000-0000" required="">
+              </div>
+              
+              
+              
+              
               <!-- Checkbox -->
               <div class="mb-3">
                 <div class="form-check custom-checkbox">
@@ -115,21 +128,21 @@
 
   <!-- Scripts -->
   <!-- Libs JS -->
-<script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-<script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="../assets/libs/feather-icons/dist/feather.min.js"></script>
-<script src="../assets/libs/prismjs/prism.js"></script>
-<script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-<script src="../assets/libs/dropzone/dist/min/dropzone.min.js"></script>
-<script src="../assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
-<script src="../assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+<script src="/project-gpmatching/resource/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/project-gpmatching/resource/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/project-gpmatching/resource/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/project-gpmatching/resource/assets/libs/feather-icons/dist/feather.min.js"></script>
+<script src="/project-gpmatching/resource/assets/libs/prismjs/prism.js"></script>
+<script src="/project-gpmatching/resource/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+<script src="/project-gpmatching/resource/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+<script src="/project-gpmatching/resource/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="/project-gpmatching/resource/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
 
 
 
 <!-- Theme JS -->
-<script src="../assets/js/theme.min.js"></script>
+<script src="/project-gpmatching/resource/assets/js/theme.min.js"></script>
 </body>
 
 </html>

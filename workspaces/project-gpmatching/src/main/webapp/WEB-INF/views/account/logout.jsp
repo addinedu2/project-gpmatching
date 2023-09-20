@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -416,7 +416,7 @@
                    <!-- text -->
                 <div class="text-center mb-7">
                   <h1 class="display-4">Layouts</h1>
-                  <p>�α׾ƿ� �Ǽ̽��ϴ�. �ູ�� �Ϸ� �Ǽ���!.</p>
+                  <p>로그아웃 되셨습니다. 행복한 하루 되세요!.</p>
                 </div>
                 <span class="divider fw-bold my-3">Demo layouts</span>
               </div>
