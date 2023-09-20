@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class gameListDto {
+public class GameListDto {
 
 	int gameNo;
 	Date gameRegDate;
