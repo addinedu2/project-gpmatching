@@ -32,19 +32,19 @@
                     data-feather="layers"
 
                     class="nav-icon icon-xs me-2">
-                </i> Game Party Matching
+                </i> 게임 파티 매칭
                 </a>
 
                 <div id="navPages" class="collapse " data-bs-parent="#sideNavbar">
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link " href="/project-gpmatching/boardMatching/lol-list">
-                                LOL matching 게시판
+                                LOL
                 			</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link has-arrow   "  href="/project-gpmatching/boardMatching/battleground-list" >
-                                베그 matching 게시판
+                                배틀그라운드
                                 </a>
 
                         </li>
@@ -52,7 +52,7 @@
 
                         <li class="nav-item">
                             <a class="nav-link " href="/project-gpmatching/boardMatching/overwatch-list">
-                                옵치 matching 게시판
+                                오버워치
                 			</a>
                         </li>
                     </ul>
@@ -65,19 +65,19 @@
                         <li class="nav-item">
                             <a class="nav-link has-arrow  collapsed " href="#!" data-bs-toggle="collapse" data-bs-target="#navAuthentication" aria-expanded="false" aria-controls="navAuthentication">
                                 <i data-feather="lock" class="nav-icon icon-xs me-2">
-                                </i> Authentication
+                                </i> 계정
                             </a>
                             <div id="navAuthentication" class="collapse " data-bs-parent="#sideNavbar">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link " href="/project-gpmatching/resources/pages/sign-in.html"> Sign In</a>
+                                        <a class="nav-link " href="/project-gpmatching/resources/pages/sign-in.html"> 로그인</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link  " href="/project-gpmatching/account/register"> Sign Up</a>
+                                        <a class="nav-link  " href="/project-gpmatching/account/register"> 회원가입</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link " href="/project-gpmatching/resources/pages/forget-password.html">
-                                             Forget Password
+                                             비밀번호 찾기
                                 </a>
                                     </li>
 
@@ -93,7 +93,7 @@
                                 >
                                 </i
                                       >
-                                Layouts
+                                커뮤니티
                             </a>
                         </li>
 
