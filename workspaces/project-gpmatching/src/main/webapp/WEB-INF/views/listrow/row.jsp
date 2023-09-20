@@ -9,18 +9,18 @@
                         <div class="card">
                             <!-- card header  -->
                             <div class="card-header bg-white  py-4">
-                                <h4 class="mb-0">Active Projects</h4>
+                                <h4 class="mb-0">LEAGUE OF LEGENDS</h4>
                             </div>
                             <!-- table  -->
                             <div class="table-responsive">
                                 <table class="table text-nowrap mb-0">
                                     <thead class="table-light">
                                         <tr>
-                                            <th>Project name</th>
-                                            <th>Hours</th>
-                                            <th>priority</th>
-                                            <th>Members</th>
-                                            <th>Progress</th>
+                                            <th>제목</th>
+                                            <th>등록일</th>
+                                            <th>티어</th>
+                                            <th>인원</th>
+                                            <th>내용</th>
                                         </tr>
                                     </thead>
                                     <tbody>
