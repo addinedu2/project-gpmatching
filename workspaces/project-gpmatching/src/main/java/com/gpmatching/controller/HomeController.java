@@ -9,8 +9,10 @@ public class HomeController {
 	@GetMapping(path = { "/", "/home" })
 	public String home() {
 		
-
+		
 		return "/home";
+		
+		//return "/home";
 
 	}
 	

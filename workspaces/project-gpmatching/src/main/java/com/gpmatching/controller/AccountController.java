@@ -53,12 +53,14 @@ public class AccountController {
 	
 		if (loginUser != null) { //loginUser가 비지 않았다=데이터베이스에 id와 pw가 일치한다=로그인 하기
 			session.setAttribute("loginuser", loginUser); //loginUser 정보를 "loginuser"에 넣기
+			System.out.println("로그인 성공");
 			return "redirect:/home";
 		} else {
 			model.addAttribute("loginfail", true); // 로그인 실패를 했으니 "loginfail"에 참 넣기
+			System.out.println("로그인 실패");
 			return "account/login";
-		}
-			
+		}		
+		
 	}
 		
 	@GetMapping(path = {"/logout"})

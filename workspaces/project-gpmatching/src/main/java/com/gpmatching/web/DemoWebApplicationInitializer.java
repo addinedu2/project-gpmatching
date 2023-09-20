@@ -30,10 +30,10 @@ public class DemoWebApplicationInitializer extends AbstractAnnotationConfigDispa
 	
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
-//		FilterRegistration characterEncodingFilter = servletContext.addFilter("characterEncodingFilter", CharacterEncodingFilter.class);
-//		characterEncodingFilter.setInitParameter("encoding", "UTF-8");
-//		characterEncodingFilter.setInitParameter("forceEncoding", "true");
-//		characterEncodingFilter.addMappingForUrlPatterns(null, true, "/*");
+		FilterRegistration characterEncodingFilter = servletContext.addFilter("characterEncodingFilter", CharacterEncodingFilter.class);
+		characterEncodingFilter.setInitParameter("encoding", "UTF-8");
+		characterEncodingFilter.setInitParameter("forceEncoding", "true");
+		characterEncodingFilter.addMappingForUrlPatterns(null, true, "/*");
 		
 		super.onStartup(servletContext);
 	}
