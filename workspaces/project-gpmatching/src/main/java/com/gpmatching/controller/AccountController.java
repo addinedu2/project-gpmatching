@@ -1,7 +1,7 @@
 package com.gpmatching.controller;
 
-import javax.servlet.http.HttpSession;
 
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -17,6 +17,7 @@ import com.gpmatching.service.AccountService;
 @Controller
 @RequestMapping(path = { "/account" })
 public class AccountController {
+
 
 	private AccountService accountService;
 
@@ -41,8 +42,6 @@ public class AccountController {
 	}//회원가입 폼 한 후 홈으로 돌아오기
 	
 	
-	
-	
 	@GetMapping(path = {"/login"})
 	public String loginForm( ) {
 		return "account/login";
@@ -50,16 +49,16 @@ public class AccountController {
 	
 	@PostMapping(path = {"/login"})
 	public String login(UserDto user, HttpSession session, Model model) {
-	UserDto loginUser = accountService.findloginUser(user);
+	UserDto loginUser = accountService.findLoginUser(user);
 	
-	if (loginUser != null) { //loginUser가 비지 않았다=데이터베이스에 id와 pw가 일치한다=로그인 하기
-		session.setAttribute("loginuser", loginUser); //loginUser 정보를 "loginuser"에 넣기
-		return "redirect:/home";
-	} else {
-		model.addAttribute("loginfail", true); // 로그인 실패를 했으니 "loginfail"에 참 넣기
-		return "account/login";
-	}
-		
+		if (loginUser != null) { //loginUser가 비지 않았다=데이터베이스에 id와 pw가 일치한다=로그인 하기
+			session.setAttribute("loginuser", loginUser); //loginUser 정보를 "loginuser"에 넣기
+			return "redirect:/home";
+		} else {
+			model.addAttribute("loginfail", true); // 로그인 실패를 했으니 "loginfail"에 참 넣기
+			return "account/login";
+		}
+			
 	}
 		
 	@GetMapping(path = {"/logout"})
@@ -67,10 +66,6 @@ public class AccountController {
 		session.removeAttribute("loginuser"); //세션 정보에서 "loginuser"를 뺀다=로그아웃
 		return "account/logout";
 	}
-	
-	
-	
-	
 	
 	
 	@GetMapping(path = {"/mypage"})
@@ -87,4 +82,20 @@ public class AccountController {
 	} // 마이페이지 수정 버튼
 	
 
+
+
+	/*
+	
+	
+	@PostMapping(path = { "/register" })
+	public String register(@ModelAttribute("user") @Valid UserDto user, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "account/register";
+		}
+		accountService.register(user);
+		
+		return "redirect:/home";
+	}
+	*/
 }

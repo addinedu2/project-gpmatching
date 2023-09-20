@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -21,15 +23,9 @@
 <link href="../assets/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet">
 
 
-
-
-
-
-
-
 <!-- Theme CSS -->
 <link rel="stylesheet" href="../assets/css/theme.min.css">
-  <title>Sign In | ∑Œ±◊¿Œ </title>
+  <title>Sign In | Î°úÍ∑∏Ïù∏ </title>
 </head>
 
 <body class="bg-light">
@@ -79,12 +75,12 @@
 
                 <div class="d-md-flex justify-content-between mt-4">
                   <div class="mb-2 mb-md-0">
-                    <a href="/webapp/register.jsp" class="fs-5">»∏ø¯ ∞°¿‘ </a>
+                    <a href="/webapp/register.jsp" class="fs-5">ÌöåÏõê Í∞ÄÏûÖ </a>
                   </div>
                   <div>
                     <a href="forget-password.html" class="text-inherit
                         fs-5">Forgot your password?</a>
-                         <!-- ∫Òπ–π¯»£ √£±‚ -->
+                         <!-- ÎπÑÎ∞ÄÎ≤àÌò∏ Ï∞æÍ∏∞ -->
                   </div>
 
                 </div>
@@ -97,23 +93,36 @@
       </div>
     </div>
   </div>
-  <!-- Scripts -->
-  <!-- Libs JS -->
-<script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-<script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="../assets/libs/feather-icons/dist/feather.min.js"></script>
-<script src="../assets/libs/prismjs/prism.js"></script>
-<script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-<script src="../assets/libs/dropzone/dist/min/dropzone.min.js"></script>
-<script src="../assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
-<script src="../assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
 
 
 
-<!-- Theme JS -->
-<script src="../assets/js/theme.min.js"></script>
+
+			<!-- Scripts -->
+			<!-- Libs JS -->
+			<script
+				src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
+			<script
+				src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+			<script
+				src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+			<script
+				src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
+			<script src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
+			<script
+				src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+			<script
+				src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+			<script
+				src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+			<script
+				src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+
+
+
+			<!-- Theme JS -->
+			<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 </body>
 
 </html>

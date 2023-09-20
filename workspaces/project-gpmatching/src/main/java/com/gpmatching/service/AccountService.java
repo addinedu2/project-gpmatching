@@ -4,9 +4,9 @@ import com.gpmatching.dto.UserDto;
 
 public interface AccountService {
 
-	void register(UserDto user);
+
+
+	public void register(UserDto user);
 	
-	UserDto findloginUser(UserDto user);
-
-
+	public UserDto findLoginUser(UserDto user);
 }

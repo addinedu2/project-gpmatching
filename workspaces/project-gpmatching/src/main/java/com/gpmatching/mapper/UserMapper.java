@@ -1,11 +1,13 @@
 package com.gpmatching.mapper;
 
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.gpmatching.dto.UserDto;
+
 //MapperFactoryBean이 구현 클래스를 만들때 사용하는 인터페이스
 //반드시 mapper.xml 파일과 패키지, 인터페이스 이름, 메서드 이름 등이 일치하도록 작성
 // <mybatis:scan 을 통해 Mapper 인터페이스로 사용되는 설정
@@ -33,4 +35,3 @@ public interface UserMapper {
 
 
 }
-			

@@ -9,7 +9,9 @@ public class HomeController {
 	@GetMapping(path = { "/", "/home" })
 	public String home() {
 		
-		return "/account/register";
+
+		return "/home";
+
 	}
 	
 }

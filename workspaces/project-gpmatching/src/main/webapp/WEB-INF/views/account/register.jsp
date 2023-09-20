@@ -1,64 +1,135 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
+<html lang="ko">
 
-<html>
 <head>
-	<meta charset='utf-8' />
-	<title>Register</title>
-	<link rel='Stylesheet' href='/spring-demoweb/resources/styles/default.css' />
-	<link rel='Stylesheet' href='/spring-demoweb/resources/styles/input.css' />
+  <!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+
+<!-- Favicon icon-->
+<link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon/favicon.ico">
+
+<!-- Libs CSS -->
+
+
+<link href="../assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="../assets/libs/dropzone/dist/dropzone.css"  rel="stylesheet">
+<link href="../assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
+<link href="../assets/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+<!-- Theme CSS -->
+<link rel="stylesheet" href="../assets/css/theme.min.css">
+  <title>Sign Up | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
 </head>
-<body>
 
-	<div id='pageContainer'>
+<body class="bg-light">
+  <!-- container -->
+  <div class="container d-flex flex-column">
+    <div class="row align-items-center justify-content-center g-0
+        min-vh-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xxl-4 py-8 py-xl-0">
+        <!-- Card -->
+        <div class="card smooth-shadow-md">
+          <!-- Card body -->
+          <div class="card-body p-6">
+            <div class="mb-4">
+              <a href="../index.html"><img src="../assets/images/brand/logo/logo-primary.svg" class="mb-2" alt=""></a>
+              <p class="mb-6">Please enter your user information.</p>
+
+            </div>
+            <!-- Form -->
+            <form:form id="registerform" action="register" method="post" modelAttribute="user" >
+              <!-- Username -->
+              <div class="mb-3">
+                <label for="username" class="form-label">User Name</label>
+                <input type="text" id="username" class="form-control" name="username" placeholder="User Name" required="required">
+              </div>
+              <!-- Email -->
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" class="form-control" name="email" placeholder="Email address here" required="">
+              </div>
+              <!-- Password -->
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" class="form-control" name="password" placeholder="**************" required="">
+              </div>
+              <!-- Password -->
+              <div class="mb-3">
+                <label for="confirm-password" class="form-label">Confirm
+                    Password</label>
+                <input type="password" id="confirm-password" class="form-control" name="password" placeholder="**************" required="">
+              </div>
+              <!-- Checkbox -->
+              <div class="mb-3">
+                <div class="form-check custom-checkbox">
+                  <input type="checkbox" class="form-check-input" id="agreeCheck">
+                  <label class="form-check-label" for="agreeCheck"><span
+                        class="fs-5">I agree to the <a
+                          href="terms-condition-page.html">Terms of
+                          Service </a>and
+                        <a href="terms-condition-page.html">Privacy Policy.</a></span></label>
+                </div>
+              </div>
+              <div>
+                <!-- Button -->
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-primary">
+                    Create Free Account
+                  </button>
+                </div>
+
+                <div class="d-md-flex justify-content-between mt-4">
+                  <div class="mb-2 mb-md-0">
+                    <a href="sign-up.html" class="fs-5">Already
+                        member? Login </a>
+                  </div>
+                  <div>
+                    <a href="forget-password.html" class="text-inherit
+                        fs-5">Forgot your password?</a>
+                  </div>
+
+                </div>
+              </div>
+
+            </form:form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <!-- Libs JS -->
+<script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../assets/libs/feather-icons/dist/feather.min.js"></script>
+<script src="../assets/libs/prismjs/prism.js"></script>
+<script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+<script src="../assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+<script src="../assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="../assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
 
-		
-		<div id="inputcontent">
-			<br /><br />
-		    <div id="inputmain">
-		        <div class="inputsubtitle">회원기본정보</div>
-		        <!-- <form id="registerform" action="register1" method="post"> -->
-				<form id="registerform" action="account/register" method="post">
-		        <table>
-		            <tr>
-		                <th>아이디(ID)</th>
-		                <td>
-		                    <input type="text" style="width:280px" name="userId" />
-		                </td>
-		            </tr>
-		            <tr>
-		                <th>비밀번호</th>
-		                <td>
-		                	<input type="password" style="width:280px" name="userPwd" />
-		                </td>
-		            </tr>
-		           <tr>
-		                <th>nickname</th>
-		                <td>
-		                    <input type="text" style="width:280px" name="nickname" />
-		                </td>
-		            </tr>
-		            <tr>
-		                <th>이메일</th>
-		                <td>
-		                	<input type="text" style="width:280px" name="userEmail" />
-		                </td>
-		            </tr>
-		                       		            
-		        </table>
-		        <div class="buttons">
-		        	<input id="register" type="submit" value="등록" style="height:25px" />
-		        	<input id="cancel" type="button" value="취소" style="height:25px"  />
 
-		        </div>
-		        </form>
-		    </div>
-		</div>   	
-	</div>
 
+<!-- Theme JS -->
+<script src="../assets/js/theme.min.js"></script>
 </body>
+
 </html>
-
-

@@ -28,7 +28,9 @@ public class Util {
 		try {
 			//암호화 처리 인스턴스 생성
 			MessageDigest md = MessageDigest.getInstance(algorithm);
-			hashedData = md.digest(source.getBytes());//지정된 알고리즘으로 암호화
+
+			hashedData = md.digest(source.getBytes());//평문을 지정된 알고리즘으로 암호화( 결과 : byte[] )
+
 		} catch (NoSuchAlgorithmException ex) {	
 			hashedData = null;
 		}
