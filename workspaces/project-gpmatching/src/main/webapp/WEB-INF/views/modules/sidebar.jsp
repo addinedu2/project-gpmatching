@@ -4,13 +4,15 @@
  <nav class="navbar-vertical navbar">
     <div class="nav-scroller">
         <!-- Brand logo -->
-        <a class="navbar-brand" href="/spring-demoweb/resources/index.html">
-            <img src="/spring-demoweb/resources/assets/images/brand/logo/logo.svg" alt="" />
+        
+        <a class="navbar-brand" href="/project-gpmatching/resources/index.html">
+            <img src="/project-gpmatching/resources/assets/images/brand/logo/opgglogo.svg" alt="" />
         </a>
+        
         <!-- Navbar nav -->
         <ul class="navbar-nav flex-column" id="sideNavbar">
             <li class="nav-item">
-                <a class="nav-link has-arrow  active " href="/spring-demoweb/resources/index.html">
+                <a class="nav-link has-arrow  active " href="/project-gpmatching/home">
                     <i data-feather="home" class="nav-icon icon-xs me-2"></i>  Dashboard
                 </a>
 
@@ -25,47 +27,33 @@
 
              <!-- Nav item -->
              <li class="nav-item">
-                <a class="nav-link has-arrow  collapsed " href="#!" data-bs-toggle="collapse" data-bs-target="#navPages" aria-expanded="false" aria-controls="navPages">
+                <a class="nav-link has-arrow  collapsed " href="#" data-bs-toggle="collapse" data-bs-target="#navPages" aria-expanded="false" aria-controls="navPages">
                     <i
                     data-feather="layers"
 
                     class="nav-icon icon-xs me-2">
-                </i> LEAGUE OF LEGENDS
+                </i> Game Party Matching
                 </a>
 
                 <div id="navPages" class="collapse " data-bs-parent="#sideNavbar">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link " href="/spring-demoweb/resources/pages/profile.html">
-                                Profile
-                </a>
+                            <a class="nav-link " href="/project-gpmatching/boardMatching/lol-list">
+                                LOL matching 게시판
+                			</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link has-arrow   "  href="/spring-demoweb/resources/pages/settings.html" >
-                                Settings
+                            <a class="nav-link has-arrow   "  href="/project-gpmatching/boardMatching/battleground-list" >
+                                베그 matching 게시판
                                 </a>
 
                         </li>
 
 
                         <li class="nav-item">
-                            <a class="nav-link " href="/spring-demoweb/resources/pages/billing.html">
-                                Billing
-                </a>
-                        </li>
-
-
-
-
-                        <li class="nav-item">
-                            <a class="nav-link " href="/spring-demoweb/resources/pages/pricing.html">
-                               Pricing
-                </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="/spring-demoweb/resources/pages/404-error.html">
-                                404 Error
-                </a>
+                            <a class="nav-link " href="/project-gpmatching/boardMatching/overwatch-list">
+                                옵치 matching 게시판
+                			</a>
                         </li>
                     </ul>
                 </div>
@@ -82,13 +70,13 @@
                             <div id="navAuthentication" class="collapse " data-bs-parent="#sideNavbar">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link " href="/spring-demoweb/resources/pages/sign-in.html"> Sign In</a>
+                                        <a class="nav-link " href="/project-gpmatching/resources/pages/sign-in.html"> Sign In</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link  " href="/spring-demoweb/resources/pages/sign-up.html"> Sign Up</a>
+                                        <a class="nav-link  " href="/project-gpmatching/resources/pages/sign-up.html"> Sign Up</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link " href="/spring-demoweb/resources/pages/forget-password.html">
+                                        <a class="nav-link " href="/project-gpmatching/resources/pages/forget-password.html">
                                              Forget Password
                                 </a>
                                     </li>
@@ -97,7 +85,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="/spring-demoweb/resources/pages/layout.html">
+                            <a class="nav-link " href="/project-gpmatching/resources/pages/layout.html">
                                 <i
                                     data-feather="sidebar"
 
@@ -116,7 +104,7 @@
 
                         <!-- Nav item -->
                         <li class="nav-item">
-                            <a class="nav-link has-arrow " href="/spring-demoweb/resources/docs/accordions.html" >
+                            <a class="nav-link has-arrow " href="/project-gpmatching/resources/docs/accordions.html" >
                                 <i data-feather="package" class="nav-icon icon-xs me-2" >
                             </i>  Components
                             </a>
@@ -187,13 +175,13 @@
 
                         <!-- Nav item -->
                         <li class="nav-item">
-                            <a class="nav-link has-arrow " href="/spring-demoweb/resources/docs/index.html" >
+                            <a class="nav-link has-arrow " href="/project-gpmatching/resources/docs/index.html" >
                                 <i data-feather="clipboard" class="nav-icon icon-xs me-2" >
                             </i>  Docs
                             </a>
                          </li>
                          <li class="nav-item">
-                            <a class="nav-link has-arrow " href="/spring-demoweb/resources/docs/changelog.html" >
+                            <a class="nav-link has-arrow " href="/project-gpmatching/resources/docs/changelog.html" >
                                 <i data-feather="git-pull-request" class="nav-icon icon-xs me-2" >
                             </i>  Changelog
                             </a>

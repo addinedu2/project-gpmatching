@@ -2,7 +2,7 @@
 	pageEncoding="utf-8"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 <!-- Required meta tags -->
@@ -42,7 +42,7 @@
 <!-- Theme CSS -->
 <link rel="stylesheet"
 	href="/project-gpmatching/resources/assets/css/theme.min.css">
-<title>Homepage | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
+<title>gpMatching site</title>
 </head>
 
 <body class="bg-light">

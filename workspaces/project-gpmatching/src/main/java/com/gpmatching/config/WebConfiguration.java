@@ -14,6 +14,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan(basePackages = { "com.gpmatching.controller" })
 public class WebConfiguration implements WebMvcConfigurer {
 	
+	
+	
 	@Bean
 	public InternalResourceViewResolver internalResourceViewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
