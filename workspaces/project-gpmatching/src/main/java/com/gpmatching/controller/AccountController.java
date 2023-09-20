@@ -59,8 +59,8 @@ public class AccountController {
 			model.addAttribute("loginfail", true); // 로그인 실패를 했으니 "loginfail"에 참 넣기
 			System.out.println("로그인 실패");
 			return "account/login";
-		}
-			
+		}		
+		
 	}
 		
 	@GetMapping(path = {"/logout"})
