@@ -46,15 +46,15 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-
-		<!-- end of servlet -->
+	<!-- end of servlet -->
 
 		<dependency>
-		    <groupId>org.projectlombok</groupId>
-		    <artifactId>lombok</artifactId>
-		    <version>1.18.22</version>
-		    <scope>provided</scope>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.28</version>
+			<scope>provided</scope>
 		</dependency>
+
 				
 		<dependency>
 		    <groupId>com.mysql</groupId>
@@ -96,6 +96,9 @@
 
 	</dependencies>
 
+		
+
+
 	<build>
 		<plugins>
 			<plugin>
@@ -112,6 +115,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.3.2</version>
 			</plugin>
+
 
 		</plugins>
 	</build>

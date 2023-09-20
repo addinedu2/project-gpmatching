@@ -1,18 +1,21 @@
 package com.gpmatching.dto;
 
-import java.util.Date;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import java.sql.Date;
 
 import lombok.Data;
+
 
 @Data
 public class UserDto {
 
 	private int userNo;
+	private String userId;
+	private String userPwd;
+	private String userEmail;
+
 	
+/*
 	@NotBlank(message = "아이디를 입력하세요")
 	@Pattern(regexp = "^[a-zA-Z0-9]{8,12}$", message = "아이디는 영문자, 숫자 조합으로 8~12 문자입니다.") // 정규표션식 ^ : 시작, $ : 끝
 	private String userId;
@@ -25,10 +28,21 @@ public class UserDto {
 	@NotBlank(message = "이메일을 입력하세요")
 	@Email(message = "이메일 형식이 아닙니다.")
 	private String userEmail;
-	
+	*/
+
 	private String nickname;
 	private String userPhone;
 	private String userGrade;
 	private Date regDate;
-	
+
+
 }
+
+//패스워드 정규식
+//	@NotBlank(message = "아이디를 입력하세요")
+//	@Pattern(regexp = "[a-zA-Z0-9]{8,12}$", message = "아이디는 영문자, 숫자 포함 8~12 문자입니다")//형식. 영어+숫자로 8~12개
+//	private String memberId;
+// AccountController의 유효성 검사를 살리고 싶으면 이렇게 만들어주자
+
+
+

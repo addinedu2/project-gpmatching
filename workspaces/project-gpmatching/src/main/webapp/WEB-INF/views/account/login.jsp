@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=utf-8"
+<%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 
 <!DOCTYPE html>
@@ -23,15 +23,9 @@
 <link href="../assets/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet">
 
 
-
-
-
-
-
-
 <!-- Theme CSS -->
 <link rel="stylesheet" href="../assets/css/theme.min.css">
-  <title>Sign In | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
+  <title>Sign In | 로그인 </title>
 </head>
 
 <body class="bg-light">
@@ -47,18 +41,19 @@
             <div class="mb-4">
               <a href="../index.html"><img src="../assets/images/brand/logo/logo-primary.svg" class="mb-2" alt=""></a>
               <p class="mb-6">Please enter your user information.</p>
+              
             </div>
             <!-- Form -->
             <form>
               <!-- Username -->
               <div class="mb-3">
-                <label for="email" class="form-label">Username or email</label>
-                <input type="email" id="email" class="form-control" name="email" placeholder="Email address here" required="">
+                <label for="email" class="form-label">Username</label>
+                <input type="text" id="userId" class="form-control" name="userId" placeholder="USER ID here" required="">
               </div>
               <!-- Password -->
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" id="password" class="form-control" name="password" placeholder="**************" required="">
+                <input type="password" id="userPwd" class="form-control" name="userPwd" placeholder="**************" required="">
               </div>
               <!-- Checkbox -->
               <div class="d-lg-flex justify-content-between align-items-center
@@ -67,6 +62,7 @@
                   <input type="checkbox" class="form-check-input" id="rememberme">
                   <label class="form-check-label" for="rememberme">Remember
                       me</label>
+                     
                 </div>
 
               </div>
@@ -79,12 +75,12 @@
 
                 <div class="d-md-flex justify-content-between mt-4">
                   <div class="mb-2 mb-md-0">
-                    <a href="sign-up.html" class="fs-5">Create An
-                        Account </a>
+                    <a href="/webapp/register.jsp" class="fs-5">회원 가입 </a>
                   </div>
                   <div>
                     <a href="forget-password.html" class="text-inherit
                         fs-5">Forgot your password?</a>
+                         <!-- 비밀번호 찾기 -->
                   </div>
 
                 </div>
@@ -97,48 +93,7 @@
       </div>
     </div>
   </div>
-  <!-- Scripts -->
-  <!-- Libs JS -->
-<script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-<script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="../assets/libs/feather-icons/dist/feather.min.js"></script>
-<script src="../assets/libs/prismjs/prism.js"></script>
-<script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-<script src="../assets/libs/dropzone/dist/min/dropzone.min.js"></script>
-<script src="../assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
-<script src="../assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
-
-
-
-<!-- Theme JS -->
-<script src="../assets/js/theme.min.js"></script>
-</body>
-
-</html>
-
-
-
-
-
-
-<!-- Theme CSS -->
-<link rel="stylesheet"
-	href="/project-gpmatching/resources/assets/css/theme.min.css">
-<title>Homepage | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
-</head>
-
-<body class="bg-light">
-	<div id="db-wrapper">
-		<!-- navbar vertical -->
-		<!-- Sidebar -->
-		<jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
-		<!-- Page content -->
-		<div id="page-content">
-		<jsp:include page="/WEB-INF/views/modules/topheader.jsp" />
-		<!-- Container fluid -->
-		<jsp:include page="/WEB-INF/views/modules/header.jsp" />
 
 
 
