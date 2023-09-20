@@ -209,7 +209,10 @@
 </div>
 	<!-- Container fluid -->
 	
-	<a href="/project-gpmatching/boardMatching/write">게시글 쓰기</a>
+	<!-- Primary Button -->
+	<a href="/project-gpmatching/boardMatching/write">
+  	  <button type="button" class="btn btn-primary mb-2">LoL 매칭 게시글 쓰기</button>
+  	</a>
 	<jsp:include page="/WEB-INF/views/listrow/row.jsp" />
       </div>
     </div>
