@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
+import com.gpmatching.service.AccountService;
+import com.gpmatching.service.AccountServiceImpl;
 import com.gpmatching.service.MatchingBoardService;
 import com.gpmatching.service.MatchingBoardServiceImpl;
 import com.gpmatching.service.MatchingCommentService;
@@ -57,6 +59,11 @@ public class RootConfiguration implements ApplicationContextAware {
 		
 	}
 	
+	@Bean
+	public AccountService accountService() {
+		
+		return new AccountServiceImpl();
+	}
 
 	@Bean
 	public MatchingBoardService matchingBoardService() {
