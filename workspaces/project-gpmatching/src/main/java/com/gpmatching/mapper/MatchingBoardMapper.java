@@ -17,10 +17,10 @@ public interface MatchingBoardMapper {
 			+ "#{ readCount }, #{ deleted }, #{ userNo }, #{ gameNo })")
 	*/
 	
-	@Insert( "insert into matchingboard ( boardTitle, "
-			+ "boardContent, preferGender, matchingClose ) "
-			+ "values ( #{ boardTitle }, #{ boardContent },"
-			+ "#{ preferGender }, #{ matchingClose } )")
+	@Insert( "insert into MatchingBoard ( boardTitle, "
+			+ "boardContent, preferGender, mic) "
+			+ "values ( #{ boardTitle }, #{ boardContent }, "
+			+ "#{ preferGender }, #{ mic } )")
 	void insertMatchingBoard(MatchingBoardDto matchingBoardDto);
 
 }
