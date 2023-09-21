@@ -65,7 +65,7 @@
 								비밀번호 찾기 </a></li>
 
 
-<<<<<<< HEAD
+
                         <!-- Nav item -->
                         <li class="nav-item">
                             <a class="nav-link has-arrow  collapsed " href="#!" data-bs-toggle="collapse" data-bs-target="#navAuthentication" aria-expanded="false" aria-controls="navAuthentication">
@@ -94,8 +94,7 @@
                                              Forget Password
                                 </a>
                                     </li>
-=======
->>>>>>> 9068bbb78c3e16d46d3ace3818f283895df85296
+
 
 					</ul>
 				</div>
