@@ -253,6 +253,7 @@
         class="nav-icon me-2 icon-xs"></i></a>
     <div class="ms-lg-3 d-none d-md-none d-lg-block">
       <!-- Form -->
+        <form action="editmypage" method="post">
       <form class="d-flex align-items-center">
         <input type="search" class="form-control" placeholder="Search" />
       </form>
