@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=utf-8"
+﻿﻿<%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 
 <nav class="navbar-vertical navbar">
@@ -56,50 +56,22 @@
 				<div id="navAuthentication" class="collapse "
 					data-bs-parent="#sideNavbar">
 					<ul class="nav flex-column">
-						<li class="nav-item"><a class="nav-link "
-							href="/project-gpmatching/account/login"> 로그인</a></li>
+						<!-- <li class="nav-item"><a class="nav-link "
+							href="/project-gpmatching/account/login"> 로그인</a></li> -->
 						<li class="nav-item"><a class="nav-link  "
 							href="/project-gpmatching/account/register"> 회원가입</a></li>
-						<li class="nav-item"><a class="nav-link "
+						<!-- <li class="nav-item"><a class="nav-link "
+							href="/project-gpmatching/account/mypage"> 마이페이지</a></li>
+						 --><li class="nav-item">
+							<a class="nav-link  "
 							href="/project-gpmatching/resources/pages/forget-password.html">
-								비밀번호 찾기 </a></li>
+							비밀번호 찾기 </a>
+						</li>
 
 
-<<<<<<< HEAD
-                        <!-- Nav item -->
-                        <li class="nav-item">
-                            <a class="nav-link has-arrow  collapsed " href="#!" data-bs-toggle="collapse" data-bs-target="#navAuthentication" aria-expanded="false" aria-controls="navAuthentication">
-                                <i data-feather="lock" class="nav-icon icon-xs me-2">
-                                </i> Authentication
-                            </a>
-                            <div id="navAuthentication" class="collapse " data-bs-parent="#sideNavbar">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="/project-gpmatching/account/login"> Sign In</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link  " href="/project-gpmatching/account/register"> Sign Up</a>
-                                    </li>
-                                        <li class="nav-item">
-                                        <a class="nav-link  " href="/project-gpmatching/account/logout"> Sign out</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link  " href="/project-gpmatching/account/mypage"> my page</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link  " href="/project-gpmatching/account/editMypage"> editMypage</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="/project-gpmatching/resources/pages/forget-password.html">
-                                             Forget Password
-                                </a>
-                                    </li>
-=======
->>>>>>> 9068bbb78c3e16d46d3ace3818f283895df85296
 
 					</ul>
-				</div>
-			</li>
+				</div></li>
 			<li class="nav-item"><a class="nav-link "
 				href="/project-gpmatching/resources/pages/layout.html"> <i
 					data-feather="sidebar" class="nav-icon icon-xs me-2"> </i> 커뮤니티
