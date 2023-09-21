@@ -42,9 +42,9 @@ public class GameListController {
 	}
 	
 	@GetMapping(path = {"/list"} )
-	public String iistGameList(GameListDto game) {
+	public String listGameList() {
 		
-		gameListService.list();
+		gameListService.listGameList();
 		
 		return "/gamelist/list";
 		
