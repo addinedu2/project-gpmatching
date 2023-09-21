@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -253,6 +256,7 @@
         class="nav-icon me-2 icon-xs"></i></a>
     <div class="ms-lg-3 d-none d-md-none d-lg-block">
       <!-- Form -->
+      <form action="mypage" method="post">
       <form class="d-flex align-items-center">
         <input type="search" class="form-control" placeholder="Search" />
       </form>
@@ -446,12 +450,12 @@
                   </div>
                   <!-- text -->
                   <div class="lh-1">
-                    <h2 class="mb-0">Jitu Chauhan
+                    <h2 class="mb-0"> ${user.nickname}   <!-- 닉네임 -->
                       <a href="#!" class="text-decoration-none" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="Beginner">
 
                       </a>
                     </h2>
-                    <p class="mb-0 d-block">@imjituchauhan</p>
+                    <p class="mb-0 d-block">@${user.userId} <!-- 유저 아이디 --></p>
                   </div>
                 </div>
                 <div>
@@ -512,20 +516,20 @@
                     </div>
                     <div class="col-6 mb-5">
                       <h6 class="text-uppercase fs-5 ls-2">Phone </h6>
-                      <p class="mb-0">+32112345689</p>
+                      <p class="mb-0">${user.userPhone}</p>
                     </div>
                     <div class="col-6 mb-5">
-                      <h6 class="text-uppercase fs-5 ls-2">Date of Birth </h6>
-                      <p class="mb-0">01.10.1997</p>
+                      <h6 class="text-uppercase fs-5 ls-2">Date of signed up </h6>
+                      <p class="mb-0"><fmt:formatDate value="${user.regDate}" pattern="yyyy-MM-dd"/></p>
                     </div>
                     <div class="col-6">
                       <h6 class="text-uppercase fs-5 ls-2">Email </h6>
-                      <p class="mb-0">Dashui@gmail.com</p>
+                      <p class="mb-0">${user.userEmail}</p>
                     </div>
                     <div class="col-6">
-                      <h6 class="text-uppercase fs-5 ls-2">Location
+                      <h6 class="text-uppercase fs-5 ls-2">userGrade
                       </h6>
-                      <p class="mb-0">Ahmedabad, India</p>
+                      <p class="mb-0">${user.userGrade}</p>
                     </div>
                   </div>
                 </div>
