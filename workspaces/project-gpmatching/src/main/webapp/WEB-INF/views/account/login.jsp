@@ -12,19 +12,19 @@
 
 
 <!-- Favicon icon-->
-<link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="/project-gpmatching/resources/assets/images/favicon/favicon.ico">
 
 <!-- Libs CSS -->
 
 
-<link href="../assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-<link href="../assets/libs/dropzone/dist/dropzone.css"  rel="stylesheet">
-<link href="../assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
-<link href="../assets/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet">
+<link href="/project-gpmatching/resources/assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="/project-gpmatching/resources/assets/libs/dropzone/dist/dropzone.css"  rel="stylesheet">
+<link href="/project-gpmatching/resources/assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
+<link href="/project-gpmatching/resources/assets/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet">
 
 
 <!-- Theme CSS -->
-<link rel="stylesheet" href="../assets/css/theme.min.css">
+<link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
   <title>Sign In | 로그인 </title>
 </head>
 
@@ -39,7 +39,7 @@
           <!-- Card body -->
           <div class="card-body p-6">
             <div class="mb-4">
-              <a href="../index.html"><img src="../assets/images/brand/logo/logo-primary.svg" class="mb-2" alt=""></a>
+              <a href="/project-gpmatching/resources/index.html"><img src="/project-gpmatching/resources/assets/images/brand/logo/logo-primary.svg" class="mb-2" alt=""></a>
               <p class="mb-6">Please enter your user information.</p>
               
             </div>
