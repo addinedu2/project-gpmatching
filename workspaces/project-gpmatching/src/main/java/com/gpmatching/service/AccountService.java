@@ -8,4 +8,6 @@ public interface AccountService {
 
 	void register(UserDto user);
 	UserDto findLoginUser(UserDto user);
+	void editUser(UserDto updateUser);
+	
 }
