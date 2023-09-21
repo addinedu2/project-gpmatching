@@ -60,8 +60,8 @@ public class MatchingBoardController {
 		return "redirect:lol-list";	
 	}
 
-	@GetMapping(path = { "/detail"})
+	@GetMapping(path = { "/comment"})
 	public String test() {
-		return "/boardMatching/detail";
+		return "/boardMatching/comment";
 	}
 }

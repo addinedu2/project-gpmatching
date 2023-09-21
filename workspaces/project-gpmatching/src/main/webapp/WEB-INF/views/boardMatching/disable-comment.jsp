@@ -43,7 +43,7 @@
 <!-- Theme CSS -->
 <link rel="stylesheet"
 	href="/project-gpmatching/resources/assets/css/theme.min.css">
-	<link rel="stylesheet"
+<link rel="stylesheet"
 	href="/project-gpmatching/resources/assets/css/theme.css">
 <title>Layout | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
 </head>
@@ -53,70 +53,49 @@
 		<!-- navbar vertical -->
 		<!-- Sidebar -->
 		<jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
-		
+
 		<!-- page content -->
 
 		<div id="page-content">
 			<!--  header -->
-			<jsp:include page="/WEB-INF/views/modules/header.jsp" />	
-			
+			<jsp:include page="/WEB-INF/views/modules/header.jsp" />
+
 			<!-- Container fluid -->
 
-			
+
 			<br>
 			<!-- Input -->
-			<form action="write" method="post">
-				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">제목</label>
-					<input name="boardTitle" type="text" id="textInput" class="form-control" 
-							placeholder="시간은 꼭 포함해서 작성해주세요">
+			<!-- Validation Form -->
+			<form class="row g-3 needs-validation" novalidate>
+				<div class="col-md-4">
+					<label for="validationCustom01" class="form-label">닉네임</label> 
+					<input type="text" class="form-control"
+						id="validationCustom01" value="게임 아이디를 입력해주세요" required>
+					<div class="valid-feedback">Looks good!</div>
 				</div>
-				<!-- Select Option -->
-				<div class="mb-3 txt-box">
-					<label class="form-label" for="selectOne">티어<span
-						class="text-secondary">(현재 티어)</span></label> <select class="form-select"
-						aria-label="Default select example">
-						<option selected>티어를 선택하세요</option>
-						<option value="1">브론즈</option>
-						<option value="2">실버</option>
-						<option value="3">골드</option>
-					</select>
+				<hr>
+				<div class="col-md-4">
+					<label for="validationCustom02" class="form-label">댓글</label> 
+						<textarea name="boardContent" class="form-control" id="textarea-input" rows="5">
+						</textarea>
+					<div class="valid-feedback">Looks good!</div>
 				</div>
-				<!-- Textarea -->
-				<div class="mb-3 txt-box">
-					<label for="textarea-input" class="form-label">내용</label>
-					<textarea name="boardContent" class="form-control" id="textarea-input" rows="5"></textarea>
-				</div>
-				<!-- Checks -->
-				<div class="txt-box">
+				
+				<div class="col-12">
 					<div class="form-check">
-						<input name="mic" class="form-check-input" type="checkbox" value=1
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> 마이크 사용 </label>
+						<input class="form-check-input" type="checkbox" value=""
+							id="invalidCheck" required> <label
+							class="form-check-label" for="invalidCheck"> 동의합니다 </label>
+						<div class="invalid-feedback">You must agree before
+							submitting.</div>
 					</div>
 				</div>
-				<!-- radio-->
-				<br>
-				<div class="txt-box">
-					<div class="form-check">
-						<input class="form-check-input" type="radio" value=0
-							name="preferGender" id="flexRadioDefault1" checked> <label
-							class="form-check-label" for="flexRadioDefault1"> 남자 </label>
-					</div>
-					<div class="form-check">
-						<input class="form-check-input" type="radio" value=1
-							name="preferGender" id="flexRadioDefault2"> <label
-							class="form-check-label" for="flexRadioDefault2"> 여자 </label>
-					</div>
-				</div>
-				<br>
-				<div class="btn-center">
-					<!-- Primary Button -->
-					<button type="submit" class="btn btn-primary mb-2">등록</button>
-					<!-- Danger Button -->
-					<button type="button" id="btnCancel" class="btn btn-danger mb-2">취소</button>
+				<div class="col-12">
+					<button class="btn btn-primary" type="submit">등록</button>
 				</div>
 			</form>
+
+
 		</div>
 		<!-- Scripts -->
 		<script>

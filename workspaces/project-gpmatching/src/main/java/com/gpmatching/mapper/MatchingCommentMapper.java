@@ -9,10 +9,9 @@ import com.gpmatching.dto.MatchingCommentDto;
 @Mapper
 public interface MatchingCommentMapper {
 
-	// 매칭지원댓글
 	// 닉네임은 어떻게 불러오는거지..?
-	@Insert("insert into matchingcomment (mCommentContent, mCommentConfirm) "
-			+ "values (#{ mCommentContent }, #{ mCommentConfirm })")
+	@Insert("insert into MatchingComment (boardNo, mCommentContent) "
+			+ "values (#{ boardNo }, #{ mCommentContent })")
 	@Options(useGeneratedKeys = true, keyProperty = "mCommentNo")
 	void insertMatchingComment(MatchingCommentDto matchingComment);
 	

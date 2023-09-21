@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- row  -->
 
@@ -23,7 +24,8 @@
 							<th>티어</th>
 							<th>인원</th>
 							<th>내용</th>
-							
+							<th>댓글</th>
+
 						</tr>
 					</thead>
 					<tbody>
@@ -49,10 +51,12 @@
 										</div>
 									</div>
 								</td>
-								<td class="align-middle">34</td>
+								<td class="align-middle"><fmt:formatDate
+										value="${ matchingBoard.regDate }"
+										pattern="yyyy-MM-dd a hh:mm:ss" /></td>
 								<td class="align-middle"><span
 									class="badge
-                            bg-warning">Medium</span></td>
+                            bg-warning">Gold</span></td>
 								<td class="align-middle">
 									<div class="avatar-group">
 										<span class="avatar avatar-sm"> <img alt="avatar"
@@ -71,12 +75,50 @@
 									</div>
 								</td>
 								<td class="align-middle text-dark">
-									<div class="float-start me-3">15%</div>
-									<div class="mt-2">
-										<div class="progress" style="height: 5px;">
-											<div class="progress-bar" role="progressbar"
-												style="width: 15%" aria-valuenow="15" aria-valuemin="0"
-												aria-valuemax="100"></div>
+									<div class="float-start me-3">${ matchingBoard.boardContent }</div>
+
+								</td>
+								<td>
+									<!-- Varying modal -->
+									<button type="button" class="btn btn-primary"
+										data-bs-toggle="modal" data-bs-target="#exampleModal"
+										data-whatever="@getbootstrap">댓글쓰기</button>
+									<div class="modal fade" id="exampleModal" tabindex="-1"
+										role="dialog" aria-labelledby="exampleModalLabelOne"
+										aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabelOne">${ matchingBoard.boardTitle }</h5>
+													<button type="button" class="btn-close"
+														data-bs-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<form id="commentform" action="write-comment" method="post">
+													<input type="hidden" name="boardNo"
+														value="${ matchingBoard.boardNo }" /> 
+													<div class="modal-body">
+
+														<div class="mb-3">
+															<label for="recipient-name" class="col-form-label">게임
+																닉네임</label> <input type="text" class="form-control"
+																id="recipient-name">
+														</div>
+														<div class="mb-3">
+															<label for="message-text" class="col-form-label">파티장에게
+																알려줄 내용</label>
+															<textarea name="mCommentContent" class="form-control" id="message-text"></textarea>
+														</div>
+
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary"
+															data-bs-dismiss="modal">닫기</button>
+														<button type="submit" class="btn btn-primary">등록</button>
+													</div>
+												</form>
+											</div>
 										</div>
 									</div>
 								</td>
@@ -88,5 +130,13 @@
 		</div>
 	</div>
 </div>
+
+<!-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+<script>
+$('#write-comment-lnk').on('click', function(event){
+	$('#commentform').submit();
+});
+</script> -->
 
 
