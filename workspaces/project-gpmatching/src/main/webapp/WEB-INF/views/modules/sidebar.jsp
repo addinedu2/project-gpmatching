@@ -64,43 +64,6 @@
 							href="/project-gpmatching/resources/pages/forget-password.html">
 								비밀번호 찾기 </a></li>
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 22177f2db994775de93f7b026c75f37c58e7d72a
-                        <!-- Nav item -->
-                        <li class="nav-item">
-                            <a class="nav-link has-arrow  collapsed " href="#!" data-bs-toggle="collapse" data-bs-target="#navAuthentication" aria-expanded="false" aria-controls="navAuthentication">
-                                <i data-feather="lock" class="nav-icon icon-xs me-2">
-                                </i> Authentication
-                            </a>
-                            <div id="navAuthentication" class="collapse " data-bs-parent="#sideNavbar">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="/project-gpmatching/account/login"> Sign In</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link  " href="/project-gpmatching/account/register"> Sign Up</a>
-                                    </li>
-                                        <li class="nav-item">
-                                        <a class="nav-link  " href="/project-gpmatching/account/logout"> Sign out</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link  " href="/project-gpmatching/account/mypage"> my page</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link  " href="/project-gpmatching/account/editMypage"> editMypage</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="/project-gpmatching/resources/pages/forget-password.html">
-                                             Forget Password
-                                </a>
-                                    </li>
-<<<<<<< HEAD
-
-=======
->>>>>>> 22177f2db994775de93f7b026c75f37c58e7d72a
 
 					</ul>
 				</div>
