@@ -46,7 +46,7 @@
 </head>
 
 <body class="bg-light">
-	<div id="db-wrapper">
+	<div id="db-wrapper" class="toggled">
 		<!-- navbar vertical -->
 		<!-- Sidebar -->
 		<jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
