@@ -75,9 +75,14 @@
                                     <li class="nav-item">
                                         <a class="nav-link  " href="/project-gpmatching/account/register"> Sign Up</a>
                                     </li>
-                                    
-                                    <li class="nav-item">
+                                        <li class="nav-item">
                                         <a class="nav-link  " href="/project-gpmatching/account/logout"> Sign out</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link  " href="/project-gpmatching/account/mypage"> my page</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link  " href="/project-gpmatching/account/editMypage"> editMypage</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link " href="/project-gpmatching/resources/pages/forget-password.html">

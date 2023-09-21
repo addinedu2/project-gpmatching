@@ -72,19 +72,6 @@ public class AccountController {
 	}
 	
 	
-	@GetMapping(path = {"/mypage"})
-	public String mypageForm() {
-		return "account/mypage";
-	} //마이페이지 버튼
-	
-	
-	
-	
-	@GetMapping(path = {"/editmypage"})
-	public String editmypage() {
-		return "account/editmypage";
-	} // 마이페이지 수정 버튼
-	
 
 
 
