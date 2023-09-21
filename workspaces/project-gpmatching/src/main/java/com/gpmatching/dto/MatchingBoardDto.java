@@ -17,5 +17,7 @@ public class MatchingBoardDto {
 	boolean deleted;
 	int userNo;
 	int gameNo;
+	
+	
 
 }

@@ -1,7 +1,10 @@
 package com.gpmatching.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import com.gpmatching.dto.MatchingBoardDto;
 
@@ -22,5 +25,15 @@ public interface MatchingBoardMapper {
 			+ "values ( #{ boardTitle }, #{ boardContent }, "
 			+ "#{ preferGender }, #{ mic } )")
 	void insertMatchingBoard(MatchingBoardDto matchingBoardDto);
+	
+	@Select( "select boardNo, boardTitle, boardContent, regDate "
+			+ "from MatchingBoard "
+			+ "order by boardNo desc")
+	List<MatchingBoardDto> selectAllMatchingBoard();
+	
 
+	
+	
+
+	
 }
