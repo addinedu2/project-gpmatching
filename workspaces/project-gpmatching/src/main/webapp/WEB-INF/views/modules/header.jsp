@@ -115,8 +115,8 @@
 
 
             <div class="lh-1 ">
-              <h5 class="mb-1"> John E. Grainger</h5>
-              <a href="#" class="text-inherit fs-6">View my profile</a>
+              <h5 class="mb-1"> ${loginuser.nickname}</h5>
+              <a href="/project-gpmatching/account/mypage" class="text-inherit fs-6">마이페이지</a>
             </div>
             <div class=" dropdown-divider mt-3 mb-2"></div>
           </div>
@@ -124,9 +124,8 @@
           <ul class="list-unstyled">
 
             <li>
-              <a class="dropdown-item" href="#">
-                <i class="me-2 icon-xxs dropdown-item-icon" data-feather="user"></i>Edit
-                Profile
+              <a class="dropdown-item" href="/project-gpmatching/account/editMypage">
+                <i class="me-2 icon-xxs dropdown-item-icon" data-feather="user"></i>회원정보 수정
               </a>
             </li>
             <li>
@@ -152,9 +151,9 @@
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="/spring-demoweb/resources/index.html">
+              <a class="dropdown-item" href="/project-gpmatching/account/logout">
                 <i class="me-2 icon-xxs dropdown-item-icon"
-                  data-feather="power"></i>Sign Out
+                  data-feather="power"></i>로그아웃
               </a>
             </li>
           </ul>

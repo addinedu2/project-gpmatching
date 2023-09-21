@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.gpmatching.dto.UserDto;
 
@@ -25,13 +26,22 @@ public interface UserMapper {
 	
 	
 	//마이 페이지인데 신고나 리뷰 후기 보는 게시판 연결 생각을 해보자
-	@Select ("select userId, userPwd, userEmail, nickname, userPhone, userGrade, regDate "
+		
+	@Select ("select userId, userPwd, userEmail, nickname, userPhone, userGrade, regDate, deletedUser "
              + "from User "
 			+ "where userId = #{userId} and userPwd = #{userPwd} ")
 	UserDto selectUserByIdAnduserPwd(@Param("userId") String userId, @Param("userPwd") String userPwd);
-
-
-
-
-
+	//로그인할때 아이디와 비번 찾는 메서드
+	
+	@Update ("UPDATE User "
+			+ "SET nickname = #{nickname}, userPhone = #{userPhone}, userEmail = #{userEmail} "
+			+ "WHERE userId = #{userId}") 
+	void updateUserProfile(UserDto user);
+	//내 정보 수정하는 메서드
+	
+	@Update("UPDATE User SET deletedUser = true " //  delelted 값을 참으로 돌린다
+			+ "WHERE userId = #{userId} ")
+	void deleteUser(@Param("userId") String userId);
+//유저 정보 중 탈퇴 유무를 유로 돌리는 메서드
+	
 }

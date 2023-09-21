@@ -28,9 +28,15 @@ public class AccountServiceImpl implements AccountService {
 //		String hashedPasswd = Util.getHashedString(user.getUserPwd(), "SHA-256");
 //		user.setUserPwd(hashedPasswd);
 
-		
+
 		UserDto loginUser = usermapper.selectUserByIdAnduserPwd(user.getUserId(), user.getUserPwd());
 		return loginUser;  //컨트롤러에서 보자
+	}
+	
+	@Override
+	public void editUser(UserDto user) {
+		//데이베이스 데이터 수정(mapper 사용)
+		usermapper.updateUserProfile(user);
 	}
 	
 
