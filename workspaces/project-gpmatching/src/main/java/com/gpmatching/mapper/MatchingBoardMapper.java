@@ -17,6 +17,7 @@ public interface MatchingBoardMapper {
 			+ "#{ readCount }, #{ deleted }, #{ userNo }, #{ gameNo })")
 	*/
 	
+	//mysql db 설정에 table명, 칼럼명 대소문자 구분 설정 가능 - 매칭 해주어야 한다.
 	@Insert( "insert into MatchingBoard ( boardTitle, "
 			+ "boardContent, preferGender, mic) "
 			+ "values ( #{ boardTitle }, #{ boardContent }, "

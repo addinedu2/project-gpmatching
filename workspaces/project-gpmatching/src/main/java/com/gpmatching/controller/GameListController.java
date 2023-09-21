@@ -31,5 +31,24 @@ public class GameListController {
 		return "home";
 		
 	}
+	
+	@GetMapping(path = {"/show"} )
+	public String ShowGame(GameListDto game) {
+		
+		gameListService.show();
+		
+		return "home";
+		
+	}
+	
+	@GetMapping(path = {"/list"} )
+	public String List(GameListDto game) {
+		
+		gameListService.list();
+		
+		return "/gamelist/list";
+		
+	}
+
 
 }
