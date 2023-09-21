@@ -37,6 +37,7 @@ public class AccountServiceImpl implements AccountService {
 	public void editUser(UserDto user) {
 		//데이베이스 데이터 수정(mapper 사용)
 		usermapper.updateUserProfile(user);
+		
 	}
 	
 

@@ -59,7 +59,7 @@ public class MyPageController {
 		 // 수정된 사용자 정보를 데이터베이스에 업데이트
 		session.setAttribute("loginuser", updateUser);
 		// 세션에서 사용자 정보 업데이트
-		 return "account/mypage";
+		 return "redirect:mypage";
 		 //수정 후 리다이렉트할 페이지 
 	}//마이페이지 수정(데이터베이스에 보내기)
 	

@@ -192,8 +192,11 @@
                         <input type="text" class="form-control" placeholder="placeholder" id="zipcode">
                       </div>
                       <div class="offset-md-4 col-md-8 mt-4">
-                        <button type="submit" class="btn btn-primary"> Save
-                            Changes</button>
+                      
+                        <button type="submit" class="btn btn-primary">
+                        	회원정보 수정
+                        </button>
+                       
                       </div>
                     </div>
                   </form>
