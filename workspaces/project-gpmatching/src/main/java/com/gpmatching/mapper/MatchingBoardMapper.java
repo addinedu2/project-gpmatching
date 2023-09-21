@@ -38,5 +38,9 @@ public interface MatchingBoardMapper {
 	@Select("select max(boardNo) from MatchingBoard")
 	public int selectMatchingItemBoardNo() ;
 	
+	@Select("select boardNo from MatchingBoard where BoardTitle = #{boardTitle}")
+	public int selectMatchingitemByBoardNtitle(String boardTitle) ;
+	
+	
 	
 }

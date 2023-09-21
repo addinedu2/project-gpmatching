@@ -24,6 +24,7 @@ public class MatchingBoardController {
 	
 	@Setter(onMethod_ = { @Autowired }) 
 	private MatchingBoardService matchingBoardService;
+	
 	@Setter(onMethod_ = { @Autowired }) 
 	private LolService lolService;
 	
@@ -95,10 +96,4 @@ public class MatchingBoardController {
 		return "redirect:lol-list";	
 	}
 
-	
-	
-	@GetMapping(path = { "/detail"})
-	public String test() {
-		return "/boardMatching/detail";
-	}
 }

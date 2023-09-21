@@ -4,24 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gpmatching.dto.MatchingCommentDto;
 import com.gpmatching.service.MatchingCommentService;
 
 @Controller
+@RequestMapping(path = { "/boardMatching" })
 public class MatchingCommentController {
 
 	@Autowired
 	private MatchingCommentService matchingCommentService;
 	
-	@GetMapping(path = { "/apply" })
-	public String writeMatchingCommentForm(MatchingCommentDto matchingcomment) {
-		
-		return "test";
-	}
-	
-	@PostMapping(path = { "/apply" })
+	@PostMapping(path = { "/write-comment" })
 	public String writeMatchingComment(MatchingCommentDto matchingComment, @RequestParam(defaultValue = "-1") int boardNo) {
 		
 		
@@ -33,10 +29,9 @@ public class MatchingCommentController {
 		 * 
 		 * matchingCommentService.writeMatchingComment(test);
 		 */
-		 
 		
 		matchingCommentService.writeMatchingComment(matchingComment);
 		
-		return "redirect:/list";
+		return "redirect:lol-list";
 	}
 }

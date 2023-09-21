@@ -1,6 +1,7 @@
 package com.gpmatching.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -18,6 +19,6 @@ public class MatchingBoardDto {
 	int userNo;
 	int gameNo;
 	
-	
+	private List<MatchingCommentDto> matchingCommentList;
 
 }
