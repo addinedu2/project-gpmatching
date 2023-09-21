@@ -41,12 +41,14 @@
 
 <!-- Theme CSS -->
 <link rel="stylesheet"
-	href="/project-gpmatching/resources/assets/css/theme.min.css">
+	href="/project-gpmatching/resources/assets/css/theme.css">
+<link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
+
 <title>Layout | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
 </head>
 
 <body class="bg-light">
-	<div id="db-wrapper">
+	<div id="db-wrapper" class="toggled" class="toggled">
 		<!-- navbar vertical -->
 		<!-- Sidebar -->
 		<jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
@@ -58,7 +60,7 @@
 			<!-- Container fluid -->
 
 			<!-- Primary Button -->
-			<a href="/project-gpmatching/boardMatching/write">
+			<a href="/project-gpmatching/boardMatching/lol-write">
 				<button type="button" class="btn btn-primary mb-2">LoL 매칭
 					게시글 쓰기</button>
 			</a>

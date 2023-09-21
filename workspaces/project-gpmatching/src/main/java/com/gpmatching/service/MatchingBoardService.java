@@ -9,4 +9,6 @@ public interface MatchingBoardService {
 	void write(MatchingBoardDto matchingBoardDto);
 	
 	List<MatchingBoardDto> listMatchingBoard();
+
+	int getLastMatchingItemBoardNo();
 }
