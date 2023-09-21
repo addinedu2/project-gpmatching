@@ -29,7 +29,6 @@ public class MatchingCommentController {
 		 * 
 		 * matchingCommentService.writeMatchingComment(test);
 		 */
-		 
 		
 		matchingCommentService.writeMatchingComment(matchingComment);
 		

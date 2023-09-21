@@ -31,12 +31,15 @@
 
 
 <!-- Theme CSS -->
+<link rel="stylesheet"
+	href="/project-gpmatching/resources/assets/css/theme.css">
 <link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
+
     <title>Layout | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
   </head>
 
   <body class="bg-light"> 
-    <div id="db-wrapper">
+    <div id="db-wrapper" class="toggled">
          <!-- navbar vertical -->
        <!-- Sidebar -->
 		<jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />

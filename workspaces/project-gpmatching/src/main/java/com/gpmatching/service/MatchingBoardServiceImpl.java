@@ -21,10 +21,18 @@ public class MatchingBoardServiceImpl implements MatchingBoardService {
 		
 	}
 	
+	@Override
 	public List<MatchingBoardDto> listMatchingBoard() {
 		
 		List<MatchingBoardDto> matchingBoardList = mapper.selectAllMatchingBoard();
 		
 		return matchingBoardList;
+	}
+	
+	@Override
+	public int getLastMatchingItemBoardNo() {
+		int boardNo = mapper.selectMatchingItemBoardNo();
+		
+		return boardNo;
 	}
 }

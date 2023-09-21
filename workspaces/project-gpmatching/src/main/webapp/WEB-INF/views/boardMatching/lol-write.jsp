@@ -41,10 +41,11 @@
 
 
 <!-- Theme CSS -->
+
 <link rel="stylesheet"
-	href="/project-gpmatching/resources/assets/css/theme.min.css">
-	<link rel="stylesheet"
 	href="/project-gpmatching/resources/assets/css/theme.css">
+<link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
+
 <title>Layout | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
 </head>
 
@@ -62,25 +63,14 @@
 			
 			<!-- Container fluid -->
 
-			
+			<a href="/project-gpmatching/boardMatching/write">게시글 쓰기</a> <br>
 			<br>
 			<!-- Input -->
-			<form action="write" method="post">
+			<form action="lol-write" method="post">
 				<div class="mb-3 txt-box">
 					<label class="form-label" for="textInput">제목</label>
 					<input name="boardTitle" type="text" id="textInput" class="form-control" 
 							placeholder="시간은 꼭 포함해서 작성해주세요">
-				</div>
-				<!-- Select Option -->
-				<div class="mb-3 txt-box">
-					<label class="form-label" for="selectOne">티어<span
-						class="text-secondary">(현재 티어)</span></label> <select class="form-select"
-						aria-label="Default select example">
-						<option selected>티어를 선택하세요</option>
-						<option value="1">브론즈</option>
-						<option value="2">실버</option>
-						<option value="3">골드</option>
-					</select>
 				</div>
 				<!-- Textarea -->
 				<div class="mb-3 txt-box">
@@ -108,6 +98,31 @@
 							name="preferGender" id="flexRadioDefault2"> <label
 							class="form-check-label" for="flexRadioDefault2"> 여자 </label>
 					</div>
+				</div>
+				
+				<!-- 롤 등록 -->
+				<div class="mb-3 txt-box">
+					<label class="form-label" for="textInput">롤주포지션</label>
+					<input name="lolPosition" type="text" id="textInput" class="form-control" >
+				</div>
+				<div class="mb-3 txt-box">
+					<label class="form-label" for="textInput">롤서렌여부</label>
+					<input name="lolSur" type="text" id="textInput" class="form-control" >
+				</div>
+				<div class="mb-3 txt-box">
+					<label class="form-label" for="textInput">롤선호플레이</label>
+					<input name="lolPlay" type="text" id="textInput" class="form-control" >
+				</div>
+				<!-- Select Option -->
+				<div class="mb-3 txt-box">
+					<label class="form-label" for="selectOne">티어<span
+						class="text-secondary">(현재 티어)</span></label> <select name="lolTier" class="form-select"
+						aria-label="Default select example">
+						<option selected>티어를 선택하세요</option>
+						<option value="bronze">브론즈</option>
+						<option value="silver">실버</option>
+						<option value="gold">골드</option>
+					</select>
 				</div>
 				<br>
 				<div class="btn-center">

@@ -27,14 +27,20 @@ public interface MatchingBoardMapper {
 			+ "#{ preferGender }, #{ mic } )")
 	void insertMatchingBoard(MatchingBoardDto matchingBoardDto);
 	
+
 	@Select( "select boardNo, boardTitle, boardContent, regDate "
 			+ "from MatchingBoard "
 			+ "order by boardNo desc")
 	List<MatchingBoardDto> selectAllMatchingBoard();
 	
-
+	
+	//@Select( "select boardNo  from MatchingBoard where type='boardNo' ORDER BY num DESC LIMIT 1")
+	@Select("select max(boardNo) from MatchingBoard")
+	public int selectMatchingItemBoardNo() ;
+	
+	@Select("select boardNo from MatchingBoard where BoardTitle = #{boardTitle}")
+	public int selectMatchingitemByBoardNtitle(String boardTitle) ;
 	
 	
-
 	
 }
