@@ -41,10 +41,11 @@
 
 
 <!-- Theme CSS -->
+
 <link rel="stylesheet"
-	href="/project-gpmatching/resources/assets/css/theme.min.css">
-	<link rel="stylesheet"
 	href="/project-gpmatching/resources/assets/css/theme.css">
+<link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
+
 <title>Layout | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
 </head>
 

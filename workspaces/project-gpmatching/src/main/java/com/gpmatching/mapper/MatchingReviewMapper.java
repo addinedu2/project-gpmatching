@@ -13,4 +13,6 @@ public interface MatchingReviewMapper {
 			+ "values (#{ reviewContent }, #{ reviewPoint })")
 	@Options(useGeneratedKeys = true, keyProperty = "reviewNo") 
 	void insertMatchingReview(MatchingReviewDto matchingReview);
+	
+	
 }

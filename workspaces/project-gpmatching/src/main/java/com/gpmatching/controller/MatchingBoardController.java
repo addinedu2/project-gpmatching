@@ -1,14 +1,19 @@
 package com.gpmatching.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gpmatching.dto.LolDto;
 import com.gpmatching.dto.MatchingBoardDto;
+import com.gpmatching.service.LolService;
 import com.gpmatching.service.MatchingBoardService;
 
 import lombok.Setter;
@@ -18,10 +23,16 @@ import lombok.Setter;
 public class MatchingBoardController {
 	
 	@Setter(onMethod_ = { @Autowired }) 
-	private MatchingBoardService service;
+	private MatchingBoardService matchingBoardService;
+	@Setter(onMethod_ = { @Autowired }) 
+	private LolService lolService;
 	
 	@GetMapping(path = { "/lol-list"})
-	public String lolMatchingBoardList() {
+	public String listMatchingBoardList(Model model) {
+		
+		List<MatchingBoardDto> matchingBoardList = matchingBoardService.listMatchingBoard();
+		
+		model.addAttribute("matchingBoardList", matchingBoardList);
 		
 		return "/boardMatching/lol-list";
 	}
@@ -39,18 +50,55 @@ public class MatchingBoardController {
 	}
 	
 	
-	@GetMapping(path = { "/write"})
-	public String showWriteForm(HttpSession session) {
+	@GetMapping(path = { "/lol-write"})
+	public String showLolWriteForm(HttpSession session) {
 		
-		return "/boardMatching/write";
+		return "/boardMatching/lol-write";
 	}
 	
-	@PostMapping(path = { "/write"})
-	public String writeMatchingBoard(MatchingBoardDto matchingBoardDto) {
+	@PostMapping(path = { "/lol-write"})
+	public String writeLolMatchingBoard(MatchingBoardDto matchingBoardDto, LolDto lolDto) {
 		
-		service.write(matchingBoardDto);
+		matchingBoardService.write(matchingBoardDto);
+		//lolService.write(lolDto, matchingBoardDto.getBoardNo());
+		int boardNo = matchingBoardService.getLastMatchingItemBoardNo();
+		lolService.write(lolDto, boardNo);
 		
 		return "redirect:lol-list";	
 	}
 
+	@GetMapping(path = { "/battleground-write"})
+	public String showBgWriteForm(HttpSession session) {
+		
+		return "/boardMatching/write";
+	}
+	
+	@PostMapping(path = { "/battleground-write"})
+	public String writeBgMatchingBoard(MatchingBoardDto matchingBoardDto) {
+		
+		matchingBoardService.write(matchingBoardDto);
+		
+		return "redirect:lol-list";	
+	}
+
+	@GetMapping(path = { "/overwatch-write"})
+	public String showOwWriteForm(HttpSession session) {
+		
+		return "/boardMatching/write";
+	}
+	
+	@PostMapping(path = { "/overwatch-write"})
+	public String writeOwMatchingBoard(MatchingBoardDto matchingBoardDto) {
+		
+		matchingBoardService.write(matchingBoardDto);
+		
+		return "redirect:lol-list";	
+	}
+
+	
+	
+	@GetMapping(path = { "/detail"})
+	public String test() {
+		return "/boardMatching/detail";
+	}
 }

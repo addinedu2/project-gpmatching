@@ -19,6 +19,8 @@ import com.gpmatching.service.CommonBoardService;
 import com.gpmatching.service.CommonBoardServiceImpl;
 import com.gpmatching.service.GameListService;
 import com.gpmatching.service.GameListServiceImpl;
+import com.gpmatching.service.LolService;
+import com.gpmatching.service.LolServiceImpl;
 import com.gpmatching.service.MatchingBoardService;
 import com.gpmatching.service.MatchingBoardServiceImpl;
 import com.gpmatching.service.MatchingCommentService;
@@ -111,6 +113,14 @@ public class RootConfiguration implements ApplicationContextAware {
 		return gameListService;
 		
 	}
+	
+	@Bean
+	public LolService lolService() {
+		LolService lolService = new LolServiceImpl();
+		return lolService;
+		
+	}
+
 
 }
 	
