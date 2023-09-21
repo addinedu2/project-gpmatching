@@ -20,16 +20,45 @@ public class GameListController {
 	GameListService gameListService;
 	
 	@GetMapping(path = {"/register"} )
-	public String RegGame(GameListDto game) {
+	public String regGameList(GameListDto game) {
 		
-		GameListDto gameDto = new GameListDto();
-		gameDto.setGameName("lol4");
-		gameDto.setGameCom("riot games");
+		//GameListDto gameDto = new GameListDto();
+		//gameDto.setGameName("league of legends");
+		//gameDto.setGameCom("riot games");
 		
-		gameListService.register(gameDto);
+		//GameListDto gameDto = new GameListDto();
+		//gameDto.setGameName("batte ground");
+		//gameDto.setGameCom("kakao games");
+		
+		//GameListDto gameDto = new GameListDto();
+		//gameDto.setGameName("overwatch2");
+		//gameDto.setGameCom("blizzard");
+		
+		//gameListService.register(gameDto);
+		
+		gameListService.register(game);
 		
 		return "home";
 		
 	}
+	
+	@GetMapping(path = {"/show"} )
+	public String showGameList() {
+		
+		gameListService.show();
+		
+		return "home";
+		
+	}
+	
+	@GetMapping(path = {"/list"} )
+	public String listGameList() {
+		
+		gameListService.listGameList();
+		
+		return "/gamelist/list";
+		
+	}
+
 
 }

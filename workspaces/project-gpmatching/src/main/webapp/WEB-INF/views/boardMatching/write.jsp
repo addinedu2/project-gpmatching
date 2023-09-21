@@ -43,11 +43,13 @@
 <!-- Theme CSS -->
 <link rel="stylesheet"
 	href="/project-gpmatching/resources/assets/css/theme.min.css">
+	<link rel="stylesheet"
+	href="/project-gpmatching/resources/assets/css/theme.css">
 <title>Layout | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
 </head>
 
 <body class="bg-light">
-	<div id="db-wrapper">
+	<div id="db-wrapper" class="toggled">
 		<!-- navbar vertical -->
 		<!-- Sidebar -->
 		<jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
@@ -64,13 +66,13 @@
 			<br>
 			<!-- Input -->
 			<form action="write" method="post">
-				<div class="mb-3">
+				<div class="mb-3 txt-box">
 					<label class="form-label" for="textInput">제목</label>
 					<input name="boardTitle" type="text" id="textInput" class="form-control" 
 							placeholder="시간은 꼭 포함해서 작성해주세요">
 				</div>
 				<!-- Select Option -->
-				<div class="mb-3">
+				<div class="mb-3 txt-box">
 					<label class="form-label" for="selectOne">티어<span
 						class="text-secondary">(현재 티어)</span></label> <select class="form-select"
 						aria-label="Default select example">
@@ -81,34 +83,39 @@
 					</select>
 				</div>
 				<!-- Textarea -->
-				<div class="mb-3">
+				<div class="mb-3 txt-box">
 					<label for="textarea-input" class="form-label">내용</label>
 					<textarea name="boardContent" class="form-control" id="textarea-input" rows="5"></textarea>
 				</div>
 				<!-- Checks -->
-				<div class="form-check">
-					<input name="mic" class="form-check-input" type="checkbox" value=1
-						id="flexCheckDefault"> <label class="form-check-label"
-						for="flexCheckDefault"> 마이크 사용 </label>
+				<div class="txt-box">
+					<div class="form-check">
+						<input name="mic" class="form-check-input" type="checkbox" value=1
+							id="flexCheckDefault"> <label class="form-check-label"
+							for="flexCheckDefault"> 마이크 사용 </label>
+					</div>
 				</div>
 				<!-- radio-->
 				<br>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" value=0
-						name="preferGender" id="flexRadioDefault1" checked> <label
-						class="form-check-label" for="flexRadioDefault1"> 남자 </label>
-				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" value=1
-						name="preferGender" id="flexRadioDefault2"> <label
-						class="form-check-label" for="flexRadioDefault2"> 여자 </label>
+				<div class="txt-box">
+					<div class="form-check">
+						<input class="form-check-input" type="radio" value=0
+							name="preferGender" id="flexRadioDefault1" checked> <label
+							class="form-check-label" for="flexRadioDefault1"> 남자 </label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" value=1
+							name="preferGender" id="flexRadioDefault2"> <label
+							class="form-check-label" for="flexRadioDefault2"> 여자 </label>
+					</div>
 				</div>
 				<br>
-				<!-- Primary Button -->
-				<button type="submit" class="btn btn-primary mb-2">등록</button>
-				<!-- Danger Button -->
-				<button type="button" id="btnCancel" class="btn btn-danger mb-2">취소</button>
-
+				<div class="btn-center">
+					<!-- Primary Button -->
+					<button type="submit" class="btn btn-primary mb-2">등록</button>
+					<!-- Danger Button -->
+					<button type="button" id="btnCancel" class="btn btn-danger mb-2">취소</button>
+				</div>
 			</form>
 		</div>
 		<!-- Scripts -->

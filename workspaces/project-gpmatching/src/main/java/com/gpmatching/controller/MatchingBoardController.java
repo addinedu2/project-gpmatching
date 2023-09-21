@@ -1,9 +1,12 @@
 package com.gpmatching.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +24,11 @@ public class MatchingBoardController {
 	private MatchingBoardService service;
 	
 	@GetMapping(path = { "/lol-list"})
-	public String lolMatchingBoardList() {
+	public String listMatchingBoardList(Model model) {
+		
+		List<MatchingBoardDto> matchingBoardList = service.listMatchingBoard();
+		
+		model.addAttribute("matchingBoardList", matchingBoardList);
 		
 		return "/boardMatching/lol-list";
 	}
@@ -53,4 +60,8 @@ public class MatchingBoardController {
 		return "redirect:lol-list";	
 	}
 
+	@GetMapping(path = { "/detail"})
+	public String test() {
+		return "/boardMatching/detail";
+	}
 }
