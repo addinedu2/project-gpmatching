@@ -56,8 +56,8 @@
 				<div id="navAuthentication" class="collapse "
 					data-bs-parent="#sideNavbar">
 					<ul class="nav flex-column">
-						<!-- <li class="nav-item"><a class="nav-link "
-							href="/project-gpmatching/account/login"> 로그인</a></li> -->
+						<li class="nav-item"><a class="nav-link "
+							href="/project-gpmatching/account/login"> 로그인</a></li>
 						<li class="nav-item"><a class="nav-link  "
 							href="/project-gpmatching/account/register"> 회원가입</a></li>
 						<!-- <li class="nav-item"><a class="nav-link "
