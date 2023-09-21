@@ -52,7 +52,6 @@
 		<jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
 		<!-- Page content -->
 		<div id="page-content">
-		<jsp:include page="/WEB-INF/views/modules/topheader.jsp" />
 		<!-- Container fluid -->
 		<jsp:include page="/WEB-INF/views/modules/header.jsp" />
 

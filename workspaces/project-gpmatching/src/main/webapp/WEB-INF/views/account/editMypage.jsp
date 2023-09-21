@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -869,7 +869,7 @@
                       <tr>
 
                         <td class="border-top-0">
-                          When someone comments in threads I¡¯m following
+                          When someone comments in threads Iâ€™m following
                         </td>
                         <td class="border-top-0">
                           <div class="form-check ">

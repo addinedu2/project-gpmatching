@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -31,7 +31,7 @@
 
 <!-- Theme CSS -->
 <link rel="stylesheet" href="/project-gpmatching/resource/assets/css/theme.min.css">
-  <title>register | È¸¿ø°¡ÀÔ</title>
+  <title>register | íšŒì›ê°€ì…</title>
 </head>
 
 <body class="bg-light">
@@ -76,7 +76,7 @@
               <!-- nickname -->
               <div class="mb-3">
                 <label for="nickname" class="form-label">Nick Name</label>
-                <input type="text" id="nickname" class="form-control" name="nickname" placeholder="´Ğ³×ÀÓÀ»³Ö¾îÁÖ¼¼¿ä" required="">
+                <input type="text" id="nickname" class="form-control" name="nickname" placeholder="ë‹‰ë„¤ì„ì„ë„£ì–´ì£¼ì„¸ìš”" required="">
               </div>
               <!-- userPhone -->
               <div class="mb-3">

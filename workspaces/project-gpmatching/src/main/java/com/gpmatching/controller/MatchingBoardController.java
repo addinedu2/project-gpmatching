@@ -1,6 +1,6 @@
 package com.gpmatching.controller;
 
-import java.util.Date;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,36 +40,17 @@ public class MatchingBoardController {
 	
 	
 	@GetMapping(path = { "/write"})
-	public String writeMatchingBoard() {
-		
-		//test
-		MatchingBoardDto testMatchingBoard;
-		
-		testMatchingBoard = new MatchingBoardDto();
-		testMatchingBoard.setBoardNo(0);
-		testMatchingBoard.setBoardTitle("test title");
-		testMatchingBoard.setBoardContent("test content");
-		testMatchingBoard.setPreferGender(false);
-		testMatchingBoard.setMatchingClose(false);
-		testMatchingBoard.setRegDate(new Date());
-		testMatchingBoard.setReadCount(0);
-		
-		
-		service.write(testMatchingBoard);
+	public String showWriteForm(HttpSession session) {
 		
 		return "/boardMatching/write";
-		
 	}
 	
 	@PostMapping(path = { "/write"})
 	public String writeMatchingBoard(MatchingBoardDto matchingBoardDto) {
 		
-		//test
-		
 		service.write(matchingBoardDto);
-		//service.write(matchingBoardDto);
-		return null;
 		
+		return "redirect:lol-list";	
 	}
 
 }

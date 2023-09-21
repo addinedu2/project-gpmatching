@@ -334,7 +334,7 @@
                             </div>
                             <!-- card footer  -->
                             <div class="card-footer bg-white text-center">
-                                <a href="#" class="link-primary">View All Projects</a>
+                                <a href="#" class="link-primary">´õº¸±â</a>
 
                             </div>
                         </div>

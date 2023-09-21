@@ -6,7 +6,6 @@ public interface AccountService {
 
 
 
-	public void register(UserDto user);
-	
-	public UserDto findLoginUser(UserDto user);
+	void register(UserDto user);
+	UserDto findLoginUser(UserDto user);
 }
