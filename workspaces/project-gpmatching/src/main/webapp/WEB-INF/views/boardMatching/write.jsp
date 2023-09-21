@@ -51,12 +51,12 @@
 		<!-- navbar vertical -->
 		<!-- Sidebar -->
 		<jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
-		<!--  header -->
-		<jsp:include page="/WEB-INF/views/modules/header.jsp" />
+		
 		<!-- page content -->
 
 		<div id="page-content">
-			
+			<!--  header -->
+			<jsp:include page="/WEB-INF/views/modules/header.jsp" />	
 			
 			<!-- Container fluid -->
 
@@ -87,7 +87,7 @@
 				</div>
 				<!-- Checks -->
 				<div class="form-check">
-					<input name="mic" class="form-check-input" type="checkbox" value="checked"
+					<input name="mic" class="form-check-input" type="checkbox" value=1
 						id="flexCheckDefault"> <label class="form-check-label"
 						for="flexCheckDefault"> 마이크 사용 </label>
 				</div>

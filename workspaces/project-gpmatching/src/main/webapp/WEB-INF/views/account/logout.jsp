@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -253,6 +253,7 @@
         class="nav-icon me-2 icon-xs"></i></a>
     <div class="ms-lg-3 d-none d-md-none d-lg-block">
       <!-- Form -->
+        <form action="logout" method="get">
       <form class="d-flex align-items-center">
         <input type="search" class="form-control" placeholder="Search" />
       </form>
