@@ -22,11 +22,21 @@ public class GameListController {
 	@GetMapping(path = {"/register"} )
 	public String regGameList(GameListDto game) {
 		
-		GameListDto gameDto = new GameListDto();
-		gameDto.setGameName("lol");
-		gameDto.setGameCom("riot games");
+		//GameListDto gameDto = new GameListDto();
+		//gameDto.setGameName("league of legends");
+		//gameDto.setGameCom("riot games");
 		
-		gameListService.register(gameDto);
+		//GameListDto gameDto = new GameListDto();
+		//gameDto.setGameName("batte ground");
+		//gameDto.setGameCom("kakao games");
+		
+		//GameListDto gameDto = new GameListDto();
+		//gameDto.setGameName("overwatch2");
+		//gameDto.setGameCom("blizzard");
+		
+		//gameListService.register(gameDto);
+		
+		gameListService.register(game);
 		
 		return "home";
 		
