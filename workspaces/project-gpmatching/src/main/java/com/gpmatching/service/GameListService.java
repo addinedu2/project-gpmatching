@@ -1,6 +1,5 @@
 package com.gpmatching.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.gpmatching.dto.GameListDto;
@@ -9,13 +8,12 @@ public interface GameListService {
 	
 	public void register(GameListDto gameDto);
 
-	public void show();
-
-	public GameListDto findGameListByGameName(String gameName);
-
 	public GameListDto findGameListByGameNo(int gameNo);
 
+	public GameListDto findGameListByGameName(String gameName);
+	
 	public List<GameListDto> listGameList();
 
+	public void show();
 
 }

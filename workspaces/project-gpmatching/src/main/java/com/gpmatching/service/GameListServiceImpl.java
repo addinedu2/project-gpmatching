@@ -20,19 +20,18 @@ public class GameListServiceImpl implements GameListService {
 		mapper.insert(gameDto);
 	}
 
-	@Override
-	public void show() {
-		List<GameListDto> game = mapper.selectAllGameList();
-		for(GameListDto i : game) {
-			System.out.println(i);
-		}
-	
-	};
+
 	
 	@Override
 	public GameListDto findGameListByGameNo(int gameNo) {
 		GameListDto game = mapper.selectByGameNo(gameNo);
 		return game;
+	};
+	
+	@Override
+	public GameListDto findGameListByGameName(String gameName) {
+		GameListDto game = mapper.selectByGameName(gameName);
+		return null;
 	};
 	
 	@Override
@@ -42,9 +41,13 @@ public class GameListServiceImpl implements GameListService {
 	}
 
 	@Override
-	public GameListDto findGameListByGameName(String gameName) {
-		GameListDto game = mapper.selectByGameName(gameName);
-		return null;
+	public void show() {
+		List<GameListDto> game = mapper.selectAllGameList();
+		for(GameListDto i : game) {
+			System.out.println(i);
+		}
+	
 	};
+
 
 }

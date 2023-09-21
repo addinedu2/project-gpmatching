@@ -23,5 +23,8 @@ public interface MatchingBoardMapper {
 			+ "values ( #{ boardTitle }, #{ boardContent }, "
 			+ "#{ preferGender }, #{ mic } )")
 	void insertMatchingBoard(MatchingBoardDto matchingBoardDto);
+	
+	
+	
 
 }
