@@ -20,10 +20,10 @@ public class GameListController {
 	GameListService gameListService;
 	
 	@GetMapping(path = {"/register"} )
-	public String RegGame(GameListDto game) {
+	public String regGameList(GameListDto game) {
 		
 		GameListDto gameDto = new GameListDto();
-		gameDto.setGameName("lol4");
+		gameDto.setGameName("lol");
 		gameDto.setGameCom("riot games");
 		
 		gameListService.register(gameDto);
@@ -33,7 +33,7 @@ public class GameListController {
 	}
 	
 	@GetMapping(path = {"/show"} )
-	public String ShowGame(GameListDto game) {
+	public String showGameList() {
 		
 		gameListService.show();
 		
@@ -42,7 +42,7 @@ public class GameListController {
 	}
 	
 	@GetMapping(path = {"/list"} )
-	public String List(GameListDto game) {
+	public String iistGameList(GameListDto game) {
 		
 		gameListService.list();
 		

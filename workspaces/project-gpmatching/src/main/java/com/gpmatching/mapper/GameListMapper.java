@@ -1,5 +1,7 @@
 package com.gpmatching.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -18,7 +20,14 @@ public interface GameListMapper {
 	public void insert(GameListDto game);
 	
 	
-	@Select("select * from GameList where GameList.gameNo = #{gameNo}")
-	public GameListDto select() ;
+	@Select("select * from GameList where gameNo = #{gameNo}")
+	public GameListDto selectByGameNo(int gameNo) ;
+	
+	@Select("select * from GameList where gameName = #{gameName}")
+	public GameListDto selectByGameName(String gameName) ;
+
+	@Select ( "select gameNo, gameName, gameRegDate, gameCom "
+			+ "from GameList ")
+	public List<GameListDto> selectAllGameList();
 
 }

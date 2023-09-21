@@ -11,7 +11,11 @@ public interface GameListService {
 
 	public void show();
 
-	public ArrayList<GameListDto> list();
+	public GameListDto findGameListByGameName(String gameName);
+
+	public GameListDto findGameListByGameNo(int gameNo);
+
+	public List<GameListDto> listGameList();
 
 
 }

@@ -1,6 +1,7 @@
 package com.gpmatching.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,18 +19,32 @@ public class GameListServiceImpl implements GameListService {
 	public void register(GameListDto gameDto) {
 		mapper.insert(gameDto);
 	}
-	
-	@Override
-	public ArrayList<GameListDto> list(){
-		ArrayList<GameListDto> gamelist = null;
-		
-		return gamelist;
-	}
 
 	@Override
 	public void show() {
-		GameListDto game = mapper.select();
+		List<GameListDto> game = mapper.selectAllGameList();
+		for(GameListDto i : game) {
+			System.out.println(i);
+		}
+	
 	};
+	
+	@Override
+	public GameListDto findGameListByGameNo(int gameNo) {
+		GameListDto game = mapper.selectByGameNo(gameNo);
+		return game;
+	};
+	
+	@Override
+	public List<GameListDto> listGameList() {
+		List<GameListDto> game = mapper.selectAllGameList();
+		return game;
+	}
 
+	@Override
+	public GameListDto findGameListByGameName(String gameName) {
+		GameListDto game = mapper.selectByGameName(gameName);
+		return null;
+	};
 
 }

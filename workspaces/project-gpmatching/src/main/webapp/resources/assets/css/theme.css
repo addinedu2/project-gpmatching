@@ -8,6 +8,13 @@
 * Designed and coded by https://codescandy.com
 ========================================================= */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+.btn-center{text-align:center;}
+
+.txt-box{padding-left:20px;padding-right:20px;}
+
+
+
 .align-baseline {
   vertical-align: baseline !important;
 }
