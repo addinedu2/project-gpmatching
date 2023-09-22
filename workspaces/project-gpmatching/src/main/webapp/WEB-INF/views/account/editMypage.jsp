@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -724,13 +725,13 @@
         <div class="row">
           <div class="col-xl-3 col-lg-4 col-md-12 col-12">
             <div class="mb-4 mb-lg-0">
-              <h4 class="mb-1">Delete Account</h4>
+              <h4  class="mb-1">회원 탈퇴</h4>
               <p class="mb-0 fs-5 text-muted">Easily set up social media accounts</p>
             </div>
 
           </div>
 
-          <div class="col-xl-9 col-lg-8 col-md-12 col-12">
+          <div a href="" class="col-xl-9 col-lg-8 col-md-12 col-12">
             <!-- card -->
 
             <div class="card mb-6">
@@ -743,7 +744,7 @@
                 <div>
                   <!-- text -->
                   <p>Delete any and all content you have, such as articles, comments, your reading list or chat messages. Allow your username to become available to anyone.</p>
-                  <a href="#" class="btn btn-danger">Delete Account</a>
+                  <a href="#" class="delete-user" data-comment-no="${ comment.commentNo }" href="javascript:">회원 탈퇴</a>
                   <p class="small mb-0 mt-3">Feel free to contact with any <a href="#">dashui@example.com</a> questions.
                   </p>
                 </div>

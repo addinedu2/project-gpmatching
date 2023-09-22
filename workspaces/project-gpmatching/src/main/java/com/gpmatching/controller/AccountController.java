@@ -2,10 +2,13 @@ package com.gpmatching.controller;
 
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,19 +36,31 @@ public class AccountController {
 		return "account/register";
 	}//회원가입 버튼
 
+		
 	@PostMapping(path = { "/register" })
 	//@valid/indingResult result 는 유효성 검사라서 회원 가입할때 유효성을 걸어놔야한다. userdto에 걸어둠
-	public String register(@ModelAttribute("user") UserDto user) {
-	// AccountService accountService = new AccountServiceImpl();
+	public String register(@ModelAttribute("user") @Valid UserDto user, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "account/register";
+		}
 		accountService.register(user);
+		
 		return "redirect:/home";
 	}//회원가입 폼 한 후 홈으로 돌아오기
+
+	
+	
+	
 	
 	
 	@GetMapping(path = {"/login"})
 	public String loginForm( ) {
 		return "account/login";
 	}//로그인 버튼
+	
+	
+	
 	
 	@PostMapping(path = {"/login"})
 	public String login(UserDto user, HttpSession session, Model model) {
@@ -72,21 +87,13 @@ public class AccountController {
 	}
 	
 	
+//	@PostMapping(path = { "/register" })
+//	public String register(@ModelAttribute("user") UserDto user) {
+//	// AccountService accountService = new AccountServiceImpl();
+//		accountService.register(user);
+//		return "redirect:/home";
+//	}
 
 
 
-	/*
-	
-	
-	@PostMapping(path = { "/register" })
-	public String register(@ModelAttribute("user") @Valid UserDto user, BindingResult result) {
-		
-		if(result.hasErrors()) {
-			return "account/register";
-		}
-		accountService.register(user);
-		
-		return "redirect:/home";
-	}
-	*/
 }
