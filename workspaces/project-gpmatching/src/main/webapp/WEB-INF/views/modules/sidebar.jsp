@@ -6,7 +6,7 @@
 		<!-- Brand logo -->
 
 		<a class="navbar-brand"
-			href="/project-gpmatching/resources/index.html"> <img
+			href="/project-gpmatching/home"> <img
 			src="/project-gpmatching/resources/assets/images/brand/logo/opgglogo.svg"
 			alt="" />
 		</a>

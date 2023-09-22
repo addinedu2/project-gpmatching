@@ -79,25 +79,27 @@ public class MatchingBoardController {
 		
 		return "redirect:lol-list";	
 	}
-
+	
 	@GetMapping(path = { "/battleground-write"})
-	public String showBgWriteForm(HttpSession session) {
+	public String showBattlegroundWriteForm(HttpSession session) {
 		
-		return "/boardMatching/write";
+		return "/boardMatching/battleground-write";
 	}
+	
+
 	
 	@PostMapping(path = { "/battleground-write"})
 	public String writeBgMatchingBoard(MatchingBoardDto matchingBoardDto) {
 		
 		matchingBoardService.write(matchingBoardDto);
 		
-		return "redirect:lol-list";	
+		return "redirect:battleground-list";	
 	}
 
 	@GetMapping(path = { "/overwatch-write"})
-	public String showOwWriteForm(HttpSession session) {
+	public String showOverwatchWriteForm(HttpSession session) {
 		
-		return "/boardMatching/write";
+		return "/boardMatching/overwatch-write";
 	}
 	
 	@PostMapping(path = { "/overwatch-write"})
@@ -105,7 +107,7 @@ public class MatchingBoardController {
 		
 		matchingBoardService.write(matchingBoardDto);
 		
-		return "redirect:lol-list";	
+		return "redirect:overwatch-list";	
 	}
 
 }
