@@ -32,6 +32,13 @@
 	href="/project-gpmatching/resources/assets/libs/prismjs/themes/prism-okaidia.css"
 	rel="stylesheet">
 	
+<!-- 	<style type="text/css">
+	listCommon {
+	text-align: center;
+	}
+	
+	</style>
+ -->	
     <title>commonList</title>
 </head>
 
@@ -45,10 +52,10 @@
              <a href="/project-gpmatching/commonBoard/commonWrite">
 				<button type="button" class="btn btn-secondary mb-2">글쓰기</button></a>
              <!-- basic table -->
-<table class="table">
+<table class="table" style="text-align: center">
    <thead>
-      <tr>
-         <th>번호</th>
+      <tr class="listCommon" >
+         <th >번호</th>
          <th>제목</th>
          <th>작성자</th>
          <th>조회수</th>
@@ -63,7 +70,7 @@
          <td style="text-align:left; padding-left:10px">
          <c:choose>
          	<c:when test="${not commonBoard.deleted }">
-         		<a href="commonDetail?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}">${commonBoard.commonTitle }</a>
+         		<a href="commonDetail?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}" style="text-decoration: none; color: inherit;">${commonBoard.commonTitle }</a>
          	</c:when>
          	<c:otherwise>
          	<span class="deleted" style="color:gray;">[삭제된 글]</span>
@@ -73,17 +80,44 @@
          <td>${ commonBoard.userNo }</td>
          <td>${ commonBoard.readCount }</td>
          <td>
-         	<fmt:formatDate value="${commonBoard.regDate }"
+         	<fmt:formatDate value="${ commonBoard.regDate }"
          				    pattern="yyyy-MM-dd"/>
          </td>
       </tr>
       </c:forEach>
    </tbody>
 </table>
-             <div class="btn-center">${pager }</div>
+             <div class="btn-center">${ pager }</div>
             </div>
             <%-- <jsp:include page="/WEB-INF/views/modules/testBottom.jsp" /> --%>
+	</script>
+	
+	<!-- Libs JS -->
+	<script
+		src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
+
+
+
+	<!-- Theme JS -->
+	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
+	
 </body>
 
 </html>
