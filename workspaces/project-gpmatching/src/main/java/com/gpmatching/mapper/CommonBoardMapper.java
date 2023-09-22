@@ -14,41 +14,41 @@ import com.gpmatching.dto.CommonBoardDto;
 @Mapper
 public interface CommonBoardMapper {
 
-	@Insert("insert into commonboard(commonTitle,commonContent) "
+	@Insert("insert into CommonBoard(commonTitle,commonContent) "
 		  + "values (#{commonTitle},#{commonContent})")
 	
 	@Options(useGeneratedKeys = true, keyProperty = "commonNo")
 	void insertCommonBoard(CommonBoardDto commonBoardDto);
 	
 	@Select("select commonNo, commonTitle, commonContent, userNo, readCount, regDate, deleted "
-		  + "from commonBoard "
+		  + "from CommonBoard "
 		  + "order by commonNo desc")
 	List<CommonBoardDto> selectAllBoard();//전체 리스트
 	
 	@Select("select commonNo, commonTitle, commonContent, userNo, readCount, regDate, deleted "
-			  + "from commonBoard "
+			  + "from CommonBoard "
 			  + "order by commonNo desc "
 			  + "limit #{from}, #{count}")
 		List<CommonBoardDto> selectBoardByPage(@Param("from")int from, @Param("count")int count);
 	
 	
 	@Select("select commonNo, commonTitle, commonContent, userNo, readCount, regDate, deleted "
-		  + "from commonBoard "
+		  + "from CommonBoard "
 		  + "where commonNo = #{commonNo} and deleted = false")
 	CommonBoardDto selectCommonBoardByCommonNo(@Param("commonNo") int commonNo);
 
 	
-	@Update("update commonboard set deleted = true "
+	@Update("update CommonBoard set deleted = true "
 		  + "where commonNo = #{commonNo}")
 	void deleteCommon(@Param("commonNo") int commonNo);
 	
-	@Update("update commonboard "
+	@Update("update CommonBoard "
 		  + "set commonTitle = #{commonTitle},commonContent = #{commonContent} "
 		  + "where commonNo = #{commonNo}")
 	void updateCommonEdit(CommonBoardDto commonBoardDto);
 
 	
-	@Select("select count(*) from commonboard")
+	@Select("select count(*) from CommonBoard")
 	int selectCommonBoardCount();
 	
 //	@Insert("insert into boardAttach(userFilename, savedFilename) "
