@@ -47,7 +47,7 @@
 
 		
 <form action="commonEdit" method="post">
-	<input type="hidden" name="commonNo" value="${commonBoard.commonNo }/">
+	<input type="hidden" name="commonNo" value="${commonBoard.commonNo }">
 	<input type="hidden" name="pageNo" value="${pageNo }">
 
 	<!-- title -->
@@ -104,8 +104,6 @@
 		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
 	<script
 		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
-
-
 
 
 	<!-- Theme JS -->

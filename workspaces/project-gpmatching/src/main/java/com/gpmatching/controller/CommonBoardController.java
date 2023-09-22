@@ -148,12 +148,12 @@ public class CommonBoardController {
 							 @RequestParam(defaultValue="-1")int pageNo) {
 		
 		if(pageNo < 1) {
-			return "redirect:list";
+			return "redirect:commonList";
 		}
 		
 		commonBoardService.commonEdit(commonBoardDto);
 		
-		return String.format("redirect:commonDetail?commonNo=%d",commonBoardDto.getCommonNo());
+		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d",commonBoardDto.getCommonNo(),pageNo);
 	}
 	
 	
