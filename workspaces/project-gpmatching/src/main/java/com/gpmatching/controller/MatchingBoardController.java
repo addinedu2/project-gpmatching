@@ -70,6 +70,8 @@ public class MatchingBoardController {
 	@PostMapping(path = { "/lol-write"})
 	public String writeLolMatchingBoard(MatchingBoardDto matchingBoardDto, LolDto lolDto) {
 		
+		//롤 게임번호 주기
+		matchingBoardDto.setGameNo(5);
 		matchingBoardService.write(matchingBoardDto);
 		//lolService.write(lolDto, matchingBoardDto.getBoardNo());
 		int boardNo = matchingBoardService.getLastMatchingItemBoardNo();
