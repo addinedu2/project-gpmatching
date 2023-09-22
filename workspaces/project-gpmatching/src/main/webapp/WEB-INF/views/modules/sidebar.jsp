@@ -71,10 +71,23 @@
 
 					</ul>
 				</div></li>
-			<li class="nav-item"><a class="nav-link "
-				href="/project-gpmatching/resources/pages/layout.html"> <i
-					data-feather="sidebar" class="nav-icon icon-xs me-2"> </i> 커뮤니티
-			</a></li>
+			<!-- common -->
+			<li class="nav-item">
+               <a class="nav-link has-arrow  collapsed " href="#!"
+               data-bs-toggle="collapse" data-bs-target="#common" aria-expanded="false"
+               aria-controls="common">
+               <i data-feather="sidebar" class="nav-icon icon-xs me-2"> </i>공통게시판</a>
+                            <div id="common" class="collapse " data-bs-parent="#sideNavbar" style="">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="/project-gpmatching/commonBoard/commonList"> 자유게시판 </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link has-arrow" href="/project-gpmatching/commonBoard/tipsList"> Tips </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
 
 			<!-- Nav item -->
 			<li class="nav-item">
