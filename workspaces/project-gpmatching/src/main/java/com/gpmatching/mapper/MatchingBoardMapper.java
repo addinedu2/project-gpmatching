@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -31,9 +32,10 @@ public interface MatchingBoardMapper {
 	*/
 	
 	@Insert( "insert into MatchingBoard ( boardTitle, "
-			+ "boardContent, preferGender, mic, gameNo) "
+			+ "boardContent, preferGender, mic, gameNo, userNo) "
 			+ "values ( #{ boardTitle }, #{ boardContent }, "
-			+ "#{ preferGender }, #{ mic } , #{ gameNo})")
+			+ "#{ preferGender }, #{ mic } , #{ gameNo}, #{ userNo })")
+	@Options(useGeneratedKeys = true, keyProperty = "boardNo")
 	void insertMatchingBoard(MatchingBoardDto matchingBoardDto);
 	
 
