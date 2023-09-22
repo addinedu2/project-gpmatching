@@ -32,8 +32,9 @@ public class MatchingBoardController {
 	@GetMapping(path = { "/lol-list"})
 	public String matchingBoardList(Model model) {
 		
-		List<MatchingBoardDto> matchingBoardList = matchingBoardService.listMatchingBoard();
-		
+		//List<MatchingBoardDto> matchingBoardList = matchingBoardService.listMatchingBoard();
+		List<MatchingBoardDto> matchingBoardList = matchingBoardService.getMatchingBoardListByGameName("league of legends");
+				
 		model.addAttribute("matchingBoardList", matchingBoardList);
 		
 		return "/boardMatching/lol-list";
@@ -50,13 +51,22 @@ public class MatchingBoardController {
 	}
 
 	@GetMapping(path = { "/battleground-list"})
-	public String bgMatchingBoardList() {
+	public String bgMatchingBoardList(Model model) {
+		
+		
+		List<MatchingBoardDto> matchingBoardList = matchingBoardService.getMatchingBoardListByGameName("battle ground");
+		
+		model.addAttribute("matchingBoardList", matchingBoardList);
 		
 		return "/boardMatching/battleground-list";
 	}
 	
 	@GetMapping(path = { "/overwatch-list"})
-	public String owMatchingBoardList() {
+	public String owMatchingBoardList(Model model) {
+		
+		List<MatchingBoardDto> matchingBoardList = matchingBoardService.getMatchingBoardListByGameName("overwatch2");
+		
+		model.addAttribute("matchingBoardList", matchingBoardList);
 		
 		return "/boardMatching/overwatch-list";
 	}
@@ -71,6 +81,8 @@ public class MatchingBoardController {
 	@PostMapping(path = { "/lol-write"})
 	public String writeLolMatchingBoard(MatchingBoardDto matchingBoardDto, LolDto lolDto) {
 		
+		//롤 게임번호 주기
+		matchingBoardDto.setGameNo(5);
 		matchingBoardService.write(matchingBoardDto);
 		//lolService.write(lolDto, matchingBoardDto.getBoardNo());
 		int boardNo = matchingBoardService.getLastMatchingItemBoardNo();

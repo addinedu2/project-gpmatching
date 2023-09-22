@@ -3,19 +3,47 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <!DOCTYPE html>
-
 <html>
 <head>
-	<meta charset="utf-8" />
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Favicon icon-->
+<link rel="shortcut icon" type="image/x-icon"
+	href="/project-gpmatching/resources/assets/images/favicon/favicon.ico">
+<!-- Theme CSS -->
+<link rel="stylesheet"
+	href="/project-gpmatching/resources/assets/css/theme.min.css">
+	<link rel="stylesheet"
+	href="/project-gpmatching/resources/assets/css/theme.css">
+
+<!-- Libs CSS -->
+<link
+	href="/project-gpmatching/resources/assets/libs/bootstrap-icons/font/bootstrap-icons.css"
+	rel="stylesheet">
+<link
+	href="/project-gpmatching/resources/assets/libs/dropzone/dist/dropzone.css"
+	rel="stylesheet">
+<link
+	href="/project-gpmatching/resources/assets/libs/@mdi/font/css/materialdesignicons.min.css"
+	rel="stylesheet" />
+<link
+	href="/project-gpmatching/resources/assets/libs/prismjs/themes/prism-okaidia.css"
+	rel="stylesheet">
 	<title>게시판글쓰기</title>
 </head>
 <body class="bg-light">
-<div id="db-wrapper" class="toggled">
-<%--     <jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
-    <div id="page-content">
-	<jsp:include page="/WEB-INF/views/modules/header.jsp" /> --%>
+
+	<div id="db-wrapper" class="toggled">
+		<!-- navbar vertical -->
+		<!-- Sidebar -->
+		<jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
+		<!-- page content -->
+		<div id="page-content">
+		<!--  header -->
+		<jsp:include page="/WEB-INF/views/modules/header.jsp" />
 
 	<div id="pageContainer">
 		
@@ -26,25 +54,25 @@
 		        <table>
 		        	<tr>
 		                <th>글번호</th>
-		                <td>${requestScope.CommonBoard.commonNo }</td>
+		                <td>${requestScope.commonBoard.commonNo }</td>
 		            </tr>
 		            <tr>
 		                <th>제목</th>
-		                <td>${CommonBoard.commonTitle }</td>
+		                <td>${commonBoard.commonTitle }</td>
 		            </tr>
 		            <tr>
 		                <th>작성자</th>
-		                <td>${CommonBoard.userNo }</td>
+		                <td>${commonBoard.userNo }</td>
 		            </tr>
 		            <tr>
 		                <th>작성일</th>
 		                <td>
-		                <fmt:formatDate value="${CommonBoard.regDate }" pattern="yyyy-MM-dd" />
+		                <fmt:formatDate value="${commonBoard.regDate }" pattern="yyyy-MM-dd" />
 		                </td>
 		            </tr>
 		            <tr>
 		                <th>조회수</th>
-		                <td>${CommonBoard.readCount }</td>
+		                <td>${commonBoard.readCount }</td>
 		            </tr>
 		            <tr>
 		            
@@ -52,7 +80,7 @@
 " />		
 		            <!-- c:set은 변수를 만들어줌. value값에 ""사이에 실제 줄바꿈 엔터를 쳐줘야함 -->
 		                <th>본문</th>
-		                <td>${fn:replace(CommonBoard.commonContent,enter,"<br>") }</td>
+		                <td>${fn:replace(commonBoard.commonContent,enter,"<br>") }</td>
 		                <!--  -->
 		     <!-- c:set에서 var="enter"설정을 줄바꿈으로 설정해줘서 enter칠 때마다 자동으로 <br>들어감 -->
 		            </tr>
@@ -60,14 +88,14 @@
 		        <div class="buttons">
 		        	[ <a href="commonList?=pageNo=${pageNo}">목록보기</a> ]
 		        	<!-- sessionScope.loginuser != null && loginuser.memberId == board.writer 같은 의미-->
-		        	[ <a href="commonEdit?commonNo=${CommonBoard.commonNo}&pageNo=${pageNo}">수정</a> ]
+		        	[ <a href="commonEdit?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}">수정</a> ]
 		        	[ <a href="javascript:" id="delete-board-lnk">삭제</a> ]
 		        
 		        </div>
 		        
 		        <!-- write comment area -->
-		<form id="commentform" action="writeComment" method="post">
-			<input type="hidden" name="commonNo" value="${ CommonBoard.commonNo }" />
+	<%-- 	<form id="commentform" action="writeComment" method="post">
+			<input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
 			<input type="hidden" name="pageNo" value="${ pageNo }" />
 			<input type="hidden" name="userNo" value="${ userNo}" />
 			<table style="width:800px;border:solid 1px;margin:0 auto">
@@ -82,31 +110,31 @@
 					</td>
 				</tr>                    
 			</table>
-		</form>
+		</form> --%>
 	
 		<!-- end of write comment area -->
 		
 		<!-- comment list area -->
-		<br>
+<%-- 		<br>
 	    <hr style="width:800px;margin:0 auto">
 	    <br>
 	    <table id="comment-list" style="width:800px;border:solid 1px;margin:0 auto">
-		<c:forEach var="comment" items="${ CommonBoard.boardCommentList }">				
+		<c:forEach var="comment" items="${ commonBoard.boardCommentList }">				
 			<tr>
 				<td style="text-align:left;margin:5px;border-bottom: solid 1px;">					
 					<div id="comment-view-area-${ boardComment.commentNo }">
 					<c:choose>
-					<c:when test="${ BoardComment.deleted }">
+					<c:when test="${ boardComment.deleted }">
 						<br><br>
 						<span style='color:gray'>삭제된 글입니다.</span>
 						<br><br>
 					</c:when>
 					<c:otherwise>
-						${ boardComment.writer } &nbsp;&nbsp; [<fmt:formatDate value="${ BoardComment.regDate }" pattern="yyyy-MM-dd hh:mm:ss"/>]
+						${ boardComment.writer } &nbsp;&nbsp; [<fmt:formatDate value="${ boardComment.regDate }" pattern="yyyy-MM-dd hh:mm:ss"/>]
 					    <br /><br />
-					    <span>${ fn:replace(BoardComment.content, enter, "<br>") }</span>
+					    <span>${ fn:replace(boardComment.content, enter, "<br>") }</span>
 						<br /><br />
-						<div style='display:${ (not empty loginuser and loginuser.memberId == comment.writer) ? "block" : "none" }'>
+						<div style='display:${ (not empty loginuser and loginuser.memberId == BoardComment.writer) ? "block" : "none" }'>
 					    	<a class="edit-comment" data-comment-no="${ boardComment.commentNo }" href="javascript:">편집</a>
 							&nbsp;
 							<a class="delete-comment" data-comment-no="${ boardComment.commentNo }" href="javascript:">삭제</a>
@@ -134,7 +162,7 @@
 				</td>
 			</tr>
 		</c:forEach>        	
-		</table>
+		</table> --%>
 		<!-- end of comment list area -->
 		    </div>
 		</div>
@@ -173,7 +201,7 @@
 			const yn = confirm(commentNo + "번 댓글을 삭제할까요?");
 			if (yn) {
 				location.href = 'delete-comment?commentNo=' + commentNo + 
-											  '&boardNo=' + ${ board.boardNo } + 
+											  '&boardNo=' + ${ commonBoard.commonNo } + 
 											  '&pageNo=' + ${ pageNo };
 			}
 		});
@@ -219,6 +247,33 @@
 
 	});
 	</script>
+	
+	<!-- Libs JS -->
+	<script
+		src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+
+
+
+	<!-- Theme JS -->
+	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
+	
 
 </body>
 </html>

@@ -63,7 +63,9 @@
 			
 			<!-- Container fluid -->
 
-			<a href="/project-gpmatching/boardMatching/write">게시글 쓰기</a> <br>
+			<a href="/project-gpmatching/boardMatching/lol-list">
+				<button type="button" class="btn btn-primary mb-2">목록보기</button>
+			</a>
 			<br>
 			<!-- Input -->
 			<form action="lol-write" method="post">
