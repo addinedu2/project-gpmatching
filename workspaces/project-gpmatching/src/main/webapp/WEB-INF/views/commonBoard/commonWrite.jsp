@@ -45,7 +45,7 @@
 		<jsp:include page="/WEB-INF/views/modules/header.jsp" />
 
 		
-<form action="commonWrite" method="post" enctype="multipart/form-data">
+<form action="commonWrite" method="post" >
 	<!-- title -->
 	<div class="mb-3 txt-box">
 	  <label class="form-label" for="textInput">제목</label>

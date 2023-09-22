@@ -80,7 +80,7 @@
       </c:forEach>
    </tbody>
 </table>
-             ${pager }
+             <div class="btn-center">${pager }</div>
             </div>
             <%-- <jsp:include page="/WEB-INF/views/modules/testBottom.jsp" /> --%>
 
