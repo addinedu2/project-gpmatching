@@ -66,7 +66,10 @@
 			<a href="/project-gpmatching/boardMatching/lol-write">
 				<button type="button" class="btn btn-primary mb-2">LoL 매칭 게시글 쓰기</button>
 			</a>
-				
+			<a href="/project-gpmatching/home">
+				<button type="button" class="btn btn-primary mb-2">홈으로</button>
+			</a>
+					
 			<div class="row mt-6">
 				<div class="col-md-12 col-12">
 					<!-- card  -->

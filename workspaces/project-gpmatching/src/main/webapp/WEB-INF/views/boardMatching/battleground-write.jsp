@@ -63,16 +63,15 @@
 			
 			<!-- Container fluid -->
 
-			<a href="/project-gpmatching/boardMatching/lol-list">
-				<button type="button" class="btn btn-primary mb-2">LoL 목록보기</button>
+			<a href="/project-gpmatching/boardMatching/battleground-list">
+				<button type="button" class="btn btn-primary mb-2">베틀그라운드 목록보기</button>
 			</a>
 			<a href="/project-gpmatching/home">
 				<button type="button" class="btn btn-primary mb-2">홈으로</button>
-			</a>
-				
+			</a>	
 			<br>
 			<!-- Input -->
-			<form action="lol-write" method="post">
+			<form action="battleground-write" method="post">
 				<div class="mb-3 txt-box">
 					<label class="form-label" for="textInput">제목</label>
 					<input name="boardTitle" type="text" id="textInput" class="form-control" 
@@ -106,29 +105,22 @@
 					</div>
 				</div>
 				
-				<!-- 롤 등록 -->
+				<!-- 베그 등록 -->
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">롤주포지션</label>
+					<label class="form-label" for="textInput">베그서버</label>
 					<input name="lolPosition" type="text" id="textInput" class="form-control" >
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">롤서렌여부</label>
+					<label class="form-label" for="textInput">베그주포지션</label>
+					<input name="lolPosition" type="text" id="textInput" class="form-control" >
+				</div>
+				<div class="mb-3 txt-box">
+					<label class="form-label" for="textInput">베그주사용무기</label>
 					<input name="lolSur" type="text" id="textInput" class="form-control" >
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">롤선호플레이</label>
+					<label class="form-label" for="textInput">베그선호플레이</label>
 					<input name="lolPlay" type="text" id="textInput" class="form-control" >
-				</div>
-				<!-- Select Option -->
-				<div class="mb-3 txt-box">
-					<label class="form-label" for="selectOne">티어<span
-						class="text-secondary">(현재 티어)</span></label> <select name="lolTier" class="form-select"
-						aria-label="Default select example">
-						<option selected>티어를 선택하세요</option>
-						<option value="bronze">브론즈</option>
-						<option value="silver">실버</option>
-						<option value="gold">골드</option>
-					</select>
 				</div>
 				<br>
 				<div class="btn-center">
@@ -146,7 +138,7 @@
 				const btnCancel = document.querySelector("#btnCancel"); // id="btnCancel"인 요소 찾기
 				btnCancel.addEventListener("click", function(event) {
 
-					location.href = "lol-list"; // 브라우저의 주소 입력기에 주소를 입력하는 것과 같은 효과 ( 이동 )
+					location.href = "battleground-list"; // 브라우저의 주소 입력기에 주소를 입력하는 것과 같은 효과 ( 이동 )
 				});
 			});
 		</script>
