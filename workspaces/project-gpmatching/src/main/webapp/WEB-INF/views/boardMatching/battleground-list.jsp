@@ -1,27 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 
-  <head>
-    <!-- Required meta tags -->
+<head>
+<!-- Required meta tags -->
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
 
 <!-- Favicon icon-->
-<link rel="shortcut icon" type="image/x-icon" href="/project-gpmatching/resources/assets/images/favicon/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon"
+	href="/project-gpmatching/resources/assets/images/favicon/favicon.ico">
 
 <!-- Libs CSS -->
 
 
-<link href="/project-gpmatching/resources/assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-<link href="/project-gpmatching/resources/assets/libs/dropzone/dist/dropzone.css"  rel="stylesheet">
-<link href="/project-gpmatching/resources/assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
-<link href="/project-gpmatching/resources/assets/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet">
+<link
+	href="/project-gpmatching/resources/assets/libs/bootstrap-icons/font/bootstrap-icons.css"
+	rel="stylesheet">
+<link
+	href="/project-gpmatching/resources/assets/libs/dropzone/dist/dropzone.css"
+	rel="stylesheet">
+<link
+	href="/project-gpmatching/resources/assets/libs/@mdi/font/css/materialdesignicons.min.css"
+	rel="stylesheet" />
+<link
+	href="/project-gpmatching/resources/assets/libs/prismjs/themes/prism-okaidia.css"
+	rel="stylesheet">
 
 
 
@@ -35,209 +47,181 @@
 	href="/project-gpmatching/resources/assets/css/theme.css">
 <link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
 
-    <title>Layout | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
-  </head>
+<title>Layout | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
+</head>
 
-  <body class="bg-light"> 
-    <div id="db-wrapper" class="toggled">
-         <!-- navbar vertical -->
-       <!-- Sidebar -->
+<body class="bg-light">
+	<div id="db-wrapper" class="toggled" class="toggled">
+		<!-- navbar vertical -->
+		<!-- Sidebar -->
 		<jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
-       <!-- page content -->
-      <div id="page-content">
-        <div class="header @@classList">
-  <!-- navbar -->
-  <nav class="navbar-classic navbar navbar-expand-lg">
-    <a id="nav-toggle" href="#"><i
-        data-feather="menu"
+		
+		<!-- page content -->
+		<div id="page-content">
+			<!--  header -->
+			<jsp:include page="/WEB-INF/views/modules/header.jsp" />
+			<!-- Container fluid -->
 
-        class="nav-icon me-2 icon-xs"></i></a>
-    <div class="ms-lg-3 d-none d-md-none d-lg-block">
-      <!-- Form -->
-      <form class="d-flex align-items-center">
-        <input type="search" class="form-control" placeholder="Search" />
-      </form>
-    </div>
-    <!--Navbar nav -->
-    <ul class="navbar-nav navbar-right-wrap ms-auto d-flex nav-top-wrap">
-      <li class="dropdown stopevent">
-        <a class="btn btn-light btn-icon rounded-circle indicator
-          indicator-primary text-muted" href="#" role="button"
-          id="dropdownNotification" data-bs-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          <i class="icon-xs" data-feather="bell"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end"
-          aria-labelledby="dropdownNotification">
-          <div>
-            <div class="border-bottom px-3 pt-2 pb-3 d-flex
-              justify-content-between align-items-center">
-              <p class="mb-0 text-dark fw-medium fs-4">Notifications</p>
-              <a href="#" class="text-muted">
-                <span>
-                  <i class="me-1 icon-xxs" data-feather="settings"></i>
-                </span>
-              </a>
-            </div>
-            <!-- List group -->
-            <ul class="list-group list-group-flush notification-list-scroll">
-              <!-- List group item -->
-              <li class="list-group-item bg-light">
-
-
-                <a href="#" class="text-muted">
-                    <h5 class=" mb-1">Rishi Chopra</h5>
-                    <p class="mb-0">
-                      Mauris blandit erat id nunc blandit, ac eleifend dolor pretium.
-                    </p>
-                </a>
-
-
-
-          </li>
-             <!-- List group item -->
-             <li class="list-group-item">
-
-
-              <a href="#" class="text-muted">
-                  <h5 class=" mb-1">Neha Kannned</h5>
-                  <p class="mb-0">
-                    Proin at elit vel est condimentum elementum id in ante. Maecenas et sapien metus.
-                  </p>
-              </a>
-
-
-
-        </li>
-              <!-- List group item -->
-              <li class="list-group-item">
-
-
-                <a href="#" class="text-muted">
-                    <h5 class=" mb-1">Nirmala Chauhan</h5>
-                    <p class="mb-0">
-                      Morbi maximus urna lobortis elit sollicitudin sollicitudieget elit vel pretium.
-                    </p>
-                </a>
-
-
-
-          </li>
-              <!-- List group item -->
-              <li class="list-group-item">
-
-
-                    <a href="#" class="text-muted">
-                        <h5 class=" mb-1">Sina Ray</h5>
-                        <p class="mb-0">
-                          Sed aliquam augue sit amet mauris volutpat hendrerit sed nunc eu diam.
-                        </p>
-                    </a>
-
-
-
-              </li>
-            </ul>
-            <div class="border-top px-3 py-2 text-center">
-              <a href="#" class="text-inherit fw-semi-bold">
-                View all Notifications
-              </a>
-            </div>
-          </div>
-        </div>
-      </li>
-      <!-- List -->
-      <li class="dropdown ms-2">
-        <a class="rounded-circle" href="#" role="button" id="dropdownUser"
-          data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <div class="avatar avatar-md avatar-indicators avatar-online">
-            <img alt="avatar" src="/project-gpmatching/resources/assets/images/avatar/avatar-1.jpg"
-              class="rounded-circle" />
-          </div>
-        </a>
-        <div class="dropdown-menu dropdown-menu-end"
-          aria-labelledby="dropdownUser">
-          <div class="px-4 pb-0 pt-2">
-
-
-            <div class="lh-1 ">
-              <h5 class="mb-1"> John E. Grainger</h5>
-              <a href="#" class="text-inherit fs-6">View my profile</a>
-            </div>
-            <div class=" dropdown-divider mt-3 mb-2"></div>
-          </div>
-
-          <ul class="list-unstyled">
-
-            <li>
-              <a class="dropdown-item" href="#">
-                <i class="me-2 icon-xxs dropdown-item-icon" data-feather="user"></i>Edit
-                Profile
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item"
-                href="#">
-                <i class="me-2 icon-xxs dropdown-item-icon"
-                  data-feather="activity"></i>Activity Log
-              </a>
-
-
-            </li>
-
-            <li>
-              <a class="dropdown-item text-primary" href="#">
-                <i class="me-2 icon-xxs text-primary dropdown-item-icon"
-                  data-feather="star"></i>Go Pro
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">
-                <i class="me-2 icon-xxs dropdown-item-icon"
-                  data-feather="settings"></i>Account Settings
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="../index.html">
-                <i class="me-2 icon-xxs dropdown-item-icon"
-                  data-feather="power"></i>Sign Out
-              </a>
-            </li>
-          </ul>
-
-        </div>
-      </li>
-    </ul>
-  </nav>
-</div>
-	<!-- Container fluid -->
-	<!-- Primary Button -->
-	<a href="/project-gpmatching/boardMatching/write">
-  	  <button type="button" class="btn btn-primary mb-2">베그 매칭 게시글 쓰기</button>
-  	</a>
-	<jsp:include page="/WEB-INF/views/listrow/row.jsp" />
-      </div>
-    </div>
-    <!-- Scripts -->
-    <!-- Libs JS -->
-<script src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+			<!-- Primary Button -->
+			<a href="/project-gpmatching/boardMatching/lol-write">
+				<button type="button" class="btn btn-primary mb-2">배틀그라운드 매칭 게시글 쓰기</button>
+			</a>
+				
+			<div class="row mt-6">
+				<div class="col-md-12 col-12">
+					<!-- card  -->
+					<div class="card">
+						<!-- card header  -->
+						<div class="card-header bg-white  py-4">
+							<h4 class="mb-0">베틀그라운드</h4>
+						</div>
+						<!-- table  -->
+						<div class="table-responsive">
+							<table class="table text-nowrap mb-0">
+								<thead class="table-light">
+									<tr>
+										<th>제목</th>
+										<th>등록일</th>
+										<th>티어</th>
+										<th>인원</th>
+										<th>내용</th>
+										<th>댓글</th>
+			
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="matchingBoard" items="${ requestScope.matchingBoardList }">
+										<tr id="tr-${ matchingBoard.boardNo }" data-title="${ matchingBoard.boardTitle }">
+											<td class="align-middle">
+												<div class="d-flex align-items-center">
+													<div>
+														<div class="icon-shape icon-md border p-4 rounded-1">
+															<img src="assets/images/brand/dropbox-logo.svg" alt="">
+														</div>
+													</div>
+													<div class="ms-3 lh-1">
+														<h5 class=" mb-1">
+															<a href="#" class="text-inherit">${ matchingBoard.boardTitle }</a>
+														</h5>
+			
+													</div>
+												</div>
+											</td>
+											<td class="align-middle">
+												<fmt:formatDate value="${ matchingBoard.regDate }" pattern="yyyy-MM-dd " />					         
+											</td>
+											<td class="align-middle">
+												<span class="badge bg-warning">Gold</span>
+											</td>
+											<td class="align-middle">
+												<div class="avatar-group">
+													<span class="avatar avatar-sm"> 
+														<img alt="avatar" src="assets/images/avatar/avatar-1.jpg" class="rounded-circle">
+													</span> 
+													<span class="avatar avatar-sm"> 
+														<img alt="avatar" src="assets/images/avatar/avatar-2.jpg" class="rounded-circle">
+													</span> 
+													<span class="avatar avatar-sm"> 
+														<img alt="avatar" src="assets/images/avatar/avatar-3.jpg" class="rounded-circle">
+													</span> 
+													<span class="avatar avatar-sm avatar-primary"> 
+														<span class="avatar-initials rounded-circle fs-6">+5</span>
+													</span>
+												</div>
+											</td>
+											<td class="align-middle text-dark">
+												<div class="float-start me-3">${ matchingBoard.boardContent }</div>
+			
+											</td>
+											<td>
+												<!-- Varying modal -->
+												<button type="button" class="btn btn-primary btn-show-comment-modal" 
+														data-boardno="${ matchingBoard.boardNo }">${ matchingBoard.boardNo }</button>
+											</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="modal fade" id="comment-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelOne" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="title-in-modal"></h5>
+							<button type="button" class="btn-close"
+								data-bs-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<form id="commentform" action="write-comment" method="post">
+							<input type="hidden" id="boardno-in-modal" name="boardNo" value="${ matchingBoard.boardNo }" /> 
+							<div class="modal-body">
+			
+								<div class="mb-3">
+									<label for="recipient-name" class="col-form-label">게임 닉네임</label> 
+									<input type="text" class="form-control" id="recipient-name-in-modal">
+								</div>
+								<div class="mb-3">
+									<label for="message-text" class="col-form-label">파티장에게 알려줄 내용</label>
+									<textarea name="mCommentContent" class="form-control" id="message-text-in-modal"></textarea>
+								</div>
+			
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-bs-dismiss="modal">닫기</button>
+								<button type="submit" class="btn btn-primary">등록</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Scripts -->
+	<!-- Libs JS -->
+	<script
+		src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
 
 
 
-<!-- Theme JS -->
-<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
+	<!-- Theme JS -->
+	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 
-
-
-  </body>
+	<script>
+	
+	$(function() {
+		$('.btn-show-comment-modal').on("click", function(event) {
+			const boardNo = $(this).data('boardno');
+			const currentTr = $('#tr-' + boardNo);
+			$('#title-in-modal').text(currentTr.data('title'));
+			$('#boardno-in-modal').val(boardNo);
+			$('#comment-modal').modal('show');
+		});
+	});
+	
+	</script>
+</body>
 
 </html>

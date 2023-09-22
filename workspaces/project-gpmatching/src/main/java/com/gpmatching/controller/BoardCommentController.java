@@ -9,26 +9,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gpmatching.dto.BoardCommentDto;
 import com.gpmatching.service.BoardCommentService;
 
+import lombok.Setter;
+
 @Controller
-@RequestMapping(path= {"/commonBoard"})
+@RequestMapping(path = { "/commonBoard" })
 public class BoardCommentController {
 	
-	@Autowired
+	@Setter(onMethod_ = { @Autowired })
 	private BoardCommentService boardCommentService;
 	
-	@PostMapping(path= {"/writeComment"})
-	public String writeCommentForm(BoardCommentDto boardComment, @RequestParam(defaultValue = "-1")int pageNo ) {
-
-		boardCommentService.writeComment(boardComment);
 	
+
+	
+	@PostMapping(path= {"/writeComment"})
+	public String writeComment(BoardCommentDto boardComment, @RequestParam(defaultValue = "-1") int pageNo) {
+	
+		boardCommentService.writeComment(boardComment);
+
+		//return "redirect:commonDetail";
 		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d", boardComment.getCommonNo(), pageNo);
-			//나중에 적은 댓글 주소로 돌아올 것
 	}
 	
 	
-	 
-
 	
+	
+	public String deleteComment() {
+		return null;
+	}
 	
 	
 ////testCode

@@ -6,8 +6,5 @@ public interface BoardCommentService {
 
 	void writeComment(BoardCommentDto boardComment);
 
-	
-
-	
 
 }

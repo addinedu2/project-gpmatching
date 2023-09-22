@@ -9,6 +9,8 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+
 
 <!-- Favicon icon-->
 <link rel="shortcut icon" type="image/x-icon"
@@ -32,7 +34,8 @@
 <link
 	href="/project-gpmatching/resources/assets/libs/prismjs/themes/prism-okaidia.css"
 	rel="stylesheet">
-	<title>자유게시판</title>
+	<title>게시판글쓰기</title>
+	
 </head>
 <body class="bg-light">
 
@@ -42,63 +45,129 @@
 		<jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
 		<!-- page content -->
 		<div id="page-content">
-		<!--  header -->
-		<jsp:include page="/WEB-INF/views/modules/header.jsp" />
+			<!--  header -->
+			<jsp:include page="/WEB-INF/views/modules/header.jsp" />
 
-	<div id="pageContainer">
-		
-		<div style="padding-top:25px;text-align:center">
-		<div id="inputcontent">
-		    <div id="inputmain">
-		        <div class="inputsubtitle">게시글 정보</div>
-		        <table>
-		        	<tr>
-		                <th>글번호</th>
-		                <td>${requestScope.commonBoard.commonNo }</td>
-		            </tr>
-		            <tr>
-		                <th>제목</th>
-		                <td>${commonBoard.commonTitle }</td>
-		            </tr>
-		            <tr>
-		                <th>작성자</th>
-		                <td>${commonBoard.userNo }</td>
-		            </tr>
-		            <tr>
-		                <th>작성일</th>
-		                <td>
-		                <fmt:formatDate value="${commonBoard.regDate }" pattern="yyyy-MM-dd" />
-		                </td>
-		            </tr>
-		            <tr>
-		                <th>조회수</th>
-		                <td>${commonBoard.readCount }</td>
-		            </tr>
-		            <tr>
-		            
+			<div class="container-fluid p-6">
+			
+				<div class="row">
+		          <div class="col-lg-12 col-md-12 col-12">
+		            <!-- Page header -->
+		           
+		              <div class="border-bottom pb-4 mb-4 ">
+		               
+		                  <h3 class="mb-0 fw-bold">게시물 상세 보기</h3>
+		           
+		            </div>
+		          </div>
+		        </div>
+			
+				<div class="py-6">
+		          <!-- row -->
+		          <div class="row">
+		          	<div class="col-xl-12 col-md-12 col-12 mb-6">
+		              <!-- card -->
+		              <div class="card">
+		                <!-- card body -->
+		                <div class="card-body">
+		                
+		                	<div class="d-flex align-items-center">
+		                      <!-- <div>
+		                        <img src="../assets/images/avatar/avatar-1.jpg" alt="" class="avatar avatar-md rounded-circle">
+		                      </div> -->
+		                      <div class="ms-3">
+		                        <h5 class="mb-0 fw-bold">${commonBoard.userNo }</h5>
+		                        <p class="mb-0"><fmt:formatDate value="${commonBoard.regDate }" pattern="yyyy-MM-dd" /></p>
+		                      </div>
+		                    </div>
+		                    <br>
+		                    
+
+		                    
+		                    <div class="row">
+			                      <!-- text -->
+			                    <div class="col-6 mb-5">
+			                      <h6 class="text-uppercase fs-5 ls-2">글번호 </h6>
+			                      <p class="mb-0">${requestScope.commonBoard.commonNo }</p>
+			                    </div>
+			                    <div class="col-6 mb-5">
+			                      <h6 class="text-uppercase fs-5 ls-2">조회수</h6>
+			                      <p class="mb-0">${commonBoard.readCount }</p>
+			                    </div>
+			                 </div>
+			                <span class="text-uppercase fw-medium text-darks-5 ls-2">제목</span>
+			                <!-- text -->
+			                <h4 class="card-title">${commonBoard.commonTitle }</h4>
+			                
 <c:set var="enter" value="
 " />		
-		            <!-- c:set은 변수를 만들어줌. value값에 ""사이에 실제 줄바꿈 엔터를 쳐줘야함 -->
-		                <th>본문</th>
-		                <td>${fn:replace(commonBoard.commonContent,enter,"<br>") }</td>
-		                <!--  -->
-		     <!-- c:set에서 var="enter"설정을 줄바꿈으로 설정해줘서 enter칠 때마다 자동으로 <br>들어감 -->
-		            </tr>
-		        </table>
-		        <div class="buttons">
-		        	[ <a href="commonList?=pageNo=${pageNo}">목록보기</a> ]
-		        	<!-- sessionScope.loginuser != null && loginuser.memberId == board.writer 같은 의미-->
-		        	[ <a href="commonEdit?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}">수정</a> ]
-		        	[ <a href="javascript:" id="delete-board-lnk">삭제</a> ]
-		        
+			                <span class="text-uppercase fw-medium text-darks-5 ls-2">본문</span>
+			                <!-- text -->
+			                <p class="mt-2 mb-6">${fn:replace(commonBoard.commonContent,enter,"<br>") }</p>
+		                	
+		                	
+		               
+		                  <div class="row">
+		                    <!-- <div class="col-xl-1 col-lg-2 col-md-2 col-12 mb-3 mb-lg-0">
+		                      avatar
+		                      <img src="../assets/images/avatar/avatar-1.jpg" class="avatar avatar-md rounded-circle" alt="">
+		                    </div> -->
+		                    <!-- input -->
+		                    <div class="col-xl-11 col-lg-10 col-md-9 col-12 ">
+		
+		                      <div class="row g-3 align-items-center">
+		                        <div class="col-md-2 col-xxl-1">
+		                          <label for="name" class="col-form-label ">Name</label>
+		                        </div>
+		                        <div class="col-md-8 col-xxl-9  mt-0 mt-md-3">
+		                          <input type="password" id="name" class="form-control" aria-describedby="name">
+		                        </div>
+		                        <div class="col-md-2 col-xxl-2">
+		                          <button type="submit" class="btn btn-primary">Post</button>
+		                        </div>
+		                      </div>
+		
+		                    </div>
+		
+		                  </div>
+		                  
+		                  
+		                </div>
+		              </div>
+		            
+		            	<br>
+			            <div class="btn-center" >
+				        	<a href="commonList?=pageNo=${pageNo}">
+				        	<button type="button" class="btn btn-primary btn-group-sm mb-2" aria-label="Small button group">목록</button>
+				        	</a>
+				        	
+				        	<!-- sessionScope.loginuser != null && loginuser.memberId == board.writer 같은 의미-->
+				        	
+				        	<a href="commonEdit?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}">
+				        	<button type="button" class="btn btn-secondary btn-group-sm mb-2" aria-label="Small button group">수정</button>
+				        	</a>
+		
+				        	
+				        	<a href="javascript:" id="delete-board-lnk">
+				        	<button type="button" class="btn btn-danger btn-group-sm mb-2" aria-label="Small button group">삭제</button>
+				        	</a>
+				        	
+		
+				        
+				        </div>
+		            
+		            </div>
+	            
+		          </div>
+		          
 		        </div>
+
 		        
-		        <!-- write comment area -->
+<%-- 		<!-- write comment area -->
 		<form id="commentform" action="writeComment" method="post">
 			<input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
 			<input type="hidden" name="pageNo" value="${ pageNo }" />
-			<%-- <input type="hidden" name="userNo" value="${ userNo }" />  --%>
-			<!-- 로그인하면 댓글 쓰는 걸로 처리할 시 loginuser.userNo 체크  -->
+			<input type="hidden" name="userNo" value="${ userNo}" />
 			<table style="width:800px;border:solid 1px;margin:0 auto">
 				<tr>
 					<td style="width:750px">	                	
@@ -114,113 +183,12 @@
 		</form>
 	
 		<!-- end of write comment area -->
-		
-		<!-- comment list area -->
-		<hr style="width:800px;margin:0 auto">
-<br>
-<table id="comment-list" style="width:800px;border:solid 1px;margin:0 auto">
-    <c:forEach var="comment" items="${commonBoard.boardCommentList}">				
-        <tr>
-            <td style="text-align:left;margin:5px;border-bottom: solid 1px;">
-                <div id="comment-view-area-${comment.commentNo}">
-                    <c:choose>
-                        <c:when test="${comment.deleted}">
-                            <br><br>
-                            <span style='color:gray'>삭제된 글입니다.</span>
-                            <br><br>
-                        </c:when>
-                        <c:otherwise>
-                            ${comment.writer } &nbsp;&nbsp; [<fmt:formatDate value="${comment.regDate}" pattern="yyyy-MM-dd hh:mm:ss"/>]
-                            <br /><br />
-                            <span>${fn:replace(comment.content, enter, "<br>")}</span>
-                            <br /><br />
-                                <a class="edit-comment" data-comment-no="${comment.commentNo}" href="javascript:">편집</a>
-                                &nbsp;
-                                <a class="delete-comment" data-comment-no="${comment.commentNo}" href="javascript:">삭제</a>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
-                </div>	                
-                <div id="comment-edit-area-${comment.commentNo}" style="display: none">
-                    ${comment.userNo } &nbsp;&nbsp; [${comment.regDate}]
-                    <br /><br />
-                    <form action="editComment" method="post">
-                        <input type="hidden" name="commentNo" value="${comment.commentNo}" />
-                        <textarea name="content" style="width: 99%; resize: none" rows="3" maxlength="200">${comment.commentContent}</textarea>
-                    </form>
-                    <br />
-                    <div>
-                        <a class="update-comment" data-comment-no="${comment.commentNo}" href="javascript:">수정</a> 
-                        &nbsp; 
-                        <a class="cancel-edit-comment" data-comment-no="${comment.commentNo}" href="javascript:">취소</a>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </c:forEach>        	
-</table>
-		
-		
-		<%-- 로그인 해서야 돌아가는 코드이니 남겨준다 로그인 걸리면 주석 풀 것
-		<br>
-	    <hr style="width:800px;margin:0 auto">
-	    <br>
-	    <table id="comment-list" style="width:800px;border:solid 1px;margin:0 auto">
-		<c:forEach var="comment" items="${ commonBoard.boardCommentList }">				
-			<tr>
-				<td style="text-align:left;margin:5px;border-bottom: solid 1px;">					
-					<div id="comment-view-area-${ boardComment.commentNo }">
-					<c:choose>
-					<c:when test="${ boardComment.deleted }">
-						<br><br>
-						<span style='color:gray'>삭제된 글입니다.</span>
-						<br><br>
-					</c:when>
-					<c:otherwise>
-						${ boardComment.writer } &nbsp;&nbsp; [<fmt:formatDate value="${ boardComment.regDate }" pattern="yyyy-MM-dd hh:mm:ss"/>]
-					    <br /><br />
-					    <span>${ fn:replace(boardComment.content, enter, "<br>") }</span>
-						<br /><br />
-						<div style='display:${ (not empty loginuser and loginuser.memberId == BoardComment.writer) ? "block" : "none" }'>
-					    	<a class="edit-comment" data-comment-no="${ boardComment.commentNo }" href="javascript:">편집</a>
-							&nbsp;
-							<a class="delete-comment" data-comment-no="${ boardComment.commentNo }" href="javascript:">삭제</a>
-						</div>
-					</c:otherwise>
-					</c:choose>
-					</div>	                
-					<div id="comment-edit-area-${ boardComment.commentNo }" style="display: none">
-						${ boardComment.userNo } &nbsp;&nbsp; [${ boardComment.regDate }]
-						<br /><br />
-						<form action="editComment" method="post">
-						<input type="hidden" name="commentNo" value="${ boardComment.commentNo }" />
-						<input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
-						<input type="hidden" name="pageNo" value="${ pageNo }" />
-						<textarea name="content" style="width: 99%; resize: none" rows="3" maxlength="200">${ boardComment.commentContent }</textarea>
-						</form>
-						<br />
-						<div>
-							<a class="update-comment" data-comment-no="${boardComment.commentNo}" href="javascript:">수정</a> 
-							&nbsp; 
-							<a class="cancel-edit-comment" data-comment-no="${ boardComment.commentNo }" href="javascript:">취소</a>
-						</div>
-					</div>
-			
-				</td>
-			</tr>
-		</c:forEach>        	
-		</table> --%>
-		<!-- end of comment list area -->
-		    </div>
+		 --%>
+		 
 		</div>
-		<br><br>
-		
-		
-	
+
 	</div>
-	</div>
-	
-	
+
 	
 	
 	<!-- Libs JS -->
@@ -244,11 +212,6 @@
 		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
 
-
-
-	<!-- Theme JS -->
-	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
-	
 	<script>
 	 $(function(event) {
 		
@@ -314,8 +277,11 @@
 			
 		});
 
-	});
-	</script>
+	});</script>
+	
+
+	<!-- Theme JS -->
+	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 	
 
 </body>

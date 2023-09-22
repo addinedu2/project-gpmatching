@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,38 +19,43 @@
 	href="/project-gpmatching/resources/assets/css/theme.css">
 
 <!-- Libs CSS -->
-<link href="/project-gpmatching/resources/assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-<link href="/project-gpmatching/resources/assets/libs/dropzone/dist/dropzone.css"  rel="stylesheet">
-<link href="/project-gpmatching/resources/assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
-<link href="/project-gpmatching/resources/assets/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet">
+<link
+	href="/project-gpmatching/resources/assets/libs/bootstrap-icons/font/bootstrap-icons.css"
+	rel="stylesheet">
+<link
+	href="/project-gpmatching/resources/assets/libs/dropzone/dist/dropzone.css"
+	rel="stylesheet">
+<link
+	href="/project-gpmatching/resources/assets/libs/@mdi/font/css/materialdesignicons.min.css"
+	rel="stylesheet" />
+<link
+	href="/project-gpmatching/resources/assets/libs/prismjs/themes/prism-okaidia.css"
+	rel="stylesheet">
 	
-<!-- Theme CSS -->
+<!-- 	<style type="text/css">
+	listCommon {
+	text-align: center;
+	}
 	
-	<link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
+	</style>
+ -->	
     <title>commonList</title>
 </head>
 
 <body class="bg-light">
-
-	<div id="db-wrapper" class="toggled">
-		<!-- navbar vertical -->
-		<!-- Sidebar -->
-		<jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
-		<!-- page content -->
-		<div id="page-content">
-		<!--  header -->
-		<jsp:include page="/WEB-INF/views/modules/header.jsp" />
-
-	<div id="pageContainer">
-		
+    <div id="db-wrapper" class="toggled">
+    <jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
+    <div id="page-content">
+	<jsp:include page="/WEB-INF/views/modules/header.jsp" />
+             
              <!-- commonList -->
              <a href="/project-gpmatching/commonBoard/commonWrite">
 				<button type="button" class="btn btn-secondary mb-2">글쓰기</button></a>
              <!-- basic table -->
-<table class="table">
+<table class="table" style="text-align: center">
    <thead>
-      <tr>
-         <th>번호</th>
+      <tr class="listCommon" >
+         <th >번호</th>
          <th>제목</th>
          <th>작성자</th>
          <th>조회수</th>
@@ -66,7 +70,7 @@
          <td style="text-align:left; padding-left:10px">
          <c:choose>
          	<c:when test="${not commonBoard.deleted }">
-         		<a href="commonDetail?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}">${commonBoard.commonTitle }</a>
+         		<a href="commonDetail?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}" style="text-decoration: none; color: inherit;">${commonBoard.commonTitle }</a>
          	</c:when>
          	<c:otherwise>
          	<span class="deleted" style="color:gray;">[삭제된 글]</span>
@@ -76,18 +80,17 @@
          <td>${ commonBoard.userNo }</td>
          <td>${ commonBoard.readCount }</td>
          <td>
-         	<fmt:formatDate value="${commonBoard.regDate }"
+         	<fmt:formatDate value="${ commonBoard.regDate }"
          				    pattern="yyyy-MM-dd"/>
          </td>
       </tr>
       </c:forEach>
    </tbody>
 </table>
-             <div class="btn-center">${pager }</div>
+             <div class="btn-center">${ pager }</div>
             </div>
             <%-- <jsp:include page="/WEB-INF/views/modules/testBottom.jsp" /> --%>
-
-</script>
+	</script>
 	
 	<!-- Libs JS -->
 	<script
@@ -115,6 +118,6 @@
 	<!-- Theme JS -->
 	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 	
-
 </body>
+
 </html>

@@ -13,6 +13,8 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	@Override
 	public void writeComment(BoardCommentDto boardComment) {
 		boardCommentMapper.insertComment(boardComment);
+		
+		//boardCommentMapper.updateGroupNo(boardComment.getCommentNo(), boardComment.getCommentNo());
 	}
 
 }
