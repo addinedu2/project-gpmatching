@@ -56,7 +56,8 @@
 		<jsp:include page="/WEB-INF/views/modules/header.jsp" />
 
 
-
+		</div>
+	</div>
 
 			<!-- Scripts -->
 			<!-- Libs JS -->

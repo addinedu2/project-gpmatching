@@ -63,10 +63,12 @@
 			<!-- Container fluid -->
 
 			<!-- Primary Button -->
-			<a href="/project-gpmatching/boardMatching/lol-write">
+			<a href="/project-gpmatching/boardMatching/battleground-write">
 				<button type="button" class="btn btn-primary mb-2">배틀그라운드 매칭 게시글 쓰기</button>
 			</a>
-				
+			<a href="/project-gpmatching/home">
+				<button type="button" class="btn btn-primary mb-2">홈으로</button>
+			</a>	
 			<div class="row mt-6">
 				<div class="col-md-12 col-12">
 					<!-- card  -->

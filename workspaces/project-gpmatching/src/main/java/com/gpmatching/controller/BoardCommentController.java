@@ -2,31 +2,39 @@ package com.gpmatching.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gpmatching.dto.BoardCommentDto;
 import com.gpmatching.service.BoardCommentService;
 
-@Controller
+import lombok.Setter;
 
+@Controller
+@RequestMapping(path = { "/commonBoard" })
 public class BoardCommentController {
 	
-	@Autowired
+	@Setter(onMethod_ = { @Autowired })
 	private BoardCommentService boardCommentService;
 	
-	@GetMapping(path= {"/comment"})
-	public String writeCommentForm(BoardCommentDto boardCommentDto) {
-		
-		return "board/comment";
+	
+
+	
+	@PostMapping(path= {"/writeComment"})
+	public String writeComment(BoardCommentDto boardComment, @RequestParam(defaultValue = "-1") int pageNo) {
+	
+		boardCommentService.writeComment(boardComment);
+
+		//return "redirect:commonDetail";
+		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d", boardComment.getCommonNo(), pageNo);
 	}
 	
-	@PostMapping(path= {"/comment"})
-	public String writeComment(BoardCommentDto boardCommentDto) {
 	
-		boardCommentService.writeComment(boardCommentDto);
-
-		return "board/comment";
+	
+	
+	public String deleteComment() {
+		return null;
 	}
 	
 	
