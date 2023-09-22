@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gpmatching.dto.LolDto;
 import com.gpmatching.dto.MatchingBoardDto;
@@ -36,6 +37,16 @@ public class MatchingBoardController {
 		model.addAttribute("matchingBoardList", matchingBoardList);
 		
 		return "/boardMatching/lol-list";
+	}
+	
+	@GetMapping(path = { "/comment-list" })
+	public String showCommentList(@RequestParam(defaultValue = "-1") int boardNo, Model model) {
+		
+		MatchingBoardDto matchingBoard = matchingBoardService.findMatchingBoardByBoardNo(boardNo);
+		
+		model.addAttribute("matchingBoard", matchingBoard);
+		
+		return "/boardMatching/comment-list";
 	}
 
 	@GetMapping(path = { "/battleground-list"})

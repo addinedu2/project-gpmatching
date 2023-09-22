@@ -82,6 +82,7 @@
 								<thead class="table-light">
 									<tr>
 										<th>제목</th>
+										<th>닉네임</th>
 										<th>등록일</th>
 										<th>티어</th>
 										<th>인원</th>
@@ -108,6 +109,9 @@
 													</div>
 												</div>
 											</td>
+											<td>
+											${ matchingBoard.userNo }
+											</td>
 											<td class="align-middle">
 												<fmt:formatDate value="${ matchingBoard.regDate }" pattern="yyyy-MM-dd a hh:mm:ss" />
 											</td>
@@ -128,6 +132,7 @@
 													<span class="avatar avatar-sm avatar-primary"> 
 														<span class="avatar-initials rounded-circle fs-6">+5</span>
 													</span>
+													
 												</div>
 											</td>
 											<td class="align-middle text-dark">
@@ -137,8 +142,10 @@
 											<td>
 												<!-- Varying modal -->
 												<button type="button" class="btn btn-primary btn-show-comment-modal" 
-														data-boardno="${ matchingBoard.boardNo }">${ matchingBoard.boardNo }</button>
+														data-boardno="${ matchingBoard.boardNo }">지원하기</button>
+												
 											</td>
+											
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -181,6 +188,21 @@
 					</div>
 				</div>
 			</div>
+			<!--  댓글 select 기능 임시로 구현함 -->
+			<div class="modal fade" id="commentlist-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelOne" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="title-in-modal"></h5>
+							<button type="button" class="btn-close"
+								data-bs-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+					
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!-- Scripts -->
@@ -219,6 +241,16 @@
 			$('#title-in-modal').text(currentTr.data('title'));
 			$('#boardno-in-modal').val(boardNo);
 			$('#comment-modal').modal('show');
+		});
+	});
+	
+	$(function() {
+		$('.btn-show-commentlist-modal').on("click", function(event) {
+			const boardNo = $(this).data('boardno');
+			const currentTr = $('#tr-' + boardNo);
+			$('#title-in-modal').text(currentTr.data('title'));
+			$('#boardno-in-modal').val(boardNo);
+			$('#commentlist-modal').modal('show');
 		});
 	});
 	

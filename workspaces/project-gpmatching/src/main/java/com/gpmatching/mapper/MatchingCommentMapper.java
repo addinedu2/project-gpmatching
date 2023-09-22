@@ -21,6 +21,7 @@ public interface MatchingCommentMapper {
 	
 	@Select("select commentNo, boardNo, boardContent "
 			+ "from MatchingComment "
-			+ "where boardNo = #{ boardNo }")
+			+ "where boardNo = #{ boardNo }"
+			+ "order by commentNo desc")
 	List<MatchingCommentDto> selectMatchingCommentByBoardNo(@Param("boardNo") int boardNo);
 }
