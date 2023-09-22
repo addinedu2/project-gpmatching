@@ -63,8 +63,11 @@
 			<!-- Container fluid -->
 
 			<!-- Primary Button -->
-			<a href="/project-gpmatching/boardMatching/lol-write">
+			<a href="/project-gpmatching/boardMatching/overwatch-write">
 				<button type="button" class="btn btn-primary mb-2">오버워치 매칭 게시글 쓰기</button>
+			</a>
+			<a href="/project-gpmatching/home">
+				<button type="button" class="btn btn-primary mb-2">홈으로</button>
 			</a>
 				
 			<div class="row mt-6">
