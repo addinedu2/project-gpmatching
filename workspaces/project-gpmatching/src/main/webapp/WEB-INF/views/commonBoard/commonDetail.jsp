@@ -26,25 +26,25 @@
 		        <table>
 		        	<tr>
 		                <th>글번호</th>
-		                <td>${requestScope.commonBoard.commonNo }</td>
+		                <td>${requestScope.CommonBoard.commonNo }</td>
 		            </tr>
 		            <tr>
 		                <th>제목</th>
-		                <td>${commonBoard.commonTitle }</td>
+		                <td>${CommonBoard.commonTitle }</td>
 		            </tr>
 		            <tr>
 		                <th>작성자</th>
-		                <td>${commonBoard.userNo }</td>
+		                <td>${CommonBoard.userNo }</td>
 		            </tr>
 		            <tr>
 		                <th>작성일</th>
 		                <td>
-		                <fmt:formatDate value="${commonBoard.regDate }" pattern="yyyy-MM-dd" />
+		                <fmt:formatDate value="${CommonBoard.regDate }" pattern="yyyy-MM-dd" />
 		                </td>
 		            </tr>
 		            <tr>
 		                <th>조회수</th>
-		                <td>${commonBoard.readCount }</td>
+		                <td>${CommonBoard.readCount }</td>
 		            </tr>
 		            <tr>
 		            
@@ -52,7 +52,7 @@
 " />		
 		            <!-- c:set은 변수를 만들어줌. value값에 ""사이에 실제 줄바꿈 엔터를 쳐줘야함 -->
 		                <th>본문</th>
-		                <td>${fn:replace(commonBoard.commonContent,enter,"<br>") }</td>
+		                <td>${fn:replace(CommonBoard.commonContent,enter,"<br>") }</td>
 		                <!--  -->
 		     <!-- c:set에서 var="enter"설정을 줄바꿈으로 설정해줘서 enter칠 때마다 자동으로 <br>들어감 -->
 		            </tr>
@@ -60,14 +60,14 @@
 		        <div class="buttons">
 		        	[ <a href="commonList?=pageNo=${pageNo}">목록보기</a> ]
 		        	<!-- sessionScope.loginuser != null && loginuser.memberId == board.writer 같은 의미-->
-		        	[ <a href="commonEdit?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}">수정</a> ]
+		        	[ <a href="commonEdit?commonNo=${CommonBoard.commonNo}&pageNo=${pageNo}">수정</a> ]
 		        	[ <a href="javascript:" id="delete-board-lnk">삭제</a> ]
 		        
 		        </div>
 		        
 		        <!-- write comment area -->
 		<form id="commentform" action="writeComment" method="post">
-			<input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
+			<input type="hidden" name="commonNo" value="${ CommonBoard.commonNo }" />
 			<input type="hidden" name="pageNo" value="${ pageNo }" />
 			<input type="hidden" name="userNo" value="${ userNo}" />
 			<table style="width:800px;border:solid 1px;margin:0 auto">
@@ -91,20 +91,20 @@
 	    <hr style="width:800px;margin:0 auto">
 	    <br>
 	    <table id="comment-list" style="width:800px;border:solid 1px;margin:0 auto">
-		<c:forEach var="comment" items="${ commonBoard.boardCommentList }">				
+		<c:forEach var="comment" items="${ CommonBoard.boardCommentList }">				
 			<tr>
 				<td style="text-align:left;margin:5px;border-bottom: solid 1px;">					
 					<div id="comment-view-area-${ boardComment.commentNo }">
 					<c:choose>
-					<c:when test="${ boardComment.deleted }">
+					<c:when test="${ BoardComment.deleted }">
 						<br><br>
 						<span style='color:gray'>삭제된 글입니다.</span>
 						<br><br>
 					</c:when>
 					<c:otherwise>
-						${ boardComment.writer } &nbsp;&nbsp; [<fmt:formatDate value="${ boardComment.regDate }" pattern="yyyy-MM-dd hh:mm:ss"/>]
+						${ boardComment.writer } &nbsp;&nbsp; [<fmt:formatDate value="${ BoardComment.regDate }" pattern="yyyy-MM-dd hh:mm:ss"/>]
 					    <br /><br />
-					    <span>${ fn:replace(comment.content, enter, "<br>") }</span>
+					    <span>${ fn:replace(BoardComment.content, enter, "<br>") }</span>
 						<br /><br />
 						<div style='display:${ (not empty loginuser and loginuser.memberId == comment.writer) ? "block" : "none" }'>
 					    	<a class="edit-comment" data-comment-no="${ boardComment.commentNo }" href="javascript:">편집</a>

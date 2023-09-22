@@ -13,7 +13,7 @@ public interface BoardCommentMapper {
 //	@Insert("insert into boardcomment (commonNo, userNo, commentContent, groupNo, step, depth) "
 //		  + "values (#{commonNo},#{userNo},#{commentContent},0,1,0)")
 	
-	@Insert("insert into boardcomment (commentContent) "
+	@Insert("insert into BoardComment (commentContent) "
 		  + "values (#{commentContent})")
 	
 	@Options(useGeneratedKeys = true, keyProperty = "commentNo", keyColumn="commentNo")
