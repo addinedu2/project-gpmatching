@@ -29,7 +29,7 @@ public class MatchingBoardController {
 	private LolService lolService;
 	
 	@GetMapping(path = { "/lol-list"})
-	public String listMatchingBoardList(Model model) {
+	public String matchingBoardList(Model model) {
 		
 		List<MatchingBoardDto> matchingBoardList = matchingBoardService.listMatchingBoard();
 		
@@ -37,7 +37,7 @@ public class MatchingBoardController {
 		
 		return "/boardMatching/lol-list";
 	}
-	
+
 	@GetMapping(path = { "/battleground-list"})
 	public String bgMatchingBoardList() {
 		
