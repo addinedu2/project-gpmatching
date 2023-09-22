@@ -31,21 +31,31 @@ public class MatchingBoardController {
 	@GetMapping(path = { "/lol-list"})
 	public String matchingBoardList(Model model) {
 		
-		List<MatchingBoardDto> matchingBoardList = matchingBoardService.listMatchingBoard();
-		
+		//List<MatchingBoardDto> matchingBoardList = matchingBoardService.listMatchingBoard();
+		List<MatchingBoardDto> matchingBoardList = matchingBoardService.getMatchingBoardListByGameName("league of legends");
+				
 		model.addAttribute("matchingBoardList", matchingBoardList);
 		
 		return "/boardMatching/lol-list";
 	}
 
 	@GetMapping(path = { "/battleground-list"})
-	public String bgMatchingBoardList() {
+	public String bgMatchingBoardList(Model model) {
+		
+		
+		List<MatchingBoardDto> matchingBoardList = matchingBoardService.getMatchingBoardListByGameName("battle ground");
+		
+		model.addAttribute("matchingBoardList", matchingBoardList);
 		
 		return "/boardMatching/battleground-list";
 	}
 	
 	@GetMapping(path = { "/overwatch-list"})
-	public String owMatchingBoardList() {
+	public String owMatchingBoardList(Model model) {
+		
+		List<MatchingBoardDto> matchingBoardList = matchingBoardService.getMatchingBoardListByGameName("overwatch2");
+		
+		model.addAttribute("matchingBoardList", matchingBoardList);
 		
 		return "/boardMatching/overwatch-list";
 	}

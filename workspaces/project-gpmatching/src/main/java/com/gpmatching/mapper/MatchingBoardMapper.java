@@ -35,6 +35,22 @@ public interface MatchingBoardMapper {
 	List<MatchingBoardDto> selectAllMatchingBoard();
 	
 	
+	@Select( "select boardNo, boardTitle, boardContent, regDate "
+			+ "from MatchingBoard "
+			+ "where gameNo = #{ gameNo } "
+			+ "order by boardNo desc")
+	List<MatchingBoardDto> selectMatchingBoardListByGameNo(int gameNo);
+	
+
+	@Select( "select boardNo, boardTitle, boardContent, regDate "
+			+ "from MatchingBoard "
+			+ "where gameNo = (select gameNo "
+			+ "from GameList where gameName = #{ gameName} )")
+	List<MatchingBoardDto> selectMatchingBoardListByGameName(String gameName);
+	
+	
+	
+	
 	//@Select( "select boardNo  from MatchingBoard where type='boardNo' ORDER BY num DESC LIMIT 1")
 	@Select("select max(boardNo) from MatchingBoard")
 	public int selectMatchingItemBoardNo() ;

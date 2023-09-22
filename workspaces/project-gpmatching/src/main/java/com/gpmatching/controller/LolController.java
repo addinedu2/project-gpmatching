@@ -30,16 +30,19 @@ public class LolController {
 //		lol.setLolSur("lolSur");
 //		lol.setLolTier("lolTier");
 //		
+		
 		lolDto.setLolTier("gold");
-		//lolDto.setBoardNo(2);
+		//lolDto.setBoardNo(2); // BoardNo 중복값 2번 입력하면 에러
 		lolDto.setLolPlay("lolPlay");
 		lolDto.setLolPosition("lolPosition");
 		lolDto.setLolSur("lolSur");
 		lolDto.setLolTier("lolTier");
-		lolService.write(lolDto, 3);
+		//lolService.write(lolDto, 3);
+		//lolService.write(lolDto, 40); //boardMaching table에 없는 BoardNo 값 입력 에러
+		lolService.write(lolDto, 30);
+		
 		
 		return "home";
-
 	}
 
 }

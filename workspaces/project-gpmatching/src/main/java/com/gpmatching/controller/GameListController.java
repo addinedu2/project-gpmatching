@@ -27,7 +27,7 @@ public class GameListController {
 		//gameDto.setGameCom("riot games");
 		
 		//GameListDto gameDto = new GameListDto();
-		//gameDto.setGameName("batte ground");
+		//gameDto.setGameName("battle ground");
 		//gameDto.setGameCom("kakao games");
 		
 		//GameListDto gameDto = new GameListDto();
