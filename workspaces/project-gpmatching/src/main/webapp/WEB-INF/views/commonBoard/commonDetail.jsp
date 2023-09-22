@@ -32,7 +32,7 @@
 <link
 	href="/project-gpmatching/resources/assets/libs/prismjs/themes/prism-okaidia.css"
 	rel="stylesheet">
-	<title>게시판글쓰기</title>
+	<title>자유게시판</title>
 </head>
 <body class="bg-light">
 
@@ -94,10 +94,11 @@
 		        </div>
 		        
 		        <!-- write comment area -->
-	<%-- 	<form id="commentform" action="writeComment" method="post">
+		<form id="commentform" action="writeComment" method="post">
 			<input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
 			<input type="hidden" name="pageNo" value="${ pageNo }" />
-			<input type="hidden" name="userNo" value="${ userNo}" />
+			<%-- <input type="hidden" name="userNo" value="${ userNo }" />  --%>
+			<!-- 로그인하면 댓글 쓰는 걸로 처리할 시 loginuser.userNo 체크  -->
 			<table style="width:800px;border:solid 1px;margin:0 auto">
 				<tr>
 					<td style="width:750px">	                	
@@ -110,12 +111,58 @@
 					</td>
 				</tr>                    
 			</table>
-		</form> --%>
+		</form>
 	
 		<!-- end of write comment area -->
 		
 		<!-- comment list area -->
-<%-- 		<br>
+		<hr style="width:800px;margin:0 auto">
+<br>
+<table id="comment-list" style="width:800px;border:solid 1px;margin:0 auto">
+    <c:forEach var="comment" items="${commonBoard.boardCommentList}">				
+        <tr>
+            <td style="text-align:left;margin:5px;border-bottom: solid 1px;">
+                <div id="comment-view-area-${comment.commentNo}">
+                    <c:choose>
+                        <c:when test="${comment.deleted}">
+                            <br><br>
+                            <span style='color:gray'>삭제된 글입니다.</span>
+                            <br><br>
+                        </c:when>
+                        <c:otherwise>
+                            ${comment.writer } &nbsp;&nbsp; [<fmt:formatDate value="${comment.regDate}" pattern="yyyy-MM-dd hh:mm:ss"/>]
+                            <br /><br />
+                            <span>${fn:replace(comment.content, enter, "<br>")}</span>
+                            <br /><br />
+                                <a class="edit-comment" data-comment-no="${comment.commentNo}" href="javascript:">편집</a>
+                                &nbsp;
+                                <a class="delete-comment" data-comment-no="${comment.commentNo}" href="javascript:">삭제</a>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+                </div>	                
+                <div id="comment-edit-area-${comment.commentNo}" style="display: none">
+                    ${comment.userNo } &nbsp;&nbsp; [${comment.regDate}]
+                    <br /><br />
+                    <form action="editComment" method="post">
+                        <input type="hidden" name="commentNo" value="${comment.commentNo}" />
+                        <textarea name="content" style="width: 99%; resize: none" rows="3" maxlength="200">${comment.commentContent}</textarea>
+                    </form>
+                    <br />
+                    <div>
+                        <a class="update-comment" data-comment-no="${comment.commentNo}" href="javascript:">수정</a> 
+                        &nbsp; 
+                        <a class="cancel-edit-comment" data-comment-no="${comment.commentNo}" href="javascript:">취소</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </c:forEach>        	
+</table>
+		
+		
+		<%-- 로그인 해서야 돌아가는 코드이니 남겨준다 로그인 걸리면 주석 풀 것
+		<br>
 	    <hr style="width:800px;margin:0 auto">
 	    <br>
 	    <table id="comment-list" style="width:800px;border:solid 1px;margin:0 auto">
@@ -173,12 +220,34 @@
 	</div>
 	</div>
 	
-	<!-- 자사 웹서버에서 jquery js 파일 배포 -->
-	<script src="/project-gpmatching/resources/js/jquery-3.7.1.js"></script>
 	
-	<!-- CDN 서버에서 jquery js 파일 배포 -->
-	<!-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script> -->
 	
+	
+	<!-- Libs JS -->
+	<script
+		src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+
+
+
+	<!-- Theme JS -->
+	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 	
 	<script>
 	 $(function(event) {
@@ -247,32 +316,6 @@
 
 	});
 	</script>
-	
-	<!-- Libs JS -->
-	<script
-		src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
-
-
-
-
-	<!-- Theme JS -->
-	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 	
 
 </body>

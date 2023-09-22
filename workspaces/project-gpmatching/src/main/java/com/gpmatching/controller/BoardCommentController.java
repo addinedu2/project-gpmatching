@@ -2,32 +2,33 @@ package com.gpmatching.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gpmatching.dto.BoardCommentDto;
 import com.gpmatching.service.BoardCommentService;
 
 @Controller
-
+@RequestMapping(path= {"/commonBoard"})
 public class BoardCommentController {
 	
 	@Autowired
 	private BoardCommentService boardCommentService;
 	
-	@GetMapping(path= {"/comment"})
-	public String writeCommentForm(BoardCommentDto boardCommentDto) {
-		
-		return "board/comment";
-	}
-	
-	@PostMapping(path= {"/comment"})
-	public String writeComment(BoardCommentDto boardCommentDto) {
-	
-		boardCommentService.writeComment(boardCommentDto);
+	@PostMapping(path= {"/writeComment"})
+	public String writeCommentForm(BoardCommentDto boardComment, @RequestParam(defaultValue = "-1")int pageNo ) {
 
-		return "board/comment";
+		boardCommentService.writeComment(boardComment);
+	
+		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d", boardComment.getCommonNo(), pageNo);
+			//나중에 적은 댓글 주소로 돌아올 것
 	}
+	
+	
+	 
+
+	
 	
 	
 ////testCode

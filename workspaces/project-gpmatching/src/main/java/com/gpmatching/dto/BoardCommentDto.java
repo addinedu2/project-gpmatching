@@ -6,14 +6,14 @@ import lombok.Data;
 
 @Data
 public class BoardCommentDto {
-	int commentNo;
-	Date regDate;
-	String commentContent;
-	int commonNo;
-	int userNo;
-	int groupNo;
-	int step;
-	int depth;
-	boolean deleted;
+	private int commentNo;
+	private Date regDate;
+	private String commentContent;
+	private int commonNo;
+	private int userNo;
+	private int groupNo;
+	private int step;
+	private int depth;
+	private boolean deleted;
 
 }

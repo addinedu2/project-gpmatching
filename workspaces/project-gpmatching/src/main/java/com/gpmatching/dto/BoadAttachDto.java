@@ -6,11 +6,12 @@ import lombok.Data;
 
 @Data
 public class BoadAttachDto {
-	int boadAttachNo;
-	String userFilename;
-	String savedFilename;
-	Date regDate;
-	int downloadCount;
-	int commonNo;
+	
+	private int boadAttachNo;
+	private String userFilename;
+	private String savedFilename;
+	private Date regDate;
+	private int downloadCount;
+	private int commonNo;
 
 }
