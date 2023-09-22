@@ -41,6 +41,20 @@ public class MatchingBoardServiceImpl implements MatchingBoardService {
 		return boardNo;
 	}
 	
+	@Override
+	public List<MatchingBoardDto> getMatchingBoardListByGameNo(int gameNo) {
+		List<MatchingBoardDto> boardMachingList = mapper.selectMatchingBoardListByGameNo(gameNo);
+		
+		return boardMachingList;
+	}
+	
+	@Override
+	public List<MatchingBoardDto> getMatchingBoardListByGameName(String gameName) {
+		List<MatchingBoardDto> boardMachingList  = mapper.selectMatchingBoardListByGameName(gameName);
+		
+		return boardMachingList;
+	}
+	
 	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {
 		
 		MatchingBoardDto matchingBoard = mapper.selectMatchingBoardByBoardNo(boardNo);

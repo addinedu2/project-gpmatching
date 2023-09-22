@@ -4,6 +4,7 @@ import com.gpmatching.dto.BoardCommentDto;
 
 public interface BoardCommentService {
 
-	public void writeComment(BoardCommentDto boardComment);
+	void writeComment(BoardCommentDto boardComment);
+
 
 }

@@ -161,10 +161,35 @@
 		          </div>
 		          
 		        </div>
-			</div>
 
+		        
+<%-- 		<!-- write comment area -->
+		<form id="commentform" action="writeComment" method="post">
+			<input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
+			<input type="hidden" name="pageNo" value="${ pageNo }" />
+			<input type="hidden" name="userNo" value="${ userNo}" />
+			<table style="width:800px;border:solid 1px;margin:0 auto">
+				<tr>
+					<td style="width:750px">	                	
+						<textarea id="commentContent" name="commentContent" style="width:100%;resize: none;" rows="3"></textarea>	                    
+					</td>
+					<td style="width:50px;vertical-align:middle">
+						<a id="write-comment-lnk" href="javascript:" style="text-decoration:none">
+							댓글<br />등록
+						</a>
+					</td>
+				</tr>                    
+			</table>
+		</form>
+	
+		<!-- end of write comment area -->
+		 --%>
+		 
 		</div>
+
 	</div>
+
+	
 	
 	<!-- Libs JS -->
 	<script
@@ -187,7 +212,73 @@
 		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
 
+	<script>
+	 $(function(event) {
+		
+		$('#delete-board-lnk').on('click', function(event) {
+			const yes = confirm(${ commonBoard.commonNo } + "번 게시물을 삭제할까요?");
+			if (yes) {
+				location.href = 'deleteCommon/' + ${ commonBoard.commonNo } + "?pageNo=" + ${ pageNo };
+			}
+		});
+		
+		// 댓글 쓰기 이벤트 처리
+		$("#write-comment-lnk").on("click", function(event) {
+			$('#commentform').submit(); // <input type="submit"을 클릭한 것과 같은 효과 --> form을 submit
+		});
+		
+		// 댓글 삭제 이벤트 처리
+		$(".delete-comment").on('click', function(event) {
+			const commentNo = $(this).attr("data-comment-no");			
+			const yn = confirm(commentNo + "번 댓글을 삭제할까요?");
+			if (yn) {
+				location.href = 'delete-comment?commentNo=' + commentNo + 
+											  '&boardNo=' + ${ commonBoard.commonNo } + 
+											  '&pageNo=' + ${ pageNo };
+			}
+		});
 
+		
+		let currentEditCommentNo = null;
+		
+		// 편집 링크 클릭 이벤트 처리
+		$(".edit-comment").on('click', function(event) {
+			const commentNo = $(this).attr("data-comment-no");
+			
+			$('#comment-edit-area-' + commentNo).css('display', '');
+			$('#comment-view-area-' + commentNo).css('display', 'none');
+			
+			if (currentEditCommentNo) { // 이전에 편집하던 요소의 표시 상태 변경 (복원)
+				$('#comment-edit-area-' + currentEditCommentNo).css('display', 'none');
+				$('#comment-view-area-' + currentEditCommentNo).css('display', '');
+			}
+			currentEditCommentNo = commentNo;
+			
+		}); // end of addEventListener
+
+		
+		// 편집 취소 링크 클릭 이벤트 처리
+		$(".cancel-edit-comment").on('click', function(event) {
+			const commentNo = $(this).attr("data-comment-no");
+			
+			$('#comment-edit-area-' + commentNo).css('display', 'none');
+			$('#comment-view-area-' + commentNo).css('display', '');
+			
+			currentEditCommentNo = null;
+			
+		}); // end of addEventListener
+		
+		// 댓글 수정 이벤트 처리
+		$(".update-comment").click(function(event) {
+
+			// const commentNo = $(this).attr("data-comment-no");
+			const commentNo = $(this).data('comment-no'); // data-속성이름="값" 으로 표현된 속성의 값 읽기
+			$('#comment-edit-area-' + commentNo + ' form').submit();
+			
+		});
+
+	});</script>
+	
 
 	<!-- Theme JS -->
 	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>

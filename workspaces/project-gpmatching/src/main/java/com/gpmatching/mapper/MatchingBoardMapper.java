@@ -22,17 +22,43 @@ public interface MatchingBoardMapper {
 	*/
 	
 	//mysql db 설정에 table명, 칼럼명 대소문자 구분 설정 가능 - 매칭 해주어야 한다.
+	/*
 	@Insert( "insert into MatchingBoard ( boardTitle, "
 			+ "boardContent, preferGender, mic) "
 			+ "values ( #{ boardTitle }, #{ boardContent }, "
 			+ "#{ preferGender }, #{ mic } )")
+	void insertMatchingBoard2(MatchingBoardDto matchingBoardDto);
+	*/
+	
+	@Insert( "insert into MatchingBoard ( boardTitle, "
+			+ "boardContent, preferGender, mic, gameNo) "
+			+ "values ( #{ boardTitle }, #{ boardContent }, "
+			+ "#{ preferGender }, #{ mic } , #{ gameNo})")
 	void insertMatchingBoard(MatchingBoardDto matchingBoardDto);
 	
+
 
 	@Select( "select boardNo, boardTitle, boardContent, regDate "
 			+ "from MatchingBoard "
 			+ "order by boardNo desc")
 	List<MatchingBoardDto> selectAllMatchingBoard();
+	
+	
+	@Select( "select boardNo, boardTitle, boardContent, regDate "
+			+ "from MatchingBoard "
+			+ "where gameNo = #{ gameNo } "
+			+ "order by boardNo desc")
+	List<MatchingBoardDto> selectMatchingBoardListByGameNo(int gameNo);
+	
+
+	@Select( "select boardNo, boardTitle, boardContent, regDate "
+			+ "from MatchingBoard "
+			+ "where gameNo = (select gameNo "
+			+ "from GameList where gameName = #{ gameName} )"
+			+ "order by boardNo desc" )
+	List<MatchingBoardDto> selectMatchingBoardListByGameName(String gameName);
+	
+	
 	
 	
 	//@Select( "select boardNo  from MatchingBoard where type='boardNo' ORDER BY num DESC LIMIT 1")
