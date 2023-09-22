@@ -63,15 +63,15 @@ public class MyPageController {
 		 //수정 후 리다이렉트할 페이지 
 	}//마이페이지 수정(데이터베이스에 보내기)
 	
-	@GetMapping(path = {"/deletedUser"})
-	public String DeletedUser(HttpSession session, Model model) {
-		UserDto DeletedUser = (UserDto) session.getAttribute("loginuser");
-		if (DeletedUser != null) {
-			model.addAttribute("user", DeletedUser);
-			return "account/editMypage";
-		} else {
-		   return "account/login";
-		}
-	}
+//	@GetMapping(path = {"/deletedUser"})
+//	public String DeletedUser(HttpSession session, Model model) {
+//		UserDto DeletedUser = (UserDto) session.getAttribute("loginuser");
+//		if (DeletedUser != null) {
+//			model.addAttribute("user", DeletedUser);
+//			return "account/editMypage";
+//		} else {
+//		   return "account/login";
+//		}
+//	}
 	//유저 삭제+로그인 해야지만 탈퇴를 할 수 있게 하기
 }

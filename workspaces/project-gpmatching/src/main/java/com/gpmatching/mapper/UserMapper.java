@@ -39,9 +39,9 @@ public interface UserMapper {
 	void updateUserProfile(UserDto user);
 	//내 정보 수정하는 메서드
 	
-	@Update("UPDATE User SET deletedUser = true " //  delelted 값을 참으로 돌린다
-			+ "WHERE userId = #{userId} ")
-	void deleteUser(@Param("userId") String userId);
+//	@Update("UPDATE User SET deletedUser = true " //  delelted 값을 참으로 돌린다
+//			+ "WHERE userId = #{userId} ")
+//	void deleteUser(@Param("userId") String userId);
 //유저 정보 중 탈퇴 유무를 유로 돌리는 메서드
 	
 }

@@ -37,19 +37,24 @@ public class AccountController {
 	}//회원가입 버튼
 
 		
-	@PostMapping(path = { "/register" })
-	//@valid/indingResult result 는 유효성 검사라서 회원 가입할때 유효성을 걸어놔야한다. userdto에 걸어둠
-	public String register(@ModelAttribute("user") @Valid UserDto user, BindingResult result) {
-		
-		if(result.hasErrors()) {
-			return "account/register";
-		}
-		accountService.register(user);
-		
-		return "redirect:/home";
-	}//회원가입 폼 한 후 홈으로 돌아오기
+//	@PostMapping(path = { "/register" })
+//	//@valid/indingResult result 는 유효성 검사라서 회원 가입할때 유효성을 걸어놔야한다. userdto도 활성화
+//	public String register(@ModelAttribute("user") @Valid UserDto user, BindingResult result) {
+//		
+//		if(result.hasErrors()) {
+//			return "account/register";
+//		}
+//		accountService.register(user);
+//		
+//		return "redirect:/home";
+//	}//회원가입 폼 한 후 홈으로 돌아오기
 
-	
+	@PostMapping(path = { "/register" })
+	public String register(@ModelAttribute("user") UserDto user) {
+	// AccountService accountService = new AccountServiceImpl();
+		accountService.register(user);
+		return "redirect:/home";
+	}
 	
 	
 	
@@ -87,12 +92,7 @@ public class AccountController {
 	}
 	
 	
-//	@PostMapping(path = { "/register" })
-//	public String register(@ModelAttribute("user") UserDto user) {
-//	// AccountService accountService = new AccountServiceImpl();
-//		accountService.register(user);
-//		return "redirect:/home";
-//	}
+
 
 
 
