@@ -64,8 +64,7 @@
 
 			<!-- Primary Button -->
 			<a href="/project-gpmatching/boardMatching/lol-write">
-				<button type="button" class="btn btn-primary mb-2">LoL 매칭
-					게시글 쓰기</button>
+				<button type="button" class="btn btn-primary mb-2">LoL 매칭 게시글 쓰기</button>
 			</a>
 				
 			<div class="row mt-6">
@@ -109,7 +108,7 @@
 												</div>
 											</td>
 											<td class="align-middle">
-												<fmt:formatDate value="${ matchingBoard.regDate }" pattern="yyyy-MM-dd a hh:mm:ss" />
+												<fmt:formatDate value="${ matchingBoard.regDate }" pattern="yyyy-MM-dd " />					         
 											</td>
 											<td class="align-middle">
 												<span class="badge bg-warning">Gold</span>
