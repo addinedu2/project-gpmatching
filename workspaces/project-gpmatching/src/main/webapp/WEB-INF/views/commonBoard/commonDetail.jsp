@@ -94,10 +94,10 @@
 		        </div>
 		        
 		        <!-- write comment area -->
-	<%-- 	<form id="commentform" action="writeComment" method="post">
+		<form id="commentform" action="writeComment" method="post">
 			<input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
 			<input type="hidden" name="pageNo" value="${ pageNo }" />
-			<input type="hidden" name="userNo" value="${ userNo}" />
+			<%-- <input type="hidden" name="userNo" value="${ userNo}" /> --%>
 			<table style="width:800px;border:solid 1px;margin:0 auto">
 				<tr>
 					<td style="width:750px">	                	
@@ -110,7 +110,7 @@
 					</td>
 				</tr>                    
 			</table>
-		</form> --%>
+		</form>
 	
 		<!-- end of write comment area -->
 		
@@ -172,14 +172,30 @@
 	
 	</div>
 	</div>
-	
-	<!-- 자사 웹서버에서 jquery js 파일 배포 -->
-	<script src="/project-gpmatching/resources/js/jquery-3.7.1.js"></script>
-	
-	<!-- CDN 서버에서 jquery js 파일 배포 -->
-	<!-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script> -->
+
 	
 	
+	<!-- Libs JS -->
+	<script
+		src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+	<script
+		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+
 	<script>
 	 $(function(event) {
 		
@@ -245,31 +261,8 @@
 			
 		});
 
-	});
-	</script>
+	});</script>
 	
-	<!-- Libs JS -->
-	<script
-		src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
-
-
-
 
 	<!-- Theme JS -->
 	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>

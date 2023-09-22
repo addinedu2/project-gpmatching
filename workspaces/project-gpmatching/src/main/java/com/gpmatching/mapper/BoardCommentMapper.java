@@ -19,5 +19,11 @@ public interface BoardCommentMapper {
 	@Options(useGeneratedKeys = true, keyProperty = "commentNo", keyColumn="commentNo")
 
 	void insertComment(BoardCommentDto boardCommentDto);
+		
+	//	@Update("update BoardComment "
+	//	+ "set groupNo = #{ groupNo } "
+	//	+ "where commentNo = #{ commentNo }")
+	//void updateGroupNo(@Param("groupNo") int groupNo,@Param("commentNo") int commentNo);
+
 
 }
