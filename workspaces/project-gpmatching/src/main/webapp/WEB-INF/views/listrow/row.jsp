@@ -80,9 +80,10 @@
 								</td>
 								<td>
 									<!-- Varying modal -->
-									<button type="button" class="btn btn-primary"
+									<button id="getboardNo" type="button" class="btn btn-primary"
 										data-bs-toggle="modal" data-bs-target="#exampleModal"
-										data-whatever="@getbootstrap">´ñ±Û¾²±â</button>
+										data-whatever="@getbootstrap">${ matchingBoard.boardNo }</button>
+										
 									<div class="modal fade" id="exampleModal" tabindex="-1"
 										role="dialog" aria-labelledby="exampleModalLabelOne"
 										aria-hidden="true">
@@ -131,12 +132,12 @@
 	</div>
 </div>
 
-<!-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
-<script>
-$('#write-comment-lnk').on('click', function(event){
+<!-- <script>
+$('#getBoardNo').on('click', function(event){
 	$('#commentform').submit();
 });
-</script> -->
-
+</script>
+ -->
 

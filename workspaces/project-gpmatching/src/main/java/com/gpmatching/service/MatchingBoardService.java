@@ -11,4 +11,6 @@ public interface MatchingBoardService {
 	List<MatchingBoardDto> listMatchingBoard();
 
 	int getLastMatchingItemBoardNo();
+
+	MatchingBoardDto findMatchingBoardByBoardNo(int boardNo);
 }

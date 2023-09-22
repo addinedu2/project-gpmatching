@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.gpmatching.dto.MatchingBoardDto;
@@ -38,9 +39,11 @@ public interface MatchingBoardMapper {
 	@Select("select max(boardNo) from MatchingBoard")
 	public int selectMatchingItemBoardNo() ;
 	
-	@Select("select boardNo from MatchingBoard where BoardTitle = #{boardTitle}")
-	public int selectMatchingitemByBoardNtitle(String boardTitle) ;
 	
+	@Select("select boardNo, boardTitle, boardContent "
+			+ "from MatchingBoard "
+			+ "where boardNo = #{ boardNo }")
+	MatchingBoardDto selectMatchingBoardByBoardNo(@Param("boardNo")int boardNo);
 	
 	
 }

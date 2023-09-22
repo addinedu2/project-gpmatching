@@ -64,10 +64,7 @@
 				<button type="button" class="btn btn-primary mb-2">LoL 매칭
 					게시글 쓰기</button>
 			</a>
-			<a href="/project-gpmatching/boardMatching/comment">
-				<button type="button" class="btn btn-primary mb-2">댓글 폼 테스트</button>
-			</a>
-			
+				
 			<jsp:include page="/WEB-INF/views/listrow/row.jsp" />
 		</div>
 	</div>
