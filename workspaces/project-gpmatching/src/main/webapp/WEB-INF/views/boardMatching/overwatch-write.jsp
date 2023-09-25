@@ -109,15 +109,15 @@
 				<!-- 오버워치 등록 -->
 				<div class="mb-3 txt-box">
 					<label class="form-label" for="textInput">옵티어목록</label>
-					<input name="lolPosition" type="text" id="textInput" class="form-control" >
+					<input name="owTier" type="text" id="textInput" class="form-control" >
 				</div>
 				<div class="mb-3 txt-box">
 					<label class="form-label" for="textInput">옵포지션</label>
-					<input name="lolSur" type="text" id="textInput" class="form-control" >
+					<input name="owPosition" type="text" id="textInput" class="form-control" >
 				</div>
 				<div class="mb-3 txt-box">
 					<label class="form-label" for="textInput">옵선호플레이</label>
-					<input name="lolPosition" type="text" id="textInput" class="form-control" >
+					<input name="owPlay" type="text" id="textInput" class="form-control" >
 				</div>
 				<br>
 				<div class="btn-center">

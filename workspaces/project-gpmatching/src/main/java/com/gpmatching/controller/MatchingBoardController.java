@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gpmatching.dto.LolDto;
 import com.gpmatching.dto.MatchingBoardDto;
+import com.gpmatching.dto.OverwatchDto;
+import com.gpmatching.dto.PubgDto;
 import com.gpmatching.service.LolService;
+import com.gpmatching.service.OverwatchService;
+import com.gpmatching.service.PubgService;
 import com.gpmatching.service.MatchingBoardService;
 
 import lombok.Setter;
@@ -27,6 +31,14 @@ public class MatchingBoardController {
 	
 	@Setter(onMethod_ = { @Autowired }) 
 	private LolService lolService;
+	
+	@Setter(onMethod_ = { @Autowired }) 	
+	private OverwatchService OverwatchService;
+	
+	@Setter(onMethod_ = { @Autowired }) 	
+	private PubgService pubgService;
+	
+	
 	
 	@GetMapping(path = { "/lol-list"})
 	public String matchingBoardList(Model model) {
@@ -89,9 +101,14 @@ public class MatchingBoardController {
 
 	
 	@PostMapping(path = { "/battleground-write"})
-	public String writeBgMatchingBoard(MatchingBoardDto matchingBoardDto) {
+	public String writeBgMatchingBoard(MatchingBoardDto matchingBoardDto, PubgDto pubgDto ) {
 		
+		//베그 게임번호 주기
+		matchingBoardDto.setGameNo(7);
 		matchingBoardService.write(matchingBoardDto);
+		//lolService.write(lolDto, matchingBoardDto.getBoardNo());
+		int boardNo = matchingBoardService.getLastMatchingItemBoardNo();
+		pubgService.write(pubgDto, boardNo);
 		
 		return "redirect:battleground-list";	
 	}
@@ -99,13 +116,20 @@ public class MatchingBoardController {
 	@GetMapping(path = { "/overwatch-write"})
 	public String showOverwatchWriteForm(HttpSession session) {
 		
+	
 		return "/boardMatching/overwatch-write";
 	}
 	
 	@PostMapping(path = { "/overwatch-write"})
-	public String writeOwMatchingBoard(MatchingBoardDto matchingBoardDto) {
+	public String writeOwMatchingBoard(MatchingBoardDto matchingBoardDto, OverwatchDto overwatchDto) {
 		
+		
+		//옵치 게임번호 주기
+		matchingBoardDto.setGameNo(4);
 		matchingBoardService.write(matchingBoardDto);
+		//lolService.write(lolDto, matchingBoardDto.getBoardNo());
+		int boardNo = matchingBoardService.getLastMatchingItemBoardNo();
+		OverwatchService.write(overwatchDto, boardNo);
 		
 		return "redirect:overwatch-list";	
 	}
