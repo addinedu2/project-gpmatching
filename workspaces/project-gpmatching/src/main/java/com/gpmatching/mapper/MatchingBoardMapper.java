@@ -31,29 +31,29 @@ public interface MatchingBoardMapper {
 	void insertMatchingBoard2(MatchingBoardDto matchingBoardDto);
 	*/
 	
-	@Insert( "insert into MatchingBoard ( boardTitle, "
+	@Insert( "insert into MatchingBoard (boardTitle, "
 			+ "boardContent, preferGender, mic, gameNo, userNo) "
 			+ "values ( #{ boardTitle }, #{ boardContent }, "
-			+ "#{ preferGender }, #{ mic } , #{ gameNo}, #{ userNo })")
+			+ "#{ preferGender }, #{ mic } , #{ gameNo }, #{ userNo })")
 	@Options(useGeneratedKeys = true, keyProperty = "boardNo")
 	void insertMatchingBoard(MatchingBoardDto matchingBoardDto);
 	
 
 
-	@Select( "select boardNo, boardTitle, boardContent, regDate "
+	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo "
 			+ "from MatchingBoard "
 			+ "order by boardNo desc")
 	List<MatchingBoardDto> selectAllMatchingBoard();
 	
 	
-	@Select( "select boardNo, boardTitle, boardContent, regDate "
+	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo "
 			+ "from MatchingBoard "
 			+ "where gameNo = #{ gameNo } "
 			+ "order by boardNo desc")
 	List<MatchingBoardDto> selectMatchingBoardListByGameNo(int gameNo);
 	
 
-	@Select( "select boardNo, boardTitle, boardContent, regDate "
+	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo "
 			+ "from MatchingBoard "
 			+ "where gameNo = (select gameNo "
 			+ "from GameList where gameName = #{ gameName} )"

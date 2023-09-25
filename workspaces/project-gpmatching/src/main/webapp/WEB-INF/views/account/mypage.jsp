@@ -85,12 +85,12 @@
                   </div>
                   <!-- text -->
                   <div class="lh-1">
-                    <h2 class="mb-0"> ${user.nickname}   <!-- 닉네임 -->
+                    <h2 class="mb-0"> ${loginuser.nickname}   <!-- 닉네임 -->
                       <a href="#!" class="text-decoration-none" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="Beginner">
 
                       </a>
                     </h2>
-                    <p class="mb-0 d-block">@${user.userId} <!-- 유저 아이디 --></p>
+                    <p class="mb-0 d-block">@${loginuser.userNo} <!-- 원래 유저 아이디 인데 userNo 넘어오는거 테스트용--></p>
                   </div>
                 </div>
                 <div>
@@ -151,20 +151,20 @@
                     </div>
                     <div class="col-6 mb-5">
                       <h6 class="text-uppercase fs-5 ls-2">Phone </h6>
-                      <p class="mb-0">${user.userPhone}</p>
+                      <p class="mb-0">${loginuser.userPhone}</p>
                     </div>
                     <div class="col-6 mb-5">
                       <h6 class="text-uppercase fs-5 ls-2">Date of signed up </h6>
-                      <p class="mb-0"><fmt:formatDate value="${user.regDate}" pattern="yyyy-MM-dd"/></p>
+                      <p class="mb-0"><fmt:formatDate value="${loginuser.regDate}" pattern="yyyy-MM-dd"/></p>
                     </div>
                     <div class="col-6">
                       <h6 class="text-uppercase fs-5 ls-2">이메일 </h6>
-                      <p class="mb-0">${user.userEmail}</p>
+                      <p class="mb-0">${loginuser.userEmail}</p>
                     </div>
                     <div class="col-6">
                       <h6 class="text-uppercase fs-5 ls-2">userGrade
                       </h6>
-                      <p class="mb-0">${user.userGrade}</p>
+                      <p class="mb-0">${loginuser.userGrade}</p>
                     </div>
                   </div>
                 </div>
