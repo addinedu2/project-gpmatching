@@ -1,7 +1,8 @@
 
 /**
-* @brief 클래스 설명 : 게임리스트 정보 (GameList 테이블) 
-* 					controller 클래스 (view 없는 테스트 클래스)
+* @brief 클래스 설명 :
+* 게임리스트 정보 (GameList 테이블) 
+* controller 클래스 (view 없는 테스트 클래스)
 * @author 최종 수정자 : hi.lee
 * @version 1.0, 작업 내용 : register, list
 * @Date : 2023-09-26
