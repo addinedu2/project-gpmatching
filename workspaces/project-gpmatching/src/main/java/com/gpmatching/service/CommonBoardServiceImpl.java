@@ -21,6 +21,7 @@ public class CommonBoardServiceImpl implements CommonBoardService {
 //		}
 	}
 
+	//공통게시판 리스트
 	@Override
 	public List<CommonBoardDto> listCommonBoard() {
 
@@ -29,6 +30,7 @@ public class CommonBoardServiceImpl implements CommonBoardService {
 		return commonBoardList;
 	}
 
+	//공통게시판 글 번호 찾기
 	@Override
 	public CommonBoardDto findCommonBoardByCommonNo(int commonNo) {
 		CommonBoardDto commonBoardDto = commonBoardMapper.selectCommonBoardByCommonNo(commonNo);
@@ -40,17 +42,19 @@ public class CommonBoardServiceImpl implements CommonBoardService {
 		return commonBoardDto;
 	}
 	
+	//공통게시판 글 삭제
 	@Override
 	public void deleteCommon(int commonNo) {
 		commonBoardMapper.deleteCommon(commonNo);
 	}
 	
-	//Edit
+	//공통게시판 글 수정
 	@Override
 	public void commonEdit(CommonBoardDto commonBoardDto) {
 		commonBoardMapper.updateCommonEdit(commonBoardDto);
 	}
 
+	//공통게시판 특정 페이지 조회
 	@Override
 	public List<CommonBoardDto> listCommonBoardByPage(int from, int count) {
 		
