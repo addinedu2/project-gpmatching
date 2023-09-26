@@ -31,7 +31,6 @@ public class LolController {
 //		lol.setLolTier("lolTier");
 //		
 		
-		lolDto.setLolTier("gold");
 		//lolDto.setBoardNo(2); // BoardNo 중복값 2번 입력하면 에러
 		lolDto.setLolPlay("lolPlay");
 		lolDto.setLolPosition("lolPosition");

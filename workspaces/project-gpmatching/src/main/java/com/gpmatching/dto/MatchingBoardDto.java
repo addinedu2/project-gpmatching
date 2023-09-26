@@ -20,6 +20,6 @@ public class MatchingBoardDto {
 	int gameNo;
 	
 	private List<MatchingCommentDto> matchingCommentList;
-	private UserDto writer;
+	private UserDto user;
 
 }

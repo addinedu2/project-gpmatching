@@ -112,7 +112,7 @@
 												</div>
 											</td>
 											<td>
-											${ matchingBoard.userNo }
+											${ matchingBoard.user.nickname }
 											</td>
 											<td class="align-middle">
 												<fmt:formatDate value="${ matchingBoard.regDate }" pattern="yyyy-MM-dd " />					         

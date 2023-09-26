@@ -107,21 +107,26 @@
 				
 				<!-- 베그 등록 -->
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">베그서버</label>
-					<input name="lolPosition" type="text" id="textInput" class="form-control" >
+					<label class="form-label" for="textInput">베그선호플레이</label>
+					<input name="pubgPlay" type="text" id="textInput" class="form-control" >
 				</div>
 				<div class="mb-3 txt-box">
 					<label class="form-label" for="textInput">베그주포지션</label>
-					<input name="lolPosition" type="text" id="textInput" class="form-control" >
+					<input name="pubgPosition" type="text" id="textInput" class="form-control" >
 				</div>
 				<div class="mb-3 txt-box">
 					<label class="form-label" for="textInput">베그주사용무기</label>
-					<input name="lolSur" type="text" id="textInput" class="form-control" >
+					<input name="pubgGun" type="text" id="textInput" class="form-control" >
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">베그선호플레이</label>
-					<input name="lolPlay" type="text" id="textInput" class="form-control" >
+					<label class="form-label" for="textInput">베그서버</label>
+					<input name="pubgServer" type="text" id="textInput" class="form-control" >
 				</div>
+				<div class="mb-3 txt-box">
+					<label class="form-label" for="textInput">베그모드</label>
+					<input name="pubgMode" type="text" id="textInput" class="form-control" >
+				</div>
+				
 				<br>
 				<div class="btn-center">
 					<!-- Primary Button -->

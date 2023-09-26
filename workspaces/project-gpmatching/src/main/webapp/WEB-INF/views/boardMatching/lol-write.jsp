@@ -79,8 +79,8 @@
 							placeholder="시간은 꼭 포함해서 작성해주세요">
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">작성자</label>
-					<input name="nickname" type="hidden" id="textInput" class="form-control" value="${ loginuser.userNo }">
+					<label class="form-label" for="textInput">작성자 : ${ loginuser.nickname }</label>
+					<input name="userNo" type="hidden" id="textInput" class="form-control" value="${ loginuser.userNo }">
 				</div>
 				<!-- Textarea -->
 				<div class="mb-3 txt-box">

@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.gpmatching.dto.MatchingBoardDto;
+import com.gpmatching.dto.UserDto;
 
 @Mapper
 public interface MatchingBoardMapper {
@@ -31,10 +32,10 @@ public interface MatchingBoardMapper {
 	void insertMatchingBoard2(MatchingBoardDto matchingBoardDto);
 	*/
 	
-	@Insert( "insert into MatchingBoard (boardTitle, "
-			+ "boardContent, preferGender, mic, gameNo, userNo) "
+	@Insert( "insert into MatchingBoard ( boardTitle, "
+			+ "boardContent, preferGender, mic, userNo, gameNo) "
 			+ "values ( #{ boardTitle }, #{ boardContent }, "
-			+ "#{ preferGender }, #{ mic } , #{ gameNo }, #{ userNo })")
+			+ "#{ preferGender }, #{ mic } , #{ userNo }, #{ gameNo })")
 	@Options(useGeneratedKeys = true, keyProperty = "boardNo")
 	void insertMatchingBoard(MatchingBoardDto matchingBoardDto);
 	
@@ -52,18 +53,25 @@ public interface MatchingBoardMapper {
 			+ "order by boardNo desc")
 	List<MatchingBoardDto> selectMatchingBoardListByGameNo(int gameNo);
 	
+	
+//	// 테스트
+//	@Select("SELECT mb.boardNo, mb.boardTitle, mb.boardContent, mb.regDate, mb.userNo, u.nickname " +
+//            "FROM MatchingBoard mb " +
+//            "INNER JOIN User u ON mb.userNo = u.userNo " +
+//            "WHERE mb.gameNo = (SELECT gameNo FROM GameList WHERE gameName = #{gameName}) " +
+//            "ORDER BY mb.boardNo DESC")
+//	List<MatchingBoardDto> selectMatchingBoardListByGameName(String gameName);
+	
 
-	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo "
+	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo, nickname "
 			+ "from MatchingBoard "
 			+ "where gameNo = (select gameNo "
-			+ "from GameList where gameName = #{ gameName} )"
+			+ "from GameList where gameName = #{ gameName} ) "
 			+ "order by boardNo desc" )
 	List<MatchingBoardDto> selectMatchingBoardListByGameName(String gameName);
 	
 	
-	
-	
-	//@Select( "select boardNo  from MatchingBoard where type='boardNo' ORDER BY num DESC LIMIT 1")
+	//MatchingBoard 의 마지막 튜플의 boardNo (ai 설정됨) 를 가지고 오는 SQL 문
 	@Select("select max(boardNo) from MatchingBoard")
 	public int selectMatchingItemBoardNo() ;
 	
@@ -73,5 +81,6 @@ public interface MatchingBoardMapper {
 			+ "where boardNo = #{ boardNo }")
 	MatchingBoardDto selectMatchingBoardByBoardNo(@Param("boardNo")int boardNo);
 	
-	
+//	@Select("select u.nickname from MatchingBoard m, User u where m.userNo = u.userNo")
+//	String selectMatchingBoardNickname();
 }

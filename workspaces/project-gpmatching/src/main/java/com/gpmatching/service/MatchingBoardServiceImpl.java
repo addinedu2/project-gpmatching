@@ -26,13 +26,13 @@ public class MatchingBoardServiceImpl implements MatchingBoardService {
 		
 	}
 	
-	@Override
-	public List<MatchingBoardDto> listMatchingBoard() {
-		
-		List<MatchingBoardDto> matchingBoardList = mapper.selectAllMatchingBoard();
-		
-		return matchingBoardList;
-	}
+//	@Override
+//	public List<MatchingBoardDto> listMatchingBoard() {
+//		
+//		List<MatchingBoardDto> matchingBoardList = mapper.selectAllMatchingBoard();
+//		
+//		return matchingBoardList;
+//	}
 	
 	@Override
 	public int getLastMatchingItemBoardNo() {
@@ -41,28 +41,37 @@ public class MatchingBoardServiceImpl implements MatchingBoardService {
 		return boardNo;
 	}
 	
-	@Override
-	public List<MatchingBoardDto> getMatchingBoardListByGameNo(int gameNo) {
-		List<MatchingBoardDto> boardMachingList = mapper.selectMatchingBoardListByGameNo(gameNo);
-		
-		return boardMachingList;
-	}
+//	@Override
+//	public List<MatchingBoardDto> getMatchingBoardListByGameNo(int gameNo) {
+//		List<MatchingBoardDto> boardMachingList = mapper.selectMatchingBoardListByGameNo(gameNo);
+//		
+//		return boardMachingList;
+//	}
 	
 	@Override
 	public List<MatchingBoardDto> getMatchingBoardListByGameName(String gameName) {
+		
 		List<MatchingBoardDto> boardMachingList  = mapper.selectMatchingBoardListByGameName(gameName);
 		
 		return boardMachingList;
 	}
 	
-	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {
-		
-		MatchingBoardDto matchingBoard = mapper.selectMatchingBoardByBoardNo(boardNo);
-		
-		List<MatchingCommentDto> matchingCommentList = matchingCommentMapper.selectMatchingCommentByBoardNo(boardNo);
-		matchingBoard.setMatchingCommentList(matchingCommentList);
-		
-		return matchingBoard;
-		
-	}
+//	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {
+//		
+//		MatchingBoardDto matchingBoard = mapper.selectMatchingBoardByBoardNo(boardNo);
+//		
+//		List<MatchingCommentDto> matchingCommentList = matchingCommentMapper.selectMatchingCommentByBoardNo(boardNo);
+//		matchingBoard.setMatchingCommentList(matchingCommentList);
+//		
+//		return matchingBoard;
+//		
+//	}
+	
+//	@Override
+//	public String getMatchingBoardNickname() {
+//		
+//		String nickname = mapper.selectMatchingBoardNickname();
+//		
+//		return nickname;
+//	}
 }
