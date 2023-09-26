@@ -27,6 +27,10 @@ import com.gpmatching.service.MatchingCommentService;
 import com.gpmatching.service.MatchingCommentServiceImpl;
 import com.gpmatching.service.MatchingReviewService;
 import com.gpmatching.service.MatchingReviewServiceImpl;
+import com.gpmatching.service.OverwatchService;
+import com.gpmatching.service.OverwatchServiceImpl;
+import com.gpmatching.service.PubgService;
+import com.gpmatching.service.PubgServiceImpl;
 
 
 @Configuration
@@ -120,6 +124,23 @@ public class RootConfiguration implements ApplicationContextAware {
 		return lolService;
 		
 	}
+
+
+	@Bean
+	public PubgService pubgService() {
+		PubgService pubgService = new PubgServiceImpl();
+		return pubgService;
+		
+	}
+	
+	@Bean
+	public OverwatchService overwatchService() {
+		OverwatchService overwatchService = new OverwatchServiceImpl();
+		return overwatchService;
+		
+	}
+	
+	
 
 
 }

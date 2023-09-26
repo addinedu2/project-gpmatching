@@ -17,15 +17,6 @@ public class LolServiceImpl implements LolService {
 	@Override
 	public void write(LolDto lolDto, int boardNo){
 		
-		System.out.println("test");
-//		LolDto lol = new LolDto();
-//		lol.setBoardNo(boardNo);
-//		lol.setLolPlay("lolPlay");
-//		lol.setLolPosition("lolPosition");
-//		lol.setLolSur("lolSur");
-//		lol.setLolTier("lolTier");
-//		
-		lolDto.setLolTier("gold");
 		lolDto.setBoardNo(boardNo);
 		mapper.insert(lolDto);
 	}

@@ -31,9 +31,9 @@ public interface MatchingBoardMapper {
 	*/
 	
 	@Insert( "insert into MatchingBoard ( boardTitle, "
-			+ "boardContent, preferGender, mic, gameNo) "
+			+ "boardContent, preferGender, mic, userNo, gameNo) "
 			+ "values ( #{ boardTitle }, #{ boardContent }, "
-			+ "#{ preferGender }, #{ mic } , #{ gameNo})")
+			+ "#{ preferGender }, #{ mic } ,  #{ userNo}, #{ gameNo})")
 	void insertMatchingBoard(MatchingBoardDto matchingBoardDto);
 	
 
@@ -59,9 +59,7 @@ public interface MatchingBoardMapper {
 	List<MatchingBoardDto> selectMatchingBoardListByGameName(String gameName);
 	
 	
-	
-	
-	//@Select( "select boardNo  from MatchingBoard where type='boardNo' ORDER BY num DESC LIMIT 1")
+	//MatchingBoard 의 마지막 튜플의 boardNo (ai 설정됨) 를 가지고 오는 SQL 문
 	@Select("select max(boardNo) from MatchingBoard")
 	public int selectMatchingItemBoardNo() ;
 	
