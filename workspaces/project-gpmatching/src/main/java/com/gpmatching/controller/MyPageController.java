@@ -36,7 +36,7 @@ public class MyPageController {
 		   return "account/login";
 		}
 		
-	}
+	}//마이페이지 버튼
 
 	
 	
@@ -66,9 +66,15 @@ public class MyPageController {
 	
 	
 	
-	
-	
 //	@GetMapping(path = {"/deletedUser"})
-//	public String deletedUser()
+//	public String DeletedUser(HttpSession session, Model model) {
+//		UserDto DeletedUser = (UserDto) session.getAttribute("loginuser");
+//		if (DeletedUser != null) {
+//			model.addAttribute("user", DeletedUser);
+//			return "account/editMypage";
+//		} else {
+//		   return "account/login";
+//		}
+//	}
 	//유저 삭제+로그인 해야지만 탈퇴를 할 수 있게 하기
 }

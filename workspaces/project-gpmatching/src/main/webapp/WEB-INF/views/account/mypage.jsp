@@ -90,7 +90,9 @@
 
                       </a>
                     </h2>
+
                     <p class="mb-0 d-block">@${loginuser.userNo} <!-- 원래 유저 아이디 인데 userNo 넘어오는거 테스트용--></p>
+
                   </div>
                 </div>
                 <div>

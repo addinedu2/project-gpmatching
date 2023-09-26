@@ -31,11 +31,12 @@ public class CommonBoardController {
 		int pageSize = 10; //한 페이지 표시 개수
 		int pagerSize = 5;//표시 페이지 개수
 		String linkUrl = "commonList"; //commonList?page=x href
-		int dataCount = commonBoardService.getCommonBoardCount();
+		int dataCount = commonBoardService.getCommonBoardCount();//총 게시물 개수
 		
 		int from = (pageNo -1) *pageSize;//첫번째 페이지 게시물 순서
 		List<CommonBoardDto> commonBoardList = commonBoardService.listCommonBoardByPage(from, pageSize);
 		
+		//페이지 번호 표시 부분
 		ThePager pager = 
 				new ThePager(dataCount, pageNo, pageSize, pagerSize, linkUrl);
 		
@@ -46,7 +47,7 @@ public class CommonBoardController {
 		return "/commonBoard/commonList";
 	}
 	
-	
+	//공통게시판 글쓰기 form
 	@GetMapping(path = {"/commonWrite"})
 	public String showWriteForm() {
 //		if(session.getAttribute("loginuser") == null) {
@@ -56,6 +57,7 @@ public class CommonBoardController {
 		return "/commonBoard/commonWrite";
 	}
 	
+	//공통게시판 글쓰기 구현
 	@PostMapping(path= {"/commonWrite"})
 	public String writeCommonBoard(CommonBoardDto commonBoardDto) {
 		
@@ -86,6 +88,7 @@ public class CommonBoardController {
 		return "redirect:commonList";
 	}
 	
+	//공통게시판 글 상세보기
 	@GetMapping(path= {"/commonDetail"})
 	public String commonDetail(@RequestParam(defaultValue="-1") int commonNo,
 							   @RequestParam(defaultValue=" -1") int pageNo, Model model) {
@@ -108,8 +111,8 @@ public class CommonBoardController {
 		return "commonBoard/commonDetail";
 	}
 	
-	
-	@GetMapping(path= {"/deleteCommon/{commonNo}"}) //안됨
+	//공통게시판 글 삭제
+	@GetMapping(path= {"/deleteCommon/{commonNo}"})
 	public String deleteCommon(@PathVariable("commonNo") int commonNo,
 							   @RequestParam(defaultValue="-1") int pageNo) {
 		if(pageNo == -1) {
@@ -121,7 +124,7 @@ public class CommonBoardController {
 		return String.format("redirect:/commonBoard/commonList?pageNo=%d", pageNo);
 	}
 	
-	//Edit
+	//공통게시판 글 수정 페이지 가져오기
 	@GetMapping(path= {"/commonEdit"})
 	public String showCommonEditForm(@RequestParam(defaultValue = "-1")int commonNo, 
 									 @RequestParam(defaultValue = "-1")int pageNo,Model model) {
@@ -142,7 +145,7 @@ public class CommonBoardController {
 		return "commonBoard/commonEdit";
 	}
 	
-	//Edit
+	//공통게시판 글 수정
 	@PostMapping(path= {"/commonEdit"})
 	public String commonEdit(CommonBoardDto commonBoardDto,
 							 @RequestParam(defaultValue="-1")int pageNo) {
@@ -158,10 +161,11 @@ public class CommonBoardController {
 	
 	
 	///////////////////////////////////
-	@GetMapping(path= {"/tipsList"})
-	public String tipsList() {
-		
-		return "/commonBoard/tipsList";
-	}
-	
+	//작성 예정
+//	@GetMapping(path= {"/tipsList"}) 
+//	public String tipsList() {
+//		
+//		return "/commonBoard/tipsList";
+//	}
+//	
 }

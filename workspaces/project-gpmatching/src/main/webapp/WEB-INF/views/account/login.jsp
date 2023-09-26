@@ -40,7 +40,7 @@
           <div class="card-body p-6">
             <div class="mb-4">
               <a href="/project-gpmatching/resources/index.html"><img src="/project-gpmatching/resources/assets/images/brand/logo/logo-primary.svg" class="mb-2" alt=""></a>
-              <p class="mb-6">Please enter your user information.</p>
+              <p class="mb-6">ID와 비밀 번호를 입력해주세요</p>
               
             </div>
             <!-- Form -->
@@ -48,14 +48,14 @@
            
               <!-- Username -->
               <div class="mb-3">
-                <label for="userId" class="form-label">Username</label>
+                <label for="userId" class="form-label">유저 ID</label>
                 <input type="text" id="userId" class="form-control" name="userId" placeholder="USER ID here" required="">
                 
              
               </div>
               <!-- Password -->
               <div class="mb-3">
-                <label for="userPwd" class="form-label">Password</label>
+                <label for="userPwd" class="form-label">비밀번호</label>
                 <input type="password" id="userPwd" class="form-control" name="userPwd" placeholder="**************" required="">
               </div>
               <!-- Checkbox -->
@@ -63,8 +63,7 @@
                   mb-4">
                 <div class="form-check custom-checkbox">
                   <input type="checkbox" class="form-check-input" id="rememberme">
-                  <label class="form-check-label" for="rememberme">Remember
-                      me</label>
+                  <label class="form-check-label" for="rememberme">기억할까요?</label>
                      
                 </div>
 
@@ -72,17 +71,16 @@
               <div>
                 <!-- Button -->
                 <div class="d-grid">
-                  <button type="submit" class="btn btn-primary">Sign
-                    in</button>
+                  <button type="submit" class="btn btn-primary">로그인</button>
                 </div>
 
                 <div class="d-md-flex justify-content-between mt-4">
                   <div class="mb-2 mb-md-0">
-                    <a href="/webapp/register.jsp" class="fs-5">회원 가입 </a>
+                    <a href="/project-gpmatching/account/register" class="fs-5">회원 가입 </a>
                   </div>
                   <div>
                     <a href="forget-password.html" class="text-inherit
-                        fs-5">Forgot your password?</a>
+                        fs-5">비밀번호를 잊으셨나요?</a>
                          <!-- 비밀번호 찾기 -->
                   </div>
 

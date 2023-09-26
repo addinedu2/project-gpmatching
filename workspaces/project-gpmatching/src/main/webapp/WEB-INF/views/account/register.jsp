@@ -46,7 +46,7 @@
           <div class="card-body p-6">
             <div class="mb-4">
               <a href="/project-gpmatching/resources/index.html"><img src="/project-gpmatching/resources/assets/images/brand/logo/logo-primary.svg" class="mb-2" alt=""></a>
-              <p class="mb-6">Please enter your user information.</p>
+              <p class="mb-6">회원 정보를 입력해주세요.</p>
 
             </div>      
             <!-- Form -->
@@ -54,33 +54,32 @@
             <form:form id="registerform" action="register" method="post" modelAttribute="user">
               <!-- userId -->
               <div class="mb-3">
-                <label for="userId" class="form-label">User Id</label>
-                <input type="text" id="userId" class="form-control" name="userId" placeholder="User Name" >
+                <label for="userId" class="form-label">회원 ID</label>
+                <input type="text" id="userId" class="form-control" name="userId" placeholder="회원 ID" required="">
               </div>
               <!-- Password -->
               <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label for="password" class="form-label">회원 비밀번호</label>
                 <input type="password" id="userPwd" class="form-control" name="userPwd" placeholder="**************" required="">
               </div>
               <!-- Password -->
               <div class="mb-3">
-                <label for="confirm-password" class="form-label">Confirm
-                    Password</label>
+                <label for="confirm-password" class="form-label">회원 비밀번호 확인</label>
                 <input type="password" id="confirm-password" class="form-control" name="confirm-password" placeholder="**************" required="">
               </div>
               <!-- Email -->
               <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
+                <label for="email" class="form-label">이메일</label>
                 <input type="email" id="userEmail" class="form-control" name="userEmail" placeholder="Email address here" required="">
               </div>
               <!-- nickname -->
               <div class="mb-3">
-                <label for="nickname" class="form-label">Nick Name</label>
+                <label for="nickname" class="form-label">닉네임</label>
                 <input type="text" id="nickname" class="form-control" name="nickname" placeholder="닉네임을넣어주세요" required="">
               </div>
               <!-- userPhone -->
               <div class="mb-3">
-                <label for="userPhone" class="form-label">userPhone</label>
+                <label for="userPhone" class="form-label">핸드폰 번호</label>
                 <input type="text" id="userPhone" class="form-control" name="userPhone" placeholder="000-0000-0000" required="">
               </div>
               
@@ -102,18 +101,17 @@
                 <!-- Button -->
                 <div class="d-grid">
                   <button type="submit" class="btn btn-primary">
-                    Create Free Account
+                    회원 가입 완료!
                   </button>
                 </div>
 
                 <div class="d-md-flex justify-content-between mt-4">
                   <div class="mb-2 mb-md-0">
-                    <a href="sign-up.html" class="fs-5">Already
-                        member? Login </a>
+                    <a href="/project-gpmatching/login" class="fs-5">이미 가입하셨나요? 로그인 해주세요 </a>
                   </div>
                   <div>
                     <a href="forget-password.html" class="text-inherit
-                        fs-5">Forgot your password?</a>
+                        fs-5">비밀번호를 잊으셨나요?</a>
                   </div>
 
                 </div>

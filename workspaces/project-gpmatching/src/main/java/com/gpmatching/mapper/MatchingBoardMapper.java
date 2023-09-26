@@ -63,7 +63,7 @@ public interface MatchingBoardMapper {
 //	List<MatchingBoardDto> selectMatchingBoardListByGameName(String gameName);
 	
 
-	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo, nickname "
+	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo "
 			+ "from MatchingBoard "
 			+ "where gameNo = (select gameNo "
 			+ "from GameList where gameName = #{ gameName} ) "

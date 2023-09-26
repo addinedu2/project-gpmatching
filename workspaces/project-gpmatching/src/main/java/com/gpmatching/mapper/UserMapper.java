@@ -23,9 +23,6 @@ public interface UserMapper {
 			+ "values (#{userPwd}, #{userId}, #{userEmail}, #{nickname}, #{userPhone}) ")
 	void insertUser(UserDto user);
 
-	
-	
-	//마이 페이지인데 신고나 리뷰 후기 보는 게시판 연결 생각을 해보자
 		
 	@Select ("select userId, userPwd, userEmail, nickname, userPhone, userGrade, regDate, deletedUser, userNo "
              + "from User "
@@ -39,9 +36,11 @@ public interface UserMapper {
 	void updateUserProfile(UserDto user);
 	//내 정보 수정하는 메서드
 	
-	@Update("UPDATE User SET deletedUser = true " //  deleted 값을 참으로 돌린다
-			+ "WHERE userId = #{userId} ")
-	void deleteUser(@Param("userId") String userId);
-	//유저 정보 중 탈퇴 유무를 유로 돌리는 메서드
+
+//	@Update("UPDATE User SET deletedUser = true " //  delelted 값을 참으로 돌린다
+//			+ "WHERE userId = #{userId} ")
+//	void deleteUser(@Param("userId") String userId);
+//유저 정보 중 탈퇴 유무를 유로 돌리는 메서드
+
 	
 }
