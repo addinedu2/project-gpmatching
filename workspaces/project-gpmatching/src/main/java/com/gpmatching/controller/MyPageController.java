@@ -27,25 +27,25 @@ public class MyPageController {
 	
 	@GetMapping(path = {"/mypage"})
 	public String mypage(HttpSession session, Model model) {
-		UserDto LogingUser = (UserDto) session.getAttribute("loginuser");
+		UserDto loginUser = (UserDto) session.getAttribute("loginuser");
 		
-		if (LogingUser != null) {
-			model.addAttribute("user", LogingUser);
+		if (loginUser != null) {
+			model.addAttribute("loginuser", loginUser);
 			return "account/mypage";
 		} else {
 		   return "account/login";
 		}
 		
-	}
+	}//마이페이지 버튼
 
 	
 	
 	@GetMapping(path = {"/editMypage"})
 	public String editmypage(HttpSession session, Model model) {
-		UserDto LogingUser = (UserDto) session.getAttribute("loginuser");
+		UserDto loginUser = (UserDto) session.getAttribute("loginuser");
 			
-		if (LogingUser != null) {
-		model.addAttribute("user", LogingUser);
+		if (loginUser != null) {
+		model.addAttribute("loginuser", loginUser);
 				return "account/editMypage";
 			} else {
 			   return "account/login";
@@ -65,9 +65,15 @@ public class MyPageController {
 	
 	
 	
-	
-	
 //	@GetMapping(path = {"/deletedUser"})
-//	public String deletedUser()
+//	public String DeletedUser(HttpSession session, Model model) {
+//		UserDto DeletedUser = (UserDto) session.getAttribute("loginuser");
+//		if (DeletedUser != null) {
+//			model.addAttribute("user", DeletedUser);
+//			return "account/editMypage";
+//		} else {
+//		   return "account/login";
+//		}
+//	}
 	//유저 삭제+로그인 해야지만 탈퇴를 할 수 있게 하기
 }

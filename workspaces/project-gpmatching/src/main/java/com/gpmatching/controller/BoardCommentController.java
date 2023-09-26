@@ -18,9 +18,7 @@ public class BoardCommentController {
 	@Setter(onMethod_ = { @Autowired })
 	private BoardCommentService boardCommentService;
 	
-	
-
-	
+	//공통게시판 댓글 쓰기
 	@PostMapping(path= {"/writeComment"})
 	public String writeComment(BoardCommentDto boardComment, @RequestParam(defaultValue = "-1") int pageNo) {
 	
@@ -32,12 +30,16 @@ public class BoardCommentController {
 	
 	
 	
+	@PostMapping(path = {"/deleteComment"}) //댓글 삭제
+	public String deleteComment(int commentNo, int commonNo, int pageNo) {
+		
+		boardCommentService.deleteComment(commentNo);
+		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d", commonNo, pageNo);
+	}  
 	
-	public String deleteComment() {
-		return null;
-	}
 	
-	
+	//아직 댓글 보이는 기능을 구현 못함....
+}
 ////testCode
 //	@GetMapping(path= {"/test"})
 //	public String writeCommentForm(BoardCommentDto boardComment) {
@@ -68,4 +70,3 @@ public class BoardCommentController {
 //		return "redirect:/test";
 //	}
 
-}
