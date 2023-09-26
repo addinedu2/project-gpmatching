@@ -9,7 +9,7 @@
 * 오버워치 매칭게시판에서 글쓰기 시에 폼 정보가 MatchingBoard 와 Overwatch 테이블 에 함께 입력 됩니다.
 * 
 * 
-* @brief 클래스 설명 : MatchingBoard 게시판 정보 controller 클래스 (view 없는 테스트 클래스)
+* @brief 클래스 설명 : MatchingBoard 게시판 정보 controller 클래스
 * @author 최종 수정자 : hi.lee
 * @version 1.0, 작업 내용 :
 * 게임별 매칭게시판 글쓰기 (write)
