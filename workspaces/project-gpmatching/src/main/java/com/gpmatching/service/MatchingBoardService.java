@@ -8,13 +8,15 @@ public interface MatchingBoardService {
 
 	void write(MatchingBoardDto matchingBoardDto);
 	
-	List<MatchingBoardDto> listMatchingBoard();
+	//List<MatchingBoardDto> listMatchingBoard();
 
 	int getLastMatchingItemBoardNo();
 	
 	List<MatchingBoardDto> getMatchingBoardListByGameName(String gameName);
 
-	List<MatchingBoardDto> getMatchingBoardListByGameNo(int gameNo);
+	//List<MatchingBoardDto> getMatchingBoardListByGameNo(int gameNo);
 
-	MatchingBoardDto findMatchingBoardByBoardNo(int boardNo);
+	//MatchingBoardDto findMatchingBoardByBoardNo(int boardNo);
+	
+	//String getMatchingBoardNickname();
 }

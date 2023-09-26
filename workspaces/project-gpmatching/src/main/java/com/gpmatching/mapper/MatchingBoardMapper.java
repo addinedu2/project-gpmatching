@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.gpmatching.dto.MatchingBoardDto;
+import com.gpmatching.dto.UserDto;
 
 @Mapper
 public interface MatchingBoardMapper {
@@ -33,28 +35,38 @@ public interface MatchingBoardMapper {
 	@Insert( "insert into MatchingBoard ( boardTitle, "
 			+ "boardContent, preferGender, mic, userNo, gameNo) "
 			+ "values ( #{ boardTitle }, #{ boardContent }, "
-			+ "#{ preferGender }, #{ mic } ,  #{ userNo}, #{ gameNo})")
+			+ "#{ preferGender }, #{ mic } , #{ userNo }, #{ gameNo })")
+	@Options(useGeneratedKeys = true, keyProperty = "boardNo")
 	void insertMatchingBoard(MatchingBoardDto matchingBoardDto);
 	
 
 
-	@Select( "select boardNo, boardTitle, boardContent, regDate "
+	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo "
 			+ "from MatchingBoard "
 			+ "order by boardNo desc")
 	List<MatchingBoardDto> selectAllMatchingBoard();
 	
 	
-	@Select( "select boardNo, boardTitle, boardContent, regDate "
+	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo "
 			+ "from MatchingBoard "
 			+ "where gameNo = #{ gameNo } "
 			+ "order by boardNo desc")
 	List<MatchingBoardDto> selectMatchingBoardListByGameNo(int gameNo);
 	
+	
+//	// 테스트
+//	@Select("SELECT mb.boardNo, mb.boardTitle, mb.boardContent, mb.regDate, mb.userNo, u.nickname " +
+//            "FROM MatchingBoard mb " +
+//            "INNER JOIN User u ON mb.userNo = u.userNo " +
+//            "WHERE mb.gameNo = (SELECT gameNo FROM GameList WHERE gameName = #{gameName}) " +
+//            "ORDER BY mb.boardNo DESC")
+//	List<MatchingBoardDto> selectMatchingBoardListByGameName(String gameName);
+	
 
-	@Select( "select boardNo, boardTitle, boardContent, regDate "
+	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo "
 			+ "from MatchingBoard "
 			+ "where gameNo = (select gameNo "
-			+ "from GameList where gameName = #{ gameName} )"
+			+ "from GameList where gameName = #{ gameName} ) "
 			+ "order by boardNo desc" )
 	List<MatchingBoardDto> selectMatchingBoardListByGameName(String gameName);
 	
@@ -69,5 +81,6 @@ public interface MatchingBoardMapper {
 			+ "where boardNo = #{ boardNo }")
 	MatchingBoardDto selectMatchingBoardByBoardNo(@Param("boardNo")int boardNo);
 	
-	
+//	@Select("select u.nickname from MatchingBoard m, User u where m.userNo = u.userNo")
+//	String selectMatchingBoardNickname();
 }

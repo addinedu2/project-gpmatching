@@ -48,19 +48,20 @@ public class MyPageController {
 		model.addAttribute("loginuser", loginUser);
 				return "account/editMypage";
 			} else {
-			   return "account/login";
+				return "account/login";
 			}
 		
 	} // 마이페이지 수정 버튼(로그인 하고 들어갈 수 있는 컨트롤러)
 
 	@PostMapping(path = {"/editMypage"})
-	public String updateUserProfile(UserDto updateUser, HttpSession session) {
-		accountService.editUser(updateUser);
-		 // 수정된 사용자 정보를 데이터베이스에 업데이트
-		session.setAttribute("loginuser", updateUser);
+	public String updateUserProfile(UserDto loginUser, HttpSession session, Model model) {
+		accountService.editUser(loginUser);
+		// 수정된 사용자 정보를 데이터베이스에 업데이트
+		session.setAttribute("loginuser", loginUser);
 		// 세션에서 사용자 정보 업데이트
-		 return "redirect:mypage";
-		 //수정 후 리다이렉트할 페이지 
+
+		return "redirect:mypage";
+		//수정 후 리다이렉트할 페이지 
 	}//마이페이지 수정(데이터베이스에 보내기)
 	
 	
