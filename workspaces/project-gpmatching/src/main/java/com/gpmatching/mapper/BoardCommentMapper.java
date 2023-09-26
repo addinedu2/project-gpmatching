@@ -3,6 +3,8 @@ package com.gpmatching.mapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 import com.gpmatching.dto.BoardCommentDto;
 
@@ -19,7 +21,15 @@ public interface BoardCommentMapper {
 	@Options(useGeneratedKeys = true, keyProperty = "commentNo", keyColumn="commentNo")
 
 	void insertComment(BoardCommentDto boardCommentDto);
-		
+	
+	@Update("update BoardComment "
+			+ "set deleted =  true "
+			+ "where commentNo = #{ commentNo } ")
+	void deleteComment(@Param("commentNo") int commentNo );
+	
+	
+	
+	
 	//	@Update("update BoardComment "
 	//	+ "set groupNo = #{ groupNo } "
 	//	+ "where commentNo = #{ commentNo }")
