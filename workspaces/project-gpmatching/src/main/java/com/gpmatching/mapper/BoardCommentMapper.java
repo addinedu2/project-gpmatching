@@ -9,10 +9,7 @@ import com.gpmatching.dto.BoardCommentDto;
 @Mapper
 public interface BoardCommentMapper {
 	
-	//int num = 1;
-//	@Insert("insert into boardcomment (commonNo, userNo, commentContent, groupNo, step, depth) "
-//		  + "values (#{commonNo},#{userNo},#{commentContent},0,1,0)")
-	
+	//공통게시판 댓글 쓰기
 	@Insert("insert into BoardComment (commentContent) "
 		  + "values (#{commentContent})")
 	

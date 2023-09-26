@@ -18,10 +18,8 @@ public class BoardCommentController {
 	@Setter(onMethod_ = { @Autowired })
 	private BoardCommentService boardCommentService;
 	
-	
-
-	
-	@PostMapping(path= {"/writeComment"}) //댓글쓰기
+	//공통게시판 댓글 쓰기
+	@PostMapping(path= {"/writeComment"})
 	public String writeComment(BoardCommentDto boardComment, @RequestParam(defaultValue = "-1") int pageNo) {
 	
 		boardCommentService.writeComment(boardComment);
