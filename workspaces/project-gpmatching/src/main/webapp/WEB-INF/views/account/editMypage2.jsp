@@ -118,7 +118,7 @@
 
                   </div>
                   <form action="editMypage" method="post">
-		        <input type="hidden" name="userId" value="${ loginuser.userId }">
+		        <input type="hidden" name="userId" value="${ user.userId }">
                     <!-- row -->
 		
 
@@ -138,7 +138,7 @@
                       <label for="email" class="col-sm-4 col-form-label
                           form-label">이메일</label>
                       <div class="col-md-8 col-12"><!--이메일  -->
-                        <input type="Email" class="form-control" name="userEmail" placeholder="${loginuser.userEmail}" id="userEmail">
+                        <input type="Email" class="form-control" name="userEmail" placeholder="${user.userEmail}" id="userEmail">
                       </div>
                     </div>
                     <!-- row -->
@@ -146,7 +146,7 @@
                       <label for="phone" class="col-sm-4 col-form-label
                           form-label">핸드폰 <span class="text-muted">(Optional)</span></label>
                       <div class="col-md-8 col-12">
-                        <input type="text" class="form-control" name="userPhone" placeholder="${loginuser.userPhone}" id="userPhone">
+                        <input type="text" class="form-control" name="userPhone" placeholder="${user.userPhone}" id="userPhone">
                       </div>
                     </div>
                     <!-- row -->
@@ -155,7 +155,7 @@
                           form-label">닉네임</label>
 
                       <div class="col-md-8 col-12">
-                  <input type="text" class="form-control" name="nickname" placeholder="${loginuser.nickname}" id="nickname">
+                  <input type="text" class="form-control" name="nickname" placeholder="${user.nickname}" id="nickname">
                    <!--      <select class="form-select" id="newnickname">
                         <option selected>Select Country</option>
                             <option value="1">India</option>

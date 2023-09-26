@@ -21,7 +21,7 @@ public class BoardCommentController {
 	
 
 	
-	@PostMapping(path= {"/writeComment"})
+	@PostMapping(path= {"/writeComment"}) //댓글쓰기
 	public String writeComment(BoardCommentDto boardComment, @RequestParam(defaultValue = "-1") int pageNo) {
 	
 		boardCommentService.writeComment(boardComment);
@@ -33,9 +33,9 @@ public class BoardCommentController {
 	
 	
 	
-	public String deleteComment() {
-		return null;
-	}
+//	public String deleteComment() {  
+//		return null;
+//	}  댓글삭제, 수정 구현 안 됨
 	
 	
 ////testCode

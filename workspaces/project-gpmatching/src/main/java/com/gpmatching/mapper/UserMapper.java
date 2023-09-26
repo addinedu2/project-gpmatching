@@ -23,9 +23,6 @@ public interface UserMapper {
 			+ "values (#{userPwd}, #{userId}, #{userEmail}, #{nickname}, #{userPhone}) ")
 	void insertUser(UserDto user);
 
-	
-	
-	//마이 페이지인데 신고나 리뷰 후기 보는 게시판 연결 생각을 해보자
 		
 	@Select ("select userId, userPwd, userEmail, nickname, userPhone, userGrade, regDate, deletedUser "
              + "from User "

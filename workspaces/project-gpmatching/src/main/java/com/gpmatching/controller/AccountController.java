@@ -54,7 +54,7 @@ public class AccountController {
 	// AccountService accountService = new AccountServiceImpl();
 		accountService.register(user);
 		return "redirect:/home";
-	}
+	}//회원 가입
 	
 	
 	
@@ -79,7 +79,7 @@ public class AccountController {
 			model.addAttribute("loginfail", true); // 로그인 실패를 했으니 "loginfail"에 참 넣기
 			System.out.println("로그인 실패");
 			return "account/login";
-		}		
+		}//로그인 성공/실패		
 		
 	}
 		
@@ -89,7 +89,7 @@ public class AccountController {
 		System.out.println("로그아웃 성공");
 		return "redirect:/home";
 		//return "account/logout";
-	}
+	}  //로그아웃
 	
 	
 

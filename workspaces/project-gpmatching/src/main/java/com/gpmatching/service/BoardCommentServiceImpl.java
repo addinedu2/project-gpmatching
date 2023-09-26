@@ -10,11 +10,11 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	@Autowired
 	private BoardCommentMapper boardCommentMapper;
 	
-	@Override
-	public void writeComment(BoardCommentDto boardComment) {
+	@Override   
+ 	public void writeComment(BoardCommentDto boardComment) {
 		boardCommentMapper.insertComment(boardComment);
 		
 		//boardCommentMapper.updateGroupNo(boardComment.getCommentNo(), boardComment.getCommentNo());
-	}
+	}  //댓글쓰기
 
 }
