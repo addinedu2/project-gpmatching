@@ -15,7 +15,7 @@ MATCHIN.GG(가제)
 다양한 게임 TIP 정보 등은 여기서 찾아보세요  
 
 # 이미지 혹은 동영상 첨부
-NOT YET
+![gpmatchingweb](https://github.com/whereiswilly/kasan-edu-jw/assets/145098356/e289b5d9-fafd-40eb-911c-3671e50299f3)
 
 # 샘플 코드 및 실행 방법
 SECRET
