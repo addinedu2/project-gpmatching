@@ -1,12 +1,11 @@
 package com.gpmatching.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gpmatching.dto.GameListDto;
 import com.gpmatching.dto.MatchingBoardDto;
-import com.gpmatching.dto.MatchingCommentDto;
 import com.gpmatching.mapper.MatchingBoardMapper;
 import com.gpmatching.mapper.MatchingCommentMapper;
 
@@ -54,6 +53,25 @@ public class MatchingBoardServiceImpl implements MatchingBoardService {
 		List<MatchingBoardDto> boardMachingList  = mapper.selectMatchingBoardListByGameName(gameName);
 		
 		return boardMachingList;
+	}
+	
+	
+	@Override
+	public List<Map<String, String>> getSelectLolMatchingMapByGameName(String gameName) {
+		List<Map<String, String>> list = mapper.selectLolMatchingMapByGameName(gameName);
+		return list;
+	}
+	
+	@Override
+	public List<Map<String, String>> getSelectOwMatchingMapByGameName(String gameName) {
+		List<Map<String, String>> list = mapper.selectOwMatchingMapByGameName(gameName);
+		return list;
+	}
+	
+	@Override
+	public List<Map<String, String>> getSelectPubgMatchingMapByGameName(String gameName) {
+		List<Map<String, String>> list = mapper.selectPubgMatchingMapByGameName(gameName);
+		return list;
 	}
 	
 //	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {

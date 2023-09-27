@@ -23,6 +23,7 @@
 package com.gpmatching.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -71,10 +72,9 @@ public class MatchingBoardController {
 	@GetMapping(path = { "/lol-list"})
 	public String matchingBoardList(Model model) {
 		
-		//List<MatchingBoardDto> matchingBoardList = matchingBoardService.listMatchingBoard();
-		List<MatchingBoardDto> matchingBoardList = matchingBoardService.getMatchingBoardListByGameName("league of legends");
+		List<Map<String, String>> matchingLolList = matchingBoardService.getSelectLolMatchingMapByGameName("league of legends");
 				
-		model.addAttribute("matchingBoardList", matchingBoardList);
+		model.addAttribute("matchingLolList", matchingLolList);
 		
 		return "/boardMatching/lol-list";
 	}
@@ -91,9 +91,9 @@ public class MatchingBoardController {
 	public String bgMatchingBoardList(Model model) {
 		
 		
-		List<MatchingBoardDto> matchingBoardList = matchingBoardService.getMatchingBoardListByGameName("battle ground");
+		List<Map<String, String>> matchingPubgList = matchingBoardService.getSelectPubgMatchingMapByGameName("battle ground");
 		
-		model.addAttribute("matchingBoardList", matchingBoardList);
+		model.addAttribute("matchingPubgList", matchingPubgList);
 		
 		return "/boardMatching/battleground-list";
 	}
@@ -108,9 +108,9 @@ public class MatchingBoardController {
 	@GetMapping(path = { "/overwatch-list"})
 	public String owMatchingBoardList(Model model) {
 		
-		List<MatchingBoardDto> matchingBoardList = matchingBoardService.getMatchingBoardListByGameName("overwatch2");
+		List<Map<String, String>> matchingOwList = matchingBoardService.getSelectOwMatchingMapByGameName("overwatch2");
 		
-		model.addAttribute("matchingBoardList", matchingBoardList);
+		model.addAttribute("matchingOwList", matchingOwList);
 		
 		return "/boardMatching/overwatch-list";
 	}
@@ -146,7 +146,6 @@ public class MatchingBoardController {
 		//롤 게임번호 주기
 		matchingBoardDto.setGameNo(5);
 		matchingBoardService.write(matchingBoardDto);
-		//lolService.write(lolDto, matchingBoardDto.getBoardNo());
 		int boardNo = matchingBoardService.getLastMatchingItemBoardNo();
 		lolService.write(lolDto, boardNo);
 		
@@ -181,7 +180,6 @@ public class MatchingBoardController {
 		//베그 게임번호 주기
 		matchingBoardDto.setGameNo(7);
 		matchingBoardService.write(matchingBoardDto);
-		//lolService.write(lolDto, matchingBoardDto.getBoardNo());
 		int boardNo = matchingBoardService.getLastMatchingItemBoardNo();
 		pubgService.write(pubgDto, boardNo);
 		
@@ -217,7 +215,6 @@ public class MatchingBoardController {
 		//옵치 게임번호 주기
 		matchingBoardDto.setGameNo(4);
 		matchingBoardService.write(matchingBoardDto);
-		//lolService.write(lolDto, matchingBoardDto.getBoardNo());
 		int boardNo = matchingBoardService.getLastMatchingItemBoardNo();
 		OverwatchService.write(overwatchDto, boardNo);
 		

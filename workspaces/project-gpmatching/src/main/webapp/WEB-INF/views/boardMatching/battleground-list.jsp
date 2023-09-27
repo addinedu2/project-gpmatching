@@ -82,65 +82,41 @@
 							<table class="table text-nowrap mb-0">
 								<thead class="table-light">
 									<tr>
+										<th>플레이어이름</th>
 										<th>제목</th>
-										<th>등록일</th>
-										<th>티어</th>
-										<th>인원</th>
 										<th>내용</th>
+										<th>베그플레이</th>
+										<th>주포지션</th>
+										<th>주사용무기</th>
+										<th>베그서버</th>
+										<th>베그모드</th>
+										<th>선호성별</th>
+										<th>마이크사용</th>
+										<th>마감여부</th>
+										<th>등록일시</th>
+										<th>조회수</th>
 										<th>댓글</th>
-			
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="matchingBoard" items="${ requestScope.matchingBoardList }">
-										<tr id="tr-${ matchingBoard.boardNo }" data-title="${ matchingBoard.boardTitle }">
-											<td class="align-middle">
-												<div class="d-flex align-items-center">
-													<div>
-														<div class="icon-shape icon-md border p-4 rounded-1">
-															<img src="assets/images/brand/dropbox-logo.svg" alt="">
-														</div>
-													</div>
-													<div class="ms-3 lh-1">
-														<h5 class=" mb-1">
-															<a href="#" class="text-inherit">${ matchingBoard.boardTitle }</a>
-														</h5>
-			
-													</div>
-												</div>
-											</td>
-											<td class="align-middle">
-												<fmt:formatDate value="${ matchingBoard.regDate }" pattern="yyyy-MM-dd " />					         
-											</td>
-											<td class="align-middle">
-												<span class="badge bg-warning">Gold</span>
-											</td>
-											<td class="align-middle">
-												<div class="avatar-group">
-													<span class="avatar avatar-sm"> 
-														<img alt="avatar" src="assets/images/avatar/avatar-1.jpg" class="rounded-circle">
-													</span> 
-													<span class="avatar avatar-sm"> 
-														<img alt="avatar" src="assets/images/avatar/avatar-2.jpg" class="rounded-circle">
-													</span> 
-													<span class="avatar avatar-sm"> 
-														<img alt="avatar" src="assets/images/avatar/avatar-3.jpg" class="rounded-circle">
-													</span> 
-													<span class="avatar avatar-sm avatar-primary"> 
-														<span class="avatar-initials rounded-circle fs-6">+5</span>
-													</span>
-												</div>
-											</td>
-											<td class="align-middle text-dark">
-												<div class="float-start me-3">${ matchingBoard.boardContent }</div>
-			
-											</td>
-											<td>
-												<!-- Varying modal -->
-												<button type="button" class="btn btn-primary btn-show-comment-modal" 
-														data-boardno="${ matchingBoard.boardNo }">${ matchingBoard.boardNo }</button>
-											</td>
+									<c:forEach var="matchingBoard" items="${ requestScope.matchingPubgList }" varStatus="vs">
+										 <tr>
+											<th>${ matchingPubgList[vs.index].get("nickname") }</th>
+											<th>${ matchingPubgList[vs.index].get("boardTitle") }</th>
+											<th>${ matchingPubgList[vs.index].get("boardContent") }</th>
+											<th>${ matchingPubgList[vs.index].get("pubgPlay ") }</th>
+											<th>${ matchingPubgList[vs.index].get("pubgPosition") }</th>
+											<th>${ matchingPubgList[vs.index].get("pubgGun") }</th>
+											<th>${ matchingPubgList[vs.index].get("pubgServer") }</th>
+											<th>${ matchingPubgList[vs.index].get("pubgMode") }</th>
+											<th>${ matchingPubgList[vs.index].get("preferGender") }</th>
+											<th>${ matchingPubgList[vs.index].get("mic") }</th>
+											<th>${ matchingPubgList[vs.index].get("matchingClose") }</th>
+											<th>${ matchingPubgList[vs.index].get('regDate') }</th>
+											<th>${ matchingPubgList[vs.index].get("readCount") }</th>
+											<th>댓글</th>
 										</tr>
+
 									</c:forEach>
 								</tbody>
 							</table>
