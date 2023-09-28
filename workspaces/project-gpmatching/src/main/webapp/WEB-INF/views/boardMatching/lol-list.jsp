@@ -118,7 +118,7 @@
 												<fmt:formatDate value="${ matchingBoard.regDate }" pattern="yyyy-MM-dd " />					         
 											</td>
 											<td class="align-middle">
-												<span class="badge bg-warning">Gold</span>
+												<span class="badge bg-warning">${ matchingBoard.mic }</span>
 											</td>
 											<td class="align-middle">
 												<div class="avatar-group">
@@ -172,8 +172,9 @@
 							<div class="modal-body">
 			
 								<div class="mb-3">
-									<label for="recipient-name" class="col-form-label">게임 닉네임</label> 
-									<input type="text" class="form-control" id="recipient-name-in-modal">
+									<label for="recipient-name" class="col-form-label">닉네임 : ${ loginuser.nickname }</label> 
+									<input type="text" class="form-control" id="recipient-name-in-modal" 
+									placeholder="게임 아이디를 입력해주세요">
 								</div>
 								<div class="mb-3">
 									<label for="message-text" class="col-form-label">파티장에게 알려줄 내용</label>
