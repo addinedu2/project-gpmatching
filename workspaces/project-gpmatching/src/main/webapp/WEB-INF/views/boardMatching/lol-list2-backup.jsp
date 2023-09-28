@@ -99,9 +99,63 @@
 									</tr>
 								</thead>
 				 
-								<tbody>		
-									<c:forEach var="matchingBoard" items="${ requestScope.matchingLolList }" varStatus="vs">
+								<tbody>
+<%-- 									<c:forEach var="matchingBoard" items="${ requestScope.matchingBoardList }">
 										<tr id="tr-${ matchingBoard.boardNo }" data-title="${ matchingBoard.boardTitle }">
+											<td class="align-middle">
+												<div class="d-flex align-items-center">
+													<div>
+														<div class="icon-shape icon-md border p-4 rounded-1">
+															<img src="assets/images/brand/dropbox-logo.svg" alt="">
+														</div>
+													</div>
+													<div class="ms-3 lh-1">
+														<h5 class=" mb-1">
+															<a href="#" class="text-inherit">${ matchingBoard.boardTitle }</a>
+														</h5>
+			
+													</div>
+												</div>
+											</td>
+											<td>
+											${ matchingBoard.userNo }
+											</td>
+											<td class="align-middle">
+												<fmt:formatDate value="${ matchingBoard.regDate }" pattern="yyyy-MM-dd " />					         
+											</td>
+											<td class="align-middle">
+												<span class="badge bg-warning">${ matchingBoard.mic }</span>
+											</td>
+											<td class="align-middle">
+												<div class="avatar-group">
+													<span class="avatar avatar-sm"> 
+														<img alt="avatar" src="assets/images/avatar/avatar-1.jpg" class="rounded-circle">
+													</span> 
+													<span class="avatar avatar-sm"> 
+														<img alt="avatar" src="assets/images/avatar/avatar-2.jpg" class="rounded-circle">
+													</span> 
+													<span class="avatar avatar-sm"> 
+														<img alt="avatar" src="assets/images/avatar/avatar-3.jpg" class="rounded-circle">
+													</span> 
+													<span class="avatar avatar-sm avatar-primary"> 
+														<span class="avatar-initials rounded-circle fs-6">+5</span>
+													</span>
+													
+												</div>
+											</td>
+											<td class="align-middle text-dark">
+												<div class="float-start me-3">${ matchingBoard.boardContent }</div>
+			
+											</td>
+											<td>
+												<!-- Varying modal -->
+												<button type="button" class="btn btn-primary btn-show-comment-modal" 
+														data-boardno="${ matchingBoard.boardNo }">지원하기</button>
+												
+											</td>
+ --%>
+									<c:forEach var="matchingBoard" items="${ requestScope.matchingLolList }" varStatus="vs">
+										 <tr>
 
 											<th>${ matchingLolList[vs.index].get("nickname") }</th>
 											<th>${ matchingLolList[vs.index].get("boardTitle") }</th>
@@ -113,14 +167,9 @@
 											<th>${ matchingLolList[vs.index].get("preferGender") }</th>
 											<th>${ matchingLolList[vs.index].get("mic") }</th>
 											<th>${ matchingLolList[vs.index].get("matchingClose") }</th>
-											<th>${ matchingLolList[vs.index].get("regDate") }</th>
+											<th>${ matchingLolList[vs.index].get('regDate') }</th>
 											<th>${ matchingLolList[vs.index].get("readCount") }</th>
-											<th class="align-middle">
-												<!-- Varying modal -->
-												<button type="button" class="btn btn-primary btn-show-comment-modal" 
-														data-boardno="${ matchingLolList[vs.index].get("boardNo") }">${ matchingLolList[vs.index].get("boardNo") }
-												</button>
-											</th>
+											<th>댓글</th>
 										</tr>
 
 									</c:forEach>

@@ -27,7 +27,7 @@ public class CommonBoardController {
 //		전체게시물조회
 //		List<CommonBoardDto> commonBoardList = commonBoardService.listCommonBoard();
 		
-		//페지이별 게시물 조회
+		//페이지별 게시물 조회
 		int pageSize = 10; //한 페이지 표시 개수
 		int pagerSize = 5;//표시 페이지 개수
 		String linkUrl = "commonList"; //commonList?page=x href
@@ -91,14 +91,11 @@ public class CommonBoardController {
 	//공통게시판 글 상세보기
 	@GetMapping(path= {"/commonDetail"})
 	public String commonDetail(@RequestParam(defaultValue="-1") int commonNo,
-							   @RequestParam(defaultValue=" -1") int pageNo, Model model) {
+							   @RequestParam(defaultValue="-1") int pageNo, Model model) {
 		if(commonNo == -1 || pageNo == -1) {
-			return "redirect:list";
-		}
-		
-		if(commonNo == -1) {
 			return "redirect:commonList";
 		}
+		
 		CommonBoardDto commonBoardDto = commonBoardService.findCommonBoardByCommonNo(commonNo);
 		
 		if(commonBoardDto == null) {//조회 글 없는 경우
