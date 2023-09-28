@@ -56,7 +56,7 @@
 		           
 		              <div class="border-bottom pb-4 mb-4 ">
 		               
-		                  <h3 class="mb-0 fw-bold">게시물 상세 보기</h3>
+		                  <h3 class="mb-0 fw-bold">{commonBoard.commonTitle }</h3>
 		           
 		            </div>
 		          </div>
@@ -191,24 +191,24 @@
 			<c:forEach var="comment" items="${ commonBoard.boardCommentList }">				
 				<tr>
 					<td style="text-align:left;margin:5px;border-bottom: solid 1px;">					
-						<div id="comment-view-area-${ comment.commentNo }">
+						<div id="comment-view-area-${ BoardComment.commentNo }">
 						<c:choose>
-						<c:when test="${ comment.deleted }">
+						<c:when test="${ BoardComment.deleted }">
 							<br><br>
 							<span style='color:gray'>삭제된 글입니다.</span>
 							<br><br>
 						</c:when>
 						<c:otherwise>
-							${ comment.userNo } &nbsp;&nbsp; [${ comment.regDate }]
+							${ Comment.userNo } &nbsp;&nbsp; [${ Comment.regDate }]
 						    <br /><br />
-						    <span>${ fn:replace(comment.commentContent, enter, "<br>") }</span>
+						    <span>${ fn:replace( Comment.commentContent, enter, "<br>") }</span>
 							<br /><br />
-							<%-- <div style='display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'>
-						    	<a class="edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">편집</a>
+							<%-- <div style='display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'> --%>
+						    	<a class="edit-comment" data-comment-no="${ Comment.commentNo }" href="javascript:">편집</a>
 								&nbsp;
 								<a class="delete-comment" data-comment-no="${ comment.commentNo }" href="javascript:">삭제</a>
 							</div>
-							<a class="recomment-link btn btn-sm btn-success">댓글 쓰기</a> --%>
+							<%-- <a class="recomment-link btn btn-sm btn-success">댓글 쓰기</a> --%>
 						</c:otherwise>
 						</c:choose>
 						</div>	                
@@ -284,7 +284,7 @@
 			const yn = confirm(commentNo + "번 댓글을 삭제할까요?");
 			if (yn) {
 				location.href = 'delete-comment?commentNo=' + commentNo + 
-											  '&boardNo=' + ${ commonBoard.commonNo } + 
+											  '&commonNo=' + ${ BoardComment.commonNo } + 
 											  '&pageNo=' + ${ pageNo };
 			}
 		});

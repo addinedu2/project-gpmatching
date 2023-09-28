@@ -38,7 +38,6 @@ public class BoardCommentController {
 	}  
 	
 	
-	//아직 댓글 보이는 기능을 구현 못함....
 }
 ////testCode
 //	@GetMapping(path= {"/test"})

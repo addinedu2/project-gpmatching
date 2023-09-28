@@ -92,7 +92,6 @@ public class AccountController {
 	@GetMapping(path = {"/logout"})
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginuser"); //세션 정보에서 "loginuser"를 뺀다=로그아웃
-		System.out.println("로그아웃 성공");
 		return "redirect:/home";
 		//return "account/logout";
 	}  //로그아웃
