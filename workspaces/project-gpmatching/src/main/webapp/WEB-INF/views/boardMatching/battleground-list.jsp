@@ -112,9 +112,14 @@
 											<th>${ matchingPubgList[vs.index].get("preferGender") }</th>
 											<th>${ matchingPubgList[vs.index].get("mic") }</th>
 											<th>${ matchingPubgList[vs.index].get("matchingClose") }</th>
-											<th>${ matchingPubgList[vs.index].get('regDate') }</th>
+											<th>${ matchingPubgList[vs.index].get("regDate") }</th>
 											<th>${ matchingPubgList[vs.index].get("readCount") }</th>
-											<th>댓글</th>
+											<th class="align-middle">
+												<!-- Varying modal -->
+												<button type="button" class="btn btn-primary btn-show-comment-modal" 
+														data-boardno="${ matchingPubgList[vs.index].get("boardNo") }">${ matchingPubgList[vs.index].get("boardNo") }
+												</button>
+											</th>
 										</tr>
 
 									</c:forEach>

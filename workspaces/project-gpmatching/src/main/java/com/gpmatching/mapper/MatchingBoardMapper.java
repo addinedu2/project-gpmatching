@@ -85,7 +85,7 @@ public interface MatchingBoardMapper {
 	
 	
 	//User 테이블, MatchingBoard 테이블, Lol 테이블 join해서 같이 보여주는 코드(게임명: "league of legends") 
-	@Select( "select u.nickname, m.boardTitle, m.boardContent, m.preferGender, m.mic, "
+	@Select( "select u.nickname, m.boardNo,m.boardTitle, m.boardContent, m.preferGender, m.mic, "
 			+ "m.matchingClose, m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
 			+ "from MatchingBoard m "
 			+ "inner join Lol l "
@@ -98,7 +98,7 @@ public interface MatchingBoardMapper {
 	List<Map<String, String>> selectLolMatchingMapByGameName(String gameName);
 	
 	//User 테이블, MatchingBoard 테이블, Pubg 테이블 join해서 같이 보여주는 코드(게임명: "battle ground")
-	@Select( "select u.nickname, m.boardTitle, m.boardContent, m.preferGender, m.mic, "
+	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, "
 			+ "m.matchingClose, m.regDate, m.readCount, p.pubgPlay, p.pubgPosition, p.pubgGun, "
 			+ "p.pubgServer, p.pubgMode "
 			+ "from MatchingBoard m "
@@ -112,7 +112,7 @@ public interface MatchingBoardMapper {
 	List<Map<String, String>> selectPubgMatchingMapByGameName(String gameName);
 	
 	//User 테이블, MatchingBoard 테이블, Overwatch 테이블 join해서 같이 보여주는 코드(게임명: "overwatch2")
-	@Select( "select u.nickname, m.boardTitle, m.boardContent, m.preferGender, m.mic, "
+	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, "
 			+ "m.matchingClose, m.regDate, m.readCount, o.owTier, o.owPosition, o.owPlay "
 			+ "from MatchingBoard m "
 			+ "inner join Overwatch o "
