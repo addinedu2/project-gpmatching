@@ -167,7 +167,7 @@
 		<form id="commentform" action="writeComment" method="post">
 			<input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
 			<input type="hidden" name="pageNo" value="${ pageNo }" />
-			<%-- <input type="hidden" name="userNo" value="${ userNo}" /> --%>
+			<input type="hidden" name="userNo" value="${ loginuser.userNo }" />
 			<table style="width:800px;border:solid 1px;margin:0 auto">
 				<tr>
 					<td style="width:750px">	                	
