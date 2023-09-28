@@ -21,4 +21,11 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		boardCommentMapper.deleteComment(commentNo);
 	}
 
+	//댓글수정
+	@Override
+	public void editComment(BoardCommentDto boardComment) {
+
+		boardCommentMapper.updateComment(boardComment);
+	}
+
 }

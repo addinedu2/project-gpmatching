@@ -31,7 +31,11 @@ public interface BoardCommentMapper {
 			+ "order by commentNo desc")
 	List<BoardCommentDto> selectBoardCommentByCommonNo(@Param("commonNo") int commonNo);
 
-	
+	//댓글 수정
+	@Update("update boardcomment "
+			+ "set content = #{ content } "
+			+ "where commentno = #{ commentNo }")
+	void updateComment(BoardCommentDto boardComment);
 	
 	//	@Update("update BoardComment "
 	//	+ "set groupNo = #{ groupNo } "

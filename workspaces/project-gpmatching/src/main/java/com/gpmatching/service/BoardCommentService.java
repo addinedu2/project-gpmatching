@@ -8,6 +8,8 @@ public interface BoardCommentService {
 
 	void deleteComment(int commentNo);
 
+	void editComment(BoardCommentDto boardComment);
+
 	
 
 

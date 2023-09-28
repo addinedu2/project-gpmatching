@@ -37,9 +37,19 @@ public class BoardCommentController {
 		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d", commonNo, pageNo);
 	}  
 	
+	//댓글 수정
+	@PostMapping(path = { "/edit-comment" })
+	public String editComment(BoardCommentDto boardComment, @RequestParam(defaultValue = "-1") int pageNo) {
+		
+		boardCommentService.editComment(boardComment);
+		
+		return String.format("redirect:detail?boardNo=%d&pageNo=%d", boardComment.getCommonNo(), pageNo);
+	}
+}
+	
 	
 	//아직 댓글 보이는 기능을 구현 못함....
-}
+
 ////testCode
 //	@GetMapping(path= {"/test"})
 //	public String writeCommentForm(BoardCommentDto boardComment) {

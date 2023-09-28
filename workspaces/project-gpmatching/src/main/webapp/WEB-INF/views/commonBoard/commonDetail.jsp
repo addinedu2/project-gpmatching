@@ -203,24 +203,24 @@
 						    <br /><br />
 						    <span>${ fn:replace(comment.commentContent, enter, "<br>") }</span>
 							<br /><br />
-							<%-- <div style='display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'>
-						    	<a class="edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">편집</a>
+							<div style='display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'>
+						    	<a class="edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">수정</a>
 								&nbsp;
 								<a class="delete-comment" data-comment-no="${ comment.commentNo }" href="javascript:">삭제</a>
 							</div>
-							<a class="recomment-link btn btn-sm btn-success">댓글 쓰기</a> --%>
+							<!-- <a class="recomment-link btn btn-sm btn-success">댓글 쓰기</a> -->
 						</c:otherwise>
 						</c:choose>
 						</div>	                
-						<%-- <div id="comment-edit-area-${ comment.commentNo }" style="display: none">
-							${ comment.writer } &nbsp;&nbsp; [${ comment.regDate }]
+						<div id="comment-edit-area-${ comment.commentNo }" style="display: none">
+							${ comment.userNo } &nbsp;&nbsp; [${ comment.regDate }]
 							<br /><br />
 							<form action="edit-comment" method="post">
 							<input type="hidden" name="commentNo" value="${ comment.commentNo }" />
 							<input type="hidden" name="boardNo" value="${ board.boardNo }" />
 							<input type="hidden" name="pageNo" value="${ pageNo }" />
 							<textarea name="content" style="width: 99%; resize: none" rows="3" 
-								maxlength="200">${ comment.content }</textarea>
+								maxlength="200">${ comment.commentContent }</textarea>
 							</form>
 							<br />
 							<div>
@@ -228,7 +228,7 @@
 								&nbsp; 
 								<a class="cancel-edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">취소</a>
 							</div>
-						</div> --%>
+						</div>
 				
 					</td>
 				</tr>
