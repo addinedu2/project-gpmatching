@@ -32,12 +32,17 @@ public class AccountController {
 	}
 
 	@GetMapping(path = { "/register" })
-	public String registerForm (UserDto user) {
-		return "account/register";
+	public String registerForm (HttpSession session, Model model) {
+ 		// 이미 로그인된 사용자가 있을 경우 마이 페이지로 리디렉션
+	    if (session.getAttribute("loginuser") != null) {
+	        return "account/mypage";
+	    } else {
+	        return "account/register";
+	    }
 	}//회원가입 버튼
 
 		
-//	@PostMapping(path = { "/register" })
+//	@PostMapping(path = { "/register" })  todo
 //	//@valid/indingResult result 는 유효성 검사라서 회원 가입할때 유효성을 걸어놔야한다. userdto도 활성화
 //	public String register(@ModelAttribute("user") @Valid UserDto user, BindingResult result) {
 //		
@@ -60,12 +65,15 @@ public class AccountController {
 	
 	
 	@GetMapping(path = {"/login"})
-	public String loginForm( ) {
-		return "account/login";
-	}//로그인 버튼
-	
-	
-	
+	public String loginForm(HttpSession session, Model model) {
+	    // 이미 로그인된 사용자가 있을 경우 마이 페이지로 리디렉션
+		    if (session.getAttribute("loginuser") != null) {
+		        return "account/mypage";
+		    } else {
+		        return "account/login";
+		    }
+		}//로그인 버튼
+
 	
 	@PostMapping(path = {"/login"})
 	public String login(UserDto user, HttpSession session, Model model) {
@@ -73,11 +81,9 @@ public class AccountController {
 	
 		if (loginUser != null) { //loginUser가 비지 않았다=데이터베이스에 id와 pw가 일치한다=로그인 하기
 			session.setAttribute("loginuser", loginUser); //loginUser 정보를 "loginuser"에 넣기
-			System.out.println("로그인 성공");
 			return "redirect:/home";
 		} else {
 			model.addAttribute("loginfail", true); // 로그인 실패를 했으니 "loginfail"에 참 넣기
-			System.out.println("로그인 실패");
 			return "account/login";
 		}//로그인 성공/실패		
 		
