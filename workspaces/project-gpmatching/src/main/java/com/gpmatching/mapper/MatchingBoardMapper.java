@@ -1,6 +1,7 @@
 package com.gpmatching.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -14,6 +15,7 @@ import com.gpmatching.dto.UserDto;
 @Mapper
 public interface MatchingBoardMapper {
 	
+	//모든 테이블 칼럼 항목 보여주는 예시 쿼리
 	/*
 	@Insert( "insert into matchingbaord ( boardNo, boardTitle, "
 			+ "boardContent, preferGender, mic, matchingClose,"
@@ -90,6 +92,61 @@ public interface MatchingBoardMapper {
 			+ "from MatchingBoard "
 			+ "where boardNo = #{ boardNo }")
 	MatchingBoardDto selectMatchingBoardByBoardNo(@Param("boardNo")int boardNo);
+	
+	
+	//User 테이블, MatchingBoard 테이블, Lol 테이블 join해서 같이 보여주는 코드(게임명: "league of legends") 
+	@Select( "select u.nickname, m.boardTitle, m.boardContent, m.preferGender, m.mic, "
+			+ "m.matchingClose, m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
+			+ "from MatchingBoard m "
+			+ "inner join Lol l "
+			+ "on l.boardNo = m.boardNo "
+			+ "inner join User u "
+			+ "on m.userNo = u.userNo "
+			+ "where m.gameNo =  (select gameNo "
+			+ "from GameList where gameName = #{ gameName} ) "
+			+ "order by m.boardNo desc" )
+	List<Map<String, String>> selectLolMatchingMapByGameName(String gameName);
+	
+	//User 테이블, MatchingBoard 테이블, Pubg 테이블 join해서 같이 보여주는 코드(게임명: "battle ground")
+	@Select( "select u.nickname, m.boardTitle, m.boardContent, m.preferGender, m.mic, "
+			+ "m.matchingClose, m.regDate, m.readCount, p.pubgPlay, p.pubgPosition, p.pubgGun, "
+			+ "p.pubgServer, p.pubgMode "
+			+ "from MatchingBoard m "
+			+ "inner join Pubg p "
+			+ "on p.boardNo = m.boardNo "
+			+ "inner join User u "
+			+ "on m.userNo = u.userNo "
+			+ "where m.gameNo =  (select gameNo "
+			+ "from GameList where gameName = #{ gameName} ) "
+			+ "order by m.boardNo desc" )
+	List<Map<String, String>> selectPubgMatchingMapByGameName(String gameName);
+	
+	//User 테이블, MatchingBoard 테이블, Overwatch 테이블 join해서 같이 보여주는 코드(게임명: "overwatch2")
+	@Select( "select u.nickname, m.boardTitle, m.boardContent, m.preferGender, m.mic, "
+			+ "m.matchingClose, m.regDate, m.readCount, o.owTier, o.owPosition, o.owPlay "
+			+ "from MatchingBoard m "
+			+ "inner join Overwatch o "
+			+ "on o.boardNo = m.boardNo "
+			+ "inner join User u "
+			+ "on m.userNo = u.userNo "
+			+ "where m.gameNo =  (select gameNo "
+			+ "from GameList where gameName = #{ gameName} ) "
+			+ "order by m.boardNo desc" )
+	List<Map<String, String>> selectOwMatchingMapByGameName(String gameName);
+	
+	/* 성공
+	@Select( "select * "
+			+ "from MatchingBoard m "
+			+ "inner join Lol l "
+			+ "on l.boardNo = m.boardNo "
+			+ "inner join User u "
+			+ "on m.userNo = u.userNo "
+			+ "where m.gameNo =  (select gameNo "
+			+ "from GameList where gameName = #{ gameName} ) "
+			+ "order by m.boardNo desc" )
+	List<Map<String, String>> SelectGameMatchingMapByGameName(String gameName);
+	*/
+	
 	
 //	@Select("select u.nickname from MatchingBoard m, User u where m.userNo = u.userNo")
 //	String selectMatchingBoardNickname();

@@ -1,9 +1,12 @@
 package com.gpmatching.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.gpmatching.dto.BoardCommentDto;
@@ -12,11 +15,9 @@ import com.gpmatching.dto.BoardCommentDto;
 public interface BoardCommentMapper {
 	
 	//공통게시판 댓글 쓰기
-	@Insert("insert into BoardComment (commentContent) "
-		  + "values (#{commentContent})")
-	
+	@Insert("insert into BoardComment (commonNo, userNo, commentContent) "
+		  + "values (#{commonNo}, #{userNo}, #{commentContent})")
 	@Options(useGeneratedKeys = true, keyProperty = "commentNo", keyColumn="commentNo")
-
 	void insertComment(BoardCommentDto boardCommentDto);
 	
 	@Update("update BoardComment "
@@ -24,7 +25,12 @@ public interface BoardCommentMapper {
 			+ "where commentNo = #{ commentNo } ")
 	void deleteComment(@Param("commentNo") int commentNo );
 	
-	
+	@Select("select commentNo, commonNo, userNo, commentContent, regDate, deleted "
+			+ "from BoardComment "
+			+ "where commonNo = #{ commonNo } "
+			+ "order by commentNo desc")
+	List<BoardCommentDto> selectBoardCommentByCommonNo(@Param("commonNo") int commonNo);
+
 	
 	
 	//	@Update("update BoardComment "

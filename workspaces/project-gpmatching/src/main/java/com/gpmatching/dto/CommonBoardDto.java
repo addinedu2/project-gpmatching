@@ -1,6 +1,7 @@
 package com.gpmatching.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -19,7 +20,7 @@ public class CommonBoardDto {
 	
 //	private List<BoardAttachDto> boardAttachList;
 //	
-//	private List<CommonBoardCommentDto> boardCommentList;
+	private List<BoardCommentDto> boardCommentList;
 	
 
 }

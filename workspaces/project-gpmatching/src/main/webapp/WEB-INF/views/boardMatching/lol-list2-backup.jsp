@@ -63,32 +63,33 @@
 			<!-- Container fluid -->
 
 			<!-- Primary Button -->
-			<a href="/project-gpmatching/boardMatching/overwatch-write">
-				<button type="button" class="btn btn-primary mb-2">오버워치 매칭 게시글 쓰기</button>
+			<a href="/project-gpmatching/boardMatching/lol-write">
+				<button type="button" class="btn btn-primary mb-2">LoL 매칭 게시글 쓰기</button>
 			</a>
 			<a href="/project-gpmatching/home">
 				<button type="button" class="btn btn-primary mb-2">홈으로</button>
 			</a>
-				
+					
 			<div class="row mt-6">
 				<div class="col-md-12 col-12">
 					<!-- card  -->
 					<div class="card">
 						<!-- card header  -->
 						<div class="card-header bg-white  py-4">
-							<h4 class="mb-0">오버워치</h4>
+							<h4 class="mb-0">LEAGUE OF LEGENDS</h4>
 						</div>
 						<!-- table  -->
 						<div class="table-responsive">
 							<table class="table text-nowrap mb-0">
 								<thead class="table-light">
 									<tr>
-										<th>플레이어이름</th>
+										<th>소환사이름</th>
 										<th>제목</th>
 										<th>내용</th>
-										<th>옵티어</th>
+										<th>롤티어</th>
 										<th>주포지션</th>
-										<th>옵플레이</th>
+										<th>서렌여부</th>
+										<th>선호플레이</th>
 										<th>선호성별</th>
 										<th>마이크사용</th>
 										<th>마감여부</th>
@@ -97,22 +98,81 @@
 										<th>댓글</th>
 									</tr>
 								</thead>
+				 
 								<tbody>
-									<c:forEach var="matchingBoard" items="${ requestScope.matchingOwList }" varStatus="vs">
+<<<<<<< HEAD
+									<c:forEach var="matchingBoard" items="${ requestScope.matchingBoardList }">
+										<tr id="tr-${ matchingBoard.boardNo }" data-title="${ matchingBoard.boardTitle }">
+											<td class="align-middle">
+												<div class="d-flex align-items-center">
+													<div>
+														<div class="icon-shape icon-md border p-4 rounded-1">
+															<img src="assets/images/brand/dropbox-logo.svg" alt="">
+														</div>
+													</div>
+													<div class="ms-3 lh-1">
+														<h5 class=" mb-1">
+															<a href="#" class="text-inherit">${ matchingBoard.boardTitle }</a>
+														</h5>
+			
+													</div>
+												</div>
+											</td>
+											<td>
+											${ matchingBoard.userNo }
+											</td>
+											<td class="align-middle">
+												<fmt:formatDate value="${ matchingBoard.regDate }" pattern="yyyy-MM-dd " />					         
+											</td>
+											<td class="align-middle">
+												<span class="badge bg-warning">${ matchingBoard.mic }</span>
+											</td>
+											<td class="align-middle">
+												<div class="avatar-group">
+													<span class="avatar avatar-sm"> 
+														<img alt="avatar" src="assets/images/avatar/avatar-1.jpg" class="rounded-circle">
+													</span> 
+													<span class="avatar avatar-sm"> 
+														<img alt="avatar" src="assets/images/avatar/avatar-2.jpg" class="rounded-circle">
+													</span> 
+													<span class="avatar avatar-sm"> 
+														<img alt="avatar" src="assets/images/avatar/avatar-3.jpg" class="rounded-circle">
+													</span> 
+													<span class="avatar avatar-sm avatar-primary"> 
+														<span class="avatar-initials rounded-circle fs-6">+5</span>
+													</span>
+													
+												</div>
+											</td>
+											<td class="align-middle text-dark">
+												<div class="float-start me-3">${ matchingBoard.boardContent }</div>
+			
+											</td>
+											<td>
+												<!-- Varying modal -->
+												<button type="button" class="btn btn-primary btn-show-comment-modal" 
+														data-boardno="${ matchingBoard.boardNo }">지원하기</button>
+												
+											</td>
+											
+=======
+									<c:forEach var="matchingBoard" items="${ requestScope.matchingLolList }" varStatus="vs">
 										 <tr>
 
-											<th>${ matchingOwList[vs.index].get("nickname") }</th>
-											<th>${ matchingOwList[vs.index].get("boardTitle") }</th>
-											<th>${ matchingOwList[vs.index].get("boardContent") }</th>
-											<th>${ matchingOwList[vs.index].get("owTier") }</th>
-											<th>${ matchingOwList[vs.index].get("owPosition") }</th>
-											<th>${ matchingOwList[vs.index].get("lolPlay") }</th>
-											<th>${ matchingOwList[vs.index].get("preferGender") }</th>
-											<th>${ matchingOwList[vs.index].get("mic") }</th>
-											<th>${ matchingOwList[vs.index].get("matchingClose") }</th>
-											<th>${ matchingOwList[vs.index].get("regDate") }</th>
-											<th>${ matchingOwList[vs.index].get("readCount") }</th>
+											<th>${ matchingLolList[vs.index].get("nickname") }</th>
+											<th>${ matchingLolList[vs.index].get("boardTitle") }</th>
+											<th>${ matchingLolList[vs.index].get("boardContent") }</th>
+											<th>${ matchingLolList[vs.index].get("lolTier") }</th>
+											<th>${ matchingLolList[vs.index].get("lolPosition") }</th>
+											<th>${ matchingLolList[vs.index].get("lolSur") }</th>
+											<th>${ matchingLolList[vs.index].get("lolPlay") }</th>
+											<th>${ matchingLolList[vs.index].get("preferGender") }</th>
+											<th>${ matchingLolList[vs.index].get("mic") }</th>
+											<th>${ matchingLolList[vs.index].get("matchingClose") }</th>
+											<th>${ matchingLolList[vs.index].get('regDate') }</th>
+											<th>${ matchingLolList[vs.index].get("readCount") }</th>
 											<th>댓글</th>
+>>>>>>> 9c4299baf52f5bde8f291dddcdeb32e5aee41c2e
 										</tr>
 
 									</c:forEach>
@@ -138,8 +198,9 @@
 							<div class="modal-body">
 			
 								<div class="mb-3">
-									<label for="recipient-name" class="col-form-label">게임 닉네임</label> 
-									<input type="text" class="form-control" id="recipient-name-in-modal">
+									<label for="recipient-name" class="col-form-label">닉네임 : ${ loginuser.nickname }</label> 
+									<input type="text" class="form-control" id="recipient-name-in-modal" 
+									placeholder="게임 아이디를 입력해주세요">
 								</div>
 								<div class="mb-3">
 									<label for="message-text" class="col-form-label">파티장에게 알려줄 내용</label>
@@ -153,6 +214,21 @@
 								<button type="submit" class="btn btn-primary">등록</button>
 							</div>
 						</form>
+					</div>
+				</div>
+			</div>
+			<!--  댓글 select 기능 임시로 구현함 -->
+			<div class="modal fade" id="commentlist-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelOne" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="title-in-modal"></h5>
+							<button type="button" class="btn-close"
+								data-bs-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+					
 					</div>
 				</div>
 			</div>
@@ -194,6 +270,16 @@
 			$('#title-in-modal').text(currentTr.data('title'));
 			$('#boardno-in-modal').val(boardNo);
 			$('#comment-modal').modal('show');
+		});
+	});
+	
+	$(function() {
+		$('.btn-show-commentlist-modal').on("click", function(event) {
+			const boardNo = $(this).data('boardno');
+			const currentTr = $('#tr-' + boardNo);
+			$('#title-in-modal').text(currentTr.data('title'));
+			$('#boardno-in-modal').val(boardNo);
+			$('#commentlist-modal').modal('show');
 		});
 	});
 	
