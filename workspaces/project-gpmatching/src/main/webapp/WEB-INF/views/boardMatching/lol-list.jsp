@@ -113,10 +113,14 @@
 											<th>${ matchingLolList[vs.index].get("preferGender") }</th>
 											<th>${ matchingLolList[vs.index].get("mic") }</th>
 											<th>${ matchingLolList[vs.index].get("matchingClose") }</th>
-											<th>${ matchingLolList[vs.index].get('regDate') }</th>
+											<th>${ matchingLolList[vs.index].get("regDate") }</th>
 											<th>${ matchingLolList[vs.index].get("readCount") }</th>
-											<th><button type="button" class="btn btn-primary btn-show-comment-modal" 
-														data-boardno="${ matchingBoard.boardNo }">지원하기</button></th>
+											<th class="align-middle">
+												<!-- Varying modal -->
+												<button type="button" class="btn btn-primary btn-show-comment-modal" 
+														data-boardno="${ matchingLolList[vs.index].get("boardNo") }">${ matchingLolList[vs.index].get("boardNo") }
+												</button>
+											</th>
 										</tr>
 
 									</c:forEach>

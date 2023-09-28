@@ -15,6 +15,7 @@ import com.gpmatching.dto.CommonBoardDto;
 public interface CommonBoardMapper {
 
 	//공통게시판 글쓰기
+
 	@Insert("insert into CommonBoard(commonTitle, commonContent) "
 		  + "values (#{commonTitle}, #{commonContent})")
 	@Options(useGeneratedKeys = true, keyProperty = "commonNo")

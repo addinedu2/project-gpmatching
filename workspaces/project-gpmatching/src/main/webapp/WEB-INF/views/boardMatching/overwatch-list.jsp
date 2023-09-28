@@ -112,7 +112,12 @@
 											<th>${ matchingOwList[vs.index].get("matchingClose") }</th>
 											<th>${ matchingOwList[vs.index].get("regDate") }</th>
 											<th>${ matchingOwList[vs.index].get("readCount") }</th>
-											<th>댓글</th>
+											<th class="align-middle">
+												<!-- Varying modal -->
+												<button type="button" class="btn btn-primary btn-show-comment-modal" 
+														data-boardno="${ matchingOwList[vs.index].get("boardNo") }">${ matchingOwList[vs.index].get("boardNo") }
+												</button>
+											</th>
 										</tr>
 
 									</c:forEach>

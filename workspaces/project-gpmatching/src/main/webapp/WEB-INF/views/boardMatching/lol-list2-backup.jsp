@@ -100,8 +100,7 @@
 								</thead>
 				 
 								<tbody>
-<<<<<<< HEAD
-									<c:forEach var="matchingBoard" items="${ requestScope.matchingBoardList }">
+<%-- 									<c:forEach var="matchingBoard" items="${ requestScope.matchingBoardList }">
 										<tr id="tr-${ matchingBoard.boardNo }" data-title="${ matchingBoard.boardTitle }">
 											<td class="align-middle">
 												<div class="d-flex align-items-center">
@@ -154,8 +153,7 @@
 														data-boardno="${ matchingBoard.boardNo }">지원하기</button>
 												
 											</td>
-											
-=======
+ --%>
 									<c:forEach var="matchingBoard" items="${ requestScope.matchingLolList }" varStatus="vs">
 										 <tr>
 
@@ -172,7 +170,6 @@
 											<th>${ matchingLolList[vs.index].get('regDate') }</th>
 											<th>${ matchingLolList[vs.index].get("readCount") }</th>
 											<th>댓글</th>
->>>>>>> 9c4299baf52f5bde8f291dddcdeb32e5aee41c2e
 										</tr>
 
 									</c:forEach>
