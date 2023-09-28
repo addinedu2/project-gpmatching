@@ -43,10 +43,10 @@ public interface MatchingBoardMapper {
 	
 
 
-	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo "
-			+ "from MatchingBoard "
-			+ "order by boardNo desc")
-	List<MatchingBoardDto> selectAllMatchingBoard();
+//	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo "
+//			+ "from MatchingBoard "
+//			+ "order by boardNo desc")
+//	List<MatchingBoardDto> selectAllMatchingBoard();
 	
 	
 	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo "
@@ -65,12 +65,22 @@ public interface MatchingBoardMapper {
 //	List<MatchingBoardDto> selectMatchingBoardListByGameName(String gameName);
 	
 
-	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo "
+	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo, mic "
 			+ "from MatchingBoard "
 			+ "where gameNo = (select gameNo "
 			+ "from GameList where gameName = #{ gameName} ) "
 			+ "order by boardNo desc" )
 	List<MatchingBoardDto> selectMatchingBoardListByGameName(String gameName);
+	
+//	@Select( "select nickname "
+//			+ "from User u "
+//			+ "inner join matchingBoard m "
+//			+ "on m.boardNo = (select boardNo "
+//			+ "from MatchingBoard "
+//			+ "where gameNo = (select gameNo "
+//			+ "from GameList where gameName = #{ gameName} )) "
+//			+ "order by boardNo desc" )
+//	selectMatchingBoardListByGameName(String gameName);	
 	
 	
 	//MatchingBoard 의 마지막 튜플의 boardNo (ai 설정됨) 를 가지고 오는 SQL 문

@@ -4,13 +4,18 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gpmatching.dto.BoardCommentDto;
 import com.gpmatching.dto.CommonBoardDto;
+import com.gpmatching.mapper.BoardCommentMapper;
 import com.gpmatching.mapper.CommonBoardMapper;
 
 public class CommonBoardServiceImpl implements CommonBoardService {
 	
 	@Autowired
 	public CommonBoardMapper commonBoardMapper;
+	
+	@Autowired
+	private BoardCommentMapper boardCommentMapper;
 	
 	@Override
 	public void writeCommonBoard(CommonBoardDto commonBoardDto) {
@@ -33,11 +38,14 @@ public class CommonBoardServiceImpl implements CommonBoardService {
 	//공통게시판 글 번호 찾기
 	@Override
 	public CommonBoardDto findCommonBoardByCommonNo(int commonNo) {
+		
 		CommonBoardDto commonBoardDto = commonBoardMapper.selectCommonBoardByCommonNo(commonNo);
 
-//		if(commonBoardDto != null) {
-//			List<CommonBoardDto> attachList = commonBoardMapper.selectCommonAttachByCommonNo(commonNo);
-//		}
+		if(commonBoardDto != null) {
+			List<BoardCommentDto> commentList = boardCommentMapper.selectBoardCommentByCommonNo(commonNo);
+			commonBoardDto.setBoardCommentList(commentList);
+		}
+		
 		
 		return commonBoardDto;
 	}
