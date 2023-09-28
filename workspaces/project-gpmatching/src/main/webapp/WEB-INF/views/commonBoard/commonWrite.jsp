@@ -51,7 +51,11 @@
 	  <label class="form-label" for="textInput">제목</label>
 	  <input type="text" name="commonTitle" id="textInput" class="form-control" placeholder="제목 입력">
 	</div>
-	
+	<!--  nickname -->
+	<div class="mb-3 txt-box">
+		<input type="text" name="nickname" id="textInput" class="form-control" value="${ loginuser.nickname }" readonly>
+		<input type="hidden" name="userNo" value="${ loginuser.userNo }">
+	</div>
 	<!-- content -->
 	 <div class="mb-3 txt-box">
 	   <label for="textarea-input" class="form-label">본문</label>
