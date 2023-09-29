@@ -106,7 +106,23 @@
 											<th>${ matchingLolList[vs.index].get("nickname") }</th>
 											<th>${ matchingLolList[vs.index].get("boardTitle") }</th>
 											<th>${ matchingLolList[vs.index].get("boardContent") }</th>
-											<th>${ matchingLolList[vs.index].get("lolTier") }</th>
+											<td>
+											<c:set var="lolTier" value="${ matchingLolList[vs.index].get('lolTier') }" />
+											<c:choose>
+												<c:when test = "${ lolTier eq 'bronze'}">
+													<span class="badge bg-danger">${ matchingLolList[vs.index].get("lolTier") }</span>
+												</c:when>
+												<c:when test = "${ lolTier eq 'silver'}">
+													<span class="badge rounded-pill bg-light text-dark">${ matchingLolList[vs.index].get("lolTier") }</span>
+												</c:when>	
+												<c:when test = "${ lolTier eq 'gold'}">
+													<span class="badge bg-warning">${ matchingLolList[vs.index].get("lolTier") }</span>
+												</c:when>
+												<c:otherwise>
+													<span class="badge bg-dark">unranked</span>
+												</c:otherwise>
+											</c:choose>
+											</td>
 											<th>${ matchingLolList[vs.index].get("lolPosition") }</th>
 											<th>${ matchingLolList[vs.index].get("lolSur") }</th>
 											<th>${ matchingLolList[vs.index].get("lolPlay") }</th>
