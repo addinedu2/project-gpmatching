@@ -20,11 +20,13 @@ public interface BoardCommentMapper {
 	@Options(useGeneratedKeys = true, keyProperty = "commentNo", keyColumn="commentNo")
 	void insertComment(BoardCommentDto boardCommentDto);
 	
+	//댓글삭제
 	@Update("update BoardComment "
 			+ "set deleted =  true "
 			+ "where commentNo = #{ commentNo } ")
 	void deleteComment(@Param("commentNo") int commentNo );
 	
+	//댓글 목록
 	@Select("select commentNo, commonNo, userNo, commentContent, regDate, deleted "
 			+ "from BoardComment "
 			+ "where commonNo = #{ commonNo } "
@@ -32,15 +34,17 @@ public interface BoardCommentMapper {
 	List<BoardCommentDto> selectBoardCommentByCommonNo(@Param("commonNo") int commonNo);
 
 	//댓글 수정
-	@Update("update boardcomment "
-			+ "set content = #{ content } "
-			+ "where commentno = #{ commentNo }")
+	@Update("update BoardComment "
+			+ "set commentContent = #{ commentContent } "
+			+ "where commentNo = #{ commentNo }")
 	void updateComment(BoardCommentDto boardComment);
 	
-	//	@Update("update BoardComment "
-	//	+ "set groupNo = #{ groupNo } "
-	//	+ "where commentNo = #{ commentNo }")
-	//void updateGroupNo(@Param("groupNo") int groupNo,@Param("commentNo") int commentNo);
+	@Update(  "update BoardComment "
+			+ "set groupNo = #{ groupNo } "
+			+ "where commentNo = #{ commentNo }")
+	void updateGroupNo(@Param("groupNo") int groupNo, @Param("commentNo") int commentNo);
+	
+
 
 
 }

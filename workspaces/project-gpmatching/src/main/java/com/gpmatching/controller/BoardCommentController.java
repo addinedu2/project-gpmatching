@@ -38,12 +38,12 @@ public class BoardCommentController {
 	}  
 	
 	//댓글 수정
-	@PostMapping(path = { "/edit-comment" })
+	@PostMapping(path = { "/editComment" })
 	public String editComment(BoardCommentDto boardComment, @RequestParam(defaultValue = "-1") int pageNo) {
 		
 		boardCommentService.editComment(boardComment);
 		
-		return String.format("redirect:detail?boardNo=%d&pageNo=%d", boardComment.getCommonNo(), pageNo);
+		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d", boardComment.getCommonNo(), pageNo);
 	}
 }
 	

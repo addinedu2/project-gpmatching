@@ -183,6 +183,7 @@
 		</form>
 	
 		<!-- end of write comment area -->
+		
 		<!-- comment list area -->
 		<br>
 		<hr style="width:800px;margin:0 auto">
@@ -215,11 +216,11 @@
 						<div id="comment-edit-area-${ comment.commentNo }" style="display: none">
 							${ comment.userNo } &nbsp;&nbsp; [${ comment.regDate }]
 							<br /><br />
-							<form action="edit-comment" method="post">
+							<form action="editComment" method="post">
 							<input type="hidden" name="commentNo" value="${ comment.commentNo }" />
-							<input type="hidden" name="boardNo" value="${ board.boardNo }" />
+							<input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
 							<input type="hidden" name="pageNo" value="${ pageNo }" />
-							<textarea name="content" style="width: 99%; resize: none" rows="3" 
+							<textarea name=commentContent style="width: 99%; resize: none" rows="3" 
 								maxlength="200">${ comment.commentContent }</textarea>
 							</form>
 							<br />
