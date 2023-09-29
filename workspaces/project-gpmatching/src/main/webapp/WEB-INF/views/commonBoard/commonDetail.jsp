@@ -284,8 +284,8 @@
 			const commentNo = $(this).attr("data-comment-no");			
 			const yn = confirm(commentNo + "번 댓글을 삭제할까요?");
 			if (yn) {
-				location.href = 'delete-comment?commentNo=' + commentNo + 
-											  '&boardNo=' + ${ commonBoard.commonNo } + 
+				location.href = 'deleteComment?commentNo=' + commentNo + 
+											  '&commonNo=' + ${ commonBoard.commonNo } + 
 											  '&pageNo=' + ${ pageNo };
 			}
 		});
