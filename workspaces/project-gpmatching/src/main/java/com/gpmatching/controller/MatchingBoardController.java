@@ -126,7 +126,9 @@ public class MatchingBoardController {
 	
 	@GetMapping(path = { "/lol-write"})
 	public String showLolWriteForm(HttpSession session) {
-		
+		if(session.getAttribute("loginuser") == null) {
+			return "redirect:/account/login";
+		}
 		return "/boardMatching/lol-write";
 	}
 	
@@ -162,7 +164,9 @@ public class MatchingBoardController {
 	
 	@GetMapping(path = { "/battleground-write"})
 	public String showBattlegroundWriteForm(HttpSession session) {
-		
+		if(session.getAttribute("loginuser") == null) {
+			return "redirect:/account/login";
+		}
 		return "/boardMatching/battleground-write";
 	}
 	
@@ -195,8 +199,9 @@ public class MatchingBoardController {
 	
 	@GetMapping(path = { "/overwatch-write"})
 	public String showOverwatchWriteForm(HttpSession session) {
-		
-	
+		if(session.getAttribute("loginuser") == null) {
+			return "redirect:/account/login";
+		}
 		return "/boardMatching/overwatch-write";
 	}
 	

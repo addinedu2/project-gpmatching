@@ -90,6 +90,12 @@ public class AccountController {
 	}  //로그아웃
 	
 	
+	//비밀번호 찾기 페이지 가기
+	@GetMapping(path = {"/forgetPassword"})
+	public String forgetPassword() {
+		
+		return "account/forget-password";
+	}
 
 
 
