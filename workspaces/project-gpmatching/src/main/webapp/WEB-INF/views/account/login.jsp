@@ -39,7 +39,9 @@
           <!-- Card body -->
           <div class="card-body p-6">
             <div class="mb-4">
-              <a href="/project-gpmatching/resources/index.html"><img src="/project-gpmatching/resources/assets/images/brand/logo/logo-primary.svg" class="mb-2" alt=""></a>
+              <a href="/project-gpmatching/home">
+              	<img src="/project-gpmatching/resources/assets/images/brand/logo/opgglogo-primary.png" class="mb-2" alt="">
+              </a>
               <p class="mb-6">ID와 비밀 번호를 입력해주세요</p>
               
             </div>
@@ -79,7 +81,7 @@
                     <a href="/project-gpmatching/account/register" class="fs-5">회원 가입 </a>
                   </div>
                   <div>
-                    <a href="forget-password.html" class="text-inherit
+                    <a href="/project-gpmatching/account/forgetPassword" class="text-inherit
                         fs-5">비밀번호를 잊으셨나요?</a>
                          <!-- 비밀번호 찾기 -->
                   </div>
