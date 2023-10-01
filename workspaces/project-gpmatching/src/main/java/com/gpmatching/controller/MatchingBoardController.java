@@ -31,8 +31,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gpmatching.dto.LolDto;
 import com.gpmatching.dto.MatchingBoardDto;
@@ -69,15 +71,18 @@ public class MatchingBoardController {
 	 */
 	
 	
-	@GetMapping(path = { "/lol-list"})
+	@GetMapping(path = { "/lol-list" })
 	public String matchingBoardList(Model model) {
 		
 		List<Map<String, String>> matchingLolList = matchingBoardService.getSelectLolMatchingMapByGameName("league of legends");
-				
+
 		model.addAttribute("matchingLolList", matchingLolList);
 		
 		return "/boardMatching/lol-list";
 	}
+	
+	
+	
 	
 	/**
 	 * 베틀그라운드 매칭 게시판 보기

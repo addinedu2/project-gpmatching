@@ -78,6 +78,7 @@
 						<div class="card-header bg-white  py-4">
 							<h4 class="mb-0">LEAGUE OF LEGENDS</h4>
 						</div>
+						
 						<!-- table  -->
 						<div class="table-responsive">
 							<table class="table text-nowrap mb-0">
@@ -86,7 +87,18 @@
 										<th>소환사이름</th>
 										<th>제목</th>
 										<th>내용</th>
-										<th>롤티어</th>
+										<th>
+										<div class="dropdown">
+											<button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											티어											
+											</button>
+										 	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+												<a class="dropdown-item" href="/project-gpmatching/boardMatching/lol-list/bronze">브론즈</a>
+												<a class="dropdown-item" href="/project-gpmatching/boardMatching/lol-list/silver">실버</a>
+												<a class="dropdown-item" href="/project-gpmatching/boardMatching/lol-list/gold">골드</a>											
+											</div>
+										</div>
+										</th>
 										<th>주포지션</th>
 										<th>서렌여부</th>
 										<th>선호플레이</th>
@@ -123,7 +135,29 @@
 												</c:otherwise>
 											</c:choose>
 											</td>
-											<th>${ matchingLolList[vs.index].get("lolPosition") }</th>
+											<td>
+											<c:set var="lolPosition" value="${ matchingLolList[vs.index].get('lolPosition') }" />
+											<c:choose>
+												<c:when test = "${ lolPosition eq 'top'}">
+													<img src="/project-gpmatching/resources/assets/images/lolposition/top.svg" width=24px>
+												</c:when>
+												<c:when test = "${ lolPosition eq 'jungle'}">
+													<img src="/project-gpmatching/resources/assets/images/lolposition/jungle.svg" width=24px>
+												</c:when>	
+												<c:when test = "${ lolPosition eq 'mid'}">
+													<img src="/project-gpmatching/resources/assets/images/lolposition/mid.svg" width=24px>
+												</c:when>
+												<c:when test = "${ lolPosition eq 'adcarry'}">
+													<img src="/project-gpmatching/resources/assets/images/lolposition/adcarry.svg" width=24px>
+												</c:when>
+												<c:when test = "${ lolPosition eq 'support'}">
+													<img src="/project-gpmatching/resources/assets/images/lolposition/support.svg" width=24px>
+												</c:when>
+												<c:otherwise>
+													${ matchingLolList[vs.index].get("lolPosition") }
+												</c:otherwise>
+											</c:choose>
+											</td>
 											<th>${ matchingLolList[vs.index].get("lolSur") }</th>
 											<th>${ matchingLolList[vs.index].get("lolPlay") }</th>
 											<th>${ matchingLolList[vs.index].get("preferGender") }</th>
@@ -134,7 +168,7 @@
 											<th class="align-middle">
 												<!-- Varying modal -->
 												<button type="button" class="btn btn-primary btn-show-comment-modal" 
-														data-boardno="${ matchingLolList[vs.index].get("boardNo") }">${ matchingLolList[vs.index].get("boardNo") }
+														data-boardno="${ matchingLolList[vs.index].get('boardNo') }">${ matchingLolList[vs.index].get("boardNo") }
 												</button>
 											</th>
 										</tr>

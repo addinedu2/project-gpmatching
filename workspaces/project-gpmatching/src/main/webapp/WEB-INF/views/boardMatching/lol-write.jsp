@@ -114,7 +114,7 @@
 							class="form-check-label" for="flexRadioDefault2"> 여자만 </label>
 					</div>
 				</div>
-				
+				<br>
 				<!-- 롤 등록 -->
 				<div class="mb-3 txt-box">
 					<label class="form-label" for="selectOne">롤주포지션</label>
