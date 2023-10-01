@@ -2,6 +2,7 @@ package com.gpmatching.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,12 +31,19 @@ public class BoardCommentController {
 	
 	
 	
-	@PostMapping(path = {"/deleteComment"}) //댓글 삭제
+	@GetMapping(path = {"/deleteComment"}) //댓글 삭제
 	public String deleteComment(int commentNo, int commonNo, int pageNo) {
 		
 		boardCommentService.deleteComment(commentNo);
 		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d", commonNo, pageNo);
 	}  
+	
+	@PostMapping(path = {"/editcomment"})
+	public String editComment(BoardCommentDto boardComment, @RequestParam(defaultValue = "-1") int pageNo) {
+		boardCommentService.editComment(boardComment);
+		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d", boardComment.getCommonNo(), pageNo);	
+	}
+	
 	
 	
 }

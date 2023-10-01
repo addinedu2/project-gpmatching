@@ -14,11 +14,16 @@ public class BoardCommentServiceImpl implements BoardCommentService {
  	public void writeComment(BoardCommentDto boardComment) {
 		boardCommentMapper.insertComment(boardComment);	
 		//boardCommentMapper.updateGroupNo(boardComment.getCommentNo(), boardComment.getCommentNo());
-	}  //댓글쓰기
+		}  //댓글쓰기
 	
 	@Override
 	public void deleteComment(int commentNo) {
 		boardCommentMapper.deleteComment(commentNo);
+	} //댓글 삭제
+	
+	@Override
+	public void editComment(BoardCommentDto boardComment) {
+		boardCommentMapper.updateComment(boardComment);
 	}
 
 }
