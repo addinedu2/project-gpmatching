@@ -10,7 +10,7 @@ public class MatchingBoardDto {
 	int boardNo;
 	String boardTitle;
 	String boardContent;
-	boolean preferGender;
+	String preferGender;
 	boolean mic;
 	boolean matchingClose;
 	Date regDate;

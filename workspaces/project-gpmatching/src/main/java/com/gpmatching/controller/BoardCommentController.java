@@ -35,6 +35,7 @@ public class BoardCommentController {
 	public String deleteComment(int commentNo, int commonNo, int pageNo) {
 		
 		boardCommentService.deleteComment(commentNo);
+		//return "redirect:commonDetail";
 		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d", commonNo, pageNo);
 	}  
 	
@@ -44,9 +45,8 @@ public class BoardCommentController {
 		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d", boardComment.getCommonNo(), pageNo);	
 	}
 	
-	
-	
 }
+
 ////testCode
 //	@GetMapping(path= {"/test"})
 //	public String writeCommentForm(BoardCommentDto boardComment) {

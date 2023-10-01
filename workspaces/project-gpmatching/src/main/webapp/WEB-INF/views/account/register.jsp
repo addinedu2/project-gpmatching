@@ -45,9 +45,10 @@
           <!-- Card body -->
           <div class="card-body p-6">
             <div class="mb-4">
-              <a href="/project-gpmatching/resources/index.html"><img src="/project-gpmatching/resources/assets/images/brand/logo/logo-primary.svg" class="mb-2" alt=""></a>
+              <a href="/project-gpmatching/home">
+              	<img src="/project-gpmatching/resources/assets/images/brand/logo/opgglogo-primary.png" class="mb-2" alt="">
+              </a>
               <p class="mb-6">회원 정보를 입력해주세요.</p>
-
             </div>      
             <!-- Form -->
          
@@ -107,11 +108,12 @@
 
                 <div class="d-md-flex justify-content-between mt-4">
                   <div class="mb-2 mb-md-0">
-                    <a href="/project-gpmatching/login" class="fs-5">이미 가입하셨나요? 로그인 해주세요 </a>
+                    <a href="/project-gpmatching/account/login" class="fs-5">이미 가입하셨나요? 로그인 해주세요 </a>
                   </div>
                   <div>
-                    <a href="forget-password.html" class="text-inherit
+                    <a href="/project-gpmatching/account/forgetPassword" class="text-inherit
                         fs-5">비밀번호를 잊으셨나요?</a>
+                         <!-- 비밀번호 찾기 -->
                   </div>
 
                 </div>

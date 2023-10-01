@@ -99,21 +99,33 @@
 				<br>
 				<div class="txt-box">
 					<div class="form-check">
-						<input class="form-check-input" type="radio" value=0
+						<input class="form-check-input" type="radio" value="anyone"
 							name="preferGender" id="flexRadioDefault1" checked> <label
-							class="form-check-label" for="flexRadioDefault1"> 남자 </label>
+							class="form-check-label" for="flexRadioDefault1"> 상관없음 </label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" value=1
+						<input class="form-check-input" type="radio" value="M"
+							name="preferGender" id="flexRadioDefault1"> <label
+							class="form-check-label" for="flexRadioDefault1"> 남자만 </label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" value="F"
 							name="preferGender" id="flexRadioDefault2"> <label
-							class="form-check-label" for="flexRadioDefault2"> 여자 </label>
+							class="form-check-label" for="flexRadioDefault2"> 여자만 </label>
 					</div>
 				</div>
 				
 				<!-- 롤 등록 -->
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">롤주포지션</label>
-					<input name="lolPosition" type="text" id="textInput" class="form-control" >
+					<label class="form-label" for="selectOne">롤주포지션</label>
+					<select name="lolPosition" class="form-select" aria-label="Default select example">
+						<option selected>포지션 전체</option>
+						<option value="top">탑</option>
+						<option value="jungle">정글</option>
+						<option value="mid">미드</option>
+						<option value="adcarry">원딜</option>
+						<option value="support">서폿</option>
+					</select>
 				</div>
 				<div class="mb-3 txt-box">
 					<label class="form-label" for="textInput">롤서렌여부</label>

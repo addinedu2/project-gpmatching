@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.gpmatching.dto.BoardCommentDto;
 import com.gpmatching.mapper.BoardCommentMapper;
 
+import lombok.Setter;
+
 public class BoardCommentServiceImpl implements BoardCommentService {
 	
-	@Autowired
+	@Setter(onMethod_ = { @Autowired })
 	private BoardCommentMapper boardCommentMapper;
 	
 	@Override   
@@ -20,9 +22,11 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	public void deleteComment(int commentNo) {
 		boardCommentMapper.deleteComment(commentNo);
 	} //댓글 삭제
-	
+
+	//댓글수정
 	@Override
 	public void editComment(BoardCommentDto boardComment) {
+
 		boardCommentMapper.updateComment(boardComment);
 	}
 
