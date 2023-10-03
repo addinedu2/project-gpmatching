@@ -156,9 +156,15 @@ public class CommonBoardController {
 		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d",commonBoardDto.getCommonNo(),pageNo);
 	}
 	
-	//리뷰 jsp 테스트용 컨트롤러
+	//CommonBoard에 테스트했기 때문에 GetMapping은 여기서 했고 PostMapping은 MatchingReviewController에서 수행했습니다.
 	@GetMapping(path = { "/review" })
-	public String matchingReview(CommonBoardDto commonBoardDto) {
+	public String showMatchingReviewForm(@RequestParam(defaultValue = "-1")int commonNo, 
+								 		 @RequestParam(defaultValue = "-1")int pageNo, Model model) {
+		
+		CommonBoardDto commonBoardDto = commonBoardService.findCommonBoardByCommonNo(commonNo);
+		model.addAttribute("commonBoard", commonBoardDto);
+		model.addAttribute("pageNo",pageNo);
+
 		
 		return "/commonBoard/reviewtest";
 	}

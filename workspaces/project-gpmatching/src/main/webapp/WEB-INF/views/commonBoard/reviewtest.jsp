@@ -49,12 +49,41 @@
 		<!-- Basic -->
 		
 		<div class="card" style="width: 20rem;" >
-		   <img src="../assets/images/placeholder/placeholder-4by3.svg" class="card-img-top" alt="">
+		<form id="reviewform" action="review" method="post">
 		   <div class="card-body">
-		      <h5 class="card-title">Card title</h5>
-		      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		      <a href="#" class="btn btn-primary">Go somewhere</a>
+		   	  <input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
+		   	  <input type="hidden" name="userNo" value="${ loginuser.userNo }" />
+
+		      <h5 class="card-title">평점 리뷰 기능</h5>
+		      <span>글제목 : ${ commonBoard.commonTitle }</span>
+		      <br>
+		      <span>글번호 : ${ commonBoard.commonNo }</span>
+		      <br>
+		      <span>회원번호 : ${ commonBoard.userNo }</span>
+		      <hr>
+		      <span>리뷰작성자 : ${ loginuser.nickname }</span>
+		      <br>
+		      <br>
+		      <!-- Select Option -->
+			  <div class="mb-3">
+				<label class="form-label" for="selectOne">평점 <span class="text-secondary">(포인트 적립)</span>
+				   <select name ="reviewPoint" class="form-select" aria-label="Default select example">
+				     <option value="5" selected>★★★★★ (+5)</option>
+				     <option value="4">★★★★☆ (+4)</option>
+				     <option value="3">★★★☆☆ (+3)</option>
+				     <option value="2">★★☆☆☆ (+2)</option>
+				     <option value="1">★☆☆☆☆ (+1)</option>
+				   </select>
+				</label>  
+			  </div>
+		      <!-- Textarea -->
+				 <div class="mb-3">
+				   <label for="textarea-input" class="form-label">리뷰</label>
+				   <textarea name ="reviewContent" class="form-control" id="textarea-input" rows="5"></textarea>
+				 </div>
+		      <button type="submit" class="btn btn-primary">등록</button>
 		   </div>
+		   </form>
 		</div>
 		</div>
 		</div>

@@ -8,6 +8,6 @@ public class MatchingReviewDto {
 	private int reviewNo;
 	private int reviewPoint;
 	private String reviewContent;
-	private int boardNo;
+	private int commonNo;
 	private int userNo;
 }
