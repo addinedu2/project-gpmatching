@@ -131,9 +131,10 @@ public class MatchingBoardController {
 	
 	@GetMapping(path = { "/lol-write"})
 	public String showLolWriteForm(HttpSession session) {
-		if(session.getAttribute("loginuser") == null) {
-			return "redirect:/account/login";
-		}
+		// 아래 코드는 AuthInterceptor 인터셉터에서 처리
+		//if(session.getAttribute("loginuser") == null) {
+		//	return "redirect:/account/login";
+		//}
 		return "/boardMatching/lol-write";
 	}
 	
@@ -169,9 +170,7 @@ public class MatchingBoardController {
 	
 	@GetMapping(path = { "/battleground-write"})
 	public String showBattlegroundWriteForm(HttpSession session) {
-		if(session.getAttribute("loginuser") == null) {
-			return "redirect:/account/login";
-		}
+
 		return "/boardMatching/battleground-write";
 	}
 	
@@ -204,9 +203,7 @@ public class MatchingBoardController {
 	
 	@GetMapping(path = { "/overwatch-write"})
 	public String showOverwatchWriteForm(HttpSession session) {
-		if(session.getAttribute("loginuser") == null) {
-			return "redirect:/account/login";
-		}
+		
 		return "/boardMatching/overwatch-write";
 	}
 	
