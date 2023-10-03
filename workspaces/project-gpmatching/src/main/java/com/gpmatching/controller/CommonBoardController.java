@@ -156,6 +156,13 @@ public class CommonBoardController {
 		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d",commonBoardDto.getCommonNo(),pageNo);
 	}
 	
+	//리뷰 jsp 테스트용 컨트롤러
+	@GetMapping(path = { "/review" })
+	public String matchingReview(CommonBoardDto commonBoardDto) {
+		
+		return "/commonBoard/reviewtest";
+	}
+	
 	
 	///////////////////////////////////
 	//작성 예정
