@@ -61,7 +61,7 @@
 		            </div>
 		          </div>
 		        </div>
-				
+			
 				<div class="py-6">
 		          <!-- row -->
 		          <div class="row">
@@ -122,11 +122,8 @@
 		                        <div class="col-md-8 col-xxl-9  mt-0 mt-md-3">
 		                          <input type="password" id="name" class="form-control" aria-describedby="name">
 		                        </div>
-		                        <!-- 여기다가 매칭게시판쪽 리뷰 기능 테스트 -->
 		                        <div class="col-md-2 col-xxl-2">
-		                        	<a href="review">
-		                         	<button type="submit" class="btn btn-primary">리뷰</button>
-		                         	</a>
+		                          <button type="submit" class="btn btn-primary">Post</button>
 		                        </div>
 		                      </div>
 		
@@ -137,7 +134,6 @@
 		                  
 		                </div>
 		              </div>
-		             
 		            
 		            	<br>
 			            <div class="btn-center" >
@@ -165,7 +161,6 @@
 		          </div>
 		          
 		        </div>
-		       	
 
 		        
 		<!-- write comment area -->
@@ -208,24 +203,24 @@
 						    <br /><br />
 						    <span>${ fn:replace(comment.commentContent, enter, "<br>") }</span>
 							<br /><br />
-								<div style='display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'>
+							<%-- <div style='display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'>
 						    	<a class="edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">편집</a>
 								&nbsp;
 								<a class="delete-comment" data-comment-no="${ comment.commentNo }" href="javascript:">삭제</a>
 							</div>
-							<!-- <a class="recomment-link btn btn-sm btn-success">댓글 쓰기</a>  -->
+							<a class="recomment-link btn btn-sm btn-success">댓글 쓰기</a> --%>
 						</c:otherwise>
 						</c:choose>
 						</div>	                
-						<div id="comment-edit-area-${ comment.commentNo }" style="display: none">
-							${ comment.userNo } &nbsp;&nbsp; [${ comment.regDate }]
+						<%-- <div id="comment-edit-area-${ comment.commentNo }" style="display: none">
+							${ comment.writer } &nbsp;&nbsp; [${ comment.regDate }]
 							<br /><br />
-							<form action="editcomment" method="post"> <!-- BoardCommentController의 /editcomment에 연결 -->
+							<form action="edit-comment" method="post">
 							<input type="hidden" name="commentNo" value="${ comment.commentNo }" />
-							<input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
+							<input type="hidden" name="boardNo" value="${ board.boardNo }" />
 							<input type="hidden" name="pageNo" value="${ pageNo }" />
-							<textarea name="commentContent" style="width: 99%; resize: none" rows="3" 
-								maxlength="200">${ comment.commentContent }</textarea>
+							<textarea name="content" style="width: 99%; resize: none" rows="3" 
+								maxlength="200">${ comment.content }</textarea>
 							</form>
 							<br />
 							<div>
@@ -233,7 +228,7 @@
 								&nbsp; 
 								<a class="cancel-edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">취소</a>
 							</div>
-						</div> 
+						</div> --%>
 				
 					</td>
 				</tr>
@@ -287,9 +282,9 @@
 		$(".delete-comment").on('click', function(event) {
 			const commentNo = $(this).attr("data-comment-no");			
 			const yn = confirm(commentNo + "번 댓글을 삭제할까요?");
-			if (yn) { /* 여기서 BoardCommentController.java 의 /deleteComment에 연결시킬 것 */
-				location.href = 'deleteComment?commentNo=' + commentNo + 
-											  '&commonNo=' + ${ commonBoard.commonNo } + 
+			if (yn) {
+				location.href = 'delete-comment?commentNo=' + commentNo + 
+											  '&boardNo=' + ${ commonBoard.commonNo } + 
 											  '&pageNo=' + ${ pageNo };
 			}
 		});
