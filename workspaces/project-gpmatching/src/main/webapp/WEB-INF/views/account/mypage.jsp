@@ -137,7 +137,7 @@
                 <!-- card body -->
                 <div class="card-body">
                   <!-- card title -->
-                  <h4 class="card-title">About Me</h4>
+                  <h4 class="card-title">내 정보</h4>
                   <span class="text-uppercase fw-medium text-dark
                       fs-5 ls-2">Bio</span>
                   <!-- text -->
@@ -156,7 +156,7 @@
                       <p class="mb-0">${loginuser.userPhone}</p>
                     </div>
                     <div class="col-6 mb-5">
-                      <h6 class="text-uppercase fs-5 ls-2">Date of signed up </h6>
+                      <h6 class="text-uppercase fs-5 ls-2">가입일자</h6>
                       <p class="mb-0"><fmt:formatDate value="${loginuser.regDate}" pattern="yyyy-MM-dd"/></p>
                     </div>
                     <div class="col-6">
@@ -178,7 +178,7 @@
                 <!-- card body -->
                 <div class="card-body">
                   <!-- card title -->
-                  <h4 class="card-title">Projects Contributions</h4>
+                  <h4 class="card-title">내가 쓴 글 목록</h4>
                   <div class="d-md-flex justify-content-between
                       align-items-center mb-4">
                     <div class="d-flex align-items-center">
@@ -189,8 +189,7 @@
                       </div>
                       <!-- text -->
                       <div class="ms-3 ">
-                        <h5 class="mb-1"><a href="#" class="text-inherit">Slack Figma Design
-                            UI</a></h5>
+                        <h5 class="mb-1"><a href="" class="text-inherit">${ commonBoard.commonNo }</a></h5>
                         <p class="mb-0 fs-5 text-muted">Project description and details about...</p>
                       </div>
                     </div>
@@ -214,7 +213,7 @@
                             <img alt="avatar"
                               src="/project-gpmatching/resources/assets/images/avatar/avatar-3.jpg"
                               class="rounded-circle">
-                          </span>
+                        </span>
                       </div>
                       <div>
                         <!-- dropdown -->
