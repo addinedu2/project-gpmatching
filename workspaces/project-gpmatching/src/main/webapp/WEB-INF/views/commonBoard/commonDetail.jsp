@@ -209,7 +209,7 @@
 						    <span>${ fn:replace(comment.commentContent, enter, "<br>") }</span>
 							<br /><br />
 								<div style='display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'>
-						    	<a class="edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">편집</a>
+						    	<a class="edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">수정</a>
 								&nbsp;
 								<a class="delete-comment" data-comment-no="${ comment.commentNo }" href="javascript:">삭제</a>
 							</div>
@@ -220,7 +220,7 @@
 						<div id="comment-edit-area-${ comment.commentNo }" style="display: none">
 							${ comment.userNo } &nbsp;&nbsp; [${ comment.regDate }]
 							<br /><br />
-							<form action="editcomment" method="post"> <!-- BoardCommentController의 /editcomment에 연결 -->
+							<form action="editComment" method="post"> <!-- BoardCommentController의 /editcomment에 연결 -->
 							<input type="hidden" name="commentNo" value="${ comment.commentNo }" />
 							<input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
 							<input type="hidden" name="pageNo" value="${ pageNo }" />

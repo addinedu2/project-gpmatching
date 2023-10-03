@@ -20,30 +20,33 @@ public interface BoardCommentMapper {
 	@Options(useGeneratedKeys = true, keyProperty = "commentNo", keyColumn="commentNo")
 	void insertComment(BoardCommentDto boardCommentDto);
 	
-	@Update ( "update BoardComment "
-			+ "set groupno = #{ groupNo } "
-			+ "where commentno = #{ commentNo }")
-	void updateGroupNo(@Param("groupNo") int groupNo, @Param("commentNo") int commentNo);
-	//그룹 넘버 수정
-	
+	//댓글 목록
+	//사용할 댓글 위치 찾기
 	@Select("select commentNo, commonNo, userNo, commentContent, regDate, deleted "
 			+ "from BoardComment "
 			+ "where commonNo = #{ commonNo } "
 			+ "order by commentNo desc")
 	List<BoardCommentDto> selectBoardCommentByCommonNo(@Param("commonNo") int commonNo);
-	//사용할 댓글 위치 찾기
 	
+	
+	//댓글 삭제
 	@Update("update BoardComment "
 			+ "set deleted =  true "
 			+ "where commentNo = #{ commentNo } ")
 	void deleteComment(@Param("commentNo") int commentNo );
-	//댓글 삭제
+
 	
+	//댓글 수정
 	@Update( "update BoardComment "
 			+ "set commentContent = #{ commentContent } "
 			+ "where commentNo = #{ commentNo }")
 	void updateComment(BoardCommentDto boardComment);
-	//댓글 수정
+	
+	//그룹 넘버 수정
+	@Update ( "update BoardComment "
+			+ "set groupno = #{ groupNo } "
+			+ "where commentno = #{ commentNo }")
+	void updateGroupNo(@Param("groupNo") int groupNo, @Param("commentNo") int commentNo);
 	
 	
 	

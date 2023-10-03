@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gpmatching.dto.BoardAttachDto;
 import com.gpmatching.dto.BoardCommentDto;
 import com.gpmatching.dto.CommonBoardDto;
 import com.gpmatching.mapper.BoardCommentMapper;
@@ -18,12 +19,13 @@ public class CommonBoardServiceImpl implements CommonBoardService {
 	private BoardCommentMapper boardCommentMapper;
 	
 	@Override
-	public void writeCommonBoard(CommonBoardDto commonBoardDto) {
-		commonBoardMapper.insertCommonBoard(commonBoardDto);
+	public void writeCommonBoard(CommonBoardDto commonBoard) {
+		commonBoardMapper.insertCommonBoard(commonBoard);
 		
-//		for(BoardAttachDto attach : commonBoard.getBoardAttachList()) {
-//			commonBoardMapper.insertBoardAttach(attach);
-//		}
+		for(BoardAttachDto attach : commonBoard.getBoardAttachList()) {
+			attach.setCommonNo(commonBoard.getCommonNo());
+			commonBoardMapper.insertBoardAttach(attach);
+		}
 	}
 
 	//공통게시판 리스트
