@@ -5,9 +5,9 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class BoadAttachDto {
+public class BoardAttachDto {
 	
-	private int boadAttachNo;
+	private int boardAttachNo;
 	private String userFilename;
 	private String savedFilename;
 	private Date regDate;
