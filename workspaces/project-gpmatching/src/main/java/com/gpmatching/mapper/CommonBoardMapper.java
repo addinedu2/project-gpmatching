@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.gpmatching.dto.BoardAttachDto;
 import com.gpmatching.dto.CommonBoardDto;
 
 @Mapper
@@ -20,6 +21,13 @@ public interface CommonBoardMapper {
 
 	@Options(useGeneratedKeys = true, keyProperty = "commonNo")
 	void insertCommonBoard(CommonBoardDto commonBoardDto);
+	
+	
+	//첨부파일
+	@Insert("insert into BoardAttach(userFilename, savedFilename, commonNo) "
+		  + "values(#{userFilename},#{savedFilename},#{commonNo})")
+	@Options(useGeneratedKeys = true, keyProperty = "boardAttachNo")
+	void insertBoardAttach(BoardAttachDto attach);
 	
 	//공통게시판 글 전체 조회
 	@Select("select commonNo, commonTitle, commonContent, userNo, readCount, regDate, deleted "

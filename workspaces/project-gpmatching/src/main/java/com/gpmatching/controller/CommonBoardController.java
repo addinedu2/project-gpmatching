@@ -1,6 +1,10 @@
 package com.gpmatching.controller;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.gpmatching.common.Util;
+import com.gpmatching.dto.BoardAttachDto;
 import com.gpmatching.dto.CommonBoardDto;
 import com.gpmatching.service.CommonBoardService;
 import com.gpmatching.ui.ThePager;
@@ -59,33 +66,35 @@ public class CommonBoardController {
 	
 	//공통게시판 글쓰기 구현
 	@PostMapping(path= {"/commonWrite"})
-	public String writeCommonBoard(CommonBoardDto commonBoardDto) {
+	public String writeCommonBoard(CommonBoardDto commonBoard, MultipartFile attach, HttpServletRequest req) {
 		
-//		ArrayList<BoardAttachDto> attachList = new ArrayList<>();
-//		if(!attach.isEmpty()) {
-//			try {
-//				String savedFileName = Util.makeUniqueFileName(attach.getOriginalFilename());
-//				
-//				String uploadDir = req.getServletContext().getRealPath("/resources/upload/");
-//				attach.transferTo(new File(uploadDir, savedFileName));
-//				
-//				BoardAttachDto boardAttach = new BoardAttachDto();
-//				boardAttach.setUserFilename(attach.getOriginalFilename());
-//				boardAttach.setSavedFilename(savedFileName);
-//				
-//				System.out.println(boardAttach);//testCode
-//				
-//				attachList.add(boardAttach);
-//				
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		commonBoardDto.setBoardAttachList(attachList);
+		String uploadDir = req.getServletContext().getRealPath("/resources/upload/");
+		ArrayList<BoardAttachDto> boardAttachList = handleUploadFile(attach, uploadDir);
+		commonBoard.setBoardAttachList(boardAttachList);
 		
-		commonBoardService.writeCommonBoard(commonBoardDto);
+		commonBoardService.writeCommonBoard(commonBoard);
 		
 		return "redirect:commonList";
+	}
+	private ArrayList<BoardAttachDto> handleUploadFile(MultipartFile attach, String uploadDir) {
+		ArrayList<BoardAttachDto> boardAttachList = new ArrayList<>();
+		if(!attach.isEmpty()) {
+			try {
+				String savedFileName = Util.makeUniqueFileName(attach.getOriginalFilename());
+				
+				attach.transferTo(new File(uploadDir, savedFileName));
+				
+				BoardAttachDto boardAttach = new BoardAttachDto();
+				boardAttach.setUserFilename(attach.getOriginalFilename());
+				boardAttach.setSavedFilename(savedFileName);
+				
+				boardAttachList.add(boardAttach);
+				
+			}catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+		return boardAttachList;
 	}
 	
 	//공통게시판 글 상세보기
@@ -154,6 +163,19 @@ public class CommonBoardController {
 		commonBoardService.commonEdit(commonBoardDto);
 		
 		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d",commonBoardDto.getCommonNo(),pageNo);
+	}
+	
+	//CommonBoard에 테스트했기 때문에 GetMapping은 여기서 했고 PostMapping은 MatchingReviewController에서 수행했습니다.
+	@GetMapping(path = { "/review" })
+	public String showMatchingReviewForm(@RequestParam(defaultValue = "-1")int commonNo, 
+								 		 @RequestParam(defaultValue = "-1")int pageNo, Model model) {
+		
+		CommonBoardDto commonBoardDto = commonBoardService.findCommonBoardByCommonNo(commonNo);
+		model.addAttribute("commonBoard", commonBoardDto);
+		model.addAttribute("pageNo",pageNo);
+
+		
+		return "/commonBoard/reviewtest";
 	}
 	
 	
