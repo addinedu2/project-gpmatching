@@ -18,8 +18,8 @@ public class CommonBoardDto {
 	private boolean deleted;
 	//private int boardInfoNo;
 	
-//	private List<BoardAttachDto> boardAttachList;
-//	
+	private List<BoardAttachDto> boardAttachList;
+	
 	private List<BoardCommentDto> boardCommentList;
 	
 

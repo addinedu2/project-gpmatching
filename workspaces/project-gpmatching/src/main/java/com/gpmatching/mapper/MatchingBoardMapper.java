@@ -103,9 +103,10 @@ public interface MatchingBoardMapper {
 			+ "inner join User u "
 			+ "on m.userNo = u.userNo "
 			+ "where m.gameNo =  (select gameNo "
-			+ "from GameList where gameName = #{ gameName} ) "
-			+ "order by m.boardNo desc" )
+			+ "from GameList where gameName = #{ gameName } ) "
+			+ "order by boardNo desc" )
 	List<Map<String, String>> selectLolMatchingMapByGameName(String gameName);
+	
 	
 	//User 테이블, MatchingBoard 테이블, Pubg 테이블 join해서 같이 보여주는 코드(게임명: "battle ground")
 	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, "

@@ -9,8 +9,8 @@ import com.gpmatching.dto.MatchingReviewDto;
 @Mapper
 public interface MatchingReviewMapper {
 
-	@Insert("insert into matchingreview (reviewContent, reviewPoint) "
-			+ "values (#{ reviewContent }, #{ reviewPoint })")
+	@Insert("insert into MatchingReview (reviewContent, reviewPoint, userNo, commonNo) "
+			+ "values (#{ reviewContent }, #{ reviewPoint }, #{ userNo }, #{ commonNo })")
 	@Options(useGeneratedKeys = true, keyProperty = "reviewNo") 
 	void insertMatchingReview(MatchingReviewDto matchingReview);
 	

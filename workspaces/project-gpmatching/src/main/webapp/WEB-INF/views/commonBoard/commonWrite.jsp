@@ -45,27 +45,29 @@
 		<jsp:include page="/WEB-INF/views/modules/header.jsp" />
 
 		
-<form action="commonWrite" method="post" >
+<form action="commonWrite" method="post" enctype="multipart/form-data">
 	<!-- title -->
 	<div class="mb-3 txt-box">
 	  <label class="form-label" for="textInput">제목</label>
 	  <input type="text" name="commonTitle" id="textInput" class="form-control" placeholder="제목 입력">
 	</div>
+	
 	<!--  nickname -->
 	<div class="mb-3 txt-box">
-		<input type="text" name="nickname" id="textInput" class="form-control" value="${ loginuser.nickname }" readonly>
-		<input type="hidden" name="userNo" value="${ loginuser.userNo }">
+		<label class="form-label text-light" for="textInput">작성자 : ${ loginuser.nickname }</label>
+		<input name="userNo" type="hidden" id="textInput" class="form-control" value="${ loginuser.userNo }">
 	</div>
+	
 	<!-- content -->
 	 <div class="mb-3 txt-box">
 	   <label for="textarea-input" class="form-label">본문</label>
 	   <textarea class="form-control" name="commonContent" id="textarea-input" rows="5" placeholder="본문 입력"></textarea>
 	 </div>
 	 
-	 <!-- attach file -->
-	 <!-- <div class="mb-3 txt-box">
-		<input type="file" name="attachFile" id="attachFile" class="form-control">
-	</div> -->
+	  <!-- attach file -->
+	  <div class="mb-3 txt-box">
+		 <input type="file" name="attach" id="attach" class="form-control">
+	  </div>
 
 	<!-- submit&reset -->
     <div class="btn-center">
