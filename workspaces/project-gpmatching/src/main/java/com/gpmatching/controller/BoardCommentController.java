@@ -39,7 +39,7 @@ public class BoardCommentController {
 		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d", commonNo, pageNo);
 	}  
 	
-	@PostMapping(path = {"/editcomment"})
+	@PostMapping(path = {"/editComment"})
 	public String editComment(BoardCommentDto boardComment, @RequestParam(defaultValue = "-1") int pageNo) {
 		boardCommentService.editComment(boardComment);
 		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d", boardComment.getCommonNo(), pageNo);	
