@@ -5,9 +5,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import com.gpmatching.interceptor.AuthInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -38,6 +41,22 @@ public class WebConfiguration implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	}
+	
+	//로그인 검증 인터셉터 bean 등록
+	@Bean
+	public AuthInterceptor authInterceptor() {
+		return new AuthInterceptor();
+	}
+		
+	//인터셉터 bean 추가
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(authInterceptor())
+				.addPathPatterns("/boardMatching/**") // 로그인 검증 인터셉터를 매칭게시판에 적용
+				.excludePathPatterns("/boardMatching/lol-list", "/boardMatching/battleground-list", 
+						"/boardMatching/overwatch-list"); // 게시물 보기는 로그인 없이 가능 
+
 	}
 
 }
