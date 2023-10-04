@@ -48,6 +48,21 @@ public interface CommonBoardMapper {
 		  + "where commonNo = #{commonNo} and deleted = false")
 	CommonBoardDto selectCommonBoardByCommonNo(@Param("commonNo") int commonNo);
 
+	//첨부파일 조회
+	@Select("select boardAttachNo, commonNo, userFilename, savedFilename, regDate, downloadCount "
+		  + "from BoardAttach "
+		  + "where commonNo = #{commonNo}")
+	List<BoardAttachDto> selectBoardAttachByCommonNo(@Param("commonNo") int commonNo);
+		
+	@Select("select boardAttachNo, commonNo, userFilename, savedFilename, regDate, downloadCount "
+		  + "from BoardAttach "
+		  + "where boardAttachNo = #{boardAttachNo}")
+	BoardAttachDto selectBoardAttachByBoardAttachNo(@Param("boardAttachNo") int boardAttachNo);
+		
+	//게시물 개수 카운트
+	@Select("select count(*) from CommonBoard")
+	int selectCommonBoardCount();
+	
 	//공통게시판 글 수정
 	@Update("update CommonBoard set deleted = true "
 		  + "where commonNo = #{commonNo}")
@@ -57,14 +72,14 @@ public interface CommonBoardMapper {
 		  + "set commonTitle = #{commonTitle},commonContent = #{commonContent} "
 		  + "where commonNo = #{commonNo}")
 	void updateCommonEdit(CommonBoardDto commonBoardDto);
-
-	//게시물 개수 카운트
-	@Select("select count(*) from CommonBoard")
-	int selectCommonBoardCount();
 	
-//	@Insert("insert into boardAttach(userFilename, savedFilename) "
-//		  + "values(#{userFilename},#{savedFilename})")
-//	@Options(useGeneratedKeys = true, keyProperty = "boardAttachNo")
-//	void insertBoardAttach(BoardAttachDto attach);
+	//게시물 조회수
+	@Update("update CommonBoard "
+		  + "set readCount = readCount + 1} "
+		  + "where commonNo =#{commonNo}")
+	void updateReadCount(@Param("readCount")int readCount);
+
+	
+	
 }
 	

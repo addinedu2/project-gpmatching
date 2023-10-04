@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.View;
 
 import com.gpmatching.common.Util;
 import com.gpmatching.dto.BoardAttachDto;
 import com.gpmatching.dto.CommonBoardDto;
 import com.gpmatching.service.CommonBoardService;
 import com.gpmatching.ui.ThePager;
+import com.gpmatching.view.DownloadView;
 
 @Controller
 @RequestMapping(path= {"/commonBoard"})
@@ -80,13 +82,13 @@ public class CommonBoardController {
 		ArrayList<BoardAttachDto> boardAttachList = new ArrayList<>();
 		if(!attach.isEmpty()) {
 			try {
-				String savedFileName = Util.makeUniqueFileName(attach.getOriginalFilename());
+				String savedFilename = Util.makeUniqueFileName(attach.getOriginalFilename());
 				
-				attach.transferTo(new File(uploadDir, savedFileName));
+				attach.transferTo(new File(uploadDir, savedFilename));
 				
 				BoardAttachDto boardAttach = new BoardAttachDto();
 				boardAttach.setUserFilename(attach.getOriginalFilename());
-				boardAttach.setSavedFilename(savedFileName);
+				boardAttach.setSavedFilename(savedFilename);
 				
 				boardAttachList.add(boardAttach);
 				
@@ -139,13 +141,13 @@ public class CommonBoardController {
 			return "redirect:commonList";
 		}
 		
-		CommonBoardDto commonBoardDto = commonBoardService.findCommonBoardByCommonNo(commonNo);
+		CommonBoardDto commonBoard = commonBoardService.findCommonBoardByCommonNo(commonNo);
 		
-		if(commonBoardDto == null) {
+		if(commonBoard == null) {
 			return "redirect:commonList";
 		}
 		
-		model.addAttribute("commonBoard", commonBoardDto);
+		model.addAttribute("commonBoard", commonBoard);
 		model.addAttribute("pageNo",pageNo);
 		
 		return "commonBoard/commonEdit";
@@ -153,16 +155,34 @@ public class CommonBoardController {
 	
 	//공통게시판 글 수정
 	@PostMapping(path= {"/commonEdit"})
-	public String commonEdit(CommonBoardDto commonBoardDto,
+	public String commonEdit(CommonBoardDto commonBoard, MultipartFile attach,HttpServletRequest req,
 							 @RequestParam(defaultValue="-1")int pageNo) {
 		
 		if(pageNo < 1) {
 			return "redirect:commonList";
 		}
 		
-		commonBoardService.commonEdit(commonBoardDto);
+		String uploadDir = req.getServletContext().getRealPath("/resources/upload/");
+		ArrayList<BoardAttachDto> boardAttachList = handleUploadFile(attach, uploadDir);
+		commonBoard.setBoardAttachList(boardAttachList);
 		
-		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d",commonBoardDto.getCommonNo(),pageNo);
+		commonBoardService.commonEdit(commonBoard);
+		
+		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d",commonBoard.getCommonNo(),pageNo);
+	}
+	
+	@GetMapping(path= {"/download"})
+	public View download(int boardAttachNo, Model model) {
+		//첨부파일조회
+		BoardAttachDto boardAttach = commonBoardService.findBoardAttachByBoardAttachNo(boardAttachNo);
+
+		//다운로드
+		model.addAttribute("boardAttach",boardAttach);
+		DownloadView downloadView = new DownloadView();
+		
+		model.addAttribute("attach",boardAttach);
+		
+		return downloadView;
 	}
 	
 	//CommonBoard에 테스트했기 때문에 GetMapping은 여기서 했고 PostMapping은 MatchingReviewController에서 수행했습니다.
@@ -180,7 +200,7 @@ public class CommonBoardController {
 	
 	
 	///////////////////////////////////
-	//작성 예정
+	//ToDo
 //	@GetMapping(path= {"/tipsList"}) 
 //	public String tipsList() {
 //		

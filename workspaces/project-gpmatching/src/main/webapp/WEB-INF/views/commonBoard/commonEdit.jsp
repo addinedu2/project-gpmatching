@@ -46,7 +46,7 @@
 		<jsp:include page="/WEB-INF/views/modules/header.jsp" />
 
 		
-<form action="commonEdit" method="post">
+<form action="commonEdit" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="commonNo" value="${commonBoard.commonNo }">
 	<input type="hidden" name="pageNo" value="${pageNo }">
 
@@ -59,6 +59,18 @@
 	  	작성자 ${ commonBoard.userNo }
 	  </div> --%>
 	
+	</div>
+	
+	<!-- attach -->
+	<div>
+		<c:forEach var="attach" items="${ commonBoard.boardAttachList }">
+        	${ attach.userFilename } [<a href="delete-attach?boardAttachNo=${attach.boardAttachNo}">삭제</a>]<br>
+		</c:forEach>
+		
+		<!-- attach file -->
+	  <div class="mb-3 txt-box">
+		 <input type="file" name="attach" id="attach" class="form-control">
+	  </div>
 	</div>
 	
 	<!-- content -->
