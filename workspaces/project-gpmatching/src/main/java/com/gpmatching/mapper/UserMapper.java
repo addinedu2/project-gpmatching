@@ -1,12 +1,15 @@
 package com.gpmatching.mapper;
 
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.gpmatching.dto.CommonBoardDto;
 import com.gpmatching.dto.UserDto;
 
 //MapperFactoryBean이 구현 클래스를 만들때 사용하는 인터페이스
@@ -23,18 +26,38 @@ public interface UserMapper {
 			+ "values (#{userPwd}, #{userId}, #{userEmail}, #{nickname}, #{userPhone}) ")
 	void insertUser(UserDto user);
 
-		
+	
+	//로그인할때 아이디와 비번 찾는 메서드	
 	@Select ("select userId, userPwd, userEmail, nickname, userPhone, userGrade, regDate, deletedUser, userNo "
              + "from User "
 			+ "where userId = #{userId} and userPwd = #{userPwd} ")
 	UserDto selectUserByIdAnduserPwd(@Param("userId") String userId, @Param("userPwd") String userPwd);
-	//로그인할때 아이디와 비번 찾는 메서드
 	
+	
+	//내 정보 수정하는 메서드
 	@Update ("UPDATE User "
 			+ "SET nickname = #{nickname}, userPhone = #{userPhone}, userEmail = #{userEmail} "
 			+ "WHERE userId = #{userId}") 
 	void updateUserProfile(UserDto user);
-	//내 정보 수정하는 메서드
+	
+
+	//로그인 중복검사
+	@Select(  "select count(*) "
+			+ "from User "
+			+ "where userId = #{ userId }")
+	int selectUserCountMyUserId(String userId);
+	
+	
+	//내가 작성한 글만 보기(미완성코드
+	@Select(  "select commonNo, commonTitle, commonContent, userNo, readCount, regDate, deleted "
+			+ "from CommonBoard "
+			+ "where "
+			+ "order by commonNo desc")
+	List<CommonBoardDto> selectAllBoard();
+
+
+	
+	
 	
 
 //	@Update("UPDATE User SET deletedUser = true " //  delelted 값을 참으로 돌린다

@@ -76,7 +76,7 @@
 		                        <img src="../assets/images/avatar/avatar-1.jpg" alt="" class="avatar avatar-md rounded-circle">
 		                      </div> -->
 		                      <div class="ms-3">
-		                        <h5 class="mb-0 fw-bold">${commonBoard.userNo }</h5>
+		                        <h5 class="mb-0 fw-bold">${commonBoard.nickname }</h5>
 		                        <p class="mb-0"><fmt:formatDate value="${commonBoard.regDate }" pattern="yyyy-MM-dd" /></p>
 		                      </div>
 		                    </div>
@@ -212,7 +212,8 @@
 							<br><br>
 						</c:when>
 						<c:otherwise>
-							${ comment.userNo } &nbsp;&nbsp; [${ comment.regDate }]
+							${ comment.userNo } &nbsp;&nbsp;
+							[<fmt:formatDate value="${ commonBoard.regDate }" pattern="yyyy-MM-dd"/>]
 						    <br /><br />
 						    <span>${ fn:replace(comment.commentContent, enter, "<br>") }</span>
 							<br /><br />

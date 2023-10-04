@@ -47,7 +47,7 @@
 	href="/project-gpmatching/resources/assets/css/theme.css">
 <link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
 
-<title>Layout | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
+<title>LOL Matching | LOL 매칭 게시판</title>
 </head>
 
 <body class="bg-light">
