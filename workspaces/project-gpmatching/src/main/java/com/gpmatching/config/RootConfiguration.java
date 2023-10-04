@@ -12,6 +12,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
 import com.gpmatching.mapper.UserMapper;
+import com.gpmatching.matchingboard.lolboard.service.LolBoardService;
+import com.gpmatching.matchingboard.lolboard.service.LolBoardServiceImpl;
+import com.gpmatching.matchingboard.lolboard.service.LolService;
+import com.gpmatching.matchingboard.lolboard.service.LolServiceImpl;
+import com.gpmatching.matchingboard.overwatchboard.service.OverwatchBoardService;
+import com.gpmatching.matchingboard.overwatchboard.service.OverwatchBoardServiceImpl;
+import com.gpmatching.matchingboard.overwatchboard.service.OverwatchService;
+import com.gpmatching.matchingboard.overwatchboard.service.OverwatchServiceImpl;
+import com.gpmatching.matchingboard.pubgboard.service.PubgBoardService;
+import com.gpmatching.matchingboard.pubgboard.service.PubgBoardServiceImpl;
+import com.gpmatching.matchingboard.pubgboard.service.PubgService;
+import com.gpmatching.matchingboard.pubgboard.service.PubgServiceImpl;
 import com.gpmatching.service.AccountServiceImpl;
 import com.gpmatching.service.BoardCommentService;
 import com.gpmatching.service.BoardCommentServiceImpl;
@@ -19,22 +31,15 @@ import com.gpmatching.service.CommonBoardService;
 import com.gpmatching.service.CommonBoardServiceImpl;
 import com.gpmatching.service.GameListService;
 import com.gpmatching.service.GameListServiceImpl;
-import com.gpmatching.service.LolService;
-import com.gpmatching.service.LolServiceImpl;
-import com.gpmatching.service.MatchingBoardService;
-import com.gpmatching.service.MatchingBoardServiceImpl;
 import com.gpmatching.service.MatchingCommentService;
 import com.gpmatching.service.MatchingCommentServiceImpl;
 import com.gpmatching.service.MatchingReviewService;
 import com.gpmatching.service.MatchingReviewServiceImpl;
-import com.gpmatching.service.OverwatchService;
-import com.gpmatching.service.OverwatchServiceImpl;
-import com.gpmatching.service.PubgService;
-import com.gpmatching.service.PubgServiceImpl;
+
 
 
 @Configuration
-@MapperScan(basePackages = { "com.gpmatching.mapper"}) //xml  설정의 <mybatis:scan 을 대신하는 annotation
+@MapperScan(basePackages = { "com.gpmatching.mapper" , "com.gpmatching.matchingboard"}) //xml  설정의 <mybatis:scan 을 대신하는 annotation
 public class RootConfiguration implements ApplicationContextAware {
 	
 	private ApplicationContext applicationContext;
@@ -72,11 +77,6 @@ public class RootConfiguration implements ApplicationContextAware {
 		
 	}
 	
-	@Bean
-	public MatchingBoardService matchingBoardService() {
-		
-		return new MatchingBoardServiceImpl();
-	}
 	
 	@Bean
 	public MatchingReviewService matchingReviewService() {
@@ -140,7 +140,23 @@ public class RootConfiguration implements ApplicationContextAware {
 		
 	}
 	
+	@Bean
+	public LolBoardService lolBoardService() {
+		
+		return new LolBoardServiceImpl();
+	}
 	
+	@Bean
+	public OverwatchBoardService overwatchBoardService() {
+		
+		return new OverwatchBoardServiceImpl();
+	}
+	
+	@Bean
+	public PubgBoardService pubgBoardService() {
+		
+		return new PubgBoardServiceImpl();
+	}
 
 
 }

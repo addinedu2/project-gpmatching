@@ -14,7 +14,7 @@ import com.gpmatching.interceptor.AuthInterceptor;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "com.gpmatching.controller" })
+@ComponentScan(basePackages = { "com.gpmatching.controller" , "com.gpmatching.matchingboard" })
 public class WebConfiguration implements WebMvcConfigurer {
 	
 	
@@ -54,8 +54,8 @@ public class WebConfiguration implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(authInterceptor())
 				.addPathPatterns("/boardMatching/**") // 로그인 검증 인터셉터를 매칭게시판에 적용
-				.excludePathPatterns("/boardMatching/lol-list", "/boardMatching/battleground-list", 
-						"/boardMatching/overwatch-list"); // 게시물 보기는 로그인 없이 가능 
+				.excludePathPatterns("/boardMatching/lolBoard/lol-list", "/boardMatching/pubgBoard/battleground-list", 
+						"/boardMatching/overwatchBoard/overwatch-list"); // 게시물 보기는 로그인 없이 가능 
 
 	}
 

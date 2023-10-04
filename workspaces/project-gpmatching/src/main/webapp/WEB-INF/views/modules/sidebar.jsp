@@ -35,14 +35,14 @@
 				<div id="navPages" class="collapse " data-bs-parent="#sideNavbar">
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link "
-							href="/project-gpmatching/boardMatching/lol-list"> LOL </a></li>
+							href="/project-gpmatching/boardMatching/lolBoard/lol-list"> LOL </a></li>
 						<li class="nav-item"><a class="nav-link has-arrow   "
-							href="/project-gpmatching/boardMatching/battleground-list">
+							href="/project-gpmatching/boardMatching/pubgBoard/battleground-list">
 								배틀그라운드 </a></li>
 
 
 						<li class="nav-item"><a class="nav-link "
-							href="/project-gpmatching/boardMatching/overwatch-list"> 오버워치
+							href="/project-gpmatching/boardMatching/overwatchBoard/overwatch-list"> 오버워치
 						</a></li>
 					</ul>
 				</div></li>
