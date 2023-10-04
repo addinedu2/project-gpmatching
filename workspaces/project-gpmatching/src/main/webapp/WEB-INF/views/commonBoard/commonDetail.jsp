@@ -99,6 +99,14 @@
 			                <!-- text -->
 			                <h4 class="card-title">${commonBoard.commonTitle }</h4>
 			                
+			                <!-- attach -->
+			                <div>
+			                	<c:forEach var="attach" items="${ commonBoard.boardAttachList }">
+		                			첨부파일 : <a href="download?boardAttachNo=${ attach.boardAttachNo }">${ attach.userFilename }</a>
+		                			[${attach.downloadCount }]<br>
+		                		</c:forEach>
+			                </div>
+			                
 <c:set var="enter" value="
 " />		
 			                <span class="text-uppercase fw-medium text-darks-5 ls-2">본문</span>

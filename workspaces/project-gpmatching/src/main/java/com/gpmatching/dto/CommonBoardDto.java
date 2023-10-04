@@ -16,7 +16,6 @@ public class CommonBoardDto {
 	private Date regDate;
 	private int readCount;
 	private boolean deleted;
-	//private int boardInfoNo;
 	
 	private List<BoardAttachDto> boardAttachList;
 	
