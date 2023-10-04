@@ -21,9 +21,10 @@ public interface BoardCommentMapper {
 	void insertComment(BoardCommentDto boardCommentDto);
 	
 	//댓글 목록
-	//사용할 댓글 위치 찾기
-	@Select("select commentNo, commonNo, userNo, commentContent, regDate, deleted "
-			+ "from BoardComment "
+	@Select("select u.nickname, bc.commentNo, bc.commonNo, bc.commentContent, bc.regDate, bc.deleted "
+			+ "from BoardComment bc "
+			+ "inner join User u "
+			+ "on u.userNo = bc.userNo "
 			+ "where commonNo = #{ commonNo } "
 			+ "order by commentNo desc")
 	List<BoardCommentDto> selectBoardCommentByCommonNo(@Param("commonNo") int commonNo);
