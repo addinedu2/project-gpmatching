@@ -30,22 +30,28 @@ public interface CommonBoardMapper {
 	void insertBoardAttach(BoardAttachDto attach);
 	
 	//공통게시판 글 전체 조회
-	@Select("select commonNo, commonTitle, commonContent, userNo, readCount, regDate, deleted "
-		  + "from CommonBoard "
+	@Select("select u.nickname, cb.commonNo, cb.commonTitle, cb.commonContent, cb.userNo, cb.readCount, cb.regDate, cb.deleted "
+	 	  + "from CommonBoard cb "
+		  + "inner join User u "
+		  + "on u.UserNo = cb.UserNo "
 		  + "order by commonNo desc")
-	List<CommonBoardDto> selectAllBoard();//전체 리스트 가져오기
+	List<CommonBoardDto> selectAllBoard();
 	
 	//공통게시판 페이지별 조회
-	@Select("select commonNo, commonTitle, commonContent, userNo, readCount, regDate, deleted "
-			  + "from CommonBoard "
-			  + "order by commonNo desc "
-			  + "limit #{from}, #{count}")
-		List<CommonBoardDto> selectBoardByPage(@Param("from")int from, @Param("count")int count);
+	@Select("select u.nickname, cb.commonNo, cb.commonTitle, cb.commonContent, cb.userNo, cb.readCount, cb.regDate, cb.deleted "
+		  + "from CommonBoard cb "
+	      + "inner join User u "
+		  + "on u.UserNo = cb.UserNo "
+		  + "order by commonNo desc "
+		  + "limit #{from}, #{count}")
+	List<CommonBoardDto> selectBoardByPage(@Param("from")int from, @Param("count")int count);
 	
-	//공통게시판 글 삭제 표시
-	@Select("select commonNo, commonTitle, commonContent, userNo, readCount, regDate, deleted "
-		  + "from CommonBoard "
-		  + "where commonNo = #{commonNo} and deleted = false")
+	//공통게시판 글 상세 보기
+	@Select("select u.nickname, cb.commonNo, cb.commonTitle, cb.commonContent, cb.userNo, cb.readCount, cb.regDate, cb.deleted "
+		  + "from CommonBoard cb "
+		  + "inner join User u "
+	 	  + "on u.UserNo = cb.UserNo "
+	 	  + "where commonNo = #{commonNo} and deleted = false")
 	CommonBoardDto selectCommonBoardByCommonNo(@Param("commonNo") int commonNo);
 
 	//첨부파일 조회

@@ -16,6 +16,7 @@ public class CommonBoardDto {
 	private Date regDate;
 	private int readCount;
 	private boolean deleted;
+	private String nickname;//닉네임 표시
 	
 	private List<BoardAttachDto> boardAttachList;
 	

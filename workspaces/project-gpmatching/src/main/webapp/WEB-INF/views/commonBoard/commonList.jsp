@@ -64,7 +64,7 @@
    </thead>
    <!-- commonNo, commonTitle, userNo, readCount, regDate --> 
    <tbody>
-   <c:forEach var="commonBoard" items="${commonBoardList }">
+   <c:forEach var="commonBoard" items="${requestScope.commonBoardList }">
       <tr>
          <td>${commonBoard.commonNo }</td>
          <td style="text-align:left; padding-left:10px">
@@ -77,7 +77,7 @@
          	</c:otherwise>
          </c:choose>
          
-         <td>${ commonBoard.userNo }</td>
+         <td>${ commonBoard.nickname }</td>
          <td>${ commonBoard.readCount }</td>
          <td>
          	<fmt:formatDate value="${ commonBoard.regDate }"
