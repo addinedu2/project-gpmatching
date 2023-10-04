@@ -27,6 +27,7 @@ public class CommonBoardServiceImpl implements CommonBoardService {
 			commonBoardMapper.insertBoardAttach(attach);
 		}
 	}
+	
 
 	//공통게시판 리스트
 	@Override
@@ -41,16 +42,19 @@ public class CommonBoardServiceImpl implements CommonBoardService {
 	@Override
 	public CommonBoardDto findCommonBoardByCommonNo(int commonNo) {
 		
-		CommonBoardDto commonBoardDto = commonBoardMapper.selectCommonBoardByCommonNo(commonNo);
+		CommonBoardDto commonBoard = commonBoardMapper.selectCommonBoardByCommonNo(commonNo);
 
-		if(commonBoardDto != null) {
+		if(commonBoard != null) {
 			List<BoardCommentDto> commentList = boardCommentMapper.selectBoardCommentByCommonNo(commonNo);
-			commonBoardDto.setBoardCommentList(commentList);
+			commonBoard.setBoardCommentList(commentList);
+			
+			List<BoardAttachDto> attachList = commonBoardMapper.selectBoardAttachByCommonNo(commonNo);
+			commonBoard.setBoardAttachList(attachList);
 		}
 		
-		
-		return commonBoardDto;
+		return commonBoard;
 	}
+	
 	
 	//공통게시판 글 삭제
 	@Override
@@ -60,8 +64,8 @@ public class CommonBoardServiceImpl implements CommonBoardService {
 	
 	//공통게시판 글 수정
 	@Override
-	public void commonEdit(CommonBoardDto commonBoardDto) {
-		commonBoardMapper.updateCommonEdit(commonBoardDto);
+	public void commonEdit(CommonBoardDto commonBoard) {
+		commonBoardMapper.updateCommonEdit(commonBoard);
 	}
 
 	//공통게시판 특정 페이지 조회
@@ -78,5 +82,21 @@ public class CommonBoardServiceImpl implements CommonBoardService {
 		int count = commonBoardMapper.selectCommonBoardCount();
 		return count;
 	}
+	
+	//첨부파일
+	@Override
+	public List<BoardAttachDto> findBoardAttachByCommonNo(int commonNo){
+		List<BoardAttachDto> attachList = commonBoardMapper.selectBoardAttachByCommonNo(commonNo);
+		
+		return attachList;
+	}
+	
+	@Override
+	public BoardAttachDto findBoardAttachByBoardAttachNo(int boardAttachNo) {
+		BoardAttachDto attach = commonBoardMapper.selectBoardAttachByBoardAttachNo(boardAttachNo);
+		
+		return attach;
+	}
 
+	
 }
