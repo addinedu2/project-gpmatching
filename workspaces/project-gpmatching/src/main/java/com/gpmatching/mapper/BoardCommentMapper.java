@@ -21,10 +21,16 @@ public interface BoardCommentMapper {
 	void insertComment(BoardCommentDto boardCommentDto);
 	
 	//댓글 목록
-	@Select("select u.nickname, bc.commentNo, bc.commonNo, bc.commentContent, bc.regDate, bc.deleted "
-			+ "from BoardComment bc "
-			+ "inner join User u "
-			+ "on u.userNo = bc.userNo "
+//	@Select("select u.nickname, bc.commentNo, bc.commonNo, bc.commentContent, bc.regDate, bc.deleted "
+//			+ "from BoardComment bc "
+//			+ "inner join User u "
+//			+ "on u.userNo = bc.userNo "
+//			+ "where commonNo = #{ commonNo } "
+//			+ "order by commentNo desc")
+//	List<BoardCommentDto> selectBoardCommentByCommonNo(@Param("commonNo") int commonNo);
+	
+	@Select("select commentNo, commonNo, userNo, commentContent, regDate, deleted "
+			+ "from BoardComment "
 			+ "where commonNo = #{ commonNo } "
 			+ "order by commentNo desc")
 	List<BoardCommentDto> selectBoardCommentByCommonNo(@Param("commonNo") int commonNo);
