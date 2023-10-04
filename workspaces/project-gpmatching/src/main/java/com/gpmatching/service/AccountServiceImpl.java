@@ -11,6 +11,7 @@ public class AccountServiceImpl implements AccountService {
 	@Setter
 	private UserMapper userMapper;
 	
+	//회원가입
 	@Override
 	public void register(UserDto user) { //회원 가입을 할 거다
 		
@@ -32,9 +33,12 @@ public class AccountServiceImpl implements AccountService {
 		return loginUser;  //컨트롤러에서 보자
 	}
 	
+	
+	
+	//마이페이지 수정
 	@Override
 	public void editUser(UserDto user) {
-		//데이베이스 데이터 수정(mapper 사용)
+		//데이터베이스 데이터 수정(mapper 사용)
 		userMapper.updateUserProfile(user);
 		
 	}

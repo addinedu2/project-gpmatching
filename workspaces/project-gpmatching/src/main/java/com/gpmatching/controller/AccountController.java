@@ -30,6 +30,7 @@ public class AccountController {
 		//어카운트 서비스에서만 돌릴것
 	}
 
+	//회원가입 버튼
 	@GetMapping(path = { "/register" })
 	public String registerForm (HttpSession session, Model model) {
  		// 이미 로그인된 사용자가 있을 경우 마이 페이지로 리디렉션
@@ -38,7 +39,7 @@ public class AccountController {
 	    } else {
 	        return "account/register";
 	    }
-	}//회원가입 버튼
+	}
 
 		
 //	@PostMapping(path = { "/register" })  todo
@@ -53,16 +54,18 @@ public class AccountController {
 //		return "redirect:/home";
 //	}//회원가입 폼 한 후 홈으로 돌아오기
 
+	
+	//회원 가입
 	@PostMapping(path = { "/register" })
 	public String register(@ModelAttribute("user") UserDto user) {
 	// AccountService accountService = new AccountServiceImpl();
 		accountService.register(user);
 		return "redirect:/home";
-	}//회원 가입
+	}
 	
 	
 	
-	
+	//로그인 버튼
 	@GetMapping(path = {"/login"})
 	public String loginForm(HttpSession session, Model model) {
 	    // 이미 로그인된 사용자가 있을 경우 마이 페이지로 리디렉션
@@ -71,9 +74,10 @@ public class AccountController {
 		    } else {
 		        return "account/login";
 		    }
-		}//로그인 버튼
+		}
 
 	
+	//로그인 성공/실패	
 	@PostMapping(path = {"/login"})
 	public String login(UserDto user, HttpSession session, Model model) {
 	UserDto loginUser = accountService.findLoginUser(user);
@@ -84,16 +88,17 @@ public class AccountController {
 		} else {
 			model.addAttribute("loginfail", true); // 로그인 실패를 했으니 "loginfail"에 참 넣기
 			return "account/login";
-		}//로그인 성공/실패		
+		}	
 		
 	}
 		
+	//로그아웃
 	@GetMapping(path = {"/logout"})
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginuser"); //세션 정보에서 "loginuser"를 뺀다=로그아웃
 		return "redirect:/home";
 		//return "account/logout";
-	}  //로그아웃
+	}
 	
 	
 	//비밀번호 찾기 페이지 가기

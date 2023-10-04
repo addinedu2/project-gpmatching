@@ -141,6 +141,7 @@
                         <input type="Email" class="form-control" name="userEmail" placeholder="${loginuser.userEmail}" id="userEmail">
                       </div>
                     </div>
+                    
                     <!-- row -->
                     <div class="mb-3 row">
                       <label for="phone" class="col-sm-4 col-form-label
@@ -149,11 +150,11 @@
                         <input type="text" class="form-control" name="userPhone" placeholder="${loginuser.userPhone}" id="userPhone">
                       </div>
                     </div>
+                    
                     <!-- row -->
                     <div class="mb-3 row">
                       <label for="location" class="col-sm-4 col-form-label
                           form-label">닉네임</label>
-
                       <div class="col-md-8 col-12">
                   <input type="text" class="form-control" name="nickname" placeholder="${loginuser.nickname}" id="nickname">
                    <!--      <select class="form-select" id="newnickname">
@@ -164,16 +165,16 @@
                           </select> -->  <!-- 데이터 선택이라 일단 주석으로 남겨놓는다 -->
                       </div>
                     </div>
+                    
                     <!-- row -->
                     <div class="mb-3 row">
                       <label for="addressLine" class="col-sm-4 col-form-label
-                          form-label">Address line 1</label>
-
-
+                          form-label">등록일</label>
                       <div class="col-md-8 col-12">
                         <input type="text" class="form-control" placeholder="placeholder" id="addressLine">
                       </div>
                     </div>
+                    
                     <!-- row -->
                     <div class="mb-3 row">
                       <label for="addressLineTwo" class="col-sm-4

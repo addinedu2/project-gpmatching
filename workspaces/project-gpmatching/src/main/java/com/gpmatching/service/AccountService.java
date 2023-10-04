@@ -12,4 +12,6 @@ public interface AccountService {
 	
 	boolean isUserIdValid(String userId);  //로그인 중복검사
 	
+
+	
 }

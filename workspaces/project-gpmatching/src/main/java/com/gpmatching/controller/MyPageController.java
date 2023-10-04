@@ -17,6 +17,7 @@ import com.gpmatching.service.AccountService;
 @RequestMapping(path = {"/account"})
 public class MyPageController {
 	private AccountService accountService;
+	
 		
 	@Autowired
 	@Qualifier("accountService")
@@ -24,6 +25,12 @@ public class MyPageController {
 		this.accountService = accountService;
 	}
 	
+	//mypageservice test용
+//	@Autowired
+//	@Qualifier("mypageService")
+//	public void setMypageService(MypageService mypageService) {
+//		this.mypageService = mypageService;
+//	}
 	
 	@GetMapping(path = {"/mypage"})
 	public String mypage(HttpSession session, Model model) {
@@ -39,7 +46,7 @@ public class MyPageController {
 	}//마이페이지 버튼
 
 	
-	
+	// 마이페이지 수정 버튼(로그인 하고 들어갈 수 있는 컨트롤러)
 	@GetMapping(path = {"/editMypage"})
 	public String editmypage(HttpSession session, Model model) {
 		UserDto loginUser = (UserDto) session.getAttribute("loginuser");
@@ -51,18 +58,21 @@ public class MyPageController {
 				return "account/login";
 			}
 		
-	} // 마이페이지 수정 버튼(로그인 하고 들어갈 수 있는 컨트롤러)
+	} 
 
+	//마이페이지 수정(데이터베이스에 보내기)
 	@PostMapping(path = {"/editMypage"})
-	public String updateUserProfile(UserDto loginUser, HttpSession session, Model model) {
-		accountService.editUser(loginUser);
+	public String updateUserProfile(UserDto loginUser, HttpSession session, Model model)  {
 		// 수정된 사용자 정보를 데이터베이스에 업데이트
-		session.setAttribute("loginuser", loginUser);
+		accountService.editUser(loginUser);
+		
 		// 세션에서 사용자 정보 업데이트
+		session.setAttribute("loginuser", loginUser);
 
-		return "redirect:mypage";
 		//수정 후 리다이렉트할 페이지 
-	}//마이페이지 수정(데이터베이스에 보내기)
+		return "redirect:mypage";
+		
+	}
 	
 	
 	
