@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gpmatching.dto.BoardCommentDto;
+import com.gpmatching.dto.MatchingAlarmDto;
 import com.gpmatching.service.BoardCommentService;
+import com.gpmatching.service.CommonBoardService;
+import com.gpmatching.service.MatchingAlarmService;
 
 import lombok.Setter;
 
@@ -18,6 +21,9 @@ public class BoardCommentController {
 	
 	@Setter(onMethod_ = { @Autowired })
 	private BoardCommentService boardCommentService;
+	
+	
+
 	
 	//공통게시판 댓글 쓰기
 	@PostMapping(path= {"/writeComment"})

@@ -19,7 +19,6 @@ import com.gpmatching.service.AccountService;
 @RequestMapping(path = { "/account" })
 public class AccountController {
 
-
 	private AccountService accountService;
 
 	@Autowired

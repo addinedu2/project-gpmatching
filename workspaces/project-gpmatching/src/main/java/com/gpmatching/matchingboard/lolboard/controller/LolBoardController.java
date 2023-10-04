@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gpmatching.dto.MatchingAlarmDto;
 import com.gpmatching.matchingboard.dto.LolDto;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 import com.gpmatching.matchingboard.lolboard.service.LolBoardService;
@@ -47,6 +48,8 @@ public class LolBoardController {
 	@Setter(onMethod_ = { @Autowired }) 
 	private LolService lolService;
 	
+	
+
 	
 	/**
 	 * 롤 매칭 게시판 보기
@@ -97,11 +100,13 @@ public class LolBoardController {
 	@PostMapping(path = { "/lol-write"})
 	public String writeLolMatchingBoard(MatchingBoardDto matchingBoardDto, LolDto lolDto) {
 		
+		
 		//롤 게임번호 주기
 		matchingBoardDto.setGameNo(5);
 		lolBoardService.write(matchingBoardDto);
 		int boardNo = lolBoardService.getLastMatchingItemBoardNo();
 		lolService.write(lolDto, boardNo);
+		
 		
 		return "redirect:lol-list";	
 	}

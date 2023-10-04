@@ -31,6 +31,8 @@ import com.gpmatching.service.CommonBoardService;
 import com.gpmatching.service.CommonBoardServiceImpl;
 import com.gpmatching.service.GameListService;
 import com.gpmatching.service.GameListServiceImpl;
+import com.gpmatching.service.MatchingAlarmService;
+import com.gpmatching.service.MatchingAlarmServiceImpl;
 import com.gpmatching.service.MatchingCommentService;
 import com.gpmatching.service.MatchingCommentServiceImpl;
 import com.gpmatching.service.MatchingReviewService;
@@ -156,6 +158,12 @@ public class RootConfiguration implements ApplicationContextAware {
 	public PubgBoardService pubgBoardService() {
 		
 		return new PubgBoardServiceImpl();
+	}
+	
+	@Bean
+	public MatchingAlarmService matchingAlarmService() {
+		
+		return new MatchingAlarmServiceImpl();
 	}
 
 

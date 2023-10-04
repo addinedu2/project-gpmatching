@@ -7,4 +7,5 @@ public class MatchingAlarmDto {
 
 	private int alarmNo;
 	private int mCommentNo;
+	private String alarmContent;
 }

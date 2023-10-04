@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.gpmatching.interceptor.AlarmInterceptor;
 import com.gpmatching.interceptor.AuthInterceptor;
 
 @Configuration
@@ -48,7 +49,13 @@ public class WebConfiguration implements WebMvcConfigurer {
 	public AuthInterceptor authInterceptor() {
 		return new AuthInterceptor();
 	}
-		
+	
+	//알림 인터셉터 bean 등록
+	@Bean
+	public AlarmInterceptor alarmInterceptor() {
+		return new AlarmInterceptor();
+	}
+	
 	//인터셉터 bean 추가
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -56,7 +63,9 @@ public class WebConfiguration implements WebMvcConfigurer {
 				.addPathPatterns("/boardMatching/**") // 로그인 검증 인터셉터를 매칭게시판에 적용
 				.excludePathPatterns("/boardMatching/lolBoard/lol-list", "/boardMatching/pubgBoard/battleground-list", 
 						"/boardMatching/overwatchBoard/overwatch-list"); // 게시물 보기는 로그인 없이 가능 
-
+		registry.addInterceptor(alarmInterceptor());	// 알림 인터셉터 추가
 	}
+	
+	
 
 }
