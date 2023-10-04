@@ -35,6 +35,17 @@ public interface UserMapper {
 			+ "WHERE userId = #{userId}") 
 	void updateUserProfile(UserDto user);
 	//내 정보 수정하는 메서드
+
+	//로그인 중복검사
+	@Select(  "select count(*) "
+			+ "from User "
+			+ "where userId = #{ userId }")
+	int selectUserCountMyUserId(String userId);
+	
+
+
+	
+	
 	
 
 //	@Update("UPDATE User SET deletedUser = true " //  delelted 값을 참으로 돌린다

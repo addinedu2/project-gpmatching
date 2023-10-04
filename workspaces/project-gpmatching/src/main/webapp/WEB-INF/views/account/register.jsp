@@ -55,9 +55,17 @@
             <form:form id="registerform" action="register" method="post" modelAttribute="user">
               <!-- userId -->
               <div class="mb-3">
+					<label for="userId" class="form-label">회원 ID</label>
+					<div class="input-group">
+						<input type="text" id="userId" class="form-control" name="userId" placeholder="회원 ID" required="">
+						<button id="checkDup" class="btn btn-primary">중복검사</button>
+						<form:errors path="userId" cssClass="error"></form:errors>
+					</div>
+			  </div>
+              <!-- <div class="mb-3">
                 <label for="userId" class="form-label">회원 ID</label>
                 <input type="text" id="userId" class="form-control" name="userId" placeholder="회원 ID" required="">
-              </div>
+              </div> -->
               <!-- Password -->
               <div class="mb-3">
                 <label for="password" class="form-label">회원 비밀번호</label>
@@ -101,7 +109,7 @@
               <div>
                 <!-- Button -->
                 <div class="d-grid">
-                  <button type="submit" class="btn btn-primary">
+                  <button id="registerComplete" type="submit" class="btn btn-primary">
                     회원 가입 완료!
                   </button>
                 </div>
@@ -125,6 +133,64 @@
       </div>
     </div>
   </div>
+  
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  
+  <script>
+	
+	$(function () {
+		
+		let dupChecked = false;		// 중복검사 실행여부를 저장하는 변수
+		
+		$("#checkDup").on("click", function(event) {
+			event.preventDefault(); // 이벤트 발생 객체의 원래 동작 실행 막기. 그냥 넣어주면됨
+			
+			const userId = $("#userId").val();
+			if (!userId){ // !userId : null or "" 인 경우 true -> 사용자가 입력하지 않은경우
+				alert('아이디를 입력하세요');
+				$('#userId').focus();
+				return;
+			}
+			
+			$.ajax({
+				"url": "check-id-dup",
+				"method": "get",  //type을 써도됨
+				"data" : { "userId" : userId },
+				"async" : true,
+				"success": function(data, status, xhr) {   //"success" 정상적으로 처리됐을때 호출
+					if(data == "true"){
+						dupChecked = true;  //중복체크
+						alert("사용 가능한 아이디 입니다");
+					}else{
+						dupChecked = false;
+						alert("이미 사용중이다");
+					}
+				},
+				"error": function(xhr, status, err){	//"error" 정상적이지 않을때 호출
+					alert("error");
+				}
+			});
+		});
+		
+		$('#registerComplete').on('click', function(event){
+			event.preventDefault(); //이벤트 발생 객체의 원래 동작 실행 막기 
+			
+			if(!dupChecked){
+				alert("아이디 중복검사를 실행하세요");
+				return;
+			}
+			
+			$("#registerform").submit(); //중복검사 됐을때만 submit
+			
+		});
+		
+		$('#userId').on('keyup', function(){  //키보드를 손대면 다시 중복검사 ,( keyup, keydown )
+			dupChecked = false;
+		});
+		
+	});
+	
+	</script>
 
   <!-- Scripts -->
   <!-- Libs JS -->

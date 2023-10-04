@@ -95,7 +95,7 @@ public class RootConfiguration implements ApplicationContextAware {
 	@Bean
 	public AccountServiceImpl accountService() {
 		AccountServiceImpl accountService = new AccountServiceImpl();
-		accountService.setUsermapper(applicationContext.getBean(UserMapper.class));
+		accountService.setUserMapper(applicationContext.getBean(UserMapper.class));
 		return accountService;
 	}
 	

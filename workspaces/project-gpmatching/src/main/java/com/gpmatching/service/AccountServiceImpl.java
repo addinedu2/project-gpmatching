@@ -9,7 +9,7 @@ import lombok.Setter;
 public class AccountServiceImpl implements AccountService {
 
 	@Setter
-	private UserMapper usermapper;
+	private UserMapper userMapper;
 	
 	@Override
 	public void register(UserDto user) { //회원 가입을 할 거다
@@ -17,7 +17,7 @@ public class AccountServiceImpl implements AccountService {
 //		String hashPasswd = Util.getHashedString(user.getUserPwd(), "SHA-256" ); //입력한 비번 암호화
 //		user.setUserPwd(hashPasswd); //암호화 된 비번으로 넣기
 						
-		usermapper.insertUser(user);
+		userMapper.insertUser(user);
 	}
 	
 	@Override 
@@ -28,16 +28,28 @@ public class AccountServiceImpl implements AccountService {
 //		user.setUserPwd(hashedPasswd);
 
 
-		UserDto loginUser = usermapper.selectUserByIdAnduserPwd(user.getUserId(), user.getUserPwd());
+		UserDto loginUser = userMapper.selectUserByIdAnduserPwd(user.getUserId(), user.getUserPwd());
 		return loginUser;  //컨트롤러에서 보자
 	}
 	
 	@Override
 	public void editUser(UserDto user) {
 		//데이베이스 데이터 수정(mapper 사용)
-		usermapper.updateUserProfile(user);
+		userMapper.updateUserProfile(user);
 		
 	}
+
+	
+	
+	//로그인 중복검사
+	@Override
+	public boolean isUserIdValid(String userId) {
+		
+		int count = userMapper.selectUserCountMyUserId(userId);
+		return count == 0;
+	}
+	
+	
 	
 
 }
