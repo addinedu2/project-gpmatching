@@ -2,6 +2,7 @@ package com.gpmatching.service;
 
 import java.util.List;
 
+import com.gpmatching.dto.BoardAttachDto;
 import com.gpmatching.dto.CommonBoardDto;
 
 public interface CommonBoardService {
@@ -16,8 +17,10 @@ public interface CommonBoardService {
 
 	void deleteCommon(int commonNo);
 
-	void commonEdit(CommonBoardDto commonBoardDto);
+	void commonEdit(CommonBoardDto commonBoard);
 
-	
+	List<BoardAttachDto> findBoardAttachByCommonNo(int commonNo);
+
+	BoardAttachDto findBoardAttachByBoardAttachNo(int boardAttachNo);
 
 }
