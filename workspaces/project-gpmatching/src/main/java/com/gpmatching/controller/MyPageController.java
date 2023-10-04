@@ -25,12 +25,6 @@ public class MyPageController {
 		this.accountService = accountService;
 	}
 	
-	//mypageservice test용
-//	@Autowired
-//	@Qualifier("mypageService")
-//	public void setMypageService(MypageService mypageService) {
-//		this.mypageService = mypageService;
-//	}
 	
 	@GetMapping(path = {"/mypage"})
 	public String mypage(HttpSession session, Model model) {
