@@ -42,6 +42,7 @@ public interface CommonBoardMapper {
 		  + "from CommonBoard cb "
 	      + "inner join User u "
 		  + "on u.UserNo = cb.UserNo "
+		  + "where deleted=false "
 		  + "order by commonNo desc "
 		  + "limit #{from}, #{count}")
 	List<CommonBoardDto> selectBoardByPage(@Param("from")int from, @Param("count")int count);
