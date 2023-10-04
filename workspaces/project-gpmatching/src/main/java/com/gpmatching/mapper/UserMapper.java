@@ -30,11 +30,12 @@ public interface UserMapper {
 	UserDto selectUserByIdAnduserPwd(@Param("userId") String userId, @Param("userPwd") String userPwd);
 	//로그인할때 아이디와 비번 찾는 메서드
 	
+	//내 정보 수정하는 메서드
 	@Update ("UPDATE User "
 			+ "SET nickname = #{nickname}, userPhone = #{userPhone}, userEmail = #{userEmail} "
 			+ "WHERE userId = #{userId}") 
 	void updateUserProfile(UserDto user);
-	//내 정보 수정하는 메서드
+	
 
 	//로그인 중복검사
 	@Select(  "select count(*) "
