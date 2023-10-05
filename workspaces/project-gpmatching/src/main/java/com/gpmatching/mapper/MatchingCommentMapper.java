@@ -19,8 +19,8 @@ public interface MatchingCommentMapper {
 	@Options(useGeneratedKeys = true, keyProperty = "mCommentNo")
 	void insertMatchingComment(MatchingCommentDto matchingComment);
 	
-	// 아직 안씀
-	@Select("select commentNo, boardNo, boardContent "
+	
+	@Select("select mCommentNo, boardNo, boardContent, userNo "
 			+ "from MatchingComment "
 			+ "where boardNo = #{ boardNo }"
 			+ "order by commentNo desc")

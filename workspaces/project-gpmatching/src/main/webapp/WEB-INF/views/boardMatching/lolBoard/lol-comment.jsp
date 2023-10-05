@@ -80,7 +80,7 @@
 						</div>
 						
 						<!-- table  -->
-						<table id="matching-list" class="table table-sm table-dark table-hover">
+						<table class="table table-sm table-dark table-hover">
 							<thead>
 										
 								<tr>
@@ -233,7 +233,7 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-bs-dismiss="modal">닫기</button>
-								<button id="write-comment-lnk" type="button" class="btn btn-primary">등록</button>
+								<button type="submit" class="btn btn-primary">등록</button>
 							</div>
 						</form>
 					</div>
@@ -310,27 +310,6 @@
 	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 
 	<script>
-	//댓글 쓰기 이벤트 처리
-	$('#write-comment-lnk').on('click', function(event){
-		
-		const formData = $('#commentform').serialize();
-		$.ajax({
-			"url": "ajax-write-comment",
-			"method": "post",
-			"data": formData,
-			"success": function(data, status, xhr){
-				// alert(data);
-				// 댓글 목록 영역 업데이트 ( 부분 화면 갱신 )
-				// load : ajax 방식으로 서버에 요청을 보내고 수신한 html 을 사용해서 화면의 일부를 갱신하는 함수
-				alert("success");
-				
-			},
-			"error": function(xhr, status, err){
-				alert("fail");
-			}
-		});
-	});
-	
 	
 	// 버튼을 누르면 해당 행의 데이터를 포함한 모달창을 보여줌 (-허지웅)
 	$(function() {
