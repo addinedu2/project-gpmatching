@@ -98,7 +98,7 @@ public class ThePager {
 				+ "                            <a class='page-link' href='%s?pageNo=%d' aria-label='Next'> "
 				+ "                              <span aria-hidden='true'><i class='mdi mdi-chevron-double-right'></i></span> "
 				+ "                            </a> "
-				+ "                          </li>",linkUrl, pageNo + 1));
+				+ "                          </li>",linkUrl, pageCount));
 
 		}
 		
