@@ -212,7 +212,7 @@
 							<br><br>
 						</c:when>
 						<c:otherwise>
-							${ comment.userNo } &nbsp;&nbsp;
+							${ comment.nickname } &nbsp;&nbsp;
 							[<fmt:formatDate value="${ commonBoard.regDate }" pattern="yyyy-MM-dd"/>]
 						    <br /><br />
 						    <span>${ fn:replace(comment.commentContent, enter, "<br>") }</span>
