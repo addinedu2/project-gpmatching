@@ -21,6 +21,8 @@ import com.gpmatching.common.Util;
 import com.gpmatching.dto.BoardAttachDto;
 import com.gpmatching.dto.ReportBoardDto;
 import com.gpmatching.service.ReportBoardService;
+import com.gpmatching.ui.CommonPager;
+import com.gpmatching.ui.ReportPager;
 import com.gpmatching.ui.ThePager;
 import com.gpmatching.view.DownloadView;
 
@@ -46,8 +48,8 @@ public class ReportBoardController { //공통게시판, 댓글, 첨부파일 데
 		List<ReportBoardDto> reportBoardList = reportBoardService.listReportBoardByPage(from, pageSize, linkUrl);
 		
 		//페이지 번호 표시 부분
-		ThePager pager = 
-				new ThePager(dataCount, pageNo, pageSize, pagerSize, linkUrl);
+		ReportPager pager = 
+				new ReportPager(dataCount, pageNo, pageSize, pagerSize, linkUrl);
 		
 		model.addAttribute("reportBoardList",reportBoardList);
 		model.addAttribute("pager",pager);

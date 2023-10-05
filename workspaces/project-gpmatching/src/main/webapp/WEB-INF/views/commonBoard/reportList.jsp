@@ -82,7 +82,11 @@
       </c:forEach>
    </tbody>
 </table>
-             <div class="btn-center">${ pager }</div>
+              <div>
+             	<ul class="pagination justify-content-center mb-0">
+             	${ pager }
+             	</ul>
+             </div>
             </div>
             <%-- <jsp:include page="/WEB-INF/views/modules/testBottom.jsp" /> --%>
 	</script>
