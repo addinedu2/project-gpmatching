@@ -37,6 +37,7 @@ import com.gpmatching.service.MatchingCommentService;
 import com.gpmatching.service.MatchingCommentServiceImpl;
 import com.gpmatching.service.MatchingReviewService;
 import com.gpmatching.service.MatchingReviewServiceImpl;
+import com.gpmatching.service.MypageServiceImpl;
 import com.gpmatching.service.ReportBoardService;
 import com.gpmatching.service.ReportBoardServiceImpl;
 
@@ -101,6 +102,13 @@ public class RootConfiguration implements ApplicationContextAware {
 		AccountServiceImpl accountService = new AccountServiceImpl();
 		accountService.setUserMapper(applicationContext.getBean(UserMapper.class));
 		return accountService;
+	}
+	
+	@Bean
+	public MypageServiceImpl mypageService() {
+		MypageServiceImpl mypageService = new MypageServiceImpl();
+		//mypageService.setMypageMapper(applicationContext.getBean(MypageMapper.class));
+		return mypageService;
 	}
 	
 	@Bean

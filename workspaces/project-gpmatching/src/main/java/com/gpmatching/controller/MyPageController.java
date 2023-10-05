@@ -11,18 +11,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gpmatching.dto.UserDto;
-import com.gpmatching.service.AccountService;
+import com.gpmatching.service.MypageService;
 
 @Controller
 @RequestMapping(path = {"/account"})
 public class MyPageController {
-	private AccountService accountService;
+	
+	@Autowired
+	private MypageService mypageService;
 	
 		
 	@Autowired
-	@Qualifier("accountService")
-	public void setAccountService(AccountService accountService) {
-		this.accountService = accountService;
+	@Qualifier("mypageService")
+	public void setMypageService(MypageService mypageService) {
+		this.mypageService = mypageService;
 	}
 	
 	
@@ -58,15 +60,19 @@ public class MyPageController {
 	@PostMapping(path = {"/editMypage"})
 	public String updateUserProfile(UserDto loginUser, HttpSession session, Model model)  {
 		// 수정된 사용자 정보를 데이터베이스에 업데이트
-		accountService.editUser(loginUser);
+		mypageService.editUser(loginUser);
+		
+		UserDto selectForRegDate = mypageService.selectUserProfile(loginUser);
 		
 		// 세션에서 사용자 정보 업데이트
-		session.setAttribute("loginuser", loginUser);
+		session.setAttribute("loginuser", selectForRegDate);
 
 		//수정 후 리다이렉트할 페이지 
 		return "redirect:mypage";
 		
 	}
+	
+	
 	
 	
 	
