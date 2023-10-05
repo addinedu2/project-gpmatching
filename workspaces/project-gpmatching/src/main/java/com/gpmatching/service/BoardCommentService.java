@@ -1,5 +1,7 @@
 package com.gpmatching.service;
 
+import java.util.List;
+
 import com.gpmatching.dto.BoardCommentDto;
 
 public interface BoardCommentService {
@@ -9,6 +11,8 @@ public interface BoardCommentService {
 	void deleteComment(int commentNo);
 
 	void editComment(BoardCommentDto boardComment);
+
+	List<BoardCommentDto> getCommentListByCommonNo(int commonNo);
 
 	
 

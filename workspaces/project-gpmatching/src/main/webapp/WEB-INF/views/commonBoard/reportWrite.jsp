@@ -30,7 +30,7 @@
 	href="/project-gpmatching/resources/assets/libs/prismjs/themes/prism-okaidia.css"
 	rel="stylesheet">
 	
-<title>commonBoard</title>
+<title>신고 게시물</title>
 </head>
 
 <body class="bg-dark">
@@ -44,12 +44,19 @@
 		<!--  header -->
 		<jsp:include page="/WEB-INF/views/modules/header.jsp" />
 
+
+			<a href="/project-gpmatching/commonBoard/reportList">
+				<button type="button" class="btn btn-primary mb-2">신고 목록보기</button>
+			</a>
+			<a href="/project-gpmatching/home">
+				<button type="button" class="btn btn-primary mb-2">홈으로</button>
+			</a>
 		
 <form action="reportWrite" method="post" enctype="multipart/form-data">
 	<!-- title -->
 	<div class="mb-3 txt-box">
 	  <label class="form-label" for="textInput">제목</label>
-	  <input type="text" name="commonTitle" id="textInput" class="form-control" placeholder="제목 입력">
+	  <input type="text" name="commonTitle" id="textInput" class="form-control" placeholder="제목은 필수 사항입니다" required>
 	</div>
 	
 	<!--  nickname -->
@@ -61,7 +68,8 @@
 	<!-- content -->
 	 <div class="mb-3 txt-box">
 	   <label for="textarea-input" class="form-label">본문</label>
-	   <textarea class="form-control" name="commonContent" id="textarea-input" rows="5" placeholder="본문 입력"></textarea>
+	   <textarea class="form-control" name="commonContent" id="textarea-input" rows="5" placeholder="신고는 신중히 해주세요" required></textarea>
+	   
 	 </div>
 	 
 	  <!-- attach file -->

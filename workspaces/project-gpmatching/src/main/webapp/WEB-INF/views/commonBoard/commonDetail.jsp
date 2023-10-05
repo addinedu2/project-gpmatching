@@ -286,29 +286,49 @@
 			if (yes) {
 				location.href = 'deleteCommon/' + ${ commonBoard.commonNo } + "?pageNo=" + ${ pageNo };
 			}
-		});
+		});//delete
 		
 		// 댓글 쓰기 이벤트 처리
 		$("#write-comment-lnk").on("click", function(event) {
-			$('#commentform').submit(); // <input type="submit"을 클릭한 것과 같은 효과 --> form을 submit
-		});
+			const formData = $('#commentform').serialize(); // <input type="submit"을 클릭한 것과 같은 효과 --> form을 submit
+			
+			$.ajax({
+				"url" : "ajax-writeComment",
+				"method" : "post",
+				"data" : formData,
+				"success": function(data, status, xhr){
+					$('#comment-list').load('commentList?commonNo=${commonBoard.commonNo}');
+				},
+				"error" : function(xhr, status, err){
+					alert("fail");
+				}
+			});
+		
+		});//write
 		
 		// 댓글 삭제 이벤트 처리
-		$(".delete-comment").on('click', function(event) {
+		$("#comment-list").on('click', ".delete-comment", function(event) {
+		//$(".delete-comment").on('click', function(event) {
 			const commentNo = $(this).attr("data-comment-no");			
 			const yn = confirm(commentNo + "번 댓글을 삭제할까요?");
-			if (yn) { /* 여기서 BoardCommentController.java 의 /deleteComment에 연결시킬 것 */
-				location.href = 'deleteComment?commentNo=' + commentNo + 
-											  '&commonNo=' + ${ commonBoard.commonNo } + 
-											  '&pageNo=' + ${ pageNo };
+			if (yn) {
+				  $.ajax({
+						"url": "ajax-deleteComment",
+						"method": "get",
+						"data": "commentNo=" + commentNo,
+						"success": function(data, status, xhr) {
+							$('#comment-list').load('commentList?commonNo=${commonBoard.commonNo}');
+							currentEditCommentNo = null;
+						},
+						"error": function(xhr, status, err) {
+							alert("댓글 삭제 실패");
+						}
+				});
 			}
-		});
-
-		
-		let currentEditCommentNo = null;
+		});//delete
 		
 		// 편집 링크 클릭 이벤트 처리
-		$(".edit-comment").on('click', function(event) {
+		$("#comment-list").on('click', ".edit-comment", function(event) {
 			const commentNo = $(this).attr("data-comment-no");
 			
 			$('#comment-edit-area-' + commentNo).css('display', '');
@@ -320,8 +340,7 @@
 			}
 			currentEditCommentNo = commentNo;
 			
-		}); // end of addEventListener
-
+		}); //edit
 		
 		// 편집 취소 링크 클릭 이벤트 처리
 		$(".cancel-edit-comment").on('click', function(event) {
@@ -332,18 +351,29 @@
 			
 			currentEditCommentNo = null;
 			
-		}); // end of addEventListener
+		}); //edit cancel
 		
+		//여기까진 됨
 		// 댓글 수정 이벤트 처리
-		$(".update-comment").click(function(event) {
-
-			// const commentNo = $(this).attr("data-comment-no");
-			const commentNo = $(this).data('comment-no'); // data-속성이름="값" 으로 표현된 속성의 값 읽기
-			$('#comment-edit-area-' + commentNo + ' form').submit();
-			
-		});
-
-	});</script>
+		$("#comment-list").on("click", ".update-comment", function(event) {
+			const commentNo = $(this).data('comment-no');
+			const formData = $('#comment-edit-area-' + commentNo + ' form').serialize();
+			$.ajax({
+				"url" : "ajax-editComment",
+				"method" : "post",
+				"data" : formData,
+				"success" : function(data, status, xhr){
+					$("#comment-list").load('commentList?commonNo=${commonBoard.commonNo}');
+					currentEditCommentNo = null;
+				},
+				"error" : function(xhr, status, err){
+					alert("댓글 수정 실패");
+				}
+			})	
+		});//update
+	
+	 })
+	</script>
 	
 
 	<!-- Theme JS -->
