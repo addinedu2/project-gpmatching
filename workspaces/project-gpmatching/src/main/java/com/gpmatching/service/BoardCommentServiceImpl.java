@@ -1,5 +1,7 @@
 package com.gpmatching.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gpmatching.dto.BoardCommentDto;
@@ -11,6 +13,14 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	
 	@Setter(onMethod_ = { @Autowired })
 	private BoardCommentMapper boardCommentMapper;
+	
+	@Override
+	public List<BoardCommentDto> getCommentListByCommonNo(int commonNo) {
+		
+		List<BoardCommentDto> boardComments = boardCommentMapper.selectBoardCommentByCommonNo(commonNo);
+		
+		return boardComments;
+	}
 	
 	@Override   
  	public void writeComment(BoardCommentDto boardComment) {
