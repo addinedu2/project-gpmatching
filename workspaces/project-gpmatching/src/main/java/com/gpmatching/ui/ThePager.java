@@ -31,18 +31,30 @@ public class ThePager {
 		//1. 처음, 이전 항목 만들기
 		if (pageNo > 1) {
 			linkString.append(
-				String.format("[<a href='%s?pageNo=1'>처음</a>]",linkUrl));
-			linkString.append("&nbsp;");
-			linkString.append("&nbsp;");
-			linkString.append(String.format(
-				"[<a href='%s?pageNo=%d'>이전</a>]", linkUrl, pageNo - 1));
-			linkString.append("&nbsp;");
+				String.format("<li class='page-item'> "
+						+ "      <a class='page-link' href='%s?pageNo=1' aria-label='Previous'> "
+						+ "        <span aria-hidden='true'><i class='mdi mdi-chevron-double-left'></i></span> "
+						+ "      </a> "
+						+ "     </li>", linkUrl));
+			linkString.append(
+				String.format("<li class='page-item'> "
+					+ "          <a class='page-link' href='%s?pageNo=%d' aria-label='Previous'> "
+					+ "            <span aria-hidden='true'><i class='mdi mdi-chevron-left'></i></span> "
+					+ "          </a> "
+					+ "        </li>", linkUrl, pageNo - 1));
+			
 		} else {
-			linkString.append("[<span style='color:lightgray'>처음</span>]");
-			linkString.append("&nbsp;");
-			linkString.append("&nbsp;");
-			linkString.append("[<span style='color:lightgray'>이전</span>]");
-			linkString.append("&nbsp;");
+			linkString.append("<li class='page-item disabled'> "
+					+ "          <a class='page-link'' aria-label='Previous'> "
+					+ "            <span aria-hidden='true'><i class='mdi mdi-chevron-double-left'></i></span> "
+					+ "          </a> "
+					+ "        </li>");
+			linkString.append("<li class='page-item disabled'> "
+					+ "          <a class='page-link'' aria-label='Previous'> "
+					+ "            <span aria-hidden='true'><i class='mdi mdi-chevron-left'></i></span> "
+					+ "          </a> "
+					+ "        </li>");
+
 		}
 		
 		//2. 페이지 번호 Link 만들기
@@ -51,31 +63,43 @@ public class ThePager {
 		int end = start + pagerSize;
 		for (int i = start; i < end; i++) {
 			if (i > pageCount) break;
-			linkString.append("&nbsp;");
 			if(i == pageNo) {
-				linkString.append(String.format("[%d]", i));
+				linkString.append(String.format("<li class='page-item active' aria-current='page'> "
+						+ "                        <a class='page-link' href='%s?pageNo=%d'> "
+						+ "						     <span class='sr-only'> %d </span> "
+						+ "						   </a> "
+						+ "                      </li>", linkUrl, i, i));
 			} else { 
 				linkString.append(String.format(
-					"<a href='%s?pageNo=%d'>%d</a>", linkUrl, i, i));
+					"<li class='page-item'><a class='page-link' href='%s?pageNo=%d'>%d</a></li>", linkUrl, i, i));
 			}
-			linkString.append("&nbsp;");
 		}
 		
 		//3. 다음, 마지막 항목 만들기
 		if (pageNo < pageCount) {
-			linkString.append("&nbsp;");
-			linkString.append(String.format(
-				"[<a href='%s?pageNo=%d'>다음</a>]",linkUrl, pageNo + 1));
-			linkString.append("&nbsp;");
-			linkString.append("&nbsp;");
-			linkString.append(String.format(
-				"[<a href='%s?pageNo=%d'>마지막</a>]", linkUrl, pageCount));
+			linkString.append(String.format("<li class='page-item'> "
+				+ "                            <a class='page-link' href='%s?pageNo=%d' aria-label='Next'> "
+				+ "                              <span aria-hidden='true'><i class='mdi mdi-chevron-right'></i></span> "
+				+ "                            </a> "
+				+ "                          </li>",linkUrl, pageNo + 1));
+			linkString.append(String.format("<li class='page-item'> "
+			    + "                            <a class='page-link' href='%s?pageNo=%d' aria-label='Next'> "
+				+ "                              <span aria-hidden='true'><i class='mdi mdi-chevron-double-right'></i></span> "
+				+ "                            </a> "
+				+ "                          </li>", linkUrl, pageCount));
 		} else {
-			linkString.append("[<span style='color:lightgray'>다음</span>]");
-			linkString.append("&nbsp;");
-			linkString.append("&nbsp;");
-			linkString.append("[<span style='color:lightgray'>마지막</span>]");
-			linkString.append("&nbsp;");
+			linkString.append(String.format("<li class='page-item disabled'> "
+				+ "                            <a class='page-link' href='%s?pageNo=%d' aria-label='Next'> "
+				+ "                              <span aria-hidden='true'><i class='mdi mdi-chevron-right'></i></span> "
+				+ "                            </a> "
+				+ "                          </li>",linkUrl, pageNo + 1));
+
+			linkString.append(String.format("<li class='page-item disabled'> "
+				+ "                            <a class='page-link' href='%s?pageNo=%d' aria-label='Next'> "
+				+ "                              <span aria-hidden='true'><i class='mdi mdi-chevron-double-right'></i></span> "
+				+ "                            </a> "
+				+ "                          </li>",linkUrl, pageNo + 1));
+
 		}
 		
 		return linkString.toString();
