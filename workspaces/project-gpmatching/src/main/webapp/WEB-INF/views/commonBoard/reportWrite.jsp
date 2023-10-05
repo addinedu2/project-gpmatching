@@ -45,7 +45,7 @@
 		<jsp:include page="/WEB-INF/views/modules/header.jsp" />
 
 		
-<form action="commonWrite" method="post" enctype="multipart/form-data">
+<form action="reportWrite" method="post" enctype="multipart/form-data">
 	<!-- title -->
 	<div class="mb-3 txt-box">
 	  <label class="form-label" for="textInput">제목</label>
@@ -56,7 +56,7 @@
 	<div class="mb-3 txt-box">
 		<label class="form-label text-light" for="userNoInput">작성자 : ${ loginuser.nickname }</label>
 	<input name="userNo" type="hidden" id="userNoInput" class="form-control" value="${ loginuser.userNo }"> 
-	<input name="category" type="hidden" id="categoryInput" class="form-control" value="common"> 
+	<input name="category" type="hidden" id="categoryInput" class="form-control" value="report"> 
 	</div>
 	<!-- content -->
 	 <div class="mb-3 txt-box">

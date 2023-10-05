@@ -53,7 +53,7 @@
 		   <div class="card-body">
 		   	  <input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
 		   	  <input type="hidden" name="userNo" value="${ loginuser.userNo }" />
-
+			<input type="hidden" name="category"  value="review"> 
 		      <h5 class="card-title">평점 리뷰 기능</h5>
 		      <span>글제목 : ${ commonBoard.commonTitle }</span>
 		      <br>
