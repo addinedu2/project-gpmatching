@@ -106,7 +106,6 @@
 							         	<th scope="col">마이크사용</th>
 							         	<th scope="col">마감여부</th>
 							        	<th scope="col">등록일시</th>
-							       	  	<th scope="col">조회수</th>
 							         	<th scope="col">댓글</th>
 							         	<th scope="col"></th>
 									</tr>
@@ -116,20 +115,20 @@
 									<c:forEach var="matchingBoard" items="${ requestScope.matchingLolList }" varStatus="vs">
 										<tr id="tr-${ matchingBoard.boardNo }" data-title="${ matchingBoard.boardTitle }">
 
-											<th>${ matchingLolList[vs.index].get("nickname") }</th>
-											<th>${ matchingLolList[vs.index].get("boardTitle") }</th>
-											<th>${ matchingLolList[vs.index].get("boardContent") }</th>
+											<th scope="row">${ matchingBoard.nickname }</th>
+											<th>${ matchingBoard.boardTitle }</th>
+											<th>${ matchingBoard.boardContent }</th>
 											<td>
-											<c:set var="lolTier" value="${ matchingLolList[vs.index].get('lolTier') }" />
+											<c:set var="lolTier" value="${ matchingBoard.lolTier }" />
 											<c:choose>
 												<c:when test = "${ lolTier eq 'bronze'}">
-													<span class="badge bg-danger">${ matchingLolList[vs.index].get("lolTier") }</span>
+													<span class="badge bg-danger">${ matchingBoard.lolTier }</span>
 												</c:when>
 												<c:when test = "${ lolTier eq 'silver'}">
-													<span class="badge rounded-pill bg-light text-dark">${ matchingLolList[vs.index].get("lolTier") }</span>
+													<span class="badge rounded-pill bg-light text-dark">${ matchingBoard.lolTier }</span>
 												</c:when>	
 												<c:when test = "${ lolTier eq 'gold'}">
-													<span class="badge bg-warning">${ matchingLolList[vs.index].get("lolTier") }</span>
+													<span class="badge bg-warning">${ matchingBoard.lolTier }</span>
 												</c:when>
 												<c:otherwise>
 													<span class="badge bg-dark">unranked</span>
@@ -137,7 +136,7 @@
 											</c:choose>
 											</td>
 											<td>
-											<c:set var="lolPosition" value="${ matchingLolList[vs.index].get('lolPosition') }" />
+											<c:set var="lolPosition" value="${ matchingBoard.lolPosition }" />
 											<c:choose>
 												<c:when test = "${ lolPosition eq 'top'}">
 													<img src="/project-gpmatching/resources/assets/images/lolposition/top.svg" width=24px>
@@ -155,21 +154,23 @@
 													<img src="/project-gpmatching/resources/assets/images/lolposition/support.svg" width=24px>
 												</c:when>
 												<c:otherwise>
-													${ matchingLolList[vs.index].get("lolPosition") }
+													${ matchingBoard.lolPosition }
 												</c:otherwise>
 											</c:choose>
 											</td>
-											<th>${ matchingLolList[vs.index].get("lolSur") }</th>
-											<th>${ matchingLolList[vs.index].get("lolPlay") }</th>
-											<th>${ matchingLolList[vs.index].get("preferGender") }</th>
-											<th>${ matchingLolList[vs.index].get("mic") }</th>
-											<th>${ matchingLolList[vs.index].get("matchingClose") }</th>
-											<th>${ matchingLolList[vs.index].get("regDate") }</th>
-											<th>${ matchingLolList[vs.index].get("readCount") }</th>
+											<th>${ matchingBoard.lolSur }</th>
+											<th>${ matchingBoard.lolPlay }</th>
+											<th>${ matchingBoard.preferGender }</th>
+											<th>${ matchingBoard.mic }</th>
+											<th>${ matchingBoard.matchingClose }</th>
+											<th>
+												<fmt:formatDate value="${ matchingBoard.regDate }"
+         				    						pattern="yyyy-MM-dd"/>
+											</th>
 											<th class="align-middle">
 												<!-- Varying modal -->
 												<button type="button" class="btn btn-primary btn-show-comment-modal" 
-														data-boardno="${ matchingLolList[vs.index].get('boardNo') }">${ matchingLolList[vs.index].get("boardNo") }
+														data-boardno="${ matchingBoard.boardNo }">${ matchingBoard.boardNo }
 												</button>
 											</th>
 											<th>
@@ -179,7 +180,7 @@
 												      +
 												</button>
 											   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-													<a class="dropdown-item" href="#">수정</a>
+													<a class="dropdown-item" href="lol-edit?boardNo=${matchingBoard.boardNo}">수정</a>
 													<a class="dropdown-item" href="#">삭제</a>
 											   </div>
 											 </div>

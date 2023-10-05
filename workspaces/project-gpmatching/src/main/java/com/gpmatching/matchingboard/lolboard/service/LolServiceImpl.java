@@ -20,9 +20,8 @@ public class LolServiceImpl implements LolService {
 	}
 
 	@Override
-	public void edit(LolDto lolDto, int boardNo){
+	public void edit(LolDto lolDto){
 		
-		lolDto.setBoardNo(boardNo);
 		mapper.update(lolDto);
 	}
 

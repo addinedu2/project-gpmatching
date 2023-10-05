@@ -26,6 +26,13 @@ public class LolBoardServiceImpl implements LolBoardService {
 		
 	}
 	
+	@Override
+	public void edit(MatchingBoardDto matchingBoardDto) {
+
+		mapper.updateMatchingBoard(matchingBoardDto);
+		
+	}
+	
 //	@Override
 //	public List<MatchingBoardDto> listMatchingBoard() {
 //		
@@ -58,10 +65,24 @@ public class LolBoardServiceImpl implements LolBoardService {
 	
 	
 	@Override
-	public List<Map<String, String>> getSelectLolMatchingMapByGameName(String gameName) {
-		List<Map<String, String>> list = mapper.selectLolMatchingMapByGameName(gameName);
+	public List<MatchingBoardDto> getSelectLolBoardListByGameName(String gameName) {
+		List<MatchingBoardDto> list = mapper.selectLolBoardListByGameName(gameName);
 		return list;
 	}
+	
+	@Override
+	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {
+		
+		return mapper.selectMatchingBoardByBoardNo(boardNo);
+	}
+	
+	@Override
+	public MatchingBoardDto findLolBoardByBoardNo(int boardNo) {
+		MatchingBoardDto lolBoard = mapper.selectLolBoardByBoardNo(boardNo);
+		return lolBoard;
+	}
+
+
 	
 	
 //	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {

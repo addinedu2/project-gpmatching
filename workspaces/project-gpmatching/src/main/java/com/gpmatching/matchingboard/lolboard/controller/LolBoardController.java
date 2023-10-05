@@ -62,7 +62,7 @@ public class LolBoardController {
 	@GetMapping(path = { "/lol-list"})
 	public String matchingBoardList(Model model) {
 		
-		List<Map<String, String>> matchingLolList = lolBoardService.getSelectLolMatchingMapByGameName("league of legends");
+		List<MatchingBoardDto> matchingLolList = lolBoardService.getSelectLolBoardListByGameName("league of legends");
 				
 		model.addAttribute("matchingLolList", matchingLolList);
 		
@@ -111,4 +111,43 @@ public class LolBoardController {
 		return "redirect:lol-list";	
 	}
 
+	/**
+	 * 롤 매칭 게시판 수정 view 요청
+	 * 
+	 * @param session 글 작성자 세션 정보
+	 * @return 롤 게시판 뷰
+	 */
+	
+	
+	@GetMapping(path = { "/lol-edit"})
+	public String showLolEditForm(HttpSession session, int boardNo, Model model) {
+		
+		MatchingBoardDto lolMatchingBoard = lolBoardService.findLolBoardByBoardNo(boardNo);
+		
+		model.addAttribute("lolMatchingBoard", lolMatchingBoard);
+		
+		//System.out.println(lolMatchingBoard);
+		
+		return "/boardMatching/lolBoard/lol-edit";
+	}
+	
+	
+	
+	/**
+	 * 롤 매칭 게시판 글수정 form 요청
+	 * 
+	 * @param matchingBoardDto 매칭게시판 matchingBoard 테이블
+	 * @param lolDto 롤 Lol 테이블 
+	 * @return 롤 게시판 뷰 리다이렉트 요청
+	 */
+	
+	
+	@PostMapping(path = { "/lol-edit"})
+	public String editLolMatchingBoard(MatchingBoardDto matchingBoardDto, LolDto lolDto) {
+		
+		lolBoardService.edit(matchingBoardDto);
+		lolService.edit(lolDto);
+		
+		return "redirect:lol-list";	
+	}
 }
