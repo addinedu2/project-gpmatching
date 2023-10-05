@@ -98,6 +98,10 @@
                 <div>
                   <a href="/project-gpmatching/account/editMypage" class="btn btn-outline-primary
                       d-none d-md-block">회원정보 수정</a>
+                  <a href="/project-gpmatching/commonBoard/reportList" class="btn btn-outline-primary
+                      d-none d-md-block">신고 게시판</a>
+                   <a href="/project-gpmatching/commonBoard/reviewtestList" class="btn btn-outline-primary
+                      d-none d-md-block">리뷰 게시판</a>
                 </div>
               </div>
               <!-- nav -->

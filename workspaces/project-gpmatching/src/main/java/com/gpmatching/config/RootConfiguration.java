@@ -37,6 +37,8 @@ import com.gpmatching.service.MatchingCommentService;
 import com.gpmatching.service.MatchingCommentServiceImpl;
 import com.gpmatching.service.MatchingReviewService;
 import com.gpmatching.service.MatchingReviewServiceImpl;
+import com.gpmatching.service.ReportBoardService;
+import com.gpmatching.service.ReportBoardServiceImpl;
 
 
 
@@ -105,6 +107,12 @@ public class RootConfiguration implements ApplicationContextAware {
 	public CommonBoardService commonBoardService() {
 		CommonBoardService commonBoardService = new CommonBoardServiceImpl();
 		return commonBoardService;
+	}
+	
+	@Bean
+	public ReportBoardService reportBoardService() {
+		ReportBoardService reportBoardService = new ReportBoardServiceImpl();
+		return reportBoardService;
 	}
 	
 	@Bean
