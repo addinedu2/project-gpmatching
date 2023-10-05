@@ -37,7 +37,7 @@
 	<title>게시판글쓰기</title>
 	
 </head>
-<body class="bg-light">
+<body class="bg-dark">
 
 	<div id="db-wrapper" class="toggled">
 		<!-- navbar vertical -->
@@ -56,7 +56,7 @@
 		           
 		              <div class="border-bottom pb-4 mb-4 ">
 		               
-		                  <h3 class="mb-0 fw-bold">게시물 상세 보기</h3>
+		                  <h3 class="mb-0 fw-bold text-light">게시물 상세 보기</h3>
 		           
 		            </div>
 		          </div>
@@ -71,18 +71,22 @@
 		                <!-- card body -->
 		                <div class="card-body">
 		                
+		                	<span class="text-uppercase fw-medium text-darks-5 ls-2">제목</span>
+			                <!-- text -->
+			                <h4 class="card-title">${commonBoard.commonTitle }</h4>
+		                
 		                	<div class="d-flex align-items-center">
 		                      <!-- <div>
 		                        <img src="../assets/images/avatar/avatar-1.jpg" alt="" class="avatar avatar-md rounded-circle">
 		                      </div> -->
-		                      <div class="ms-3">
+		                      <div>
 		                        <h5 class="mb-0 fw-bold">${commonBoard.nickname }</h5>
 		                        <p class="mb-0"><fmt:formatDate value="${commonBoard.regDate }" pattern="yyyy-MM-dd" /></p>
 		                      </div>
 		                    </div>
 		                    <br>
 		                    
-
+							
 		                    
 		                    <div class="row">
 			                      <!-- text -->
@@ -95,9 +99,6 @@
 			                      <p class="mb-0">${commonBoard.readCount }</p>
 			                    </div>
 			                 </div>
-			                <span class="text-uppercase fw-medium text-darks-5 ls-2">제목</span>
-			                <!-- text -->
-			                <h4 class="card-title">${commonBoard.commonTitle }</h4>
 			                
 			                <!-- attach -->
 			                <div>
@@ -181,7 +182,7 @@
 			<input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
 			<input type="hidden" name="pageNo" value="${ pageNo }" />
 			<input type="hidden" name="userNo" value="${ loginuser.userNo }" />
-			<table style="width:800px;border:solid 1px;margin:0 auto">
+			<table style="width:800px;margin:0 auto">
 				<tr>
 					<td style="width:750px">	                	
 						<textarea id="commentContent" name="commentContent" style="width:100%;resize: none;" rows="3"></textarea>	                    
@@ -200,7 +201,7 @@
 		<br>
 		<hr style="width:800px;margin:0 auto">
 		<br>
-		<table id="comment-list" style="width:800px;border:solid 1px;margin:0 auto">
+		<table id="comment-list" style="width:800px;margin:0 auto">
 			<c:forEach var="comment" items="${ commonBoard.boardCommentList }">				
 				<tr>
 					<td style="text-align:left;margin:5px;border-bottom: solid 1px;">					
@@ -212,7 +213,7 @@
 							<br><br>
 						</c:when>
 						<c:otherwise>
-							${ comment.userNo } &nbsp;&nbsp;
+							${ comment.nickname } &nbsp;&nbsp;
 							[<fmt:formatDate value="${ commonBoard.regDate }" pattern="yyyy-MM-dd"/>]
 						    <br /><br />
 						    <span>${ fn:replace(comment.commentContent, enter, "<br>") }</span>
