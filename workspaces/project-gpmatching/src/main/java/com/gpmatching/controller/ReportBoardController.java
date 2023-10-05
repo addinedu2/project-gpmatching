@@ -21,9 +21,7 @@ import com.gpmatching.common.Util;
 import com.gpmatching.dto.BoardAttachDto;
 import com.gpmatching.dto.ReportBoardDto;
 import com.gpmatching.service.ReportBoardService;
-import com.gpmatching.ui.CommonPager;
 import com.gpmatching.ui.ReportPager;
-import com.gpmatching.ui.ThePager;
 import com.gpmatching.view.DownloadView;
 
 @Controller

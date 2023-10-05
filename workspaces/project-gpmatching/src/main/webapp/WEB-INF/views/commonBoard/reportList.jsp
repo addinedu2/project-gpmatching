@@ -49,7 +49,7 @@
 	<jsp:include page="/WEB-INF/views/modules/header.jsp" />
              
              <!-- commonList -->
-             <a href="/project-gpmatching/commonBoard/reportWrite">
+  <a href="/project-gpmatching/commonBoard/reportWrite">
 				<button type="button" class="btn btn-secondary mb-2">글쓰기</button></a>
              <!-- basic table -->
 <table class="table" style="text-align: center">

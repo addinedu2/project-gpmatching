@@ -83,6 +83,9 @@
                                         <a class="nav-link " href="/project-gpmatching/commonBoard/commonList"> 자유게시판 </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a class="nav-link has-arrow" href="/project-gpmatching/commonBoard/reportList"> 신고게시판 </a>
+                                    </li>
+                                     <li class="nav-item">
                                         <a class="nav-link has-arrow" href="/project-gpmatching/commonBoard/tipsList"> Tips </a>
                                     </li>
                                 </ul>
