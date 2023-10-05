@@ -21,7 +21,7 @@ import com.gpmatching.common.Util;
 import com.gpmatching.dto.BoardAttachDto;
 import com.gpmatching.dto.CommonBoardDto;
 import com.gpmatching.service.CommonBoardService;
-import com.gpmatching.ui.ThePager;
+import com.gpmatching.ui.CommonPager;
 import com.gpmatching.view.DownloadView;
 
 @Controller
@@ -46,8 +46,8 @@ public class CommonBoardController {
 		List<CommonBoardDto> commonBoardList = commonBoardService.listCommonBoardByPage(from, pageSize);
 		
 		//페이지 번호 표시 부분
-		ThePager pager = 
-				new ThePager(dataCount, pageNo, pageSize, pagerSize, linkUrl);
+		CommonPager pager = 
+				new CommonPager(dataCount, pageNo, pageSize, pagerSize, linkUrl);
 		
 		model.addAttribute("commonBoardList",commonBoardList);
 		model.addAttribute("pager",pager);

@@ -42,17 +42,21 @@
     <title>commonList</title>
 </head>
 
-<body class="bg-light">
+<body class="bg-dark">
     <div id="db-wrapper" class="toggled">
     <jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
     <div id="page-content">
 	<jsp:include page="/WEB-INF/views/modules/header.jsp" />
              
              <!-- commonList -->
+             <br>
+             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
              <a href="/project-gpmatching/commonBoard/commonWrite">
-				<button type="button" class="btn btn-secondary mb-2">글쓰기</button></a>
+				<button type="button" class="btn btn-secondary me-3">글쓰기</button></a>
+			 </div>
+			 <br>
              <!-- basic table -->
-<table class="table" style="text-align: center">
+<table class="table text-light" style="text-align: center">
    <thead>
       <tr class="listCommon" >
          <th>번호</th>
@@ -87,7 +91,12 @@
       </c:forEach>
    </tbody>
 </table>
-             <div class="btn-center">${ pager }</div>
+<br>
+             <div>
+             	<ul class="pagination justify-content-center mb-0">
+             	${ pager }
+             	</ul>
+             </div>
             </div>
             <%-- <jsp:include page="/WEB-INF/views/modules/testBottom.jsp" /> --%>
 	</script>

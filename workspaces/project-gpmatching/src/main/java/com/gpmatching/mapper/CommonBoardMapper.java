@@ -67,7 +67,8 @@ public interface CommonBoardMapper {
 	BoardAttachDto selectBoardAttachByBoardAttachNo(@Param("boardAttachNo") int boardAttachNo);
 		
 	//게시물 개수 카운트
-	@Select("select count(*) from CommonBoard")
+	@Select("select count(*) from CommonBoard "
+			+ "where deleted = false")
 	int selectCommonBoardCount();
 	
 	//공통게시판 글 수정
