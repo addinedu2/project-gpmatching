@@ -23,4 +23,6 @@ public interface CommonBoardService {
 
 	BoardAttachDto findBoardAttachByBoardAttachNo(int boardAttachNo);
 
+	void incrementReadCount(int commonNo);
+
 }
