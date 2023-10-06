@@ -58,12 +58,13 @@ public class OverwatchBoardController {
 	@GetMapping(path = { "/overwatch-list"})
 	public String owMatchingBoardList(Model model) {
 		
-		List<Map<String, String>> matchingOwList = overwatchBoardService.getSelectOwMatchingMapByGameName("overwatch2");
+		List<MatchingBoardDto> matchingOwList = overwatchBoardService.getSelectOwBoardListByGameName("overwatch2");
 		
 		model.addAttribute("matchingOwList", matchingOwList);
 		
 		return "/boardMatching/overwatchBoard/overwatch-list";
 	}
+	
 	
 
 	/**
@@ -99,6 +100,57 @@ public class OverwatchBoardController {
 		int boardNo = overwatchBoardService.getLastMatchingItemBoardNo();
 		overwatchService.write(overwatchDto, boardNo);
 		
+		return "redirect:overwatch-list";	
+	}
+	
+	/**
+	 * 오버워치 매칭 게시판 글쓰기 view 요청
+	 * 
+	 * @param session 글 작성자 세션 정보
+	 * @return 베틀 그라운드 게시판 뷰
+	 */
+	
+	@GetMapping(path = { "/overwatch-edit"})
+	public String showOverwatchEditForm(HttpSession session, int boardNo, Model model) {
+		MatchingBoardDto overwatchBoard = overwatchBoardService.getSelectOwBoardByBoardNo(boardNo);
+		
+		model.addAttribute("owMatchingBoard", overwatchBoard);
+		
+		return "/boardMatching/overwatchBoard/overwatch-edit";
+	}
+	
+	/**
+	 * 오버워치 매칭 게시판 글쓰기 form 요청
+	 * 
+	 * @param matchingBoardDto 매칭게시판 matchingBoard 테이블
+	 * @param overwatchDto 오버워치 overwatch 테이블 
+	 * @return 오버워치 게시판 뷰 리다이렉트 요청
+	 */
+	
+	@PostMapping(path = { "/overwatch-edit"})
+	public String editOwMatchingBoard(MatchingBoardDto matchingBoardDto, OverwatchDto overwatchDto) {
+		
+		
+		//옵치 게임번호 주기
+		overwatchBoardService.edit(matchingBoardDto);
+		overwatchService.edit(overwatchDto);
+		
+		return "redirect:overwatch-list";	
+	}
+
+	/**
+	 * 롤 매칭 게시판 글삭제 기능
+	 * 
+	 * @param 매칭게시판 boardNo
+	 * @return 롤 게시판 뷰 리다이렉트 요청
+	 */
+	
+	
+	@GetMapping(path = { "/overwatch-delete"})
+	public String deleteLolMatchingBoard(int boardNo) {
+		
+		overwatchBoardService.delete(boardNo);
+
 		return "redirect:overwatch-list";	
 	}
 

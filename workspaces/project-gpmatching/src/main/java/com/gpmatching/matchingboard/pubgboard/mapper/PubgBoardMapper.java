@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.gpmatching.dto.UserDto;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
@@ -94,6 +95,18 @@ public interface PubgBoardMapper {
 	MatchingBoardDto selectMatchingBoardByBoardNo(@Param("boardNo")int boardNo);
 	
 
+	@Select("select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, "
+			+ "m.matchingClose, m.regDate, m.readCount, m.gameNo, p.pubgPlay, p.pubgPosition, p.pubgGun, "
+			+ "p.pubgServer, p.pubgMode "
+			+ "from MatchingBoard m "
+			+ "inner join Pubg p "
+			+ "on p.boardNo = m.boardNo "
+			+ "inner join User u "
+			+ "on m.userNo = u.userNo "
+			+ "where m.boardNo = #{ boardNo } ") 
+	MatchingBoardDto selectPubgBoardByBoardNo(int boardNo);
+
+	
 	
 	//User 테이블, MatchingBoard 테이블, Pubg 테이블 join해서 같이 보여주는 코드(게임명: "battle ground")
 	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, "
@@ -106,10 +119,23 @@ public interface PubgBoardMapper {
 			+ "on m.userNo = u.userNo "
 			+ "where m.gameNo =  (select gameNo "
 			+ "from GameList where gameName = #{ gameName} ) "
+			+ "and deleted = false "
 			+ "order by m.boardNo desc" )
-	List<Map<String, String>> selectPubgMatchingMapByGameName(String gameName);
+	List<MatchingBoardDto> selectPubgBoardListByGameName(String gameName);
 	
 
+	@Update( "update MatchingBoard set boardTitle = #{boardTitle}, "
+			+ "boardContent = #{ boardContent }, preferGender = #{ preferGender }, mic = #{ mic }, "
+			+ "matchingClose = #{ matchingClose }, readCount = #{ readCount } "
+			+ "where boardNo = #{boardNo} ")
+	void updateMatchingBoard(MatchingBoardDto matchingBoardDto);
+	
+	
+	//deleted = true 로 설정하여 삭제
+	@Update("update MatchingBoard set deleted = true "
+		  + "where boardNo = #{boardNo}")
+	void deletePubgBoard(int boardNo);
+	
 	/* 성공
 	@Select( "select * "
 			+ "from MatchingBoard m "

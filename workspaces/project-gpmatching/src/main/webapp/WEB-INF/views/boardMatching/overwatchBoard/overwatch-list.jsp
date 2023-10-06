@@ -47,7 +47,7 @@
 	href="/project-gpmatching/resources/assets/css/theme.css">
 <link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
 
-<title>오버워치 Matching | 오버워치 매칭 게시판</title>
+<title>오버워치 매칭 게시판</title>
 </head>
 
 <body class="bg-light">
@@ -93,7 +93,6 @@
 										<th scope="col">마이크사용</th>
 										<th scope="col">마감여부</th>
 										<th scope="col">등록일시</th>
-										<th scope="col">조회수</th>
 										<th scope="col">댓글</th>
 										<th scope="col"></th>
 									</tr>
@@ -102,21 +101,24 @@
 									<c:forEach var="matchingBoard" items="${ requestScope.matchingOwList }" varStatus="vs">
 										 <tr>
 
-											<th>${ matchingOwList[vs.index].get("nickname") }</th>
-											<th>${ matchingOwList[vs.index].get("boardTitle") }</th>
-											<th>${ matchingOwList[vs.index].get("boardContent") }</th>
-											<th>${ matchingOwList[vs.index].get("owTier") }</th>
-											<th>${ matchingOwList[vs.index].get("owPosition") }</th>
-											<th>${ matchingOwList[vs.index].get("owPlay") }</th>
-											<th>${ matchingOwList[vs.index].get("preferGender") }</th>
-											<th>${ matchingOwList[vs.index].get("mic") }</th>
-											<th>${ matchingOwList[vs.index].get("matchingClose") }</th>
-											<th>${ matchingOwList[vs.index].get("regDate") }</th>
-											<th>${ matchingOwList[vs.index].get("readCount") }</th>
+											<th>${ matchingBoard.nickname }</th>
+											<th>${ matchingBoard.boardTitle }</th>
+											<th>${ matchingBoard.boardContent }</th>
+											<th>${ matchingBoard.owTier }</th>
+											<th>${ matchingBoard.owPosition }</th>
+											<th>${ matchingBoard.owPlay }</th>
+											<th>${ matchingBoard.preferGender }</th>
+											<th>${ matchingBoard.mic }</th>
+											<th>${ matchingBoard.matchingClose }</th>
+											<th>
+												<fmt:formatDate value="${ matchingBoard.regDate }"
+         				    						pattern="yyyy-MM-dd"/>
+											</th>
 											<th class="align-middle">
 												<!-- Varying modal -->
 												<button type="button" class="btn btn-primary btn-show-comment-modal" 
-														data-boardno="${ matchingOwList[vs.index].get("boardNo") }">${ matchingOwList[vs.index].get("boardNo") }
+														data-boardno="${ matchingBoard.boardNo }">
+														${ matchingBoard.boardNo }
 												</button>
 											</th>
 											<th>
@@ -126,8 +128,8 @@
 												      +
 												</button>
 											   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-													<a class="dropdown-item" href="#">수정</a>
-													<a class="dropdown-item" href="#">삭제</a>
+													<a class="dropdown-item" href="overwatch-edit?boardNo=${matchingBoard.boardNo}">수정</a>
+													<a class="dropdown-item" href="overwatch-delete?boardNo=${matchingBoard.boardNo}">삭제</a>
 											   </div>
 											 </div>
 											</th>

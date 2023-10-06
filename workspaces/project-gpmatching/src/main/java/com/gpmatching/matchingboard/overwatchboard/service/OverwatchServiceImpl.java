@@ -18,5 +18,11 @@ public class OverwatchServiceImpl implements OverwatchService {
 		overwatchDto.setBoardNo(boardNo);
 		mapper.insert(overwatchDto);
 	}
+	
+	@Override
+	public void edit(OverwatchDto overwatchDto) {
+		mapper.update(overwatchDto);
+		
+	}
 
 }

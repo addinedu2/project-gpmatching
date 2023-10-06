@@ -19901,7 +19901,7 @@ textarea.form-control-lg {
   --bs-pagination-padding-y: 0.375rem;
   --bs-pagination-font-size: 0.9375rem;
   --bs-pagination-color: var(--bs-link-color);
-  --bs-pagination-bg: #637381;
+  --bs-pagination-bg: #fff;
   --bs-pagination-border-width: 1px;
   --bs-pagination-border-color: #dfe3e8;
   --bs-pagination-border-radius: 0.375rem;

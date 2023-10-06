@@ -46,7 +46,7 @@
 	href="/project-gpmatching/resources/assets/css/theme.css">
 <link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
 
-<title>배틀그라운드 Write | 배틀그라운드 매칭 글 작성</title>
+<title>배틀그라운드 매칭 글 작성</title>
 </head>
 
 <body class="bg-light">
