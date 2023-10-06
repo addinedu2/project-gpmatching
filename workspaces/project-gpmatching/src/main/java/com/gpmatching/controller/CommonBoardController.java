@@ -117,6 +117,9 @@ public class CommonBoardController {
 			return "redirect:list";
 		}
 		
+		//조회수 증가 코드
+		commonBoardService.incrementReadCount(commonNo);
+		
 		model.addAttribute("commonBoard",commonBoardDto);
 		model.addAttribute("pageNo",pageNo);
 		

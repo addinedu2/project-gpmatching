@@ -150,4 +150,20 @@ public class LolBoardController {
 		
 		return "redirect:lol-list";	
 	}
+	
+	/**
+	 * 롤 매칭 게시판 글삭제 기능
+	 * 
+	 * @param 매칭게시판 boardNo
+	 * @return 롤 게시판 뷰 리다이렉트 요청
+	 */
+	
+	
+	@GetMapping(path = { "/lol-delete"})
+	public String deleteLolMatchingBoard(int boardNo) {
+		
+		lolBoardService.delete(boardNo);
+
+		return "redirect:lol-list";	
+	}
 }

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 
@@ -93,6 +94,17 @@ public interface OverwatchBoardMapper {
 	MatchingBoardDto selectMatchingBoardByBoardNo(@Param("boardNo")int boardNo);
 	
 	
+	@Select("select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, "
+			+ "m.matchingClose, m.regDate, m.readCount, m.gameNo, o.owTier, o.owPosition, o.owPlay "
+			+ "from MatchingBoard m "
+			+ "inner join Overwatch o "
+			+ "on o.boardNo = m.boardNo "
+			+ "inner join User u "
+			+ "on m.userNo = u.userNo "
+			+ "where m.boardNo = #{ boardNo } ") 
+	MatchingBoardDto selectOwBoardByBoardNo(int boardNo);
+	
+	
 	//User 테이블, MatchingBoard 테이블, Overwatch 테이블 join해서 같이 보여주는 코드(게임명: "overwatch2")
 	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, "
 			+ "m.matchingClose, m.regDate, m.readCount, o.owTier, o.owPosition, o.owPlay "
@@ -103,8 +115,22 @@ public interface OverwatchBoardMapper {
 			+ "on m.userNo = u.userNo "
 			+ "where m.gameNo =  (select gameNo "
 			+ "from GameList where gameName = #{ gameName} ) "
+			+ "and deleted = false "
 			+ "order by m.boardNo desc" )
-	List<Map<String, String>> selectOwMatchingMapByGameName(String gameName);
+	List<MatchingBoardDto> selectOwBoardListByGameName(String gameName);
+	
+	@Update( "update MatchingBoard set boardTitle = #{boardTitle}, "
+			+ "boardContent = #{ boardContent }, preferGender = #{ preferGender }, mic = #{ mic }, "
+			+ "matchingClose = #{ matchingClose }, readCount = #{ readCount } "
+			+ "where boardNo = #{boardNo} ")
+	void updateMatchingBoard(MatchingBoardDto matchingBoardDto);
+	
+	
+	//deleted = true 로 설정하여 삭제
+	@Update("update MatchingBoard set deleted = true "
+		  + "where boardNo = #{boardNo}")
+	void deleteOverwatchBoard(int boardNo);
+
 	
 	/* 성공
 	@Select( "select * "

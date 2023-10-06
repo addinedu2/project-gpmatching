@@ -18,5 +18,12 @@ public class PubgServiceImpl implements PubgService {
 		pubgDto.setBoardNo(boardNo);
 		mapper.insert(pubgDto);
 	}
+	
+	@Override
+	public void edit(PubgDto pubgDto) {
+		
+		mapper.update(pubgDto);	
+	}
+
 
 }

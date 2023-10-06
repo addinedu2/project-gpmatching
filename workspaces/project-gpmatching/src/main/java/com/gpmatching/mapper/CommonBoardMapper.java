@@ -82,11 +82,11 @@ public interface CommonBoardMapper {
 		  + "where commonNo = #{commonNo}")
 	void updateCommonEdit(CommonBoardDto commonBoardDto);
 	
-	//게시물 조회수
+	//게시물 조회수 증가
 	@Update("update CommonBoard "
-		  + "set readCount = readCount + 1} "
-		  + "where commonNo =#{commonNo}")
-	void updateReadCount(@Param("readCount")int readCount);
+			  + "set readCount = COALESCE(readCount,0) + 1 "
+			  + "where commonNo = #{commonNo}")
+	void incrementReadCount(@Param("commonNo") int commonNo);
 
 	
 	

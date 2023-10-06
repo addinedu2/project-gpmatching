@@ -31,6 +31,19 @@ public class MatchingBoardDto {
 	String lolPlay;
 	String lolTier;
 	
+	//Pubg
+	private String pubgPlay;
+	private String pubgPosition;
+	private String pubgGun;
+	private String pubgServer;
+	private String pubgMode;
+	
+	//overwatch
+	private String owTier;
+	private String owPlay;
+	private String owPosition;
+	
+	
 	private List<MatchingCommentDto> matchingCommentList;
 	private UserDto user;
 	private LolDto lol;
