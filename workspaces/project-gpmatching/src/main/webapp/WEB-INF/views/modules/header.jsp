@@ -1,6 +1,8 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
 <div class="header @@classList">
   <!-- navbar -->
   <nav class="navbar-classic navbar navbar-expand-lg">
@@ -151,10 +153,18 @@
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="/project-gpmatching/account/logout">
-                <i class="me-2 icon-xxs dropdown-item-icon"
-                  data-feather="power"></i>로그아웃
-              </a>
+            <c:choose>
+            	<c:when test="${ loginuser eq null }">
+					<a class="dropdown-item" href="/project-gpmatching/account/login">
+					  <i class="me-2 icon-xxs dropdown-item-icon" data-feather="power"></i>로그인
+					</a>
+			    </c:when>
+			    <c:otherwise>
+					<a class="dropdown-item" href="/project-gpmatching/account/logout">
+					    <i class="me-2 icon-xxs dropdown-item-icon" data-feather="power"></i>로그아웃
+					</a>
+			    </c:otherwise>
+            </c:choose>  
             </li>
           </ul>
 

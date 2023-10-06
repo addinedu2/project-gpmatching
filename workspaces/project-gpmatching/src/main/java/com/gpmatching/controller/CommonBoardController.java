@@ -21,18 +21,18 @@ import com.gpmatching.common.Util;
 import com.gpmatching.dto.BoardAttachDto;
 import com.gpmatching.dto.CommonBoardDto;
 import com.gpmatching.service.CommonBoardService;
-import com.gpmatching.ui.ThePager;
+import com.gpmatching.ui.CommonPager;
 import com.gpmatching.view.DownloadView;
 
 @Controller
 @RequestMapping(path= {"/commonBoard"})
 public class CommonBoardController {
-	
+	//todo 지금은 테스트를 위해 방치했지만 나중에 매퍼 건들여서 공통만 보이게 할껏. 예시: ReportBoardMapper.java
 	@Autowired
 	private CommonBoardService commonBoardService;
 
 	@GetMapping(path= {"/commonList"})
-	public String commonList(@RequestParam(defaultValue="1") int pageNo, Model model) {
+	public String commonList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue = "common") String category, Model model) {
 //		전체게시물조회
 //		List<CommonBoardDto> commonBoardList = commonBoardService.listCommonBoard();
 		
@@ -46,8 +46,8 @@ public class CommonBoardController {
 		List<CommonBoardDto> commonBoardList = commonBoardService.listCommonBoardByPage(from, pageSize);
 		
 		//페이지 번호 표시 부분
-		ThePager pager = 
-				new ThePager(dataCount, pageNo, pageSize, pagerSize, linkUrl);
+		CommonPager pager = 
+				new CommonPager(dataCount, pageNo, pageSize, pagerSize, linkUrl);
 		
 		model.addAttribute("commonBoardList",commonBoardList);
 		model.addAttribute("pager",pager);
@@ -58,13 +58,17 @@ public class CommonBoardController {
 	
 	//공통게시판 글쓰기 form
 	@GetMapping(path = {"/commonWrite"})
-	public String showWriteForm() {
+	public String showCommonWriteForm(Model model,  @RequestParam(defaultValue = "common") String category) {
+		model.addAttribute("category", "common");
 //		if(session.getAttribute("loginuser") == null) {
 //			return "redirect:/account/login";
 //		}
 		
 		return "/commonBoard/commonWrite";
 	}
+	
+	
+	
 	
 	//공통게시판 글쓰기 구현
 	@PostMapping(path= {"/commonWrite"})
@@ -76,7 +80,7 @@ public class CommonBoardController {
 		
 		commonBoardService.writeCommonBoard(commonBoard);
 		
-		return "redirect:commonList";
+		return "redirect:/commonBoard/commonList?category=common";
 	}
 	private ArrayList<BoardAttachDto> handleUploadFile(MultipartFile attach, String uploadDir) {
 		ArrayList<BoardAttachDto> boardAttachList = new ArrayList<>();
@@ -159,7 +163,7 @@ public class CommonBoardController {
 							 @RequestParam(defaultValue="-1")int pageNo) {
 		
 		if(pageNo < 1) {
-			return "redirect:commonList";
+			 return "redirect:/commonBoard/commonList?category=common";
 		}
 		
 		String uploadDir = req.getServletContext().getRealPath("/resources/upload/");
@@ -185,18 +189,18 @@ public class CommonBoardController {
 		return downloadView;
 	}
 	
-	//CommonBoard에 테스트했기 때문에 GetMapping은 여기서 했고 PostMapping은 MatchingReviewController에서 수행했습니다.
-	@GetMapping(path = { "/review" })
-	public String showMatchingReviewForm(@RequestParam(defaultValue = "-1")int commonNo, 
-								 		 @RequestParam(defaultValue = "-1")int pageNo, Model model) {
-		
-		CommonBoardDto commonBoardDto = commonBoardService.findCommonBoardByCommonNo(commonNo);
-		model.addAttribute("commonBoard", commonBoardDto);
-		model.addAttribute("pageNo",pageNo);
-
-		
-		return "/commonBoard/reviewtest";
-	}
+//	//CommonBoard에 테스트했기 때문에 GetMapping은 여기서 했고 PostMapping은 MatchingReviewController에서 수행했습니다.
+//	@GetMapping(path = { "/review" })
+//	public String showMatchingReviewForm(@RequestParam(defaultValue = "-1")int commonNo, 
+//								 		 @RequestParam(defaultValue = "-1")int pageNo, Model model) {
+//		
+//		CommonBoardDto commonBoardDto = commonBoardService.findCommonBoardByCommonNo(commonNo);
+//		model.addAttribute("commonBoard", commonBoardDto);
+//		model.addAttribute("pageNo",pageNo);
+//
+//		
+//		return "/commonBoard/reviewtest";
+//	}
 	
 	
 	///////////////////////////////////

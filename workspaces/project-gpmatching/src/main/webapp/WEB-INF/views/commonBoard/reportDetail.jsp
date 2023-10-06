@@ -73,15 +73,15 @@
 		                
 		                	<span class="text-uppercase fw-medium text-darks-5 ls-2">제목</span>
 			                <!-- text -->
-			                <h4 class="card-title">${commonBoard.commonTitle }</h4>
+			                <h4 class="card-title">${reportBoard.commonTitle }</h4>
 		                
 		                	<div class="d-flex align-items-center">
 		                      <!-- <div>
 		                        <img src="../assets/images/avatar/avatar-1.jpg" alt="" class="avatar avatar-md rounded-circle">
 		                      </div> -->
 		                      <div>
-		                        <h5 class="mb-0 fw-bold">${commonBoard.nickname }</h5>
-		                        <p class="mb-0"><fmt:formatDate value="${commonBoard.regDate }" pattern="yyyy-MM-dd" /></p>
+		                        <h5 class="mb-0 fw-bold">${reportBoard.nickname }</h5>
+		                        <p class="mb-0"><fmt:formatDate value="${reportBoard.regDate }" pattern="yyyy-MM-dd" /></p>
 		                      </div>
 		                    </div>
 		                    <br>
@@ -92,17 +92,17 @@
 			                      <!-- text -->
 			                    <div class="col-6 mb-5">
 			                      <h6 class="text-uppercase fs-5 ls-2">글번호 </h6>
-			                      <p class="mb-0">${requestScope.commonBoard.commonNo }</p>
+			                      <p class="mb-0">${requestScope.reportBoard.commonNo }</p>
 			                    </div>
 			                    <div class="col-6 mb-5">
 			                      <h6 class="text-uppercase fs-5 ls-2">조회수</h6>
-			                      <p class="mb-0">${commonBoard.readCount }</p>
+			                      <p class="mb-0">${reportBoard.readCount }</p>
 			                    </div>
 			                 </div>
 			                
 			                <!-- attach -->
 			                <div>
-			                	<c:forEach var="attach" items="${ commonBoard.boardAttachList }">
+			                	<c:forEach var="attach" items="${ reportBoard.boardAttachList }">
 		                			첨부파일 : <a href="download?boardAttachNo=${ attach.boardAttachNo }">${ attach.userFilename }</a>
 		                			[${attach.downloadCount }]<br>
 		                		</c:forEach>
@@ -112,7 +112,7 @@
 " />		
 			                <span class="text-uppercase fw-medium text-darks-5 ls-2">본문</span>
 			                <!-- text -->
-			                <p class="mt-2 mb-6">${fn:replace(commonBoard.commonContent,enter,"<br>") }</p>
+			                <p class="mt-2 mb-6">${fn:replace(reportBoard.commonContent,enter,"<br>") }</p>
 		                	
 		                	
 		               
@@ -133,7 +133,7 @@
 		                        </div>
 		                        <!-- 여기다가 매칭게시판쪽 리뷰 기능 테스트 -->
 		                        <div class="col-md-2 col-xxl-2">
-		                        	<a href="review?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}">
+		                        	<a href="review?commonNo=${reportBoard.commonNo}&pageNo=${pageNo}">
 		                         	<button type="button" class="btn btn-primary">리뷰</button>
 		                         	</a>
 		                        </div>
@@ -156,7 +156,7 @@
 				        	
 				        	<!-- sessionScope.loginuser != null && loginuser.memberId == board.writer 같은 의미-->
 				        	
-				        	<a href="commonEdit?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}">
+				        	<a href="commonEdit?commonNo=${reportBoard.commonNo}&pageNo=${pageNo}">
 				        	<button type="button" class="btn btn-secondary btn-group-sm mb-2" aria-label="Small button group">수정</button>
 				        	</a>
 		
@@ -179,7 +179,7 @@
 		        
 		<!-- write comment area -->
 		<form id="commentform" action="writeComment" method="post">
-			<input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
+			<input type="hidden" name="commonNo" value="${ reportBoard.commonNo }" />
 			<input type="hidden" name="pageNo" value="${ pageNo }" />
 			<input type="hidden" name="userNo" value="${ loginuser.userNo }" />
 			<table style="width:800px;margin:0 auto">
@@ -202,7 +202,7 @@
 		<hr style="width:800px;margin:0 auto">
 		<br>
 		<table id="comment-list" style="width:800px;margin:0 auto">
-			<c:forEach var="comment" items="${ commonBoard.boardCommentList }">				
+			<c:forEach var="comment" items="${ reportBoard.boardCommentList }">				
 				<tr>
 					<td style="text-align:left;margin:5px;border-bottom: solid 1px;">					
 						<div id="comment-view-area-${ comment.commentNo }">
@@ -214,7 +214,7 @@
 						</c:when>
 						<c:otherwise>
 							${ comment.nickname } &nbsp;&nbsp;
-							[<fmt:formatDate value="${ commonBoard.regDate }" pattern="yyyy-MM-dd"/>]
+							[<fmt:formatDate value="${ reportBoard.regDate }" pattern="yyyy-MM-dd"/>]
 						    <br /><br />
 						    <span>${ fn:replace(comment.commentContent, enter, "<br>") }</span>
 							<br /><br />
@@ -232,7 +232,7 @@
 							<br /><br />
 							<form action="editComment" method="post"> <!-- BoardCommentController의 /editcomment에 연결 -->
 							<input type="hidden" name="commentNo" value="${ comment.commentNo }" />
-							<input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
+							<input type="hidden" name="commonNo" value="${ reportBoard.commonNo }" />
 							<input type="hidden" name="pageNo" value="${ pageNo }" />
 							<textarea name="commentContent" style="width: 99%; resize: none" rows="3" 
 								maxlength="200">${ comment.commentContent }</textarea>

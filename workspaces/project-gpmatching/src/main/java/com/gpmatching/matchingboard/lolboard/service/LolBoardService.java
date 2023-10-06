@@ -16,12 +16,15 @@ public interface LolBoardService {
 	
 	List<MatchingBoardDto> getMatchingBoardListByGameName(String gameName);
 	
-	List<Map<String, String>> getSelectLolMatchingMapByGameName(String gameName);
-	
+	List<MatchingBoardDto> getSelectLolBoardListByGameName(String gameName);
+
+	MatchingBoardDto findLolBoardByBoardNo(int boardNo);
+
+	MatchingBoardDto findMatchingBoardByBoardNo(int boardNo);
+
+	void edit(MatchingBoardDto matchingBoardDto);
 
 	//List<MatchingBoardDto> getMatchingBoardListByGameNo(int gameNo);
-
-	//MatchingBoardDto findMatchingBoardByBoardNo(int boardNo);
 	
 	//String getMatchingBoardNickname();
 }

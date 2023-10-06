@@ -99,107 +99,100 @@
 										</div>
 									</div>
 									</th>
-						         	<th scope="col">주포지션</th>
-						         	<th scope="col">서렌여부</th>
-						         	<th scope="col">선호플레이</th>
-						         	<th scope="col">선호성별</th>
-						         	<th scope="col">마이크사용</th>
-						         	<th scope="col">마감여부</th>
-						        	<th scope="col">등록일시</th>
-						       	  	<th scope="col">조회수</th>
-						         	<th scope="col">댓글</th>
-						         	<th scope="col">수정/삭제</th>
-						         	<th scope="col"></th>
-								</tr>
-							
-							</thead>
-							<tbody>		
-								<c:forEach var="matchingBoard" items="${ requestScope.matchingLolList }" varStatus="vs">
-								
-									<tr id="tr-${ matchingBoard.boardNo }" data-title="${ matchingBoard.boardTitle }">
-
-										<th>${ matchingLolList[vs.index].get("nickname") }</th>
-										<th>${ matchingLolList[vs.index].get("boardTitle") }</th>
-										<th>${ matchingLolList[vs.index].get("boardContent") }</th>
-										<td>
-										<c:set var="lolTier" value="${ matchingLolList[vs.index].get('lolTier') }" />
-										<c:choose>
-											<c:when test = "${ lolTier eq 'bronze'}">
-												<span class="badge bg-danger">${ matchingLolList[vs.index].get("lolTier") }</span>
-											</c:when>
-											<c:when test = "${ lolTier eq 'silver'}">
-												<span class="badge rounded-pill bg-light text-dark">${ matchingLolList[vs.index].get("lolTier") }</span>
-											</c:when>	
-											<c:when test = "${ lolTier eq 'gold'}">
-												<span class="badge bg-warning">${ matchingLolList[vs.index].get("lolTier") }</span>
-											</c:when>
-											<c:otherwise>
-												<span class="badge bg-dark">unranked</span>
-											</c:otherwise>
-										</c:choose>
-										</td>
-										<td>
-										<c:set var="lolPosition" value="${ matchingLolList[vs.index].get('lolPosition') }" />
-										<c:choose>
-											<c:when test = "${ lolPosition eq 'top'}">
-												<img src="/project-gpmatching/resources/assets/images/lolposition/top.svg" width=24px>
-											</c:when>
-											<c:when test = "${ lolPosition eq 'jungle'}">
-												<img src="/project-gpmatching/resources/assets/images/lolposition/jungle.svg" width=24px>
-											</c:when>	
-											<c:when test = "${ lolPosition eq 'mid'}">
-												<img src="/project-gpmatching/resources/assets/images/lolposition/mid.svg" width=24px>
-											</c:when>
-											<c:when test = "${ lolPosition eq 'adcarry'}">
-												<img src="/project-gpmatching/resources/assets/images/lolposition/adcarry.svg" width=24px>
-											</c:when>
-											<c:when test = "${ lolPosition eq 'support'}">
-												<img src="/project-gpmatching/resources/assets/images/lolposition/support.svg" width=24px>
-											</c:when>
-											<c:otherwise>
-												${ matchingLolList[vs.index].get("lolPosition") }
-											</c:otherwise>
-										</c:choose>
-										</td>
-										<th>${ matchingLolList[vs.index].get("lolSur") }</th>
-										<th>${ matchingLolList[vs.index].get("lolPlay") }</th>
-										<th>${ matchingLolList[vs.index].get("preferGender") }</th>
-										<th>${ matchingLolList[vs.index].get("mic") }</th>
-										<th>${ matchingLolList[vs.index].get("matchingClose") }</th>
-										<th>${ matchingLolList[vs.index].get("regDate") }</th>
-										<th>${ matchingLolList[vs.index].get("readCount") }</th>
-										
-										<th class="align-middle">
-											<!-- 댓글 쓰기 -->
-											<button type="button" class="btn btn-primary btn-show-comment-modal" 
-													data-boardno="${ matchingLolList[vs.index].get('boardNo') }">
-											${ matchingLolList[vs.index].get('boardNo') }
-											</button>
-										</th>
-										<th>
-										  <!-- collapse -->
-										  <div class="dropdown">
-										  	<button type="button" id="dropdownMenuButton" class="btn btn-icon btn-white border border-2 rounded-circle btn-dashed ms-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											      +
-											</button>
-										   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-												<a class="dropdown-item" href="#">수정</a>
-												<a class="dropdown-item" href="#">삭제</a>
-										   </div>
-										 </div>
-										</th>
-										<th>
-										<!-- 댓글 목록 버튼 -->
-										<button type="button" class="btn btn-primary btn-show-commentList-modal" 
-										data-boardno=1>
-										    댓글 목록
-										</button>
-										</th>
+						         	
+							         	<th scope="col">주포지션</th>
+							         	<th scope="col">서렌여부</th>
+							         	<th scope="col">선호플레이</th>
+							         	<th scope="col">선호성별</th>
+							         	<th scope="col">마이크사용</th>
+							         	<th scope="col">마감여부</th>
+							        	<th scope="col">등록일시</th>
+							         	<th scope="col">댓글</th>
+							         	<th scope="col"></th>
 									</tr>
-								
-								</c:forEach>
-							</tbody>		
-						</table>
+								</thead>
+				 
+								<tbody>		
+									<c:forEach var="matchingBoard" items="${ requestScope.matchingLolList }" varStatus="vs">
+										<tr id="tr-${ matchingBoard.boardNo }" data-title="${ matchingBoard.boardTitle }">
+
+											<th scope="row">${ matchingBoard.nickname }</th>
+											<th>${ matchingBoard.boardTitle }</th>
+											<th>${ matchingBoard.boardContent }</th>
+											<td>
+											<c:set var="lolTier" value="${ matchingBoard.lolTier }" />
+											<c:choose>
+												<c:when test = "${ lolTier eq 'bronze'}">
+													<span class="badge bg-danger">${ matchingBoard.lolTier }</span>
+												</c:when>
+												<c:when test = "${ lolTier eq 'silver'}">
+													<span class="badge rounded-pill bg-light text-dark">${ matchingBoard.lolTier }</span>
+												</c:when>	
+												<c:when test = "${ lolTier eq 'gold'}">
+													<span class="badge bg-warning">${ matchingBoard.lolTier }</span>
+												</c:when>
+												<c:otherwise>
+													<span class="badge bg-dark">unranked</span>
+												</c:otherwise>
+											</c:choose>
+											</td>
+											<td>
+											<c:set var="lolPosition" value="${ matchingBoard.lolPosition }" />
+											<c:choose>
+												<c:when test = "${ lolPosition eq 'top'}">
+													<img src="/project-gpmatching/resources/assets/images/lolposition/top.svg" width=24px>
+												</c:when>
+												<c:when test = "${ lolPosition eq 'jungle'}">
+													<img src="/project-gpmatching/resources/assets/images/lolposition/jungle.svg" width=24px>
+												</c:when>	
+												<c:when test = "${ lolPosition eq 'mid'}">
+													<img src="/project-gpmatching/resources/assets/images/lolposition/mid.svg" width=24px>
+												</c:when>
+												<c:when test = "${ lolPosition eq 'adcarry'}">
+													<img src="/project-gpmatching/resources/assets/images/lolposition/adcarry.svg" width=24px>
+												</c:when>
+												<c:when test = "${ lolPosition eq 'support'}">
+													<img src="/project-gpmatching/resources/assets/images/lolposition/support.svg" width=24px>
+												</c:when>
+												<c:otherwise>
+													${ matchingBoard.lolPosition }
+												</c:otherwise>
+											</c:choose>
+											</td>
+											<th>${ matchingBoard.lolSur }</th>
+											<th>${ matchingBoard.lolPlay }</th>
+											<th>${ matchingBoard.preferGender }</th>
+											<th>${ matchingBoard.mic }</th>
+											<th>${ matchingBoard.matchingClose }</th>
+											<th>
+												<fmt:formatDate value="${ matchingBoard.regDate }"
+         				    						pattern="yyyy-MM-dd"/>
+											</th>
+											<th class="align-middle">
+												<!-- Varying modal -->
+												<button type="button" class="btn btn-primary btn-show-comment-modal" 
+														data-boardno="${ matchingBoard.boardNo }">${ matchingBoard.boardNo }
+												</button>
+											</th>
+											<th>
+											  <!-- collapse -->
+											  <div class="dropdown">
+											  	<button type="button" id="dropdownMenuButton" class="btn btn-icon btn-white border border-2 rounded-circle btn-dashed ms-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												      +
+												</button>
+											   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+													<a class="dropdown-item" href="lol-edit?boardNo=${matchingBoard.boardNo}">수정</a>
+													<a class="dropdown-item" href="#">삭제</a>
+											   </div>
+											 </div>
+											</th>
+										</tr>
+
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+
 					</div>
 				</div>
 			</div>
@@ -233,14 +226,14 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-bs-dismiss="modal">닫기</button>
-								<button id="write-comment-lnk" type="button" class="btn btn-primary">등록</button>
+								<button id="write-comment-lnk" type="submit" class="btn btn-primary">등록</button>
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
 			
-			<!-- 댓글 목록 보기 모달 -->
+			<!-- 댓글 목록 보기 모달 (비활성화) -->
 			<!-- Modal -->
 			<div class="modal fade" id="commentList-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			    <div class="modal-dialog" role="document">
@@ -310,7 +303,7 @@
 	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 
 	<script>
-	//댓글 쓰기 이벤트 처리
+	/* //댓글 쓰기 이벤트 처리
 	$('#write-comment-lnk').on('click', function(event){
 		
 		const formData = $('#commentform').serialize();
@@ -329,7 +322,7 @@
 				alert("fail");
 			}
 		});
-	});
+	}); */
 	
 	
 	// 버튼을 누르면 해당 행의 데이터를 포함한 모달창을 보여줌 (-허지웅)
@@ -344,7 +337,7 @@
 		});
 	});
 	
-	// 버튼을 누르면 해당 글의 댓글 보기 (-허지웅)
+	// 버튼을 누르면 해당 글의 댓글 보기 (-허지웅) (비활성화)
 	$(function() {
 		$('.btn-show-commentList-modal').on("click", function(event) {
 			const boardNo = $(this).data('boardno');

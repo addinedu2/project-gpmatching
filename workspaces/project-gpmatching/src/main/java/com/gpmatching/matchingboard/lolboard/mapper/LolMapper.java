@@ -16,7 +16,7 @@ public interface LolMapper {
 			+ "values ( #{boardNo}, #{lolPosition}, #{lolSur} , #{lolPlay}, #{lolTier})") 
 	public void insert(LolDto lol); 
 	
-	@Update("update Lol set lolPosition = #{lolPosition}, lolSur = #{lolSur}, lolPlay = #{lolPlay} "
+	@Update("update Lol set lolPosition = #{lolPosition}, lolSur = #{lolSur}, lolPlay = #{lolPlay}, "
 			+ "lolTier = #{lolTier} "
 			+ "where boardNo = #{boardNo}")
 	

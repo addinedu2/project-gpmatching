@@ -22,6 +22,15 @@ public class MatchingBoardDto {
 	int userNo;
 	int gameNo;
 	
+	//User
+	String nickname;
+	
+	//Lol
+	String lolPosition;
+	String lolSur;
+	String lolPlay;
+	String lolTier;
+	
 	private List<MatchingCommentDto> matchingCommentList;
 	private UserDto user;
 	private LolDto lol;

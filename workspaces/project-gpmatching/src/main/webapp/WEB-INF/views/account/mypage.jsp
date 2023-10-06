@@ -66,7 +66,7 @@
           <div class="col-xl-12 col-lg-12 col-md-12 col-12">
             <!-- Bg -->
             <div class="pt-20 rounded-top" style="background:
-                url(../assets/images/background/profile-cover.jpg) no-repeat;
+                url(/project-gpmatching/resources/assets/images/background/profile-cover.jpg) no-repeat;
                 background-size: cover;">
             </div>
             <div class="bg-white rounded-bottom smooth-shadow-sm ">
@@ -98,6 +98,10 @@
                 <div>
                   <a href="/project-gpmatching/account/editMypage" class="btn btn-outline-primary
                       d-none d-md-block">회원정보 수정</a>
+                  <a href="/project-gpmatching/commonBoard/reportList" class="btn btn-outline-primary
+                      d-none d-md-block">신고 게시판</a>
+                   <a href="/project-gpmatching/commonBoard/reviewtestList" class="btn btn-outline-primary
+                      d-none d-md-block">리뷰 게시판</a>
                 </div>
               </div>
               <!-- nav -->
@@ -131,6 +135,7 @@
         <div class="py-6">
           <!-- row -->
           <div class="row">
+          
             <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
               <!-- card -->
               <div class="card">
@@ -139,7 +144,7 @@
                   <!-- card title -->
                   <h4 class="card-title">내 정보</h4>
                   <span class="text-uppercase fw-medium text-dark
-                      fs-5 ls-2">Bio</span>
+                      fs-5 ls-2">소개</span>
                   <!-- text -->
                   <p class="mt-2 mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspen disse var ius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.
                   </p>
@@ -172,13 +177,27 @@
                 </div>
               </div>
             </div>
+            
             <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
               <!-- card -->
               <div class="card">
                 <!-- card body -->
+                <!-- 내가 쓴 글 만 보 기 -->
+				<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+				
+				
+				  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+				  <label class="btn btn-outline-primary" for="btnradio1">매칭게시판</label>
+				
+				  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+				  <label class="btn btn-outline-primary" for="btnradio2">자유게시판</label>
+				
+				  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+				  <label class="btn btn-outline-primary" for="btnradio3">뭐로할까</label>
+				</div>
                 <div class="card-body">
+                
                   <!-- card title -->
-                  <h4 class="card-title">내가 쓴 글 목록</h4>
                   <div class="d-md-flex justify-content-between
                       align-items-center mb-4">
                     <div class="d-flex align-items-center">
@@ -231,6 +250,7 @@
                       </div>
                     </div>
                   </div>
+                  
                   <div class="d-md-flex justify-content-between
                       align-items-center mb-4">
                     <div class="d-flex align-items-center">
@@ -446,9 +466,13 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                  
+                  
+                </div><!-- end of card body -->
               </div>
             </div>
+            
+            
             <div class="col-xl-6 col-md-12 col-12 mb-6">
               <!-- card -->
               <div class="card">

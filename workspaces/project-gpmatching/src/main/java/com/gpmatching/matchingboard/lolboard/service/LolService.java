@@ -6,6 +6,6 @@ public interface LolService {
 
 	void write(LolDto lolDto, int boardNo);
 
-	void edit(LolDto lolDto, int boardNo);
+	void edit(LolDto lolDto);
 
 }

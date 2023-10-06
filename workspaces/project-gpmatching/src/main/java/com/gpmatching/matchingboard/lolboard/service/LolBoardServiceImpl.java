@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
+import com.gpmatching.dto.MatchingCommentDto;
 import com.gpmatching.mapper.MatchingCommentMapper;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 import com.gpmatching.matchingboard.lolboard.mapper.LolBoardMapper;
@@ -17,12 +17,19 @@ public class LolBoardServiceImpl implements LolBoardService {
 	@Setter(onMethod_ = { @Autowired }) 
 	LolBoardMapper mapper;
 	
-	@Autowired
+	@Setter(onMethod_ = { @Autowired }) 
 	MatchingCommentMapper matchingCommentMapper;
 	
 	public void write(MatchingBoardDto matchingBoardDto) {
 		mapper.insertMatchingBoard(matchingBoardDto);
 		
+		
+	}
+	
+	@Override
+	public void edit(MatchingBoardDto matchingBoardDto) {
+
+		mapper.updateMatchingBoard(matchingBoardDto);
 		
 	}
 	
@@ -58,10 +65,44 @@ public class LolBoardServiceImpl implements LolBoardService {
 	
 	
 	@Override
-	public List<Map<String, String>> getSelectLolMatchingMapByGameName(String gameName) {
-		List<Map<String, String>> list = mapper.selectLolMatchingMapByGameName(gameName);
+	public List<MatchingBoardDto> getSelectLolBoardListByGameName(String gameName) {
+		List<MatchingBoardDto> list = mapper.selectLolBoardListByGameName(gameName);
+
 		return list;
 	}
+	
+	@Override
+	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {
+		
+		MatchingBoardDto lolBoard = mapper.selectMatchingBoardByBoardNo(boardNo);
+		
+		List<MatchingCommentDto> commentList = null;
+		if (lolBoard != null) {
+			
+			 commentList = matchingCommentMapper.selectMatchingCommentByBoardNo(boardNo);
+		}
+		
+
+		lolBoard.setMatchingCommentList(commentList);
+		
+		return mapper.selectMatchingBoardByBoardNo(boardNo);
+	}
+	
+	/*
+	@Override
+	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {
+	
+		
+		return mapper.selectMatchingBoardByBoardNo(boardNo);
+	}*/
+	
+	@Override
+	public MatchingBoardDto findLolBoardByBoardNo(int boardNo) {
+		MatchingBoardDto lolBoard = mapper.selectLolBoardByBoardNo(boardNo);
+		return lolBoard;
+	}
+
+
 	
 	
 //	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {

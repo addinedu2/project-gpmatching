@@ -39,24 +39,20 @@
 	
 	</style>
  -->	
-    <title>commonList</title>
+    <title>reportList</title>
 </head>
 
-<body class="bg-dark">
+<body class="bg-light">
     <div id="db-wrapper" class="toggled">
     <jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
     <div id="page-content">
 	<jsp:include page="/WEB-INF/views/modules/header.jsp" />
              
              <!-- commonList -->
-             <br>
-             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-             <a href="/project-gpmatching/commonBoard/commonWrite">
-				<button type="button" class="btn btn-secondary me-3">글쓰기</button></a>
-			 </div>
-			 <br>
+             <a href="/project-gpmatching/commonBoard/reportWrite">
+				<button type="button" class="btn btn-secondary mb-2">글쓰기</button></a>
              <!-- basic table -->
-<table class="table text-light" style="text-align: center">
+<table class="table" style="text-align: center">
    <thead>
       <tr class="listCommon" >
          <th>번호</th>
@@ -68,31 +64,25 @@
    </thead>
    <!-- commonNo, commonTitle, userNo, readCount, regDate --> 
    <tbody>
-   <c:forEach var="commonBoard" items="${requestScope.commonBoardList }">
+     <c:forEach var="reportBoard" items="${requestScope.reportBoardList }">
       <tr>
-         <td>${commonBoard.commonNo }</td>
+         <td>${ reportBoard.commonNo }</td>
          <td style="text-align:left; padding-left:10px">
-         <c:choose>
-         	<c:when test="${not commonBoard.deleted }">
-         		<a href="commonDetail?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}" style="text-decoration: none; color: inherit;">${commonBoard.commonTitle }</a>
-         	</c:when>
-         	<c:otherwise>
-         	<span class="deleted" style="color:gray;">[삭제된 글]</span>
-         	</c:otherwise>
-         </c:choose>
-         
-         <td>${ commonBoard.nickname }</td>
-         <td>${ commonBoard.readCount }</td>
+         <a href="reportDetail?commonNo=${reportBoard.commonNo}&pageNo=${pageNo}" style="text-decoration: none; color: inherit;">${reportBoard.commonTitle }</a>
+        </td>
+         <td>${ reportBoard.nickname }</td>
+         <td>${ reportBoard.readCount }</td>
          <td>
-         	<fmt:formatDate value="${ commonBoard.regDate }"
+         	<fmt:formatDate value="${ reportBoard.regDate }"
          				    pattern="yyyy-MM-dd"/>
+         				    
+  
          </td>
       </tr>
       </c:forEach>
    </tbody>
 </table>
-<br>
-             <div>
+              <div>
              	<ul class="pagination justify-content-center mb-0">
              	${ pager }
              	</ul>
