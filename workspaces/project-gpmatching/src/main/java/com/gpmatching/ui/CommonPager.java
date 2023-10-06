@@ -21,8 +21,10 @@ public class CommonPager {
 		this.pageSize = pageSize;
 		this.pagerSize = pagerSize;
 		this.pageNo = pageNo;		
+		
 		pageCount = 
 			(dataCount / pageSize) + ((dataCount % pageSize) > 0 ? 1 : 0); 
+
 	}
 	
 	public String toString(){

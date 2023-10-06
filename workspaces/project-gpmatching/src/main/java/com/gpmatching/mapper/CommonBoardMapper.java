@@ -69,7 +69,7 @@ public interface CommonBoardMapper {
 		
 	//게시물 개수 카운트
 	@Select("select count(*) from CommonBoard "
-			+ "where deleted = false")
+			+ "where category = 'common' and deleted = false")
 	int selectCommonBoardCount();
 	
 	//공통게시판 글 수정
