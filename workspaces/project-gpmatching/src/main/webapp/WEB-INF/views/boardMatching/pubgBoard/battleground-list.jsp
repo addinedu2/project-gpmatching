@@ -47,7 +47,7 @@
 	href="/project-gpmatching/resources/assets/css/theme.css">
 <link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
 
-<title>배틀그라운드 Matching | 배틀그라운드 매칭 게시판</title>
+<title>배틀그라운드 매칭 게시판</title>
 </head>
 
 <body class="bg-light">
@@ -94,7 +94,6 @@
 										<th scope="col">마이크사용</th>
 										<th scope="col">마감여부</th>
 										<th scope="col">등록일시</th>
-										<th scope="col">조회수</th>
 										<th scope="col">댓글</th>
 										<th scope="col"></th>
 									</tr>
@@ -102,23 +101,26 @@
 								<tbody>
 									<c:forEach var="matchingBoard" items="${ requestScope.matchingPubgList }" varStatus="vs">
 										 <tr>
-											<th>${ matchingPubgList[vs.index].get("nickname") }</th>
-											<th>${ matchingPubgList[vs.index].get("boardTitle") }</th>
-											<th>${ matchingPubgList[vs.index].get("boardContent") }</th>
-											<th>${ matchingPubgList[vs.index].get("pubgPlay ") }</th>
-											<th>${ matchingPubgList[vs.index].get("pubgPosition") }</th>
-											<th>${ matchingPubgList[vs.index].get("pubgGun") }</th>
-											<th>${ matchingPubgList[vs.index].get("pubgServer") }</th>
-											<th>${ matchingPubgList[vs.index].get("pubgMode") }</th>
-											<th>${ matchingPubgList[vs.index].get("preferGender") }</th>
-											<th>${ matchingPubgList[vs.index].get("mic") }</th>
-											<th>${ matchingPubgList[vs.index].get("matchingClose") }</th>
-											<th>${ matchingPubgList[vs.index].get("regDate") }</th>
-											<th>${ matchingPubgList[vs.index].get("readCount") }</th>
+											<th>${ matchingBoard.nickname }</th>
+											<th>${ matchingBoard.boardTitle }</th>
+											<th>${ matchingBoard.boardContent }</th>
+											<th>${ matchingBoard.pubgPlay }</th>
+											<th>${ matchingBoard.pubgPosition }</th>
+											<th>${ matchingBoard.pubgGun }</th>
+											<th>${ matchingBoard.pubgServer }</th>
+											<th>${ matchingBoard.pubgMode }</th>
+											<th>${ matchingBoard.preferGender }</th>
+											<th>${ matchingBoard.mic }</th>
+											<th>${ matchingBoard.matchingClose }</th>
+											<th>
+												<fmt:formatDate value="${ matchingBoard.regDate }"
+         				    						pattern="yyyy-MM-dd"/>
+											</th>
 											<th class="align-middle">
 												<!-- Varying modal -->
 												<button type="button" class="btn btn-primary btn-show-comment-modal" 
-														data-boardno="${ matchingPubgList[vs.index].get("boardNo") }">${ matchingPubgList[vs.index].get("boardNo") }
+														data-boardno="${ matchingBoard.boardNo }">
+														${ matchingBoard.boardNo }
 												</button>
 											</th>
 											<th>
@@ -128,8 +130,8 @@
 												      +
 												</button>
 											   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-													<a class="dropdown-item" href="#">수정</a>
-													<a class="dropdown-item" href="#">삭제</a>
+													<a class="dropdown-item" href="battleground-edit?boardNo=${matchingBoard.boardNo}">수정</a>
+													<a class="dropdown-item" href="battleground-delete?boardNo=${matchingBoard.boardNo}">삭제</a>
 											   </div>
 											 </div>
 											</th>

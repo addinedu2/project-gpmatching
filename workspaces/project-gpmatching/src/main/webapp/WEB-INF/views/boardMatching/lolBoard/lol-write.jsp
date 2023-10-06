@@ -46,7 +46,7 @@
 	href="/project-gpmatching/resources/assets/css/theme.css">
 <link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
 
-<title>LOL Write | LOL 매칭 글 작성</title>
+<title>LOL 매칭 글 작성</title>
 </head>
 
 <body class="bg-light">

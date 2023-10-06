@@ -114,6 +114,7 @@ public interface LolBoardMapper {
 			+ "on m.userNo = u.userNo "
 			+ "where m.gameNo =  (select gameNo "
 			+ "from GameList where gameName = #{ gameName} ) "
+			+ "and deleted = false "
 			+ "order by m.boardNo desc" )
 	List<MatchingBoardDto> selectLolBoardListByGameName(String gameName);
 	
@@ -123,6 +124,11 @@ public interface LolBoardMapper {
 			+ "where boardNo = #{boardNo} ")
 	void updateMatchingBoard(MatchingBoardDto matchingBoardDto);
 
+	//deleted = true 로 설정하여 삭제
+	@Update("update MatchingBoard set deleted = true "
+		  + "where boardNo = #{boardNo}")
+	void deleteLolBoard(int boardNo);
+	
 	
 	/* 성공
 	@Select( "select * "

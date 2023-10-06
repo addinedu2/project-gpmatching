@@ -70,9 +70,9 @@ public class CommonBoardServiceImpl implements CommonBoardService {
 
 	//공통게시판 특정 페이지 조회
 	@Override
-	public List<CommonBoardDto> listCommonBoardByPage(int from, int count) {
+	public List<CommonBoardDto> listCommonBoardByPage(int from, int count, String category) {
 		
-		List<CommonBoardDto> commonBoardList = commonBoardMapper.selectBoardByPage(from, count);
+		List<CommonBoardDto> commonBoardList = commonBoardMapper.selectBoardByPage(from, count, category);
 		
 		return commonBoardList;
 	}
@@ -96,6 +96,13 @@ public class CommonBoardServiceImpl implements CommonBoardService {
 		BoardAttachDto attach = commonBoardMapper.selectBoardAttachByBoardAttachNo(boardAttachNo);
 		
 		return attach;
+	}
+
+
+	@Override
+	public void incrementReadCount(int commonNo) {
+		commonBoardMapper.incrementReadCount(commonNo);
+		
 	}
 
 	

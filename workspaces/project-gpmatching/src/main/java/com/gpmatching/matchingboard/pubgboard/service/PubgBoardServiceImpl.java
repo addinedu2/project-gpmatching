@@ -26,6 +26,13 @@ public class PubgBoardServiceImpl implements PubgBoardService {
 		
 	}
 	
+	@Override
+	public void edit(MatchingBoardDto matchingBoardDto) {
+
+		mapper.updateMatchingBoard(matchingBoardDto);
+		
+	}
+	
 //	@Override
 //	public List<MatchingBoardDto> listMatchingBoard() {
 //		
@@ -59,10 +66,32 @@ public class PubgBoardServiceImpl implements PubgBoardService {
 	
 	
 	@Override
-	public List<Map<String, String>> getSelectPubgMatchingMapByGameName(String gameName) {
-		List<Map<String, String>> list = mapper.selectPubgMatchingMapByGameName(gameName);
-		return list;
+	public List<MatchingBoardDto> getSelectPubgBoardListByGameName(String gameName) {
+		List<MatchingBoardDto> pubgList = mapper.selectPubgBoardListByGameName(gameName);
+		return pubgList;
 	}
+
+	@Override
+	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {
+		
+		return mapper.selectMatchingBoardByBoardNo(boardNo);
+	}
+	
+
+	@Override
+	public MatchingBoardDto findPubgBoardByBoardNo(int boardNo) {
+		MatchingBoardDto pubgBoard = mapper.selectPubgBoardByBoardNo(boardNo);
+		return pubgBoard;
+	}
+	
+	
+	@Override
+	public void delete(int boardNo) {
+		mapper.deletePubgBoard(boardNo);
+		
+	}
+	
+
 	
 //	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {
 //		

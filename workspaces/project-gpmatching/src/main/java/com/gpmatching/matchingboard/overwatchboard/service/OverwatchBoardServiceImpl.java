@@ -50,16 +50,34 @@ public class OverwatchBoardServiceImpl implements OverwatchBoardService {
 	@Override
 	public List<MatchingBoardDto> getMatchingBoardListByGameName(String gameName) {
 		
-		List<MatchingBoardDto> boardMachingList  = mapper.selectMatchingBoardListByGameName(gameName);
+		List<MatchingBoardDto> boardMatchingList  = mapper.selectMatchingBoardListByGameName(gameName);
 		
-		return boardMachingList;
+		return boardMatchingList;
 	}
 	
 
 	@Override
-	public List<Map<String, String>> getSelectOwMatchingMapByGameName(String gameName) {
-		List<Map<String, String>> list = mapper.selectOwMatchingMapByGameName(gameName);
-		return list;
+	public List<MatchingBoardDto> getSelectOwBoardListByGameName(String gameName) {
+		List<MatchingBoardDto> overwatchBoardList = mapper.selectOwBoardListByGameName(gameName);
+		return overwatchBoardList;
+	}
+	
+	@Override
+	public void delete(int boardNo) {
+		mapper.deleteOverwatchBoard(boardNo);
+		
+	}
+
+	@Override
+	public void edit(MatchingBoardDto matchingBoardDto) {
+		mapper.updateMatchingBoard(matchingBoardDto);
+		
+	}
+
+	@Override
+	public MatchingBoardDto getSelectOwBoardByBoardNo(int boardNo) {
+		MatchingBoardDto overwatchBoard = mapper.selectOwBoardByBoardNo(boardNo);
+		return overwatchBoard;
 	}
 	
 	

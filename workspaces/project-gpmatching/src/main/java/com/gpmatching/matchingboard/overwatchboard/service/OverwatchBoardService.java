@@ -15,8 +15,13 @@ public interface OverwatchBoardService {
 	
 	List<MatchingBoardDto> getMatchingBoardListByGameName(String gameName);
 	
-	List<Map<String, String>> getSelectOwMatchingMapByGameName(String gameName);
+	List<MatchingBoardDto> getSelectOwBoardListByGameName(String gameName);
 
+	void edit(MatchingBoardDto matchingBoardDto);
+
+	void delete(int boardNo);
+
+	MatchingBoardDto getSelectOwBoardByBoardNo(int boardNo);
 
 	//List<MatchingBoardDto> getMatchingBoardListByGameNo(int gameNo);
 

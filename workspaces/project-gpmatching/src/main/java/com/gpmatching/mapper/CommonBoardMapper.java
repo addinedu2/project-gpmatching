@@ -30,25 +30,26 @@ public interface CommonBoardMapper {
 	void insertBoardAttach(BoardAttachDto attach);
 	
 	//공통게시판 글 전체 조회
-	@Select("select u.nickname, cb.commonNo, cb.commonTitle, cb.commonContent, cb.userNo, cb.readCount, cb.regDate, cb.deleted "
+	@Select("select u.nickname, cb.commonNo, cb.commonTitle, cb.commonContent, cb.userNo, cb.readCount, cb.regDate, cb.deleted, cb.category "
 	 	  + "from CommonBoard cb "
 		  + "inner join User u "
 		  + "on u.UserNo = cb.UserNo "
+		  + "where cb.category = 'common' "   //여기서 데이터에서 공통만 뽑아냄, 위에서 데이터 가져오는거, 아래서 데이터 가져갈 것도 신경 쓸 것
 		  + "order by commonNo desc")
 	List<CommonBoardDto> selectAllBoard();
 	
 	//공통게시판 페이지별 조회
-	@Select("select u.nickname, cb.commonNo, cb.commonTitle, cb.commonContent, cb.userNo, cb.readCount, cb.regDate, cb.deleted "
+	@Select("select u.nickname, cb.commonNo, cb.commonTitle, cb.commonContent, cb.userNo, cb.readCount, cb.regDate, cb.deleted, cb.category "
 		  + "from CommonBoard cb "
 	      + "inner join User u "
 		  + "on u.UserNo = cb.UserNo "
-		  + "where deleted=false "
+		  + "where cb.category = 'common' and cb.deleted = false "   //여기서 데이터에서 공통만 뽑아냄, 위에서 데이터 가져오는거, 아래서 데이터 가져갈 것도 신경 쓸 것
 		  + "order by commonNo desc "
 		  + "limit #{from}, #{count}")
-	List<CommonBoardDto> selectBoardByPage(@Param("from")int from, @Param("count")int count);
+	List<CommonBoardDto> selectBoardByPage(@Param("from")int from, @Param("count")int count, @Param("category")String category );
 	
 	//공통게시판 글 상세 보기
-	@Select("select u.nickname, cb.commonNo, cb.commonTitle, cb.commonContent, cb.userNo, cb.readCount, cb.regDate, cb.deleted "
+	@Select("select u.nickname, cb.commonNo, cb.commonTitle, cb.commonContent, cb.userNo, cb.readCount, cb.regDate, cb.deleted,  "
 		  + "from CommonBoard cb "
 		  + "inner join User u "
 	 	  + "on u.UserNo = cb.UserNo "
@@ -81,11 +82,11 @@ public interface CommonBoardMapper {
 		  + "where commonNo = #{commonNo}")
 	void updateCommonEdit(CommonBoardDto commonBoardDto);
 	
-	//게시물 조회수
+	//게시물 조회수 증가
 	@Update("update CommonBoard "
-		  + "set readCount = readCount + 1} "
-		  + "where commonNo =#{commonNo}")
-	void updateReadCount(@Param("readCount")int readCount);
+			  + "set readCount = COALESCE(readCount,0) + 1 "
+			  + "where commonNo = #{commonNo}")
+	void incrementReadCount(@Param("commonNo") int commonNo);
 
 	
 	

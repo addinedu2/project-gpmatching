@@ -49,7 +49,7 @@
 	<!-- title -->
 	<div class="mb-3 txt-box">
 	  <label class="form-label" for="textInput">제목</label>
-	  <input type="text" name="commonTitle" id="textInput" class="form-control" placeholder="제목 입력">
+	  <input type="text" name="commonTitle" id="textInput" class="form-control" placeholder="제목은 필수 사항입니다" required>
 	</div>
 	
 	<!--  nickname -->
@@ -61,7 +61,7 @@
 	<!-- content -->
 	 <div class="mb-3 txt-box">
 	   <label for="textarea-input" class="form-label">본문</label>
-	   <textarea class="form-control" name="commonContent" id="textarea-input" rows="5" placeholder="본문 입력"></textarea>
+	   <textarea class="form-control" name="commonContent" id="textarea-input" rows="5" placeholder="내용도 필수 사항입니다" required></textarea>
 	 </div>
 	 
 	  <!-- attach file -->

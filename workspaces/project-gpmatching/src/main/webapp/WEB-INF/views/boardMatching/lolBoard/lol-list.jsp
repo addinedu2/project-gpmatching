@@ -47,7 +47,7 @@
 	href="/project-gpmatching/resources/assets/css/theme.css">
 <link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
 
-<title>LOL Matching | LOL 매칭 게시판</title>
+<title>LOL 매칭 게시판</title>
 </head>
 
 <body class="bg-light">
@@ -182,7 +182,7 @@
 												</button>
 											   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 													<a class="dropdown-item" href="lol-edit?boardNo=${matchingBoard.boardNo}">수정</a>
-													<a class="dropdown-item" href="#">삭제</a>
+													<a class="dropdown-item" href="lol-delete?boardNo=${matchingBoard.boardNo}">삭제</a>
 											   </div>
 											 </div>
 											</th>

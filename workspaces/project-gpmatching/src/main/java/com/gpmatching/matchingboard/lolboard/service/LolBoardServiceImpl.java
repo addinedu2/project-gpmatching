@@ -101,7 +101,12 @@ public class LolBoardServiceImpl implements LolBoardService {
 	}
 
 
-	
+	@Override
+	public void delete(int boardNo) {
+		mapper.deleteLolBoard(boardNo);
+		
+	}
+
 	
 //	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {
 //		
