@@ -43,7 +43,7 @@ public class CommonBoardController {
 		int dataCount = commonBoardService.getCommonBoardCount();//총 게시물 개수
 		
 		int from = (pageNo -1) *pageSize;//첫번째 페이지 게시물 순서
-		List<CommonBoardDto> commonBoardList = commonBoardService.listCommonBoardByPage(from, pageSize);
+		List<CommonBoardDto> commonBoardList = commonBoardService.listCommonBoardByPage(from, pageSize, linkUrl);
 		
 		//페이지 번호 표시 부분
 		CommonPager pager = 
@@ -59,7 +59,7 @@ public class CommonBoardController {
 	//공통게시판 글쓰기 form
 	@GetMapping(path = {"/commonWrite"})
 	public String showCommonWriteForm(Model model,  @RequestParam(defaultValue = "common") String category) {
-		model.addAttribute("category", "common");
+		model.addAttribute("category", category);
 //		if(session.getAttribute("loginuser") == null) {
 //			return "redirect:/account/login";
 //		}
