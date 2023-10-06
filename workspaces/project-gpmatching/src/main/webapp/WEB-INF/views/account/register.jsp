@@ -147,7 +147,7 @@
 			
 			const userId = $("#userId").val();
 			if (!userId){ // !userId : null or "" 인 경우 true -> 사용자가 입력하지 않은경우
-				alert('아이디를 입력하세요');
+				alert('아이디를 써야 중복검사를 하지');
 				$('#userId').focus();
 				return;
 			}
@@ -160,7 +160,7 @@
 				"success": function(data, status, xhr) {   //"success" 정상적으로 처리됐을때 호출
 					if(data == "true"){
 						dupChecked = true;  //중복체크
-						alert("사용 가능한 아이디 입니다");
+						alert("사용 가능한 아이디");
 					}else{
 						dupChecked = false;
 						alert("이미 사용중이다");
@@ -176,7 +176,7 @@
 			event.preventDefault(); //이벤트 발생 객체의 원래 동작 실행 막기 
 			
 			if(!dupChecked){
-				alert("아이디 중복검사를 실행하세요");
+				alert("아이디 중복검사 안하냐");
 				return;
 			}
 			
