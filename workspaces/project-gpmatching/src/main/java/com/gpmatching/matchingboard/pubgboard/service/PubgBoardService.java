@@ -17,7 +17,17 @@ public interface PubgBoardService {
 	
 	List<MatchingBoardDto> getMatchingBoardListByGameName(String gameName);
 	
-	List<Map<String, String>> getSelectPubgMatchingMapByGameName(String gameName);
+	List<MatchingBoardDto> getSelectPubgBoardListByGameName(String gameName);
+	
+	MatchingBoardDto findMatchingBoardByBoardNo(int boardNo);
+	
+	MatchingBoardDto findPubgBoardByBoardNo(int boardNo);
+	
+	void edit(MatchingBoardDto matchingBoardDto);
+
+	void delete(int boardNo);
+
+
 
 	//List<MatchingBoardDto> getMatchingBoardListByGameNo(int gameNo);
 

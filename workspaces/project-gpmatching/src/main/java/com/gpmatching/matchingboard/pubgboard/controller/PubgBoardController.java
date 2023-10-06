@@ -61,7 +61,7 @@ public class PubgBoardController {
 	public String bgMatchingBoardList(Model model) {
 		
 		
-		List<Map<String, String>> matchingPubgList = pubgBoardService.getSelectPubgMatchingMapByGameName("battle ground");
+		List<MatchingBoardDto> matchingPubgList = pubgBoardService.getSelectPubgBoardListByGameName("battle ground");
 		
 		model.addAttribute("matchingPubgList", matchingPubgList);
 		
@@ -106,6 +106,53 @@ public class PubgBoardController {
 		return "redirect:battleground-list";	
 	}
 
+	@GetMapping(path = { "/battleground-edit"})
+	public String showLolEditForm(HttpSession session, int boardNo, Model model) {
+		
+		MatchingBoardDto pubgMatchingBoard = pubgBoardService.findPubgBoardByBoardNo(boardNo);
+		
+		model.addAttribute("pubgMatchingBoard", pubgMatchingBoard);
+		
+		//System.out.println(lolMatchingBoard);
+		
+		return "/boardMatching/pubgBoard/battleground-edit";
+	}
+	
+	
+	
+	/**
+	 * 베틀그라운드 매칭 게시판 글수정 form 요청
+	 * 
+	 * @param matchingBoardDto 매칭게시판 matchingBoard 테이블
+	 * @param lolDto 롤 Lol 테이블 
+	 * @return 롤 게시판 뷰 리다이렉트 요청
+	 */
+	
+	
+	@PostMapping(path = { "/battleground-edit"})
+	public String editLolMatchingBoard(MatchingBoardDto matchingBoardDto, PubgDto pubgDto) {
+		
+		pubgBoardService.edit(matchingBoardDto);
+		pubgService.edit(pubgDto);
+		
+		return "redirect:battleground-list";	
+	}
+	
+	/**
+	 * 베틀그라운드 매칭 게시판 글삭제 기능
+	 * 
+	 * @param 매칭게시판 boardNo
+	 * @return 롤 게시판 뷰 리다이렉트 요청
+	 */
+	
+	
+	@GetMapping(path = { "/battleground-delete"})
+	public String deleteLolMatchingBoard(int boardNo) {
+		
+		pubgBoardService.delete(boardNo);
 
+		return "redirect:battleground-list";	
+	}
+	
 
 }

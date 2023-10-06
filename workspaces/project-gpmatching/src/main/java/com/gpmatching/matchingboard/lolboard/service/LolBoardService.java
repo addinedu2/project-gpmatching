@@ -23,6 +23,8 @@ public interface LolBoardService {
 	MatchingBoardDto findMatchingBoardByBoardNo(int boardNo);
 
 	void edit(MatchingBoardDto matchingBoardDto);
+	
+	void delete(int boardNo);
 
 	//List<MatchingBoardDto> getMatchingBoardListByGameNo(int gameNo);
 
