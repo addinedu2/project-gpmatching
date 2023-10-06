@@ -66,7 +66,9 @@ public interface ReportBoardMapper {
 	BoardAttachDto selectBoardAttachByBoardAttachNo(@Param("boardAttachNo") int boardAttachNo);
 		
 	//게시물 개수 카운트
-	@Select("select count(*) from CommonBoard")
+	@Select("select count(*)"
+			+ " from CommonBoard "
+			+ "where category = 'report' ")
 	int selectReportBoardCount();
 	
 	
