@@ -49,7 +49,7 @@ public interface CommonBoardMapper {
 	List<CommonBoardDto> selectBoardByPage(@Param("from")int from, @Param("count")int count, @Param("category")String category );
 	
 	//공통게시판 글 상세 보기
-	@Select("select u.nickname, cb.commonNo, cb.commonTitle, cb.commonContent, cb.userNo, cb.readCount, cb.regDate, cb.deleted,  "
+	@Select("select u.nickname, cb.commonNo, cb.commonTitle, cb.commonContent, cb.userNo, cb.readCount, cb.regDate, cb.deleted  "
 		  + "from CommonBoard cb "
 		  + "inner join User u "
 	 	  + "on u.UserNo = cb.UserNo "
