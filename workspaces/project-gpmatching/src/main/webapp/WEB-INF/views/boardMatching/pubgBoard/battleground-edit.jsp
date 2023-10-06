@@ -71,7 +71,7 @@
 			</a>	
 			<br>
 			<!-- Input -->
-			<form action="battleground-write" method="post">
+			<form action="battleground-edit" method="post">
 				<input name="gameNo" type="hidden" id="textInput" class="form-control" value="${ pubgMatchingBoard.gameNo }">
 				<input name="boardNo" type="hidden" id="textInput" class="form-control" value="${ pubgMatchingBoard.boardNo }">
 				<div class="mb-3 txt-box">
