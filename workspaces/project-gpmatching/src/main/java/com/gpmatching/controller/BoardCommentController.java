@@ -1,17 +1,18 @@
 package com.gpmatching.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gpmatching.dto.BoardCommentDto;
-import com.gpmatching.dto.MatchingAlarmDto;
 import com.gpmatching.service.BoardCommentService;
-import com.gpmatching.service.CommonBoardService;
-import com.gpmatching.service.MatchingAlarmService;
 
 import lombok.Setter;
 
@@ -22,7 +23,14 @@ public class BoardCommentController {
 	@Setter(onMethod_ = { @Autowired })
 	private BoardCommentService boardCommentService;
 	
-	
+	@GetMapping(path= {"/commentList"})
+	public String showCommentList(int commonNo, Model model) {
+		
+		List<BoardCommentDto> comments = boardCommentService.getCommentListByCommonNo(commonNo);
+		model.addAttribute("comments",comments);
+		
+		return "commonBoard/commentList";
+	}
 
 	
 	//공통게시판 댓글 쓰기
@@ -35,6 +43,18 @@ public class BoardCommentController {
 		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d", boardComment.getCommonNo(), pageNo);
 	}
 	
+	@PostMapping(path= {"/ajax-writeComment"})
+	@ResponseBody
+	public String ajaxWriteComment(BoardCommentDto boardComment, @RequestParam(defaultValue = "-1") int pageNo) {
+	
+		if (pageNo < 1) {
+			return "redirect:commonList";
+		}
+		
+		boardCommentService.writeComment(boardComment);
+
+		return "success";
+	}
 	
 	
 	@GetMapping(path = {"/deleteComment"}) //댓글 삭제
@@ -45,10 +65,27 @@ public class BoardCommentController {
 		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d", commonNo, pageNo);
 	}  
 	
+	@GetMapping(path = {"/ajax-deleteComment"})
+	@ResponseBody
+	public String ajaxDeleteComment(int commentNo) {
+		
+		boardCommentService.deleteComment(commentNo);
+		
+		return "success";
+	} 
+	
 	@PostMapping(path = {"/editComment"})
 	public String editComment(BoardCommentDto boardComment, @RequestParam(defaultValue = "-1") int pageNo) {
 		boardCommentService.editComment(boardComment);
 		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d", boardComment.getCommonNo(), pageNo);	
+	}
+	
+	@PostMapping(path = {"/ajax-editComment"})
+	@ResponseBody
+	public String ajaxEditComment(BoardCommentDto boardComment) {
+		boardCommentService.editComment(boardComment);
+		
+		return "success";	
 	}
 	
 }

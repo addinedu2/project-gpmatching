@@ -24,7 +24,8 @@ SECRET
 ?
 
 ## 관련 링크 (커뮤니티)
-TBD
+[DUO.GG](https://duo.op.gg/ko/lol/)  
+[YOUR.GG](https://your.gg/ko/kr/duo-request) 
 
 ## CONTRIBUTE 방법 설명
 TBD

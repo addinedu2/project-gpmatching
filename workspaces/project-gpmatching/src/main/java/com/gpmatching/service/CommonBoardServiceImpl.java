@@ -98,5 +98,12 @@ public class CommonBoardServiceImpl implements CommonBoardService {
 		return attach;
 	}
 
+
+	@Override
+	public void incrementReadCount(int commonNo) {
+		commonBoardMapper.incrementReadCount(commonNo);
+		
+	}
+
 	
 }

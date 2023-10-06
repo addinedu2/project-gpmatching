@@ -35,13 +35,13 @@ public class AccountServiceImpl implements AccountService {
 	
 	
 	
-	//마이페이지 수정
-	@Override
-	public void editUser(UserDto user) {
-		//데이터베이스 데이터 수정(mapper 사용)
-		userMapper.updateUserProfile(user);
-		
-	}
+//	//마이페이지 수정  MypageServiceImpl로 이동
+//	@Override
+//	public void editUser(UserDto user) {
+//		//데이터베이스 데이터 수정(mapper 사용)
+//		userMapper.updateUserProfile(user);
+//		
+//	}
 
 	
 	

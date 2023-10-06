@@ -150,20 +150,10 @@
 		            
 		            	<br>
 			            <div class="btn-center" >
-				        	<a href="commonList?pageNo=${pageNo}">
+				        	<a href="reportList?pageNo=${pageNo}">
 				        	<button type="button" class="btn btn-primary btn-group-sm mb-2" aria-label="Small button group">목록</button>
 				        	</a>
 				        	
-				        	<!-- sessionScope.loginuser != null && loginuser.memberId == board.writer 같은 의미-->
-				        	
-				        	<a href="commonEdit?commonNo=${reportBoard.commonNo}&pageNo=${pageNo}">
-				        	<button type="button" class="btn btn-secondary btn-group-sm mb-2" aria-label="Small button group">수정</button>
-				        	</a>
-		
-				        	
-				        	<a href="javascript:" id="delete-board-lnk">
-				        	<button type="button" class="btn btn-danger btn-group-sm mb-2" aria-label="Small button group">삭제</button>
-				        	</a>
 				        	
 		
 				        
