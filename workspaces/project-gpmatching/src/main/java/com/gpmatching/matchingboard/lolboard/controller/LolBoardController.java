@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gpmatching.dto.MatchingAlarmDto;
+import com.gpmatching.dto.MatchingCommentDto;
 import com.gpmatching.matchingboard.dto.LolDto;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 import com.gpmatching.matchingboard.lolboard.service.LolBoardService;
@@ -63,10 +64,11 @@ public class LolBoardController {
 	public String matchingBoardList(Model model) {
 		
 		List<MatchingBoardDto> matchingLolList = lolBoardService.getSelectLolBoardListByGameName("league of legends");
-		MatchingBoardDto matchingComment = lolBoardService.findMatchingBoardByBoardNo("내일할일");
-				
+		
+		
+		
 		model.addAttribute("matchingLolList", matchingLolList);
-		model.addAttribute("matchingComment", matchingComment);
+		
 		
 		return "/boardMatching/lolBoard/lol-list";
 	}

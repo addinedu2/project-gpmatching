@@ -189,18 +189,18 @@ public class CommonBoardController {
 		return downloadView;
 	}
 	
-//	//CommonBoard에 테스트했기 때문에 GetMapping은 여기서 했고 PostMapping은 MatchingReviewController에서 수행했습니다.
-//	@GetMapping(path = { "/review" })
-//	public String showMatchingReviewForm(@RequestParam(defaultValue = "-1")int commonNo, 
-//								 		 @RequestParam(defaultValue = "-1")int pageNo, Model model) {
-//		
-//		CommonBoardDto commonBoardDto = commonBoardService.findCommonBoardByCommonNo(commonNo);
-//		model.addAttribute("commonBoard", commonBoardDto);
-//		model.addAttribute("pageNo",pageNo);
-//
-//		
-//		return "/commonBoard/reviewtest";
-//	}
+	//CommonBoard에 테스트했기 때문에 GetMapping은 여기서 했고 PostMapping은 MatchingReviewController에서 수행했습니다.
+	@GetMapping(path = { "/review" })
+	public String showMatchingReviewForm(@RequestParam(defaultValue = "-1")int commonNo, 
+								 		 @RequestParam(defaultValue = "-1")int pageNo, Model model) {
+		
+		CommonBoardDto commonBoardDto = commonBoardService.findCommonBoardByCommonNo(commonNo);
+		model.addAttribute("commonBoard", commonBoardDto);
+		model.addAttribute("pageNo",pageNo);
+
+		
+		return "/commonBoard/reviewtest";
+	}
 	
 	
 	///////////////////////////////////

@@ -186,6 +186,7 @@
 											   </div>
 											 </div>
 											</th>
+											
 										</tr>
 
 									</c:forEach>
@@ -210,6 +211,7 @@
 						</div>
 						<form id="commentform" action="write-comment" method="post">
 							<input type="hidden" id="boardno-in-modal" name="boardNo" value="${ matchingBoard.boardNo }" /> 
+							<input type="hidden" name="userNo" value="${ loginuser.userNo }" /> 
 							<div class="modal-body">
 			
 								<div class="mb-3">
@@ -221,6 +223,7 @@
 									<label for="message-text" class="col-form-label">파티장에게 알려줄 내용</label>
 									<textarea name="mCommentContent" class="form-control" id="message-text-in-modal"></textarea>
 								</div>
+								
 			
 							</div>
 							<div class="modal-footer">
@@ -246,20 +249,20 @@
 			            </div>
 			            <div class="modal-body">
 			            <!-- 댓글 view -->
-			            <table>
+			            <%-- <table>
 			            <tr>			            	
 			            	<th>userNo</th>			            
 			            	<th>mCommentNo</th>
 			            	<th>mCommentContent</th>
 			            </tr>
-			            <c:forEach var="mCommentList" items="${ requestScope.mCommentList }">
+			            <c:forEach var="mCommentList" items="${ requestScope.matchingComment }">
 			            <tr>
 			            	<td>${ mCommentList.userNo }z</td>
 			            	<td>${ mCommentList.mCommentNo }</td>
 			            	<td>${ mCommentList.mCommentContent }</td>
 			            </tr>
 			            </c:forEach>
-			            </table>
+			            </table> --%>
 			            </div>
 			            <div class="modal-footer">
 			                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

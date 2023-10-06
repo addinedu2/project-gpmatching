@@ -3,6 +3,7 @@ package com.gpmatching.matchingboard.lolboard.service;
 import java.util.List;
 import java.util.Map;
 
+import com.gpmatching.dto.MatchingCommentDto;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 
 
@@ -23,6 +24,7 @@ public interface LolBoardService {
 	MatchingBoardDto findMatchingBoardByBoardNo(int boardNo);
 
 	void edit(MatchingBoardDto matchingBoardDto);
+
 
 	//List<MatchingBoardDto> getMatchingBoardListByGameNo(int gameNo);
 	
