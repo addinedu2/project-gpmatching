@@ -177,16 +177,15 @@
 														data-boardno="${ matchingBoard.boardNo }">목록</button>
 											</th>
 											<th>
-											  <!-- collapse -->
-											  <div class="dropdown">
-											  	<button type="button" id="dropdownMenuButton" class="btn btn-icon btn-white border border-2 rounded-circle btn-dashed ms-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-												      +
-												</button>
-											   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-													<a class="dropdown-item" href="lol-edit?boardNo=${matchingBoard.boardNo}">수정</a>
-													<a class="dropdown-item" href="lol-delete?boardNo=${matchingBoard.boardNo}">삭제</a>
-											   </div>
-											 </div>
+												<div class="dropdown dropstart">
+			                                        <a class="text-muted text-primary-hover" href="#" role="button" id="dropdownTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			                                            <i class="icon-xxs" data-feather="more-vertical"></i>
+			                                        </a>
+			                                        <div class="dropdown-menu" aria-labelledby="dropdownTask">
+			                                            <a class="dropdown-item" href="lol-edit?boardNo=${matchingBoard.boardNo}">수정</a>
+			                                            <a class="dropdown-item" href="lol-delete?boardNo=${matchingBoard.boardNo}">삭제</a>
+			                                        </div>
+			                                    </div>
 											</th>
 											
 										</tr>
@@ -242,19 +241,44 @@
 			                </button>
 			            </div>
 			            <div id="comment-list" class="modal-body" >
-<!-- 			                <ul> -->
-<%-- 						        <c:forEach var="comment" items="${comments}"> --%>
-<%-- 						            <li>${comment.mCommentContent}</li> --%>
-<%-- 						        </c:forEach> --%>
-<!-- 						    </ul> -->
+							
 			            </div>
 			            <div class="modal-footer">
 			                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 			                <button type="button" class="btn btn-primary">Save changes</button>
 			            </div>
-			        </div>
-			    </div>
-			</div>
+			            <!-- card : 댓글 ui는 나중에 이런 형식으로 구현할 예정입니다 -->
+			              <div class="card mb-4">
+			                <!-- card body -->
+			                <div class="card-body">
+			                  <!-- card title -->
+			                  <h4 class="card-title">나중에 댓글 ui 이런식으로 어때요?</h4>
+			                  <div class="d-flex justify-content-between
+			                      align-items-center mb-4">
+			                    <div class="d-flex align-items-center">
+			                      <!-- img -->
+			                      <div>
+			                        <img src="../assets/images/avatar/avatar-1.jpg" class="rounded-circle avatar-md" alt="">
+			                      </div>
+			                      <!-- text -->
+			                      <div class="ms-3 ">
+			                        <h5 class="mb-1">여기는 지원자 닉네임</h5>
+			                        <p class="text-muted mb-0 fs-5 text-muted">여기는 간단한 내용
+			                        </p>
+			                      </div>
+			                    </div>
+			                    <div>
+			                      <a href="/누르면매칭수락" class="text-muted text-primary-hover"><i
+			                            class="me-4 icon-xs" data-feather="phone-call"></i></a>
+			                      <a href="/누르면매칭거절" class="text-muted text-primary-hover"><i
+			                            class="icon-xs" data-feather="video"></i></a>
+			                    </div>
+			                  </div>
+						        </div>
+						    </div>
+						</div>
+					</div>
+				</div>
 	
 	
 	<!-- Scripts -->
@@ -325,7 +349,9 @@
 		$('#lol-list').on("click", '.btn-show-commentList-modal', function(event) {
 			
 			const boardNo = $(this).data('boardno');
-
+			const currentTr = $('#tr-' + boardNo);
+			$('#title2-in-modal').text("(" + boardNo + ") " + currentTr.data('title'));
+			
 			$.ajax({
 				
 				"url": "ajax-show-comment",
@@ -341,19 +367,49 @@
 						
 						// 테이블 헤더 추가
 		                var $headerRow = $("<tr>");
+		                
 		                $headerRow.append($("<th>").text("댓글 번호"));
-		                $headerRow.append($("<th>").text("유저 번호"));
+		                $headerRow.append($("<th>").text("닉네임"));
 		                $headerRow.append($("<th>").text("댓글 내용"));
-		                $headerRow.append($("<th>").text("게시물 번호"));
+		                $headerRow.append($("<th>").text("매칭"));
 		                commentList.append($headerRow);
 		                
 						for(var i = 0; i < result.length; i++){
 							var $row = $("<tr>");
+		                    
 		                    $row.append($("<td>").text(result[i].mcommentNo));
-		                    $row.append($("<td>").text(result[i].userNo));
+		                    $row.append($("<td>").text(result[i].nickname));
 		                    $row.append($("<td>").text(result[i].mcommentContent));
-		                    $row.append($("<td>").text(result[i].boardNo));
+		                    
 		                    commentList.append($row);
+		                    
+		                    // 수락 버튼 추가
+	                        var $acceptButton = $("<button>")
+	                            .addClass("btn btn-primary btn-sm btn-accept-comment")
+	                            .data('commentno', result[i].mcommentNo)
+	                            .text("수락");
+		                    
+	                     	// 거절 버튼 추가
+	                        var $rejectButton = $("<button>")
+	                            .addClass("btn btn-danger btn-sm btn-reject-comment")
+	                            .data('commentno', result[i].mcommentNo)
+	                            .text("거절");
+	                        
+	                     	// 수락 버튼 눌렀을 때의 동작 (not yet)
+	                        $('#comment-list').on("click", '.btn-accept-comment', function(event) {
+	                            var commentNo = $(this).data('commentno');
+	                            // TODO: 수정 버튼을 눌렀을 때의 동작 구현
+	                        });
+
+	                        // 거절 버튼 눌렀을 때의 동작 (not yet)
+	                        $('#comment-list').on("click", '.btn-reject-comment', function(event) {
+	                            var commentNo = $(this).data('commentno');
+	                            // TODO: 삭제 버튼을 눌렀을 때의 동작 구현
+	                        });
+	                        
+	                     	var $buttonColumn = $("<td>").append($acceptButton, $rejectButton);
+	                        $row.append($buttonColumn);
+		                    
 						}
 					}
 					

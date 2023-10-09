@@ -19,8 +19,10 @@ public interface MatchingCommentMapper {
 	@Options(useGeneratedKeys = true, keyProperty = "mCommentNo")
 	void insertMatchingComment(MatchingCommentDto matchingComment);
 
-	@Select("select mCommentNo, mCommentContent, boardNo, userNo "
-			+ "from MatchingComment "
+	@Select("select c.mCommentNo, c.mCommentContent, u.nickname "
+			+ "from MatchingComment c "
+			+ "inner join User u "
+			+ "on c.userNo = u.userNo "
 			+ "where boardNo = #{ boardNo }")
 	List<MatchingCommentDto> selectMatchingCommentByBoardNo(int boardNo);
 	

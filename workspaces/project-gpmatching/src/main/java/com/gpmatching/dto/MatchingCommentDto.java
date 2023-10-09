@@ -14,5 +14,6 @@ public class MatchingCommentDto {
 	private int boardNo;
 	private int userNo;
 	
-	
+	private UserDto user;
+	String nickname;
 }
