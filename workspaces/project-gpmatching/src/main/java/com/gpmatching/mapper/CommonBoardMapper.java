@@ -49,6 +49,7 @@ public interface CommonBoardMapper {
 	List<CommonBoardDto> selectBoardByPage(@Param("from")int from, @Param("count")int count, @Param("category")String category );
 	
 	//공통게시판 글 상세 보기
+
 	@Select("select u.nickname, cb.commonNo, cb.commonTitle, cb.commonContent, cb.userNo, cb.readCount, cb.regDate, cb.deleted "
 		  + "from CommonBoard cb "
 		  + "inner join User u "
@@ -69,7 +70,7 @@ public interface CommonBoardMapper {
 		
 	//게시물 개수 카운트
 	@Select("select count(*) from CommonBoard "
-			+ "where deleted = false")
+			+ "where category = 'common' and deleted = false")
 	int selectCommonBoardCount();
 	
 	//공통게시판 글 수정

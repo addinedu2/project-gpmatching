@@ -64,7 +64,7 @@
 			<!-- Container fluid -->
 
 			<a href="/project-gpmatching/boardMatching/pubgBoard/battleground-list">
-				<button type="button" class="btn btn-primary mb-2">베틀그라운드 목록보기</button>
+				<button type="button" class="btn btn-primary mb-2">배틀그라운드 목록보기</button>
 			</a>
 			<a href="/project-gpmatching/home">
 				<button type="button" class="btn btn-primary mb-2">홈으로</button>
@@ -118,27 +118,27 @@
 				
 				<!-- 베그 등록 -->
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">베그선호플레이</label>
+					<label class="form-label" for="textInput">배그선호플레이</label>
 					<input name="pubgPlay" type="text" id="textInput" class="form-control"
 							value="${ pubgMatchingBoard.pubgPlay }" >
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">베그주포지션</label>
+					<label class="form-label" for="textInput">배그주포지션</label>
 					<input name="pubgPosition" type="text" id="textInput" class="form-control" 
 							value="${ pubgMatchingBoard.pubgPosition }" >
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">베그주사용무기</label>
+					<label class="form-label" for="textInput">배그주사용무기</label>
 					<input name="pubgGun" type="text" id="textInput" class="form-control" 
 							value="${ pubgMatchingBoard.pubgGun }" >
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">베그서버</label>
+					<label class="form-label" for="textInput">배그서버</label>
 					<input name="pubgServer" type="text" id="textInput" class="form-control" 
 							value="${ pubgMatchingBoard.pubgServer }" >
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">베그모드</label>
+					<label class="form-label" for="textInput">배그모드</label>
 					<input name="pubgMode" type="text" id="textInput" class="form-control"  
 							value="${ pubgMatchingBoard.pubgMode }" >
 				</div>

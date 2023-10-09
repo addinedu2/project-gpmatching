@@ -25,7 +25,7 @@ public interface BoardCommentMapper {
 		  + "from BoardComment bc "
 	  	  + "inner join User u "
 		  + "on u.userNo = bc.userNo "
-		  + "where commonNo = #{ commonNo } "
+		  + "where commonNo = #{ commonNo } and deleted = false "
 		  + "order by commentNo desc")
 	List<BoardCommentDto> selectBoardCommentByCommonNo(@Param("commonNo") int commonNo);	
 	

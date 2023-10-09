@@ -132,18 +132,6 @@
 				</div>
 			</form>
 		</div>
-		<!-- Scripts -->
-		<script>
-			window.addEventListener("load", function(event) { // 브라우저가 현재 화면을 모두 처리한 후 호출하는 함수 등록	
-
-				const btnCancel = document.querySelector("#btnCancel"); // id="btnCancel"인 요소 찾기
-				btnCancel.addEventListener("click", function(event) {
-
-					location.href = "overwatch-list"; // 브라우저의 주소 입력기에 주소를 입력하는 것과 같은 효과 ( 이동 )
-				});
-			});
-		</script>
-
 
 		<!-- Libs JS -->
 		<script
@@ -165,11 +153,23 @@
 		<script
 			src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
-
-
-
 		<!-- Theme JS -->
 		<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
+		
+		
+		<!-- Scripts -->
+		<script>
+			window.addEventListener("load", function(event) { // 브라우저가 현재 화면을 모두 처리한 후 호출하는 함수 등록	
+
+				const btnCancel = document.querySelector("#btnCancel"); // id="btnCancel"인 요소 찾기
+				btnCancel.addEventListener("click", function(event) {
+
+					location.href = "overwatch-list"; // 브라우저의 주소 입력기에 주소를 입력하는 것과 같은 효과 ( 이동 )
+				});
+			});
+		</script>
+
+		
 </body>
 
 </html>
