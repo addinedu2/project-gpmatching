@@ -22,7 +22,7 @@ import lombok.Setter;
 @RequestMapping(path = { "/boardMatching/lolBoard" })
 public class MatchingCommentController {
 
-	@Autowired
+	@Setter(onMethod_ = { @Autowired })
 	private MatchingCommentService matchingCommentService;
 	
 	@Setter(onMethod_ = { @Autowired })
@@ -53,12 +53,27 @@ public class MatchingCommentController {
 		return "success";
 	}
 	
-	@GetMapping(path = { "/lol-comment" })
-	public String showMatchingCommentList(int boardNo, Model model) {
-		
-		List<MatchingCommentDto> mComments = matchingCommentService.getMatchingCommentByBoardNo(boardNo);
-		model.addAttribute("mComments", mComments);
-		
-		return "boardMatching/lolBoard/lol-comment";
-	}
+	@GetMapping(path = { "/ajax-show-comment" }, produces = "application/json;charset=utf-8")
+	@ResponseBody
+    public List<MatchingCommentDto> ajaxShowMatchingComment(@RequestParam int boardNo) {
+        
+	    System.out.println("Received boardNo: " + boardNo);
+
+        List<MatchingCommentDto> comments = matchingCommentService.getMatchingCommentByBoardNo(boardNo);
+        
+        System.out.println(comments);
+        
+        //model.addAttribute("comments", comments);
+        
+        return comments; 
+    }
+	
+//	@GetMapping(path = { "/lol-comment" })
+//	public String showMatchingCommentList(int boardNo, Model model) {
+//		
+//		List<MatchingCommentDto> mComments = matchingCommentService.getMatchingCommentByBoardNo(boardNo);
+//		model.addAttribute("mComments", mComments);
+//		
+//		return "boardMatching/lolBoard/lol-comment";
+//	}
 }

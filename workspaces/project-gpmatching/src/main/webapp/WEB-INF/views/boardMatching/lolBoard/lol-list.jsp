@@ -112,8 +112,8 @@
 									</tr>
 								</thead>
 				 
-								<tbody>		
-									<c:forEach var="matchingBoard" items="${ requestScope.matchingLolList }" varStatus="vs">
+								<tbody id="lol-list">		
+									<c:forEach var="matchingBoard" items="${ requestScope.matchingLolList }">
 										<tr id="tr-${ matchingBoard.boardNo }" data-title="${ matchingBoard.boardTitle }">
 
 											<th scope="row">${ matchingBoard.nickname }</th>
@@ -172,7 +172,9 @@
 												<!-- Varying modal -->
 												<button type="button" class="btn btn-primary btn-show-comment-modal" 
 														data-boardno="${ matchingBoard.boardNo }">${ matchingBoard.boardNo }
-												</button>
+												</button>											
+												<button type="button" class="btn btn-primary btn-show-commentList-modal" 
+														data-boardno="${ matchingBoard.boardNo }">목록</button>
 											</th>
 											<th>
 											  <!-- collapse -->
@@ -199,70 +201,52 @@
 			</div>
 			</div>
 			<!-- 댓글 쓰기 모달 -->
-			<div class="modal fade" id="comment-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelOne" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="title-in-modal">제목 : ${ matchingBoard.boardTitle }</h5>
-							<button type="button" class="btn-close"
-								data-bs-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<form id="commentform" action="write-comment" method="post">
-							<input type="hidden" id="boardno-in-modal" name="boardNo" value="${ matchingBoard.boardNo }" /> 
-							<input type="hidden" name="userNo" value="${ loginuser.userNo }" /> 
-							<div class="modal-body">
-			
-								<div class="mb-3">
-									<label for="recipient-name" class="col-form-label">닉네임 : ${ loginuser.nickname }</label> 
-									<input type="text" class="form-control" id="recipient-name-in-modal" 
-									placeholder="게임 아이디를 입력해주세요">
-								</div>
-								<div class="mb-3">
-									<label for="message-text" class="col-form-label">파티장에게 알려줄 내용</label>
-									<textarea name="mCommentContent" class="form-control" id="message-text-in-modal"></textarea>
-								</div>
-								
-			
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-bs-dismiss="modal">닫기</button>
-								<button id="write-comment-lnk" type="submit" class="btn btn-primary">등록</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			
-			<!-- 댓글 목록 보기 모달 (비활성화) -->
-			<!-- Modal -->
-			<div class="modal fade" id="commentList-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal fade" id="comment-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			    <div class="modal-dialog" role="document">
 			        <div class="modal-content">
 			            <div class="modal-header">
-			                <h5 class="modal-title" id="boardno-in-modal"></h5>
+			                <h5 class="modal-title" id="title-in-modal">${ matchingBoard.boardTitle }</h5>
 			                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-			                    <span aria-hidden="true">&times;</span>
+			                    <!-- <span aria-hidden="true">&times;</span> -->
 			                </button>
 			            </div>
+						<form id="commentform" action="write-comment" method="post">
+							<input type="hidden" id="boardno-in-modal" name="boardNo" value="${ matchingBoard.boardNo }" /> 
+							<input type="hidden" name="userNo" value="${ loginuser.userNo }" /> 
 			            <div class="modal-body">
-			            <!-- 댓글 view -->
-			            <%-- <table>
-			            <tr>			            	
-			            	<th>userNo</th>			            
-			            	<th>mCommentNo</th>
-			            	<th>mCommentContent</th>
-			            </tr>
-			            <c:forEach var="mCommentList" items="${ requestScope.matchingComment }">
-			            <tr>
-			            	<td>${ mCommentList.userNo }z</td>
-			            	<td>${ mCommentList.mCommentNo }</td>
-			            	<td>${ mCommentList.mCommentContent }</td>
-			            </tr>
-			            </c:forEach>
-			            </table> --%>
+			                <div class="mb-3">
+								<label for="recipient-name" class="col-form-label">닉네임 : ${ loginuser.nickname }</label> 
+								<input type="text" class="form-control" id="recipient-name-in-modal" 
+								placeholder="게임 아이디를 입력해주세요">
+							</div>
+							<div class="mb-3">
+								<label for="message-text" class="col-form-label">파티장에게 알려줄 내용</label>
+								<textarea name="mCommentContent" class="form-control" id="message-text-in-modal"></textarea>
+							</div>
+						</div>
+			            <div class="modal-footer">
+			                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+			                <button type="button" id="write-comment-lnk" class="btn btn-primary">등록</button>
+			            </div>
+						</form>
+			        </div>
+			    </div>
+			</div>
+			<!-- 댓글 목록 보기 -->
+			<div class="modal fade" id="commentList-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			    <div class="modal-dialog" role="document">
+			        <div class="modal-content">
+			            <div class="modal-header">			            
+			                <h5 class="modal-title" id="title2-in-modal">댓글</h5>
+			                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+			                </button>
+			            </div>
+			            <div id="comment-list" class="modal-body" >
+<!-- 			                <ul> -->
+<%-- 						        <c:forEach var="comment" items="${comments}"> --%>
+<%-- 						            <li>${comment.mCommentContent}</li> --%>
+<%-- 						        </c:forEach> --%>
+<!-- 						    </ul> -->
 			            </div>
 			            <div class="modal-footer">
 			                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -271,12 +255,7 @@
 			        </div>
 			    </div>
 			</div>
-			
-			
-			
-			
-			
-		</div>
+	
 	
 	<!-- Scripts -->
 	<!-- Libs JS -->
@@ -306,51 +285,91 @@
 	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 
 	<script>
-	/* //댓글 쓰기 이벤트 처리
-	$('#write-comment-lnk').on('click', function(event){
-		
-		const formData = $('#commentform').serialize();
-		$.ajax({
-			"url": "ajax-write-comment",
-			"method": "post",
-			"data": formData,
-			"success": function(data, status, xhr){
-				// alert(data);
-				// 댓글 목록 영역 업데이트 ( 부분 화면 갱신 )
-				// load : ajax 방식으로 서버에 요청을 보내고 수신한 html 을 사용해서 화면의 일부를 갱신하는 함수
-				alert("success");
-				
-			},
-			"error": function(xhr, status, err){
-				alert("fail");
-			}
-		});
-	}); */
-	
 	
 	// 버튼을 누르면 해당 행의 데이터를 포함한 모달창을 보여줌 (-허지웅)
 	$(function() {
-		$('.btn-show-comment-modal').on("click", function(event) {
+		$('#lol-list').on("click", '.btn-show-comment-modal', function(event) {
 			const boardNo = $(this).data('boardno');
 			const currentTr = $('#tr-' + boardNo);
+			alert(boardNo);
 
-			$('#title-in-modal').text(currentTr.data('title'));
+			$('#title-in-modal').text("(" + boardNo + ") " + currentTr.data('title'));
 			$('#boardno-in-modal').val(boardNo);
 			$('#comment-modal').modal('show');
 		});
 	});
 	
+	// 댓글 모달창의 등록 버튼을 누르면 데이터가 전송됨
+	$('#write-comment-lnk').on('click', function(event){
+		
+		const formData = $('#commentform').serialize();	// <form> 에 포함된 입력요소의 값을 뽑아서 전송가능한 문자열로 반환
+		alert(formData);
+
+		$.ajax({
+			"url": "write-comment",
+			"method": "post",
+			"data": formData,
+			"success": function(data, status, xhr){
+				alert('성공');
+				$('#comment-modal').modal("hide");
+			},
+			"error": function(xhr, status, err){
+				alert('실패');
+			}
+		});	 
+	});
+	
+	
 	// 버튼을 누르면 해당 글의 댓글 보기 (-허지웅) (비활성화)
 	$(function() {
-		$('.btn-show-commentList-modal').on("click", function(event) {
+		$('#lol-list').on("click", '.btn-show-commentList-modal', function(event) {
+			
 			const boardNo = $(this).data('boardno');
-			const currentTr = $('#tr-' + boardNo);
 
-			$('#title-in-modal').text(currentTr.data('title'));
-			$('#boardno-in-modal').val(boardNo);
-			$('#commentList-modal').modal('show');
+			$.ajax({
+				
+				"url": "ajax-show-comment",
+				"method": "get",
+				"data": { "boardNo" : boardNo },
+				
+				"success": function(result){
+					
+					var commentList = $('#comment-list');
+					commentList.empty();
+					if (result != null){
+						console.log(result);
+						
+						// 테이블 헤더 추가
+		                var $headerRow = $("<tr>");
+		                $headerRow.append($("<th>").text("댓글 번호"));
+		                $headerRow.append($("<th>").text("유저 번호"));
+		                $headerRow.append($("<th>").text("댓글 내용"));
+		                $headerRow.append($("<th>").text("게시물 번호"));
+		                commentList.append($headerRow);
+		                
+						for(var i = 0; i < result.length; i++){
+							var $row = $("<tr>");
+		                    $row.append($("<td>").text(result[i].mcommentNo));
+		                    $row.append($("<td>").text(result[i].userNo));
+		                    $row.append($("<td>").text(result[i].mcommentContent));
+		                    $row.append($("<td>").text(result[i].boardNo));
+		                    commentList.append($row);
+						}
+					}
+					
+					console.log(commentList);
+					$('#commentList-modal').modal('show');
+				},
+				"error": function(xhr, status, err){
+					alert("실패");
+				
+				} 
+				
+			}); 
 		});
 	});
+	
+	
 	
 	</script>
 </body>

@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.gpmatching.interceptor.AlarmInterceptor;
 import com.gpmatching.interceptor.AuthInterceptor;
@@ -38,6 +39,8 @@ public class WebConfiguration implements WebMvcConfigurer {
 		
 		return multipartResolver;
 	}
+	
+	
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

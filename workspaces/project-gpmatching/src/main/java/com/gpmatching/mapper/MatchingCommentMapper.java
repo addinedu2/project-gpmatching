@@ -18,6 +18,11 @@ public interface MatchingCommentMapper {
 			+ "values (#{ boardNo }, #{ mCommentContent }, #{ userNo })")
 	@Options(useGeneratedKeys = true, keyProperty = "mCommentNo")
 	void insertMatchingComment(MatchingCommentDto matchingComment);
+
+	@Select("select mCommentNo, mCommentContent, boardNo, userNo "
+			+ "from MatchingComment "
+			+ "where boardNo = #{ boardNo }")
+	List<MatchingCommentDto> selectMatchingCommentByBoardNo(int boardNo);
 	
 	
 //	// 지우진 마세용

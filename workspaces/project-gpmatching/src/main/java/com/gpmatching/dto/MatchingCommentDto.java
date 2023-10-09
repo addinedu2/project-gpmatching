@@ -13,4 +13,6 @@ public class MatchingCommentDto {
 	private boolean mCommentConfirm;
 	private int boardNo;
 	private int userNo;
+	
+	
 }

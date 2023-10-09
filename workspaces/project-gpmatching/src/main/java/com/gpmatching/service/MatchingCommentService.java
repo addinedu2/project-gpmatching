@@ -8,5 +8,7 @@ public interface MatchingCommentService {
 	
 	void writeMatchingComment(MatchingCommentDto matchingComment);
 
+	List<MatchingCommentDto> getMatchingCommentByBoardNo(int boardNo);
+
 	//List<MatchingCommentDto> getMatchingCommentByBoardNo(int boardNo);
 }
