@@ -74,8 +74,10 @@
               <!-- Password -->
               <div class="mb-3">
                 <label for="confirm-password" class="form-label">회원 비밀번호 확인</label>
-                <input type="password" id="confirm-password" class="form-control" name="confirm-password" placeholder="**************" required="">
+                <input type="password" id="confirmPassword" class="form-control" name="confirm-password" placeholder="**************" required="">
               </div>
+              <p id="passwordCheck"></p>
+              
               <!-- Email -->
               <div class="mb-3">
                 <label for="email" class="form-label">이메일</label>
@@ -147,7 +149,7 @@
 			
 			const userId = $("#userId").val();
 			if (!userId){ // !userId : null or "" 인 경우 true -> 사용자가 입력하지 않은경우
-				alert('아이디를 써야 중복검사를 하지');
+				alert('아이디를 입력하세요');
 				$('#userId').focus();
 				return;
 			}
@@ -160,10 +162,10 @@
 				"success": function(data, status, xhr) {   //"success" 정상적으로 처리됐을때 호출
 					if(data == "true"){
 						dupChecked = true;  //중복체크
-						alert("사용 가능한 아이디");
+						alert("사용 가능한 아이디 입니다");
 					}else{
 						dupChecked = false;
-						alert("이미 사용중이다");
+						alert("이미 사용중");
 					}
 				},
 				"error": function(xhr, status, err){	//"error" 정상적이지 않을때 호출
@@ -176,7 +178,7 @@
 			event.preventDefault(); //이벤트 발생 객체의 원래 동작 실행 막기 
 			
 			if(!dupChecked){
-				alert("아이디 중복검사 안하냐");
+				alert("아이디 중복검사를 하세요");
 				return;
 			}
 			
@@ -190,6 +192,55 @@
 		
 	});
 	
+	
+	var passwordField = document.getElementById('userPwd');
+	var passwordConfirmField = document.getElementById('confirmPassword');
+	
+	function checkPassword(){
+	   var userPwd = passwordField.value;
+	   var confirmPassword = passwordConfirmField.value;
+	   var passwordCheck = document.getElementById('passwordCheck')
+	   
+	/*      var passwordOption = document.getElementById('passwordOption')
+	   var SpecialChar = ["!","@","#","$","%"];
+	   var checkSpecialChar = 0;
+	   
+	   if(password.length < 6 || password.length>16) {
+	      passwordOption.innerHTML = '비밀번호는 6글자 이상, 16글자 이하만 이용 가능합니다.';
+	      passwordOption.style.color = 'red';          
+	   }
+	   
+	   for(var i=0; i<SpecialChar.length; i++){
+	      if(password.indexOf(SpecialChar[i]) != -1){
+	         checkSpecialChar = 1;            
+	      }          
+	   }
+	   if(checkSpecialChar == 0){
+	      passwordOption.innerHTML = '!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.'  
+	   }  */
+	 
+	   /* $('#register').on('click', function(event){
+	    event.preventDefault();
+	   
+	    if (password != passwordConfirm){
+	       alert("비밀번호가 일치하지 않습니다");
+	       $('#password').focus();
+	       return
+	    }
+	   }); */
+	   
+	   if(userPwd != '' && confirmPassword != ''){
+	      if(userPwd == confirmPassword){
+	    	 passwordCheck.innerHTML = '비밀번호가 일치합니다.'
+	    	 passwordCheck.style.color = 'green';
+	         return true;          
+	      } else {
+	    	 passwordCheck.innerHTML = '비밀번호가 일치하지 않습니다.';
+	    	 passwordCheck.style.color = 'red';
+	         return false;    
+	        }
+	   }
+	}
 	</script>
 
   <!-- Scripts -->
@@ -209,6 +260,9 @@
 
 <!-- Theme JS -->
 <script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
+
+
+
 </body>
 
 </html>
