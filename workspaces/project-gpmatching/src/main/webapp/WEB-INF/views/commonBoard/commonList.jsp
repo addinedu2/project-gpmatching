@@ -74,9 +74,8 @@
          <td style="text-align:left; padding-left:10px">
          <c:choose>
          	<c:when test="${not commonBoard.deleted }">
-         		<a href="commonDetail?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}" style="text-decoration: none; color: inherit;">${commonBoard.commonTitle }
-         		 [<c:out value="${commentCounts[loop.index]}"></c:out>]<!--  varStatus="loop"를 이용한 댓글 갯수 가져오기 -->
-         		 </a>
+    	     	<a href="commonDetail?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}" style="text-decoration: none; color: inherit;">${commonBoard.commonTitle } </a>
+				<a href="commonDetail?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}#comment-list"  style="text-decoration: none; color: inherit;"> [<c:out value="${commentCounts[loop.index]}"></c:out>]</a>         <!--  varStatus="loop"를 이용한 댓글 갯수 가져오기 -->
          	</c:when>
          	<c:otherwise>
          	<span class="deleted" style="color:gray;">[삭제된 글]</span>
@@ -100,8 +99,8 @@
              	</ul>
              </div>
             </div>
-            <%-- <jsp:include page="/WEB-INF/views/modules/testBottom.jsp" /> --%>
-	</script>
+          </div>
+
 	
 	<!-- Libs JS -->
 	<script

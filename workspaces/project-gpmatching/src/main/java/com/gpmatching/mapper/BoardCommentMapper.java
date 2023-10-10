@@ -52,7 +52,7 @@ public interface BoardCommentMapper {
 	//댓글 개수 카운트
 	@Select("select count(*) "
 			+ "from BoardComment "
-			+ "where commonNo = #{ commonNo } ")
+			+ "where commonNo = #{ commonNo }  and deleted = false ")
 	int selectBoardByCommentCount(@Param("commonNo") int commonNo);
 
 	
