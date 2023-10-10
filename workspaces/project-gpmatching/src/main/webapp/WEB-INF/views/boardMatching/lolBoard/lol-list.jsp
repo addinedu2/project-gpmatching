@@ -4,17 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<?php
-// 로그인 상태 확인
-session_start();
-if (isset($_SESSION['loginuser'])) {
-    // 로그인한 사용자
-    $loggedIn = true;
-} else {
-    // 로그인하지 않은 사용자
-    $loggedIn = false;
-}
-?>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -108,9 +97,10 @@ if (isset($_SESSION['loginuser'])) {
 										티어											
 										</button>
 									 	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-											<a class="dropdown-item" href="/project-gpmatching/boardMatching/lolBoard/lol-list/bronze">브론즈</a>
-											<a class="dropdown-item" href="/project-gpmatching/boardMatching/lolBoard/lol-list/silver">실버</a>
-											<a class="dropdown-item" href="/project-gpmatching/boardMatching/lolBoard/lol-list/gold">골드</a>											
+									 		<a class="dropdown-item" href="lol-list">모든 티어</a>
+											<a class="dropdown-item" href="lol-list?lolTier=bronze">브론즈</a>
+											<a class="dropdown-item" href="lol-list?lolTier=silver">실버</a>
+											<a class="dropdown-item" href="lol-list?lolTier=gold">골드</a>											
 										</div>
 									</div>
 									</th>
@@ -327,7 +317,6 @@ if (isset($_SESSION['loginuser'])) {
 	// 버튼을 누르면 해당 행의 데이터를 포함한 모달창을 보여줌 (-허지웅)
 	$(function() {
 		
-		
 		$('#lol-list').on("click", '.btn-show-comment-modal', function(event) {
 			const boardNo = $(this).data('boardno');
 			const currentTr = $('#tr-' + boardNo);
@@ -337,10 +326,9 @@ if (isset($_SESSION['loginuser'])) {
 			$('#boardno-in-modal').val(boardNo);
 			$('#comment-modal').modal('show');
 		});
-	});
-	
-	// 댓글 모달창의 등록 버튼을 누르면 데이터가 전송됨
-	$(function() {
+	    
+
+		// 댓글 모달창의 등록 버튼을 누르면 데이터가 전송됨
 		$('#write-comment-lnk').on('click', function(event){
 			
 			const formData = $('#commentform').serialize();	// <form> 에 포함된 입력요소의 값을 뽑아서 전송가능한 문자열로 반환
@@ -361,8 +349,9 @@ if (isset($_SESSION['loginuser'])) {
 		});
 	});
 	
-	// 버튼을 누르면 해당 글의 댓글 보기 (-허지웅)
-	$(function() {
+		
+	$(function(){
+		// 버튼을 누르면 해당 글의 댓글 보기 (-허지웅)
 		$('#lol-list').on("click", '.btn-show-commentList-modal', function(event) {
 			
 			const boardNo = $(this).data('boardno');
@@ -446,7 +435,7 @@ if (isset($_SESSION['loginuser'])) {
 	
 	
 	
-	</script>
+</script>
 </body>
 
 </html>
