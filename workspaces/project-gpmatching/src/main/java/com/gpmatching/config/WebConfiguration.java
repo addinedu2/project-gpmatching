@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import com.gpmatching.interceptor.AlarmInterceptor;
+import com.gpmatching.interceptor.DisabledAlarmInterceptor;
 import com.gpmatching.interceptor.AuthInterceptor;
 
 @Configuration
@@ -55,8 +55,8 @@ public class WebConfiguration implements WebMvcConfigurer {
 	
 	//알림 인터셉터 bean 등록
 	@Bean
-	public AlarmInterceptor alarmInterceptor() {
-		return new AlarmInterceptor();
+	public DisabledAlarmInterceptor alarmInterceptor() {
+		return new DisabledAlarmInterceptor();
 	}
 	
 	//인터셉터 bean 추가
