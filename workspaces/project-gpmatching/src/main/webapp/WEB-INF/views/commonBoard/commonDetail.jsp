@@ -156,11 +156,10 @@
 				        	
 				        	<!-- sessionScope.loginuser != null && loginuser.memberId == board.writer 같은 의미-->
 				        	
+				        	<div style='display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'>
 				        	<a href="commonEdit?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}">
 				        	<button type="button" class="btn btn-secondary btn-group-sm mb-2" aria-label="Small button group">수정</button>
 				        	</a>
-		
-				        	
 				        	<a href="javascript:" id="delete-board-lnk">
 				        	<button type="button" class="btn btn-danger btn-group-sm mb-2" aria-label="Small button group">삭제</button>
 				        	</a>
@@ -275,7 +274,7 @@
 		<!-- end of comment list area -->
 		 
 		</div>
-
+	  </div>
 	</div>
 
 	<!-- modal -->
@@ -306,6 +305,7 @@
 	    </div>
 	  </div>
 	</div>
+
 	
 	<!-- Libs JS -->
 	<script

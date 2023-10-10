@@ -55,6 +55,7 @@
 				<button type="button" class="btn btn-secondary me-3">글쓰기</button></a>
 			 </div>
 			 <br>
+<<<<<<< HEAD
 			<!-- basic table -->
 			<table class="table text-light" style="text-align: center">
 			   <thead>
@@ -104,6 +105,7 @@
             
             <%-- <jsp:include page="/WEB-INF/views/modules/testBottom.jsp" /> --%>
 	
+
 	
 	<!-- Libs JS -->
 	<script
