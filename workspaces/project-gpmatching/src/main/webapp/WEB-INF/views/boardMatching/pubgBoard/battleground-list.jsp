@@ -75,7 +75,7 @@
 					<div class="card">
 						<!-- card header  -->
 						<div class="card-header bg-info  py-4">
-							<h4 class="mb-0">베틀그라운드</h4>
+							<h4 class="mb-0">배틀그라운드</h4>
 						</div>
 						<!-- table  -->
 						<div class="table-responsive">
@@ -85,11 +85,11 @@
 										<th scope="col">플레이어이름</th>
 										<th scope="col">제목</th>
 										<th scope="col">내용</th>
-										<th scope="col">베그플레이</th>
+										<th scope="col">배그플레이</th>
 										<th scope="col">주포지션</th>
 										<th scope="col">주사용무기</th>
-										<th scope="col">베그서버</th>
-										<th scope="col">베그모드</th>
+										<th scope="col">배그서버</th>
+										<th scope="col">배그모드</th>
 										<th scope="col">선호성별</th>
 										<th scope="col">마이크사용</th>
 										<th scope="col">마감여부</th>

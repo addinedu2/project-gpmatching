@@ -33,8 +33,8 @@ public interface CommonBoardMapper {
 	@Select("select u.nickname, cb.commonNo, cb.commonTitle, cb.commonContent, cb.userNo, cb.readCount, cb.regDate, cb.deleted, cb.category "
 	 	  + "from CommonBoard cb "
 		  + "inner join User u "
-		  + "on u.UserNo = cb.UserNo "
-		  + "where cb.category = 'common' and cb.deleted = false "   //여기서 데이터에서 공통만 뽑아냄, 위에서 데이터 가져오는거, 아래서 데이터 가져갈 것도 신경 쓸 것
+		  + "on u.userNo = cb.userNo "
+		  + "where cb.category = 'common' "   //여기서 데이터에서 공통만 뽑아냄, 위에서 데이터 가져오는거, 아래서 데이터 가져갈 것도 신경 쓸 것
 		  + "order by commonNo desc")
 	List<CommonBoardDto> selectAllBoard();
 	
@@ -42,17 +42,18 @@ public interface CommonBoardMapper {
 	@Select("select u.nickname, cb.commonNo, cb.commonTitle, cb.commonContent, cb.userNo, cb.readCount, cb.regDate, cb.deleted, cb.category "
 		  + "from CommonBoard cb "
 	      + "inner join User u "
-		  + "on u.UserNo = cb.UserNo "
+		  + "on u.userNo = cb.userNo "
 		  + "where cb.category = 'common' and cb.deleted = false "   //여기서 데이터에서 공통만 뽑아냄, 위에서 데이터 가져오는거, 아래서 데이터 가져갈 것도 신경 쓸 것
 		  + "order by commonNo desc "
 		  + "limit #{from}, #{count}")
 	List<CommonBoardDto> selectBoardByPage(@Param("from")int from, @Param("count")int count, @Param("category")String category );
 	
 	//공통게시판 글 상세 보기
-	@Select("select u.nickname, cb.commonNo, cb.commonTitle, cb.commonContent, cb.userNo, cb.readCount, cb.regDate, cb.deleted  "
+
+	@Select("select u.nickname, cb.commonNo, cb.commonTitle, cb.commonContent, cb.userNo, cb.readCount, cb.regDate, cb.deleted "
 		  + "from CommonBoard cb "
 		  + "inner join User u "
-	 	  + "on u.UserNo = cb.UserNo "
+	 	  + "on u.userNo = cb.userNo "
 	 	  + "where commonNo = #{commonNo} and deleted = false")
 	CommonBoardDto selectCommonBoardByCommonNo(@Param("commonNo") int commonNo);
 
@@ -88,7 +89,11 @@ public interface CommonBoardMapper {
 			  + "where commonNo = #{commonNo}")
 	void incrementReadCount(@Param("commonNo") int commonNo);
 
-	
+	//댓글 개수 카운트
+		@Select("select count(*) "
+				+ "from BoardComment "
+				+ "where commonNo = #{ commonNo } ")
+		int selectBoardByCommentCount(@Param("commonNo") int commonNo);
 	
 }
 	

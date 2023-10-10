@@ -64,7 +64,7 @@
 			<!-- Container fluid -->
 
 			<a href="/project-gpmatching/boardMatching/pubgBoard/battleground-list">
-				<button type="button" class="btn btn-primary mb-2">베틀그라운드 목록보기</button>
+				<button type="button" class="btn btn-primary mb-2">배틀그라운드 목록보기</button>
 			</a>
 			<a href="/project-gpmatching/home">
 				<button type="button" class="btn btn-primary mb-2">홈으로</button>
@@ -98,36 +98,41 @@
 				<br>
 				<div class="txt-box">
 					<div class="form-check">
-						<input class="form-check-input" type="radio" value=0
+						<input class="form-check-input" type="radio" value="anyone"
 							name="preferGender" id="flexRadioDefault1" checked> <label
-							class="form-check-label" for="flexRadioDefault1"> 남자 </label>
+							class="form-check-label" for="flexRadioDefault1"> 상관없음 </label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" value=1
+						<input class="form-check-input" type="radio" value="M"
+							name="preferGender" id="flexRadioDefault1"> <label
+							class="form-check-label" for="flexRadioDefault1"> 남자만 </label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" value="F"
 							name="preferGender" id="flexRadioDefault2"> <label
-							class="form-check-label" for="flexRadioDefault2"> 여자 </label>
+							class="form-check-label" for="flexRadioDefault2"> 여자만 </label>
 					</div>
 				</div>
 				
 				<!-- 베그 등록 -->
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">베그선호플레이</label>
+					<label class="form-label" for="textInput">배그선호플레이</label>
 					<input name="pubgPlay" type="text" id="textInput" class="form-control" >
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">베그주포지션</label>
+					<label class="form-label" for="textInput">배그주포지션</label>
 					<input name="pubgPosition" type="text" id="textInput" class="form-control" >
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">베그주사용무기</label>
+					<label class="form-label" for="textInput">배그주사용무기</label>
 					<input name="pubgGun" type="text" id="textInput" class="form-control" >
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">베그서버</label>
+					<label class="form-label" for="textInput">배그서버</label>
 					<input name="pubgServer" type="text" id="textInput" class="form-control" >
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">베그모드</label>
+					<label class="form-label" for="textInput">배그모드</label>
 					<input name="pubgMode" type="text" id="textInput" class="form-control" >
 				</div>
 				
@@ -140,18 +145,6 @@
 				</div>
 			</form>
 		</div>
-		<!-- Scripts -->
-		<script>
-			window.addEventListener("load", function(event) { // 브라우저가 현재 화면을 모두 처리한 후 호출하는 함수 등록	
-
-				const btnCancel = document.querySelector("#btnCancel"); // id="btnCancel"인 요소 찾기
-				btnCancel.addEventListener("click", function(event) {
-
-					location.href = "battleground-list"; // 브라우저의 주소 입력기에 주소를 입력하는 것과 같은 효과 ( 이동 )
-				});
-			});
-		</script>
-
 
 		<!-- Libs JS -->
 		<script
@@ -173,11 +166,23 @@
 		<script
 			src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
-
-
-
 		<!-- Theme JS -->
 		<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
+		
+		
+		<!-- Scripts -->
+		<script>
+			window.addEventListener("load", function(event) { // 브라우저가 현재 화면을 모두 처리한 후 호출하는 함수 등록	
+
+				const btnCancel = document.querySelector("#btnCancel"); // id="btnCancel"인 요소 찾기
+				btnCancel.addEventListener("click", function(event) {
+
+					location.href = "battleground-list"; // 브라우저의 주소 입력기에 주소를 입력하는 것과 같은 효과 ( 이동 )
+				});
+			});
+		</script>
+
+		
 </body>
 
 </html>

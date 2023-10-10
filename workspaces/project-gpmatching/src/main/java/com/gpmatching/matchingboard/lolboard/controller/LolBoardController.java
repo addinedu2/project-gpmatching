@@ -31,10 +31,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gpmatching.dto.MatchingAlarmDto;
+import com.gpmatching.dto.MatchingCommentDto;
 import com.gpmatching.matchingboard.dto.LolDto;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 import com.gpmatching.matchingboard.lolboard.service.LolBoardService;
 import com.gpmatching.matchingboard.lolboard.service.LolService;
+import com.gpmatching.service.MatchingCommentService;
 
 import lombok.Setter;
 
@@ -48,7 +50,8 @@ public class LolBoardController {
 	@Setter(onMethod_ = { @Autowired }) 
 	private LolService lolService;
 	
-	
+	@Setter(onMethod_ = { @Autowired }) 
+	private MatchingCommentService matchingCommentService;
 
 	
 	/**
@@ -63,8 +66,9 @@ public class LolBoardController {
 	public String matchingBoardList(Model model) {
 		
 		List<MatchingBoardDto> matchingLolList = lolBoardService.getSelectLolBoardListByGameName("league of legends");
-				
+
 		model.addAttribute("matchingLolList", matchingLolList);
+		
 		
 		return "/boardMatching/lolBoard/lol-list";
 	}

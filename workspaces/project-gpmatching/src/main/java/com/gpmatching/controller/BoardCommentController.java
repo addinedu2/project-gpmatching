@@ -56,6 +56,27 @@ public class BoardCommentController {
 		return "success";
 	}
 	
+	//대댓글 쓰기
+	@PostMapping(path= {"/writeRecomment"})
+	@ResponseBody
+	public String writeRecomment(BoardCommentDto boardComment) {
+			
+		BoardCommentDto parentBoardComment = boardCommentService.findBoardCommentByCommentNo(boardComment.getCommentNo());
+			
+		boardComment.setCommonNo(parentBoardComment.getCommonNo());
+		boardComment.setGroupNo(parentBoardComment.getGroupNo());
+		boardComment.setStep(parentBoardComment.getStep()+1);
+		boardComment.setDepth(parentBoardComment.getDepth()+1);
+			
+		//대댓 작성시 depth업데이트
+		boardCommentService.updateStep(boardComment);
+			
+		//대댓 작성
+		boardCommentService.writeRecomment(boardComment);
+			
+		return "success";
+	}
+	
 	
 	@GetMapping(path = {"/deleteComment"}) //댓글 삭제
 	public String deleteComment(int commentNo, int commonNo, int pageNo) {
@@ -90,33 +111,4 @@ public class BoardCommentController {
 	
 }
 
-////testCode
-//	@GetMapping(path= {"/test"})
-//	public String writeCommentForm(BoardCommentDto boardComment) {
-//		
-//		return "test2";
-//	}
-//	
-//	@PostMapping(path= {"/test"})
-//	public String writeComment(BoardCommentDto boardComment) {
-//		
-//		boardCommentService.writeComment(boardComment);
-//	
-//		System.out.println(boardComment);//testCode
-//
-//		BoardCommentDto test = new BoardCommentDto();
-//		
-//		  test.setCommentNo(11);
-//		  test.setCommonNo(11);
-//		  test.setUserNo(11);
-//		  test.setCommentContent("content1");
-////		  test.setGroupNo(1);
-////		  test.setStep(1);
-////		  test.setDepth(0);
-////		  test.setDeleted(false);
-//		  
-//		  boardCommentService.writeComment(test);
-//		
-//		return "redirect:/test";
-//	}
 

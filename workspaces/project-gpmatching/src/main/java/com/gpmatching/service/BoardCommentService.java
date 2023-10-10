@@ -14,16 +14,13 @@ public interface BoardCommentService {
 
 	List<BoardCommentDto> getCommentListByCommonNo(int commonNo);
 
+
 	int countCommentsByPostId(int commonNo);
 
-   
+	BoardCommentDto findBoardCommentByCommentNo(int commentNo);
 
-	
-	}
+	void updateStep(BoardCommentDto boardComment);
 
-	
-
-
-	
-
+	void writeRecomment(BoardCommentDto boardComment);
+}
 

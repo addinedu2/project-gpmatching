@@ -1,5 +1,7 @@
 package com.gpmatching.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -16,6 +18,21 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 		
 		matchingCommentMapper.insertMatchingComment(matchingComment);
 	}
+
+	@Override
+	public List<MatchingCommentDto> getMatchingCommentByBoardNo(int boardNo) {
+
+		List<MatchingCommentDto> comments = matchingCommentMapper.selectMatchingCommentByBoardNo(boardNo);
+		
+		return comments;
+	}
 	
+//	@Override
+//	public List<MatchingCommentDto> getMatchingCommentByBoardNo(int boardNo){
+//		
+//		List<MatchingCommentDto> comments = matchingCommentMapper.selectMatchingCommentByBoardNo(boardNo);
+//		
+//		return comments;
+//	}
 	
 }

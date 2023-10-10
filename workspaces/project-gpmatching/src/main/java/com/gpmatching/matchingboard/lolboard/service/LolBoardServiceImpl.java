@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
+import com.gpmatching.dto.MatchingCommentDto;
 import com.gpmatching.mapper.MatchingCommentMapper;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 import com.gpmatching.matchingboard.lolboard.mapper.LolBoardMapper;
@@ -17,7 +17,7 @@ public class LolBoardServiceImpl implements LolBoardService {
 	@Setter(onMethod_ = { @Autowired }) 
 	LolBoardMapper mapper;
 	
-	@Autowired
+	@Setter(onMethod_ = { @Autowired }) 
 	MatchingCommentMapper matchingCommentMapper;
 	
 	public void write(MatchingBoardDto matchingBoardDto) {
@@ -58,27 +58,45 @@ public class LolBoardServiceImpl implements LolBoardService {
 	@Override
 	public List<MatchingBoardDto> getMatchingBoardListByGameName(String gameName) {
 		
-		List<MatchingBoardDto> boardMachingList  = mapper.selectMatchingBoardListByGameName(gameName);
+		List<MatchingBoardDto> boardMatchingList  = mapper.selectMatchingBoardListByGameName(gameName);
 		
-		return boardMachingList;
+		return boardMatchingList;
 	}
+	
+	
 	
 	
 	@Override
 	public List<MatchingBoardDto> getSelectLolBoardListByGameName(String gameName) {
 		List<MatchingBoardDto> list = mapper.selectLolBoardListByGameName(gameName);
+
 		return list;
 	}
 	
 	@Override
 	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {
 		
-		return mapper.selectMatchingBoardByBoardNo(boardNo);
+		MatchingBoardDto lolBoard = mapper.selectMatchingBoardByBoardNo(boardNo);
+		
+		
+		
+		return lolBoard;
 	}
+	
+	/*
+	@Override
+	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {
+	
+		
+		return mapper.selectMatchingBoardByBoardNo(boardNo);
+	}*/
 	
 	@Override
 	public MatchingBoardDto findLolBoardByBoardNo(int boardNo) {
+		
 		MatchingBoardDto lolBoard = mapper.selectLolBoardByBoardNo(boardNo);
+		
+		
 		return lolBoard;
 	}
 

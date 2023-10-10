@@ -101,7 +101,7 @@ public interface LolBoardMapper {
 			+ "inner join User u "
 			+ "on m.userNo = u.userNo "
 			+ "where m.boardNo = #{ boardNo } ") 
-	MatchingBoardDto selectLolBoardByBoardNo(int boardNo);
+	MatchingBoardDto selectLolBoardByBoardNo(@Param("boardNo")int boardNo);
 	
 	
 	//User 테이블, MatchingBoard 테이블, Lol 테이블 join해서 같이 보여주는 코드(게임명: "league of legends") 

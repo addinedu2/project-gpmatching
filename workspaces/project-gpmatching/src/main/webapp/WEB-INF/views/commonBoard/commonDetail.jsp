@@ -204,46 +204,69 @@
 		<table id="comment-list" style="width:800px;margin:0 auto">
 			<c:forEach var="comment" items="${ commonBoard.boardCommentList }">				
 				<tr>
-					<td style="text-align:left;margin:5px;border-bottom: solid 1px;">					
-						<div id="comment-view-area-${ comment.commentNo }">
-						<c:choose>
-						<c:when test="${ comment.deleted }">
-							<br><br>
-							<span style='color:gray'>삭제된 글입니다.</span>
-							<br><br>
-						</c:when>
-						<c:otherwise>
-							${ comment.nickname } &nbsp;&nbsp;
-							[<fmt:formatDate value="${ commonBoard.regDate }" pattern="yyyy-MM-dd"/>]
-						    <br /><br />
-						    <span>${ fn:replace(comment.commentContent, enter, "<br>") }</span>
-							<br /><br />
-								<div style='display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'>
-						    	<a class="edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">수정</a>
-								&nbsp;
-								<a class="delete-comment" data-comment-no="${ comment.commentNo }" href="javascript:">삭제</a>
-							</div>
-							<!-- <a class="recomment-link btn btn-sm btn-success">댓글 쓰기</a>  -->
-						</c:otherwise>
-						</c:choose>
-						</div>	                
-						<div id="comment-edit-area-${ comment.commentNo }" style="display: none">
-							${ comment.userNo } &nbsp;&nbsp; [${ comment.regDate }]
-							<br /><br />
-							<form action="editComment" method="post"> <!-- BoardCommentController의 /editcomment에 연결 -->
-							<input type="hidden" name="commentNo" value="${ comment.commentNo }" />
-							<input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
-							<input type="hidden" name="pageNo" value="${ pageNo }" />
-							<textarea name="commentContent" style="width: 99%; resize: none" rows="3" 
-								maxlength="200">${ comment.commentContent }</textarea>
-							</form>
-							<br />
-							<div>
-								<a class="update-comment" data-comment-no="${ comment.commentNo }" href="javascript:">수정</a> 
-								&nbsp; 
-								<a class="cancel-edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">취소</a>
-							</div>
-						</div> 
+					<td style="text-align:left;margin:5px;border-bottom: solid 1px;">
+					
+						<table>
+							<tr>
+								<td>
+									<c:forEach begin="0" end="${comment.depth}">
+										&nbsp;&nbsp;
+									</c:forEach>
+									
+									<c:if test="${comment.depth > 0}">
+										&gt;&gt; &nbsp;
+									</c:if>					
+								</td>
+								<td>				
+									<div id="comment-view-area-${ comment.commentNo }">
+									<c:choose>
+									<c:when test="${ comment.deleted }">
+										<br><br>
+										<span style='color:gray'>삭제된 글입니다.</span>
+										<br><br>
+									</c:when>
+									<c:otherwise>
+			
+										${ comment.nickname } &nbsp;&nbsp;
+										[<fmt:formatDate value="${ comment.regDate }" pattern="yyyy-MM-dd"/>]
+									    <br /><br />
+									    <span>${ fn:replace(comment.commentContent, enter, "<br>") }</span>
+										<br /><br />
+											<div style='float:left; display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'>
+									    	<a class="edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">수정</a>
+											&nbsp;
+											<a class="delete-comment" data-comment-no="${ comment.commentNo }" href="javascript:">삭제</a>
+											&nbsp;&nbsp;
+										</div>
+										<div style='float:left; display:${ not empty loginuser ? "block" : "none" }'>
+											<a class="write-recomment" data-comment-no="${ comment.commentNo }" href="javascript:">대댓</a>
+										</div>
+										<span style="clear:both"></span>
+										
+									</c:otherwise>
+									</c:choose>
+									</div>	                
+									<div id="comment-edit-area-${ comment.commentNo }" style="display: none">
+										${ comment.userNo } &nbsp;&nbsp; [<fmt:formatDate value="${ comment.regDate }" pattern="yyyy-MM-dd"/>]
+										<br /><br />
+										<form action="editComment" method="post"> <!-- BoardCommentController의 /editcomment에 연결 -->
+										<input type="hidden" name="commentNo" value="${ comment.commentNo }" />
+										<input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
+										<input type="hidden" name="pageNo" value="${ pageNo }" />
+										<textarea name="commentContent" style="width: 99%; resize: none" rows="3" 
+											maxlength="200">${ comment.commentContent }</textarea>
+										</form>
+										<br />
+										<div>
+											<a class="update-comment" data-comment-no="${ comment.commentNo }" href="javascript:">수정</a> 
+											&nbsp; 
+											<a class="cancel-edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">취소</a>
+										</div>
+									</div> 
+						
+								</td>
+							</tr>
+						</table>
 				
 					</td>
 				</tr>
@@ -255,7 +278,34 @@
 
 	</div>
 
+	<!-- modal -->
+	<div class="modal" id="recomment-modal" tabindex="-1" role="dialog" aria-labelledby="recomment-modal-label">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="recomment-modal-label">대댓 쓰기</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
 	
+			<form id="recommentform" action="writeRecomment" method="post">
+				<input type="hidden" name="commentNo" value="" />
+				<input type="hidden" name="userNo" value="${ loginuser.userNo }" />
+					
+				<textarea id="recomment-content" name="commentContent" class="form-control" style="resize: none;" rows="3"></textarea>
+			</form>
+	
+	
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+	        <button type="button" class="btn btn-primary" id="write-recomment-btn">쓰기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	
 	<!-- Libs JS -->
 	<script
@@ -353,7 +403,7 @@
 			
 		}); //edit cancel
 		
-		//여기까진 됨
+		
 		// 댓글 수정 이벤트 처리
 		$("#comment-list").on("click", ".update-comment", function(event) {
 			const commentNo = $(this).data('comment-no');
@@ -371,6 +421,37 @@
 				}
 			})	
 		});//update
+		
+		$("#comment-list").on("click",".write-recomment",function(event){
+			const commentNo = $(this).data('comment-no');
+			
+			$('#recommentform #recomment-content').val("");
+			$('#recommentform input[name=commentNo]').val(commentNo);
+			
+			$('#recomment-modal').modal("show");
+
+		});
+		
+		$('#write-recomment-btn').on('click',function(event){
+			
+			const formData = $('#recommentform').serialize();
+			
+			console.log(formData)
+			$.ajax({
+				"url" : "writeRecomment",
+				"method" : "post",
+				"data" : formData,
+				"success" : function(data, status, xhr){
+					alert('댓글 쓰기 성공');
+					$('#recomment-modal').modal("hide");
+					$('#comment-list').load('commentList?commonNo=${commonBoard.commonNo}');
+				},
+				"error" : function(xhr, status, err){
+					alert("댓글 쓰기 실패");
+				}
+				
+			});
+		});//recomment write
 	
 	 })
 	</script>
