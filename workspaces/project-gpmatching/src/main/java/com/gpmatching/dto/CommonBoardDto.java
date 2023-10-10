@@ -18,6 +18,7 @@ public class CommonBoardDto {
 	private boolean deleted;
 	private String nickname;//닉네임 표시
 	private String category;
+	private String userId;
 	
 	private List<BoardAttachDto> boardAttachList;
 	
