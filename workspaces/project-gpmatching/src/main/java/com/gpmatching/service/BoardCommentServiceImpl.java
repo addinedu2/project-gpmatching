@@ -22,22 +22,49 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		return boardComments;
 	}
 	
+	//댓글 쓰기-삭제-수정
 	@Override   
  	public void writeComment(BoardCommentDto boardComment) {
 		boardCommentMapper.insertComment(boardComment);	
-		//boardCommentMapper.updateGroupNo(boardComment.getCommentNo(), boardComment.getCommentNo());
-		}  //댓글쓰기
+		boardCommentMapper.updateGroupNo(boardComment.getCommentNo(), boardComment.getCommentNo());
+	}
 	
 	@Override
 	public void deleteComment(int commentNo) {
 		boardCommentMapper.deleteComment(commentNo);
-	} //댓글 삭제
+	}
 
-	//댓글수정
+	
 	@Override
 	public void editComment(BoardCommentDto boardComment) {
-
 		boardCommentMapper.updateComment(boardComment);
+	}
+
+	//댓글 갯수
+	@Override
+	public int countCommentsByPostId(int commonNo) {
+		return boardCommentMapper.selectBoardByCommentCount(commonNo);
+	}
+	
+	//대댓글 작성
+	@Override
+	public BoardCommentDto findBoardCommentByCommentNo(int commentNo) {
+		
+		BoardCommentDto boardComment = boardCommentMapper.selectBoardCommentByCommentNo(commentNo);
+		
+		return boardComment;
+	}
+
+	@Override
+	public void updateStep(BoardCommentDto boardComment) {
+		boardCommentMapper.updateStep(boardComment);
+		
+	}
+
+	@Override
+	public void writeRecomment(BoardCommentDto boardComment) {
+		boardCommentMapper.insertRecomment(boardComment);
+		
 	}
 
 }

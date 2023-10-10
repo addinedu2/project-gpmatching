@@ -68,19 +68,21 @@
    </thead>
    <!-- commonNo, commonTitle, userNo, readCount, regDate --> 
    <tbody>
-   <c:forEach var="commonBoard" items="${requestScope.commonBoardList }">
+   <c:forEach var="commonBoard" items="${requestScope.commonBoardList }" varStatus="loop">
       <tr>
          <td>${commonBoard.commonNo }</td>
          <td style="text-align:left; padding-left:10px">
          <c:choose>
          	<c:when test="${not commonBoard.deleted }">
-         		<a href="commonDetail?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}" style="text-decoration: none; color: inherit;">${commonBoard.commonTitle }</a>
+         		<a href="commonDetail?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}" style="text-decoration: none; color: inherit;">${commonBoard.commonTitle }
+         		 [<c:out value="${commentCounts[loop.index]}"></c:out>]<!--  varStatus="loop"를 이용한 댓글 갯수 가져오기 -->
+         		 </a>
          	</c:when>
          	<c:otherwise>
          	<span class="deleted" style="color:gray;">[삭제된 글]</span>
          	</c:otherwise>
          </c:choose>
-         
+        
          <td>${ commonBoard.nickname }</td>
          <td>${ commonBoard.readCount }</td>
          <td>

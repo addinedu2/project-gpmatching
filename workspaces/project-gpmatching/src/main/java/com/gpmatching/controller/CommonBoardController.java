@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.View;
 import com.gpmatching.common.Util;
 import com.gpmatching.dto.BoardAttachDto;
 import com.gpmatching.dto.CommonBoardDto;
+import com.gpmatching.service.BoardCommentService;
 import com.gpmatching.service.CommonBoardService;
 import com.gpmatching.ui.CommonPager;
 import com.gpmatching.view.DownloadView;
@@ -30,8 +32,10 @@ public class CommonBoardController {
 	//todo 지금은 테스트를 위해 방치했지만 나중에 매퍼 건들여서 공통만 보이게 할껏. 예시: ReportBoardMapper.java
 	@Autowired
 	private CommonBoardService commonBoardService;
+	@Autowired
+	private BoardCommentService boardCommentService;
 
-	@GetMapping(path= {"/commonList"})
+	@GetMapping(path= {"/commonList"}) //게시물 목록 및 댓글 포함
 	public String commonList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue = "common") String category, Model model) {
 //		전체게시물조회
 //		List<CommonBoardDto> commonBoardList = commonBoardService.listCommonBoard();
@@ -45,18 +49,28 @@ public class CommonBoardController {
 		int from = (pageNo -1) *pageSize;//첫번째 페이지 게시물 순서
 		List<CommonBoardDto> commonBoardList = commonBoardService.listCommonBoardByPage(from, pageSize, linkUrl);
 		
+		
+		//각 게시글에 대한 댓글 갯수 조회
+		List<Integer> commentCounts = new ArrayList<>();
+		for (CommonBoardDto commonBoard : commonBoardList) {
+			int commentCount = boardCommentService.countCommentsByPostId(commonBoard.getCommonNo());
+			commentCounts.add(commentCount);
+		}
+		
 		//페이지 번호 표시 부분
 		CommonPager pager = 
 				new CommonPager(dataCount, pageNo, pageSize, pagerSize, linkUrl);
 		
 		model.addAttribute("commonBoardList",commonBoardList);
+		model.addAttribute("commentCounts", commentCounts);
 		model.addAttribute("pager",pager);
 		model.addAttribute("pageNo",pageNo);
 		
 		return "/commonBoard/commonList";
 	}
+
 	
-	//공통게시판 글쓰기 form
+	
 	@GetMapping(path = {"/commonWrite"})
 	public String showCommonWriteForm(Model model,  @RequestParam(defaultValue = "common") String category) {
 		model.addAttribute("category", category);
@@ -66,9 +80,6 @@ public class CommonBoardController {
 		
 		return "/commonBoard/commonWrite";
 	}
-	
-	
-	
 	
 	//공통게시판 글쓰기 구현
 	@PostMapping(path= {"/commonWrite"})
