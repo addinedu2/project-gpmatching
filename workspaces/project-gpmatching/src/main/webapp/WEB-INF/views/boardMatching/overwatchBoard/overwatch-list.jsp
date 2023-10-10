@@ -50,7 +50,7 @@
 <title>오버워치 매칭 게시판</title>
 </head>
 
-<body class="bg-light">
+<body class="bg-dark">
 	<div id="db-wrapper" class="toggled" class="toggled">
 		<!-- navbar vertical -->
 		<!-- Sidebar -->
@@ -63,13 +63,16 @@
 			<!-- Container fluid -->
 
 			<!-- Primary Button -->
+			<br>
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 			<a href="/project-gpmatching/boardMatching/overwatchBoard/overwatch-write">
-				<button type="button" class="btn btn-primary mb-2">오버워치 매칭 게시글 쓰기</button>
+				<button type="button" class="btn btn-primary me-2">오버워치 매칭 게시글 쓰기</button>
 			</a>
 			<a href="/project-gpmatching/home">
-				<button type="button" class="btn btn-primary mb-2">홈으로</button>
+				<button type="button" class="btn btn-primary me-3">홈으로</button>
 			</a>
-				
+			</div>
+	
 			<div class="row mt-6">
 				<div class="col-md-12 col-12">
 					<!-- card  -->
