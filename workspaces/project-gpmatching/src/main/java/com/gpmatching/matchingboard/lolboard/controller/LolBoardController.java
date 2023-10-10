@@ -29,6 +29,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gpmatching.dto.MatchingAlarmDto;
 import com.gpmatching.dto.MatchingCommentDto;
@@ -62,16 +63,16 @@ public class LolBoardController {
 	 */
 	
 	
-	@GetMapping(path = { "/lol-list"})
-	public String matchingBoardList(Model model) {
-		
-		List<MatchingBoardDto> matchingLolList = lolBoardService.getSelectLolBoardListByGameName("league of legends");
-
-		model.addAttribute("matchingLolList", matchingLolList);
-		
-		
-		return "/boardMatching/lolBoard/lol-list";
-	}
+//	@GetMapping(path = { "/lol-list"})
+//	public String matchingBoardList(Model model) {
+//		
+//		List<MatchingBoardDto> matchingLolList = lolBoardService.getSelectLolBoardListByGameName("league of legends");
+//
+//		model.addAttribute("matchingLolList", matchingLolList);
+//		
+//		
+//		return "/boardMatching/lolBoard/lol-list";
+//	}
 	
 	
 	/**
@@ -170,4 +171,25 @@ public class LolBoardController {
 
 		return "redirect:lol-list";	
 	}
+	
+	
+	@GetMapping(path = { "/lol-list"})
+	public String matchingBoardListByLolTier(@RequestParam(name = "lolTier", required = false) String lolTier, Model model) {
+		
+		List<MatchingBoardDto> matchingLolList;
+		
+		if (lolTier != null) {
+			
+			matchingLolList = lolBoardService.getMatchingBoardListByLolTier("league of legends", lolTier);
+
+		} else {
+			matchingLolList = lolBoardService.getSelectLolBoardListByGameName("league of legends");
+		}
+
+		model.addAttribute("matchingLolList", matchingLolList);
+		
+		
+		return "/boardMatching/lolBoard/lol-list";
+	}
+	
 }

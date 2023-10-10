@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import com.gpmatching.interceptor.AlarmInterceptor;
+import com.gpmatching.interceptor.DisabledAlarmInterceptor;
 import com.gpmatching.interceptor.AuthInterceptor;
 
 @Configuration
@@ -55,8 +55,8 @@ public class WebConfiguration implements WebMvcConfigurer {
 	
 	//알림 인터셉터 bean 등록
 	@Bean
-	public AlarmInterceptor alarmInterceptor() {
-		return new AlarmInterceptor();
+	public DisabledAlarmInterceptor alarmInterceptor() {
+		return new DisabledAlarmInterceptor();
 	}
 	
 	//인터셉터 bean 추가
@@ -66,7 +66,9 @@ public class WebConfiguration implements WebMvcConfigurer {
 				.addPathPatterns("/boardMatching/**") // 로그인 검증 인터셉터를 매칭게시판에 적용
 				.addPathPatterns("/commonBoard/**") // 공통 게시판
 				.excludePathPatterns("/boardMatching/lolBoard/lol-list", "/boardMatching/pubgBoard/battleground-list", 
-						"/boardMatching/overwatchBoard/overwatch-list", "/commonBoard/commonList"); // 게시물 보기는 로그인 없이 가능 
+						"/boardMatching/overwatchBoard/overwatch-list", "/boardMatching/lolBoard/ajax-show-comment", 
+						"/commonBoard/commonList");// 게시물 보기는 로그인 없이 가능 
+
 		registry.addInterceptor(alarmInterceptor());	// 알림 인터셉터 추가
 	}
 	
