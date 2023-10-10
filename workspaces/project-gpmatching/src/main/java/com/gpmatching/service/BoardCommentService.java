@@ -14,7 +14,16 @@ public interface BoardCommentService {
 
 	List<BoardCommentDto> getCommentListByCommonNo(int commonNo);
 
+	int countCommentsByPostId(int commonNo);
+
+   
+
+	
+	}
+
 	
 
 
-}
+	
+
+

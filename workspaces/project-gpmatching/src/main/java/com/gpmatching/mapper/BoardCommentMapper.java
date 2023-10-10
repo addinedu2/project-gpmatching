@@ -48,9 +48,10 @@ public interface BoardCommentMapper {
 			+ "where commentno = #{ commentNo }")
 	void updateGroupNo(@Param("groupNo") int groupNo, @Param("commentNo") int commentNo);
 	
-	
-	
-	
-	
+	//댓글 개수 카운트
+	@Select("select count(*) "
+			+ "from BoardComment "
+			+ "where commonNo = #{ commonNo } ")
+	int selectBoardByCommentCount(@Param("commonNo") int commonNo);
 	
 }

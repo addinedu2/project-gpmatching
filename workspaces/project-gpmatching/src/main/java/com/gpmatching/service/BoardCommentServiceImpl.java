@@ -39,5 +39,11 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 
 		boardCommentMapper.updateComment(boardComment);
 	}
-
+	//댓글 갯수
+	@Override
+	public int countCommentsByPostId(int commonNo) {
+		return boardCommentMapper.selectBoardByCommentCount(commonNo);
+	}
+	
+	
 }
