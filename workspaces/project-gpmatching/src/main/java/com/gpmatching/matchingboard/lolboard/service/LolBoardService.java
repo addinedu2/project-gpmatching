@@ -15,7 +15,7 @@ public interface LolBoardService {
 
 	int getLastMatchingItemBoardNo();
 	
-	// 아마 안쓸듯? (-허지웅) List<MatchingBoardDto> getMatchingBoardListByGameName(String gameName);
+	List<MatchingBoardDto> getMatchingBoardListByGameName(String gameName);
 	
 	List<MatchingBoardDto> getSelectLolBoardListByGameName(String gameName);
 
@@ -26,8 +26,6 @@ public interface LolBoardService {
 	void edit(MatchingBoardDto matchingBoardDto);
 	
 	void delete(int boardNo);
-	
-	List<MatchingBoardDto> getMatchingBoardListByLolTier(String gameName, String lolTier);
 
 
 	//List<MatchingBoardDto> getMatchingBoardListByGameNo(int gameNo);

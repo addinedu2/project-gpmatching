@@ -129,8 +129,9 @@ public interface LolBoardMapper {
 		  + "where boardNo = #{boardNo}")
 	void deleteLolBoard(int boardNo);
 	
-	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, "
-			+ "m.matchingClose, m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
+	
+	/* 성공
+	@Select( "select * "
 			+ "from MatchingBoard m "
 			+ "inner join Lol l "
 			+ "on l.boardNo = m.boardNo "
@@ -138,12 +139,11 @@ public interface LolBoardMapper {
 			+ "on m.userNo = u.userNo "
 			+ "where m.gameNo =  (select gameNo "
 			+ "from GameList where gameName = #{ gameName} ) "
-			+ "and deleted = false "
-			+ "and l.lolTier = #{ lolTier } "
 			+ "order by m.boardNo desc" )
-	List<MatchingBoardDto> selectLolBoardListByLolTier(@Param("gameName")String gameName, @Param("lolTier")String lolTier);
-
+	List<Map<String, String>> SelectGameMatchingMapByGameName(String gameName);
+	*/
 	
 	
-
+//	@Select("select u.nickname from MatchingBoard m, User u where m.userNo = u.userNo")
+//	String selectMatchingBoardNickname();
 }

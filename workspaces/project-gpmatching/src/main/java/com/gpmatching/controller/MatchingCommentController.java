@@ -2,9 +2,6 @@ package com.gpmatching.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +29,7 @@ public class MatchingCommentController {
 	private MatchingAlarmService matchingAlarmService;
 	
 	@PostMapping(path = { "/write-comment" })
-	public String writeMatchingComment(HttpSession session, MatchingCommentDto matchingComment, @RequestParam(defaultValue = "-1") int boardNo) {
+	public String writeMatchingComment(MatchingCommentDto matchingComment, MatchingAlarmDto matchingAlarmDto, @RequestParam(defaultValue = "-1") int boardNo) {
 		
 		
 		matchingCommentService.writeMatchingComment(matchingComment);
@@ -59,8 +56,7 @@ public class MatchingCommentController {
 	@GetMapping(path = { "/ajax-show-comment" }, produces = "application/json;charset=utf-8")
 	@ResponseBody
     public List<MatchingCommentDto> ajaxShowMatchingComment(@RequestParam int boardNo) {
-		
-		
+        
 	    System.out.println("Received boardNo: " + boardNo);
 
         List<MatchingCommentDto> comments = matchingCommentService.getMatchingCommentByBoardNo(boardNo);
