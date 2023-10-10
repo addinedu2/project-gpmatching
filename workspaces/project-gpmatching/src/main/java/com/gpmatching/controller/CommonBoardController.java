@@ -122,16 +122,17 @@ public class CommonBoardController {
 			return "redirect:commonList";
 		}
 		
-		CommonBoardDto commonBoardDto = commonBoardService.findCommonBoardByCommonNo(commonNo);
+		CommonBoardDto commonBoard = commonBoardService.findCommonBoardByCommonNo(commonNo);
 		
-		if(commonBoardDto == null) {//조회 글 없는 경우
+		if(commonBoard == null) {//조회 글 없는 경우
 			return "redirect:list";
 		}
 		
 		//조회수 증가 코드
 		commonBoardService.incrementReadCount(commonNo);
+		commonBoard.setReadCount(commonBoard.getReadCount()+1);
 		
-		model.addAttribute("commonBoard",commonBoardDto);
+		model.addAttribute("commonBoard",commonBoard);
 		model.addAttribute("pageNo",pageNo);
 		
 		return "commonBoard/commonDetail";

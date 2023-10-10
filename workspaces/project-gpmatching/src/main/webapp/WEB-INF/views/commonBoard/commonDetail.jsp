@@ -275,7 +275,7 @@
 		<!-- end of comment list area -->
 		 
 		</div>
-
+	  </div>
 	</div>
 
 	<!-- modal -->
@@ -306,6 +306,7 @@
 	    </div>
 	  </div>
 	</div>
+
 	
 	<!-- Libs JS -->
 	<script

@@ -100,8 +100,8 @@
              	</ul>
              </div>
             </div>
-            <%-- <jsp:include page="/WEB-INF/views/modules/testBottom.jsp" /> --%>
-	</script>
+          </div>
+
 	
 	<!-- Libs JS -->
 	<script
