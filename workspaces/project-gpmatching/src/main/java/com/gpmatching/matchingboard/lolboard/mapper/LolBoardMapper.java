@@ -129,6 +129,7 @@ public interface LolBoardMapper {
 		  + "where boardNo = #{boardNo}")
 	void deleteLolBoard(int boardNo);
 	
+	//선택한 티어에 해당하는 글만 보여줌 (나중에 동적 쿼리로 확장 예정 -허지웅)
 	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, "
 			+ "m.matchingClose, m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
 			+ "from MatchingBoard m "
@@ -136,13 +137,26 @@ public interface LolBoardMapper {
 			+ "on l.boardNo = m.boardNo "
 			+ "inner join User u "
 			+ "on m.userNo = u.userNo "
-			+ "where m.gameNo =  (select gameNo "
+			+ "where m.gameNo = (select gameNo "
 			+ "from GameList where gameName = #{ gameName} ) "
 			+ "and deleted = false "
 			+ "and l.lolTier = #{ lolTier } "
 			+ "order by m.boardNo desc" )
 	List<MatchingBoardDto> selectLolBoardListByLolTier(@Param("gameName")String gameName, @Param("lolTier")String lolTier);
 
+	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, "
+			+ "m.matchingClose, m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
+			+ "from MatchingBoard m "
+			+ "inner join Lol l "
+			+ "on l.boardNo = m.boardNo "
+			+ "inner join User u "
+			+ "on m.userNo = u.userNo "
+			+ "where m.boardTitle like concat('%',#{keyword},'%') "
+			+ "and m.gameNo = (select gameNo "
+			+ "from GameList where gameName = #{gameName} ) "
+			+ "and deleted = false "
+			+ "order by m.boardNo desc" )
+	List<MatchingBoardDto> selectLolBoardListByTitle(@Param("gameName")String gameName, @Param("keyword")String keyword);
 	
 	
 
