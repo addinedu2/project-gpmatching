@@ -24,6 +24,7 @@ public interface MypageMapper {
 			+ "where userId = #{userId}")
 	UserDto selectUserProfile(UserDto loginUser);
 	
+	
 	//마이페이지 내가 쓴 글만 보기
 	@Select("select cb.commonTitle, cb.regDate "
 		 	  + "from CommonBoard cb "
