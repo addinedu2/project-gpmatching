@@ -116,6 +116,10 @@
 							class="form-check-label" for="flexRadioDefault2"> 여자만 </label>
 					</div>
 				</div>
+				<div class="mb-3 txt-box">
+					<label class="form-label" for="textInput">모집인원</label>
+					<input name="headCount" type="text" id="textInput" class="form-control" value="${ lolMatchingBoard.headCount }">
+				</div>
 				
 				<!-- 롤 등록 -->
 				<div class="mb-3 txt-box">

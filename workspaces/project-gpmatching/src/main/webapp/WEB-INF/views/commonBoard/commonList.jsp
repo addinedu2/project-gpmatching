@@ -55,56 +55,51 @@
 				<button type="button" class="btn btn-secondary me-3">글쓰기</button></a>
 			 </div>
 			 <br>
-
-			<!-- basic table -->
-			<table class="table text-light" style="text-align: center">
-			   <thead>
-			      <tr class="listCommon" >
-			         <th>번호</th>
-			         <th>제목</th>
-			         <th>작성자</th>
-			         <th>조회수</th>
-			         <th>작성일자</th>
-			      </tr>
-			   </thead>
-			   <!-- commonNo, commonTitle, userNo, readCount, regDate --> 
-			   <tbody>
-			   <c:forEach var="commonBoard" items="${requestScope.commonBoardList }" varStatus="loop">
-			      <tr>
-			         <td>${commonBoard.commonNo }</td>
-			         <td style="text-align:left; padding-left:10px">
-			         <c:choose>
-			         	<c:when test="${not commonBoard.deleted }">
-			         		<a href="commonDetail?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}" style="text-decoration: none; color: inherit;">${commonBoard.commonTitle }
-			         		 [<c:out value="${commentCounts[loop.index]}"></c:out>]<!--  varStatus="loop"를 이용한 댓글 갯수 가져오기 -->
-			         		 </a>
-			         	</c:when>
-			         	<c:otherwise>
-			         	<span class="deleted" style="color:gray;">[삭제된 글]</span>
-			         	</c:otherwise>
-			         </c:choose>
-			        
-			         <td>${ commonBoard.nickname }</td>
-			         <td>${ commonBoard.readCount }</td>
-			         <td>
-			         	<fmt:formatDate value="${ commonBoard.regDate }"
-			         				    pattern="yyyy-MM-dd"/>
-			         </td>
-			      </tr>
-			      </c:forEach>
-			   </tbody>
-			</table>
-			<br>
-
-			<!-- 페이지 이동 -->
-            <div>
-				<ul class="pagination justify-content-center mb-0">${ pager }</ul>
+             <!-- basic table -->
+<table class="table text-light" style="text-align: center">
+   <thead>
+      <tr class="listCommon" >
+         <th>번호</th>
+         <th>제목</th>
+         <th>작성자</th>
+         <th>조회수</th>
+         <th>작성일자</th>
+      </tr>
+   </thead>
+   <!-- commonNo, commonTitle, userNo, readCount, regDate --> 
+   <tbody>
+   <c:forEach var="commonBoard" items="${requestScope.commonBoardList }" varStatus="loop">
+      <tr>
+         <td>${commonBoard.commonNo }</td>
+         <td style="text-align:left; padding-left:10px">
+         <c:choose>
+         	<c:when test="${not commonBoard.deleted }">
+    	     	<a href="commonDetail?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}" style="text-decoration: none; color: inherit;">${commonBoard.commonTitle } </a>
+				<a href="commonDetail?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}#comment-list"  style="text-decoration: none; color: inherit;"> [<c:out value="${commentCounts[loop.index]}"></c:out>]</a>         <!--  varStatus="loop"를 이용한 댓글 갯수 가져오기 -->
+         	</c:when>
+         	<c:otherwise>
+         	<span class="deleted" style="color:gray;">[삭제된 글]</span>
+         	</c:otherwise>
+         </c:choose>
+        
+         <td>${ commonBoard.nickname }</td>
+         <td>${ commonBoard.readCount }</td>
+         <td>
+         	<fmt:formatDate value="${ commonBoard.regDate }"
+         				    pattern="yyyy-MM-dd"/>
+         </td>
+      </tr>
+      </c:forEach>
+   </tbody>
+</table>
+<br>
+             <div>
+             	<ul class="pagination justify-content-center mb-0">
+             	${ pager }
+             	</ul>
+             </div>
             </div>
-		</div>
-		</div>
-            
-            <%-- <jsp:include page="/WEB-INF/views/modules/testBottom.jsp" /> --%>
-	
+          </div>
 
 	
 	<!-- Libs JS -->

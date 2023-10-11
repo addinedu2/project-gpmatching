@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -79,10 +78,21 @@
 					<!-- card  -->
 					<div class="card">
 						<!-- card header  -->
-						<div class="card-header bg-info  py-4">
-							<h4 class="mb-0">LEAGUE OF LEGENDS</h4>
+						<div class="card-header bg-info py-4" style="display: flex; align-items: center; justify-content: space-between;">
+						    <div style="display: flex; align-items: center;">
+						        <img src="/project-gpmatching/resources/assets/images/lol/logo.png" width="200px">
+						    </div>
+						    <div style="display: flex; align-items: center;">
+						        <select name="searchType" style="width: 150px;" class="form-select form-select">
+						            <option value="" selected>-- 옵션 --</option>
+						            <option value="t">제목</option>
+						            <option value="c">내용</option>
+						            <option value="n">닉네임</option>
+						        </select>
+						        <input name="keyword" style="width: 200px; margin-left: 10px; margin-right: 10px;" class="form-control" type="search" id="search-input" placeholder="검색어를 입력하세요">
+						        <button id="search-btn" type="button" class="btn btn-light mb-2">검색</button>
+						    </div>
 						</div>
-						
 						<!-- table  -->
 						<table id="matching-list" class="table table-sm table-dark table-hover">
 							<thead>
@@ -97,19 +107,19 @@
 										티어											
 										</button>
 									 	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									 		<a class="dropdown-item" href="lol-list">모든 티어</a>
-											<a class="dropdown-item" href="lol-list?lolTier=bronze">브론즈</a>
-											<a class="dropdown-item" href="lol-list?lolTier=silver">실버</a>
-											<a class="dropdown-item" href="lol-list?lolTier=gold">골드</a>											
+									 		<a class="dropdown-item" href="/project-gpmatching/boardMatching/lolBoard/lol-list">모든 티어</a>
+											<a class="dropdown-item" href="?lolTier=bronze">브론즈</a>
+											<a class="dropdown-item" href="?lolTier=silver">실버</a>
+											<a class="dropdown-item" href="?lolTier=gold">골드</a>											
+
 										</div>
 									</div>
 									</th>
 						         	
 							         	<th scope="col">주포지션</th>
-							         	<th scope="col">서렌여부</th>
-							         	<th scope="col">선호플레이</th>
 							         	<th scope="col">선호성별</th>
 							         	<th scope="col">마이크사용</th>
+							         	<th scope="col">모집인원</th>
 							         	<th scope="col">마감여부</th>
 							        	<th scope="col">등록일시</th>
 							         	<th scope="col">댓글</th>
@@ -121,7 +131,9 @@
 									<c:forEach var="matchingBoard" items="${ requestScope.matchingLolList }">
 										<tr id="tr-${ matchingBoard.boardNo }" data-title="${ matchingBoard.boardTitle }">
 
-											<th scope="row">${ matchingBoard.nickname }</th>
+											<th scope="row">
+											<a href="">${ matchingBoard.nickname }</a>
+											</th>
 											<th>${ matchingBoard.boardTitle }</th>
 											<th>${ matchingBoard.boardContent }</th>
 											<td>
@@ -145,29 +157,28 @@
 											<c:set var="lolPosition" value="${ matchingBoard.lolPosition }" />
 											<c:choose>
 												<c:when test = "${ lolPosition eq 'top'}">
-													<img src="/project-gpmatching/resources/assets/images/lolposition/top.svg" width=24px>
+													<img src="/project-gpmatching/resources/assets/images/lol/top.svg" width=24px>
 												</c:when>
 												<c:when test = "${ lolPosition eq 'jungle'}">
-													<img src="/project-gpmatching/resources/assets/images/lolposition/jungle.svg" width=24px>
+													<img src="/project-gpmatching/resources/assets/images/lol/jungle.svg" width=24px>
 												</c:when>	
 												<c:when test = "${ lolPosition eq 'mid'}">
-													<img src="/project-gpmatching/resources/assets/images/lolposition/mid.svg" width=24px>
+													<img src="/project-gpmatching/resources/assets/images/lol/mid.svg" width=24px>
 												</c:when>
 												<c:when test = "${ lolPosition eq 'adcarry'}">
-													<img src="/project-gpmatching/resources/assets/images/lolposition/adcarry.svg" width=24px>
+													<img src="/project-gpmatching/resources/assets/images/lol/adcarry.svg" width=24px>
 												</c:when>
 												<c:when test = "${ lolPosition eq 'support'}">
-													<img src="/project-gpmatching/resources/assets/images/lolposition/support.svg" width=24px>
+													<img src="/project-gpmatching/resources/assets/images/lol/support.svg" width=24px>
 												</c:when>
 												<c:otherwise>
 													${ matchingBoard.lolPosition }
 												</c:otherwise>
 											</c:choose>
 											</td>
-											<th>${ matchingBoard.lolSur }</th>
-											<th>${ matchingBoard.lolPlay }</th>
 											<th>${ matchingBoard.preferGender }</th>
 											<th>${ matchingBoard.mic }</th>
+											<th>${ matchingBoard.headCount }</th>
 											<th>${ matchingBoard.matchingClose }</th>
 											<th>
 												<fmt:formatDate value="${ matchingBoard.regDate }"
@@ -175,9 +186,11 @@
 											</th>
 											<th class="align-middle">
 												<!-- Varying modal -->
+
 												<button type="button" class="btn btn-primary btn-sm btn-show-comment-modal" 
-														data-boardno="${ matchingBoard.boardNo }">지원하기</button>											
-												<button type="button" class="btn btn-primary btn-sm btn-show-commentList-modal" 
+														data-boardno="${ matchingBoard.boardNo }">${ matchingBoard.boardNo }
+												</button>											
+												<button type="button" class="btn btn-primary btn-sm btn-show-commentList-modal"
 														data-boardno="${ matchingBoard.boardNo }">목록</button>
 											</th>
 											<th>
@@ -262,7 +275,9 @@
 			                    <div class="d-flex align-items-center">
 			                      <!-- img -->
 			                      <div>
+
 			                        <img src="/project-gpmatching/resources/assets/images/avatar/avatar-1.jpg" class="rounded-circle avatar-md" alt="">
+
 			                      </div>
 			                      <!-- text -->
 			                      <div class="ms-3 ">
@@ -316,42 +331,57 @@
 	
 	// 버튼을 누르면 해당 행의 데이터를 포함한 모달창을 보여줌 (-허지웅)
 	$(function() {
-		
 		$('#lol-list').on("click", '.btn-show-comment-modal', function(event) {
 			const boardNo = $(this).data('boardno');
 			const currentTr = $('#tr-' + boardNo);
-			//alert(boardNo);
+			alert(boardNo);
 
 			$('#title-in-modal').text("(" + boardNo + ") " + currentTr.data('title'));
 			$('#boardno-in-modal').val(boardNo);
 			$('#comment-modal').modal('show');
 		});
-	    
-
-		// 댓글 모달창의 등록 버튼을 누르면 데이터가 전송됨
-		$('#write-comment-lnk').on('click', function(event){
-			
-			const formData = $('#commentform').serialize();	// <form> 에 포함된 입력요소의 값을 뽑아서 전송가능한 문자열로 반환
-			alert(formData);
-	
-			$.ajax({
-				"url": "write-comment",
-				"method": "post",
-				"data": formData,
-				"success": function(data, status, xhr){
-					alert('성공');
-					$('#comment-modal').modal("hide");
-				},
-				"error": function(xhr, status, err){
-					alert('실패');
-				}
-			});	 
-		});
 	});
 	
-		
+
+	//검색 버튼을 누르면 해당되는 게시글을 보여줌 (-허지웅)
 	$(function(){
-		// 버튼을 누르면 해당 글의 댓글 보기 (-허지웅)
+		
+		$('#search-btn').on("click", function(event){
+			
+			var searchType = $("select[name = searchType]").val();
+			var keyword = $("input[name = keyword]").val();
+			
+			self.location = "/project-gpmatching/boardMatching/lolBoard/lol-list?searchType=" + searchType + "&keyword=" + keyword;
+			
+			console.log("searchType : " + searchType);
+			console.log("keyword : " + keyword);
+		})
+	});
+	
+
+	// 댓글 모달창의 등록 버튼을 누르면 데이터가 전송됨
+	$('#write-comment-lnk').on('click', function(event){
+		
+		const formData = $('#commentform').serialize();	// <form> 에 포함된 입력요소의 값을 뽑아서 전송가능한 문자열로 반환
+		alert(formData);
+
+		$.ajax({
+			"url": "write-comment",
+			"method": "post",
+			"data": formData,
+			"success": function(data, status, xhr){
+				alert('성공');
+				$('#comment-modal').modal("hide");
+			},
+			"error": function(xhr, status, err){
+				alert('실패');
+			}
+		});	 
+	});
+	
+	
+	// 버튼을 누르면 해당 글의 댓글 보기 (-허지웅) (비활성화)
+	$(function() {
 		$('#lol-list').on("click", '.btn-show-commentList-modal', function(event) {
 			
 			const boardNo = $(this).data('boardno');
@@ -377,9 +407,9 @@
 		                $headerRow.append($("<th>").text("댓글 번호"));
 		                $headerRow.append($("<th>").text("닉네임"));
 		                $headerRow.append($("<th>").text("댓글 내용"));
-		                $headerRow.append($("<th>").text("매칭"));
-		                commentList.append($headerRow);
+						$headerRow.append($("<th>").text("승인여부"));;
 		                
+		                commentList.append($headerRow);
 		                
 						for(var i = 0; i < result.length; i++){
 							var $row = $("<tr>");
@@ -387,6 +417,13 @@
 		                    $row.append($("<td>").text(result[i].mcommentNo));
 		                    $row.append($("<td>").text(result[i].nickname));
 		                    $row.append($("<td>").text(result[i].mcommentContent));
+		                    if(result[i].status == "0"){
+		                    	$row.append($("<td>").text("미승인"));
+							}else if (result[i].status == "1"){
+								$row.append($("<td>").text("승인"));
+							}else if (result[i].status == "2"){
+								$row.append($("<td>").text("거절"));
+							}
 		                    
 		                    commentList.append($row);
 		                    
@@ -401,24 +438,27 @@
 	                            .addClass("btn btn-danger btn-sm btn-reject-comment")
 	                            .data('commentno', result[i].mcommentNo)
 	                            .text("거절");
-	                        
-// 	                     	// 수락 버튼 눌렀을 때의 동작 (not yet)
-// 	                        $('#comment-list').on("click", '.btn-accept-comment', function(event) {
-// 	                            var commentNo = $(this).data('commentno');
-// 	                            // TODO: 수정 버튼을 눌렀을 때의 동작 구현
-// 	                        });
 
-// 	                        // 거절 버튼 눌렀을 때의 동작 (not yet)
-// 	                        $('#comment-list').on("click", '.btn-reject-comment', function(event) {
-// 	                            var commentNo = $(this).data('commentno');
-// 	                            // TODO: 삭제 버튼을 눌렀을 때의 동작 구현
-// 	                        });
+	                     	// 수락 버튼 눌렀을 때의 동작 
+	                        $('#comment-list').on("click", '.btn-accept-comment', function(event) {
+	                        	var boardNo = $(this).data('boardno');
+	                            var commentNo = $(this).data('commentno');
+	                            location.href = "commentConfirm?commentNo=" + commentNo;
+	                            // TODO: 수정 버튼을 눌렀을 때의 동작 구현
+	                        });
+
+	                        // 거절 버튼 눌렀을 때의 동작 
+	                        $('#comment-list').on("click", '.btn-reject-comment', function(event) {
+	                            var commentNo = $(this).data('commentno');
+	                            location.href = "commentReject?commentNo=" + commentNo;
+
+	                            // TODO: 삭제 버튼을 눌렀을 때의 동작 구현
+	                        });
 	                        
 	                     	var $buttonColumn = $("<td>").append($acceptButton, $rejectButton);
 	                        $row.append($buttonColumn);
 		                    
 						}
-					
 					}
 					
 					console.log(commentList);
@@ -435,7 +475,7 @@
 	
 	
 	
-</script>
+	</script>
 </body>
 
 </html>

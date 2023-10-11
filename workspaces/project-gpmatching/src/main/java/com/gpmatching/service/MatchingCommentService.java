@@ -10,5 +10,10 @@ public interface MatchingCommentService {
 
 	List<MatchingCommentDto> getMatchingCommentByBoardNo(int boardNo);
 
-	//List<MatchingCommentDto> getMatchingCommentByBoardNo(int boardNo);
+	void setCommentStatusConfirm( int commentNo);
+
+	void setCommentStatusReject(int commentNo);
+
+	boolean isMatchingCloseTrueByCommentNo(int commentNo);
+	
 }

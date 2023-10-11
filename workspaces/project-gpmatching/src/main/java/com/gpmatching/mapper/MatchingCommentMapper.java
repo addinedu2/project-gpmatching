@@ -19,12 +19,28 @@ public interface MatchingCommentMapper {
 	@Options(useGeneratedKeys = true, keyProperty = "mCommentNo")
 	void insertMatchingComment(MatchingCommentDto matchingComment);
 
-	@Select("select c.mCommentNo, c.mCommentContent, u.nickname "
+	@Select("select c.mCommentNo, c.mCommentContent, u.nickname, c.status "
 			+ "from MatchingComment c "
 			+ "inner join User u "
 			+ "on c.userNo = u.userNo "
 			+ "where boardNo = #{ boardNo }")
 	List<MatchingCommentDto> selectMatchingCommentByBoardNo(int boardNo);
+	
+	
+	@Select("update MatchingComment set status = #{ status } "
+			+ "where mCommentNo = #{commentNo}")
+	void updateMatchingCommentStatus(@Param("commentNo") int commentNo, @Param("status") String status);
+
+	@Select("select count(*) from MatchingComment where boardNo = #{ boardNo } and status = '1'")
+	int commentConfirmCountByMatchingBoardNo(int boardNo);
+
+	@Select("select boardNo from MatchingComment where mCommentNo = #{ commentNo}")
+	int selectBoardNoByCommentNo(int commentNo);
+
+	@Select("select status from MatchingComment where mCommentNo = #{ commentNo}")
+	String selectStatusByCommentNo(int commentNo);
+
+
 	
 	
 //	// 지우진 마세용

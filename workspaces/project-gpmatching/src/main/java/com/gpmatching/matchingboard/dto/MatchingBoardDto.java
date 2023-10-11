@@ -17,6 +17,7 @@ public class MatchingBoardDto {
 	String preferGender;
 	boolean mic;
 	boolean matchingClose;
+	int headCount;
 	
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	Date regDate;

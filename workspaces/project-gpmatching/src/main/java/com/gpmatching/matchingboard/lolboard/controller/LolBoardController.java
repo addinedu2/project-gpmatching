@@ -127,11 +127,15 @@ public class LolBoardController {
 	@GetMapping(path = { "/lol-edit"})
 	public String showLolEditForm(HttpSession session, int boardNo, Model model) {
 		
+		boolean matchingClose = lolBoardService.getMatchingCloseByBoardNo(boardNo);
+		if(matchingClose) {
+			return "redirect:lol-list";
+			
+		}
+		
 		MatchingBoardDto lolMatchingBoard = lolBoardService.findLolBoardByBoardNo(boardNo);
 		
 		model.addAttribute("lolMatchingBoard", lolMatchingBoard);
-		
-		//System.out.println(lolMatchingBoard);
 		
 		return "/boardMatching/lolBoard/lol-edit";
 	}
@@ -171,10 +175,13 @@ public class LolBoardController {
 
 		return "redirect:lol-list";	
 	}
+
 	
 	
 	@GetMapping(path = { "/lol-list"})
-	public String matchingBoardListByLolTier(@RequestParam(name = "lolTier", required = false) String lolTier, Model model) {
+	public String matchingBoardListByLolTier(@RequestParam(name = "lolTier", required = false) String lolTier,
+											 @RequestParam(name = "searchType", required = false) String searchType,
+											 @RequestParam(name = "keyword", required = false) String keyword, Model model) {
 		
 		List<MatchingBoardDto> matchingLolList;
 		
@@ -182,14 +189,19 @@ public class LolBoardController {
 			
 			matchingLolList = lolBoardService.getMatchingBoardListByLolTier("league of legends", lolTier);
 
+		} else if ("t".equals(searchType)){
+			
+			matchingLolList = lolBoardService.searchMatchingBoardListByTitle("league of legends", keyword);
+			
 		} else {
+			
 			matchingLolList = lolBoardService.getSelectLolBoardListByGameName("league of legends");
 		}
 
 		model.addAttribute("matchingLolList", matchingLolList);
-		
-		
+			
 		return "/boardMatching/lolBoard/lol-list";
 	}
 	
+
 }
