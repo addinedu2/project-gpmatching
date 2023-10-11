@@ -502,7 +502,7 @@ $(function(event){
 	
 	 $('input[name="btnradio"]').on('click', function(event){
 		
-		let selectBtn = $('input[name="btnradio"]:checked').val();
+		//let selectBtn = $('input[name="btnradio"]:checked').val();
 		let loginUser = "${loginUser.userNo}";
 		//alert(loginUser);
 		

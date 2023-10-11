@@ -2,6 +2,7 @@ package com.gpmatching.dto;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -15,7 +16,7 @@ public class CommonBoardDto {
 	private String commonTitle;//공통게시판 제목
 	private int userNo;//공통게시판 글쓴이 정보
 	private String commonContent;
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date regDate;
 	private int readCount;
 	private boolean deleted;
