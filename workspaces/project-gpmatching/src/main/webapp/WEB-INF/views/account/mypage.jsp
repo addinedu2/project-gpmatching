@@ -199,7 +199,7 @@
                 <div id="write-Board-List">
                 
                   	
-					<table style="text-align: center">
+					<table >
 					   <thead>
 					      <tr class="listCommon" >
 					     
@@ -504,7 +504,8 @@ $(function(event){
 		
 		let selectBtn = $('input[name="btnradio"]:checked').val();
 		let loginUser = "${loginUser.userNo}";
-		alert(loginUser);
+		//alert(loginUser);
+		
 		$.ajax({
 			"url":"boardSelect",
 			"method": "get",
@@ -512,9 +513,11 @@ $(function(event){
 			"success": function(result){
 				
 				console.log(loginUser);
+				
 				var myBoardList = $('#write-Board-List');
 				myBoardList.empty();
 				if (result != null){
+					
 					console.log(result);
 					
 					// 테이블 헤더 추가
@@ -528,12 +531,14 @@ $(function(event){
 					for(var i = 0; i < result.length; i++){
 						var $row = $("<tr>");
 	                    
-	                    $row.append($("<td>").text(result[i].title));
+	                    $row.append($("<td>").text(result[i].commonTitle));
 	                    $row.append($("<td>").text(result[i].regDate));
 	                    
 	                    myBoardList.append($row);
 	                    
 					}
+					
+					
 				}
 				
 			},
