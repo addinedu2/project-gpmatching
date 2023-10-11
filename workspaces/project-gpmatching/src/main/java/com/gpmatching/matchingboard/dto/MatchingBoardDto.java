@@ -16,6 +16,7 @@ public class MatchingBoardDto {
 	String preferGender;
 	boolean mic;
 	boolean matchingClose;
+	int headCount;
 	Date regDate;
 	int readCount;
 	boolean deleted;

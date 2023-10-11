@@ -106,13 +106,13 @@
 									</th>
 						         	
 							         	<th scope="col">주포지션</th>
-							         	<th scope="col">서렌여부</th>
-							         	<th scope="col">선호플레이</th>
 							         	<th scope="col">선호성별</th>
 							         	<th scope="col">마이크사용</th>
+							         	<th scope="col">모집인원</th>
 							         	<th scope="col">마감여부</th>
 							        	<th scope="col">등록일시</th>
 							         	<th scope="col">댓글</th>
+							         	<th scope="col"></th>
 							         	<th scope="col"></th>
 									</tr>
 								</thead>
@@ -164,10 +164,9 @@
 												</c:otherwise>
 											</c:choose>
 											</td>
-											<th>${ matchingBoard.lolSur }</th>
-											<th>${ matchingBoard.lolPlay }</th>
 											<th>${ matchingBoard.preferGender }</th>
 											<th>${ matchingBoard.mic }</th>
+											<th>${ matchingBoard.headCount }</th>
 											<th>${ matchingBoard.matchingClose }</th>
 											<th>
 												<fmt:formatDate value="${ matchingBoard.regDate }"
@@ -176,7 +175,9 @@
 											<th class="align-middle">
 												<!-- Varying modal -->
 												<button type="button" class="btn btn-primary btn-sm btn-show-comment-modal" 
-														data-boardno="${ matchingBoard.boardNo }">지원하기</button>											
+														data-boardno="${ matchingBoard.boardNo }">지원하기</button>	
+											</th>
+											<th>										
 												<button type="button" class="btn btn-primary btn-sm btn-show-commentList-modal" 
 														data-boardno="${ matchingBoard.boardNo }">목록</button>
 											</th>
@@ -377,9 +378,9 @@
 		                $headerRow.append($("<th>").text("댓글 번호"));
 		                $headerRow.append($("<th>").text("닉네임"));
 		                $headerRow.append($("<th>").text("댓글 내용"));
-		                $headerRow.append($("<th>").text("매칭"));
-		                commentList.append($headerRow);
+						$headerRow.append($("<th>").text("승인여부"));;
 		                
+		                commentList.append($headerRow);
 		                
 						for(var i = 0; i < result.length; i++){
 							var $row = $("<tr>");
@@ -387,6 +388,13 @@
 		                    $row.append($("<td>").text(result[i].mcommentNo));
 		                    $row.append($("<td>").text(result[i].nickname));
 		                    $row.append($("<td>").text(result[i].mcommentContent));
+		                    if(result[i].status == "0"){
+		                    	$row.append($("<td>").text("미승인"));
+							}else if (result[i].status == "1"){
+								$row.append($("<td>").text("승인"));
+							}else if (result[i].status == "2"){
+								$row.append($("<td>").text("거절"));
+							}
 		                    
 		                    commentList.append($row);
 		                    
@@ -402,17 +410,20 @@
 	                            .data('commentno', result[i].mcommentNo)
 	                            .text("거절");
 	                        
-// 	                     	// 수락 버튼 눌렀을 때의 동작 (not yet)
-// 	                        $('#comment-list').on("click", '.btn-accept-comment', function(event) {
-// 	                            var commentNo = $(this).data('commentno');
-// 	                            // TODO: 수정 버튼을 눌렀을 때의 동작 구현
-// 	                        });
+	                     	// 수락 버튼 눌렀을 때의 동작 
+	                        $('#comment-list').on("click", '.btn-accept-comment', function(event) {
+	                        	var boardNo = $(this).data('boardno');
+	                            var commentNo = $(this).data('commentno');
+	                            location.href = "commentConfirm?commentNo=" + commentNo;
+	                            // TODO: 수정 버튼을 눌렀을 때의 동작 구현
+	                        });
 
-// 	                        // 거절 버튼 눌렀을 때의 동작 (not yet)
-// 	                        $('#comment-list').on("click", '.btn-reject-comment', function(event) {
-// 	                            var commentNo = $(this).data('commentno');
-// 	                            // TODO: 삭제 버튼을 눌렀을 때의 동작 구현
-// 	                        });
+	                        // 거절 버튼 눌렀을 때의 동작 
+	                        $('#comment-list').on("click", '.btn-reject-comment', function(event) {
+	                            var commentNo = $(this).data('commentno');
+	                            location.href = "commentReject?commentNo=" + commentNo;
+	                            // TODO: 삭제 버튼을 눌렀을 때의 동작 구현
+	                        });
 	                        
 	                     	var $buttonColumn = $("<td>").append($acceptButton, $rejectButton);
 	                        $row.append($buttonColumn);
