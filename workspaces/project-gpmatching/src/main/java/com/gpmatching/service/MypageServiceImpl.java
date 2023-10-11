@@ -34,9 +34,9 @@ public class MypageServiceImpl implements MypageService{
 	}
 	
 	@Override
-	public List<CommonBoardDto> findMyWriteBoardByUserNo(int userNo) {
+	public List<CommonBoardDto> findMyWriteCommonBoardByUserNo(int userNo) {
 		
-		List<CommonBoardDto> writeBoard = mypageMapper.selectMyWriteBoardByUserNo(userNo);
+		List<CommonBoardDto> writeBoard = mypageMapper.selectMyWriteCommonBoardByUserNo(userNo);
 		return writeBoard;
 	}
 

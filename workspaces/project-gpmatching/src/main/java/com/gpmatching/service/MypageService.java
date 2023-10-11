@@ -11,5 +11,5 @@ public interface MypageService {
 
 	UserDto selectUserProfile(UserDto loginUser);
 
-	List<CommonBoardDto>findMyWriteBoardByUserNo(int userNo);
+	List<CommonBoardDto>findMyWriteCommonBoardByUserNo(int userNo);
 }

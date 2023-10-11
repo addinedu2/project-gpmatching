@@ -39,7 +39,7 @@ public class MyPageController {
 
 		if (loginUser != null) {
 			System.out.println("Received userNo: " + loginUser.getUserNo());
-			List<CommonBoardDto> myPageView = mypageService.findMyWriteBoardByUserNo(loginUser.getUserNo());
+			List<CommonBoardDto> myPageView = mypageService.findMyWriteCommonBoardByUserNo(loginUser.getUserNo());
 
 			model.addAttribute("loginuser", loginUser);
 			model.addAttribute("myPageView", myPageView);
@@ -96,7 +96,7 @@ public class MyPageController {
 		
 		System.out.println("Received userNo: " + loginUser.getUserNo());
 		
-		List<CommonBoardDto> myPageView = mypageService.findMyWriteBoardByUserNo(loginUser.getUserNo());
+		List<CommonBoardDto> myPageView = mypageService.findMyWriteCommonBoardByUserNo(loginUser.getUserNo());
 		
 		System.out.println(myPageView);
 		
