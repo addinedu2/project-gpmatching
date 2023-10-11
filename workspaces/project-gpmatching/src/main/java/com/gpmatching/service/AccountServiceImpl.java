@@ -1,15 +1,17 @@
 package com.gpmatching.service;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.gpmatching.dto.UserDto;
 import com.gpmatching.mapper.UserMapper;
 
-import lombok.Setter;
-
 public class AccountServiceImpl implements AccountService {
 
-	@Setter
+	@Autowired
 	private UserMapper userMapper;
+	
+	
 	
 	//회원가입
 	@Override
@@ -33,6 +35,25 @@ public class AccountServiceImpl implements AccountService {
 		return loginUser;  //컨트롤러에서 보자
 	}
 	
+	@Override
+	public UserDto findUserByIdAnduserEmail(String userId, String userEmail) {
+		// UserMapper를 사용하여 사용자를 데이터베이스에서 조회
+	UserDto useridmail = userMapper.findUserByIdAnduserEmail(userId, userEmail);	
+		return useridmail;
+	}
+	
+	
+	
+//	private String generateTemporaryPassword() {
+//        // 임시 비밀번호 생성 로직을 구현 (예: 랜덤 문자열 생성)
+//        // ...
+//        return "temporaryPassword123"; // 임시로 사용할 비밀번호 반환
+//    }
+//
+//    private void sendTemporaryPasswordByEmail(String email, String temporaryPassword) {
+//        // 이메일로 임시 비밀번호 전송 로직을 구현 (JavaMailSender 또는 다른 이메일 전송 라이브러리 사용)
+//        // ...
+//    }
 	
 	
 //	//마이페이지 수정  MypageServiceImpl로 이동
@@ -52,9 +73,20 @@ public class AccountServiceImpl implements AccountService {
 		int count = userMapper.selectUserCountMyUserId(userId);
 		return count == 0;
 	}
+
+	public void setUserMapper(UserMapper bean) {
+		// TODO Auto-generated method stub
+		
+	}
 	
+	//비밀번호 이메일 보내기
+
+   
+	
+	
+	}
 	
 	
 
-}
+
 

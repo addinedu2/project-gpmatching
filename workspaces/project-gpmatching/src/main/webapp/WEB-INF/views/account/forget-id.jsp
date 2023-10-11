@@ -57,20 +57,19 @@
               <a href="/project-gpmatching/home">
               	<img src="/project-gpmatching/resources/assets/images/brand/logo/opgglogo-primary.png" class="mb-2" alt="">
               </a>
-              <p class="mb-6">비밀 번호를 잊으셨다고 걱정하지 마세요.
-              				<br>임시 비밀번호를 이메일로 보내드립니다 
+              <p class="mb-6">ID를 잊으셨다고 걱정하지 마세요.
             </div>
             <!-- Form -->
             <form>
-             <!-- userId -->
-              <div class="mb-3">
-                <label for="userId" class="form-label">ID</label>
-                <input type="text" id="userId" class="form-control" name="userId" placeholder="가입시 등록한 아이디를 적어주세요" required="">
-              </div>
               <!-- Email -->
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" id="userEmail" class="form-control" name="userEmail" placeholder="가입시 등록한 이메일를 적어주세요" required="">
+              </div>
+                <!-- userId -->
+              <div class="mb-3">
+                <label for="userId" class="form-label">ID</label>
+                <input type="text" id="userPhone" class="form-control" name="userPhone" placeholder="가입시 등록한 아이디를 적어주세요" required="">
               </div>
               <!-- Button -->
               <div class="mb-3 d-grid">

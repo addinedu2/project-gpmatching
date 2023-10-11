@@ -11,6 +11,7 @@ public interface AccountService {
 	//void editUser(UserDto user);
 	
 	boolean isUserIdValid(String userId);  //로그인 중복검사
+	UserDto findUserByIdAnduserEmail(String userId, String userEmail);
 	
 
 	

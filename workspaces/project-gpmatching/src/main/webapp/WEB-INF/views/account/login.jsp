@@ -29,6 +29,16 @@
 </head>
 
 <body class="bg-light">
+	<div id="db-wrapper" class="toggled">
+		<!-- navbar vertical -->
+		<!-- Sidebar -->
+		<jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
+		<!-- Page content -->
+		<div id="page-content">
+		<!-- Container fluid -->
+		<jsp:include page="/WEB-INF/views/modules/header.jsp" />
+
+
   <!-- container -->
   <div class="container d-flex flex-column">
     <div class="row align-items-center justify-content-center g-0

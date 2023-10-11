@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.gpmatching.dto.UserDto;
 
@@ -29,7 +30,6 @@ public interface UserMapper {
 			+ "where userId = #{userId} and userPwd = #{userPwd} ")
 	UserDto selectUserByIdAnduserPwd(@Param("userId") String userId, @Param("userPwd") String userPwd);
 	
-	
 //	//내 정보 수정하는 메서드
 //	@Update ("UPDATE User "
 //			+ "SET nickname = #{nickname}, userPhone = #{userPhone}, userEmail = #{userEmail} "
@@ -42,6 +42,21 @@ public interface UserMapper {
 			+ "from User "
 			+ "where userId = #{ userId }")
 	int selectUserCountMyUserId(String userId);
+	
+	//아이디 찾을 때 핸드폰와 이메일 찾는 메서드	
+	@Select ("select userPhone, userEmail "
+	         + "from User "
+	         + "where userPhone = #{userPhone} and userEmail = #{userEmail} ")
+	UserDto findUserByPhoneAndEmail(String userPhone, String userEmail);
+	
+	
+	//비번 찾을 때 아이디와 이메일 찾는 메서드	
+//	@Select ("select userId, userEmail "
+//	         + "from User "
+//	         + "where userId = #{userId} and userEmail = #{userEmail} ")
+//	UserDto findUserByIdAnduserEmail(String userId, String userEmail);
+
+
 	
 	
 //	//내가 작성한 글만 보기(미완성코드
