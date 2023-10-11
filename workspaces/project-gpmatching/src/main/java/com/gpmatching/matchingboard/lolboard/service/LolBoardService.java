@@ -27,6 +27,8 @@ public interface LolBoardService {
 	
 	void delete(int boardNo);
 
+	boolean getMatchingCloseByBoardNo(int boardNo);
+
 
 	//List<MatchingBoardDto> getMatchingBoardListByGameNo(int gameNo);
 	

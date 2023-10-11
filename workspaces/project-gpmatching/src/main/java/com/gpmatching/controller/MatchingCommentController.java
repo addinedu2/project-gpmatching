@@ -68,6 +68,21 @@ public class MatchingCommentController {
         return comments; 
     }
 	
+	@GetMapping(path = { "/commentConfirm"})
+	public String commentConfirm( int commentNo) {
+		System.out.println("수락버튼클릭");
+		matchingCommentService.setCommentStatusConfirm( commentNo);
+		return "redirect:lol-list";
+	}
+	
+	@GetMapping(path = { "/commentReject"})
+	public String commentReject(int commentNo) {
+		System.out.println("거절버튼클릭");
+		matchingCommentService.setCommentStatusReject(commentNo);
+		return "redirect:lol-list";
+	}
+	
+	
 //	@GetMapping(path = { "/lol-comment" })
 //	public String showMatchingCommentList(int boardNo, Model model) {
 //		

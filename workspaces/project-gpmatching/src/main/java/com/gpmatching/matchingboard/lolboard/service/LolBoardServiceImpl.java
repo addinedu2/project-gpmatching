@@ -107,6 +107,22 @@ public class LolBoardServiceImpl implements LolBoardService {
 		
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public boolean getMatchingCloseByBoardNo(int boardNo) {
+		boolean matchingClose = mapper.selectMatchingCloseByBoardNo(boardNo);
+		return matchingClose;
+	}
+	
+	@Override
+	public List<MatchingBoardDto> getMatchingBoardListByLolTier(String gameName, String lolTier) {
+		
+		List<MatchingBoardDto> list = mapper.selectLolBoardListByLolTier(gameName, lolTier);
+		
+		return list;
+	}
+>>>>>>> cebb15d688d5b1c2ba4e227ed03de685025965e5
 	
 //	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {
 //		
