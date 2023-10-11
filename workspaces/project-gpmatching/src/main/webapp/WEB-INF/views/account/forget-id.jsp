@@ -60,16 +60,16 @@
               <p class="mb-6">ID를 잊으셨다고 걱정하지 마세요.
             </div>
             <!-- Form -->
-            <form>
+            <form action="forgetId" method="post">
               <!-- Email -->
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" id="userEmail" class="form-control" name="userEmail" placeholder="가입시 등록한 이메일를 적어주세요" required="">
               </div>
-                <!-- userId -->
+                <!-- userPhone -->
               <div class="mb-3">
-                <label for="userId" class="form-label">ID</label>
-                <input type="text" id="userPhone" class="form-control" name="userPhone" placeholder="가입시 등록한 아이디를 적어주세요" required="">
+                <label for="userId" class="form-label">핸드폰 번호</label>
+                <input type="text" id="userPhone" class="form-control" name="userPhone" placeholder="가입시 등록한 핸드폰 번호를 적어주세요" required="">
               </div>
               <!-- Button -->
               <div class="mb-3 d-grid">
@@ -79,6 +79,9 @@
               </div>
               <span>Don't have an account? <a href="/project-gpmatching/account/login">sign in</a></span>
             </form>
+            
+            <h3>${ message }</h3>
+            
           </div>
         </div>
       </div>

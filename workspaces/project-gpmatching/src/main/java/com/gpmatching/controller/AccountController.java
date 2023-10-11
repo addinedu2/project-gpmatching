@@ -106,19 +106,32 @@ public class AccountController {
 		    }
 	}
 	
-	
-	
-	
-	//비밀번호 찾기 페이지 가기
-	@GetMapping(path = {"/forgetPassword"})
-		public String forgetPasswordForm (HttpSession session, Model model) {
-	 		// 이미 로그인된 사용자가 있을 경우 마이 페이지로 리디렉션
-		    if (session.getAttribute("loginuser") != null) {
-		        return "account/mypage";
-		    } else {
-		        return "account/forget-password";
+	@PostMapping(path = {"/forgetId"})
+	public String findUserByPhoneAndEmail(@RequestParam("userPhone") String userPhone, @RequestParam("userEmail") String userEmail, 
+											Model model) {
+	  UserDto userId = accountService.findUserByPhoneAndEmail(userPhone, userEmail);
+		if(userId != null) {
+			model.addAttribute("message" , "당신의 아이디는: " + userId.getUserId());
+			} else {
+			model.addAttribute("message" , "맞는 데이터가 없습니다. 핸드폰 번호와 이메일을 확인해주세요");	
+			}
+		return "account/forget-id";
 	}
-	}
+	
+	
+	
+//	//비밀번호 찾기 페이지 가기
+//	@GetMapping(path = {"/forgetPassword"})
+//		public String forgetPasswordForm (HttpSession session, Model model) {
+//	 		// 이미 로그인된 사용자가 있을 경우 마이 페이지로 리디렉션
+//		    if (session.getAttribute("loginuser") != null) {
+//		        return "account/mypage";
+//		    } else {
+//		        return "account/forget-password";
+//		    }
+//	}
+//	
+//	
 	
 	
 	//회원가입 아이디 중복검사

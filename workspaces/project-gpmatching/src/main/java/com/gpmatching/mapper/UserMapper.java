@@ -44,10 +44,11 @@ public interface UserMapper {
 	int selectUserCountMyUserId(String userId);
 	
 	//아이디 찾을 때 핸드폰와 이메일 찾는 메서드	
-	@Select ("select userPhone, userEmail "
+	@Select ("select userId "
 	         + "from User "
 	         + "where userPhone = #{userPhone} and userEmail = #{userEmail} ")
-	UserDto findUserByPhoneAndEmail(String userPhone, String userEmail);
+	UserDto findUserByPhoneAndEmail(@Param("userPhone") String userPhone, @Param("userEmail") String userEmail);
+
 	
 	
 	//비번 찾을 때 아이디와 이메일 찾는 메서드	
