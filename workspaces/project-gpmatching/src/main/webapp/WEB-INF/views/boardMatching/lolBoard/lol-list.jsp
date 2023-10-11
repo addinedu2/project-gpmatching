@@ -263,7 +263,7 @@
 			                    <div class="d-flex align-items-center">
 			                      <!-- img -->
 			                      <div>
-			                        <img src="../assets/images/avatar/avatar-1.jpg" class="rounded-circle avatar-md" alt="">
+			                        <img src="/project-gpmatching/resources/assets/images/avatar/avatar-1.jpg" class="rounded-circle avatar-md" alt="">
 			                      </div>
 			                      <!-- text -->
 			                      <div class="ms-3 ">

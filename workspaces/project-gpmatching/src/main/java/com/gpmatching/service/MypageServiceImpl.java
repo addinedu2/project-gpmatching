@@ -1,7 +1,10 @@
 package com.gpmatching.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gpmatching.dto.CommonBoardDto;
 import com.gpmatching.dto.UserDto;
 import com.gpmatching.mapper.MypageMapper;
 
@@ -30,6 +33,13 @@ public class MypageServiceImpl implements MypageService{
 		return selectUserProfile;
 	}
 	
-	
+	@Override
+	public List<CommonBoardDto> findMyWriteBoardByUserNo(int userNo) {
+		
+		List<CommonBoardDto> writeBoard = mypageMapper.selectMyWriteBoardByUserNo(userNo);
+		return writeBoard;
+	}
+
+
 
 }

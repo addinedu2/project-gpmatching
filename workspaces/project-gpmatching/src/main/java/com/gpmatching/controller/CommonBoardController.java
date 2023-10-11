@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,8 +68,7 @@ public class CommonBoardController {
 		return "/commonBoard/commonList";
 	}
 
-	
-	
+	//공통게시판 글쓰기
 	@GetMapping(path = {"/commonWrite"})
 	public String showCommonWriteForm(Model model,  @RequestParam(defaultValue = "common") String category) {
 		model.addAttribute("category", category);
