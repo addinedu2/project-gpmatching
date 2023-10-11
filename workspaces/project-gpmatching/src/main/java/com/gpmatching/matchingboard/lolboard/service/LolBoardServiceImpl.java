@@ -107,8 +107,6 @@ public class LolBoardServiceImpl implements LolBoardService {
 		
 	}
 
-<<<<<<< HEAD
-=======
 	@Override
 	public boolean getMatchingCloseByBoardNo(int boardNo) {
 		boolean matchingClose = mapper.selectMatchingCloseByBoardNo(boardNo);
@@ -122,24 +120,15 @@ public class LolBoardServiceImpl implements LolBoardService {
 		
 		return list;
 	}
->>>>>>> cebb15d688d5b1c2ba4e227ed03de685025965e5
-	
-//	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {
-//		
-//		MatchingBoardDto matchingBoard = mapper.selectMatchingBoardByBoardNo(boardNo);
-//		
-//		List<MatchingCommentDto> matchingCommentList = matchingCommentMapper.selectMatchingCommentByBoardNo(boardNo);
-//		matchingBoard.setMatchingCommentList(matchingCommentList);
-//		
-//		return matchingBoard;
-//		
-//	}
-	
-//	@Override
-//	public String getMatchingBoardNickname() {
-//		
-//		String nickname = mapper.selectMatchingBoardNickname();
-//		
-//		return nickname;
-//	}
+
+
+	@Override
+	public List<MatchingBoardDto> searchMatchingBoardListByTitle(String gameName, String keyword) {
+
+		List<MatchingBoardDto> list = mapper.selectLolBoardListByTitle(gameName, keyword);
+		
+		return list;
+	}
+
+
 }

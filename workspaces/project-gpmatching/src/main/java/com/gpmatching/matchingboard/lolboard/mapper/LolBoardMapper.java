@@ -132,27 +132,38 @@ public interface LolBoardMapper {
 		  + "where boardNo = #{boardNo}")
 	void deleteLolBoard(int boardNo);
 	
-<<<<<<< HEAD
+
+	//선택한 티어에 해당하는 글만 보여줌 (나중에 동적 쿼리로 확장 예정 -허지웅)
 	
-	/* 성공
-	@Select( "select * "
-=======
 	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, m.headCount, "
 			+ "m.matchingClose, m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
->>>>>>> cebb15d688d5b1c2ba4e227ed03de685025965e5
 			+ "from MatchingBoard m "
 			+ "inner join Lol l "
 			+ "on l.boardNo = m.boardNo "
 			+ "inner join User u "
 			+ "on m.userNo = u.userNo "
-			+ "where m.gameNo =  (select gameNo "
+			+ "where l.lolTier = #{ lolTier } "
+			+ "and deleted = false "
+			+ "and m.gameNo = (select gameNo "
 			+ "from GameList where gameName = #{ gameName} ) "
 			+ "order by m.boardNo desc" )
-<<<<<<< HEAD
-	List<Map<String, String>> SelectGameMatchingMapByGameName(String gameName);
-	*/
-=======
 	List<MatchingBoardDto> selectLolBoardListByLolTier(@Param("gameName")String gameName, @Param("lolTier")String lolTier);
+
+
+	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, m.headCount, "
+			+ "m.matchingClose, m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
+			+ "from MatchingBoard m "
+			+ "inner join Lol l "
+			+ "on l.boardNo = m.boardNo "
+			+ "inner join User u "
+			+ "on m.userNo = u.userNo "
+			+ "where m.boardTitle like concat('%',#{keyword},'%') "
+			+ "and m.gameNo = (select gameNo "
+			+ "from GameList where gameName = #{gameName} ) "
+			+ "and deleted = false "
+			+ "order by m.boardNo desc" )
+	List<MatchingBoardDto> selectLolBoardListByTitle(@Param("gameName")String gameName, @Param("keyword")String keyword);
+
 
 	@Select("select headCount from MatchingBoard where boardNo = #{ boardNo }")
 	int matchingBoardheadCountByBoardNo(int boardNo); 
@@ -161,9 +172,5 @@ public interface LolBoardMapper {
 	@Update("update MatchingBoard set matchingClose = true "
 			+ "where boardNo = #{boardNo}")
 	int updateMatchingCloseTrueByBoardNo(int boardNo);
->>>>>>> cebb15d688d5b1c2ba4e227ed03de685025965e5
 	
-	
-//	@Select("select u.nickname from MatchingBoard m, User u where m.userNo = u.userNo")
-//	String selectMatchingBoardNickname();
 }

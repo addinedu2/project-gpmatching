@@ -29,6 +29,9 @@ public interface LolBoardService {
 
 	boolean getMatchingCloseByBoardNo(int boardNo);
 
+	List<MatchingBoardDto> searchMatchingBoardListByTitle(String gameName, String keyword);
+
+	List<MatchingBoardDto> getMatchingBoardListByLolTier(String gameName, String lolTier);
 
 	//List<MatchingBoardDto> getMatchingBoardListByGameNo(int gameNo);
 	
