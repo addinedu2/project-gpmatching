@@ -69,21 +69,21 @@ public class MyPageController {
 		
 	} 
 
-//	//마이페이지 수정(데이터베이스에 보내기)
-//	@PostMapping(path = {"/editMypage"})
-//	public String updateUserProfile(UserDto loginUser, HttpSession session, Model model)  {
-//		// 수정된 사용자 정보를 데이터베이스에 업데이트
-//		mypageService.editUser(loginUser);
-//		
-//		UserDto selectForRegDate = mypageService.selectUserProfile(loginUser);
-//		
-//		// 세션에서 사용자 정보 업데이트
-//		session.setAttribute("loginuser", selectForRegDate);
-//
-//		//수정 후 리다이렉트할 페이지 
-//		return "redirect:mypage";
-//		
-//	}
+	//마이페이지 수정(데이터베이스에 보내기)
+	@PostMapping(path = {"/editMypage"})
+	public String updateUserProfile(UserDto loginUser, HttpSession session, Model model)  {
+		// 수정된 사용자 정보를 데이터베이스에 업데이트
+		mypageService.editUser(loginUser);
+		
+		UserDto selectForRegDate = mypageService.selectUserProfile(loginUser);
+		
+		// 세션에서 사용자 정보 업데이트
+		session.setAttribute("loginuser", selectForRegDate);
+
+		//수정 후 리다이렉트할 페이지 
+		return "redirect:mypage";
+		
+	}
 	
 
 	

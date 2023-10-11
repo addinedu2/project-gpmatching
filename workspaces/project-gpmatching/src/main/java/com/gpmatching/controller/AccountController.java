@@ -121,7 +121,7 @@ public class AccountController {
 	}
 	
 	
-	//로그인 중복검사
+	//회원가입 아이디 중복검사
 	@GetMapping(path = {"/check-id-dup"}, produces = "text/plain;charset=utf-8")  //  produces = "text/plain;charset=utf-8"  한글
 	@ResponseBody //이 메서드가 반환하는 값은 view이름이 아니고 응답 컨텐츠 입니다. 별도의 처리를 하지 않고 그냥 응답해라. ajax를 쓰면 필수적으로 사용되는 어노테이션
 	public String checkMemberIdDuplication(String userId) {
