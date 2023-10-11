@@ -13,6 +13,7 @@ public class MatchingCommentDto {
 	private boolean mCommentConfirm;
 	private int boardNo;
 	private int userNo;
+	String status;
 	
 	private UserDto user;
 	String nickname;

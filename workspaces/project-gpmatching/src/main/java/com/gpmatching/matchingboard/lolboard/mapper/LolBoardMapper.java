@@ -35,9 +35,9 @@ public interface LolBoardMapper {
 	*/
 	
 	@Insert( "insert into MatchingBoard ( boardTitle, "
-			+ "boardContent, preferGender, mic, userNo, gameNo) "
-			+ "values ( #{ boardTitle }, #{ boardContent }, "
-			+ "#{ preferGender }, #{ mic } , #{ userNo }, #{ gameNo })")
+			+ "boardContent, preferGender, mic, headCount, userNo, gameNo) "
+			+ "values ( #{ boardTitle }, #{ boardContent }, #{ preferGender }, #{ mic }, "
+			+ "#{headCount}, #{ userNo }, #{ gameNo })")
 	@Options(useGeneratedKeys = true, keyProperty = "boardNo")
 	void insertMatchingBoard(MatchingBoardDto matchingBoardDto);
 	
@@ -49,7 +49,7 @@ public interface LolBoardMapper {
 //	List<MatchingBoardDto> selectAllMatchingBoard();
 	
 	
-	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo "
+	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo, mic, headCount "
 			+ "from MatchingBoard "
 			+ "where gameNo = #{ gameNo } "
 			+ "order by boardNo desc")
@@ -65,7 +65,7 @@ public interface LolBoardMapper {
 //	List<MatchingBoardDto> selectMatchingBoardListByGameName(String gameName);
 	
 
-	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo, mic "
+	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo, mic, headCount "
 			+ "from MatchingBoard "
 			+ "where gameNo = (select gameNo "
 			+ "from GameList where gameName = #{ gameName} ) "
@@ -93,7 +93,7 @@ public interface LolBoardMapper {
 			+ "where boardNo = #{ boardNo }")
 	MatchingBoardDto selectMatchingBoardByBoardNo(@Param("boardNo")int boardNo);
 	
-	@Select("select u.nickname, m.boardNo,m.boardTitle, m.boardContent, m.preferGender, m.mic, "
+	@Select("select u.nickname, m.boardNo,m.boardTitle, m.boardContent, m.preferGender, m.mic, m.headCount, "
 			+ "m.matchingClose, m.regDate, m.readCount, m.gameNo, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
 			+ "from MatchingBoard m "
 			+ "inner join Lol l "
@@ -105,7 +105,7 @@ public interface LolBoardMapper {
 	
 	
 	//User 테이블, MatchingBoard 테이블, Lol 테이블 join해서 같이 보여주는 코드(게임명: "league of legends") 
-	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, "
+	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, m.headCount, "
 			+ "m.matchingClose, m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
 			+ "from MatchingBoard m "
 			+ "inner join Lol l "
@@ -118,9 +118,12 @@ public interface LolBoardMapper {
 			+ "order by m.boardNo desc" )
 	List<MatchingBoardDto> selectLolBoardListByGameName(String gameName);
 	
+	@Select("select matchingClose from MatchingBoard where boardNo = #{boardNo}")
+	boolean selectMatchingCloseByBoardNo(@Param("boardNo") int boardNo);
+	
 	@Update( "update MatchingBoard set boardTitle = #{boardTitle}, "
 			+ "boardContent = #{ boardContent }, preferGender = #{ preferGender }, mic = #{ mic }, "
-			+ "matchingClose = #{ matchingClose }, readCount = #{ readCount } "
+			+ "headCount = #{ headCount }, matchingClose = #{ matchingClose }, readCount = #{ readCount } "
 			+ "where boardNo = #{boardNo} ")
 	void updateMatchingBoard(MatchingBoardDto matchingBoardDto);
 
@@ -129,22 +132,25 @@ public interface LolBoardMapper {
 		  + "where boardNo = #{boardNo}")
 	void deleteLolBoard(int boardNo);
 	
+
 	//선택한 티어에 해당하는 글만 보여줌 (나중에 동적 쿼리로 확장 예정 -허지웅)
-	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, "
+	
+	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, m.headCount, "
 			+ "m.matchingClose, m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
 			+ "from MatchingBoard m "
 			+ "inner join Lol l "
 			+ "on l.boardNo = m.boardNo "
 			+ "inner join User u "
 			+ "on m.userNo = u.userNo "
-			+ "where m.gameNo = (select gameNo "
-			+ "from GameList where gameName = #{ gameName} ) "
+			+ "where l.lolTier = #{ lolTier } "
 			+ "and deleted = false "
-			+ "and l.lolTier = #{ lolTier } "
+			+ "and m.gameNo = (select gameNo "
+			+ "from GameList where gameName = #{ gameName} ) "
 			+ "order by m.boardNo desc" )
 	List<MatchingBoardDto> selectLolBoardListByLolTier(@Param("gameName")String gameName, @Param("lolTier")String lolTier);
 
-	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, "
+
+	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, m.headCount, "
 			+ "m.matchingClose, m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
 			+ "from MatchingBoard m "
 			+ "inner join Lol l "
@@ -157,7 +163,14 @@ public interface LolBoardMapper {
 			+ "and deleted = false "
 			+ "order by m.boardNo desc" )
 	List<MatchingBoardDto> selectLolBoardListByTitle(@Param("gameName")String gameName, @Param("keyword")String keyword);
-	
-	
 
+
+	@Select("select headCount from MatchingBoard where boardNo = #{ boardNo }")
+	int matchingBoardheadCountByBoardNo(int boardNo); 
+	
+	
+	@Update("update MatchingBoard set matchingClose = true "
+			+ "where boardNo = #{boardNo}")
+	int updateMatchingCloseTrueByBoardNo(int boardNo);
+	
 }

@@ -63,10 +63,11 @@
 						<!-- <li class="nav-item"><a class="nav-link "
 							href="/project-gpmatching/account/mypage"> 마이페이지</a></li>
 						 --><li class="nav-item">
-							<a class="nav-link  "
-							href="/project-gpmatching/account/forgetPassword">
-							비밀번호 찾기 </a>
-						</li>
+								<li class="nav-item"><a class="nav-link  "
+							href="/project-gpmatching/account/forgetId"> ID 찾기</a></li>
+						<li class="nav-item"><a class="nav-link  "
+							href="/project-gpmatching/account/forgetPassword">비밀번호 찾기</a></li>
+						
 
 
 					</ul>

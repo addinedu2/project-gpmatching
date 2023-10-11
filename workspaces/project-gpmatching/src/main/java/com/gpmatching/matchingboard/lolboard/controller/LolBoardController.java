@@ -127,11 +127,15 @@ public class LolBoardController {
 	@GetMapping(path = { "/lol-edit"})
 	public String showLolEditForm(HttpSession session, int boardNo, Model model) {
 		
+		boolean matchingClose = lolBoardService.getMatchingCloseByBoardNo(boardNo);
+		if(matchingClose) {
+			return "redirect:lol-list";
+			
+		}
+		
 		MatchingBoardDto lolMatchingBoard = lolBoardService.findLolBoardByBoardNo(boardNo);
 		
 		model.addAttribute("lolMatchingBoard", lolMatchingBoard);
-		
-		//System.out.println(lolMatchingBoard);
 		
 		return "/boardMatching/lolBoard/lol-edit";
 	}
@@ -171,6 +175,7 @@ public class LolBoardController {
 
 		return "redirect:lol-list";	
 	}
+
 	
 	
 	@GetMapping(path = { "/lol-list"})
@@ -198,4 +203,5 @@ public class LolBoardController {
 		return "/boardMatching/lolBoard/lol-list";
 	}
 	
+
 }

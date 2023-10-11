@@ -194,100 +194,34 @@
 				  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
 				  <label class="btn btn-outline-primary" for="btnradio2">자유게시판</label>
 				
-				  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-				  <label class="btn btn-outline-primary" for="btnradio3">신고게시판</label>
+				  
 				</div>
-                <div class="card-body">
+                <div id="write-Board-List">
                 
-                  <!-- 내가쓴글만 보기 게시판 -->
-                  <div class="d-md-flex justify-content-between
-                      align-items-center mb-4">
-                    <div class="d-flex align-items-center">
-                      <div>
-                        <div class="icon-shape icon-lg border p-4 rounded-1">
-                          <img src="/project-gpmatching/resources/assets/images/brand/slack-logo.svg" alt="">
-                        </div>
-                      </div>
-                      <!-- text -->
-                      <div class="ms-3 ">
-                        <h5 class="mb-1"><a href="" class="text-inherit">${ commonBoard.commonNo }</a></h5>
-                        <p class="mb-0 fs-5 text-muted">Project description and details about...</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="d-md-flex justify-content-between
-                      align-items-center mb-4">
-                    <div class="d-flex align-items-center">
-                      <div>
-                        <!-- icon shape -->
-                        <div class="icon-shape icon-lg border p-4 rounded-1">
-                          <img src="/project-gpmatching/resources/assets/images/brand/3dsmax-logo.svg" alt="">
-                        </div>
-                      </div>
-                      <!-- text -->
-                      <div class="ms-3 ">
-                        <h5 class="mb-1"><a href="#" class="text-inherit">Design 3d Character</a></h5>
-                        <p class="mb-0 fs-5 text-muted">Project description and details about...</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="d-md-flex justify-content-between
-                      align-items-center mb-4">
-                    <div class="d-flex align-items-center">
-                      <div>
-                        <!-- icon shape -->
-                        <div class="icon-shape icon-lg border p-4 rounded-1">
-                          <img src="/project-gpmatching/resources/assets/images/brand/github-logo.svg" alt="">
-                        </div>
-                      </div>
-                      <!-- text -->
-                      <div class="ms-3 ">
-                        <h5 class="mb-1"><a href="#" class="text-inherit">Github Development</a></h5>
-                        <p class="mb-0 fs-5 text-muted">Project description and details about...</p>
-                      </div>
-                    </div>
-                    <div class="d-flex align-items-center ms-10 ms-md-0 mt-3">
-                    </div>
-                  </div>
-                  
-                  <div class="d-md-flex justify-content-between
-                      align-items-center mb-4">
-                    <div class="d-flex align-items-center">
-                      <!-- icon shape -->
-                      <div>
-                        <div class="icon-shape icon-lg border p-4 rounded-1">
-                          <img src="/project-gpmatching/resources/assets/images/brand/dropbox-logo.svg" alt="">
-                        </div>
-                      </div>
-                      <!-- text -->
-                      <div class="ms-3 ">
-                        <h5 class="mb-1"><a href="#" class="text-inherit">Dropbox Design
-                            System</a></h5>
-                        <p class="mb-0 fs-5 text-muted">Project description and details about...</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="d-md-flex justify-content-between
-                      align-items-center">
-                    <div class="d-flex align-items-center">
-                      <!-- icon shape -->
-                      <div>
-                        <div class="icon-shape icon-lg border p-4 rounded-1
-                            bg-primary">
-                          <img src="/project-gpmatching/resources/assets/images/brand/layers-logo.svg" alt="">
-                        </div>
-                      </div>
-                      <!-- text -->
-                      <div class="ms-3 ">
-                        <h5 class="mb-1"><a href="#" class="text-inherit">Project Management</a></h5>
-                        <p class="mb-0 fs-5 text-muted">Project description and details about...</p>
-                      </div>
-                   	 </div>
-                    </div>
-                </div><!-- 내가쓴글만보기 -->
+                  	
+					<table >
+					   <thead>
+					      <tr class="listCommon" >
+					     
+					         <th>제목</th>
+					         <th>작성일자</th>
+					      </tr>
+					   </thead>
+					   <tbody>
+					   <c:forEach var="writeBoardList" items="${requestScope.myPageView }">
+					   	  <tr>
+					         <td>${ writeBoardList.commonTitle }</td>
+					         <td>
+					         	<fmt:formatDate value="${ writeBoardList.regDate }"
+					         				    pattern="yyyy-MM-dd"/>
+					         </td>
+					      </tr>
+					      </c:forEach>
+					   </tbody>
+					</table>
+					
+                </div>
+                <!-- 내가쓴글만보기 -->
               </div>
             </div>
             
@@ -561,6 +495,64 @@
 
 <!-- Theme JS -->
 <script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
+
+<script>
+
+$(function(event){
+	
+	 $('input[name="btnradio"]').on('click', function(event){
+		
+		//let selectBtn = $('input[name="btnradio"]:checked').val();
+		let loginUser = "${loginUser.userNo}";
+		//alert(loginUser);
+		
+		$.ajax({
+			"url":"boardSelect",
+			"method": "get",
+			"data":  {"loginUser" : loginUser } ,
+			"success": function(result){
+				
+				console.log(loginUser);
+				
+				var myBoardList = $('#write-Board-List');
+				myBoardList.empty();
+				if (result != null){
+					
+					console.log(result);
+					
+					// 테이블 헤더 추가
+	                var $headerRow = $("<tr>");
+	                
+	                $headerRow.append($("<th>").text("제목"));
+	                $headerRow.append($("<th>").text("작성일자"));
+	                
+	                myBoardList.append($headerRow);
+	                
+					for(var i = 0; i < result.length; i++){
+						var $row = $("<tr>");
+	                    
+	                    $row.append($("<td>").text(result[i].commonTitle));
+	                    $row.append($("<td>").text(result[i].regDate));
+	                    
+	                    myBoardList.append($row);
+	                    
+					}
+					
+					
+				}
+				
+			},
+			"error": function(xhr, status, err){
+				alert("실패");
+			}
+		});
+		
+	});
+	
+})
+
+</script>
+
 </body>
 
 </html>

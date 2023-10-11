@@ -55,13 +55,13 @@ public class LolBoardServiceImpl implements LolBoardService {
 //		return boardMachingList;
 //	}
 	
-//	@Override
-//	public List<MatchingBoardDto> getMatchingBoardListByGameName(String gameName) {
-//		
-//		List<MatchingBoardDto> boardMatchingList  = mapper.selectMatchingBoardListByGameName(gameName);
-//		
-//		return boardMatchingList;
-//	}
+	@Override
+	public List<MatchingBoardDto> getMatchingBoardListByGameName(String gameName) {
+		
+		List<MatchingBoardDto> boardMatchingList  = mapper.selectMatchingBoardListByGameName(gameName);
+		
+		return boardMatchingList;
+	}
 	
 	
 	
@@ -108,12 +108,19 @@ public class LolBoardServiceImpl implements LolBoardService {
 	}
 
 	@Override
+	public boolean getMatchingCloseByBoardNo(int boardNo) {
+		boolean matchingClose = mapper.selectMatchingCloseByBoardNo(boardNo);
+		return matchingClose;
+	}
+	
+	@Override
 	public List<MatchingBoardDto> getMatchingBoardListByLolTier(String gameName, String lolTier) {
 		
 		List<MatchingBoardDto> list = mapper.selectLolBoardListByLolTier(gameName, lolTier);
 		
 		return list;
 	}
+
 
 	@Override
 	public List<MatchingBoardDto> searchMatchingBoardListByTitle(String gameName, String keyword) {
@@ -122,5 +129,6 @@ public class LolBoardServiceImpl implements LolBoardService {
 		
 		return list;
 	}
-	
+
+
 }

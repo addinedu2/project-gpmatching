@@ -1,9 +1,12 @@
 package com.gpmatching.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.gpmatching.dto.CommonBoardDto;
 import com.gpmatching.dto.UserDto;
 
 @Mapper
@@ -20,5 +23,31 @@ public interface MypageMapper {
 			+ "from User "
 			+ "where userId = #{userId}")
 	UserDto selectUserProfile(UserDto loginUser);
+	
+	
+	//마이페이지 내가 쓴 글만 보기
+	@Select("select cb.commonTitle, cb.regDate "
+		 	  + "from CommonBoard cb "
+		 	  + "inner join User u "
+		 	  + "on u.userNo = cb.userNo "
+			  + "where u.userNo = #{ userNo } and cb.category = 'common' and deleted = false "   //여기서 데이터에서 공통만 뽑아냄, 위에서 데이터 가져오는거, 아래서 데이터 가져갈 것도 신경 쓸 것
+			  + "order by commonNo desc")
+	List<CommonBoardDto> selectMyWriteBoardByUserNo(int userNo);
+	
+	
+//	//마이페이지 내가 쓴 글만 보기(매칭게시판 포함ver)
+//	@Select("select mb.boardTitle, mb.regDate "
+//	        + "from MatchingBoard mb "
+//	        + "inner JOIN User u "
+//	        + "on u.userNo = mb.userNo "
+//	        + "where u.userNo = #{userNo} AND cb.category = 'common' AND cb.deleted = false "
+//	        + "order by cb.commonNo desc")
+//	List<CommonBoardDto> selectMyWriteBoardByUserNo2(int userNo);
 
 }
+
+
+
+
+
+

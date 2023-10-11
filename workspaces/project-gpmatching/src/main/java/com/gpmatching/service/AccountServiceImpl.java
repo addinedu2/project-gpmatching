@@ -1,6 +1,8 @@
 package com.gpmatching.service;
 
 
+import org.apache.ibatis.annotations.Param;
+
 import com.gpmatching.dto.UserDto;
 import com.gpmatching.mapper.UserMapper;
 
@@ -54,7 +56,10 @@ public class AccountServiceImpl implements AccountService {
 	}
 	
 	
+	@Override
+	public UserDto	findUserByPhoneAndEmail(String userPhone, String userEmail) {
+		return userMapper.findUserByPhoneAndEmail(userPhone, userEmail);
+	}
 	
 
 }
-
