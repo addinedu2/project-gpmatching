@@ -188,10 +188,10 @@
 				<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
 				
 				
-				  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+				  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" data-board="matching" checked>
 				  <label class="btn btn-outline-primary" for="btnradio1">매칭게시판</label>
 				
-				  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+				  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" data-board="common">
 				  <label class="btn btn-outline-primary" for="btnradio2">자유게시판</label>
 				
 				  
@@ -199,25 +199,33 @@
                 <div id="write-Board-List">
                 
                   	
-					<table >
-					   <thead>
-					      <tr class="listCommon" >
-					     
+					<table class="table text-nowrap mb-0">
+					   <thead class="table-light">
+					      <tr>
 					         <th>제목</th>
 					         <th>작성일자</th>
 					      </tr>
 					   </thead>
 					   <tbody>
-					   <c:forEach var="writeBoardList" items="${requestScope.myPageView }">
-					   	  <tr>
-					         <td>${ writeBoardList.commonTitle }</td>
-					         <td>
-					         	<fmt:formatDate value="${ writeBoardList.regDate }"
+					   
+					    <c:forEach var="board" items="${requestScope.boardList }">
+					   	<tr>
+                           <td class="align-middle">
+                               <div class="d-flexalign-items-center">
+                                   <div class="ms-3 lh-1">
+                                       <h5 class=" mb-1"> <a href="#" class="text-inherit">${ board.boardTitle }</a></h5>
+                                   </div>
+                               </div>
+                           </td>
+                           <td class="align-middle">
+                           		<fmt:formatDate value="${ board.regDate }"
 					         				    pattern="yyyy-MM-dd"/>
-					         </td>
-					      </tr>
-					      </c:forEach>
+                           </td>
+                           
+                       </tr>
+                       </c:forEach>
 					   </tbody>
+					   
 					</table>
 					
                 </div>
@@ -496,12 +504,18 @@
 <!-- Theme JS -->
 <script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 
-<script>
 
+<!-- 이게 진짜임  -->
+<!-- <script>
 $(function(event){
 	
+	 //버튼 이벤트 따로처리하지 않고 한번에 처리할때 사용할거
 	 $('input[name="btnradio"]').on('click', function(event){
-		
+		 
+		 
+	 //내가 작성한 글만 보기(공통게시판) ajax
+	 //$("#btnradio2").on('click', function(event){	  //자유게시판만 클릭되게..
+		 
 		//let selectBtn = $('input[name="btnradio"]:checked').val();
 		let loginUser = "${loginUser.userNo}";
 		//alert(loginUser);
@@ -528,7 +542,8 @@ $(function(event){
 	                
 	                myBoardList.append($headerRow);
 	                
-					for(var i = 0; i < result.length; i++){
+	                var maxLength = 9;
+					for(var i = 0; i < result.length && i < maxLength; i++){
 						var $row = $("<tr>");
 	                    
 	                    $row.append($("<td>").text(result[i].commonTitle));
@@ -548,10 +563,72 @@ $(function(event){
 		});
 		
 	});
-	
+	 
 })
-
 </script>
+ -->
+
+
+<!-- 테스트코드(공통게시판) -->
+<script>
+$(function(event) {
+    $("#btnradio2, #btnradio1").on('click', function(event) {
+        let loginUser = "${loginUser.userNo}";
+        
+        const board = $(this).data("board"); // data-board속성의 값 읽기
+
+        $.ajax({
+            "url": "boardSelect",
+            "method": "get",
+            "data": { "loginUser": loginUser, board: board },
+            "success": function(result) {
+                var myBoardList = $('#write-Board-List');
+                myBoardList.empty();
+
+                if (result != null) {
+                    console.log(result);
+
+                    var $table = $("<table>").addClass("table text-nowrap mb-0");
+                    myBoardList.append($table);
+
+                    var $thead = $("<thead>").addClass("table-light");
+                    $table.append($thead);
+                    
+                    var $headerRow = $("<tr>");
+                    $thead.append($headerRow);
+                    
+                    $headerRow.append($("<th>").text("제목"));
+                    $headerRow.append($("<th>").text("작성일자"));
+                    
+                    var $tbody = $("<tbody>");
+                    $table.append($tbody);
+                    
+						
+                    //var maxItems = 6;
+                    for (var i = 0; i < result.length; i++) {
+                        var $row = $("<tr>");
+                        $tbody.append($row);
+                        
+                        var $titleColumn = $("<td>").addClass("align-middle");
+                        $row.append($titleColumn);
+                        
+                        var $titleLink = $("<a>").attr("href", "#").addClass("text-inherit").text(result[i].boardTitle);
+                        $titleColumn.append($titleLink);
+                        
+                        var $dateCell = $("<td>").text(result[i].regDate);
+                        $row.append($dateCell); 
+                    }
+
+                }
+            },
+            "error": function(xhr, status, err) {
+                alert("실패");
+            }
+        });
+    });
+});
+</script>
+
 
 </body>
 

@@ -18,7 +18,6 @@ public class MatchingBoardDto {
 	boolean mic;
 	boolean matchingClose;
 	int headCount;
-	
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	Date regDate;
 	int readCount;
