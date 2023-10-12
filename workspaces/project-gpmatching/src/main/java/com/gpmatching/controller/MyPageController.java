@@ -32,25 +32,39 @@ public class MyPageController {
 	}
 	
 	
-	@GetMapping(path = {"/mypage"})
+	@GetMapping(path = { "/mypage" })
 	public String mypage(HttpSession session, Model model) {
 		UserDto loginUser = (UserDto) session.getAttribute("loginuser");
-		
 
 		if (loginUser != null) {
-			System.out.println("Received userNo: " + loginUser.getUserNo());
-			List<CommonBoardDto> myPageView = mypageService.findMyWriteBoardByUserNo(loginUser.getUserNo());
+			String UserGrade = loginUser.getUserGrade();
 
-			model.addAttribute("loginuser", loginUser);
-			model.addAttribute("myPageView", myPageView);
-			
-			System.out.println(myPageView);
+			if ("admin".equals(UserGrade)) {
+								// 로그인한 사용자가 관리자인 경우 어드민 페이지로 리디렉션
+				List<CommonBoardDto> myPageView = mypageService.findMyWriteCommonBoardByUserNo(loginUser.getUserNo());
 
-			return "account/mypage";
+				model.addAttribute("loginuser", loginUser);
+				model.addAttribute("myPageView", myPageView);
+				
+				return "/account/adminpage";
+
+				
+			} else {
+				// 로그인한 사용자가 일반 사용자인 경우 마이페이지 표시
+				System.out.println("Received userNo: " + loginUser.getUserNo());
+				List<CommonBoardDto> myPageView = mypageService.findMyWriteCommonBoardByUserNo(loginUser.getUserNo());
+
+				model.addAttribute("loginuser", loginUser);
+				model.addAttribute("myPageView", myPageView);
+
+				System.out.println(myPageView);
+
+				return "account/mypage";
+			}
 		} else {
-		   return "account/login";
+			// 로그인하지 않은 경우 로그인 페이지로 리디렉션
+			return "account/login";
 		}
-		
 	}//마이페이지 버튼
 
 	
@@ -96,7 +110,7 @@ public class MyPageController {
 		
 		System.out.println("Received userNo: " + loginUser.getUserNo());
 		
-		List<CommonBoardDto> myPageView = mypageService.findMyWriteBoardByUserNo(loginUser.getUserNo());
+		List<CommonBoardDto> myPageView = mypageService.findMyWriteCommonBoardByUserNo(loginUser.getUserNo());
 		
 		System.out.println(myPageView);
 		
