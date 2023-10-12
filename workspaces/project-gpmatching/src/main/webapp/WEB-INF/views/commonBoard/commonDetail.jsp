@@ -113,40 +113,9 @@
 			                <span class="text-uppercase fw-medium text-darks-5 ls-2">본문</span>
 			                <!-- text -->
 			                <p class="mt-2 mb-6">${fn:replace(commonBoard.commonContent,enter,"<br>") }</p>
-		                	
-		                	
-		               
-		                  <div class="row">
-		                    <!-- <div class="col-xl-1 col-lg-2 col-md-2 col-12 mb-3 mb-lg-0">
-		                      avatar
-		                      <img src="../assets/images/avatar/avatar-1.jpg" class="avatar avatar-md rounded-circle" alt="">
-		                    </div> -->
-		                    <!-- input -->
-		                    <div class="col-xl-11 col-lg-10 col-md-9 col-12 ">
-		
-		                      <div class="row g-3 align-items-center">
-		                        <div class="col-md-2 col-xxl-1">
-		                          <label for="name" class="col-form-label ">Name</label>
-		                        </div>
-		                        <div class="col-md-8 col-xxl-9  mt-0 mt-md-3">
-		                          <input type="password" id="name" class="form-control" aria-describedby="name">
-		                        </div>
-		                        <!-- 여기다가 매칭게시판쪽 리뷰 기능 테스트 -->
-		                        <div class="col-md-2 col-xxl-2">
-		                        	<a href="review?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}">
-		                         	<button type="button" class="btn btn-primary">리뷰</button>
-		                         	</a>
-		                        </div>
-		                      </div>
-		
-		                    </div>
-		
-		                  </div>
-		                  
 		                  
 		                </div>
 		              </div>
-		             
 		            
 		            	<br>
 			            <div class="btn-center" >
@@ -163,9 +132,6 @@
 				        	<a href="javascript:" id="delete-board-lnk">
 				        	<button type="button" class="btn btn-danger btn-group-sm mb-2" aria-label="Small button group">삭제</button>
 				        	</a>
-				        	
-		
-				        
 				        </div>
 		            
 		            </div>
