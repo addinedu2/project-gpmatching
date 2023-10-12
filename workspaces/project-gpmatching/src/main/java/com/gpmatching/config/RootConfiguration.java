@@ -25,6 +25,8 @@ import com.gpmatching.matchingboard.pubgboard.service.PubgBoardServiceImpl;
 import com.gpmatching.matchingboard.pubgboard.service.PubgService;
 import com.gpmatching.matchingboard.pubgboard.service.PubgServiceImpl;
 import com.gpmatching.service.AccountServiceImpl;
+import com.gpmatching.service.AdminService;
+import com.gpmatching.service.AdminServiceImpl;
 import com.gpmatching.service.BoardCommentService;
 import com.gpmatching.service.BoardCommentServiceImpl;
 import com.gpmatching.service.CommonBoardService;
@@ -181,7 +183,11 @@ public class RootConfiguration implements ApplicationContextAware {
 		
 		return new MatchingAlarmServiceImpl();
 	}
-
+	
+	@Bean
+	public AdminService adminService() {
+		return new AdminServiceImpl();
+	}
 
 }
 	

@@ -40,7 +40,7 @@ public class MyPageController {
 			String UserGrade = loginUser.getUserGrade();
 
 			if ("admin".equals(UserGrade)) {
-								// 로그인한 사용자가 관리자인 경우 어드민 페이지로 리디렉션
+								// 로그인한 사용자가 관리자인 경우 어드민 페이지로 리디렉션>어드민 컨트롤러로 이동
 				List<CommonBoardDto> myPageView = mypageService.findMyWriteCommonBoardByUserNo(loginUser.getUserNo());
 
 				model.addAttribute("loginuser", loginUser);
