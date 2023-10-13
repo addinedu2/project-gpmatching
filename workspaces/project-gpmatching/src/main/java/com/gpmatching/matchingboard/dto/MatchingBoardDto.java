@@ -3,6 +3,7 @@ package com.gpmatching.matchingboard.dto;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gpmatching.dto.MatchingCommentDto;
 import com.gpmatching.dto.UserDto;
 
@@ -17,6 +18,8 @@ public class MatchingBoardDto {
 	boolean mic;
 	boolean matchingClose;
 	int headCount;
+	int confirmCount;
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	Date regDate;
 	int readCount;
 	boolean deleted;
@@ -48,6 +51,6 @@ public class MatchingBoardDto {
 	private List<MatchingCommentDto> matchingCommentList;
 	private UserDto user;
 	private LolDto lol;
-	private int confirmCount;
+	
 
 }

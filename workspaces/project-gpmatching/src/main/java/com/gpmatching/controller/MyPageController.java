@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gpmatching.dto.CommonBoardDto;
+import com.gpmatching.dto.MypageBoardDto;
 import com.gpmatching.dto.UserDto;
+import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 import com.gpmatching.service.MypageService;
 
 @Controller
@@ -31,27 +33,27 @@ public class MyPageController {
 		this.mypageService = mypageService;
 	}
 	
-	
+	//마이페이지 버튼
 	@GetMapping(path = {"/mypage"})
 	public String mypage(HttpSession session, Model model) {
 		UserDto loginUser = (UserDto) session.getAttribute("loginuser");
 		
 
 		if (loginUser != null) {
-			System.out.println("Received userNo: " + loginUser.getUserNo());
-			List<CommonBoardDto> myPageView = mypageService.findMyWriteBoardByUserNo(loginUser.getUserNo());
+			//System.out.println("Received userNo: " + loginUser.getUserNo());
+			List<MypageBoardDto> boardList = mypageService.findMyWriteMatchingBoardByUserNo(loginUser.getUserNo());
 
 			model.addAttribute("loginuser", loginUser);
-			model.addAttribute("myPageView", myPageView);
+			model.addAttribute("boardList", boardList);
 			
-			System.out.println(myPageView);
+			//System.out.println(myPageView);
 
 			return "account/mypage";
 		} else {
 		   return "account/login";
 		}
 		
-	}//마이페이지 버튼
+	}
 
 	
 	// 마이페이지 수정 버튼(로그인 하고 들어갈 수 있는 컨트롤러)
@@ -90,19 +92,25 @@ public class MyPageController {
 	//ajax 마이페이지 내가 쓴 글만 보기
 	@GetMapping(path = { "/boardSelect" }, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public List<CommonBoardDto> myWritePageView(HttpSession session){
+	public List<MypageBoardDto> myWritePageView(String board, HttpSession session){
 		
 		UserDto loginUser = (UserDto) session.getAttribute("loginuser");
 		
-		System.out.println("Received userNo: " + loginUser.getUserNo());
+		//System.out.println("Received userNo: " + loginUser.getUserNo());
+		List<MypageBoardDto> boardList = null;
+		if(board.equals("common")) {
+			boardList = mypageService.findMyWriteCommonBoardByUserNo(loginUser.getUserNo());
 		
-		List<CommonBoardDto> myPageView = mypageService.findMyWriteBoardByUserNo(loginUser.getUserNo());
+		}else {
+			boardList = mypageService.findMyWriteMatchingBoardByUserNo(loginUser.getUserNo());
+		}
+		//System.out.println(myPageView);
 		
-		System.out.println(myPageView);
-		
-		return myPageView;
+		return boardList;
 	}
 	
+	
+
 
 	
 	

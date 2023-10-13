@@ -22,7 +22,7 @@ import com.gpmatching.dto.BoardAttachDto;
 import com.gpmatching.dto.CommonBoardDto;
 import com.gpmatching.service.BoardCommentService;
 import com.gpmatching.service.CommonBoardService;
-import com.gpmatching.ui.CommonPager;
+import com.gpmatching.ui.ThePager;
 import com.gpmatching.view.DownloadView;
 
 @Controller
@@ -57,8 +57,8 @@ public class CommonBoardController {
 		}
 		
 		//페이지 번호 표시 부분
-		CommonPager pager = 
-				new CommonPager(dataCount, pageNo, pageSize, pagerSize, linkUrl);
+		ThePager pager = 
+				new ThePager(dataCount, pageNo, pageSize, pagerSize, linkUrl);
 		
 		model.addAttribute("commonBoardList",commonBoardList);
 		model.addAttribute("commentCounts", commentCounts);

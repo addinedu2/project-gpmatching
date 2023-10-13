@@ -49,7 +49,7 @@
 <title>배틀그라운드 매칭 글 작성</title>
 </head>
 
-<body class="bg-light">
+<body class="bg-dark">
 	<div id="db-wrapper" class="toggled">
 		<!-- navbar vertical -->
 		<!-- Sidebar -->
@@ -62,32 +62,34 @@
 			<jsp:include page="/WEB-INF/views/modules/header.jsp" />	
 			
 			<!-- Container fluid -->
-
+			<br>
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 			<a href="/project-gpmatching/boardMatching/pubgBoard/battleground-list">
-				<button type="button" class="btn btn-primary mb-2">배틀그라운드 목록보기</button>
+				<button type="button" class="btn btn-primary me-2">배틀그라운드 목록보기</button>
 			</a>
 			<a href="/project-gpmatching/home">
-				<button type="button" class="btn btn-primary mb-2">홈으로</button>
-			</a>	
+				<button type="button" class="btn btn-primary me-3">홈으로</button>
+			</a>
+			</div>	
 			<br>
 			<!-- Input -->
 			<form action="battleground-write" method="post">
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">제목</label>
+					<label class="form-label text-light" for="textInput">제목</label>
 					<input name="boardTitle" type="text" id="textInput" class="form-control" 
 							placeholder="시간은 꼭 포함해서 작성해주세요">
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">작성자 : ${ loginuser.nickname }</label>
+					<label class="form-label text-light" for="textInput">작성자 : ${ loginuser.nickname }</label>
 					<input name="userNo" type="hidden" id="textInput" class="form-control" value="${ loginuser.userNo }">
 				</div>
 				<!-- Textarea -->
 				<div class="mb-3 txt-box">
-					<label for="textarea-input" class="form-label">내용</label>
+					<label for="textarea-input" class="form-label text-light">내용</label>
 					<textarea name="boardContent" class="form-control" id="textarea-input" rows="5"></textarea>
 				</div>
 				<!-- Checks -->
-				<div class="txt-box">
+				<div class="txt-box text-light">
 					<div class="form-check">
 						<input name="mic" class="form-check-input" type="checkbox" value=1
 							id="flexCheckDefault"> <label class="form-check-label"
@@ -96,7 +98,7 @@
 				</div>
 				<!-- radio-->
 				<br>
-				<div class="txt-box">
+				<div class="txt-box text-light">
 					<div class="form-check">
 						<input class="form-check-input" type="radio" value="anyone"
 							name="preferGender" id="flexRadioDefault1" checked> <label
@@ -113,33 +115,34 @@
 							class="form-check-label" for="flexRadioDefault2"> 여자만 </label>
 					</div>
 				</div>
+				<br>
 				
 				<!-- 베그 등록 -->
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">배그선호플레이</label>
+					<label class="form-label text-light" for="textInput">배그선호플레이</label>
 					<input name="pubgPlay" type="text" id="textInput" class="form-control" >
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">배그주포지션</label>
+					<label class="form-label text-light" for="textInput">배그주포지션</label>
 					<input name="pubgPosition" type="text" id="textInput" class="form-control" >
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">배그주사용무기</label>
+					<label class="form-label text-light" for="textInput">배그주사용무기</label>
 					<input name="pubgGun" type="text" id="textInput" class="form-control" >
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">배그서버</label>
+					<label class="form-label text-light" for="textInput">배그서버</label>
 					<input name="pubgServer" type="text" id="textInput" class="form-control" >
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">배그모드</label>
+					<label class="form-label text-light" for="textInput">배그모드</label>
 					<input name="pubgMode" type="text" id="textInput" class="form-control" >
 				</div>
 				
 				<br>
 				<div class="btn-center">
 					<!-- Primary Button -->
-					<button type="submit" class="btn btn-primary mb-2">등록</button>
+					<button type="submit" class="btn btn-primary me-2 mb-2">등록</button>
 					<!-- Danger Button -->
 					<button type="button" id="btnCancel" class="btn btn-danger mb-2">취소</button>
 				</div>

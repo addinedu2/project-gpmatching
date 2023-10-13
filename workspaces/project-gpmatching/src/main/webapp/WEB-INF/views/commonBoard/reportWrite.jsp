@@ -44,14 +44,15 @@
 		<!--  header -->
 		<jsp:include page="/WEB-INF/views/modules/header.jsp" />
 
-
+			<br>
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 			<a href="/project-gpmatching/commonBoard/reportList">
-				<button type="button" class="btn btn-primary mb-2">신고 목록보기</button>
+				<button type="button" class="btn btn-primary me-2">신고 목록보기</button>
 			</a>
 			<a href="/project-gpmatching/home">
-				<button type="button" class="btn btn-primary mb-2">홈으로</button>
+				<button type="button" class="btn btn-primary me-3">홈으로</button>
 			</a>
-		
+			</div>
 <form action="reportWrite" method="post" enctype="multipart/form-data">
 	<!-- title -->
 	<div class="mb-3 txt-box">
@@ -79,7 +80,7 @@
 
 	<!-- submit&reset -->
     <div class="btn-center">
-		<button type="submit" class="btn btn-primary mb-2">submit</button> 
+		<button type="submit" class="btn btn-primary me-2 mb-2">submit</button> 
 		<button type="button" id="btnCancel" class="btn btn-secondary mb-2">reset</button>
 	</div>
 </form>

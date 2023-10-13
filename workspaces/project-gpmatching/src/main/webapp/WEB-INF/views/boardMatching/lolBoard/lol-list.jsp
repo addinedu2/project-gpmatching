@@ -418,7 +418,7 @@
 						for(var i = 0; i < result.length; i++){
 							var $row = $("<tr>");
 		                    
-		                    $row.append($("<td>").text(result[i].mcommentNo));
+		                    $row.append($("<td>").text(result[i].commentNo));
 		                    $row.append($("<td>").text(result[i].nickname));
 		                    $row.append($("<td>").text(result[i].mcommentContent));
 		                    if(result[i].status == "0"){
@@ -434,14 +434,13 @@
 		                    // 수락 버튼 추가
 	                        var $acceptButton = $("<button>")
 	                            .addClass("btn btn-primary btn-sm btn-accept-comment")
-	                            .data('commentno', result[i].mcommentNo)
-	                            
+	                            .data('commentno', result[i].commentNo)
 	                            .text("수락");
 		                    
 	                     	// 거절 버튼 추가
 	                        var $rejectButton = $("<button>")
 	                            .addClass("btn btn-danger btn-sm btn-reject-comment")
-	                            .data('commentno', result[i].mcommentNo)
+	                            .data('commentno', result[i].commentNo)
 	                            .text("거절");
 
 	                     	// 수락 버튼 눌렀을 때의 동작 

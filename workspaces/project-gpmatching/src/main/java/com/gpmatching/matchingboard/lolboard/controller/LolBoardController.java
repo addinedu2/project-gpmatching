@@ -183,24 +183,25 @@ public class LolBoardController {
 											 @RequestParam(name = "searchType", required = false) String searchType,
 											 @RequestParam(name = "keyword", required = false) String keyword, Model model) {
 		
-		//List<MatchingBoardDto> matchingLolList;
+		List<MatchingBoardDto> matchingLolList;
 		
 		
-//		if (lolTier != null) {
-//			
-//			matchingLolList = lolBoardService.getMatchingBoardListByLolTier("league of legends", lolTier);
-//
-//		} else if ("t".equals(searchType)){
-//			
-//			matchingLolList = lolBoardService.searchMatchingBoardListByTitle("league of legends", keyword);
-//			
-//		} else {
-			List<MatchingBoardDto> matchingLolList = lolBoardService.getSelectLolBoardListByGameName("league of legends");
-			for (MatchingBoardDto matchingBoard : matchingLolList) {
-		        int boardNo = matchingBoard.getBoardNo();
-		        int confirmCount = matchingCommentService.showCommentConfirmCount(boardNo);
-		        matchingBoard.setConfirmCount(confirmCount);
-		    }
+		if (lolTier != null) {
+			
+			matchingLolList = lolBoardService.getMatchingBoardListByLolTier("league of legends", lolTier);
+
+		} else if ("t".equals(searchType)){
+			
+			matchingLolList = lolBoardService.searchMatchingBoardListByTitle("league of legends", keyword);
+			
+		} else {
+			matchingLolList = lolBoardService.getSelectLolBoardListByGameName("league of legends");
+//			for (MatchingBoardDto matchingBoard : matchingLolList) {
+//		        int boardNo = matchingBoard.getBoardNo();
+//		        int confirmCount = matchingCommentService.showCommentConfirmCount(boardNo);
+//		        matchingBoard.setConfirmCount(confirmCount);
+//		    }
+		}
 			
 		
 
