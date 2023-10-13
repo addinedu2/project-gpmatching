@@ -17,11 +17,13 @@ public interface AlramMapper {
 	@Options(useGeneratedKeys = true, keyProperty = "alramNo", keyColumn="alramNo")
 	void insertAlram(AlramDto alram);
 	
-	@Select("select a.alramNo, a.commentNo, bc.userNo, bc.commentContent, bc.commonNo, u.nickname "
-		  + "from BoardComment bc "
+	@Select("select distinct a.alramNo, a.commentNo, bc.userNo, bc.commentContent, bc.commonNo, u.nickname "
+	      + "from BoardComment bc "
 		  + "inner join Alram a ON a.commentNo = bc.commentNo "
-		  + "inner join User u on u.userNo = bc.userNo "
-		  + "where bc.userNo = #{userNo} order by bc.commentNo desc")
+	      + "inner join User u on u.userNo = bc.userNo "
+		  + "inner join CommonBoard cb on cb.userNo = bc.userNo "
+	      + "where bc.userNo != #{userNo} and cb.userNo != #{userNo} "
+	      + "order by bc.commentNo desc")
 	List<AlramDto> selectAlamListByUserNo(@Param("userNo") int userNo);
 
 
