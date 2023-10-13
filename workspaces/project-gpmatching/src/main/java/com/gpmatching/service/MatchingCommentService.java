@@ -15,5 +15,7 @@ public interface MatchingCommentService {
 	void setCommentStatusReject(int commentNo);
 
 	boolean isMatchingCloseTrueByCommentNo(int commentNo);
+
+	int getBoardNoByCommentNo(int commentNo);
 	
 }
