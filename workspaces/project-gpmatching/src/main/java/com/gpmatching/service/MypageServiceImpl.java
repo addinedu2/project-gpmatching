@@ -4,11 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gpmatching.dto.CommonBoardDto;
 import com.gpmatching.dto.MypageBoardDto;
 import com.gpmatching.dto.UserDto;
 import com.gpmatching.mapper.MypageMapper;
-import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 
 
 

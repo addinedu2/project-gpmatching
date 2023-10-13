@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gpmatching.dto.CommonBoardDto;
 import com.gpmatching.dto.MypageBoardDto;
 import com.gpmatching.dto.UserDto;
-import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 import com.gpmatching.service.MypageService;
 
 @Controller
@@ -33,10 +31,10 @@ public class MyPageController {
 		this.mypageService = mypageService;
 	}
 	
-	//마이페이지 버튼
+	//마이페이지 버튼 및 마이페이지 들어갔을때 내가 작성한 게시글 출력
 	@GetMapping(path = {"/mypage"})
 	public String mypage(HttpSession session, Model model) {
-		UserDto loginUser = (UserDto) session.getAttribute("loginuser");
+		UserDto loginUser = (UserDto) session.getAttribute("loginuser");  //현재 로그인한 사용자의 정보를 세션에서 가져오기
 		
 
 		if (loginUser != null) {
@@ -97,6 +95,7 @@ public class MyPageController {
 		UserDto loginUser = (UserDto) session.getAttribute("loginuser");
 		
 		//System.out.println("Received userNo: " + loginUser.getUserNo());
+		
 		List<MypageBoardDto> boardList = null;
 		if(board.equals("common")) {
 			boardList = mypageService.findMyWriteCommonBoardByUserNo(loginUser.getUserNo());

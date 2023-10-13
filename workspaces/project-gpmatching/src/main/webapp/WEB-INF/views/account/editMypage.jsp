@@ -169,7 +169,7 @@
                     <!-- row -->
                     <div class="mb-3 row">
                       <label for="addressLine" class="col-sm-4 col-form-label
-                          form-label">등록일</label>
+                          form-label">소개</label>
                       <div class="col-md-8 col-12">
                         <input type="text" class="form-control" placeholder="placeholder" id="addressLine">
                       </div>
@@ -178,7 +178,7 @@
                     <!-- row -->
                     <div class="mb-3 row">
                       <label for="addressLineTwo" class="col-sm-4
-                          col-form-label form-label">Address line 2</label>
+                          col-form-label form-label">position</label>
                       <div class="col-md-8 col-12">
                         <input type="text" class="form-control" placeholder="placeholder" id="addressLineTwo">
                       </div>
