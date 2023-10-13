@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gpmatching.dto.AlramDto;
 import com.gpmatching.dto.BoardCommentDto;
+import com.gpmatching.mapper.AlramMapper;
 import com.gpmatching.mapper.BoardCommentMapper;
 
 import lombok.Setter;
@@ -13,6 +15,9 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	
 	@Setter(onMethod_ = { @Autowired })
 	private BoardCommentMapper boardCommentMapper;
+	
+	@Setter(onMethod_ = { @Autowired })
+	private AlramMapper alramMapper;
 	
 	@Override
 	public List<BoardCommentDto> getCommentListByCommonNo(int commonNo) {
@@ -65,6 +70,13 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	public void writeRecomment(BoardCommentDto boardComment) {
 		boardCommentMapper.insertRecomment(boardComment);
 		
+	}
+	
+	@Override
+	public List<AlramDto> getAlamListByUserNo(int userNo) {
+		List<AlramDto> alrams = alramMapper.selectAlamListByUserNo(userNo);
+		
+		return alrams;
 	}
 
 }
