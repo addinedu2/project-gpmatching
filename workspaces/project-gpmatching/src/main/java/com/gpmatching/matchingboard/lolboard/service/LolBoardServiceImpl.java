@@ -100,6 +100,10 @@ public class LolBoardServiceImpl implements LolBoardService {
 		return lolBoard;
 	}
 
+	public void setNowConfirmCount(int boardNo) {
+		int confirmCount = matchingCommentMapper.commentConfirmCountByMatchingBoardNo(boardNo);
+		mapper.updateConfirmCount(confirmCount, boardNo);
+	}
 
 	@Override
 	public void delete(int boardNo) {

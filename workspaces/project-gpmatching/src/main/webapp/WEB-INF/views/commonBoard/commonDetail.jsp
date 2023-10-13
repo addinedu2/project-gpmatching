@@ -167,12 +167,12 @@
 		<!-- end of write comment area -->
 		<!-- comment list area -->
 		<br>
-		<hr style="width:800px;margin:0 auto">
+		
 		<br>
-		<table id="comment-list" style="width:800px;margin:0 auto">
+		<table id="comment-list" >
 			<c:forEach var="comment" items="${ commonBoard.boardCommentList }">				
 				<tr>
-					<td style="text-align:left;margin:5px;border-bottom: solid 1px;">
+					<td style="margin:5px;border-bottom: solid 1px;">
 					
 						<table>
 							<tr>

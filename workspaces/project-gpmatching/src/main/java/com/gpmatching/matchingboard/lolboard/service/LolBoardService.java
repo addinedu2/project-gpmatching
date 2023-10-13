@@ -33,7 +33,12 @@ public interface LolBoardService {
 
 	List<MatchingBoardDto> getMatchingBoardListByLolTier(String gameName, String lolTier);
 
+	void setNowConfirmCount(int confirmCount);
+	
 	//List<MatchingBoardDto> getMatchingBoardListByGameNo(int gameNo);
 	
 	//String getMatchingBoardNickname();
+	
+	
+	
 }

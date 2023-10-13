@@ -63,24 +63,44 @@ public class MatchingCommentController {
         
         System.out.println(comments);
         
-        //model.addAttribute("comments", comments);
+        for(MatchingCommentDto comment : comments) {
+        	comment.setBoardNo(boardNo);
+        }
+        
         
         return comments; 
     }
 	
-	@GetMapping(path = { "/commentConfirm"})
-	public String commentConfirm( int commentNo) {
+	@GetMapping(path = { "/commentConfirm" }, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public List<MatchingCommentDto> commentConfirm(@RequestParam int commentNo) {
 		System.out.println("수락버튼클릭");
 		matchingCommentService.setCommentStatusConfirm( commentNo);
-		return "redirect:lol-list";
+
+		int boardNo = matchingCommentService.getBoardNoByCommentNo(commentNo);
+
+		System.out.println("Received boardNo: " + boardNo);
+		
+        List<MatchingCommentDto> comments = matchingCommentService.getMatchingCommentByBoardNo(boardNo);
+        
+        return comments; 
 	}
 	
-	@GetMapping(path = { "/commentReject"})
-	public String commentReject(int commentNo) {
+	@GetMapping(path = { "/commentReject"}, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public List<MatchingCommentDto> commentReject(@RequestParam int commentNo) {
 		System.out.println("거절버튼클릭");
 		matchingCommentService.setCommentStatusReject(commentNo);
-		return "redirect:lol-list";
+		
+		int boardNo = matchingCommentService.getBoardNoByCommentNo(commentNo);
+		
+		System.out.println("Received boardNo: " + boardNo);
+
+        List<MatchingCommentDto> comments = matchingCommentService.getMatchingCommentByBoardNo(boardNo);
+        
+        return comments; 
 	}
+	
 	
 	
 //	@GetMapping(path = { "/lol-comment" })
