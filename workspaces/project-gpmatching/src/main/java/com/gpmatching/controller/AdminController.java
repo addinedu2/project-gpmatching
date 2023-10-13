@@ -1,115 +1,96 @@
-//package com.gpmatching.controller;
-//
-//import java.util.List;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.ResponseBody;
-//
-//import com.gpmatching.service.AdminService;
-//
-//@Controller
-//public class AdminController {
-//	
-//	@Autowired
-//	private AdminService adminService;
-//	
-//	@GetMapping("/admin_main")
-//	public void main(Model model) {
-//		System.out.println("메인 페이지로 이동");
-//		model.addAttribute("boardList", service.getAdminList());
-//		model.addAttribute("userInfo",UserService.adminUserList());
-//		
-//	}
-//	
-//	@GetMapping("/admin_boardList")
-//	public void mainList(Model model) {
-//		System.out.println("어드민메인 게시판 리스트");
-//		model.addAttribute("allBoard", service.getAllboard());
-//	}
-//	
-//	// 어드민 회원 관리
-//	@GetMapping("/admin_userList")
-//	public void user_list(Model model) {
-//		//회원 기본정보 페이징(x)
-//		System.out.println("/admin_userList 요청");
-//		List<UserVO> list = UserService.adminUserList2();
-//		model.addAttribute("userInfo",list);
-//		
-//		
-//	};
-//	
-//	@ResponseBody
-//	@PostMapping("/getuserInfo")
-//	public UserVO getuserInfo(String id) {
-//		System.out.println("유저 인포 아작스");
-//		UserVO user = UserService.getInfo(id);
-//		return user;
-//	}
-//	
-//	@ResponseBody
-//	@PostMapping("/getUserBoardList")
-//	public List<BoardVO> getUserBoardList(String board_writer) {
-//		System.out.println("open! user boardList ajax!");
-//		System.out.println("조회할 회원 아이디 : " + board_writer);
-//		List<BoardVO> list = service.getUserBoardList(board_writer);
-//		
-//		return list;
-//	}
-//	@ResponseBody
-//	@PostMapping("/getCommentList")
-//	public List<CommentVO> getCommentList(String com_writer){
-//		System.out.println("open! user Comment List ajax!");
-//		System.out.println("조회할 회원 아이디 : " + com_writer);
-//		List<CommentVO> list = comService.getComList(com_writer);
-//		System.out.println(list);
-//		return list;
-//	}
-//	
-//	@ResponseBody
-//	@PostMapping("/successId")
-//	public void successId(String id) {
-//		System.out.println(id);
-//		System.out.println("open! user sign success Id ajax!");
-//		UserService.successId(id);
-//	}
-//	
-//	@ResponseBody
-//	@PostMapping("/failId")
-//	public void failId(String id) {
-//		System.out.println(id);
-//		System.out.println("open! user sign failId Id ajax!");
-//		UserService.failed(id);
-//	}
-//	
-//	@ResponseBody
-//	@PostMapping("/deleteBoard")
-//	public void deleteBoard(int board_no) {
-//		System.out.println("삭제할 게시물 : " + board_no);
-//		service.JBoardDelete(board_no);
-//	}
-//	
-//	@GetMapping("/admin_dataTotal")
-//	public void admin_dataTotal(Model model) {
-//		model.addAttribute("allTotal", service.getAllTotal());
-//	}
-//	
-//	@ResponseBody
-//	@PostMapping("/findDate")
-//	public List<HashMap<String, Object>> admin_findDate(String date1 , String date2) {
-//		System.out.println(date1);
-//		System.out.println(date2);
-//		List<HashMap<String, Object>> list = service.admin_findDate(date1, date2);
-//		System.out.println(service.admin_findDate(date1, date2));
-//		return list;
-//	}
-//	
-//	@ResponseBody
-//	@PostMapping("/dropId")
-//	public void dropID(String id) {
-//		UserService.dropUser(id);
-//	}
-//}
+package com.gpmatching.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.gpmatching.dto.AdminDto;
+import com.gpmatching.dto.CommonBoardDto;
+import com.gpmatching.dto.MypageBoardDto;
+import com.gpmatching.dto.UserDto;
+import com.gpmatching.service.AdminService;
+import com.gpmatching.ui.AdminPager;
+import com.gpmatching.ui.CommonPager;
+
+@Controller
+@RequestMapping(path = {"/admin"})
+public class AdminController {
+	
+	@Autowired
+	private AdminService adminService;
+	
+	@GetMapping(path= {"/adminUserList"})
+	public String userList(@RequestParam(defaultValue="1") int pageNo,  @RequestParam(defaultValue = "") String keyword, Model model) {
+		
+		//페이지별 게시물 조회
+		int pageSize = 10; //한 페이지 표시 개수
+		int pagerSize = 5;//표시 페이지 개수
+		String linkUrl = "userList"; 
+		int dataCount = adminService. getUserCount();//총 게시물 개수
+		
+		int from = (pageNo -1) *pageSize;//첫번째 페이지 게시물 순서
+		List<AdminDto> listuser = adminService.listUserListByPage(from, pageSize);
+		
+		//페이지 번호 표시 부분
+		AdminPager pager = 
+				new AdminPager(dataCount, pageNo, pageSize, pagerSize, linkUrl);
+		
+		model.addAttribute("listuser", listuser);
+		model.addAttribute("pager",pager);
+		model.addAttribute("pageNo",pageNo);
+		
+		
+		return "/admin/adminUserList";
+			
+			
+		}
+	//신규 회원 리스트
+	@GetMapping(path = {"/userHome"}, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public List<AdminDto> userHome(Model model) {
+		List<AdminDto> newUsers = adminService.getNewUsers();
+		model.addAttribute("newUsers", newUsers);
+	    return newUsers;
+	}
+	
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	//링크 를릭하면 회원의 유저넘버 추출해서 상세정보 보기
+//	@GetMapping("/users/{userNo}")
+//	public String viewUser(@PathVariable int userNo, Model model) {
+//	    User user = userService.getUserByUserNo(userNo);
+//	    if (user != null) {
+//	        model.addAttribute("user", user);
+//	        return "userDetails";
+//	    } else {
+//	        // 사용자를 찾을 수 없는 경우에 대한 처리 (예: 에러 페이지로 리다이렉트)
+//	        return "error"; // 또는 다른 에러 페이지의 뷰 이름을 리턴할 수 있습니다.
+//	    }
+	}
+
+	

@@ -40,7 +40,7 @@ public class MyPageController {
 	    if (loginUser != null) {
 	    	// 로그인한 사용자가 관리자인 경우 어드민 페이지로 리디렉션
 	        if (loginUser.getUserGrade().equals("admin")) {
-	            return "account/adminpage";
+	            return "admin/adminpage";
 	        } else {
 	            // 로그인한 사용자가 일반 사용자인 경우 마이페이지 표시
 	            List<MypageBoardDto> boardList = mypageService.findMyWriteMatchingBoardByUserNo(loginUser.getUserNo());

@@ -28,7 +28,7 @@
                         data-bs-toggle="pill"
                         href="#pills-striped-rows-design" role="tab"
                         aria-controls="pills-striped-rows-design"
-                        aria-selected="true">Design</a>
+                        aria-selected="true">회원 목록</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" id="pills-striped-rows-html-tab"

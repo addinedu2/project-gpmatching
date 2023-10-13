@@ -110,7 +110,7 @@
                   <a class="nav-link active" href="#">Overview</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Project</a>
+                  <a class="nav-link" href="/project-gpmatching/admin/adminUserList">UserList</a>
                 </li>
 
                 <li class="nav-item">
@@ -198,13 +198,14 @@
                                 <table class="table text-nowrap">
                                     <thead class="table-light">
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Role</th>
-                                            <th>Last Activity</th>
+                                            <th>아이디</th>
+                                            <th>닉네임</th>
+                                            <th>가입날짜</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <c:forEach var="user" items="${newUsers}">
                                         <tr>
                                             <td class="align-middle">
                                                 <div class="d-flex align-items-center">
@@ -212,13 +213,13 @@
                                                         <img src="assets/images/avatar/avatar-2.jpg" alt="" class="avatar-md avatar rounded-circle">
                                                     </div>
                                                     <div class="ms-3 lh-1">
-                                                        <h5 class=" mb-1">Anita Parmar</h5>
-                                                        <p class="mb-0">anita@example.com</p>
+                                                        <h5 class=" mb-1"></h5>
+                                                        <p class="mb-0">${ user.userId }</p>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="align-middle">Front End Developer</td>
-                                            <td class="align-middle">3 May, 2023</td>
+                                            <td class="align-middle">${ user.nickname }</td>
+                                            <td class="align-middle">${ user.regDate }</td>
                                             <td class="align-middle">
                                                 <div class="dropdown dropstart">
                                                     <a class="text-muted text-primary-hover" href="#" role="button" id="dropdownTeamOne" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -233,7 +234,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr>  </c:forEach>
                                             <td class="align-middle">
                                                 <div class="d-flex align-items-center">
                                                     <div>
@@ -383,6 +384,7 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                  
                                 </table>
                             </div>
                         </div>

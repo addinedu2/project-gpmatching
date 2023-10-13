@@ -8,18 +8,47 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.gpmatching.dto.AdminDto;
-import com.gpmatching.dto.BoardAttachDto;
-import com.gpmatching.dto.CommonBoardDto;
 
 @Mapper
 public interface AdminMapper {
 	
-	//회원정보에 쓸 목록
-	@Select( "select count(*) "
-			+ "from User"
-			+ "order by regDate DESC")
+	//회원 전체 목록
+	@Select( "select userNo, userPwd, userId, userEmail, nickname, userPhone, userGrade, regDate, deletedUser "
+			+ "from User "
+			+ "ORDER BY regDate DESC ")
 	List<AdminDto> UserList();
 	
+	//회원 페이지별 조회
+	@Select( "select userNo, userPwd, userId, userEmail, nickname, userPhone, userGrade, regDate, deletedUser " +
+			"from User " +
+			"ORDER BY regDate DESC " +
+			"LIMIT #{from}, #{count}")
+	List<AdminDto> selectUserList(@Param("from") int from, @Param("count") int count);
+
+	
+	@Select( "select userNo, userPwd, userId, userEmail, nickname, userPhone, userGrade, regDate, deletedUser "
+			+ "from User "
+			+ "wherer userNo = #{userNo} ")
+	AdminDto getUserNo(int userNo);
+	
+	//신규회원
+	@Select ("select userNo, userId, nickname,  userGrade, regDate  "
+			+ "from User "
+			+ "ORDER BY regDate DESC" )
+			//+ "where registration_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)")
+	List<AdminDto> getNewUsers();
+	
+	@Select ("select count(*) "
+			+ "from User "
+			+ "where userNo LIKE CONCAT('%', #{keyword}, '%') "
+			+ "OR userId LIKE CONCAT('%', #{keyword}, '%') "
+			+ "OR userEmail LIKE CONCAT('%', #{keyword}, '%') "
+			+ "OR nickname LIKE CONCAT('%', #{keyword}, '%') "
+			+ "OR userGrade LIKE CONCAT('%', #{keyword}, '%') "
+			+ "OR deletedUser LIKE CONCAT('%', #{keyword}, '%')")
+	List<AdminDto> searchUsers(@Param("keyword") String keyword, @Param("offset") int offset, @Param("limit") int limit);
+
+	//회원 총 명수
 	@Select( "select count(*) "
 			+ "from User" )
 	int getUserCount();
@@ -30,7 +59,7 @@ public interface AdminMapper {
 	        + "from MatchingBoard mb "
 	        + "inner join CommonBoard cb "
 	        + "ON mb.userNo = cb.userNo "
-	        + "where mb.userNo = #{userNo}")
+	        + "where mb.userNo = #{userNo} ")
 	int countTotalPostsByUserNo(int userNo);
 	
 	//유저 글 페이지별 조회
@@ -90,17 +119,6 @@ public interface AdminMapper {
 	AdminDto selectCommentNumbersByUserNo(@Param("userNo") int userNo);
 
 
-	//첨부파일 조회
-	@Select("select boardAttachNo, commonNo, userFilename, savedFilename, regDate, downloadCount "
-		  + "from BoardAttach "
-		  + "where commonNo = #{commonNo}")
-	List<BoardAttachDto> selectBoardAttachByCommonNo(@Param("commonNo") int commonNo);
-		
-	@Select("select boardAttachNo, commonNo, userFilename, savedFilename, regDate, downloadCount "
-		  + "from BoardAttach "
-		  + "where boardAttachNo = #{boardAttachNo}")
-	BoardAttachDto selectBoardAttachByBoardAttachNo(@Param("boardAttachNo") int boardAttachNo);
-		
 	//글 갯수 카운트
 	@Select("select count(*) "
 			+ "from (select boardNo, userNo FROM MatchingBoard WHERE userNo = #{userNo} " 
@@ -119,4 +137,6 @@ public interface AdminMapper {
 	@Update("UPDATE User SET deletedUser = true " // delelted 값을 참으로 돌린다
 			+ "WHERE userId = #{userId} ")
 	void deleteUser(@Param("userId") String userId);
+
+
 }

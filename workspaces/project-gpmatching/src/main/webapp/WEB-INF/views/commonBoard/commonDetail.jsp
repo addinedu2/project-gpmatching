@@ -121,11 +121,7 @@
 			            <div class="btn-center" >
 				        	<a href="commonList?pageNo=${pageNo}">
 				        	<button type="button" class="btn btn-primary btn-group-sm mb-2" aria-label="Small button group">목록</button>
-				        	</a>
-				        	
-				        	<!-- sessionScope.loginuser != null && loginuser.memberId == board.writer 같은 의미-->
-				        	
-				        	<div style='display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'>
+				        	</a><div style='display:${ (not empty loginuser and loginuser.userNo == commonBoard.userNo) ? "block" : "none" }'>
 				        	<a href="commonEdit?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}">
 				        	<button type="button" class="btn btn-secondary btn-group-sm mb-2" aria-label="Small button group">수정</button>
 				        	</a>
