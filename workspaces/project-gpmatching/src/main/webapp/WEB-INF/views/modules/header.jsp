@@ -203,7 +203,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" id="review-list">
 
       </div>
       <div class="modal-footer">
@@ -221,7 +221,7 @@
 $(function() {
 	
 	$('.review-btn').on("click", function(event){
-		
+
 		$.ajax({
 			
 			"url": "ajax-show-review",
@@ -230,33 +230,30 @@ $(function() {
 			
 			"success": function(result){
 				
-				var commentList = $('#comment-list');
-				commentList.empty();
+				var reviewList = $('#review-list');
+				reviewList.empty();
 				if (result != null){
-					console.log(result);
 					
 					// 테이블 헤더 추가
 	                var $headerRow = $("<tr>");
 	                
-	                $headerRow.append($("<th>").text("댓글 번호"));
-	                $headerRow.append($("<th>").text("닉네임"));
-	                $headerRow.append($("<th>").text("댓글 내용"));
-					$headerRow.append($("<th>").text("승인여부"));;
-					$headerRow.append($("<th>").text("글번호 : " + boardNo));; // 테스트중
+	                $headerRow.append($("<th>").text("제목"));
+	                $headerRow.append($("<th>").text("파티장"));
+	                $headerRow.append($("<th>").text("파티원"));
 	                
 	                commentList.append($headerRow);
 	                
-					for(var i = 0; i < result.length; i++){
-						var $row = $("<tr>");
+// 					for(var i = 0; i < result.length; i++){
+// 						var $row = $("<tr>");
 	                    
-	                    $row.append($("<td>").text(result[i].mcommentNo));
-	                    $row.append($("<td>").text(result[i].nickname));
-	                    $row.append($("<td>").text(result[i].mcommentContent));
+// 	                    $row.append($("<td>").text(result[i].mcommentNo));
+// 	                    $row.append($("<td>").text(result[i].nickname));
+// 	                    $row.append($("<td>").text(result[i].mcommentContent));
 	                 
-	                    commentList.append($row);
+// 	                    commentList.append($row);
 	                    
 	                    
-					}
+// 					}
 					$('#review-modal').modal('show');
 				}
 				

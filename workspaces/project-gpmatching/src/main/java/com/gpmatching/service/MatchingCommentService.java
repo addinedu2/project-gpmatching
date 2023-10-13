@@ -16,5 +16,5 @@ public interface MatchingCommentService {
 
 	boolean isMatchingCloseTrueByCommentNo(int commentNo);
 	
-	int showCommentConfirmCount(int boardNo);
+	//int showCommentConfirmCount(int boardNo);
 }

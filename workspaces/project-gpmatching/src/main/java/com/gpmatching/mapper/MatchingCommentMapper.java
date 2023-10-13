@@ -32,7 +32,6 @@ public interface MatchingCommentMapper {
 			+ "where commentNo = #{commentNo}")
 	void updateMatchingCommentStatus(@Param("commentNo") int commentNo, @Param("status") String status);
  
-	// 지원자 수 카운트에도 이용 (-허지웅)
 	@Select("select count(*) from MatchingComment where boardNo = #{ boardNo } and status = '1'")
 	int commentConfirmCountByMatchingBoardNo(int boardNo);
 

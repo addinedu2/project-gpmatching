@@ -100,7 +100,7 @@
 				<!-- radio-->
 				<br>
 				<div class="txt-box text-light">
-			 		<label class="form-label" for="textInput">성별</label>
+			 		<label class="form-label text-light" for="textInput">성별</label>
 					<div class="form-check">
 						<input class="form-check-input" type="radio" value="anyone"
 							name="preferGender" id="flexRadioDefault1" checked> <label
