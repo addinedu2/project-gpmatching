@@ -39,74 +39,32 @@
           <div>
             <div class="border-bottom px-3 pt-2 pb-3 d-flex
               justify-content-between align-items-center">
-              <p class="mb-0 text-dark fw-medium fs-4">아직 구현 안됨</p>
+              <p class="mb-0 text-dark fw-medium fs-4">알림</p>
               <a href="#" class="text-muted">
                 <span>
                   <i class="me-1 icon-xxs" data-feather="settings"></i>
                 </span>
               </a>
             </div>
-            <!-- List group -->
-            <ul class="list-group list-group-flush notification-list-scroll">
-              <!-- List group item -->
-              <li class="list-group-item bg-light">
-
-
-                <a href="#" class="text-muted">
-                    <h5 class=" mb-1">Rishi Chopra</h5>
-                    <p class="mb-0">
-                      Mauris blandit erat id nunc blandit, ac eleifend dolor pretium.
-                    </p>
-                </a>
-
-
-
-          </li>
-             <!-- List group item -->
-             <li class="list-group-item">
-
-
-              <a href="#" class="text-muted">
-                  <h5 class=" mb-1">Neha Kannned</h5>
-                  <p class="mb-0">
-                    Proin at elit vel est condimentum elementum id in ante. Maecenas et sapien metus.
-                  </p>
-              </a>
-
-
-
-        </li>
-              <!-- List group item -->
-              <li class="list-group-item">
-
-
-                <a href="#" class="text-muted">
-                    <h5 class=" mb-1">Nirmala Chauhan</h5>
-                    <p class="mb-0">
-                      Morbi maximus urna lobortis elit sollicitudin sollicitudieget elit vel pretium.
-                    </p>
-                </a>
-
-
-
-          </li>
-              <!-- List group item -->
-              <li class="list-group-item">
-
-
-                    <a href="#" class="text-muted">
-                        <h5 class=" mb-1">Sina Ray</h5>
-                        <p class="mb-0">
-                          Sed aliquam augue sit amet mauris volutpat hendrerit sed nunc eu diam.
-                        </p>
-                    </a>
-
-
-
-              </li>
-            </ul>
+              
+              
+             <!-- List group -->
+            <div id="alram-list">
+	            <ul class="list-group list-group-flush notification-list-scroll" >
+					<li class="list-group-item border-bottom">
+						<a href="#" class="text-muted"> 
+							<c:forEach var="alram" items="${alrams}">
+								<li>유저번호:${alram.userNo}</li> 
+								<li>알람번호:${alram.alramNo}</li>
+								<li>댓글번호:${alram.commentNo}</li>
+								<hr>
+							</c:forEach>
+						</a>
+					</li> 
+	            </ul>
+            </div>
             <div class="border-top px-3 py-2 text-center">
-              <a href="#" class="text-inherit fw-semi-bold">
+              <a href="/project-gpmatching/commonBoard/alramList" class="text-inherit fw-semi-bold">
                 View all Notifications
               </a>
             </div>

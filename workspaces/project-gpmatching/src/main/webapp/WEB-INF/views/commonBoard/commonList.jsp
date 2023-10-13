@@ -122,11 +122,10 @@
 	<script
 		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
-
-
-
 	<!-- Theme JS -->
 	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
+	
+	<script src="/project-gpmatching/resources/assets/js/common.js"></script>
 	
 </body>
 
