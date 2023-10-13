@@ -2,6 +2,7 @@ package com.gpmatching.service;
 
 import java.util.List;
 
+import com.gpmatching.dto.AlramDto;
 import com.gpmatching.dto.BoardCommentDto;
 
 public interface BoardCommentService {
@@ -22,5 +23,7 @@ public interface BoardCommentService {
 	void updateStep(BoardCommentDto boardComment);
 
 	void writeRecomment(BoardCommentDto boardComment);
+	
+	List<AlramDto> getAlamListByUserNo(int userNo);
 }
 
