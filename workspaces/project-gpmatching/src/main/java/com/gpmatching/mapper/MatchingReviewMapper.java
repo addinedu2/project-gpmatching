@@ -10,7 +10,7 @@ import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 @Mapper
 public interface MatchingReviewMapper {
 
-	@Select("select count(*) from MatchingBoard where userNo = #{ userNo } and matchingClose = '1'")
+	@Select("select count(*) from MatchingBoard where userNo = #{ userNo } and matchingClose = 0")
 	int selectMatchingCloseByLoginUser(int userNo);
 	
 	@Select("select m.boardNo, m.boardTitle, c.commentNo, u.nickname "
