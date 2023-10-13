@@ -113,40 +113,9 @@
 			                <span class="text-uppercase fw-medium text-darks-5 ls-2">본문</span>
 			                <!-- text -->
 			                <p class="mt-2 mb-6">${fn:replace(commonBoard.commonContent,enter,"<br>") }</p>
-		                	
-		                	
-		               
-		                  <div class="row">
-		                    <!-- <div class="col-xl-1 col-lg-2 col-md-2 col-12 mb-3 mb-lg-0">
-		                      avatar
-		                      <img src="../assets/images/avatar/avatar-1.jpg" class="avatar avatar-md rounded-circle" alt="">
-		                    </div> -->
-		                    <!-- input -->
-		                    <div class="col-xl-11 col-lg-10 col-md-9 col-12 ">
-		
-		                      <div class="row g-3 align-items-center">
-		                        <div class="col-md-2 col-xxl-1">
-		                          <label for="name" class="col-form-label ">Name</label>
-		                        </div>
-		                        <div class="col-md-8 col-xxl-9  mt-0 mt-md-3">
-		                          <input type="password" id="name" class="form-control" aria-describedby="name">
-		                        </div>
-		                        <!-- 여기다가 매칭게시판쪽 리뷰 기능 테스트 -->
-		                        <div class="col-md-2 col-xxl-2">
-		                        	<a href="review?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}">
-		                         	<button type="button" class="btn btn-primary">리뷰</button>
-		                         	</a>
-		                        </div>
-		                      </div>
-		
-		                    </div>
-		
-		                  </div>
-		                  
 		                  
 		                </div>
 		              </div>
-		             
 		            
 		            	<br>
 			            <div class="btn-center" >
@@ -163,9 +132,6 @@
 				        	<a href="javascript:" id="delete-board-lnk">
 				        	<button type="button" class="btn btn-danger btn-group-sm mb-2" aria-label="Small button group">삭제</button>
 				        	</a>
-				        	
-		
-				        
 				        </div>
 		            
 		            </div>
@@ -177,18 +143,25 @@
 
 		        
 		<!-- write comment area -->
+		<!-- card -->
+        <div class="card">
+          <!-- card body -->
+          <div class="card-body">
+
 		<form id="commentform" action="writeComment" method="post">
 			<input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
 			<input type="hidden" name="pageNo" value="${ pageNo }" />
 			<input type="hidden" name="userNo" value="${ loginuser.userNo }" />
-			<table style="width:800px;margin:0 auto">
+			<table style=":825pwidthx;margin:0 auto">
 				<tr>
-					<td style="width:750px">	                	
-						<textarea id="commentContent" name="commentContent" style="width:100%;resize: none;" rows="3"></textarea>	                    
+					<td style="width:750px">	
+					    <div class="col-md-8 col-xxl-9  mt-0 mt-md-3" style="width:100%;resize: none;" rows="3">            	
+						<textarea class="form-control" aria-describedby="name" id="commentContent" name="commentContent" style="width:100%;resize: none;" rows="3" ></textarea>	 
+						</div>                   
 					</td>
-					<td style="width:50px;vertical-align:middle">
-						<a id="write-comment-lnk" href="javascript:" style="text-decoration:none">
-							댓글<br />등록
+					<td style="width:75px;vertical-align:middle">
+						<a id="write-comment-lnk" href="javascript:" style="text-decoration:none; width:100%;resize: none;" rows="3">
+							<button type="button" class="btn btn-primary" rows="3">등록</button>
 						</a>
 					</td>
 				</tr>                    
@@ -231,17 +204,36 @@
 									    <br /><br />
 									    <span>${ fn:replace(comment.commentContent, enter, "<br>") }</span>
 										<br /><br />
-											<div style='float:left; display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'>
-									    	<a class="edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">수정</a>
-											&nbsp;
-											<a class="delete-comment" data-comment-no="${ comment.commentNo }" href="javascript:">삭제</a>
-											&nbsp;&nbsp;
-										</div>
-										<div style='float:left; display:${ not empty loginuser ? "block" : "none" }'>
-											<a class="write-recomment" data-comment-no="${ comment.commentNo }" href="javascript:">대댓</a>
-										</div>
-										<span style="clear:both"></span>
+
+										<td>
+										<div class="dropdown-item" style='display:${ not empty loginuser ? "block" : "none" }'>
+                                       	  <a class="write-recomment" data-comment-no="${ comment.commentNo }" href="javascript:" style="color: inherit;">답글</a>
+                                        </div>
+                                        </td>
 										
+										<td class="align-middle border-bottom-0">
+                                                <div class="dropdown dropstart ">
+                                                    <a class="text-muted text-primary-hover" href="#" role="button" id="dropdownTeamSix" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="icon-xxs" data-feather="more-vertical"></i>
+                                                    </a>
+
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownTeam" >
+                                                        <div class="dropdown-item" style='display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'>
+	                                                        <a class="edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:" style="color: inherit;">수정</a>
+	                                                       &nbsp;
+	                                                    </div>
+	                                                    <div class="dropdown-item" style='display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'>
+	                                                        <a class="delete-comment" data-comment-no="${ comment.commentNo }" href="javascript:" style="color: inherit;">삭제</a>
+	                                                        &nbsp;&nbsp;
+                                                        </div>
+                                                        <%-- <div class="dropdown-item" style='display:${ not empty loginuser ? "block" : "none" }'>
+                                                        
+                                                        	<a class="write-recomment" data-comment-no="${ comment.commentNo }" href="javascript:" style="color: inherit;">답글</a>
+                                                        </div> --%>
+                                                        <span style="clear:both"></span>
+                                                    </div>
+                                                </div>
+                                            </td>
 									</c:otherwise>
 									</c:choose>
 									</div>	                
