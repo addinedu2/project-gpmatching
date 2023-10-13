@@ -430,8 +430,6 @@
 <script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 
 
-
-
 <!-- 테스트코드(공통게시판) -->
 <script>
 $(function(event) {
