@@ -19,8 +19,8 @@ import com.gpmatching.dto.CommonBoardDto;
 import com.gpmatching.dto.MypageBoardDto;
 import com.gpmatching.dto.UserDto;
 import com.gpmatching.service.AdminService;
-import com.gpmatching.ui.AdminPager;
-import com.gpmatching.ui.CommonPager;
+import com.gpmatching.ui.ThePager;
+
 
 @Controller
 @RequestMapping(path = {"/admin"})
@@ -35,15 +35,15 @@ public class AdminController {
 		//페이지별 게시물 조회
 		int pageSize = 10; //한 페이지 표시 개수
 		int pagerSize = 5;//표시 페이지 개수
-		String linkUrl = "userList"; 
+		String linkUrl = "adminUserList"; 
 		int dataCount = adminService. getUserCount();//총 게시물 개수
 		
 		int from = (pageNo -1) *pageSize;//첫번째 페이지 게시물 순서
 		List<AdminDto> listuser = adminService.listUserListByPage(from, pageSize);
 		
 		//페이지 번호 표시 부분
-		AdminPager pager = 
-				new AdminPager(dataCount, pageNo, pageSize, pagerSize, linkUrl);
+		ThePager pager = 
+				new ThePager(dataCount, pageNo, pageSize, pagerSize, linkUrl);
 		
 		model.addAttribute("listuser", listuser);
 		model.addAttribute("pager",pager);
