@@ -7,7 +7,9 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.gpmatching.dto.CommonBoardDto;
+import com.gpmatching.dto.MypageBoardDto;
 import com.gpmatching.dto.UserDto;
+import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 
 @Mapper
 public interface MypageMapper {
@@ -26,23 +28,25 @@ public interface MypageMapper {
 	
 	
 	//마이페이지 내가 쓴 글만 보기(공통게시판)
-	@Select("select cb.commonTitle, cb.regDate "
+	@Select("select cb.commonTitle boardTitle, cb.regDate, cb.commonNo boardNo, 'common' boardType "
 		 	  + "from CommonBoard cb "
 		 	  + "inner join User u "
 		 	  + "on u.userNo = cb.userNo "
 			  + "where u.userNo = #{ userNo } and cb.category = 'common' and deleted = false "   //여기서 데이터에서 공통만 뽑아냄, 위에서 데이터 가져오는거, 아래서 데이터 가져갈 것도 신경 쓸 것
-			  + "order by commonNo desc")
-	List<CommonBoardDto> selectMyWriteCommonBoardByUserNo(int userNo);
+			  + "order by commonNo desc "
+			  + "limit 6")
+	List<MypageBoardDto> selectMyWriteCommonBoardByUserNo(int userNo);
 	
 	
-//	//마이페이지 내가 쓴 글만 보기(매칭게시판)
-//	@Select("select mb.boardTitle, mb.regDate "
-//	        + "from MatchingBoard mb "
-//	        + "inner JOIN User u "
-//	        + "on u.userNo = mb.userNo "
-//	        + "where u.userNo = #{userNo} and cb.deleted = false "
-//	        + "order by mb.boardNo desc")
-//	List<CommonBoardDto> selectMyWriteBoardByUserNo2(int userNo);
+	//마이페이지 내가 쓴 글만 보기(매칭게시판)
+	@Select("select mb.boardTitle, mb.regDate, mb.boardNo, 'matching' boardType "
+	        + "from MatchingBoard mb "
+	        + "inner JOIN User u "
+	        + "on u.userNo = mb.userNo "
+	        + "where u.userNo = #{userNo} and deleted = false "
+	        + "order by boardNo desc "
+	        + "limit 6")
+	List<MypageBoardDto> selectMyWriteMatchingBoardByUserNo(int userNo);
 
 }
 

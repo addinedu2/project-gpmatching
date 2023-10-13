@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gpmatching.dto.CommonBoardDto;
+import com.gpmatching.dto.MypageBoardDto;
 import com.gpmatching.dto.UserDto;
+import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 import com.gpmatching.service.MypageService;
 
 @Controller
@@ -31,42 +33,28 @@ public class MyPageController {
 		this.mypageService = mypageService;
 	}
 	
-	
-	@GetMapping(path = { "/mypage" })
+	@GetMapping(path = {"/mypage"})
 	public String mypage(HttpSession session, Model model) {
-		UserDto loginUser = (UserDto) session.getAttribute("loginuser");
+	    UserDto loginUser = (UserDto) session.getAttribute("loginuser");
+	    
+	    if (loginUser != null) {
+	    	// 로그인한 사용자가 관리자인 경우 어드민 페이지로 리디렉션
+	        if (loginUser.getUserGrade().equals("admin")) {
+	            return "account/adminpage";
+	        } else {
+	            // 로그인한 사용자가 일반 사용자인 경우 마이페이지 표시
+	            List<MypageBoardDto> boardList = mypageService.findMyWriteMatchingBoardByUserNo(loginUser.getUserNo());
 
-		if (loginUser != null) {
-			String UserGrade = loginUser.getUserGrade();
+	            model.addAttribute("loginuser", loginUser);
+	            model.addAttribute("boardList", boardList);
 
-			if ("admin".equals(UserGrade)) {
-								// 로그인한 사용자가 관리자인 경우 어드민 페이지로 리디렉션>어드민 컨트롤러로 이동
-				List<CommonBoardDto> myPageView = mypageService.findMyWriteCommonBoardByUserNo(loginUser.getUserNo());
-
-				model.addAttribute("loginuser", loginUser);
-				model.addAttribute("myPageView", myPageView);
-				
-				return "/account/adminpage";
-
-				
-			} else {
-				// 로그인한 사용자가 일반 사용자인 경우 마이페이지 표시
-				System.out.println("Received userNo: " + loginUser.getUserNo());
-				List<CommonBoardDto> myPageView = mypageService.findMyWriteCommonBoardByUserNo(loginUser.getUserNo());
-
-				model.addAttribute("loginuser", loginUser);
-				model.addAttribute("myPageView", myPageView);
-
-				System.out.println(myPageView);
-
-				return "account/mypage";
-			}
-		} else {
-			// 로그인하지 않은 경우 로그인 페이지로 리디렉션
-			return "account/login";
-		}
-	}//마이페이지 버튼
-
+	            return "account/mypage";
+	        }
+	    } else {
+	        // 로그인하지 않은 경우 로그인 페이지로 리디렉션
+	        return "account/login";
+	    }
+	}
 	
 	// 마이페이지 수정 버튼(로그인 하고 들어갈 수 있는 컨트롤러)
 	@GetMapping(path = {"/editMypage"})
@@ -104,19 +92,25 @@ public class MyPageController {
 	//ajax 마이페이지 내가 쓴 글만 보기
 	@GetMapping(path = { "/boardSelect" }, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public List<CommonBoardDto> myWritePageView(HttpSession session){
+	public List<MypageBoardDto> myWritePageView(String board, HttpSession session){
 		
 		UserDto loginUser = (UserDto) session.getAttribute("loginuser");
 		
-		System.out.println("Received userNo: " + loginUser.getUserNo());
+		//System.out.println("Received userNo: " + loginUser.getUserNo());
+		List<MypageBoardDto> boardList = null;
+		if(board.equals("common")) {
+			boardList = mypageService.findMyWriteCommonBoardByUserNo(loginUser.getUserNo());
 		
-		List<CommonBoardDto> myPageView = mypageService.findMyWriteCommonBoardByUserNo(loginUser.getUserNo());
+		}else {
+			boardList = mypageService.findMyWriteMatchingBoardByUserNo(loginUser.getUserNo());
+		}
+		//System.out.println(myPageView);
 		
-		System.out.println(myPageView);
-		
-		return myPageView;
+		return boardList;
 	}
 	
+	
+
 
 	
 	

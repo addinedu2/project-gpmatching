@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gpmatching.dto.CommonBoardDto;
+import com.gpmatching.dto.MypageBoardDto;
 import com.gpmatching.dto.UserDto;
 import com.gpmatching.mapper.MypageMapper;
+import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 
 
 
@@ -25,7 +27,7 @@ public class MypageServiceImpl implements MypageService{
 		mypageMapper.updateUserProfile(user);
 		
 	}
-
+	//마이페이지 조회
 	@Override
 	public UserDto selectUserProfile(UserDto loginUser) {
 		
@@ -33,12 +35,24 @@ public class MypageServiceImpl implements MypageService{
 		return selectUserProfile;
 	}
 	
+	
+	//내가 작성한 글 보여주기(공통게시판)
 	@Override
-	public List<CommonBoardDto> findMyWriteCommonBoardByUserNo(int userNo) {
+	public List<MypageBoardDto> findMyWriteCommonBoardByUserNo(int userNo) {
 		
-		List<CommonBoardDto> writeBoard = mypageMapper.selectMyWriteCommonBoardByUserNo(userNo);
+		List<MypageBoardDto> writeBoard = mypageMapper.selectMyWriteCommonBoardByUserNo(userNo);
 		return writeBoard;
 	}
+	
+	//내가 작성한 글 보여주기(매칭게시판)
+	@Override
+	public List<MypageBoardDto> findMyWriteMatchingBoardByUserNo(int userNo) {
+		
+		List<MypageBoardDto> writeBoard = mypageMapper.selectMyWriteMatchingBoardByUserNo(userNo);
+		return writeBoard;
+		
+	}
+
 
 
 

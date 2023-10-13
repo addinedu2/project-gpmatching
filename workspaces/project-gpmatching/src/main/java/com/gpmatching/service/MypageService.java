@@ -2,7 +2,7 @@ package com.gpmatching.service;
 
 import java.util.List;
 
-import com.gpmatching.dto.CommonBoardDto;
+import com.gpmatching.dto.MypageBoardDto;
 import com.gpmatching.dto.UserDto;
 
 public interface MypageService {
@@ -11,5 +11,7 @@ public interface MypageService {
 
 	UserDto selectUserProfile(UserDto loginUser);
 
-	List<CommonBoardDto>findMyWriteCommonBoardByUserNo(int userNo);
+	List<MypageBoardDto>findMyWriteCommonBoardByUserNo(int userNo);
+	
+	List<MypageBoardDto>findMyWriteMatchingBoardByUserNo(int userNo);
 }

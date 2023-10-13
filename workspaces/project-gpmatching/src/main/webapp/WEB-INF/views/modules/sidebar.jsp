@@ -60,9 +60,9 @@
 							href="/project-gpmatching/account/login"> 로그인</a></li>
 						<li class="nav-item"><a class="nav-link  "
 							href="/project-gpmatching/account/register"> 회원가입</a></li>
-						<!-- <li class="nav-item"><a class="nav-link "
+						<li class="nav-item"><a class="nav-link "
 							href="/project-gpmatching/account/mypage"> 마이페이지</a></li>
-						 --><li class="nav-item">
+						<li class="nav-item">
 								<li class="nav-item"><a class="nav-link  "
 							href="/project-gpmatching/account/forgetId"> ID 찾기</a></li>
 						<li class="nav-item"><a class="nav-link  "
