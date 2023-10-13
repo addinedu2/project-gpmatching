@@ -39,7 +39,7 @@
 <body class="bg-light"> 
   <div id="db-wrapper">
     <!-- navbar vertical -->
-     	<jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
+     <jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
      
     <!-- page content -->
     <div id="page-content">
@@ -47,90 +47,11 @@
 
   		<jsp:include page="/WEB-INF/views/modules/header.jsp" />
   
-    </div>
-      <!-- Container fluid -->
-      <div class="container-fluid p-6">
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-12">
-            <!-- Page header -->
-           
-              <div class="border-bottom pb-4 mb-4 ">
-               
-                  <h3 class="mb-0 fw-bold">Overview</h3>
-              
-           
-            </div>
-          </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="col-xl-12 col-lg-12 col-md-12 col-12">
-            <!-- Bg -->
-            <div class="pt-20 rounded-top" style="background:
-                url(/project-gpmatching/resources/assets/images/background/profile-cover.jpg) no-repeat;
-                background-size: cover;">
-            </div>
-            <div class="bg-white rounded-bottom smooth-shadow-sm ">
-              <div class="d-flex align-items-center justify-content-between
-                  pt-4 pb-6 px-4">
-                <div class="d-flex align-items-center">
-                  <!-- avatar -->
-                  <div class="avatar-xxl avatar-indicators avatar-online me-2
-                      position-relative d-flex justify-content-end
-                      align-items-end mt-n10">
-                    <img src="/project-gpmatching/resources/assets/images/avatar/avatar-1.jpg" class="avatar-xxl
-                        rounded-circle border border-4 border-white-color-40" alt="">
-                    <a href="#!" class="position-absolute top-0 right-0 me-2" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="Verified">
-                      <img src="/project-gpmatching/resources/assets/images/svg/checked-mark.svg" alt="" height="30" width="30">
-                    </a>
-                  </div>
-                  <!-- text -->
-                  <div class="lh-1">
-                    <h2 class="mb-0"> ${loginuser.nickname}   <!-- 닉네임 -->
-                      <a href="#!" class="text-decoration-none" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="Beginner">
-
-                      </a>
-                    </h2>
-
-                    <p class="mb-0 d-block">@${loginuser.userNo} <!-- 원래 유저 아이디 인데 userNo 넘어오는거 테스트용--></p>
-
-                  </div>
-                </div>
-                <div>
-                  <a href="/project-gpmatching/account/editMypage" class="btn btn-outline-primary
-                      d-none d-md-block">회원정보 수정</a>
-                  <a href="/project-gpmatching/commonBoard/reportWrite" class="btn btn-outline-primary
-                      d-none d-md-block">신고 하기</a>
-                   <a href="/project-gpmatching/commonBoard/reviewtestList" class="btn btn-outline-primary
-                      d-none d-md-block">리뷰 게시판</a>
-                </div>
-              </div>
-              <!-- nav -->
-              <ul class="nav nav-lt-tab px-4" id="pills-tab" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" href="#">Overview</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Project</a>
-                </li>
-
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Files</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Teams</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                      Followers
-                    </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Activity</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+     </div>
+      <jsp:include page="/WEB-INF/views/account/modules/mypage-header.jsp" />
+        
+        
+      
         
         <!-- content -->
         <div class="py-6">
@@ -478,6 +399,10 @@
       </div>
     </div>
   </div>
+      
+    
+    
+
   <!-- Scripts -->
   <!-- Libs JS -->
 <script src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
@@ -500,7 +425,7 @@
 
 $(function(event){
 	
-	 $('input[name="btnradio"]').on('click', function(event){
+	$('input[name="btnradio"]').on('click', function(event){
 		
 		//let selectBtn = $('input[name="btnradio"]:checked').val();
 		let loginUser = "${loginUser.userNo}";
@@ -549,7 +474,18 @@ $(function(event){
 		
 	});
 	
-})
+	 
+	$('.nav-link').click(function(event) {
+		    // 모든 nav-link에서 'active' 클래스 제거
+		    $('.nav-link').removeClass('active');
+
+		    // 현재 클릭한 nav-link에 'active' 클래스 추가
+		    $(this).addClass('active');
+	});
+	 	
+});
+
+
 
 </script>
 

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,9 +28,9 @@ public class MatchingCommentController {
 	private MatchingAlarmService matchingAlarmService;
 	
 	@PostMapping(path = { "/write-comment" })
-	public String writeMatchingComment(MatchingCommentDto matchingComment, MatchingAlarmDto matchingAlarmDto, @RequestParam(defaultValue = "-1") int boardNo) {
-		
-		
+	public String writeMatchingComment(MatchingCommentDto matchingComment, MatchingAlarmDto matchingAlarmDto, 
+									   @RequestParam(defaultValue = "-1") int boardNo) {
+				
 		matchingCommentService.writeMatchingComment(matchingComment);
 		
 //		// 댓글이 작성될때 알림 테이블에 정보 저장 (미완성)
@@ -72,6 +71,8 @@ public class MatchingCommentController {
 	public String commentConfirm( int commentNo) {
 		System.out.println("수락버튼클릭");
 		matchingCommentService.setCommentStatusConfirm( commentNo);
+		
+		
 		return "redirect:lol-list";
 	}
 	
@@ -81,6 +82,8 @@ public class MatchingCommentController {
 		matchingCommentService.setCommentStatusReject(commentNo);
 		return "redirect:lol-list";
 	}
+	
+	
 	
 	
 //	@GetMapping(path = { "/lol-comment" })

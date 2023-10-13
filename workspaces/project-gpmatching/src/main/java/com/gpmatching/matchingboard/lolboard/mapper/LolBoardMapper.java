@@ -35,9 +35,9 @@ public interface LolBoardMapper {
 	*/
 	
 	@Insert( "insert into MatchingBoard ( boardTitle, "
-			+ "boardContent, preferGender, mic, headCount, userNo, gameNo) "
+			+ "boardContent, preferGender, mic, userNo, gameNo, headCount ) "
 			+ "values ( #{ boardTitle }, #{ boardContent }, #{ preferGender }, #{ mic }, "
-			+ "#{headCount}, #{ userNo }, #{ gameNo })")
+			+ "#{ userNo }, #{ gameNo }, #{ headCount } )")
 	@Options(useGeneratedKeys = true, keyProperty = "boardNo")
 	void insertMatchingBoard(MatchingBoardDto matchingBoardDto);
 	
@@ -134,7 +134,6 @@ public interface LolBoardMapper {
 	
 
 	//선택한 티어에 해당하는 글만 보여줌 (나중에 동적 쿼리로 확장 예정 -허지웅)
-	
 	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, m.headCount, "
 			+ "m.matchingClose, m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
 			+ "from MatchingBoard m "
@@ -149,7 +148,7 @@ public interface LolBoardMapper {
 			+ "order by m.boardNo desc" )
 	List<MatchingBoardDto> selectLolBoardListByLolTier(@Param("gameName")String gameName, @Param("lolTier")String lolTier);
 
-
+	//게시판 검색 기능인데 제목만 (-허지웅)
 	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, m.headCount, "
 			+ "m.matchingClose, m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
 			+ "from MatchingBoard m "

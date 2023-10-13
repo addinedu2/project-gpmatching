@@ -177,26 +177,32 @@ public class LolBoardController {
 	}
 
 	
-	
+	// 게시판 검색 기능 + 특정 컬럼 필터가 포함된 lol-list 경로 입니다 (-허지웅)
 	@GetMapping(path = { "/lol-list"})
 	public String matchingBoardListByLolTier(@RequestParam(name = "lolTier", required = false) String lolTier,
 											 @RequestParam(name = "searchType", required = false) String searchType,
 											 @RequestParam(name = "keyword", required = false) String keyword, Model model) {
 		
-		List<MatchingBoardDto> matchingLolList;
+		//List<MatchingBoardDto> matchingLolList;
 		
-		if (lolTier != null) {
+		
+//		if (lolTier != null) {
+//			
+//			matchingLolList = lolBoardService.getMatchingBoardListByLolTier("league of legends", lolTier);
+//
+//		} else if ("t".equals(searchType)){
+//			
+//			matchingLolList = lolBoardService.searchMatchingBoardListByTitle("league of legends", keyword);
+//			
+//		} else {
+			List<MatchingBoardDto> matchingLolList = lolBoardService.getSelectLolBoardListByGameName("league of legends");
+			for (MatchingBoardDto matchingBoard : matchingLolList) {
+		        int boardNo = matchingBoard.getBoardNo();
+		        int confirmCount = matchingCommentService.showCommentConfirmCount(boardNo);
+		        matchingBoard.setConfirmCount(confirmCount);
+		    }
 			
-			matchingLolList = lolBoardService.getMatchingBoardListByLolTier("league of legends", lolTier);
-
-		} else if ("t".equals(searchType)){
-			
-			matchingLolList = lolBoardService.searchMatchingBoardListByTitle("league of legends", keyword);
-			
-		} else {
-			
-			matchingLolList = lolBoardService.getSelectLolBoardListByGameName("league of legends");
-		}
+		
 
 		model.addAttribute("matchingLolList", matchingLolList);
 			

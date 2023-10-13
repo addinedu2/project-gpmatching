@@ -126,7 +126,7 @@ public class LolBoardServiceImpl implements LolBoardService {
 	public List<MatchingBoardDto> searchMatchingBoardListByTitle(String gameName, String keyword) {
 
 		List<MatchingBoardDto> list = mapper.selectLolBoardListByTitle(gameName, keyword);
-		
+				
 		return list;
 	}
 

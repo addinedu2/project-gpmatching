@@ -16,6 +16,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gpmatching.dto.UserDto;
 import com.gpmatching.service.AccountService;
+import com.gpmatching.service.BoardCommentService;
+import com.gpmatching.service.MatchingReviewService;
+
+import lombok.Setter;
 
 @Controller
 @RequestMapping(path = { "/account" })
@@ -29,6 +33,9 @@ public class AccountController {
 		this.accountService = accountService;
 		// 어카운트 서비스에서만 돌릴것
 	}
+	
+	@Setter(onMethod_ = { @Autowired })
+	private MatchingReviewService matchingReviewService;
 
 	// 회원가입 버튼
 	@GetMapping(path = { "/register" })
@@ -75,10 +82,16 @@ public class AccountController {
 	// 로그인 성공/실패
 	@PostMapping(path = { "/login" })
 	public String login(UserDto user, HttpSession session, Model model) {
+		
 		UserDto loginUser = accountService.findLoginUser(user);
-
+		
 		if (loginUser != null) { // loginUser가 비지 않았다=데이터베이스에 id와 pw가 일치한다=로그인 하기
 			session.setAttribute("loginuser", loginUser); // loginUser 정보를 "loginuser"에 넣기
+			
+			//작성이 필요한 리뷰 개수 헤더에 출력
+			int matchingCloseCount = matchingReviewService.getMatchingCloseByLoginUser(loginUser.getUserNo()); 
+			session.setAttribute("matchingCloseCount", matchingCloseCount);
+			
 			return "redirect:/home";
 		} else {
 			model.addAttribute("loginfail", true); // 로그인 실패를 했으니 "loginfail"에 참 넣기

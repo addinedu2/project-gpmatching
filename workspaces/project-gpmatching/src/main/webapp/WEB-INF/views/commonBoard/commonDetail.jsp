@@ -131,10 +131,10 @@
 		                        <div class="col-md-8 col-xxl-9  mt-0 mt-md-3">
 		                          <input type="password" id="name" class="form-control" aria-describedby="name">
 		                        </div>
-		                        <!-- 여기다가 매칭게시판쪽 리뷰 기능 테스트 -->
+		                        
 		                        <div class="col-md-2 col-xxl-2">
-		                        	<a href="review?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}">
-		                         	<button type="button" class="btn btn-primary">리뷰</button>
+		                        	<a href="#">
+		                         	<button type="button" class="btn btn-primary">리뷰 이사감</button>
 		                         	</a>
 		                        </div>
 		                      </div>

@@ -178,7 +178,7 @@
 											</td>
 											<th>${ matchingBoard.preferGender }</th>
 											<th>${ matchingBoard.mic }</th>
-											<th>${ matchingBoard.headCount }</th>
+											<th>${ matchingBoard.confirmCount + 1} / ${ matchingBoard.headCount + 1}</th>
 											<th>${ matchingBoard.matchingClose }</th>
 											<th>
 												<fmt:formatDate value="${ matchingBoard.regDate }"
@@ -253,7 +253,7 @@
 			    <div class="modal-dialog" role="document">
 			        <div class="modal-content">
 			            <div class="modal-header">			            
-			                <h5 class="modal-title" id="title2-in-modal">댓글</h5>
+			                <h5 class="modal-title" id="title2-in-modal"></h5>
 			                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 			                </button>
 			            </div>
@@ -329,12 +329,13 @@
 
 	<script>
 	
-	// 버튼을 누르면 해당 행의 데이터를 포함한 모달창을 보여줌 (-허지웅)
+	
+	// 글번호(댓글쓰기) 버튼을 누르면 해당 행의 데이터를 포함한 모달창을 보여줌 (-허지웅)
 	$(function() {
 		$('#lol-list').on("click", '.btn-show-comment-modal', function(event) {
 			const boardNo = $(this).data('boardno');
 			const currentTr = $('#tr-' + boardNo);
-			alert(boardNo);
+			
 
 			$('#title-in-modal').text("(" + boardNo + ") " + currentTr.data('title'));
 			$('#boardno-in-modal').val(boardNo);
@@ -343,7 +344,29 @@
 	});
 	
 
-	//검색 버튼을 누르면 해당되는 게시글을 보여줌 (-허지웅)
+
+	// 댓글쓰기 모달창의 등록 버튼을 누르면 데이터가 전송됨
+	$('#write-comment-lnk').on('click', function(event){
+		
+		const formData = $('#commentform').serialize();	// <form> 에 포함된 입력요소의 값을 뽑아서 전송가능한 문자열로 반환
+		
+		$.ajax({
+			"url": "write-comment",
+			"method": "post",
+			"data": formData,
+			"success": function(data, status, xhr){
+				alert('지원이 완료되었습니다!');
+				$('#comment-modal').modal("hide");
+			},
+			"error": function(xhr, status, err){
+				alert('지원 실패!');
+				
+			}
+		});	 
+	});
+	
+
+	// 검색어를 입력하고 검색 버튼을 누르면 해당되는 게시글을 보여줌 (-허지웅)
 	$(function(){
 		
 		$('#search-btn').on("click", function(event){
@@ -358,26 +381,6 @@
 		})
 	});
 	
-
-	// 댓글 모달창의 등록 버튼을 누르면 데이터가 전송됨
-	$('#write-comment-lnk').on('click', function(event){
-		
-		const formData = $('#commentform').serialize();	// <form> 에 포함된 입력요소의 값을 뽑아서 전송가능한 문자열로 반환
-		alert(formData);
-
-		$.ajax({
-			"url": "write-comment",
-			"method": "post",
-			"data": formData,
-			"success": function(data, status, xhr){
-				alert('성공');
-				$('#comment-modal').modal("hide");
-			},
-			"error": function(xhr, status, err){
-				alert('실패');
-			}
-		});	 
-	});
 	
 	
 	// 버튼을 누르면 해당 글의 댓글 보기 (-허지웅) (비활성화)
@@ -408,6 +411,7 @@
 		                $headerRow.append($("<th>").text("닉네임"));
 		                $headerRow.append($("<th>").text("댓글 내용"));
 						$headerRow.append($("<th>").text("승인여부"));;
+						$headerRow.append($("<th>").text("글번호 : " + boardNo));; // 테스트중
 		                
 		                commentList.append($headerRow);
 		                
@@ -431,6 +435,7 @@
 	                        var $acceptButton = $("<button>")
 	                            .addClass("btn btn-primary btn-sm btn-accept-comment")
 	                            .data('commentno', result[i].mcommentNo)
+	                            
 	                            .text("수락");
 		                    
 	                     	// 거절 버튼 추가
@@ -441,16 +446,39 @@
 
 	                     	// 수락 버튼 눌렀을 때의 동작 
 	                        $('#comment-list').on("click", '.btn-accept-comment', function(event) {
-	                        	var boardNo = $(this).data('boardno');
+	                        	var boardNo = $(this).data('boardno'); // 이거 필요한가요? 궁금 (-허지웅)
 	                            var commentNo = $(this).data('commentno');
-	                            location.href = "commentConfirm?commentNo=" + commentNo;
+								
+	                        	$.ajax({
+	                        		url : "commentConfirm?commentNo=" + commentNo ,
+	                        		method : "get",
+	                        		success : function(result){
+	                        			
+	                        		},
+	                        		error: function(xhr, status, err){
+	                        			
+	                        		}
+	                        	});
+	                        	
+	                            
 	                            // TODO: 수정 버튼을 눌렀을 때의 동작 구현
 	                        });
 
 	                        // 거절 버튼 눌렀을 때의 동작 
 	                        $('#comment-list').on("click", '.btn-reject-comment', function(event) {
 	                            var commentNo = $(this).data('commentno');
-	                            location.href = "commentReject?commentNo=" + commentNo;
+	                            
+	                            $.ajax({
+	                        		url : "commentReject?commentNo=" + commentNo ,
+	                        		method : "get",
+	                        		success : function(result){
+	                        		
+	                        			
+	                        		},
+	                        		error: function(xhr, status, err){
+	                        			
+	                        		}
+	                        	});
 
 	                            // TODO: 삭제 버튼을 눌렀을 때의 동작 구현
 	                        });
