@@ -23,12 +23,19 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 		matchingCommentMapper.insertMatchingComment(matchingComment);
 	}
 
+
 	@Override
 	public List<MatchingCommentDto> getMatchingCommentByBoardNo(int boardNo) {
 
-		List<MatchingCommentDto> comments = matchingCommentMapper.selectMatchingCommentByBoardNo(boardNo);
+		List<MatchingCommentDto> comments = matchingCommentMapper.selectMatchingCommentListByBoardNo(boardNo);
 		
 		return comments;
+	}
+	
+	@Override
+	public int getBoardNoByCommentNo(int commentNo) {
+		int boardNo = matchingCommentMapper.selectBoardNoByCommentNo(commentNo);
+		return boardNo;
 	}
 	
 	/**
@@ -54,7 +61,7 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 	 * confirmCount 가 모집인원보다 같거나 클때 -> 혹시 마감이 안되어있다면 마감 (matchingClose 값을 true 로 update)
 	 * 
 	 * @author hi.lee
-	 * @return commentNo 매칭댓글번호
+	 * @param commentNo 매칭댓글번호
 	 */
 	
 	@Override
@@ -71,13 +78,14 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 			return;
 		} else if(confirmCount + 1 < headCount  ) { //confirmCount 가 모집인원보다 2이상 작을때
 			matchingCommentMapper.updateMatchingCommentStatus( commentNo , "1" );
-			
+			lolBoardMapper.updateConfirmCount(confirmCount+1, boardNo);
 			System.out.println("신청승인합니다.");
 			return;
 		
 		//confirmCount 가 모집인원보다 1 작을때
 		} else if( confirmCount + 1 == headCount ) {
 			matchingCommentMapper.updateMatchingCommentStatus( commentNo , "1" );
+			lolBoardMapper.updateConfirmCount(confirmCount+1, boardNo);
 			lolBoardMapper.updateMatchingCloseTrueByBoardNo(boardNo);
 			System.out.println("신청승인합니다.");
 			System.out.println("마감합니다.");
@@ -97,7 +105,8 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 	/**
 	 * 롤 매칭 마감 판별 method
 	 * @author hi.lee
-	 * @return commentNo 매칭댓글번호
+	 * @param commentNo 댓글번호
+	 * @return matchingClose 마감여부
 	 */
 	
 	@Override
@@ -116,16 +125,20 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 	 * 마감했으면 -> 거절x
 	 * 마감하지 않았으면 -> 거절o
 	 * @author hi.lee
-	 * @return commentNo 매칭댓글번호
+	 * @param commentNo 댓글번호
 	 */
 	
 	@Override
 	public void setCommentStatusReject(int commentNo) {
 		System.out.println("거절버튼클릭");
 		boolean matchingClose = isMatchingCloseTrueByCommentNo(commentNo);
-		
+		int boardNo;
+		int confirmCount ;
 		if(!matchingClose) {
-			matchingCommentMapper.updateMatchingCommentStatus( commentNo , "2" );			
+			matchingCommentMapper.updateMatchingCommentStatus( commentNo , "2" );
+			boardNo = matchingCommentMapper.selectBoardNoByCommentNo(commentNo);
+			confirmCount = matchingCommentMapper.commentConfirmCountByMatchingBoardNo(boardNo);
+			lolBoardMapper.updateConfirmCount(confirmCount+1, boardNo);
 		}
 		
 	}

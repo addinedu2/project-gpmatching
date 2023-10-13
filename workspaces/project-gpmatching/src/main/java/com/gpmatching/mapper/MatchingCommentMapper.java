@@ -20,12 +20,12 @@ public interface MatchingCommentMapper {
 	void insertMatchingComment(MatchingCommentDto matchingComment);
 
 
-	@Select("select c.commentNo, c.mCommentContent, u.nickname, c.status "
+	@Select("select c.commentNo, c.boardNo, c.mCommentContent, u.nickname, c.status "
 			+ "from MatchingComment c "
 			+ "inner join User u "
 			+ "on c.userNo = u.userNo "
 			+ "where boardNo = #{ boardNo }")
-	List<MatchingCommentDto> selectMatchingCommentByBoardNo(int boardNo);
+	List<MatchingCommentDto> selectMatchingCommentListByBoardNo(int boardNo);
 	
 	
 	@Select("update MatchingComment set status = #{ status } "

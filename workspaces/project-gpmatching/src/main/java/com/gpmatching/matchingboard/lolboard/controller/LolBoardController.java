@@ -196,11 +196,7 @@ public class LolBoardController {
 			
 		} else {
 			matchingLolList = lolBoardService.getSelectLolBoardListByGameName("league of legends");
-//			for (MatchingBoardDto matchingBoard : matchingLolList) {
-//		        int boardNo = matchingBoard.getBoardNo();
-//		        int confirmCount = matchingCommentService.showCommentConfirmCount(boardNo);
-//		        matchingBoard.setConfirmCount(confirmCount);
-//		    }
+			
 		}
 			
 		

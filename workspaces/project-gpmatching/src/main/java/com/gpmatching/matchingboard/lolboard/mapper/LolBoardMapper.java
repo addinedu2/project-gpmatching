@@ -134,7 +134,7 @@ public interface LolBoardMapper {
 
 	@Update("update MatchingBoard set confirmCount = #{ confirmCount } "
 			+ "where boardNo = #{ boardNo }")
-	void updateConfirmCount(int confirmCount);
+	void updateConfirmCount(@Param("confirmCount") int confirmCount, @Param("boardNo")int boardNo);
 	
 	//deleted = true 로 설정하여 삭제
 	@Update("update MatchingBoard set deleted = true "

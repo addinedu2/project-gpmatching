@@ -382,8 +382,7 @@
 	});
 	
 	
-	
-	// 버튼을 누르면 해당 글의 댓글 보기 (-허지웅) (비활성화)
+	// 버튼을 누르면 해당 글의 댓글 보기 (-허지웅)
 	$(function() {
 		$('#lol-list').on("click", '.btn-show-commentList-modal', function(event) {
 			
@@ -421,6 +420,8 @@
 		                    $row.append($("<td>").text(result[i].commentNo));
 		                    $row.append($("<td>").text(result[i].nickname));
 		                    $row.append($("<td>").text(result[i].mcommentContent));
+		                    
+		                    // 댓글 승인여부 상태 표시
 		                    if(result[i].status == "0"){
 		                    	$row.append($("<td>").text("미승인"));
 							}else if (result[i].status == "1"){
@@ -435,54 +436,17 @@
 	                        var $acceptButton = $("<button>")
 	                            .addClass("btn btn-primary btn-sm btn-accept-comment")
 	                            .data('commentno', result[i].commentNo)
+	                            .data('boardno', result[i].boardNo)
 	                            .text("수락");
 		                    
 	                     	// 거절 버튼 추가
 	                        var $rejectButton = $("<button>")
 	                            .addClass("btn btn-danger btn-sm btn-reject-comment")
 	                            .data('commentno', result[i].commentNo)
+	                            .data('boardno', result[i].boardNo)
 	                            .text("거절");
 
-	                     	// 수락 버튼 눌렀을 때의 동작 
-	                        $('#comment-list').on("click", '.btn-accept-comment', function(event) {
-	                        	var boardNo = $(this).data('boardno'); // 이거 필요한가요? 궁금 (-허지웅)
-	                            var commentNo = $(this).data('commentno');
-								
-	                        	$.ajax({
-	                        		url : "commentConfirm?commentNo=" + commentNo ,
-	                        		method : "get",
-	                        		success : function(result){
-	                        			
-	                        		},
-	                        		error: function(xhr, status, err){
-	                        			
-	                        		}
-	                        	});
-	                        	
-	                            
-	                            // TODO: 수정 버튼을 눌렀을 때의 동작 구현
-	                        });
-
-	                        // 거절 버튼 눌렀을 때의 동작 
-	                        $('#comment-list').on("click", '.btn-reject-comment', function(event) {
-	                            var commentNo = $(this).data('commentno');
-	                            
-	                            $.ajax({
-	                        		url : "commentReject?commentNo=" + commentNo ,
-	                        		method : "get",
-	                        		success : function(result){
-	                        		
-	                        			
-	                        		},
-	                        		error: function(xhr, status, err){
-	                        			
-	                        		}
-	                        	});
-
-	                            // TODO: 삭제 버튼을 눌렀을 때의 동작 구현
-	                        });
-	                        
-	                     	var $buttonColumn = $("<td>").append($acceptButton, $rejectButton);
+							var $buttonColumn = $("<td>").append($acceptButton, $rejectButton);
 	                        $row.append($buttonColumn);
 		                    
 						}
@@ -500,6 +464,177 @@
 		});
 	});
 	
+	
+	// 수락 버튼을 누르면 화면이 변하지 않고 글의 댓글 목록 보기 유지 (-이현일)
+	$(function() {
+		$('#comment-list').on("click", '.btn-accept-comment', function(event) {
+			
+			const commentNo = $(this).data('commentno');
+			const boardNo = $(this).data('boardno');
+			const MatchingCloseButton = $(this).data('matchingclosebutton');
+			const currentTr = $('#tr-' + boardNo);
+			$('#title2-in-modal').text("(" + boardNo + ") " + currentTr.data('title'));
+			
+			$.ajax({
+				
+				"url": "commentConfirm",
+				"method": "get",
+				"data": { "commentNo" : commentNo },
+				
+				"success": function showcommentlist(result){
+					
+					var commentList = $('#comment-list');
+					commentList.empty();
+					if (result != null){
+						console.log(result);
+						
+						// 테이블 헤더 추가
+		                var $headerRow = $("<tr>");
+		                
+		                $headerRow.append($("<th>").text("댓글 번호"));
+		                $headerRow.append($("<th>").text("닉네임"));
+		                $headerRow.append($("<th>").text("댓글 내용"));
+						$headerRow.append($("<th>").text("승인여부"));;
+		                
+		                commentList.append($headerRow);
+		                
+						for(var i = 0; i < result.length; i++){
+							var $row = $("<tr>");
+		                    
+		                    $row.append($("<td>").text(result[i].commentNo));
+		                    $row.append($("<td>").text(result[i].nickname));
+		                    $row.append($("<td>").text(result[i].mcommentContent));
+		                    if(result[i].status == "0"){
+		                    	$row.append($("<td>").text("미승인"));
+							}else if (result[i].status == "1"){
+								$row.append($("<td>").text("승인"));
+							}else if (result[i].status == "2"){
+								$row.append($("<td>").text("거절"));
+							}
+		                    
+		                    commentList.append($row);
+		                    
+		                    // 수락 버튼 추가
+	                        var $acceptButton = $("<button>")
+	                            .addClass("btn btn-primary btn-sm btn-accept-comment")
+	                            .attr('id', 'btn-accept-comment')
+	                            .data('commentno', result[i].commentNo)
+	                            .data('boardno', result[i].boardNo)
+	                            .text("수락");
+		                    
+	                     	// 거절 버튼 추가
+	                        var $rejectButton = $("<button>")
+	                            .addClass("btn btn-danger btn-sm btn-reject-comment")
+	                            .attr('id', 'btn-reject-comment')
+	                            .data('commentno', result[i].commentNo)
+	                            .data('boardno', result[i].boardNo)
+	                            .text("거절");
+
+
+	                     	var $buttonColumn = $("<td>").append($acceptButton, $rejectButton);
+	                        $row.append($buttonColumn);
+		                    
+						}
+					}
+					
+					console.log(commentList);
+					$('#commentList-modal').modal('show');
+				},
+				"error": function(xhr, status, err){
+					alert("실패");
+				
+				} 
+				
+			}); 
+		});
+	});
+
+ 	
+ 	
+ 	// 거절 버튼 눌렀을 때의 동작 (-이현일)
+ 	$(function() {
+	    $('#comment-list').on("click", '.btn-reject-comment', function(event) {
+	    	
+	    	const commentNo = $(this).data('commentno');
+			const boardNo = $(this).data('boardno');
+			const currentTr = $('#tr-' + boardNo);
+			$('#title2-in-modal').text("(" + boardNo + ") " + currentTr.data('title'));
+			
+			$.ajax({
+				
+				"url": "commentReject",
+				"method": "get",
+				"data": { "commentNo" : commentNo },
+				
+				"success": function showcommentlist(result){
+					
+					var commentList = $('#comment-list');
+					commentList.empty();
+					if (result != null){
+						console.log(result);
+						
+						// 테이블 헤더 추가
+		                var $headerRow = $("<tr>");
+		                
+		                $headerRow.append($("<th>").text("댓글 번호"));
+		                $headerRow.append($("<th>").text("닉네임"));
+		                $headerRow.append($("<th>").text("댓글 내용"));
+						$headerRow.append($("<th>").text("승인여부"));;
+		                
+		                commentList.append($headerRow);
+		                
+						for(var i = 0; i < result.length; i++){
+							var $row = $("<tr>");
+		                    
+		                    $row.append($("<td>").text(result[i].commentNo));
+		                    $row.append($("<td>").text(result[i].nickname));
+		                    $row.append($("<td>").text(result[i].mcommentContent));
+		                    if(result[i].status == "0"){
+		                    	$row.append($("<td>").text("미승인"));
+							}else if (result[i].status == "1"){
+								$row.append($("<td>").text("승인"));
+							}else if (result[i].status == "2"){
+								$row.append($("<td>").text("거절"));
+							}
+		                    
+		                    commentList.append($row);
+		                    
+		                    // 수락 버튼 추가
+	                        var $acceptButton = $("<button>")
+	                            .addClass("btn btn-primary btn-sm btn-accept-comment")
+	                            .attr('id', 'btn-accept-comment')
+	                            .data('commentno', result[i].commentNo)
+	                            .data('boardno', result[i].boardNo)
+	                            .text("수락");
+		                    
+	                     	// 거절 버튼 추가
+	                        var $rejectButton = $("<button>")
+	                            .addClass("btn btn-danger btn-sm btn-reject-comment")
+	                            .attr('id', 'btn-reject-comment')
+	                            .data('commentno', result[i].commentNo)
+	                            .data('boardno', result[i].boardNo)
+	                            .text("거절");
+	
+	
+	                     	var $buttonColumn = $("<td>").append($acceptButton, $rejectButton);
+	                        $row.append($buttonColumn);
+		                    
+						}
+					}
+					
+					console.log(commentList);
+					$('#commentList-modal').modal('show');
+				},
+				"error": function(xhr, status, err){
+					alert("실패");
+				
+				} 
+				
+			}); 
+		});
+	});
+
+
 	
 	
 	</script>
