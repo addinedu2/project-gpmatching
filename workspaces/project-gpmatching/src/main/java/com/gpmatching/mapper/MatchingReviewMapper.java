@@ -18,5 +18,5 @@ public interface MatchingReviewMapper {
 			+ "inner join MatchingComment c on c.boardNo = m.boardNo "
 			+ "inner join User u on c.userNo = u.userNo where m.userNo = #{ userNo } and matchingClose = '0' "
 			+ "order by boardNo desc")
-	List<MatchingBoardDto> selectNotYetWrittenReviewList(int userNo);
+	List<MatchingBoardDto> selectNotYetReviewList(int userNo);
 }
