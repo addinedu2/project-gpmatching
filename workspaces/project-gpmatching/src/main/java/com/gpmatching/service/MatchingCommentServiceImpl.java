@@ -136,7 +136,7 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 			matchingCommentMapper.updateMatchingCommentStatus( commentNo , "2" );
 			boardNo = matchingCommentMapper.selectBoardNoByCommentNo(commentNo);
 			confirmCount = matchingCommentMapper.commentConfirmCountByMatchingBoardNo(boardNo);
-			lolBoardMapper.updateConfirmCount(confirmCount+1, boardNo);
+			lolBoardMapper.updateConfirmCount(confirmCount, boardNo);
 		}
 		
 	}
