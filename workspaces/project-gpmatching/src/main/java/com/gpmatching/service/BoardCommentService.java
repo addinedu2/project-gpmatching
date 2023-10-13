@@ -7,7 +7,7 @@ import com.gpmatching.dto.BoardCommentDto;
 
 public interface BoardCommentService {
 
-	void writeComment(BoardCommentDto boardComment);
+	void writeComment(BoardCommentDto boardComment, AlramDto alram);
 
 	void deleteComment(int commentNo);
 

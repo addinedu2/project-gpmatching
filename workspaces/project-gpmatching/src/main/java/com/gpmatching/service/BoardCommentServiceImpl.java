@@ -29,9 +29,13 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	
 	//댓글 쓰기-삭제-수정
 	@Override   
- 	public void writeComment(BoardCommentDto boardComment) {
+ 	public void writeComment(BoardCommentDto boardComment, AlramDto alram) {
 		boardCommentMapper.insertComment(boardComment);	
 		boardCommentMapper.updateGroupNo(boardComment.getCommentNo(), boardComment.getCommentNo());
+	
+		alram.setCommentNo(boardComment.getCommentNo());//이렇게 받아와야지..
+		alramMapper.insertAlram(alram);
+		
 	}
 	
 	@Override
