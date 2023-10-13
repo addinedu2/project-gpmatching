@@ -16,6 +16,17 @@
     </div>
     <!--Navbar nav -->
     <ul class="navbar-nav navbar-right-wrap ms-auto d-flex nav-top-wrap">
+      <li>
+		<c:choose>
+			<c:when test="${ not empty loginuser }">
+				${ loginuser.nickname }님, 환영합니다!<br>
+				<a href="/project-gpmatching/review/write">
+				리뷰를 작성해주세요 (${matchingCloseCount}개)</a>
+				<button type="button" class="btn btn-primary btn-sm review-btn">클릭</button>		  
+			</c:when>
+		</c:choose>
+      
+      </li>
       <li class="dropdown stopevent">
         <a class="btn btn-light btn-icon rounded-circle indicator
           indicator-primary text-muted" href="#" role="button"
@@ -76,7 +87,15 @@
 
             <div class="lh-1 ">
               <h5 class="mb-1"> ${loginuser.nickname}</h5>
-              <a href="/project-gpmatching/account/mypage" class="text-inherit fs-6">마이페이지</a>
+              <c:choose>
+				<c:when test="${ not empty loginuser }">
+					<a href="/project-gpmatching/account/mypage" class="text-inherit fs-6">마이페이지</a>
+				</c:when>
+				<c:otherwise>
+					<a href="/project-gpmatching/account/login" class="text-inherit fs-6">로그인</a>
+				</c:otherwise>
+			  </c:choose>
+              
             </div>
             <div class=" dropdown-divider mt-3 mb-2"></div>
           </div>
@@ -131,4 +150,82 @@
     </ul>
   </nav>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade gd-example-modal-lg" id="review-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+   <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body" id="review-list">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
+
+<script>
+
+$(function() {
+	
+	$('.review-btn').on("click", function(event){
+
+		$.ajax({
+			
+			"url": "ajax-show-review",
+			"method": "get",
+			"data": { "userNo" : userNo },
+			
+			"success": function(result){
+				
+				var reviewList = $('#review-list');
+				reviewList.empty();
+				if (result != null){
+					
+					// 테이블 헤더 추가
+	                var $headerRow = $("<tr>");
+	                
+	                $headerRow.append($("<th>").text("제목"));
+	                $headerRow.append($("<th>").text("파티장"));
+	                $headerRow.append($("<th>").text("파티원"));
+	                
+	                commentList.append($headerRow);
+	                
+// 					for(var i = 0; i < result.length; i++){
+// 						var $row = $("<tr>");
+	                    
+// 	                    $row.append($("<td>").text(result[i].mcommentNo));
+// 	                    $row.append($("<td>").text(result[i].nickname));
+// 	                    $row.append($("<td>").text(result[i].mcommentContent));
+	                 
+// 	                    commentList.append($row);
+	                    
+	                    
+// 					}
+					$('#review-modal').modal('show');
+				}
+				
+				
+			},
+			"error": function(xhr, status, err){
+				alert("실패");
+			
+			}
+		
+		});
+	 });
+	
+});
+	
+</script>
 	

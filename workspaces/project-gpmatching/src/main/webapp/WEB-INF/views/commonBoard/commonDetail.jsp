@@ -61,6 +61,7 @@
 		            </div>
 		          </div>
 		        </div>
+		        
 				
 				<div class="py-6">
 		          <!-- row -->
@@ -113,6 +114,7 @@
 			                <span class="text-uppercase fw-medium text-darks-5 ls-2">본문</span>
 			                <!-- text -->
 			                <p class="mt-2 mb-6">${fn:replace(commonBoard.commonContent,enter,"<br>") }</p>
+
 		                  
 		                </div>
 		              </div>

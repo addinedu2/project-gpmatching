@@ -98,6 +98,8 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 			return;
 			
 		} 
+		
+	
 	}
 	
 	/**
@@ -140,6 +142,13 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 		}
 		
 	}
+
+//	@Override
+//	public int showCommentConfirmCount(int boardNo) {
+//		
+//		int confirmCount = matchingCommentMapper.commentConfirmCountByMatchingBoardNo(boardNo);
+//		return confirmCount;
+//	}
 	
 //	@Override
 //	public List<MatchingCommentDto> getMatchingCommentByBoardNo(int boardNo){

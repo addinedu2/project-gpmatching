@@ -51,5 +51,6 @@ public class MatchingBoardDto {
 	private List<MatchingCommentDto> matchingCommentList;
 	private UserDto user;
 	private LolDto lol;
+	
 
 }

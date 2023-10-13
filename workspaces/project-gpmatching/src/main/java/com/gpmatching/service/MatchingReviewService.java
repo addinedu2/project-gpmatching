@@ -1,8 +1,12 @@
 package com.gpmatching.service;
 
-import com.gpmatching.dto.MatchingReviewDto;
+import java.util.List;
+
+import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 
 public interface MatchingReviewService {
 
-	void writeMatchingReview(MatchingReviewDto matchingReview);
+	int getMatchingCloseByLoginUser(int userNo);
+	
+	List<MatchingBoardDto> getNotYetReviewList(int userNo);
 }

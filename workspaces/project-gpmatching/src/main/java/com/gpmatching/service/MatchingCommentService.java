@@ -18,4 +18,5 @@ public interface MatchingCommentService {
 
 	int getBoardNoByCommentNo(int commentNo);
 	
+	//int showCommentConfirmCount(int boardNo);
 }
