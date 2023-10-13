@@ -1,6 +1,6 @@
 package com.gpmatching.ui;
 
-public class CommonPager {
+public class AdminPager {
 	
 	private int pageSize;//한 페이지당 데이터 개수
 	private int pagerSize;//번호로 보여주는 페이지 Link 개수
@@ -12,7 +12,7 @@ public class CommonPager {
 	private String linkUrl;//페이저가 포함되는 페이지의 주소
 	
 	
-	public CommonPager(int dataCount, int pageNo, 
+	public AdminPager(int dataCount, int pageNo, 
 		int pageSize, int pagerSize, String linkUrl) {
 		
 		this.linkUrl = linkUrl;
@@ -34,13 +34,13 @@ public class CommonPager {
 		if (pageNo > 1) {
 			linkString.append(
 				String.format("<li class='page-item'> "
-						+ "      <a class='page-link' href='commonList?pageNo=1' aria-label='Previous'> "
+						+ "      <a class='page-link' href='adminUserList?pageNo=1' aria-label='Previous'> "
 						+ "        <span aria-hidden='true'><i class='mdi mdi-chevron-double-left'></i></span> "
 						+ "      </a> "
 						+ "     </li>"));
 			linkString.append(
 				String.format("<li class='page-item'> "
-					+ "          <a class='page-link' href='commonList?pageNo=%d' aria-label='Previous'> "
+					+ "          <a class='page-link' href='adminUserList?pageNo=%d' aria-label='Previous'> "
 					+ "            <span aria-hidden='true'><i class='mdi mdi-chevron-left'></i></span> "
 					+ "          </a> "
 					+ "        </li>", pageNo - 1));
@@ -67,25 +67,25 @@ public class CommonPager {
 			if (i > pageCount) break;
 			if(i == pageNo) {
 				linkString.append(String.format("<li class='page-item active' aria-current='page'> "
-						+ "                        <a class='page-link' href='commonList?pageNo=%d'> "
+						+ "                        <a class='page-link' href='adminUserList?pageNo=%d'> "
 						+ "						     <span class='sr-only'> %d </span> "
 						+ "						   </a> "
 						+ "                      </li>", i, i));
 			} else { 
 				linkString.append(String.format(
-					"<li class='page-item'><a class='page-link' href='commonList?pageNo=%d'>%d</a></li>", i, i));
+					"<li class='page-item'><a class='page-link' href='adminUserList?pageNo=%d'>%d</a></li>", i, i));
 			}
 		}
 		
 		//3. 다음, 마지막 항목 만들기
 		if (pageNo < pageCount) {
 			linkString.append(String.format("<li class='page-item'> "
-				+ "                            <a class='page-link' href='commonList?pageNo=%d' aria-label='Next'> "
+				+ "                            <a class='page-link' href='adminUserList?pageNo=%d' aria-label='Next'> "
 				+ "                              <span aria-hidden='true'><i class='mdi mdi-chevron-right'></i></span> "
 				+ "                            </a> "
 				+ "                          </li>", pageNo + 1));
 			linkString.append(String.format("<li class='page-item'> "
-			    + "                            <a class='page-link' href='commonList?pageNo=%d' aria-label='Next'> "
+			    + "                            <a class='page-link' href='adminUserList?pageNo=%d' aria-label='Next'> "
 				+ "                              <span aria-hidden='true'><i class='mdi mdi-chevron-double-right'></i></span> "
 				+ "                            </a> "
 				+ "                          </li>", pageCount));

@@ -16,28 +16,28 @@ public interface MatchingCommentMapper {
 	// 닉네임은 어떻게 불러오는거지..?
 	@Insert("insert into MatchingComment (boardNo, mCommentContent, userNo) "
 			+ "values (#{ boardNo }, #{ mCommentContent }, #{ userNo })")
-	@Options(useGeneratedKeys = true, keyProperty = "mCommentNo")
+	@Options(useGeneratedKeys = true, keyProperty = "commentNo")
 	void insertMatchingComment(MatchingCommentDto matchingComment);
 
-	@Select("select c.mCommentNo, c.mCommentContent, u.nickname, c.status "
+	@Select("select c.commentNo, c.boardNo, c.mCommentContent, u.nickname, c.status "
 			+ "from MatchingComment c "
 			+ "inner join User u "
 			+ "on c.userNo = u.userNo "
 			+ "where boardNo = #{ boardNo }")
-	List<MatchingCommentDto> selectMatchingCommentByBoardNo(int boardNo);
+	List<MatchingCommentDto> selectMatchingCommentListByBoardNo(int boardNo);
 	
 	
 	@Select("update MatchingComment set status = #{ status } "
-			+ "where mCommentNo = #{commentNo}")
+			+ "where commentNo = #{commentNo}")
 	void updateMatchingCommentStatus(@Param("commentNo") int commentNo, @Param("status") String status);
 
 	@Select("select count(*) from MatchingComment where boardNo = #{ boardNo } and status = '1'")
 	int commentConfirmCountByMatchingBoardNo(int boardNo);
 
-	@Select("select boardNo from MatchingComment where mCommentNo = #{ commentNo}")
+	@Select("select boardNo from MatchingComment where commentNo = #{ commentNo}")
 	int selectBoardNoByCommentNo(int commentNo);
 
-	@Select("select status from MatchingComment where mCommentNo = #{ commentNo}")
+	@Select("select status from MatchingComment where commentNo = #{ commentNo}")
 	String selectStatusByCommentNo(int commentNo);
 
 
