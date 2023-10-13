@@ -49,7 +49,8 @@ public interface LolBoardMapper {
 //	List<MatchingBoardDto> selectAllMatchingBoard();
 	
 	
-	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo, mic, headCount "
+	@Select( "select boardNo, boardTitle, boardContent, regDate, "
+			+ "userNo, mic, headCount, confirmCount "
 			+ "from MatchingBoard "
 			+ "where gameNo = #{ gameNo } "
 			+ "order by boardNo desc")
@@ -65,7 +66,8 @@ public interface LolBoardMapper {
 //	List<MatchingBoardDto> selectMatchingBoardListByGameName(String gameName);
 	
 
-	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo, mic, headCount "
+	@Select( "select boardNo, boardTitle, boardContent, regDate, "
+			+ "userNo, mic, headCount, confirmCount "
 			+ "from MatchingBoard "
 			+ "where gameNo = (select gameNo "
 			+ "from GameList where gameName = #{ gameName} ) "
@@ -93,8 +95,10 @@ public interface LolBoardMapper {
 			+ "where boardNo = #{ boardNo }")
 	MatchingBoardDto selectMatchingBoardByBoardNo(@Param("boardNo")int boardNo);
 	
-	@Select("select u.nickname, m.boardNo,m.boardTitle, m.boardContent, m.preferGender, m.mic, m.headCount, "
-			+ "m.matchingClose, m.regDate, m.readCount, m.gameNo, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
+	@Select("select u.nickname, m.boardNo,m.boardTitle, m.boardContent, "
+			+ "m.preferGender, m.mic, m.headCount, m.confirmCount, m.matchingClose, "
+			+ "m.regDate, m.readCount, m.gameNo, "
+			+ "l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
 			+ "from MatchingBoard m "
 			+ "inner join Lol l "
 			+ "on l.boardNo = m.boardNo "
@@ -105,8 +109,9 @@ public interface LolBoardMapper {
 	
 	
 	//User 테이블, MatchingBoard 테이블, Lol 테이블 join해서 같이 보여주는 코드(게임명: "league of legends") 
-	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, m.headCount, "
-			+ "m.matchingClose, m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
+	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, "
+			+ "m.preferGender, m.mic, m.headCount, m.confirmCount, m.matchingClose, "
+			+ "m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
 			+ "from MatchingBoard m "
 			+ "inner join Lol l "
 			+ "on l.boardNo = m.boardNo "
@@ -124,9 +129,13 @@ public interface LolBoardMapper {
 	@Update( "update MatchingBoard set boardTitle = #{boardTitle}, "
 			+ "boardContent = #{ boardContent }, preferGender = #{ preferGender }, mic = #{ mic }, "
 			+ "headCount = #{ headCount }, matchingClose = #{ matchingClose }, readCount = #{ readCount } "
-			+ "where boardNo = #{boardNo} ")
+			+ "where boardNo = #{ boardNo } ")
 	void updateMatchingBoard(MatchingBoardDto matchingBoardDto);
 
+	@Update("update MatchingBoard set confirmCount = #{ confirmCount } "
+			+ "where boardNo = #{ boardNo }")
+	void updateConfirmCount(int confirmCount);
+	
 	//deleted = true 로 설정하여 삭제
 	@Update("update MatchingBoard set deleted = true "
 		  + "where boardNo = #{boardNo}")
@@ -135,8 +144,9 @@ public interface LolBoardMapper {
 
 	//선택한 티어에 해당하는 글만 보여줌 (나중에 동적 쿼리로 확장 예정 -허지웅)
 	
-	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, m.headCount, "
-			+ "m.matchingClose, m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
+	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, "
+			+ "m.mic, m.headCount, m.confirmCount, m.matchingClose, m.regDate, m.readCount, "
+			+ "l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
 			+ "from MatchingBoard m "
 			+ "inner join Lol l "
 			+ "on l.boardNo = m.boardNo "
@@ -150,8 +160,8 @@ public interface LolBoardMapper {
 	List<MatchingBoardDto> selectLolBoardListByLolTier(@Param("gameName")String gameName, @Param("lolTier")String lolTier);
 
 
-	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.mic, m.headCount, "
-			+ "m.matchingClose, m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
+	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, "
+			+ "m.mic, m.headCount, m.confirmCount, m.matchingClose, m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
 			+ "from MatchingBoard m "
 			+ "inner join Lol l "
 			+ "on l.boardNo = m.boardNo "

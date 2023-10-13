@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class MatchingCommentDto {
 
-	private int mCommentNo;
+	private int commentNo;
 	private Date mCommentRegDate;
 	private String mCommentContent;
 	private boolean mCommentConfirm;
