@@ -90,7 +90,7 @@
                                         <a class="nav-link has-arrow" href="/project-gpmatching/commonBoard/tipsList"> Tips </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link has-arrow" href="/project-gpmatching/commonBoard/alramList"> 알람 </a>
+                                        <a class="nav-link has-arrow" href="/project-gpmatching/commonBoard/alarmList"> 알람 </a>
                                     </li>
                                 </ul>
                             </div>

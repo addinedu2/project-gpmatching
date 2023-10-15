@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gpmatching.dto.AlramDto;
+import com.gpmatching.dto.AlarmDto;
 import com.gpmatching.dto.BoardCommentDto;
 import com.gpmatching.mapper.AlramMapper;
 import com.gpmatching.mapper.BoardCommentMapper;
@@ -29,7 +29,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	
 	//댓글 쓰기-삭제-수정
 	@Override   
- 	public void writeComment(BoardCommentDto boardComment, AlramDto alram) {
+ 	public void writeComment(BoardCommentDto boardComment, AlarmDto alram) {
 		boardCommentMapper.insertComment(boardComment);	
 		boardCommentMapper.updateGroupNo(boardComment.getCommentNo(), boardComment.getCommentNo());
 	
@@ -77,8 +77,8 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	}
 	
 	@Override
-	public List<AlramDto> getAlamListByUserNo(int userNo) {
-		List<AlramDto> alrams = alramMapper.selectAlamListByUserNo(userNo);
+	public List<AlarmDto> getAlamListByUserNo(int userNo) {
+		List<AlarmDto> alrams = alramMapper.selectAlamListByUserNo(userNo);
 		
 		return alrams;
 	}

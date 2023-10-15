@@ -635,9 +635,10 @@
 	});
 
 
-	
-	
 	</script>
+	
+	<script src="/project-gpmatching/resources/assets/js/common.js"></script>
+	
 </body>
 
 </html>

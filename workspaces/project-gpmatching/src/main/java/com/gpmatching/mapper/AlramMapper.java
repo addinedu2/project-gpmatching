@@ -8,14 +8,14 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import com.gpmatching.dto.AlramDto;
+import com.gpmatching.dto.AlarmDto;
 
 @Mapper
 public interface AlramMapper {
 
 	@Insert("insert into Alram (commentNo) values (#{commentNo})")
 	@Options(useGeneratedKeys = true, keyProperty = "alramNo", keyColumn="alramNo")
-	void insertAlram(AlramDto alram);
+	void insertAlram(AlarmDto alram);
 	
 	@Select("select distinct a.alramNo, a.commentNo, bc.userNo, bc.commentContent, bc.commonNo, u.nickname "
 	      + "from BoardComment bc "
@@ -24,7 +24,7 @@ public interface AlramMapper {
 		  + "inner join CommonBoard cb on cb.userNo = bc.userNo "
 	      + "where bc.userNo != #{userNo} and cb.userNo != #{userNo} "
 	      + "order by bc.commentNo desc")
-	List<AlramDto> selectAlamListByUserNo(@Param("userNo") int userNo);
+	List<AlarmDto> selectAlamListByUserNo(@Param("userNo") int userNo);
 
 
 }

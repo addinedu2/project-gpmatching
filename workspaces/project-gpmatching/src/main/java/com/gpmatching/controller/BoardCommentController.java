@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gpmatching.dto.AlramDto;
+import com.gpmatching.dto.AlarmDto;
 import com.gpmatching.dto.BoardCommentDto;
 import com.gpmatching.service.BoardCommentService;
 
@@ -36,7 +36,7 @@ public class BoardCommentController {
 	
 	//공통게시판 댓글 쓰기
 	@PostMapping(path= {"/writeComment"})
-	public String writeComment(BoardCommentDto boardComment, AlramDto alram, @RequestParam(defaultValue = "-1") int pageNo) {
+	public String writeComment(BoardCommentDto boardComment, AlarmDto alram, @RequestParam(defaultValue = "-1") int pageNo) {
 	
 		boardCommentService.writeComment(boardComment, alram);
 
@@ -46,7 +46,7 @@ public class BoardCommentController {
 	
 	@PostMapping(path= {"/ajax-writeComment"})
 	@ResponseBody
-	public String ajaxWriteComment(BoardCommentDto boardComment, AlramDto alram, @RequestParam(defaultValue = "-1") int pageNo) {
+	public String ajaxWriteComment(BoardCommentDto boardComment, AlarmDto alram, @RequestParam(defaultValue = "-1") int pageNo) {
 	
 		if (pageNo < 1) {
 			return "redirect:commonList";
