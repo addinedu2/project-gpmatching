@@ -27,3 +27,21 @@
 			});
 		});
 	});
+	
+	////////////아래 추가
+	
+	// 아이콘 변경 함수
+function updateNotificationIcon(increase) {
+  // 아이콘 요소 선택
+  const iconElement = document.getElementById("notificationIcon");
+
+  // 데이터가 1 증가하면 아이콘을 변경
+  if (increase) {
+    iconElement.setAttribute("data-feather", "bell-off");
+  } else {
+    iconElement.setAttribute("data-feather", "bell");
+  }
+
+  // 아이콘 새로 고침
+  feather.replace();
+}

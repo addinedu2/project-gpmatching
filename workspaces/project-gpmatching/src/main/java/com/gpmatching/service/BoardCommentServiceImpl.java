@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gpmatching.dto.AlarmDto;
 import com.gpmatching.dto.BoardCommentDto;
-import com.gpmatching.mapper.AlramMapper;
+import com.gpmatching.mapper.AlarmMapper;
 import com.gpmatching.mapper.BoardCommentMapper;
 
 import lombok.Setter;
@@ -17,7 +17,7 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	private BoardCommentMapper boardCommentMapper;
 	
 	@Setter(onMethod_ = { @Autowired })
-	private AlramMapper alramMapper;
+	private AlarmMapper alarmMapper;
 	
 	@Override
 	public List<BoardCommentDto> getCommentListByCommonNo(int commonNo) {
@@ -29,12 +29,12 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	
 	//댓글 쓰기-삭제-수정
 	@Override   
- 	public void writeComment(BoardCommentDto boardComment, AlarmDto alram) {
+ 	public void writeComment(BoardCommentDto boardComment, AlarmDto alarm) {
 		boardCommentMapper.insertComment(boardComment);	
 		boardCommentMapper.updateGroupNo(boardComment.getCommentNo(), boardComment.getCommentNo());
 	
-		alram.setCommentNo(boardComment.getCommentNo());//이렇게 받아와야지..
-		alramMapper.insertAlram(alram);
+		alarm.setCommentNo(boardComment.getCommentNo());//이렇게 받아와야지..
+		alarmMapper.insertAlarm(alarm);
 		
 	}
 	
@@ -78,9 +78,9 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	
 	@Override
 	public List<AlarmDto> getAlamListByUserNo(int userNo) {
-		List<AlarmDto> alrams = alramMapper.selectAlamListByUserNo(userNo);
+		List<AlarmDto> alarms = alarmMapper.selectAlamListByUserNo(userNo);
 		
-		return alrams;
+		return alarms;
 	}
 
 }

@@ -11,20 +11,22 @@ import org.apache.ibatis.annotations.Select;
 import com.gpmatching.dto.AlarmDto;
 
 @Mapper
-public interface AlramMapper {
+public interface AlarmMapper {
 
-	@Insert("insert into Alram (commentNo) values (#{commentNo})")
-	@Options(useGeneratedKeys = true, keyProperty = "alramNo", keyColumn="alramNo")
-	void insertAlram(AlarmDto alram);
+	@Insert("insert into Alarm (commentNo) values (#{commentNo})")
+	@Options(useGeneratedKeys = true, keyProperty = "alarmNo", keyColumn="alarmNo")
+	void insertAlarm(AlarmDto alarm);
 	
-	@Select("select distinct a.alramNo, a.commentNo, bc.userNo, bc.commentContent, bc.commonNo, u.nickname "
+	@Select("select distinct a.alarmNo, a.commentNo, bc.userNo, bc.commentContent, bc.commonNo, u.nickname "
 	      + "from BoardComment bc "
-		  + "inner join Alram a ON a.commentNo = bc.commentNo "
+		  + "inner join Alarm a ON a.commentNo = bc.commentNo "
 	      + "inner join User u on u.userNo = bc.userNo "
 		  + "inner join CommonBoard cb on cb.userNo = bc.userNo "
 	      + "where bc.userNo != #{userNo} and cb.userNo != #{userNo} "
 	      + "order by bc.commentNo desc")
 	List<AlarmDto> selectAlamListByUserNo(@Param("userNo") int userNo);
+
+	
 
 
 }
