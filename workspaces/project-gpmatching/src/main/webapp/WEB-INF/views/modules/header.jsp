@@ -50,8 +50,8 @@
               
               
              <!-- List group -->
-            <div id="alarm-list">
-	            <ul class="list-group list-group-flush notification-list-scroll" >
+            <div id="alarm-list" class="notification-list-scroll">
+	            <ul class="list-group list-group-flush" >
 					<li class="list-group-item border-bottom">
 						<a href="#" class="text-muted"> 
 							<c:forEach var="mAlarms" items="${matchingAlarms}">
@@ -176,56 +176,7 @@
 
 <script>
 
-$(function() {
-	
-	$('.review-btn').on("click", function(event){
-
-		$.ajax({
-			
-			"url": "ajax-show-review",
-			"method": "get",
-			"data": { "userNo" : userNo },
-			
-			"success": function(result){
-				
-				var reviewList = $('#review-list');
-				reviewList.empty();
-				if (result != null){
-					
-					// 테이블 헤더 추가
-	                var $headerRow = $("<tr>");
-	                
-	                $headerRow.append($("<th>").text("제목"));
-	                $headerRow.append($("<th>").text("파티장"));
-	                $headerRow.append($("<th>").text("파티원"));
-	                
-	                commentList.append($headerRow);
-	                
-// 					for(var i = 0; i < result.length; i++){
-// 						var $row = $("<tr>");
-	                    
-// 	                    $row.append($("<td>").text(result[i].mcommentNo));
-// 	                    $row.append($("<td>").text(result[i].nickname));
-// 	                    $row.append($("<td>").text(result[i].mcommentContent));
-	                 
-// 	                    commentList.append($row);
-	                    
-	                    
-// 					}
-					$('#review-modal').modal('show');
-				}
-				
-				
-			},
-			"error": function(xhr, status, err){
-				alert("실패");
-			
-			}
-		
-		});
-	 });
-	
-});
+//리뷰 스크립트 자리
 	
 </script>
 	

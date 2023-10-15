@@ -120,11 +120,11 @@
 		              </div>
 		            
 		            	<br>
-			            <div class="btn-center" >
+			            <div class="btn-center" style="display: flex; justify-content: center; align-items: center;">
 				        	<a href="commonList?pageNo=${pageNo}">
 				        	<button type="button" class="btn btn-primary btn-group-sm mb-2" aria-label="Small button group">목록</button>
 				        	</a>
-				        	<div style='display:${ (not empty loginuser and loginuser.userNo == commonBoard.userNo) ? "block" : "none" }'>
+				        	<div style='display:${ (not empty loginuser and loginuser.userNo == commonBoard.userNo) ? "block" : "none" }; margin-left:5px;'>
 				        	<a href="commonEdit?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}">
 				        	<button type="button" class="btn btn-secondary btn-group-sm mb-2" aria-label="Small button group">수정</button>
 				        	</a>
