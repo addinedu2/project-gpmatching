@@ -56,29 +56,52 @@
 
 	//임시 알람 클릭하면 마이페이지로 넘어감
 	$(function(event) {
-		$("#dropdownNotification").on("mouseenter",function(event) {
-			event.preventDefault();
-			let loginUser = $(this).data("userno");
-		
-			 $.ajax({
-				url: '/project-gpmatching/modules/header',
-				type: 'get',
-				dataType: 'json',
-				success: function (data) {
-					var alarmList = $('#alarm-list');
-					alarmList.empty();
-					
-					$.each(data, function (index, matchingAlarms) {
-		                var commentAlarm = '<li><a href="/project-gpmatching/account/mypage">&nbsp;&nbsp;'+matchingAlarms.nickname+'님이 댓글을 달았습니다</a></li>' + 
-		                '<hr>';
-						alarmList.append(commentAlarm);
-					});
-				},
-				error: function (xhr, status, error) {
-					console.error('댓글을 가져오는 중 오류 발생: ' + error);
-				}
-			});
-		});
+	    $("#dropdownNotification").on("mouseenter", function(event) {
+	        event.preventDefault();
+	        let loginUser = $(this).data("userno");
+	
+	        function calculateTime(regDate) {
+	            var regTime = new Date(regDate).getTime(); // 밀리초로 변환
+	            var now = new Date().getTime();
+	            var diff = now - regTime;
+	
+	            if (diff < 60000) {
+	                return "방금 전";
+	            } else if (diff < 3600000) {
+	                var minutes = Math.floor(diff / 60000);
+	                return minutes + "분 전";
+	            } else if (diff < 86400000) {
+	                var hours = Math.floor(diff / 3600000);
+	                return hours + "시간 전";
+	            } else {
+	                var options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+	                return new Date(regTime).toLocaleDateString(undefined, options);
+	            }
+	        }
+	
+	        $.ajax({
+	            url: '/project-gpmatching/modules/header',
+	            type: 'get',
+	            dataType: 'json',
+	            success: function(data) {
+	                var alarmList = $('#alarm-list');
+	                alarmList.empty();
+	
+	                $.each(data, function(index, matchingAlarms) {
+	                    var timeAgo = calculateTime(matchingAlarms.regDate);
+	
+	                    var commentAlarm =
+	                        '<li><a href="/project-gpmatching/account/mypage">&nbsp;&nbsp;' + matchingAlarms.nickname + '님이 댓글을 달았습니다</a></li>' +
+	                        '<li>&nbsp;&nbsp;' + timeAgo + '</li>' +
+	                        '<hr>';
+	                    alarmList.append(commentAlarm);
+	                });
+	            },
+	            error: function(xhr, status, error) {
+	                console.error('댓글을 가져오는 중 오류 발생: ' + error);
+	            }
+	        });
+	    });
 	});
 	
 	//알림 확인하면 데이터 삭제

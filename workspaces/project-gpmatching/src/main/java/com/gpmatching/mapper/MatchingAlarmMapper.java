@@ -18,7 +18,7 @@ public interface MatchingAlarmMapper {
 	void insertMatchingAlarm(MatchingAlarmDto matchingAlarmDto);
 
 	
-	@Select("select ma.alarmNo, ma.mCommentNo, ma.alarmContent, mc.boardNo, u.nickname "
+	@Select("select ma.alarmNo, ma.mCommentNo, ma.alarmContent, ma.regDate, mc.boardNo, u.nickname "
 			  + "from MatchingComment mc "
 			  + "inner join MatchingAlarm ma on ma.mCommentNo = mc.CommentNo "
 			  + "inner join User u on u.userNo = mc.userNo "
