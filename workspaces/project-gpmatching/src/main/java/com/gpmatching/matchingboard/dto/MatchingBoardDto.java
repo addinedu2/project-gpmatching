@@ -1,5 +1,7 @@
 package com.gpmatching.matchingboard.dto;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class MatchingBoardDto {
 	int headCount;
 	int confirmCount;
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-	Date regDate;
+	Date regDate = Timestamp.valueOf(LocalDateTime.now());
 	int readCount;
 	boolean deleted;
 	int userNo;
@@ -47,10 +49,13 @@ public class MatchingBoardDto {
 	private String owPlay;
 	private String owPosition;
 	
-	
 	private List<MatchingCommentDto> matchingCommentList;
 	private UserDto user;
 	private LolDto lol;
+	private String mCommentContent;
+	private int commentNo;
+	private String writer;
+	private String commentWriter;
 	
 
 }

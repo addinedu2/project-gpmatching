@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="com.gpmatching.common.Time" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -180,10 +180,21 @@
 											<th>${ matchingBoard.mic }</th>
 											<th>${ matchingBoard.confirmCount + 1} / ${ matchingBoard.headCount + 1}</th>
 											<th>${ matchingBoard.matchingClose }</th>
-											<th>
-												<fmt:formatDate value="${ matchingBoard.regDate }"
-         				    						pattern="yyyy-MM-dd"/>
+<!-- 											<th> -->
+<%-- 												<fmt:formatDate value="${ matchingBoard.regDate }" --%>
+<%--          				    						pattern="yyyy-MM-dd"/> --%>
+<!-- 											</th> -->
+											<c:choose>
+											    <c:when test="${empty matchingBoard.regDate}">
+											        <th>날짜 정보 없음</th>
+											    </c:when>
+											    <c:otherwise>
+											        <th>
+											    <c:set var="regDate" value="${matchingBoard.regDate}" scope="page" />
+											    <%= Time.calculateTime((java.util.Date) pageContext.getAttribute("regDate")) %>
 											</th>
+											    </c:otherwise>
+											</c:choose>
 											<th class="align-middle">
 												<!-- Varying modal -->
 

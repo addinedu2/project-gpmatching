@@ -171,6 +171,8 @@
     </div>
   </div>
 </div>
+<!-- collapse -->
+
 
 <script src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
 
@@ -180,50 +182,187 @@ $(function() {
 	
 	$('.review-btn').on("click", function(event){
 
+		const loginUser = ${loginuser.userNo};
+		const loginNickname = "${loginuser.nickname}";
+		
 		$.ajax({
 			
-			"url": "ajax-show-review",
+			"url": "/project-gpmatching/review/ajax-show-review",
 			"method": "get",
-			"data": { "userNo" : userNo },
+			"data": { "loginUser" : loginUser },
 			
 			"success": function(result){
-				
+				alert(loginNickname);
 				var reviewList = $('#review-list');
 				reviewList.empty();
-				if (result != null){
-					
-					// 테이블 헤더 추가
-	                var $headerRow = $("<tr>");
-	                
-	                $headerRow.append($("<th>").text("제목"));
-	                $headerRow.append($("<th>").text("파티장"));
-	                $headerRow.append($("<th>").text("파티원"));
-	                
-	                commentList.append($headerRow);
-	                
-// 					for(var i = 0; i < result.length; i++){
-// 						var $row = $("<tr>");
-	                    
-// 	                    $row.append($("<td>").text(result[i].mcommentNo));
-// 	                    $row.append($("<td>").text(result[i].nickname));
-// 	                    $row.append($("<td>").text(result[i].mcommentContent));
-	                 
-// 	                    commentList.append($row);
-	                    
-	                    
-// 					}
-					$('#review-modal').modal('show');
+				if (result != null) {
+                    
+                    var $table = $("<table>").addClass("table text-nowrap mb-0");
+                    $table.css({"table-layout": "fixed", "width": "100%"});
+                    reviewList.append($table);
+
+                    var $thead = $("<thead>").addClass("table-light");
+                    $table.append($thead);
+                    
+                    var $headerRow = $("<tr>");
+                    $thead.append($headerRow);
+                    
+                    $headerRow.append($("<th>").text("글번호").css("width", "10%"));
+                    $headerRow.append($("<th>").text("글제목").css("width", "30%"));
+                    $headerRow.append($("<th>").text("글작성자").css("width", "20%"));
+                    $headerRow.append($("<th>").text("지원번호").css("width", "10%"));
+                    $headerRow.append($("<th>").text("지원자").css("width", "20%"));
+                    $headerRow.append($("<th>").text("버튼").css("width", "10%"));
+                    
+                    var $tbody = $("<tbody>");
+                    $table.append($tbody);
+				 
+				
+				 	for (var i = 0; i < result.length; i++) {
+						
+				 		var $row = $("<tr>");
+						$tbody.append($row);
+						
+						var $titleColumn1 = $("<td>").addClass("align-middle");
+						$titleColumn1.css({
+						    "overflow": "hidden",
+						    "text-overflow": "ellipsis",
+						    "white-space": "nowrap"
+						});
+						var $titleColumn2 = $("<td>").addClass("align-middle");
+						$titleColumn2.css({
+						    "overflow": "hidden",
+						    "text-overflow": "ellipsis",
+						    "white-space": "nowrap"
+						});
+						var $titleColumn3 = $("<td>").addClass("align-middle");
+						$titleColumn3.css({
+						    "overflow": "hidden",
+						    "text-overflow": "ellipsis",
+						    "white-space": "nowrap"
+						});
+						var $titleColumn4 = $("<td>").addClass("align-middle");
+						$titleColumn4.css({
+						    "overflow": "hidden",
+						    "text-overflow": "ellipsis",
+						    "white-space": "nowrap"
+						});
+						var $titleColumn5 = $("<td>").addClass("align-middle");
+						$titleColumn5.css({
+						    "overflow": "hidden",
+						    "text-overflow": "ellipsis",
+						    "white-space": "nowrap"
+						});
+						var $titleColumn6 = $("<td>").addClass("align-middle");
+						
+						
+						var $board = $("<a>").attr("href", "#").addClass("text-inherit").text(result[i].boardNo);
+						$titleColumn1.append($board);
+						$row.append($titleColumn1);
+						
+						var $title = $("<a>").attr("href", "#").addClass("text-inherit").text(result[i].boardTitle);
+						$titleColumn2.append($title);
+						$row.append($titleColumn2);
+						
+						var $writer = $("<a>").attr("href", "#").addClass("text-inherit");
+						if (loginNickname === result[i].writer) {
+							result[i].writer = "";
+							$writer.text(result[i].writer);
+							$titleColumn3.append($writer);
+							$row.append($titleColumn3);     
+	                    } else {					
+							$writer.text(result[i].writer);
+							$titleColumn3.append($writer);
+							$row.append($titleColumn3); 
+	                    }
+						var $commentNo = $("<a>").attr("href", "#").addClass("text-inherit").text(result[i].commentNo);
+						$titleColumn4.append($commentNo);
+						$row.append($titleColumn4); 
+						
+						var $commentWriter = $("<a>").attr("href", "#").addClass("text-inherit");
+						if (loginNickname === result[i].commentWriter) {
+							result[i].commentWriter = "";
+							$commentWriter.text(result[i].commentWriter);
+							$titleColumn5.append($commentWriter);
+							$row.append($titleColumn5);     
+	                    } else {
+							$commentWriter.text(result[i].commentWriter);
+							$titleColumn5.append($commentWriter);
+							$row.append($titleColumn5); 
+	                    }
+						
+						// 상세보기 버튼 추가
+                        var $viewCommentsButton = $("<button>")
+                            .addClass("btn btn-primary btn-sm btn-write-review")
+                            .data('writer', result[i].writer)
+                            .data('commentWriter', result[i].commentWriter)
+                            .data('commentNo', result[i].commentNo)
+                        	.data('boardNo', result[i].boardNo)
+                        	.data('boardTitle', result[i].boardTitle)
+                        	.text("리뷰");
+	                          
+                        $titleColumn6.append($viewCommentsButton);
+                        $row.append($titleColumn6);
+                                         		
+					}
+				 	
 				}
+				$('#review-modal').modal("show");	
+				
+		
+			},
+			"error": function(xhr, status, err){
+					alert("실패");
+				
+			}
+			
+	
+		});
+	});
+	
+	
+	
+	
+	$('#review-list').on("click", '.btn-write-review', function(event) {
+		
+		const boardNo = $(this).data('boardNo');
+		const writer = $(this).data('writer');
+		const commentWriter = $(this).data('commentWriter');
+		const commentNo = $(this).data('commentNo');
+		alert("성공");
+		
+		$.ajax({
+			
+			"url": "/project-gpmatching/review/ajax-write-review",
+			"method": "get",
+			"data": { "commentWriter" : commentWriter , 
+					  "writer" : writer, 
+					  "boardNo" : boardNo,
+					  "commentNo" : commentNo
+			},
+			"success": function(result){
+				window.location.href = 
+					"/project-gpmatching/review/write?boardNo=" + boardNo + "&commentNo=" + commentNo + "&writer=" + writer + "&commentWriter=" + commentWriter;
 				
 				
 			},
 			"error": function(xhr, status, err){
 				alert("실패");
 			
-			}
-		
-		});
-	 });
+			} 
+			
+		}); 
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 });
 	
