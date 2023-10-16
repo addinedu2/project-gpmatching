@@ -32,7 +32,8 @@
           indicator-primary text-muted" href="#" role="button"
           id="dropdownNotification" data-bs-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">
-          <i class="icon-xs" data-feather="bell"></i>
+          <!-- <i class="icon-xs" data-feather="bell"></i>원본 -->
+          <i id="notificationicon" class="icon-xs" data-feather="bell"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end"
           aria-labelledby="dropdownNotification">
@@ -49,14 +50,13 @@
               
               
              <!-- List group -->
-            <div id="alram-list">
-	            <ul class="list-group list-group-flush notification-list-scroll" >
+            <div id="alarm-list" class="notification-list-scroll">
+	            <ul class="list-group list-group-flush" >
 					<li class="list-group-item border-bottom">
 						<a href="#" class="text-muted"> 
-							<c:forEach var="alram" items="${alrams}">
-								<li>유저번호:${alram.userNo}</li> 
-								<li>알람번호:${alram.alramNo}</li>
-								<li>댓글번호:${alram.commentNo}</li>
+							<c:forEach var="mAlarms" items="${matchingAlarms}">
+								<li>${mAlarms.nickname}님이 ${mAlarms.alarmContent }</li>
+
 								<hr>
 							</c:forEach>
 						</a>
@@ -64,7 +64,7 @@
 	            </ul>
             </div>
             <div class="border-top px-3 py-2 text-center">
-              <a href="/project-gpmatching/commonBoard/alramList" class="text-inherit fw-semi-bold">
+              <a href="/project-gpmatching/commonBoard/alarmList" class="text-inherit fw-semi-bold">
                 View all Notifications
               </a>
             </div>
@@ -177,6 +177,7 @@
 <script src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
 
 <script>
+
 
 $(function() {
 	
@@ -365,6 +366,7 @@ $(function() {
 	
 	
 });
+
 	
 </script>
 	

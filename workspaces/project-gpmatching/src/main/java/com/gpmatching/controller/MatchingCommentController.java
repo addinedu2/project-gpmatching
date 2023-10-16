@@ -28,10 +28,10 @@ public class MatchingCommentController {
 	private MatchingAlarmService matchingAlarmService;
 	
 	@PostMapping(path = { "/write-comment" })
-	public String writeMatchingComment(MatchingCommentDto matchingComment, MatchingAlarmDto matchingAlarmDto, 
+	public String writeMatchingComment(MatchingCommentDto matchingComment, MatchingAlarmDto matchingAlarm, 
 									   @RequestParam(defaultValue = "-1") int boardNo) {
 				
-		matchingCommentService.writeMatchingComment(matchingComment);
+		matchingCommentService.writeMatchingComment(matchingComment, matchingAlarm);
 		
 //		// 댓글이 작성될때 알림 테이블에 정보 저장 (미완성)
 //		matchingAlarmService.saveMatchingAlarm(matchingAlarmDto);
@@ -41,10 +41,11 @@ public class MatchingCommentController {
 	
 	@PostMapping(path = { "/ajax-write-comment" })
 	@ResponseBody
-	public String ajaxWriteMatchingComment(MatchingCommentDto matchingComment, MatchingAlarmDto matchingAlarmDto, @RequestParam(defaultValue = "-1") int boardNo) {
+	public String ajaxWriteMatchingComment(MatchingCommentDto matchingComment, MatchingAlarmDto matchingAlarm, 
+										   @RequestParam(defaultValue = "-1") int boardNo) {
 		
 		
-		matchingCommentService.writeMatchingComment(matchingComment);
+		matchingCommentService.writeMatchingComment(matchingComment, matchingAlarm);
 		
 //		// 댓글이 작성될때 알림 테이블에 정보 저장 (미완성)
 //		matchingAlarmService.saveMatchingAlarm(matchingAlarmDto);

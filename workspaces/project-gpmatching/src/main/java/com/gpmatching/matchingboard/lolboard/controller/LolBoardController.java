@@ -9,8 +9,10 @@
 * @author 최종 수정자 : hi.lee
 * @version 1.0, 작업 내용 :
 * 롤 매칭게시판 글쓰기 (write)
-* 롤 매칭게시판 리스트 보여주기(list)
-* @Date : 2023-10-04 
+* 롤 매칭게시판 리스트 보여주기(list) + 검색(제목) + lolTier 필터
+* 롤 매칭게시판 글수정 (edit)
+* 롤 매칭게시판 글삭제 (delete)
+* @Date : 2023-10-16
 * 
 */
 
@@ -53,27 +55,6 @@ public class LolBoardController {
 	
 	@Setter(onMethod_ = { @Autowired }) 
 	private MatchingCommentService matchingCommentService;
-
-	
-	/**
-	 * 롤 매칭 게시판 보기
-	 * 
-	 * @param model 뷰에 전달할 모델정보
-	 * @return 롤 게시판 뷰
-	 */
-	
-	
-//	@GetMapping(path = { "/lol-list"})
-//	public String matchingBoardList(Model model) {
-//		
-//		List<MatchingBoardDto> matchingLolList = lolBoardService.getSelectLolBoardListByGameName("league of legends");
-//
-//		model.addAttribute("matchingLolList", matchingLolList);
-//		
-//		
-//		return "/boardMatching/lolBoard/lol-list";
-//	}
-	
 	
 	/**
 	 * 롤 매칭 게시판 글쓰기 view 요청
@@ -82,13 +63,10 @@ public class LolBoardController {
 	 * @return 롤 게시판 뷰
 	 */
 	
-	
 	@GetMapping(path = { "/lol-write"})
 	public String showLolWriteForm(HttpSession session) {
-		// 아래 코드는 AuthInterceptor 인터셉터에서 처리
-		//if(session.getAttribute("loginuser") == null) {
-		//	return "redirect:/account/login";
-		//}
+		// AuthInterceptor 인터셉터에서 로그인 확인
+		
 		return "/boardMatching/lolBoard/lol-write";
 	}
 	
@@ -176,6 +154,12 @@ public class LolBoardController {
 		return "redirect:lol-list";	
 	}
 
+	/**
+	 * 롤 매칭 게시판 보기
+	 * 
+	 * @param model 뷰에 전달할 모델정보
+	 * @return 롤 게시판 뷰
+	 */
 	
 	// 게시판 검색 기능 + 특정 컬럼 필터가 포함된 lol-list 경로 입니다 (-허지웅)
 	@GetMapping(path = { "/lol-list"})
@@ -199,8 +183,6 @@ public class LolBoardController {
 			
 		}
 			
-		
-
 		model.addAttribute("matchingLolList", matchingLolList);
 			
 		return "/boardMatching/lolBoard/lol-list";

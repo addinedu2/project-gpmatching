@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class AlramDto {
+public class AlarmDto {
 	
 	//-> private String toId;//원글쓴 commonNo-userNo
 	//-> private String fromId;//댓글쓴 commentNo-userNo

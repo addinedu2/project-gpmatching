@@ -1,7 +1,5 @@
 package com.gpmatching.matchingboard.dto;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class MatchingBoardDto {
 	int headCount;
 	int confirmCount;
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-	Date regDate = Timestamp.valueOf(LocalDateTime.now());
+	Date regDate;
 	int readCount;
 	boolean deleted;
 	int userNo;

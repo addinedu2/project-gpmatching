@@ -33,13 +33,7 @@ public class PubgBoardServiceImpl implements PubgBoardService {
 		
 	}
 	
-//	@Override
-//	public List<MatchingBoardDto> listMatchingBoard() {
-//		
-//		List<MatchingBoardDto> matchingBoardList = mapper.selectAllMatchingBoard();
-//		
-//		return matchingBoardList;
-//	}
+
 	
 	@Override
 	public int getLastMatchingItemBoardNo() {
@@ -48,12 +42,6 @@ public class PubgBoardServiceImpl implements PubgBoardService {
 		return boardNo;
 	}
 	
-//	@Override
-//	public List<MatchingBoardDto> getMatchingBoardListByGameNo(int gameNo) {
-//		List<MatchingBoardDto> boardMachingList = mapper.selectMatchingBoardListByGameNo(gameNo);
-//		
-//		return boardMachingList;
-//	}
 	
 	@Override
 	public List<MatchingBoardDto> getMatchingBoardListByGameName(String gameName) {
@@ -91,24 +79,4 @@ public class PubgBoardServiceImpl implements PubgBoardService {
 		
 	}
 	
-
-	
-//	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {
-//		
-//		MatchingBoardDto matchingBoard = mapper.selectMatchingBoardByBoardNo(boardNo);
-//		
-//		List<MatchingCommentDto> matchingCommentList = matchingCommentMapper.selectMatchingCommentByBoardNo(boardNo);
-//		matchingBoard.setMatchingCommentList(matchingCommentList);
-//		
-//		return matchingBoard;
-//		
-//	}
-	
-//	@Override
-//	public String getMatchingBoardNickname() {
-//		
-//		String nickname = mapper.selectMatchingBoardNickname();
-//		
-//		return nickname;
-//	}
 }

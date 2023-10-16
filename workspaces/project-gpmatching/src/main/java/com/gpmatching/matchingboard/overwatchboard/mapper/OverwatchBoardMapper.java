@@ -15,24 +15,7 @@ import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 @Mapper
 public interface OverwatchBoardMapper {
 	
-	//모든 테이블 칼럼 항목 보여주는 예시 쿼리
-	/*
-	@Insert( "insert into matchingbaord ( boardNo, boardTitle, "
-			+ "boardContent, preferGender, mic, matchingClose,"
-			+ "regDate, readCount, deleted, userNo, gameNo) "
-			+ "values ( #{ boardNo }, #{ boardTitle }, #{ boardContent },"
-			+ "#{ preferGender },#{ mic },#{ matchingClose },#{ regDate },"
-			+ "#{ readCount }, #{ deleted }, #{ userNo }, #{ gameNo })")
-	*/
-	
 	//mysql db 설정에 table명, 칼럼명 대소문자 구분 설정 가능 - 매칭 해주어야 한다.
-	/*
-	@Insert( "insert into MatchingBoard ( boardTitle, "
-			+ "boardContent, preferGender, mic) "
-			+ "values ( #{ boardTitle }, #{ boardContent }, "
-			+ "#{ preferGender }, #{ mic } )")
-	void insertMatchingBoard2(MatchingBoardDto matchingBoardDto);
-	*/
 	
 	@Insert( "insert into MatchingBoard ( boardTitle, "
 			+ "boardContent, preferGender, mic, userNo, gameNo) "

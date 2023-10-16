@@ -81,8 +81,10 @@
 	 
 	<!-- submit&reset -->
     <div class="btn-center">
-		<button type="submit" class="btn btn-primary mb-2">submit</button> 
-		<button type="button" id="btnCancel" class="btn btn-secondary mb-2">reset</button>
+			<button type="submit" class="btn btn-primary mb-2">확인</button>
+		<a href="commonDetail?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}">
+			<button type="button" id="btnCancel" class="btn btn-secondary mb-2">취소</button>
+		</a>
 	</div>
 </form>
 </div>
@@ -120,7 +122,7 @@
 
 	<!-- Theme JS -->
 	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
-
+	<script src="/project-gpmatching/resources/assets/js/common.js"></script>
 
 </body>
 </html>

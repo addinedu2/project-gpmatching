@@ -79,29 +79,29 @@
 		                    </div>
 		                    <br>
 		                    
-		                    <c:forEach var="alram" items="${alrams }">
+		                    
+		                    <c:forEach var="alarm" items="${matchingAlarms }">
 
 			                    <!-- 알림 리스트 테스트★ -->
 			                	<div class="row">
 				                      <!-- text -->
 				                      
-				                    <div class="col-6 mb-5">
-				                      <h6 class="text-uppercase fs-5 ls-2">회원번호</h6>
-				                      <p class="mb-0">${alram.userNo }</p>
-				                    </div>
+				               
 				                      
 				                    <div class="col-6 mb-5">
 				                      <h6 class="text-uppercase fs-5 ls-2">알림번호 </h6>
-				                      <p class="mb-0">${alram.alramNo }</p>
+				                      <p class="mb-0">${alarm.nickname }</p>
 				                    </div>
 				                    
-				                    <div class="col-6 mb-5">
+				                    
+				                    
+				                   <%--  <div class="col-6 mb-5">
 				                      <h6 class="text-uppercase fs-5 ls-2">댓글번호</h6>
-				                      <p class="mb-0">${alram.commentNo }</p>
-				                    </div>
+				                      <p class="mb-0">${alarm.mCommentNo }</p>
+				                    </div> --%>
 				                    <div class="col-6 mb-5">
-				                      <h6 class="text-uppercase fs-5 ls-2">댓글내용</h6>
-				                      <p class="mb-0">${alram.commentContent}</p>
+				                      <h6 class="text-uppercase fs-5 ls-2">alramContent내용</h6>
+				                      <p class="mb-0">${alarm.alarmContent}</p>
 				                    </div>
 				                    
 				                    

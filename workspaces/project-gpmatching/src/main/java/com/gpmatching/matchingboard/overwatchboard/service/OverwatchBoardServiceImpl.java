@@ -25,14 +25,6 @@ public class OverwatchBoardServiceImpl implements OverwatchBoardService {
 		
 	}
 	
-//	@Override
-//	public List<MatchingBoardDto> listMatchingBoard() {
-//		
-//		List<MatchingBoardDto> matchingBoardList = mapper.selectAllMatchingBoard();
-//		
-//		return matchingBoardList;
-//	}
-	
 	@Override
 	public int getLastMatchingItemBoardNo() {
 		int boardNo = mapper.selectMatchingItemBoardNo();

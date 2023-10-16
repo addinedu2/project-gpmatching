@@ -421,7 +421,6 @@
 		                $headerRow.append($("<th>").text("닉네임"));
 		                $headerRow.append($("<th>").text("댓글 내용"));
 						$headerRow.append($("<th>").text("승인여부"));;
-						$headerRow.append($("<th>").text("글번호 : " + boardNo));; // 테스트중
 		                
 		                commentList.append($headerRow);
 		                
@@ -562,7 +561,7 @@
 
  	
  	
- 	// 거절 버튼 눌렀을 때의 동작 (-이현일)
+	// 거절 버튼을 누르면 화면이 변하지 않고 글의 댓글 목록 보기 유지 (-이현일)
  	$(function() {
 	    $('#comment-list').on("click", '.btn-reject-comment', function(event) {
 	    	
@@ -646,9 +645,10 @@
 	});
 
 
-	
-	
 	</script>
+	
+	<script src="/project-gpmatching/resources/assets/js/common.js"></script>
+	
 </body>
 
 </html>
