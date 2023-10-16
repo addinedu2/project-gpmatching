@@ -119,17 +119,19 @@
                   </div>
                   <form action="editMypage" method="post">
 		        <input type="hidden" name="userId" value="${ loginuser.userId }">
-                    <!-- row -->
-		
 
+                    <!-- row -->
                     <div class="mb-3 row">
-                      <label for="fullName" class="col-sm-4 col-form-label
-                          form-label">Full name</label>
-                      <div class="col-sm-4 mb-3 mb-lg-0">
-                        <input type="text" class="form-control" placeholder="First name" id="fullName">
-                      </div>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control" placeholder="Last name" id="lastName">
+                      <label for="location" class="col-sm-4 col-form-label
+                          form-label">닉네임</label>
+                      <div class="col-md-8 col-12">
+                  <input type="text" class="form-control" name="nickname" placeholder="${loginuser.nickname}" id="nickname">
+                   <!--      <select class="form-select" id="newnickname">
+                        <option selected>Select Country</option>
+                            <option value="1">India</option>
+                            <option value="2">UK</option>
+                            <option value="3">USA</option> 
+                          </select> -->  <!-- 데이터 선택이라 일단 주석으로 남겨놓는다 -->
                       </div>
                     </div>
 
@@ -151,20 +153,6 @@
                       </div>
                     </div>
                     
-                    <!-- row -->
-                    <div class="mb-3 row">
-                      <label for="location" class="col-sm-4 col-form-label
-                          form-label">닉네임</label>
-                      <div class="col-md-8 col-12">
-                  <input type="text" class="form-control" name="nickname" placeholder="${loginuser.nickname}" id="nickname">
-                   <!--      <select class="form-select" id="newnickname">
-                        <option selected>Select Country</option>
-                            <option value="1">India</option>
-                            <option value="2">UK</option>
-                            <option value="3">USA</option> 
-                          </select> -->  <!-- 데이터 선택이라 일단 주석으로 남겨놓는다 -->
-                      </div>
-                    </div>
                     
                     <!-- row -->
                     <div class="mb-3 row">
