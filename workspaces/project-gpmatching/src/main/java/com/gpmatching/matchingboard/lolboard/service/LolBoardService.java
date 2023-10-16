@@ -11,8 +11,6 @@ public interface LolBoardService {
 
 	void write(MatchingBoardDto matchingBoardDto);
 	
-	//List<MatchingBoardDto> listMatchingBoard();
-
 	int getLastMatchingItemBoardNo();
 	
 	List<MatchingBoardDto> getMatchingBoardListByGameName(String gameName);
@@ -35,10 +33,5 @@ public interface LolBoardService {
 
 	void setNowConfirmCount(int confirmCount);
 	
-	//List<MatchingBoardDto> getMatchingBoardListByGameNo(int gameNo);
-	
-	//String getMatchingBoardNickname();
-	
-	
-	
+
 }

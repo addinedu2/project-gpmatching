@@ -122,10 +122,10 @@
 					<label class="form-label text-light" for="textInput">모집인원 <span class="text-secondary">(최대 4인)</span></label>
 					<select class="form-select" name="headCount" aria-label="Default select example">
 						<option value="" selected>인원을 선택하세요</option>
-						<option value=1>1</option>
-						<option value=2>2</option>
-						<option value=3>3</option>
-						<option value=4>4</option>
+						<option value=1>2</option>
+						<option value=2>3</option>
+						<option value=3>4</option>
+						<option value=4>5</option>
 					</select>
 				</div>				
 				<br>

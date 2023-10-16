@@ -20,7 +20,6 @@ import com.gpmatching.dto.MypageBoardDto;
 import com.gpmatching.dto.UserDto;
 import com.gpmatching.service.AdminService;
 import com.gpmatching.ui.AdminPager;
-import com.gpmatching.ui.CommonPager;
 
 @Controller
 @RequestMapping(path = {"/admin"})

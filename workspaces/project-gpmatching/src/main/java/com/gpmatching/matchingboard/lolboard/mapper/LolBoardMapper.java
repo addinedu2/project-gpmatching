@@ -15,24 +15,9 @@ import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 @Mapper
 public interface LolBoardMapper {
 	
-	//모든 테이블 칼럼 항목 보여주는 예시 쿼리
-	/*
-	@Insert( "insert into matchingbaord ( boardNo, boardTitle, "
-			+ "boardContent, preferGender, mic, matchingClose,"
-			+ "regDate, readCount, deleted, userNo, gameNo) "
-			+ "values ( #{ boardNo }, #{ boardTitle }, #{ boardContent },"
-			+ "#{ preferGender },#{ mic },#{ matchingClose },#{ regDate },"
-			+ "#{ readCount }, #{ deleted }, #{ userNo }, #{ gameNo })")
-	*/
-	
+
+
 	//mysql db 설정에 table명, 칼럼명 대소문자 구분 설정 가능 - 매칭 해주어야 한다.
-	/*
-	@Insert( "insert into MatchingBoard ( boardTitle, "
-			+ "boardContent, preferGender, mic) "
-			+ "values ( #{ boardTitle }, #{ boardContent }, "
-			+ "#{ preferGender }, #{ mic } )")
-	void insertMatchingBoard2(MatchingBoardDto matchingBoardDto);
-	*/
 	
 	@Insert( "insert into MatchingBoard ( boardTitle, "
 			+ "boardContent, preferGender, mic, userNo, gameNo, headCount ) "
@@ -42,29 +27,12 @@ public interface LolBoardMapper {
 	void insertMatchingBoard(MatchingBoardDto matchingBoardDto);
 	
 
-
-//	@Select( "select boardNo, boardTitle, boardContent, regDate, userNo "
-//			+ "from MatchingBoard "
-//			+ "order by boardNo desc")
-//	List<MatchingBoardDto> selectAllMatchingBoard();
-	
-	
 	@Select( "select boardNo, boardTitle, boardContent, regDate, "
 			+ "userNo, mic, headCount, confirmCount "
 			+ "from MatchingBoard "
 			+ "where gameNo = #{ gameNo } "
 			+ "order by boardNo desc")
-	List<MatchingBoardDto> selectMatchingBoardListByGameNo(int gameNo);
-	
-	
-//	// 테스트
-//	@Select("SELECT mb.boardNo, mb.boardTitle, mb.boardContent, mb.regDate, mb.userNo, u.nickname " +
-//            "FROM MatchingBoard mb " +
-//            "INNER JOIN User u ON mb.userNo = u.userNo " +
-//            "WHERE mb.gameNo = (SELECT gameNo FROM GameList WHERE gameName = #{gameName}) " +
-//            "ORDER BY mb.boardNo DESC")
-//	List<MatchingBoardDto> selectMatchingBoardListByGameName(String gameName);
-	
+	List<MatchingBoardDto> selectMatchingBoardListByGameNo(int gameNo);	
 
 	@Select( "select boardNo, boardTitle, boardContent, regDate, "
 			+ "userNo, mic, headCount, confirmCount "
@@ -73,16 +41,6 @@ public interface LolBoardMapper {
 			+ "from GameList where gameName = #{ gameName} ) "
 			+ "order by boardNo desc" )
 	List<MatchingBoardDto> selectMatchingBoardListByGameName(String gameName);
-	
-//	@Select( "select nickname "
-//			+ "from User u "
-//			+ "inner join matchingBoard m "
-//			+ "on m.boardNo = (select boardNo "
-//			+ "from MatchingBoard "
-//			+ "where gameNo = (select gameNo "
-//			+ "from GameList where gameName = #{ gameName} )) "
-//			+ "order by boardNo desc" )
-//	selectMatchingBoardListByGameName(String gameName);	
 	
 	
 	//MatchingBoard 의 마지막 튜플의 boardNo (ai 설정됨) 를 가지고 오는 SQL 문

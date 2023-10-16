@@ -66,7 +66,7 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 	
 	@Override
 	public void setCommentStatusConfirm(int commentNo) {
-		System.out.println(commentNo);
+		//System.out.println(commentNo);
 		int boardNo = matchingCommentMapper.selectBoardNoByCommentNo(commentNo);
 		int confirmCount = matchingCommentMapper.commentConfirmCountByMatchingBoardNo(boardNo);
 		int headCount = lolBoardMapper.matchingBoardheadCountByBoardNo(boardNo);
@@ -130,7 +130,6 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 	
 	@Override
 	public void setCommentStatusReject(int commentNo) {
-		System.out.println("거절버튼클릭");
 		boolean matchingClose = isMatchingCloseTrueByCommentNo(commentNo);
 		int boardNo;
 		int confirmCount ;
