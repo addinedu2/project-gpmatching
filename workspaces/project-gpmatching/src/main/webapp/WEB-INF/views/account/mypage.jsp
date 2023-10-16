@@ -120,25 +120,25 @@
                 <div id="write-Board-List">
                 
                   	
-					<table class="table text-nowrap mb-0">
+					<table class="table text-nowrap mb-0" style="table-layout: fixed; width: 100%">
 					   <thead class="table-light">
 					      <tr>
-					         <th>제목</th>
-					         <th>작성일자</th>
+					         <th style="width: 70%">제목</th>
+					         <th style="width: 30%; text-align: right;">작성일자</th>
 					      </tr>
 					   </thead>
 					   <tbody>
 					   
 					    <c:forEach var="board" items="${requestScope.boardList }">
 					   	<tr>
-                           <td class="align-middle">
+                           <td class="align-middle" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                <div class="d-flexalign-items-center">
                                    <div class="ms-3 lh-1">
                                        <h5 class=" mb-1"> <a href="#" class="text-inherit">${ board.boardTitle }</a></h5>
                                    </div>
                                </div>
                            </td>
-                           <td class="align-middle">
+                           <td class="align-middle" style="text-align: right;">
                            		<fmt:formatDate value="${ board.regDate }"
 					         				    pattern="yyyy-MM-dd"/>
                            </td>
@@ -430,25 +430,19 @@
 <script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 
 
-
-	 
-	
-	 	
-
-
-
 <!-- 테스트코드(공통게시판) -->
 <script>
 $(function(event) {
     $("#btnradio2, #btnradio1").on('click', function(event) {
         let loginUser = "${loginUser.userNo}";
         
+        //<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" data-board="common"> 여기에서 data-board="common" 이부분임
         const board = $(this).data("board"); // data-board속성의 값 읽기
 
         $.ajax({
             "url": "boardSelect",
             "method": "get",
-            "data": { "loginUser": loginUser, board: board },
+            "data": { "loginUser": loginUser, "board": board },
             "success": function(result) {
                 var myBoardList = $('#write-Board-List');
                 myBoardList.empty();
@@ -457,6 +451,7 @@ $(function(event) {
                     console.log(result);
 
                     var $table = $("<table>").addClass("table text-nowrap mb-0");
+                    $table.css({"table-layout": "fixed", "width": "100%"});
                     myBoardList.append($table);
 
                     var $thead = $("<thead>").addClass("table-light");
@@ -465,8 +460,8 @@ $(function(event) {
                     var $headerRow = $("<tr>");
                     $thead.append($headerRow);
                     
-                    $headerRow.append($("<th>").text("제목"));
-                    $headerRow.append($("<th>").text("작성일자"));
+                    $headerRow.append($("<th>").text("제목").css("width", "70%"));
+                    $headerRow.append($("<th>").text("작성일자").css("text-align", "right").css("width", "30%"));
                     
                     var $tbody = $("<tbody>");
                     $table.append($tbody);
@@ -478,19 +473,24 @@ $(function(event) {
                         $tbody.append($row);
                         
                         var $titleColumn = $("<td>").addClass("align-middle");
+                        $titleColumn.css({
+                            "overflow": "hidden",
+                            "text-overflow": "ellipsis",
+                            "white-space": "nowrap"
+                        });
                         $row.append($titleColumn);
                         
                         var $titleLink = $("<a>").attr("href", "#").addClass("text-inherit").text(result[i].boardTitle);
                         $titleColumn.append($titleLink);
                         
-                        var $dateCell = $("<td>").text(result[i].regDate);
+                        var $dateCell = $("<td>").text(result[i].regDate).css("text-align", "right");
                         $row.append($dateCell); 
                     }
 
                 }
             },
             "error": function(xhr, status, err) {
-                alert("실패");
+                alert("게시글을 불러오지 못했습니다.");
             }
         });
     });
@@ -506,6 +506,7 @@ $(function(event) {
 });
 </script>
 
+<script src="/project-gpmatching/resources/assets/js/common.js"></script>
 
 </body>
 

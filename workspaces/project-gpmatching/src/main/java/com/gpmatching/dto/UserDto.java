@@ -33,7 +33,8 @@ public class UserDto {
 	private String userPhone;
 	private String userGrade;
 	private Date regDate;
-	
+	private String userImage;
+
 }
 
 

@@ -113,7 +113,7 @@
 
 	<!-- Theme JS -->
 	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
-
+	<script src="/project-gpmatching/resources/assets/js/common.js"></script>
 
 </body>
 </html>

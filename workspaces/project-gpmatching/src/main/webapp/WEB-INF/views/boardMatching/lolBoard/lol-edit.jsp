@@ -211,6 +211,8 @@
 			
 			$("#lolTier").val('${ lolMatchingBoard.lolTier }').prop("selected", true);// 선택하기
 		</script>
+		<script src="/project-gpmatching/resources/assets/js/common.js"></script>
+		
 </body>
 
 </html>
