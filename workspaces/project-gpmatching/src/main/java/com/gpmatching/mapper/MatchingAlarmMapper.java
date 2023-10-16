@@ -2,6 +2,7 @@ package com.gpmatching.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -24,4 +25,14 @@ public interface MatchingAlarmMapper {
 			  + "where mc.userNo != ${userNo} "
 			  + "order by ma.mCommentNo desc")
 	List<MatchingAlarmDto> selectAlarmListByUserNo(int userNo);
+
+
+	@Delete("delete "
+		  + "from MatchingAlarm "
+		  + "where mCommentNo "
+		  + "in (select mc.CommentNo "
+		  + "    from MatchingComment mc "
+		  + "    inner join User u on u.userNo = mc.userNo "
+		  + "    where mc.userNo != ${userNo})")
+	void deleteAlarmListByUserNo(int userNo);
 }

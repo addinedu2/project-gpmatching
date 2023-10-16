@@ -57,7 +57,8 @@
 	//임시 알람 클릭하면 마이페이지로 넘어감
 	$(function(event) {
 		$("#dropdownNotification").on("mouseenter",function(event) {
-			let loginUser = "${loginUser.userNo}";
+			event.preventDefault();
+			let loginUser = $(this).data("userno");
 		
 			 $.ajax({
 				url: '/project-gpmatching/modules/header',
@@ -68,7 +69,7 @@
 					alarmList.empty();
 					
 					$.each(data, function (index, matchingAlarms) {
-		                var commentAlarm = '<li><a href="http://localhost:8080/project-gpmatching/account/mypage">&nbsp;&nbsp;'+matchingAlarms.nickname+'님이 댓글을 달았습니다</a></li>' + 
+		                var commentAlarm = '<li><a href="/project-gpmatching/account/mypage">&nbsp;&nbsp;'+matchingAlarms.nickname+'님이 댓글을 달았습니다</a></li>' + 
 		                '<hr>';
 						alarmList.append(commentAlarm);
 					});
@@ -80,6 +81,25 @@
 		});
 	});
 	
+	//알림 확인하면 데이터 삭제
+	$(function (event){
+		$('#checkAlarm').on("click",function(event){
+			event.preventDefault();
+			const userNo = $(this).data("userno");
+			
+			$.ajax({
+				"url": '/project-gpmatching/modules/header/checkAlarm',
+				"type": 'GET',
+				"data" : {"userNo":userNo},
+				"success": function(data, status, xhr){
+					
+				},
+				"error": function(xhr, status, err){
+					console.log("요청 실패");
+				}
+			});
+		});
+	});
 	
 	//아래 ToDo
 	

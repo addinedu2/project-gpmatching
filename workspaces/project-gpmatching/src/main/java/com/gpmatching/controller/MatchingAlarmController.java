@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gpmatching.dto.MatchingAlarmDto;
 import com.gpmatching.dto.UserDto;
+import com.gpmatching.service.MatchingAlarmService;
 import com.gpmatching.service.MatchingCommentService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,14 +22,15 @@ import lombok.RequiredArgsConstructor;
 public class MatchingAlarmController {
 	
 	@Autowired
-	private MatchingCommentService matchingCommentService;
+	private MatchingAlarmService matchingAlarmService;
 	
 	@GetMapping(path= {"/modules/header"})
 	@ResponseBody
 	public List<MatchingAlarmDto> headerMatchingAlarmList(HttpSession session, Model model) {
 		
 		UserDto loginUser = (UserDto)session.getAttribute("loginuser");
-		List<MatchingAlarmDto> matchingAlarms = matchingCommentService.getMatchingAlarmListByUserNo(loginUser.getUserNo());
+		List<MatchingAlarmDto> matchingAlarms = 
+				matchingAlarmService.getMatchingAlarmListByUserNo(loginUser.getUserNo());
 		
 		return matchingAlarms;
 	}
@@ -37,10 +39,23 @@ public class MatchingAlarmController {
 	public String alarmList(HttpSession session,  Model model) {
 
 		UserDto loginUser = (UserDto)session.getAttribute("loginuser");
-		List<MatchingAlarmDto> matchingAlarms = matchingCommentService.getMatchingAlarmListByUserNo(loginUser.getUserNo());//유저넘버 조회
+		List<MatchingAlarmDto> matchingAlarms = 
+				matchingAlarmService.getMatchingAlarmListByUserNo(loginUser.getUserNo());//유저넘버 조회
 		model.addAttribute("matchingAlarms",matchingAlarms);
 
 		return "commonBoard/alarmList";
+	}
+	
+	
+	@GetMapping(path= {"/modules/header/checkAlarm"})
+	@ResponseBody
+	public String checkAlarmList(HttpSession session, int userNo) {
+		
+		matchingAlarmService.deleteAlarmListByUserNo(userNo);
+		
+		return "success";
+
+		
 	}
 	
 }
