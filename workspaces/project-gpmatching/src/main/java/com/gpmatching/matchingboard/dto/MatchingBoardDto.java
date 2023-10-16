@@ -47,10 +47,13 @@ public class MatchingBoardDto {
 	private String owPlay;
 	private String owPosition;
 	
-	
 	private List<MatchingCommentDto> matchingCommentList;
 	private UserDto user;
 	private LolDto lol;
+	private String mCommentContent;
+	private int commentNo;
+	private String writer;
+	private String commentWriter;
 	
 
 }

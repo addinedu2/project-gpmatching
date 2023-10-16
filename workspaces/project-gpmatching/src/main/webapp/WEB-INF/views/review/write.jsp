@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,19 +53,23 @@
 		<div class="card" style="width: 20rem;" >
 		<form id="reviewform" action="write-review" method="post">
 		   <div class="card-body">
-		   	  <input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
+		   	  <input type="hidden" name="boardNo" value="${ boardNo }" />
 		   	  <input type="hidden" name="userNo" value="${ loginuser.userNo }" />
+		   	  <input type="hidden" name="commentNo" value="${ commentNo }" />
 			<input type="hidden" name="category"  value="review"> 
-		      <h5 class="card-title">평점 리뷰 기능</h5>
-		      <span>글제목 : ${ commonBoard.commonTitle }</span>
-		      <br>
-		      <span>글번호 : ${ commonBoard.commonNo }</span>
-		      <br>
-		      <span>회원번호 : ${ commonBoard.userNo }</span>
+		      <h5 class="card-title">글제목 : ${ boardNo }</h5>
 		      <hr>
-		      <span>리뷰작성자 : ${ loginuser.nickname }</span>
-		      <br>
-		      <br>
+		      <c:choose>
+				<c:when test="${ empty commentWriter }">
+					<span>리뷰 대상자 : ${ writer }</span>
+					<input type="hidden" name="reviewedUserNo" value="${ writerUserNo }" />
+				</c:when>
+				<c:otherwise>					
+					<span>리뷰 대상자 : ${ commentWriter }</span>
+					<input type="hidden" name="reviewedUserNo" value="${ commentUserNo }" />		
+				</c:otherwise>
+		      </c:choose>
+		      <hr>
 		      <!-- Select Option -->
 			  <div class="mb-3">
 				<label class="form-label" for="selectOne">평점 <span class="text-secondary">(포인트 적립)</span>
