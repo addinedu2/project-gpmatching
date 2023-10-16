@@ -8,55 +8,29 @@
     <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<!-- Favicon icon-->
-<link rel="shortcut icon" type="image/x-icon"
-	href="/project-gpmatching/resources/assets/images/favicon/favicon.ico">
-<!-- Theme CSS -->
-<link rel="stylesheet"
-	href="/project-gpmatching/resources/assets/css/theme.min.css">
-	<link rel="stylesheet"
-	href="/project-gpmatching/resources/assets/css/theme.css">
-
-<!-- Libs CSS -->
-<link
-	href="/project-gpmatching/resources/assets/libs/bootstrap-icons/font/bootstrap-icons.css"
-	rel="stylesheet">
-<link
-	href="/project-gpmatching/resources/assets/libs/dropzone/dist/dropzone.css"
-	rel="stylesheet">
-<link
-	href="/project-gpmatching/resources/assets/libs/@mdi/font/css/materialdesignicons.min.css"
-	rel="stylesheet" />
-<link
-	href="/project-gpmatching/resources/assets/libs/prismjs/themes/prism-okaidia.css"
-	rel="stylesheet">
-	
-<!-- 	<style type="text/css">
-	listCommon {
-	text-align: center;
-	}
-	
-	</style>
- -->	
+<style>
+  .table.text-light th, .table.text-light td { color: black;  } /* jsp 글자 검은색 */
+</style>
     <title>유저 목록</title>
 </head>
 
 <body class="bg-dark">
-    <div id="db-wrapper" class="toggled">
-    <jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
-    <div id="page-content">
-	<jsp:include page="/WEB-INF/views/modules/header.jsp" />
-             
+ 
              <!-- commonList -->
              <br>
              <div class="d-grid gap-2 d-md-flex justify-content-md-end"></div>
 			 <br>
              <!-- basic table -->
-<table class="table text-light" style="text-align: center">
+<table class="table text-light" style="color: black; text-align: center;">
    <thead>
       <tr class="userList" >
-     
+      <form action="/adminUserList" method="get">
+            <div class="mb-3">
+                <label for="searchInput" class="form-label">회원 검색</label>
+                <input type="text" class="form-control" id="searchInput" name="searchKeyword">
+            </div>
+            <button type="submit" class="btn btn-primary">검색</button>
+        </form>
          <th>아이디</th>
          <th>닉네임</th>
          <th>회원 등급</th>
@@ -67,7 +41,9 @@
    </thead>
    <!-- userId, nickname, regDate, userGrade, regDate --> 
    <tbody>
-   <c:forEach var="userlist" items="${requestScope.listuser }" varStatus="loop">
+   
+   
+   <c:forEach var="userlist" items="${ requestScope.listuser }" varStatus="loop">
       <tr>
          <td>${ userlist.userId }</td>
          <td>${ userlist.nickname }</td>
@@ -82,6 +58,7 @@
 </table>
 <br>
              <div>
+
              	<ul class="pagination justify-content-center mb-0">
              	${ pager }
              	</ul>
