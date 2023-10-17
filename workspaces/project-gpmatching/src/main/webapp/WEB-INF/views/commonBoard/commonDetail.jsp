@@ -392,7 +392,9 @@
 				"method" : "post",
 				"data" : formData,
 				"success": function(data, status, xhr){
+
 					$('#comment-list').load('commentList?commonNo=${commonBoard.commonNo}');
+					$('#commentContent').val("");
 				},
 				"error" : function(xhr, status, err){
 					alert("fail");

@@ -36,9 +36,9 @@ public class BoardCommentController {
 	
 	//공통게시판 댓글 쓰기
 	@PostMapping(path= {"/writeComment"})
-	public String writeComment(BoardCommentDto boardComment, AlarmDto alarm, @RequestParam(defaultValue = "-1") int pageNo) {
+	public String writeComment(BoardCommentDto boardComment, @RequestParam(defaultValue = "-1") int pageNo) {
 	
-		boardCommentService.writeComment(boardComment, alarm);
+		boardCommentService.writeComment(boardComment);
 
 		//return "redirect:commonDetail";
 		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d", boardComment.getCommonNo(), pageNo);
@@ -46,13 +46,13 @@ public class BoardCommentController {
 	
 	@PostMapping(path= {"/ajax-writeComment"})
 	@ResponseBody
-	public String ajaxWriteComment(BoardCommentDto boardComment, AlarmDto alarm, @RequestParam(defaultValue = "-1") int pageNo) {
+	public String ajaxWriteComment(BoardCommentDto boardComment, @RequestParam(defaultValue = "-1") int pageNo) {
 	
 		if (pageNo < 1) {
 			return "redirect:commonList";
 		}
 		
-		boardCommentService.writeComment(boardComment, alarm);
+		boardCommentService.writeComment(boardComment);
 
 		return "success";
 	}
