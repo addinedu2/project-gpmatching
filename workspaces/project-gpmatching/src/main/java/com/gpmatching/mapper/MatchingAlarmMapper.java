@@ -35,4 +35,11 @@ public interface MatchingAlarmMapper {
 		  + "    inner join User u on u.userNo = mc.userNo "
 		  + "    where mc.userNo != ${userNo})")
 	void deleteAlarmListByUserNo(int userNo);
+
+	@Select("select count(ma.alarmNo) as mAlarmCount "
+		  + "from MatchingComment mc "
+		  + "inner join MatchingAlarm ma on ma.mCommentNo = mc.CommentNo "
+		  + "inner join User u ON u.userNo = mc.userNo "
+		  + "where mc.userNo != ${userNo}")
+	int countMatchingAlarmNo(int userNo);
 }
