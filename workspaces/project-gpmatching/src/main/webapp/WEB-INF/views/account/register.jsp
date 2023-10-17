@@ -152,10 +152,8 @@
                         fs-5">비밀번호를 잊으셨나요?</a>
                          <!-- 비밀번호 찾기 -->
                   </div>
-
                 </div>
               </div>
-
             </form>
           </div>
         </div>
@@ -271,8 +269,12 @@
 				return;
 			}
 			
+			if (userPwd != confirmPassword) {
+		        alert('비밀번호와 비밀번호 확인이 일치하지 않습니다');
+		        $('#confirmPassword').focus();
+		        return;
+			}
 			
-				
 			$("#registerform").submit(); //중복검사 됐을때만 submit
 			
 		});
@@ -298,33 +300,33 @@
 		   
 		   
 		   
-		/* var passwordOption = document.getElementById('passwordOption')
+/* 		   var pwdOption = document.getElementById('pwdOption')
 		   var SpecialChar = ["!","@","#","$","%"];
 		   var checkSpecialChar = 0;
 		   
-		   if(password.length < 6 || password.length>16) {
-		      passwordOption.innerHTML = '비밀번호는 6글자 이상, 16글자 이하만 이용 가능합니다.';
-		      passwordOption.style.color = 'red';          
+		   if(userPwd.length < 6 || userPwd.length>16) {
+			   pwdOption.innerHTML = '비밀번호는 6글자 이상, 16글자 이하만 이용 가능합니다.';
+			   pwdOption.style.color = 'red';          
 		   }
 		   
 		   for(var i=0; i<SpecialChar.length; i++){
-		      if(password.indexOf(SpecialChar[i]) != -1){
+		      if(userPwd.indexOf(SpecialChar[i]) != -1){
 		         checkSpecialChar = 1;            
 		      }          
 		   }
 		   if(checkSpecialChar == 0){
-		      passwordOption.innerHTML = '!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.'  
-		   }  */
+			   pwdOption.innerHTML = '!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.'  
+		   }  
 		 
-		   /* $('#register').on('click', function(event){
+		    $('#register').on('click', function(event){
 		    event.preventDefault();
 		   
-		    if (password != passwordConfirm){
+		    if (userPwd != confirmPassword){
 		       alert("비밀번호가 일치하지 않습니다");
-		       $('#password').focus();
+		       $('#userPwd').focus();
 		       return
 		    }
-		   }); */
+		   });  */
 		   
 		   
 		   
@@ -339,7 +341,7 @@
 		    	 passwordCheck.innerHTML = '비밀번호가 일치하지 않습니다.';
 		    	 passwordCheck.style.color = 'red';
 		         //return false;
-		         registerButton.disabled = true;
+		         registerButton.disabled = false;
 		        }
 		   }
 		}
