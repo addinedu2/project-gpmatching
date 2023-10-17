@@ -117,7 +117,7 @@
               </div>
               
               <div class="mb-3">
-		           <label for="imageName" class="form-label">
+		           <label for="imageInput" class="form-label">
 		               <img id="preview" src="/project-gpmatching/resources/assets/images/avatar/anonymous.png" width="100" height="100">
 		           </label>
 		           <input type="file" id="imageInput" name="imageName" style="display: none;" accept="image/*" onchange="readURL(this);" />
@@ -237,7 +237,23 @@
 			event.preventDefault(); //이벤트 발생 객체의 원래 동작 실행 막기 
 			
 			if(!dupChecked){
-				alert("아이디 중복검사를 하세요");
+				const userId = $("#userId").val();
+				alert("아이디를 입력하세요");
+				$('#userId').focus();
+				return;
+			}
+			
+			const userPwd = $("#userPwd").val();
+			if(!userPwd){
+				alert('비밀번호를 입력하세요');
+				$('#userPwd').focus();
+				return;
+			}
+			
+			const confirmPassword = $("#confirmPassword").val();
+			if(!confirmPassword){
+				alert('비밀번호를 확인하세요');
+				$('#confirmPassword').focus();
 				return;
 			}
 			
@@ -247,6 +263,14 @@
 				$('#userEmail').focus();
 				return;
 			}
+			
+			const nickname = $("#nickname").val();
+			if(!nickname){
+				alert('닉네임을 입력하세요');
+				$('#nickname').focus();
+				return;
+			}
+			
 			
 				
 			$("#registerform").submit(); //중복검사 됐을때만 submit
