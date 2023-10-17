@@ -74,9 +74,9 @@
                   <div class="row">
                     <div class="col-12 mb-5">
                       <!-- text -->
-                      <h6 class="text-uppercase fs-5 ls-2">Position
+                      <h6 class="text-uppercase fs-5 ls-2">review Point
                       </h6>
-                      <p class="mb-0">어쩌라고</p>
+                      <p class="mb-0">${reviewPoint}</p>
                     </div>
                     <div class="col-6 mb-5">
                       <h6 class="text-uppercase fs-5 ls-2">Phone </h6>

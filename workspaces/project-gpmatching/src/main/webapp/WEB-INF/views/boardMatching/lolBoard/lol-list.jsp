@@ -132,7 +132,7 @@
 										<tr id="tr-${ matchingBoard.boardNo }" data-title="${ matchingBoard.boardTitle }">
 
 											<th scope="row">
-											<a href="">${ matchingBoard.nickname }</a>
+											<a href="https://www.op.gg/summoners/kr/${matchingBoard.nickname}">${ matchingBoard.nickname }</a>
 											</th>
 											<th>${ matchingBoard.boardTitle }</th>
 											<th>${ matchingBoard.boardContent }</th>

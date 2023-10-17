@@ -15,5 +15,7 @@ public class MypageBoardDto {
 	private Date regDate;
 	
 	private String boardType;
+	
+	private int reviewPoint;
 
 }

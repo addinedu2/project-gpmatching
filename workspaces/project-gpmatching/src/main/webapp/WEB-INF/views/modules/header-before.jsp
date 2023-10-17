@@ -184,6 +184,7 @@ $(function() {
 	$('.review-btn').on("click", function(event){
 
 		const loginUser = ${loginuser.userNo};
+		const loginNickname = "${loginuser.nickname}";
 		
 		$.ajax({
 			
@@ -192,42 +193,33 @@ $(function() {
 			"data": { "loginUser" : loginUser },
 			
 			"success": function(result){
-
-				var $modal = $('#review-list');
-				$modal.empty();
-
+				alert(loginNickname);
+				var reviewList = $('#review-list');
+				reviewList.empty();
 				if (result != null) {
-	                // Create the first div with the specified styles
-	                var $div1 = $('<div style="width: 50%; border: 1px solid red; float: left;"></div>');
-
-	                // Create the second div with the specified styles
-	                var $div2 = $('<div style="width: 50%; border: 1px solid green; float: right;"></div>');
-
-	                // Append the first div to the modal
-	                $modal.append($div1);
-
-	                // Append the second div to the modal
-	                $modal.append($div2);
-	                
-	             	// Create the table element
-	                var $table = $('<table class="table text-nowrap mb-0"></table>');
-                    $table.css({"table-layout": "fixed", "width": "100%"});
-
-	                // Create the table header
-	                var $thead = $('<thead>').addClass("table-dark");
-	                $table.append($thead);
-	                var $headerRow = $("<tr>");
-	                $thead.append($headerRow);
-	                $headerRow.append($("<th>").text("글제목").css("width", "60%"));
-	                $headerRow.append($("<th>").text("글작성자").css("width", "20%"));
-	                $headerRow.append($("<th>").text("").css("width", "20%"));
-	                
-
-	                // Create the table body
-					var $tbody = $("<tbody>");
-                    $table.append($tbody);
                     
-					for (var i = 0; i < result.length; i++) {
+                    var $table = $("<table>").addClass("table text-nowrap mb-0");
+                    $table.css({"table-layout": "fixed", "width": "100%"});
+                    reviewList.append($table);
+
+                    var $thead = $("<thead>").addClass("table-light");
+                    $table.append($thead);
+                    
+                    var $headerRow = $("<tr>");
+                    $thead.append($headerRow);
+                    
+                    $headerRow.append($("<th>").text("글제목").css("width", "30%"));
+                    $headerRow.append($("<th>").text("글작성자").css("width", "10%"));
+                    $headerRow.append($("<th>").text("버튼").css("width", "10%"));
+                    $headerRow.append($("<th>").text("목록").css("width", "50%"));
+                   // $headerRow.append($("<th>").text("지원자").css("width", "20%"));
+                   // $headerRow.append($("<th>").text("버튼").css("width", "10%"));
+                    
+                    var $tbody = $("<tbody>");
+                    $table.append($tbody);
+				 
+				
+				 	for (var i = 0; i < result.length; i++) {
 						
 				 		var $row = $("<tr>");
 						$tbody.append($row);
@@ -241,50 +233,74 @@ $(function() {
 						var $titleColumn2 = $("<td>").addClass("align-middle");
 						
 						var $titleColumn3 = $("<td>").addClass("align-middle");
-                    
+						
+						var $titleColumn4 = $("<td>").addClass("align-middle");
+						
+// 						var $titleColumn5 = $("<td>").addClass("align-middle");
+// 						$titleColumn5.css({
+// 						    "overflow": "hidden",
+// 						    "text-overflow": "ellipsis",
+// 						    "white-space": "nowrap"
+// 						});
+// 						var $titleColumn6 = $("<td>").addClass("align-middle");
+						
+						
+// 						var $board = $("<a>").attr("href", "#").addClass("text-inherit").text(result[i].boardNo);
+// 						$titleColumn1.append($board);
+// 						$row.append($titleColumn1);
+						
 						var $title = $("<a>").attr("href", "#").addClass("text-inherit").text(result[i].boardTitle);
 						$titleColumn1.append($title);
 						$row.append($titleColumn1);
 						
 						var $writer = $("<a>").attr("href", "#").addClass("text-inherit").text(result[i].writer);
 						$titleColumn2.append($writer);
-						$row.append($titleColumn2);
-                    
+						$row.append($titleColumn2); 
+	                    
+// 						var $commentNo = $("<a>").attr("href", "#").addClass("text-inherit").text(result[i].commentNo);
+// 						$titleColumn4.append($commentNo);
+// 						$row.append($titleColumn4); 
+						
+// 						var $commentWriter = $("<a>").attr("href", "#").addClass("text-inherit");
+// 						if (loginNickname === result[i].commentWriter) {
+// 							result[i].commentWriter = "";
+// 							$commentWriter.text(result[i].commentWriter);
+// 							$titleColumn4.append($commentWriter);
+// 							$row.append($titleColumn4);     
+// 	                    } else {
+// 							$commentWriter.text(result[i].commentWriter);
+// 							$titleColumn4.append($commentWriter);
+// 							$row.append($titleColumn4); 
+// 	                    }
+						
+// 						// 상세보기 버튼 추가
+//                         var $writeReviewButton = $("<button>")
+//                             .addClass("btn btn-primary btn-sm btn-write-review")
+//                             .data('writer', result[i].writer)
+//                             .data('commentWriter', result[i].commentWriter)
+//                             .data('commentNo', result[i].commentNo)
+//                         	.data('boardNo', result[i].boardNo)
+//                         	.data('boardTitle', result[i].boardTitle)
+//                         	.text("리뷰");
+						
 						var $viewCommentsButton = $("<button>")
-						.addClass("btn btn-primary btn-sm btn-show-comments")
-						.data('writer', result[i].writer)
-                        .data('commentWriter', result[i].commentWriter)
-                        .data('commentNo', result[i].commentNo)
-                        .data('boardNo', result[i].boardNo)
-                     	.data('boardTitle', result[i].boardTitle)
-                     	.text("목록")
-                          
-	                    $titleColumn3.append($viewCommentsButton);
-	                    $row.append($titleColumn3);
+							.addclass("btn btn-primary btn-sm btn-show-comments")
+							.data('writer', result[i].writer)
+                            .data('commentWriter', result[i].commentWriter)
+                            .data('commentNo', result[i].commentNo)
+                            .data('boardNo', result[i].boardNo)
+                         	.data('boardTitle', result[i].boardTitle)
+                         	.text("보기")
+	                          
+                        $titleColumn3.append($viewCommentsButton);
+                        $row.append($titleColumn3);
+                                         		
 					}
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-	                // Append the table to the div
-	                $div1.append($table);
-
-	                // Append the first div to the modal
-	                $modal.append($div1);
-
-	                // Create the second div with the specified styles
-	                var $div2 = $('<div style="width: 50%; border: 1px solid green; float: right;"></div>');
-
-	                // Append the second div to the modal
-	                $modal.append($div2);
-	            }
-	            $('#review-modal').modal("show");
+				 	
+				}
+				$('#review-modal').modal("show");	
+				
+		
 			},
 			"error": function(xhr, status, err){
 					alert("실패");
@@ -294,27 +310,6 @@ $(function() {
 	
 		});
 	});
-	
-	$(document).on("click", ".btn-show-comments", function(event) {
-		
-		const boardNo = $(this).data('boardNo');
-		alert(boardNo);
-		
-		$.ajax({
-			
-			"url": "ajax-show-comment",
-			"method": "get",
-			"data": { "boardNo" : boardNo },
-			
-			"success": function(result){
-				
-			}
-			"error" : function(xhr, status, err){
-				alert("실패");
-			}
-	});
-	
-	
 	
 	
 	

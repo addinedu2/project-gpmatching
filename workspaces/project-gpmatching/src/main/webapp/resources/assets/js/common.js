@@ -2,57 +2,7 @@
  * 
  */
 
-	//리뷰
-	$(function() {
-		
-		$('.review-btn').on("click", function(event){
 	
-			$.ajax({
-				
-				"url": "ajax-show-review",
-				"method": "get",
-				"data": { "userNo" : userNo },
-				
-				"success": function(result){
-					
-					var reviewList = $('#review-list');
-					reviewList.empty();
-					if (result != null){
-						
-						// 테이블 헤더 추가
-		                var $headerRow = $("<tr>");
-		                
-		                $headerRow.append($("<th>").text("제목"));
-		                $headerRow.append($("<th>").text("파티장"));
-		                $headerRow.append($("<th>").text("파티원"));
-		                
-		                commentList.append($headerRow);
-		                
-	// 					for(var i = 0; i < result.length; i++){
-	// 						var $row = $("<tr>");
-		                    
-	// 	                    $row.append($("<td>").text(result[i].mcommentNo));
-	// 	                    $row.append($("<td>").text(result[i].nickname));
-	// 	                    $row.append($("<td>").text(result[i].mcommentContent));
-		                 
-	// 	                    commentList.append($row);
-		                    
-		                    
-	// 					}
-						$('#review-modal').modal('show');
-					}
-					
-					
-				},
-				"error": function(xhr, status, err){
-					alert("실패");
-				
-				}
-			
-			});
-		 });
-		
-	});
 
 	//임시 알람 클릭하면 마이페이지로 넘어감
 	$(function(event) {
