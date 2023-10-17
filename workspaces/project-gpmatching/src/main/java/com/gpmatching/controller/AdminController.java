@@ -1,23 +1,17 @@
 package com.gpmatching.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gpmatching.dto.AdminDto;
-import com.gpmatching.dto.CommonBoardDto;
-import com.gpmatching.dto.MypageBoardDto;
-import com.gpmatching.dto.UserDto;
 import com.gpmatching.service.AdminService;
 import com.gpmatching.ui.ThePager;
 
@@ -28,41 +22,70 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adminService;
+	private String linkUrl;
+	
 	
 	@GetMapping(path= {"/adminUserList"})
-	public String userList(@RequestParam(defaultValue="1") int pageNo,  @RequestParam(defaultValue = "") String keyword, Model model) {
+	public String showAdminUserList(@RequestParam(defaultValue="1") int pageNo,  
+			@RequestParam(defaultValue = "") String keyword, Model model) {
 		
 		//페이지별 게시물 조회
 		int pageSize = 10; //한 페이지 표시 개수
 		int pagerSize = 5;//표시 페이지 개수
-		String linkUrl = "adminUserList"; 
+		//String linkUrl = "adminUserList";
+		String linkUrl = "/project-gpmatching/admin/adminUserList";
 		int dataCount = adminService. getUserCount();//총 게시물 개수
 		
 		int from = (pageNo -1) *pageSize;//첫번째 페이지 게시물 순서
 		List<AdminDto> listuser = adminService.listUserListByPage(from, pageSize);
-		
+
 		//페이지 번호 표시 부분
 		ThePager pager = 
 				new ThePager(dataCount, pageNo, pageSize, pagerSize, linkUrl);
 		
+		
+		model.addAttribute("pagingUrl", linkUrl); //jsp에서 뽑아오기
 		model.addAttribute("listuser", listuser);
 		model.addAttribute("pager",pager);
 		model.addAttribute("pageNo",pageNo);
 		
 		
-		return "/admin/adminUserList";
-			
+		return "admin/adminUserList";
 			
 		}
-	//신규 회원 리스트
-	@GetMapping(path = {"/userHome"}, produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public List<AdminDto> userHome(Model model) {
-		List<AdminDto> newUsers = adminService.getNewUsers();
-		model.addAttribute("newUsers", newUsers);
-	    return newUsers;
-	}
+
+	@GetMapping(path = {"/searchUsers"})
+	public String searchUsers(@RequestParam("keyword") String keyword,
+            @RequestParam(defaultValue = "1") int pageNo,
+            @RequestParam(defaultValue = "10") int pageSize, Model model) {
+			int from = (pageNo - 1) * pageSize;
+			List<AdminDto> searchResults = adminService.searchUsers(keyword, from, pageSize);
+			  model.addAttribute("listuser", searchResults); // listuser 모델에 검색 결과를 추가
+			  return "admin/adminUserList"; // 뷰의 경로를 반환
+			}
 	
+
+	
+	
+	
+	@GetMapping(path = {"/adminOverview"} )
+	public String showAdminOverview() {
+	    return "/admin/adminOverview";
+	}
+
+
+   
+		
+	
+//	//신규 회원 리스트
+//	@GetMapping(path = {"/userHome"}, produces = "application/json;charset=utf-8")
+//	@ResponseBody
+//	public List<AdminDto> userHome(Model model) {
+//		List<AdminDto> newUsers = adminService.getNewUsers();
+//		model.addAttribute("newUsers", newUsers);
+//	    return newUsers;
+//	}
+//	
 
 
 

@@ -32,6 +32,14 @@
 <!-- Theme CSS -->
 <link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
   <title>register | 회원가입</title>
+  
+        <style>
+        .flexBox {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+    
 </head>
 
 <body class="bg-light">
@@ -53,7 +61,7 @@
         <!-- Card -->
         <div class="card smooth-shadow-md">
           <!-- Card body -->
-          <div class="card-body p-6">
+ 			 <div class="card-body p-6">
             <div class="mb-4">
               <a href="/project-gpmatching/home">
               	<img src="/project-gpmatching/resources/assets/images/brand/logo/opgglogo-primary.png" class="mb-2" alt="">
@@ -62,7 +70,7 @@
             </div>      
             <!-- Form -->
          
-            <form:form id="registerform" action="register" method="post" modelAttribute="user">
+            <form:form id="registerform" action="register" method="post" modelAttribute="user" enctype="multipart/form-data">
               <!-- userId -->
               <div class="mb-3">
 					<label for="userId" class="form-label">회원 ID</label>
@@ -79,13 +87,13 @@
               <!-- Password -->
               <div class="mb-3">
                 <label for="password" class="form-label">회원 비밀번호</label>
-                <input type="password" id="userPwd" class="form-control" name="userPwd" placeholder="**************" required="" oninput="checkPassword()">
+                <input type="password" id="userPwd" class="form-control" name="userPwd" placeholder="" required="" oninput="checkPassword()">
                 
               </div>
               <!-- Password -->
               <div class="mb-3">
                 <label for="confirm-password" class="form-label">회원 비밀번호 확인</label>
-                <input type="password" id="confirmPassword" class="form-control" name="confirm-password" placeholder="**************" required="" oninput="checkPassword()">
+                <input type="password" id="confirmPassword" class="form-control" name="confirm-password" placeholder="" required= oninput="checkPassword()">
                 
               </div>
               <p id="passwordCheck"></p>
@@ -93,18 +101,27 @@
               <!-- Email -->
               <div class="mb-3">
                 <label for="email" class="form-label">이메일</label>
-                <input type="email" id="userEmail" class="form-control" name="userEmail" placeholder="Email address here" required="">
+                <input type="email" id="userEmail" class="form-control" name="userEmail" placeholder="Email address here" required=>
               </div>
+              
               <!-- nickname -->
               <div class="mb-3">
                 <label for="nickname" class="form-label">닉네임</label>
-                <input type="text" id="nickname" class="form-control" name="nickname" placeholder="닉네임을넣어주세요" required="">
+                <input type="text" id="nickname" class="form-control" name="nickname" placeholder="닉네임을넣어주세요" required=>
               </div>
+              
               <!-- userPhone -->
               <div class="mb-3">
                 <label for="userPhone" class="form-label">핸드폰 번호</label>
-                <input type="text" id="userPhone" class="form-control" name="userPhone" placeholder="000-0000-0000" required="">
+                <input type="text" id="userPhone" class="form-control" name="userPhone" placeholder="000-0000-0000" required=>
               </div>
+              
+              <div class="mb-3">
+		           <label for="imageInput" class="form-label">
+		               <img id="preview" src="/project-gpmatching/resources/assets/images/avatar/anonymous.png" width="100" height="100">
+		           </label>
+		           <input type="file" id="imageInput" name="imageName" style="display: none;" accept="image/*" onchange="readURL(this);" />
+       	       </div>   
               
               
               
@@ -149,6 +166,20 @@
   </div>
   
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  
+    <script>
+      //프로필 이미지 
+	  function readURL(input) {
+    	  
+	      if (input.files && input.files[0]) {
+	          var reader = new FileReader();
+	          reader.onload = function (e) {
+	              $("#preview").attr("src", e.target.result);
+	          };
+	          reader.readAsDataURL(input.files[0]);
+	      }
+	  }
+  </script>
   
   <script>
 	
@@ -217,7 +248,9 @@
 		   var confirmPassword = passwordConfirmField.value;
 		   var passwordCheck = document.getElementById('passwordCheck')
 		   
-		/*      var passwordOption = document.getElementById('passwordOption')
+		   
+		   
+		/* var passwordOption = document.getElementById('passwordOption')
 		   var SpecialChar = ["!","@","#","$","%"];
 		   var checkSpecialChar = 0;
 		   
@@ -244,6 +277,9 @@
 		       return
 		    }
 		   }); */
+		   
+		   
+		   
 		   
 		   if(userPwd !== '' && confirmPassword !== ''){
 		      if(userPwd === confirmPassword){

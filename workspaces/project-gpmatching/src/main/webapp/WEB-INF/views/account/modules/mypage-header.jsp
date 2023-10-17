@@ -30,16 +30,26 @@
               <div class="d-flex align-items-center justify-content-between
                   pt-4 pb-6 px-4">
                 <div class="d-flex align-items-center">
+                 
                   <!-- avatar -->
                   <div class="avatar-xxl avatar-indicators avatar-online me-2
                       position-relative d-flex justify-content-end
                       align-items-end mt-n10">
-                    <img src="/project-gpmatching/resources/assets/images/avatar/avatar-1.jpg" class="avatar-xxl
-                        rounded-circle border border-4 border-white-color-40" alt="">
-                    <a href="#!" class="position-absolute top-0 right-0 me-2" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="Verified">
-                      <img src="/project-gpmatching/resources/assets/images/svg/checked-mark.svg" alt="" height="30" width="30">
-                    </a>
+                    	<c:choose> 
+	                    	<c:when test="${loginuser.userImage == null}">
+			                    <img src="/project-gpmatching/resources/assets/images/avatar/anonymous.png" class="avatar-xxl
+			                        rounded-circle border border-4 border-white-color-40" alt="">
+			                    <a href="#!" class="position-absolute top-0 right-0 me-2" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="Verified">
+			                      <img src="/project-gpmatching/resources/assets/images/svg/checked-mark.svg" alt="" height="30" width="30">
+			                    </a>
+	                    	</c:when>
+	                    	<c:otherwise> 
+	                    		<img src="${pageContext.request.contextPath}/resources/upload/${loginuser.userImage}" class="avatar-xxl
+			                        rounded-circle border border-4 border-white-color-40" alt="Image" height="30" width="30" >
+	                    	</c:otherwise>
+                    </c:choose>
                   </div>
+                  
                   <!-- text -->
                   <div class="lh-1">
                     <h2 class="mb-0"> ${loginuser.nickname}   <!-- 닉네임 -->

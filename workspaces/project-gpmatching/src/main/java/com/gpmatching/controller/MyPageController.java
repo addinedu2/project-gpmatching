@@ -1,7 +1,9 @@
 package com.gpmatching.controller;
 
+import java.io.File;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +13,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.gpmatching.common.Util;
 import com.gpmatching.dto.MypageBoardDto;
 import com.gpmatching.dto.UserDto;
 import com.gpmatching.service.MypageService;
+
+import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 @RequestMapping(path = {"/account"})
@@ -74,20 +81,47 @@ public class MyPageController {
 	} 
 
 	//마이페이지 수정(데이터베이스에 보내기)
-	@PostMapping(path = {"/editMypage"})
-	public String updateUserProfile(UserDto loginUser, HttpSession session, Model model)  {
-		// 수정된 사용자 정보를 데이터베이스에 업데이트
-		mypageService.editUser(loginUser);
-		
-		UserDto selectForRegDate = mypageService.selectUserProfile(loginUser);
-		
-		// 세션에서 사용자 정보 업데이트
-		session.setAttribute("loginuser", selectForRegDate);
+		@PostMapping(path = {"/editMypage"})
+		public String updateUserProfile(UserDto loginUser, HttpSession session, Model model, HttpServletRequest req, 
+										@RequestParam("imageName") MultipartFile userImage) throws Exception {
+			
+			String uploadDir = req.getServletContext().getRealPath("/resources/upload/");
+			String uploadedImageFileName = handleUploadFile(userImage, uploadDir);
+			if (uploadedImageFileName != null) {
+		        loginUser.setUserImage(uploadedImageFileName);
+		    }
+			
+			// 수정된 사용자 정보를 데이터베이스에 업데이트
+			mypageService.editUser(loginUser);
+			
+			UserDto selectForRegDate = mypageService.selectUserProfile(loginUser);
+			
+			// 세션에서 사용자 정보 업데이트
+			session.setAttribute("loginuser", selectForRegDate);
 
-		//수정 후 리다이렉트할 페이지 
-		return "redirect:mypage";
-		
-	}
+			//수정 후 리다이렉트할 페이지 
+			return "redirect:mypage";
+			
+		}
+		private String handleUploadFile(MultipartFile attach, String uploadDir) {
+			if (!attach.isEmpty()) {
+				try {
+					String savedFileName = Util.makeUniqueFileName(attach.getOriginalFilename());
+					attach.transferTo(new File(uploadDir, savedFileName)); // 파일을 컴퓨터에 저장
+
+					// 썸네일 생성
+					File thumbnailFile = new File(uploadDir, "thumbnail_" + savedFileName);
+					Thumbnails.of(new File(uploadDir, savedFileName))
+								.size(100, 100) // 썸네일 크기
+								.toFile(thumbnailFile);
+					return savedFileName;
+
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			return null;
+		}
 	
 
 	

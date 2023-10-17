@@ -31,7 +31,7 @@
         <a class="btn btn-light btn-icon rounded-circle indicator
           indicator-primary text-muted" href="#" role="button"
           id="dropdownNotification" data-bs-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
+          aria-expanded="false" data-userno="${loginuser.userNo}">
           <!-- <i class="icon-xs" data-feather="bell"></i>원본 -->
           <i id="notificationicon" class="icon-xs" data-feather="bell"></i>
         </a>
@@ -64,7 +64,8 @@
 	            </ul>
             </div>
             <div class="border-top px-3 py-2 text-center">
-              <a href="/project-gpmatching/commonBoard/alarmList" class="text-inherit fw-semi-bold">
+              <a href="/project-gpmatching/commonBoard/alarmList" class="text-inherit fw-semi-bold"
+              id="checkAlarm" data-userno="${loginuser.userNo}">
                 View all Notifications
               </a>
             </div>
@@ -76,8 +77,14 @@
         <a class="rounded-circle" href="#" role="button" id="dropdownUser"
           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <div class="avatar avatar-md avatar-indicators avatar-online">
-            <img alt="avatar" src="/spring-demoweb/resources/assets/images/avatar/avatar-1.jpg"
-              class="rounded-circle" />
+          		<c:choose>
+          			<c:when test="${loginuser.userImage == null}">
+           	    		<img alt="avatar" src="/project-gpmatching/resources/assets/images/avatar/anonymous.png" class="rounded-circle" />
+           	    	</c:when>
+                   	<c:otherwise> 
+                   		<img src="${pageContext.request.contextPath}/resources/upload/${loginuser.userImage}" class="rounded-circle" alt="Image" height="30" width="30" >
+                   	</c:otherwise>
+           	    </c:choose>
           </div>
         </a>
         <div class="dropdown-menu dropdown-menu-end"

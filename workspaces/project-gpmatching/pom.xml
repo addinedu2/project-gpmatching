@@ -111,11 +111,18 @@
 		    <artifactId>jackson-databind</artifactId>
 		    <version>2.15.2</version>
 		</dependency>
+		
 		<dependency>
-   			 <groupId>com.sun.mail</groupId>
-			    <artifactId>javax.mail</artifactId>
-			    <version>1.6.2</version>
-			</dependency>
+		 	<groupId>com.sun.mail</groupId>
+		    <artifactId>javax.mail</artifactId>
+		    <version>1.6.2</version>
+		</dependency>
+			
+		<dependency>
+		    <groupId>net.coobird</groupId>
+		    <artifactId>thumbnailator</artifactId>
+		    <version>0.4.20</version>
+		</dependency>
 			
 		<!--Spring Security-->	
 		<dependency>

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -59,8 +58,6 @@
            
           </div>
         </div>
-        
-        <form action="editMypage" method="post" enctype="multipart/form-data">
         <div class="row mb-8">
           <div class="col-xl-3 col-lg-4 col-md-12 col-12">
             <div class="mb-4 mb-lg-0">
@@ -70,7 +67,6 @@
 
           </div>
 
-
           <div class="col-xl-9 col-lg-8 col-md-12 col-12">
             <!-- card -->
             <div class="card">
@@ -78,44 +74,25 @@
               <div class="card-body">
                 <div class=" mb-6">
                   <h4 class="mb-1">General Settings</h4>
+
                 </div>
-                
-                
-                <!-- 프로필사진 -->
-	                <div class="row align-items-center mb-8">
-	                  <div class="col-md-3 mb-3 mb-md-0">
-	                    <h5 class="mb-0">Avatar</h5>
-	                  </div>
-	                  <div class="col-md-9">
-	                  
-	                    <div class="d-flex align-items-center">
-	                      <div class="me-3">
-	                        <label for="imageInput" style="cursor: pointer;">
-		                        <c:choose>
-		                        	<c:when test="${ loginuser.userImage == null }">
-			                        	<img id="preview" src="/project-gpmatching/resources/assets/images/avatar/anonymous.png" class="rounded-circle avatar avatar-lg" alt="">
-			                        	<input type="file" id="imageInput" name="imageName" style="display: none" accept="image/*" onchange="readURL(this);" />
-		                        	</c:when>
-		                        	<c:otherwise>
-		                        		<img id="preview" src="${pageContext.request.contextPath}/resources/upload/${loginuser.userImage}" class="avatar-xxl
-		                        rounded-circle border border-4 border-white-color-40" alt="Image" height="30" width="30" alt="Image" >
-		                        		<input type="file" id="imageInput" name="imageName" style="display: none;" accept="image/*" onchange="readURL(this);" />
-		                        	</c:otherwise>
-		                        </c:choose>
-	                        </label>
-	                      </div>
-	                      <div>
-	                        <button type="button" id="imageUpdateButton" class="btn btn-outline-white me-1">수정</button>
-	                        <button type="button" id="imageDeleteButton" class="btn btn-outline-white">삭제</button>
-	                      </div>
-	                    </div>
-	                    
-	                  </div>
-	                </div>
-                
-                
-                
-                <!-- 프로필커버사진 -->
+                <div class="row align-items-center mb-8">
+                  <div class="col-md-3 mb-3 mb-md-0">
+                    <h5 class="mb-0">Avatar</h5>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="d-flex align-items-center">
+                      <div class="me-3">
+                        <img src="/project-gpmatching/resources/assets/images/avatar/avatar-5.jpg" class="rounded-circle avatar avatar-lg" alt="">
+                      </div>
+                      <div>
+                        <button type="submit" class="btn btn-outline-white
+                            me-1">Change</button>
+                        <button type="submit" class="btn btn-outline-white">Remove</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <!-- col -->
                 <div class="row mb-8">
                   <div class="col-md-3 mb-3 mb-md-0">
@@ -140,19 +117,21 @@
                     <h4 class="mb-1">Basic information</h4>
 
                   </div>
-           
+                  <form action="editMypage" method="post">
 		        <input type="hidden" name="userId" value="${ loginuser.userId }">
-                    <!-- row -->
-		
 
+                    <!-- row -->
                     <div class="mb-3 row">
-                      <label for="fullName" class="col-sm-4 col-form-label
-                          form-label">Full name</label>
-                      <div class="col-sm-4 mb-3 mb-lg-0">
-                        <input type="text" class="form-control" placeholder="First name" id="fullName">
-                      </div>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control" placeholder="Last name" id="lastName">
+                      <label for="location" class="col-sm-4 col-form-label
+                          form-label">닉네임</label>
+                      <div class="col-md-8 col-12">
+                  <input type="text" class="form-control" name="nickname" placeholder="${loginuser.nickname}" id="nickname">
+                   <!--      <select class="form-select" id="newnickname">
+                        <option selected>Select Country</option>
+                            <option value="1">India</option>
+                            <option value="2">UK</option>
+                            <option value="3">USA</option> 
+                          </select> -->  <!-- 데이터 선택이라 일단 주석으로 남겨놓는다 -->
                       </div>
                     </div>
 
@@ -174,20 +153,6 @@
                       </div>
                     </div>
                     
-                    <!-- row -->
-                    <div class="mb-3 row">
-                      <label for="location" class="col-sm-4 col-form-label
-                          form-label">닉네임</label>
-                      <div class="col-md-8 col-12">
-                  <input type="text" class="form-control" name="nickname" placeholder="${loginuser.nickname}" id="nickname">
-                   <!--      <select class="form-select" id="newnickname">
-                        <option selected>Select Country</option>
-                            <option value="1">India</option>
-                            <option value="2">UK</option>
-                            <option value="3">USA</option> 
-                          </select> -->  <!-- 데이터 선택이라 일단 주석으로 남겨놓는다 -->
-                      </div>
-                    </div>
                     
                     <!-- row -->
                     <div class="mb-3 row">
@@ -223,14 +188,13 @@
                        
                       </div>
                     </div>
+                  </form>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
-       </form>
-        
-        
         <div class="row mb-8">
           <div class="col-xl-3 col-lg-4 col-md-12 col-12">
             <div class="mb-4 mb-lg-0">
@@ -799,36 +763,6 @@
 <script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 
 <script src="/project-gpmatching/resources/assets/js/common.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-
-<!-- <script>
-	$(function(event) {
-	    $("#imageUpdateButton").click(function() {
-	        alert("수정 버튼을 클릭했습니다.");
-	    });
-	
-	    $("#imageDeleteButton").click(function() {
-	        alert("삭제 버튼을 클릭했습니다.");
-	    });
-	});
-</script> -->
-
-
-<script>
-  function readURL(input) {
-
-      if (input.files && input.files[0]) {
-          var reader = new FileReader();
-          reader.onload = function (e) {
-              $("#preview").attr("src", e.target.result);
-          };
-          reader.readAsDataURL(input.files[0]);
-      }
-  }
-  </script>
-  
-  
 </body>
 
 </html>

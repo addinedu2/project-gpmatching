@@ -12,6 +12,9 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+<c:url value="${pagingUrl}" var="adminUserListUrl">
+    <c:param name="pageNo" value="${param.pageNo}" />
+</c:url> <!-- 컨트롤러의 pagingUrl에서 연결된 것 -->
 
 
 <!-- Favicon icon-->
@@ -57,6 +60,8 @@
 			<div class="header @@classList">
 
 				<jsp:include page="/WEB-INF/views/modules/header.jsp" />
+
+
 
 			</div>
 			<!-- Container fluid -->
@@ -133,17 +138,22 @@
 							</div>
 							<!-- nav -->
 							<ul class="nav nav-lt-tab px-4" id="pills-tab" role="tablist">
-								<li class="nav-item"><a class="nav-link active" href="#">Overview</a>
+								<li class="nav-item"><a class="nav-link active" 
+								href="/project-gpmatching/admin/adminOverview" id="overview">Overview</a>
 								</li>
-								<li class="nav-item"><a class="nav-link"
-									href="/project-gpmatching/admin/adminUserList">UserList</a></li>
+								<li class="nav-item">
+								<c:url value="/admin/adminUserList" var="adminUserListUrl"><c:param name="pageNo" value="${param.pageNo }"/>
+								</c:url>
+								
+								<a class="nav-link"
+									href="/project-gpmatching/admin/adminUserList" id="UserListLink">UserList</a></li>
 
-								<li class="nav-item"><a class="nav-link" href="#">Files</a>
+								<li class="nav-item"><a class="nav-link" href="#">회원이 쓴 글</a>
 								</li>
-								<li class="nav-item"><a class="nav-link" href="#">Teams</a>
+								<li class="nav-item"><a class="nav-link" href="#">차트(롤/배그/오버/전체/전체 사용량</a>
 								</li>
 								<li class="nav-item"><a class="nav-link" href="#">
-										Followers </a></li>
+										기타 </a></li>
 								<li class="nav-item"><a class="nav-link" href="#">Activity</a>
 								</li>
 							</ul>
@@ -152,114 +162,12 @@
 				</div>
 
 				<!-- content -->
-				<div class="py-6">
-					<!-- 활동량 row -->
-					<div class="row">
-						<div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6">
-							<!-- row  -->
-							<div class="row my-6">
-								<div class="col-xl-4 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0">
-									<!-- card  -->
-									<div class="card h-100">
-										<!-- card body  -->
-										<div class="card-body">
-											<div
-												class="d-flex align-items-center justify-content-between">
-												<div>
-													<h4 class="mb-0">활동량</h4>
-												</div>
-												<!-- dropdown  -->
-												<div class="dropdown dropstart">
-													<a class="text-muted text-primary-hover" href="#"
-														role="button" id="dropdownTask" data-bs-toggle="dropdown"
-														aria-haspopup="true" aria-expanded="false"> <i
-														class="icon-xxs" data-feather="more-vertical"></i>
-													</a>
-													<div class="dropdown-menu" aria-labelledby="dropdownTask">
-														<a class="dropdown-item" href="#"> 오늘의 매칭량 </a> <a
-															class="dropdown-item" href="#"> 이번 주의 매칭량 </a> <a
-															class="dropdown-item" href="#"> 이번 주의 게시판량 </a>
-													</div>
-												</div>
-											</div>
-											<!-- chart  -->
-											<div class="mb-8">
-												<div id="perfomanceChart"></div>
-											</div>
-											<!-- icon with content  -->
-											<div class="d-flex align-items-center justify-content-around">
-												<div class="text-center">
-													<i class="icon-sm text-success" data-feather="check-circle"></i>
-													<h1 class="mt-3  mb-1 fw-bold">76%</h1>
-													<p>Completed</p>
-												</div>
-												<div class="text-center">
-													<i class="icon-sm text-warning" data-feather="trending-up"></i>
-													<h1 class="mt-3  mb-1 fw-bold">32%</h1>
-													<p>In-Progress</p>
-												</div>
-												<div class="text-center">
-													<i class="icon-sm text-danger" data-feather="trending-down"></i>
-													<h1 class="mt-3  mb-1 fw-bold">13%</h1>
-													<p>Behind</p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<!-- 회원 목록 card  -->
-								<div class="col-xl-8 col-lg-12 col-md-12 col-12">
-									<div class="card h-100">
-										<!-- card header  -->
-										<div class="card-header bg-white py-4">
-											<h4 class="mb-0">회원 목록</h4>
-										</div>
-										<!-- table  -->
-										<div id="new-user-list" class="table-responsive">
-													<!-- 여기에 Ajax로 동적 데이터 넣기. -->
-					<table class="table text-nowrap mb-0">
-					   <thead class="table-light">
-					      <tr>
-					         <th>아이디</th>
-					         <th>닉네임</th>
-					         <th>가입일자</th>
-					      </tr>
-					   </thead>
-					   <tbody>
-					   
-					    <c:forEach var="user" items="${requestScope.newUsers }">
-					   	<tr>
-                           <td class="align-middle">
-                               <div class="d-flexalign-items-center">
-                                   <div class="ms-3 lh-1">
-                                       <h5 class=" mb-1"> <a href="#" class="text-inherit">${ user.userId }</a></h5>
-                                   </div>
-                               </div>
-                           </td>
-                              <td class="align-middle">
-                               <div class="d-flexalign-items-center">
-                                   <div class="ms-3 lh-1">
-                                       <h5 class=" mb-1"> <a href="#" class="text-inherit">${ user.nickname }</a></h5>
-                                   </div>
-                               </div>
-                           </td>
-                           <td class="align-middle">
-                           		<fmt:formatDate value="${ board.regDate }"
-					         				    pattern="yyyy-MM-dd"/>
-                           </td>
-                           
-                       </tr>
-                       </c:forEach>
-					   </tbody>
-					   
-					</table>
-													
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
+				<div>여기가 시작</div>
+				
+				
+		<div id="admincontent">
+		</div>
+				
 
 	<!-- Scripts -->
 	<!-- Libs JS -->
@@ -286,34 +194,52 @@
 	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 
 	<script>
+	
 	$(document).ready(function() {
-		//회원 목록 함수
-		loadUserList();
-	})
-	
-	function loadUserList() {
-    $.ajax({
-        url: "userHome",
-        method: "get",
-        dataType: "json",
-        success: function(data) {
-        
-        	
-        	
-        	
-        	
-        	
-            });
-        },
-        error: function(xhr, status, error) {
-            console.error("Error: " + error);
-        }
-    });
-}
-	
+	    // Overview 버튼 클릭 이벤트 처리
+	    $("#overview").on("click", function(event) {
+	        event.preventDefault();
+	        loadJSPPage($(this).attr("href"), event);
+	    });
+	    // UserListLink 링크 클릭 이벤트 처리
+	    $("#UserListLink").on("click", function(event) {
+	        event.preventDefault();
+	        loadJSPPage($(this).attr("href"), event);
+	    });
+
+	    // 링크 페이지를 동적으로 로드하는 함수
+	    function loadJSPPage(url, event, pageNo) {
+	        // 기본 이벤트 중지
+	        event.preventDefault();
+	        $("#admincontent").load(url);
+	    }
+	    
+	    $('#admincontent').on('click', '.pager-ul .page-item a', function(event) {
+	    	event.preventDefault();
+	    	
+	    	const href = $(this).attr("href");  //"href" + pager-ul .page-item a(페이지 수) = 페이징 된 링크)
+	    	loadJSPPage(href, event);
+	    });
+		
+	    
+	    
+	    
+	    // Overview를 동적으로 로드하는 함수 (이 부분을 주석 처리하면 초기에 Overview가 로딩되지 않습니다)
+	    // loadOverview();
+	});
+
+
+
+		
+		
+		
+		
+		
+		
+		
+		
 	
 	</script>
-	
 				
 </body>
 
