@@ -1,18 +1,22 @@
 package com.gpmatching.mapper;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
+import java.util.List;
 
-import com.gpmatching.dto.MatchingReviewDto;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 
 @Mapper
 public interface MatchingReviewMapper {
 
-	@Insert("insert into MatchingReview (reviewContent, reviewPoint, userNo, commonNo) "
-			+ "values (#{ reviewContent }, #{ reviewPoint }, #{ userNo }, #{ commonNo })")
-	@Options(useGeneratedKeys = true, keyProperty = "reviewNo") 
-	void insertMatchingReview(MatchingReviewDto matchingReview);
+	@Select("select count(*) from MatchingBoard where userNo = #{ userNo } and matchingClose = 0")
+	int selectMatchingCloseByLoginUser(int userNo);
 	
-	
+	@Select("select m.boardNo, m.boardTitle, c.commentNo, u.nickname "
+			+ "from MatchingBoard m "
+			+ "inner join MatchingComment c on c.boardNo = m.boardNo "
+			+ "inner join User u on c.userNo = u.userNo where m.userNo = #{ userNo } and matchingClose = '0' "
+			+ "order by boardNo desc")
+	List<MatchingBoardDto> selectNotYetReviewList(int userNo);
 }

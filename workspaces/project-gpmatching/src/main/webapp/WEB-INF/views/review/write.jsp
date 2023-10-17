@@ -49,7 +49,7 @@
 		<!-- Basic -->
 		
 		<div class="card" style="width: 20rem;" >
-		<form id="reviewform" action="review" method="post">
+		<form id="reviewform" action="write-review" method="post">
 		   <div class="card-body">
 		   	  <input type="hidden" name="commonNo" value="${ commonBoard.commonNo }" />
 		   	  <input type="hidden" name="userNo" value="${ loginuser.userNo }" />

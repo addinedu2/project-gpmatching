@@ -208,29 +208,18 @@
 	    });
 
 	    // 링크 페이지를 동적으로 로드하는 함수
-	    function loadJSPPage(url, event) {
+	    function loadJSPPage(url, event, pageNo) {
 	        // 기본 이벤트 중지
 	        event.preventDefault();
-
-	        // 기존 데이터를 비움
-	        $("#admincontent").empty();
-
-	        // Ajax 요청을 보냄
-	        $.ajax({
-	            url: url,
-	            method: "GET",
-	            dataType: "html",
-	            success: function(response) {
-	                // 성공적으로 응답을 받았을 때 실행되는 콜백 함수
-	                // 받은 데이터를 사용하여 페이지 업데이트 등을 수행
-	            	  $("#admincontent").html(response);
-
-	              },
-	            error: function(xhr, status, error) {
-	                console.error("Error: " + error);
-	            }
-	        });
+	        $("#admincontent").load(url);
 	    }
+	    
+	    $('#admincontent').on('click', '.pager-ul .page-item a', function(event) {
+	    	event.preventDefault();
+	    	
+	    	const href = $(this).attr("href");  //"href" + pager-ul .page-item a(페이지 수) = 페이징 된 링크)
+	    	loadJSPPage(href, event);
+	    });
 		
 	    
 	    

@@ -67,14 +67,14 @@
               <div class="mb-3">
 					<label for="userId" class="form-label">회원 ID</label>
 					<div class="input-group">
-						<input type="text" id="userId" class="form-control" name="userId" placeholder="회원 ID" required="">
+						<input type="text" id="userId" class="form-control" name="userId" placeholder="회원 ID" required="true">
 						<button id="checkDup" class="btn btn-primary">중복검사</button>
 						<form:errors path="userId" cssClass="error"></form:errors>
 					</div>
 			  </div>
               <!-- <div class="mb-3">
                 <label for="userId" class="form-label">회원 ID</label>
-                <input type="text" id="userId" class="form-control" name="userId" placeholder="회원 ID" required="">
+                <input type="text" id="userId" class="form-control" name="userId" placeholder="회원 ID" required="true">
               </div> -->
               <!-- Password -->
               <div class="mb-3">
@@ -93,17 +93,17 @@
               <!-- Email -->
               <div class="mb-3">
                 <label for="email" class="form-label">이메일</label>
-                <input type="email" id="userEmail" class="form-control" name="userEmail" placeholder="Email address here" required="">
+                <input type="email" id="userEmail" class="form-control" name="userEmail" placeholder="Email address here" required="true">
               </div>
               <!-- nickname -->
               <div class="mb-3">
                 <label for="nickname" class="form-label">닉네임</label>
-                <input type="text" id="nickname" class="form-control" name="nickname" placeholder="닉네임을넣어주세요" required="">
+                <input type="text" id="nickname" class="form-control" name="nickname" placeholder="닉네임을넣어주세요" required="true">
               </div>
               <!-- userPhone -->
               <div class="mb-3">
                 <label for="userPhone" class="form-label">핸드폰 번호</label>
-                <input type="text" id="userPhone" class="form-control" name="userPhone" placeholder="000-0000-0000" required="">
+                <input type="text" id="userPhone" class="form-control" name="userPhone" placeholder="000-0000-0000" required="true">
               </div>
               
               

@@ -100,6 +100,7 @@
 				<!-- radio-->
 				<br>
 				<div class="txt-box text-light">
+			 		<label class="form-label text-light" for="textInput">성별</label>
 					<div class="form-check">
 						<input class="form-check-input" type="radio" value="anyone"
 							name="preferGender" id="flexRadioDefault1" checked> <label
@@ -118,9 +119,15 @@
 				</div>
 				<br>
 				<div class="mb-3 txt-box">
-					<label class="form-label text-light" for="textInput">모집인원</label>
-					<input name="headCount" type="text" id="textInput" class="form-control" >
-				</div>
+					<label class="form-label text-light" for="textInput">모집인원 <span class="text-secondary">(최대 4인)</span></label>
+					<select class="form-select" name="headCount" aria-label="Default select example">
+						<option value="" selected>인원을 선택하세요</option>
+						<option value=1>1</option>
+						<option value=2>2</option>
+						<option value=3>3</option>
+						<option value=4>4</option>
+					</select>
+				</div>				
 				<br>
 				<!-- 롤 등록 -->
 				<div class="mb-3 txt-box">
@@ -198,6 +205,8 @@
 				});
 			});
 		</script>
+		<script src="/project-gpmatching/resources/assets/js/common.js"></script>
+		
 		
 </body>
 

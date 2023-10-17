@@ -177,13 +177,14 @@ public class LolBoardController {
 	}
 
 	
-	
+	// 게시판 검색 기능 + 특정 컬럼 필터가 포함된 lol-list 경로 입니다 (-허지웅)
 	@GetMapping(path = { "/lol-list"})
 	public String matchingBoardListByLolTier(@RequestParam(name = "lolTier", required = false) String lolTier,
 											 @RequestParam(name = "searchType", required = false) String searchType,
 											 @RequestParam(name = "keyword", required = false) String keyword, Model model) {
 		
 		List<MatchingBoardDto> matchingLolList;
+		
 		
 		if (lolTier != null) {
 			
@@ -194,9 +195,11 @@ public class LolBoardController {
 			matchingLolList = lolBoardService.searchMatchingBoardListByTitle("league of legends", keyword);
 			
 		} else {
-			
 			matchingLolList = lolBoardService.getSelectLolBoardListByGameName("league of legends");
+			
 		}
+			
+		
 
 		model.addAttribute("matchingLolList", matchingLolList);
 			

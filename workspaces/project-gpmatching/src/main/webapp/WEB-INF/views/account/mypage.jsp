@@ -39,7 +39,7 @@
 <body class="bg-light"> 
   <div id="db-wrapper">
     <!-- navbar vertical -->
-     	<jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
+     <jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
      
     <!-- page content -->
     <div id="page-content">
@@ -47,90 +47,11 @@
 
   		<jsp:include page="/WEB-INF/views/modules/header.jsp" />
   
-    </div>
-      <!-- Container fluid -->
-      <div class="container-fluid p-6">
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-12">
-            <!-- Page header -->
-           
-              <div class="border-bottom pb-4 mb-4 ">
-               
-                  <h3 class="mb-0 fw-bold">Overview</h3>
-              
-           
-            </div>
-          </div>
-        </div>
-        <div class="row align-items-center">
-          <div class="col-xl-12 col-lg-12 col-md-12 col-12">
-            <!-- Bg -->
-            <div class="pt-20 rounded-top" style="background:
-                url(/project-gpmatching/resources/assets/images/background/profile-cover.jpg) no-repeat;
-                background-size: cover;">
-            </div>
-            <div class="bg-white rounded-bottom smooth-shadow-sm ">
-              <div class="d-flex align-items-center justify-content-between
-                  pt-4 pb-6 px-4">
-                <div class="d-flex align-items-center">
-                  <!-- avatar -->
-                  <div class="avatar-xxl avatar-indicators avatar-online me-2
-                      position-relative d-flex justify-content-end
-                      align-items-end mt-n10">
-                    <img src="/project-gpmatching/resources/assets/images/avatar/avatar-1.jpg" class="avatar-xxl
-                        rounded-circle border border-4 border-white-color-40" alt="">
-                    <a href="#!" class="position-absolute top-0 right-0 me-2" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="Verified">
-                      <img src="/project-gpmatching/resources/assets/images/svg/checked-mark.svg" alt="" height="30" width="30">
-                    </a>
-                  </div>
-                  <!-- text -->
-                  <div class="lh-1">
-                    <h2 class="mb-0"> ${loginuser.nickname}   <!-- 닉네임 -->
-                      <a href="#!" class="text-decoration-none" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="Beginner">
-
-                      </a>
-                    </h2>
-
-                    <p class="mb-0 d-block">@${loginuser.userNo} <!-- 원래 유저 아이디 인데 userNo 넘어오는거 테스트용--></p>
-
-                  </div>
-                </div>
-                <div>
-                  <a href="/project-gpmatching/account/editMypage" class="btn btn-outline-primary
-                      d-none d-md-block">회원정보 수정</a>
-                  <a href="/project-gpmatching/commonBoard/reportWrite" class="btn btn-outline-primary
-                      d-none d-md-block">신고 하기</a>
-                   <a href="/project-gpmatching/commonBoard/reviewtestList" class="btn btn-outline-primary
-                      d-none d-md-block">리뷰 게시판</a>
-                </div>
-              </div>
-              <!-- nav -->
-              <ul class="nav nav-lt-tab px-4" id="pills-tab" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" href="#">Overview</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Project</a>
-                </li>
-
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Files</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Teams</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                      Followers
-                    </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Activity</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+     </div>
+      <jsp:include page="/WEB-INF/views/account/modules/mypage-header.jsp" />
+        
+        
+      
         
         <!-- content -->
         <div class="py-6">
@@ -199,25 +120,25 @@
                 <div id="write-Board-List">
                 
                   	
-					<table class="table text-nowrap mb-0">
+					<table class="table text-nowrap mb-0" style="table-layout: fixed; width: 100%">
 					   <thead class="table-light">
 					      <tr>
-					         <th>제목</th>
-					         <th>작성일자</th>
+					         <th style="width: 70%">제목</th>
+					         <th style="width: 30%; text-align: right;">작성일자</th>
 					      </tr>
 					   </thead>
 					   <tbody>
 					   
 					    <c:forEach var="board" items="${requestScope.boardList }">
 					   	<tr>
-                           <td class="align-middle">
+                           <td class="align-middle" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                <div class="d-flexalign-items-center">
                                    <div class="ms-3 lh-1">
                                        <h5 class=" mb-1"> <a href="#" class="text-inherit">${ board.boardTitle }</a></h5>
                                    </div>
                                </div>
                            </td>
-                           <td class="align-middle">
+                           <td class="align-middle" style="text-align: right;">
                            		<fmt:formatDate value="${ board.regDate }"
 					         				    pattern="yyyy-MM-dd"/>
                            </td>
@@ -486,6 +407,10 @@
       </div>
     </div>
   </div>
+      
+    
+    
+
   <!-- Scripts -->
   <!-- Libs JS -->
 <script src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
@@ -505,82 +430,19 @@
 <script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 
 
-<!-- 이게 진짜임  -->
-<!-- <script>
-$(function(event){
-	
-	 //버튼 이벤트 따로처리하지 않고 한번에 처리할때 사용할거
-	 $('input[name="btnradio"]').on('click', function(event){
-		 
-		 
-	 //내가 작성한 글만 보기(공통게시판) ajax
-	 //$("#btnradio2").on('click', function(event){	  //자유게시판만 클릭되게..
-		 
-		//let selectBtn = $('input[name="btnradio"]:checked').val();
-		let loginUser = "${loginUser.userNo}";
-		//alert(loginUser);
-		
-		$.ajax({
-			"url":"boardSelect",
-			"method": "get",
-			"data":  {"loginUser" : loginUser } ,
-			"success": function(result){
-				
-				console.log(loginUser);
-				
-				var myBoardList = $('#write-Board-List');
-				myBoardList.empty();
-				if (result != null){
-					
-					console.log(result);
-					
-					// 테이블 헤더 추가
-	                var $headerRow = $("<tr>");
-	                
-	                $headerRow.append($("<th>").text("제목"));
-	                $headerRow.append($("<th>").text("작성일자"));
-	                
-	                myBoardList.append($headerRow);
-	                
-	                var maxLength = 9;
-					for(var i = 0; i < result.length && i < maxLength; i++){
-						var $row = $("<tr>");
-	                    
-	                    $row.append($("<td>").text(result[i].commonTitle));
-	                    $row.append($("<td>").text(result[i].regDate));
-	                    
-	                    myBoardList.append($row);
-	                    
-					}
-					
-					
-				}
-				
-			},
-			"error": function(xhr, status, err){
-				alert("실패");
-			}
-		});
-		
-	});
-	 
-})
-</script>
- -->
-
-
 <!-- 테스트코드(공통게시판) -->
 <script>
 $(function(event) {
     $("#btnradio2, #btnradio1").on('click', function(event) {
         let loginUser = "${loginUser.userNo}";
         
+        //<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" data-board="common"> 여기에서 data-board="common" 이부분임
         const board = $(this).data("board"); // data-board속성의 값 읽기
 
         $.ajax({
             "url": "boardSelect",
             "method": "get",
-            "data": { "loginUser": loginUser, board: board },
+            "data": { "loginUser": loginUser, "board": board },
             "success": function(result) {
                 var myBoardList = $('#write-Board-List');
                 myBoardList.empty();
@@ -589,6 +451,7 @@ $(function(event) {
                     console.log(result);
 
                     var $table = $("<table>").addClass("table text-nowrap mb-0");
+                    $table.css({"table-layout": "fixed", "width": "100%"});
                     myBoardList.append($table);
 
                     var $thead = $("<thead>").addClass("table-light");
@@ -597,8 +460,8 @@ $(function(event) {
                     var $headerRow = $("<tr>");
                     $thead.append($headerRow);
                     
-                    $headerRow.append($("<th>").text("제목"));
-                    $headerRow.append($("<th>").text("작성일자"));
+                    $headerRow.append($("<th>").text("제목").css("width", "70%"));
+                    $headerRow.append($("<th>").text("작성일자").css("text-align", "right").css("width", "30%"));
                     
                     var $tbody = $("<tbody>");
                     $table.append($tbody);
@@ -610,25 +473,40 @@ $(function(event) {
                         $tbody.append($row);
                         
                         var $titleColumn = $("<td>").addClass("align-middle");
+                        $titleColumn.css({
+                            "overflow": "hidden",
+                            "text-overflow": "ellipsis",
+                            "white-space": "nowrap"
+                        });
                         $row.append($titleColumn);
                         
                         var $titleLink = $("<a>").attr("href", "#").addClass("text-inherit").text(result[i].boardTitle);
                         $titleColumn.append($titleLink);
                         
-                        var $dateCell = $("<td>").text(result[i].regDate);
+                        var $dateCell = $("<td>").text(result[i].regDate).css("text-align", "right");
                         $row.append($dateCell); 
                     }
 
                 }
             },
             "error": function(xhr, status, err) {
-                alert("실패");
+                alert("게시글을 불러오지 못했습니다.");
             }
         });
     });
+    
+//     //마이페이지 내 nav바 활성화 (-허지웅)()
+//     $('.nav-link').click(function(event) {
+// 	    // 모든 nav-link에서 'active' 클래스 제거
+// 	    $('.nav-link').removeClass('active');
+
+// 	    // 현재 클릭한 nav-link에 'active' 클래스 추가
+// 	    $(this).addClass('active');
+// 	});
 });
 </script>
 
+<script src="/project-gpmatching/resources/assets/js/common.js"></script>
 
 </body>
 

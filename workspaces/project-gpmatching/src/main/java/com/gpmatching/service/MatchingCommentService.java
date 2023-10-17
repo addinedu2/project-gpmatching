@@ -2,11 +2,12 @@ package com.gpmatching.service;
 
 import java.util.List;
 
+import com.gpmatching.dto.MatchingAlarmDto;
 import com.gpmatching.dto.MatchingCommentDto;
 
 public interface MatchingCommentService {
 	
-	void writeMatchingComment(MatchingCommentDto matchingComment);
+	void writeMatchingComment(MatchingCommentDto matchingComment, MatchingAlarmDto matchingAlarm);
 
 	List<MatchingCommentDto> getMatchingCommentByBoardNo(int boardNo);
 
@@ -17,5 +18,8 @@ public interface MatchingCommentService {
 	boolean isMatchingCloseTrueByCommentNo(int commentNo);
 
 	int getBoardNoByCommentNo(int commentNo);
+
+	List<MatchingAlarmDto> getMatchingAlarmListByUserNo(int userNo);
 	
+	//int showCommentConfirmCount(int boardNo);
 }

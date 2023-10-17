@@ -6,10 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.gpmatching.dto.CommonBoardDto;
 import com.gpmatching.dto.MypageBoardDto;
 import com.gpmatching.dto.UserDto;
-import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 
 @Mapper
 public interface MypageMapper {

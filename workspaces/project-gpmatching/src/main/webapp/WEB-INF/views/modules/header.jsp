@@ -16,12 +16,24 @@
     </div>
     <!--Navbar nav -->
     <ul class="navbar-nav navbar-right-wrap ms-auto d-flex nav-top-wrap">
+      <li>
+		<c:choose>
+			<c:when test="${ not empty loginuser }">
+				${ loginuser.nickname }님, 환영합니다!<br>
+				<a href="/project-gpmatching/review/write">
+				리뷰를 작성해주세요 (${matchingCloseCount}개)</a>
+				<button type="button" class="btn btn-primary btn-sm review-btn">클릭</button>		  
+			</c:when>
+		</c:choose>
+      
+      </li>
       <li class="dropdown stopevent">
         <a class="btn btn-light btn-icon rounded-circle indicator
           indicator-primary text-muted" href="#" role="button"
           id="dropdownNotification" data-bs-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">
-          <i class="icon-xs" data-feather="bell"></i>
+          <!-- <i class="icon-xs" data-feather="bell"></i>원본 -->
+          <i id="notificationicon" class="icon-xs" data-feather="bell"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end"
           aria-labelledby="dropdownNotification">
@@ -38,14 +50,13 @@
               
               
              <!-- List group -->
-            <div id="alram-list">
-	            <ul class="list-group list-group-flush notification-list-scroll" >
+            <div id="alarm-list" class="notification-list-scroll">
+	            <ul class="list-group list-group-flush" >
 					<li class="list-group-item border-bottom">
 						<a href="#" class="text-muted"> 
-							<c:forEach var="alram" items="${alrams}">
-								<li>유저번호:${alram.userNo}</li> 
-								<li>알람번호:${alram.alramNo}</li>
-								<li>댓글번호:${alram.commentNo}</li>
+							<c:forEach var="mAlarms" items="${matchingAlarms}">
+								<li>${mAlarms.nickname}님이 ${mAlarms.alarmContent }</li>
+
 								<hr>
 							</c:forEach>
 						</a>
@@ -53,7 +64,7 @@
 	            </ul>
             </div>
             <div class="border-top px-3 py-2 text-center">
-              <a href="/project-gpmatching/commonBoard/alramList" class="text-inherit fw-semi-bold">
+              <a href="/project-gpmatching/commonBoard/alarmList" class="text-inherit fw-semi-bold">
                 View all Notifications
               </a>
             </div>
@@ -76,7 +87,15 @@
 
             <div class="lh-1 ">
               <h5 class="mb-1"> ${loginuser.nickname}</h5>
-              <a href="/project-gpmatching/account/mypage" class="text-inherit fs-6">마이페이지</a>
+              <c:choose>
+				<c:when test="${ not empty loginuser }">
+					<a href="/project-gpmatching/account/mypage" class="text-inherit fs-6">마이페이지</a>
+				</c:when>
+				<c:otherwise>
+					<a href="/project-gpmatching/account/login" class="text-inherit fs-6">로그인</a>
+				</c:otherwise>
+			  </c:choose>
+              
             </div>
             <div class=" dropdown-divider mt-3 mb-2"></div>
           </div>
@@ -131,4 +150,33 @@
     </ul>
   </nav>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade gd-example-modal-lg" id="review-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+   <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body" id="review-list">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
+
+<script>
+
+//리뷰 스크립트 자리
+	
+</script>
 	

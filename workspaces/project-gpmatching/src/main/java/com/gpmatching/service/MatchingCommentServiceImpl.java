@@ -4,8 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
+import com.gpmatching.dto.MatchingAlarmDto;
 import com.gpmatching.dto.MatchingCommentDto;
+import com.gpmatching.mapper.MatchingAlarmMapper;
 import com.gpmatching.mapper.MatchingCommentMapper;
 import com.gpmatching.matchingboard.lolboard.mapper.LolBoardMapper;
 
@@ -16,11 +17,17 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 	
 	@Autowired
 	private MatchingCommentMapper matchingCommentMapper;
+	
+	@Autowired
+	private MatchingAlarmMapper matchingAlarmMapper;
 
 	@Override
-	public void writeMatchingComment(MatchingCommentDto matchingComment) {
+	public void writeMatchingComment(MatchingCommentDto matchingComment, MatchingAlarmDto matchingAlarm) {
 		
 		matchingCommentMapper.insertMatchingComment(matchingComment);
+		
+		matchingAlarm.setMCommentNo(matchingComment.getCommentNo());
+		matchingAlarmMapper.insertMatchingAlarm(matchingAlarm);
 	}
 
 
@@ -98,6 +105,8 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 			return;
 			
 		} 
+		
+	
 	}
 	
 	/**
@@ -140,6 +149,21 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 		}
 		
 	}
+
+
+	@Override
+	public List<MatchingAlarmDto> getMatchingAlarmListByUserNo(int userNo) {
+		List<MatchingAlarmDto> matchingAlarms = matchingAlarmMapper.selectAlarmListByUserNo(userNo);
+		
+		return matchingAlarms;
+	}
+
+//	@Override
+//	public int showCommentConfirmCount(int boardNo) {
+//		
+//		int confirmCount = matchingCommentMapper.commentConfirmCountByMatchingBoardNo(boardNo);
+//		return confirmCount;
+//	}
 	
 //	@Override
 //	public List<MatchingCommentDto> getMatchingCommentByBoardNo(int boardNo){
