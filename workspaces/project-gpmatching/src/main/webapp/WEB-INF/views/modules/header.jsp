@@ -66,7 +66,7 @@
             <div class="border-top px-3 py-2 text-center">
               <a href="/project-gpmatching/commonBoard/alarmList" class="text-inherit fw-semi-bold"
               id="checkAlarm" data-userno="${loginuser.userNo}">
-                View all Notifications
+                알림 확인(Reset)
               </a>
             </div>
           </div>

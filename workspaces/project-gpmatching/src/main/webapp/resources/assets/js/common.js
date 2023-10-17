@@ -146,7 +146,10 @@
 				"type": 'GET',
 				"data" : {"userNo":userNo},
 				"success": function(data, status, xhr){
-					
+					if(data){
+						$("#notificationicon").attr('data-feather','bell-off');
+						feather.replace();
+				   }
 				},
 				"error": function(xhr, status, err){
 					console.log("요청 실패");
