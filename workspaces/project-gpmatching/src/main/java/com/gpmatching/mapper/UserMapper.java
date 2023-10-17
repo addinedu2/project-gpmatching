@@ -19,13 +19,13 @@ public interface UserMapper {
 	
 	
 	//회원 가입
-	@Insert("insert into User ( userPwd, userId, userEmail, nickname, userPhone ) "
-			+ "values (#{userPwd}, #{userId}, #{userEmail}, #{nickname}, #{userPhone}) ")
+	@Insert("insert into User ( userPwd, userId, userEmail, nickname, userPhone, userImage ) "
+			+ "values (#{userPwd}, #{userId}, #{userEmail}, #{nickname}, #{userPhone}, #{userImage}) ")
 	void insertUser(UserDto user);
 
 	
 	//로그인할때 아이디와 비번 찾는 메서드	
-	@Select ("select userId, userPwd, userEmail, nickname, userPhone, userGrade, regDate, deletedUser, userNo "
+	@Select ("select userId, userPwd, userEmail, nickname, userPhone, userGrade, regDate, deletedUser, userNo, userImage "
              + "from User "
 			+ "where userId = #{userId} and userPwd = #{userPwd} ")
 	UserDto selectUserByIdAnduserPwd(@Param("userId") String userId, @Param("userPwd") String userPwd);

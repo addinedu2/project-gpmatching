@@ -32,6 +32,14 @@
 <!-- Theme CSS -->
 <link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
   <title>register | 회원가입</title>
+  
+        <style>
+        .flexBox {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+    
 </head>
 
 <body class="bg-light">
@@ -45,7 +53,6 @@
 		<jsp:include page="/WEB-INF/views/modules/header.jsp" />
 
 
-
   <!-- container -->
   <div class="container d-flex flex-column">
     <div class="row align-items-center justify-content-center g-0
@@ -54,7 +61,7 @@
         <!-- Card -->
         <div class="card smooth-shadow-md">
           <!-- Card body -->
-          <div class="card-body p-6">
+ 			 <div class="card-body p-6">
             <div class="mb-4">
               <a href="/project-gpmatching/home">
               	<img src="/project-gpmatching/resources/assets/images/brand/logo/opgglogo-primary.png" class="mb-2" alt="">
@@ -63,12 +70,12 @@
             </div>      
             <!-- Form -->
          
-            <form:form id="registerform" action="register" method="post" modelAttribute="user">
+            <form:form id="registerform" action="register" method="post" modelAttribute="user" enctype="multipart/form-data">
               <!-- userId -->
               <div class="mb-3">
 					<label for="userId" class="form-label">회원 ID</label>
 					<div class="input-group">
-						<input type="text" id="userId" class="form-control" name="userId" placeholder="회원 ID" required="">
+						<input type="text" id="userId" class="form-control" name="userId" placeholder="회원 ID" required>
 						<button id="checkDup" class="btn btn-primary">중복검사</button>
 						<form:errors path="userId" cssClass="error"></form:errors>
 					</div>
@@ -77,40 +84,47 @@
                 <label for="userId" class="form-label">회원 ID</label>
                 <input type="text" id="userId" class="form-control" name="userId" placeholder="회원 ID" required="">
               </div> -->
-              
-              <!-- 비밀번호 -->
+              <!-- Password -->
               <div class="mb-3">
-                <label for="userPwd" class="form-label">회원 비밀번호</label>
-                <input type="password" id="userPwd" class="form-control" name="userPwd" placeholder="**************" required oninput="checkPassword()" />
+                <label for="password" class="form-label">회원 비밀번호</label>
+                <input type="password" id="userPwd" class="form-control" name="userPwd" placeholder="" required oninput="checkPassword()">
                 
               </div>
-              <!-- 비밀번호 확인 -->
+              <!-- Password -->
               <div class="mb-3">
                 <label for="confirm-password" class="form-label">회원 비밀번호 확인</label>
-                <input type="password" id="confirmPassword" class="form-control" name="confirm-password" placeholder="**************" required oninput="checkPassword()" />
+                <input type="password" id="confirmPassword" class="form-control" name="confirm-password" placeholder="" required oninput="checkPassword()">
                 
               </div>
               <p id="passwordCheck"></p>
               
-              <!-- 이메일 -->
+              <!-- Email -->
               <div class="mb-3">
-
-                <label for="userEmail" class="form-label">이메일</label>
-                <input type="email" id="userEmail" class="form-control" name="userEmail" placeholder="Email address here" required />
+                <label for="email" class="form-label">이메일</label>
+                <input type="email" id="userEmail" class="form-control" name="userEmail" placeholder="Email address here" required>
               </div>
               
-              <!-- 닉네임 -->
+              <!-- nickname -->
               <div class="mb-3">
                 <label for="nickname" class="form-label">닉네임</label>
-
-                <input type="text" id="nickname" class="form-control" name="nickname" placeholder="닉네임을넣어주세요" required />
+                <input type="text" id="nickname" class="form-control" name="nickname" placeholder="닉네임을넣어주세요" required>
               </div>
               
-              <!-- 핸드폰 번호 -->
+              <!-- userPhone -->
               <div class="mb-3">
                 <label for="userPhone" class="form-label">핸드폰 번호</label>
-                <input type="text" id="userPhone" class="form-control" name="userPhone" placeholder="000-0000-0000" required />
+                <input type="text" id="userPhone" class="form-control" name="userPhone" placeholder="000-0000-0000" required>
               </div>
+              
+              <div class="mb-3">
+		           <label for="imageInput" class="form-label">
+		               <img id="preview" src="/project-gpmatching/resources/assets/images/avatar/anonymous.png" width="100" height="100">
+		           </label>
+		           <input type="file" id="imageInput" name="imageName" style="display: none;" accept="image/*" onchange="readURL(this);" />
+       	       </div>   
+              
+              
+              
               
               <!-- Checkbox -->
               <div class="mb-3">
@@ -143,35 +157,30 @@
 
                 </div>
               </div>
+
             </form:form>
           </div>
         </div>
       </div>
     </div>
   </div>
-
   
-
-
-
-  <!-- Scripts -->
-  <!-- Libs JS -->
-<script src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
-
-
-
-
-<!-- Theme JS -->
-<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
-
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  
+    <script>
+      //프로필 이미지 
+	  function readURL(input) {
+    	  
+	      if (input.files && input.files[0]) {
+	          var reader = new FileReader();
+	          reader.onload = function (e) {
+	              $("#preview").attr("src", e.target.result);
+	          };
+	          reader.readAsDataURL(input.files[0]);
+	      }
+	  }
+  </script>
+  
   <script>
 	
 	$(function () {
@@ -199,7 +208,7 @@
 						alert("사용 가능한 아이디 입니다");
 					}else{
 						dupChecked = false;
-						alert("이미 사용중인 아이디 입니다");
+						alert("이미 사용중");
 					}
 				},
 				"error": function(xhr, status, err){	//"error" 정상적이지 않을때 호출
@@ -239,6 +248,39 @@
 		   var confirmPassword = passwordConfirmField.value;
 		   var passwordCheck = document.getElementById('passwordCheck')
 		   
+		   
+		   
+		/* var passwordOption = document.getElementById('passwordOption')
+		   var SpecialChar = ["!","@","#","$","%"];
+		   var checkSpecialChar = 0;
+		   
+		   if(password.length < 6 || password.length>16) {
+		      passwordOption.innerHTML = '비밀번호는 6글자 이상, 16글자 이하만 이용 가능합니다.';
+		      passwordOption.style.color = 'red';          
+		   }
+		   
+		   for(var i=0; i<SpecialChar.length; i++){
+		      if(password.indexOf(SpecialChar[i]) != -1){
+		         checkSpecialChar = 1;            
+		      }          
+		   }
+		   if(checkSpecialChar == 0){
+		      passwordOption.innerHTML = '!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.'  
+		   }  */
+		 
+		   /* $('#register').on('click', function(event){
+		    event.preventDefault();
+		   
+		    if (password != passwordConfirm){
+		       alert("비밀번호가 일치하지 않습니다");
+		       $('#password').focus();
+		       return
+		    }
+		   }); */
+		   
+		   
+		   
+		   
 		   if(userPwd !== '' && confirmPassword !== ''){
 		      if(userPwd === confirmPassword){
 		    	 passwordCheck.innerHTML = '비밀번호가 일치합니다.'
@@ -249,12 +291,29 @@
 		    	 passwordCheck.innerHTML = '비밀번호가 일치하지 않습니다.';
 		    	 passwordCheck.style.color = 'red';
 		         //return false;
-		         registerButton.disabled = false;
+		         registerButton.disabled = true;
 		        }
 		   }
-	         //alert('비밀번호가 일치하지 않습니다!!!')
 		}
 </script>
+
+  <!-- Scripts -->
+  <!-- Libs JS -->
+<script src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+
+
+
+<!-- Theme JS -->
+<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 
 
 

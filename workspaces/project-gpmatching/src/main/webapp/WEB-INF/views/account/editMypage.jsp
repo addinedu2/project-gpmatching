@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -58,6 +59,8 @@
            
           </div>
         </div>
+        
+        <form action="editMypage" method="post" enctype="multipart/form-data">
         <div class="row mb-8">
           <div class="col-xl-3 col-lg-4 col-md-12 col-12">
             <div class="mb-4 mb-lg-0">
@@ -67,6 +70,7 @@
 
           </div>
 
+
           <div class="col-xl-9 col-lg-8 col-md-12 col-12">
             <!-- card -->
             <div class="card">
@@ -74,25 +78,44 @@
               <div class="card-body">
                 <div class=" mb-6">
                   <h4 class="mb-1">General Settings</h4>
-
                 </div>
-                <div class="row align-items-center mb-8">
-                  <div class="col-md-3 mb-3 mb-md-0">
-                    <h5 class="mb-0">Avatar</h5>
-                  </div>
-                  <div class="col-md-9">
-                    <div class="d-flex align-items-center">
-                      <div class="me-3">
-                        <img src="/project-gpmatching/resources/assets/images/avatar/avatar-5.jpg" class="rounded-circle avatar avatar-lg" alt="">
-                      </div>
-                      <div>
-                        <button type="submit" class="btn btn-outline-white
-                            me-1">Change</button>
-                        <button type="submit" class="btn btn-outline-white">Remove</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                
+                
+                <!-- 프로필사진 -->
+	                <div class="row align-items-center mb-8">
+	                  <div class="col-md-3 mb-3 mb-md-0">
+	                    <h5 class="mb-0">Avatar</h5>
+	                  </div>
+	                  <div class="col-md-9">
+	                  
+	                    <div class="d-flex align-items-center">
+	                      <div class="me-3">
+	                        <label for="imageInput" style="cursor: pointer;">
+		                        <c:choose>
+		                        	<c:when test="${ loginuser.userImage == null }">
+			                        	<img id="preview" src="/project-gpmatching/resources/assets/images/avatar/anonymous.png" class="rounded-circle avatar avatar-lg" alt="">
+			                        	<input type="file" id="imageInput" name="imageName" style="display: none" accept="image/*" onchange="readURL(this);" />
+		                        	</c:when>
+		                        	<c:otherwise>
+		                        		<img id="preview" src="${pageContext.request.contextPath}/resources/upload/${loginuser.userImage}" class="avatar-xxl
+		                        rounded-circle border border-4 border-white-color-40" alt="Image" height="30" width="30" alt="Image" >
+		                        		<input type="file" id="imageInput" name="imageName" style="display: none;" accept="image/*" onchange="readURL(this);" />
+		                        	</c:otherwise>
+		                        </c:choose>
+	                        </label>
+	                      </div>
+	                      <div>
+	                        <button type="button" id="imageUpdateButton" class="btn btn-outline-white me-1">수정</button>
+	                        <button type="button" id="imageDeleteButton" class="btn btn-outline-white">삭제</button>
+	                      </div>
+	                    </div>
+	                    
+	                  </div>
+	                </div>
+                
+                
+                
+                <!-- 프로필커버사진 -->
                 <!-- col -->
                 <div class="row mb-8">
                   <div class="col-md-3 mb-3 mb-md-0">
@@ -117,23 +140,8 @@
                     <h4 class="mb-1">Basic information</h4>
 
                   </div>
-                  <form action="editMypage" method="post">
+           
 		        <input type="hidden" name="userId" value="${ loginuser.userId }">
-
-                    <!-- row -->
-                    <div class="mb-3 row">
-                      <label for="location" class="col-sm-4 col-form-label
-                          form-label">닉네임</label>
-                      <div class="col-md-8 col-12">
-                  <input type="text" class="form-control" name="nickname" placeholder="${loginuser.nickname}" id="nickname">
-                   <!--      <select class="form-select" id="newnickname">
-                        <option selected>Select Country</option>
-                            <option value="1">India</option>
-                            <option value="2">UK</option>
-                            <option value="3">USA</option> 
-                          </select> -->  <!-- 데이터 선택이라 일단 주석으로 남겨놓는다 -->
-                      </div>
-                    </div>
 
                     <!-- row -->
                     <div class="mb-3 row">
@@ -153,13 +161,27 @@
                       </div>
                     </div>
                     
+                    <!-- row -->
+                    <div class="mb-3 row">
+                      <label for="location" class="col-sm-4 col-form-label
+                          form-label">닉네임</label>
+                      <div class="col-md-8 col-12">
+                  <input type="text" class="form-control" name="nickname" placeholder="${loginuser.nickname}" id="nickname">
+                   <!--      <select class="form-select" id="newnickname">
+                        <option selected>Select Country</option>
+                            <option value="1">India</option>
+                            <option value="2">UK</option>
+                            <option value="3">USA</option> 
+                          </select> -->  <!-- 데이터 선택이라 일단 주석으로 남겨놓는다 -->
+                      </div>
+                    </div>
                     
                     <!-- row -->
                     <div class="mb-3 row">
                       <label for="addressLine" class="col-sm-4 col-form-label
                           form-label">소개</label>
                       <div class="col-md-8 col-12">
-                        <input type="text" class="form-control" placeholder="placeholder" id="addressLine">
+                        <input type="text" class="form-control" name="userIntro" placeholder="${loginuser.userIntro}" id="userIntro">
                       </div>
                     </div>
                     
@@ -188,528 +210,14 @@
                        
                       </div>
                     </div>
-                  </form>
                 </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <div class="row mb-8">
-          <div class="col-xl-3 col-lg-4 col-md-12 col-12">
-            <div class="mb-4 mb-lg-0">
-              <h4 class="mb-1">Email Setting</h4>
-              <p class="mb-0 fs-5 text-muted">Add an email settings to profile </p>
-            </div>
-
-          </div>
-
-          <div class="col-xl-9 col-lg-8 col-md-12 col-12">
-            <!-- card -->
-            <div class="card" id="edit">
-              <!-- card body -->
-              <div class="card-body">
-                <div class="mb-6">
-                  <h4 class="mb-1">Email</h4>
-
-                </div>
-                <form>
-                  <!-- row -->
-                  <div class="mb-3 row">
-                    <!-- label -->
-                    <label for="newEmailAddress" class="col-sm-4
-                        col-form-label form-label">New email</label>
-                    <div class="col-md-8 col-12">
-                      <!-- input -->
-                      <input type="email" class="form-control" placeholder="Enter your email address" id="newEmailAddress" required>
-                    </div>
-                    <!-- button -->
-                    <div class="offset-md-4 col-md-8 col-12 mt-3">
-                      <button type="submit" class="btn btn-primary">Save
-                          Changes</button>
-                    </div>
-                  </div>
-                </form>
-
-                <div class="mb-6 mt-6">
-                  <h4 class="mb-1">Change your password</h4>
-
-                </div>
-                <form>
-                  <!-- row -->
-                  <div class="mb-3 row">
-                    <label for="currentPassword" class="col-sm-4
-                        col-form-label form-label">Current password</label>
-
-                    <div class="col-md-8 col-12">
-                      <input type="password" class="form-control" placeholder="Enter Current password" id="currentPassword" required>
-                    </div>
-                  </div>
-                  <!-- row -->
-                  <div class="mb-3 row">
-                    <label for="currentNewPassword" class="col-sm-4
-                        col-form-label form-label">New password</label>
-
-                    <div class="col-md-8 col-12">
-                      <input type="password" class="form-control" placeholder="Enter New password" id="currentNewPassword" required>
-                    </div>
-                  </div>
-                  <!-- row -->
-                  <div class="row align-items-center">
-                    <label for="confirmNewpassword" class="col-sm-4
-                        col-form-label form-label">Confirm new password</label>
-                    <div class="col-md-8 col-12 mb-2 mb-lg-0">
-                      <input type="password" class="form-control" placeholder="Confirm new password" id="confirmNewpassword" required>
-                    </div>
-                    <!-- list -->
-                    <div class="offset-md-4 col-md-8 col-12 mt-4">
-                      <h6 class="mb-1">Password requirements:</h6>
-                      <p>Ensure that these requirements are met:</p>
-                      <ul>
-                        <li> Minimum 8 characters long the more, the better</li>
-                        <li>At least one lowercase character</li>
-                        <li>At least one uppercase character</li>
-                        <li>At least one number, symbol, or whitespace character
-                        </li>
-                      </ul>
-                      <button type="submit" class="btn btn-primary">Save
-                          Changes</button>
-                    </div>
-                  </div>
-                </form>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="row mb-8">
-          <div class="col-xl-3 col-lg-4 col-md-12 col-12">
-            <div class="mb-4 mb-lg-0">
-              <h4 class="mb-1">Preferences</h4>
-              <p class="mb-0 fs-5 text-muted">Configure your preferences </p>
-            </div>
-
-          </div>
-
-          <div class="col-xl-9 col-lg-8 col-md-12 col-12">
-            <div class="card" id="preferences">
-              <div class="card-body">
-                <div class="mb-6">
-                  <h4 class="mb-1">Preferences</h4>
-
-                </div>
-                <form>
-                  <!-- row -->
-                  <div class="mb-3 row">
-                    <label for="langauge" class="col-sm-4 col-form-label
-                        form-label">Langauge</label>
-
-                    <div class="col-md-8 col-12">
-                      <select class="form-select" id="langauge">
-                          <option selected>English</option>
-                          <option value="1">Hindi</option>
-                          <option value="2">Spanish</option>
-                          <option value="3">Arabic </option>
-                        </select>
-                    </div>
-                  </div>
-                  <!-- row -->
-                  <div class="mb-3 row">
-                    <label for="timeZone" class="col-sm-4 col-form-label
-                        form-label">Time Zone</label>
-
-                    <div class="col-md-8 col-12">
-                      <select class="form-select" id="timeZone">
-                          <option selected>GMT +5.30</option>
-                          <option value="1">GMT +5.30</option>
-                          <option value="2">GMT +5.30</option>
-                          <option value="3">GMT +5.30 </option>
-                        </select>
-                    </div>
-                  </div>
-                  <!-- row -->
-                  <div class="mb-3 row">
-                    <label for="dateFormat" class="col-sm-4 col-form-label
-                        form-label">Date Format</label>
-
-                    <div class="col-md-8 col-12">
-                      <select class="form-select" id="dateFormat">
-                          <option selected>No Preference</option>
-                          <option value="Preference">Preference</option>
-                        </select>
-                    </div>
-                  </div>
-
-                  <!-- row -->
-                  <div class="mb-3 row">
-                    <label class="col-sm-4 col-form-label form-label">Default</label>
-                    <div class="col-md-8 col-12">
-                      <div class="form-check custom-radio
-                          form-check-inline">
-                        <input type="radio" id="customRadioInlineOn" name="customRadioInline" class="form-check-input">
-                        <label class="form-check-label" for="customRadioInlineOn">On
-                          </label>
-                      </div>
-                      <div class="form-check custom-radio
-                          form-check-inline">
-                        <input type="radio" id="customRadioInlineOff" name="customRadioInline" class="form-check-input">
-                        <label class="form-check-label" for="customRadioInlineOff">Off</label>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- row -->
-                  <div class="mb-3 row">
-                    <div class="col-md-4 col-12">
-                      <label class="mb-0 form-label">Choose option default</label>
-                    </div>
-                    <div class="col-md-8 col-12">
-                      <div class="form-check  mb-2">
-                        <input type="checkbox" class="form-check-input" id="customChecktellMe">
-                        <label class="form-check-label" for="customChecktellMe">Tell me</label>
-                      </div>
-                      <div class="form-check  mb-2">
-                        <input type="checkbox" class="form-check-input" id="customCheckemail">
-                        <label class="form-check-label" for="customCheckemail">Open e-mail</label>
-                      </div>
-                      <div class="form-check  mb-2">
-                        <input type="checkbox" class="form-check-input" id="customCheckemailTwo" checked>
-                        <label class="form-check-label" for="customCheckemailTwo">Show default</label>
-                      </div>
-                    </div>
-                    <div class="offset-md-4 col-md-8 col-12 mt-2">
-                      <button type="submit" class="btn btn-primary">Save
-                          Changes</button>
-                    </div>
-                  </div>
-
-
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row mb-8">
-          <div class="col-xl-3 col-lg-4 col-md-12 col-12">
-            <div class="mb-4 mb-lg-0">
-              <h4 class="mb-1">Notifications</h4>
-              <p class="mb-0 fs-5 text-muted">Change notification settings </p>
-            </div>
-
-          </div>
-
-          <div class="col-xl-9 col-lg-8 col-md-12 col-12">
-            <!-- card -->
-
-            <div class="card">
-              <!-- card body -->
-              <div class="card-body">
-                <div class="mb-6">
-                  <h4 class="mb-1">Notification for email, mobile & Slack</h4>
-                </div>
-                <div class="mb-4">
-                  <!-- alert -->
-                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    To start using Slack for personal notifications, you should first connect Slack.
-                    <button type="submit" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-
-        </button>
-                  </div>
-                </div>
-                <!-- table -->
-                <div class="table-responsive mb-3">
-                  <table class="table text-nowrap">
-                    <thead class="table-light">
-                      <tr>
-                        <th class="w-75">Activity & Conversation</th>
-                        <th><i data-feather="smartphone" class="icon-sm me-2"></i></th>
-                        <th><i data-feather="slack" class="icon-sm me-2"></i></th>
-                        <th><i data-feather="mail" class="icon-sm me-2"></i></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-
-                        <td class="border-top-0">
-
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckOne">
-                            <label class="form-check-label" for="customCheckOne"></label>
-                          </div>
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckTwo">
-                            <label class="form-check-label" for="customCheckTwo"></label>
-                          </div>
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckThree">
-                            <label class="form-check-label" for="customCheckThree"></label>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-
-                        <td class="border-top-0">
-                          When a Files is shared with a team
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckFour">
-                            <label class="form-check-label" for="customCheckFour"></label>
-                          </div>
-                        </td>
-                        <td class="border-top-0">
-                          <i data-feather="minus" class="text-muted icon-sm"></i>
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckFive">
-                            <label class="form-check-label" for="customCheckFive"></label>
-                          </div>
-                        </td>
-                      </tr>
-
-                      <tr>
-
-                        <td class="border-top-0">
-                          When someone requests access to my design
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckSix">
-                            <label class="form-check-label" for="customCheckSix"></label>
-                          </div>
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckSeven">
-                            <label class="form-check-label" for="customCheckSeven"></label>
-                          </div>
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckEight">
-                            <label class="form-check-label" for="customCheckEight"></label>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-
-                        <td class="border-top-0">
-                          When someone comments in threads I’m following
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckNine">
-                            <label class="form-check-label" for="customCheckNine"></label>
-                          </div>
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckTen">
-                            <label class="form-check-label" for="customCheckTen"></label>
-                          </div>
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckEleven">
-                            <label class="form-check-label" for="customCheckEleven"></label>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-
-                        <td class="border-top-0">
-                          When someone @mentions me in any comments
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckTwelve">
-                            <label class="form-check-label" for="customCheckTwelve"></label>
-                          </div>
-                        </td>
-                        <td class="border-top-0">
-                          <i class="text-muted icon-sm" data-feather="minus"></i>
-                        </td>
-                        <td class="border-top-0">
-                          <i class="text-muted icon-sm" data-feather="minus"></i>
-                        </td>
-                      </tr>
-
-                    </tbody>
-                  </table>
-                </div>
-                <div class="table-responsive mb-3">
-                  <table class="table text-nowrap">
-                    <thead class="table-light">
-                      <tr>
-                        <th class="w-75">Project activity activity</th>
-                        <th><i data-feather="smartphone" class="me-2 icon-sm"></i></th>
-                        <th><i data-feather="slack" class="me-2 icon-sm"></i></th>
-                        <th><i data-feather="mail" class="me-2 icon-sm"></i></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-
-                        <td class="border-top-0">
-                          When someone adds me to a project
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckThirteen">
-                            <label class="form-check-label" for="customCheckThirteen"></label>
-                          </div>
-                        </td>
-                        <td class="border-top-0">
-                          <i class="text-muted icon-sm" data-feather="minus"></i>
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckFourteen">
-                            <label class="form-check-label" for="customCheckFourteen"></label>
-                          </div>
-                        </td>
-                      </tr>
-
-
-                    </tbody>
-                  </table>
-                </div>
-                <div class="table-responsive">
-                  <table class="table mb-0 text-nowrap">
-                    <thead class="table-light">
-                      <tr>
-                        <th class="w-75">Team activity
-                        </th>
-                        <th><i data-feather="smartphone" class="me-2 icon-sm"></i></th>
-                        <th><i data-feather="slack" class="me-2 icon-sm"></i></th>
-                        <th><i data-feather="mail" class="me-2 icon-sm"></i></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-
-                        <td class="border-top-0">
-                          When my invitees sign up
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckSixteen">
-                            <label class="form-check-label" for="customCheckSixteen"></label>
-                          </div>
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckSeventeen">
-                            <label class="form-check-label" for="customCheckSeventeen"></label>
-                          </div>
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckEighteen">
-                            <label class="form-check-label" for="customCheckEighteen"></label>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-
-                        <td class="border-top-0">
-                          When someone requests access to my team
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckNineteen">
-                            <label class="form-check-label" for="customCheckNineteen"></label>
-                          </div>
-                        </td>
-                        <td class="border-top-0">
-                          <i data-feather="minus" class="text-muted icon-sm"></i>
-                        </td>
-                        <td class="border-top-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckTwenty">
-                            <label class="form-check-label" for="customCheckTwenty"></label>
-                          </div>
-                        </td>
-                      </tr>
-
-                      <tr>
-
-                        <td class="border-bottom-0">
-                          When someone invites me to a team
-                        </td>
-                        <td class="border-bottom-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckTwentyone">
-                            <label class="form-check-label" for="customCheckTwentyone"></label>
-                          </div>
-                        </td>
-                        <td class="border-bottom-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckTwentytwo">
-                            <label class="form-check-label" for="customCheckTwentytwo"></label>
-                          </div>
-                        </td>
-                        <td class="border-bottom-0">
-                          <div class="form-check ">
-                            <input type="checkbox" class="form-check-input" id="customCheckTwentythree">
-                            <label class="form-check-label" for="customCheckTwentythree"></label>
-                          </div>
-                        </td>
-                      </tr>
-
-
-                    </tbody>
-                  </table>
-                </div>
-                <hr class="my-6">
-                <div class="row">
-                  <div class="col-xl-6 col-md-12 mb-3">
-                    <label for="notification" class="form-label">When should
-          we send you notifications?</label>
-                    <select class="form-select" id="notification">
-          <option selected>Always</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-                  </div>
-                  <div class="col-xl-3 col-md-6 mb-3">
-                    <label for="dailyDigest" class="form-label">Daily Digest
-        </label>
-                    <select class="form-select" id="dailyDigest">
-          <option selected>Everyday</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-                  </div>
-                  <div class="col-xl-3 col-md-6 mb-3">
-                    <label for="time" class="form-label">Time</label>
-                    <select class="form-select" id="time">
-          <option selected>2PM
-          </option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-                  </div>
-                  <div class="col-xl-3 col-md-12 ">
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                  </div>
-                </div>
-
-
-              </div>
-
-            </div>
-          </div>
-        </div>
+       </form>
+        
+        
         <div class="row">
           <div class="col-xl-3 col-lg-4 col-md-12 col-12">
             <div class="mb-4 mb-lg-0">
@@ -763,6 +271,36 @@
 <script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 
 <script src="/project-gpmatching/resources/assets/js/common.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+<!-- <script>
+	$(function(event) {
+	    $("#imageUpdateButton").click(function() {
+	        alert("수정 버튼을 클릭했습니다.");
+	    });
+	
+	    $("#imageDeleteButton").click(function() {
+	        alert("삭제 버튼을 클릭했습니다.");
+	    });
+	});
+</script> -->
+
+
+<script>
+  function readURL(input) {
+
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+              $("#preview").attr("src", e.target.result);
+          };
+          reader.readAsDataURL(input.files[0]);
+      }
+  }
+  </script>
+  
+  
 </body>
 
 </html>
