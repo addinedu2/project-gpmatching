@@ -29,12 +29,12 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	
 	//댓글 쓰기-삭제-수정
 	@Override   
- 	public void writeComment(BoardCommentDto boardComment, AlarmDto alarm) {
+ 	public void writeComment(BoardCommentDto boardComment) {
 		boardCommentMapper.insertComment(boardComment);	
 		boardCommentMapper.updateGroupNo(boardComment.getCommentNo(), boardComment.getCommentNo());
 	
-		alarm.setCommentNo(boardComment.getCommentNo());//이렇게 받아와야지..
-		alarmMapper.insertAlarm(alarm);
+		//alarm.setCommentNo(boardComment.getCommentNo());//이렇게 받아와야지..
+		//alarmMapper.insertAlarm(alarm);
 		
 	}
 	
@@ -76,11 +76,11 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		
 	}
 	
-	@Override
-	public List<AlarmDto> getAlamListByUserNo(int userNo) {
-		List<AlarmDto> alarms = alarmMapper.selectAlamListByUserNo(userNo);
-		
-		return alarms;
-	}
+//	@Override
+//	public List<AlarmDto> getAlamListByUserNo(int userNo) {
+//		List<AlarmDto> alarms = alarmMapper.selectAlamListByUserNo(userNo);
+//		
+//		return alarms;
+//	}
 
 }
