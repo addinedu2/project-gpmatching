@@ -77,8 +77,14 @@
         <a class="rounded-circle" href="#" role="button" id="dropdownUser"
           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <div class="avatar avatar-md avatar-indicators avatar-online">
-            <img alt="avatar" src="/spring-demoweb/resources/assets/images/avatar/avatar-1.jpg"
-              class="rounded-circle" />
+          		<c:choose>
+          			<c:when test="${loginuser.userImage == null}">
+           	    		<img alt="avatar" src="/project-gpmatching/resources/assets/images/avatar/anonymous.png" class="rounded-circle" />
+           	    	</c:when>
+                   	<c:otherwise> 
+                   		<img src="${pageContext.request.contextPath}/resources/upload/${loginuser.userImage}" class="rounded-circle" alt="Image" height="30" width="30" >
+                   	</c:otherwise>
+           	    </c:choose>
           </div>
         </a>
         <div class="dropdown-menu dropdown-menu-end"
