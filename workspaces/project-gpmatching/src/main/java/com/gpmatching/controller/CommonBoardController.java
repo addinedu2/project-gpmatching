@@ -116,9 +116,9 @@ public class CommonBoardController {
 	@GetMapping(path= {"/commonDetail"})
 	public String commonDetail(@RequestParam(defaultValue="-1") int commonNo,
 							   @RequestParam(defaultValue="-1") int pageNo, Model model) {
-		if(commonNo == -1 || pageNo == -1) {
-			return "redirect:commonList";
-		}
+//		if(commonNo == -1 || pageNo == -1) {
+//			return "redirect:commonList";
+//		}
 		
 		CommonBoardDto commonBoard = commonBoardService.findCommonBoardByCommonNo(commonNo);
 		

@@ -10,7 +10,9 @@
 * @version 1.0, 작업 내용 :
 * 배틀그라운드 매칭게시판 글쓰기 (write)
 * 배틀그라운드 매칭게시판 리스트 보여주기(list)
-* @Date : 2023-10-04 
+* 배틀그라운드 매칭게시판 글수정(edit)
+* 배틀그라운드 매칭게시판 글삭제(delete)
+* @Date : 2023-10-16
 * 
 */
 
@@ -79,10 +81,8 @@ public class PubgBoardController {
 	
 	@GetMapping(path = { "/battleground-write"})
 	public String showBattlegroundWriteForm(HttpSession session) {
-		// 아래 코드는 AuthInterceptor 인터셉터에서 처리
-		//if(session.getAttribute("loginuser") == null) {
-		//	return "account/login";
-		//}
+		// AuthInterceptor 인터셉터에서 로그인 확인
+		
 		return "/boardMatching/pubgBoard/battleground-write";
 	}
 	
@@ -112,8 +112,6 @@ public class PubgBoardController {
 		MatchingBoardDto pubgMatchingBoard = pubgBoardService.findPubgBoardByBoardNo(boardNo);
 		
 		model.addAttribute("pubgMatchingBoard", pubgMatchingBoard);
-		
-		//System.out.println(lolMatchingBoard);
 		
 		return "/boardMatching/pubgBoard/battleground-edit";
 	}

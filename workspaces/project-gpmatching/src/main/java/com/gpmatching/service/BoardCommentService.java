@@ -23,7 +23,9 @@ public interface BoardCommentService {
 	void updateStep(BoardCommentDto boardComment);
 
 	void writeRecomment(BoardCommentDto boardComment);
-	
+
 	List<AlarmDto> getAlamListByUserNo(int userNo);
+	
+	
 }
 

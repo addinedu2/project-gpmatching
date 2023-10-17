@@ -48,7 +48,7 @@
 
 <!-- 검색 결과를 표시할 테이블 -->
 <table class="table text-light" style="color: black; text-align: center;">
-    <tbody id="userListTableBody">
+    <tbody id="admincontent">
     <c:forEach var="userlist" items="${listuser}">
         <tr>
         <td>${ userlist.userId }</td>
@@ -111,10 +111,10 @@
 	        },
 	        success: function(data) {
 	        	 // 기존의 행을 삭제
-	            $("#userListTableBody").empty();
+	            $("#admincontent").empty();
 	            
 	            // 새로운 결과를 userListTableBody에 동적으로 추가
-	            $("#userListTableBody").html(data);
+	            $("#admincontent").html(data);
 	        }
 	    });
 	}

@@ -10,7 +10,9 @@
 * @version 1.0, 작업 내용 :
 * 오버워치 매칭게시판 글쓰기 (write)
 * 오버워치 매칭게시판 리스트 보여주기(list)
-* @Date : 2023-10-04 
+* 오버워치 매칭게시판 글수정 (edit)
+* 오버워치 매칭게시판 글삭제 (delete)
+* @Date : 2023-10-16 
 * 
 */
 
@@ -76,9 +78,7 @@ public class OverwatchBoardController {
 	
 	@GetMapping(path = { "/overwatch-write"})
 	public String showOverwatchWriteForm(HttpSession session) {
-		//if(session.getAttribute("loginuser") == null) {
-		//	return "account/login";
-		//}
+		
 		return "/boardMatching/overwatchBoard/overwatch-write";
 	}
 	

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="com.gpmatching.common.Time" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -180,10 +180,21 @@
 											<th>${ matchingBoard.mic }</th>
 											<th>${ matchingBoard.confirmCount + 1} / ${ matchingBoard.headCount + 1}</th>
 											<th>${ matchingBoard.matchingClose }</th>
-											<th>
-												<fmt:formatDate value="${ matchingBoard.regDate }"
-         				    						pattern="yyyy-MM-dd"/>
+<!-- 											<th> -->
+<%-- 												<fmt:formatDate value="${ matchingBoard.regDate }" --%>
+<%--          				    						pattern="yyyy-MM-dd"/> --%>
+<!-- 											</th> -->
+											<c:choose>
+											    <c:when test="${empty matchingBoard.regDate}">
+											        <th>날짜 정보 없음</th>
+											    </c:when>
+											    <c:otherwise>
+											        <th>
+											    <c:set var="regDate" value="${matchingBoard.regDate}" scope="page" />
+											    <%= Time.calculateTime((java.util.Date) pageContext.getAttribute("regDate")) %>
 											</th>
+											    </c:otherwise>
+											</c:choose>
 											<th class="align-middle">
 												<!-- Varying modal -->
 
@@ -410,7 +421,6 @@
 		                $headerRow.append($("<th>").text("닉네임"));
 		                $headerRow.append($("<th>").text("댓글 내용"));
 						$headerRow.append($("<th>").text("승인여부"));;
-						$headerRow.append($("<th>").text("글번호 : " + boardNo));; // 테스트중
 		                
 		                commentList.append($headerRow);
 		                
@@ -551,7 +561,7 @@
 
  	
  	
- 	// 거절 버튼 눌렀을 때의 동작 (-이현일)
+	// 거절 버튼을 누르면 화면이 변하지 않고 글의 댓글 목록 보기 유지 (-이현일)
  	$(function() {
 	    $('#comment-list').on("click", '.btn-reject-comment', function(event) {
 	    	

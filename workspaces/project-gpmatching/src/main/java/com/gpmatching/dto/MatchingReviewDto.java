@@ -10,4 +10,6 @@ public class MatchingReviewDto {
 	private String reviewContent;
 	private int boardNo;
 	private int userNo;
+	private int reviewedUserNo;
+	private int commentNo;
 }

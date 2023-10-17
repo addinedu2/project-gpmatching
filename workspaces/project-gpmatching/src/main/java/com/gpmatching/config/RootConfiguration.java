@@ -62,7 +62,7 @@ public class RootConfiguration implements ApplicationContextAware {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		//dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/gpmatchingdb" );
-		dataSource.setUrl("jdbc:mysql://3.39.195.155/gpmatchingdb" );
+		dataSource.setUrl("jdbc:mysql://3.39.195.155/gpmatchingdb?serverTimezone=UTC" );
 		dataSource.setUsername("gpmatching");
 		dataSource.setPassword("gpmatching");
 		dataSource.setMaxTotal(10);

@@ -35,21 +35,14 @@ public class LolController {
 		LolDto lolDto = new LolDto();
 		
 		System.out.println("test");
-//		LolDto lol = new LolDto();
-//		lol.setBoardNo(boardNo);
-//		lol.setLolPlay("lolPlay");
-//		lol.setLolPosition("lolPosition");
-//		lol.setLolSur("lolSur");
-//		lol.setLolTier("lolTier");
-//		
 		
-		//lolDto.setBoardNo(2); // BoardNo 중복값 2번 입력하면 에러
+
 		lolDto.setLolPlay("lolPlay");
 		lolDto.setLolPosition("lolPosition");
 		lolDto.setLolSur("lolSur");
 		lolDto.setLolTier("lolTier");
-		//lolService.write(lolDto, 3);
-		//lolService.write(lolDto, 40); //boardMaching table에 없는 BoardNo 값 입력 에러
+		//lolDto.setBoardNo(2); // BoardNo 중복값 2번 입력하면 에러
+		//lolService.write(lolDto, 40); //MatchingBoard에 없는 BoardNo 넣으면 에러
 		lolService.write(lolDto, 30);
 		
 		

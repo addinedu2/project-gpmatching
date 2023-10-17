@@ -1,7 +1,10 @@
 package com.gpmatching.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gpmatching.dto.AlarmDto;
 import com.gpmatching.dto.MatchingAlarmDto;
 import com.gpmatching.mapper.MatchingAlarmMapper;
 
@@ -16,6 +19,20 @@ public class MatchingAlarmServiceImpl implements MatchingAlarmService{
 	public void saveMatchingAlarm(MatchingAlarmDto matchingAlarmDto) {
 		matchingAlarmMapper.insertMatchingAlarm(matchingAlarmDto);
 	}
+	
+	@Override
+	public List<MatchingAlarmDto> getMatchingAlarmListByUserNo(int userNo) {
+		List<MatchingAlarmDto> matchingAlarms = matchingAlarmMapper.selectAlarmListByUserNo(userNo);
+		
+		return matchingAlarms;
+	}
 
+	@Override
+	public void deleteAlarmListByUserNo(int userNo) {
+		matchingAlarmMapper.deleteAlarmListByUserNo(userNo);
+		
+	}
+
+	
 	
 }

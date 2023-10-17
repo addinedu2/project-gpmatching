@@ -11,8 +11,6 @@ public interface PubgBoardService {
 
 	void write(MatchingBoardDto matchingBoardDto);
 	
-	//List<MatchingBoardDto> listMatchingBoard();
-
 	int getLastMatchingItemBoardNo();
 	
 	List<MatchingBoardDto> getMatchingBoardListByGameName(String gameName);
@@ -27,11 +25,4 @@ public interface PubgBoardService {
 
 	void delete(int boardNo);
 
-
-
-	//List<MatchingBoardDto> getMatchingBoardListByGameNo(int gameNo);
-
-	//MatchingBoardDto findMatchingBoardByBoardNo(int boardNo);
-	
-	//String getMatchingBoardNickname();
 }
