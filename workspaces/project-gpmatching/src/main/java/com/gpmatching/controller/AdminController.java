@@ -65,55 +65,22 @@ public class AdminController {
 			}
 	
 
-	
-	
-	
 	@GetMapping(path = {"/adminOverview"} )
 	public String showAdminOverview() {
 	    return "/admin/adminOverview";
+	    
 	}
-
-
-   
+	
+	//링크 를릭하면 회원의 유저넘버 추출해서 상세정보 보기
+	@GetMapping(path = {"/user/{userNo}"})
+	public String viewUser(int userNo, Model model) {
+		AdminDto user = adminService.getUserNo(userNo);
+		if (user != null) {
+			model.addAttribute("user", user);
+		}
+		return "/admin/adminUserDetail";
+		}
 		
+}
 	
-//	//신규 회원 리스트
-//	@GetMapping(path = {"/userHome"}, produces = "application/json;charset=utf-8")
-//	@ResponseBody
-//	public List<AdminDto> userHome(Model model) {
-//		List<AdminDto> newUsers = adminService.getNewUsers();
-//		model.addAttribute("newUsers", newUsers);
-//	    return newUsers;
-//	}
-//	
-
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//	//링크 를릭하면 회원의 유저넘버 추출해서 상세정보 보기
-//	@GetMapping("/users/{userNo}")
-//	public String viewUser(@PathVariable int userNo, Model model) {
-//	    User user = userService.getUserByUserNo(userNo);
-//	    if (user != null) {
-//	        model.addAttribute("user", user);
-//	        return "userDetails";
-//	    } else {
-//	        // 사용자를 찾을 수 없는 경우에 대한 처리 (예: 에러 페이지로 리다이렉트)
-//	        return "error"; // 또는 다른 에러 페이지의 뷰 이름을 리턴할 수 있습니다.
-//	    }
-	}
-
 	

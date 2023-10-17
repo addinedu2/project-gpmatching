@@ -20,6 +20,11 @@ public class AdminDto {
 	private String userPhone;
 	private String userGrade;
 	private Date regDate;
+	private String userImage;
+	private String userIntro;
+    private boolean	deletedUser;
+    private Data banEndDate;
+	
 	
 	
 	private List<CommonBoardDto> CommonBoardlist;

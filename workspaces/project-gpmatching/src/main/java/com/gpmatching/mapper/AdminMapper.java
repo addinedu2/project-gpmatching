@@ -13,32 +13,20 @@ import com.gpmatching.dto.AdminDto;
 public interface AdminMapper {
 	
 	//회원 전체 목록
-	@Select( "select userNo, userPwd, userId, userEmail, nickname, userPhone, userGrade, regDate, deletedUser "
+	@Select( "select userNo, userPwd, userId, userEmail, nickname, userPhone, userGrade, regDate, deletedUser, userImage "
 			+ "from User "
 			+ "ORDER BY regDate DESC ")
 	List<AdminDto> UserList();
 	
 	//회원 페이지별 조회
-	@Select( "select userNo, userPwd, userId, userEmail, nickname, userPhone, userGrade, regDate, deletedUser " +
+	@Select( "select userNo, userPwd, userId, userEmail, nickname, userPhone, userGrade, regDate, deletedUser, userImage " +
 			"from User " +
 			"ORDER BY regDate DESC " +
 			"LIMIT #{from}, #{count}")
 	List<AdminDto> selectUserList(@Param("from") int from, @Param("count") int count);
-
 	
-	@Select( "select userNo, userPwd, userId, userEmail, nickname, userPhone, userGrade, regDate, deletedUser "
-			+ "from User "
-			+ "where userNo = #{userNo} ")
-	AdminDto getUserNo(int userNo);
-	
-	//신규회원
-	@Select ("select userNo, userId, nickname,  userGrade, regDate  "
-			+ "from User "
-			+ "ORDER BY regDate DESC" )
-			//+ "where registration_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)")
-	List<AdminDto> getNewUsers();
-	
-	@Select ("select userNo, userPwd, userId, userEmail, nickname, userPhone, userGrade, regDate, deletedUser "
+	//회원 검색
+	@Select ("select userNo, userPwd, userId, userEmail, nickname, userPhone, userGrade, regDate, deletedUser, userImage "
 			+ "from User "
 			+ "where userNo LIKE CONCAT('%', #{keyword}, '%') "
 			+ "OR userId LIKE CONCAT('%', #{keyword}, '%') "
@@ -47,7 +35,36 @@ public interface AdminMapper {
 			+ "OR userGrade LIKE CONCAT('%', #{keyword}, '%') "
 			+ "OR deletedUser LIKE CONCAT('%', #{keyword}, '%')")
 	List<AdminDto> searchUsers(@Param("keyword") String keyword, @Param("from") int from, @Param("count") int count);
-
+	
+	//회원 UserNo 기준으로 회원 정보 가져오기
+	@Select( "select userNo, userPwd, userId, userEmail, nickname, userPhone, userGrade, regDate, deletedUser, userImage, userIntro, banEndDate "
+			+ "from User "
+			+ "where userNo = #{userNo} ")
+	AdminDto getUserNo(int userNo);
+	
+	//회원 정보 수정하는 메서드
+	@Update("UPDATE user " +
+	        "SET userId = #{userId}, " +
+	        "userEmail = #{userEmail}, " +
+	        "nickname = #{nickname}, " +
+	        "userPhone = #{userPhone}, " +
+	        "userGrade = #{userGrade}, " +
+	        "userIntro = #{userIntro}, " +
+	        "banEndDate = #{banEndDate}, " +
+	        "deletedUser = #{deletedUser} " +
+	        "WHERE userNo = #{userNo}")
+	void updateUser(AdminDto adminDto);
+	
+	//회원 이미지 수정하는 메서드
+	@Update("update user "
+			+ "set userImage = #{userImage} "
+			+ "WHERE userNo = #{userNo}")
+	void updateImage(AdminDto adminDto);
+	
+	
+	
+	
+	
 	//회원 총 명수
 	@Select( "select count(*) "
 			+ "from User" )
