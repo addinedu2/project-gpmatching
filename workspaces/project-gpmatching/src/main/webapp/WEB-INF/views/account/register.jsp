@@ -70,7 +70,7 @@
             </div>      
             <!-- Form -->
          
-            <form:form id="registerform" action="register" method="post" modelAttribute="user" enctype="multipart/form-data">
+            <form id="registerform" action="register" method="post" enctype="multipart/form-data">
               <!-- userId -->
               <div class="mb-3">
 					<label for="userId" class="form-label">회원 ID</label>
@@ -86,22 +86,22 @@
               </div> -->
               <!-- Password -->
               <div class="mb-3">
-                <label for="password" class="form-label">회원 비밀번호</label>
-                <input type="password" id="userPwd" class="form-control" name="userPwd" placeholder="" required oninput="checkPassword()">
+                <label for="userPwd" class="form-label">회원 비밀번호</label>
+                <input type="password" id="userPwd" class="form-control" name="userPwd" required oninput="checkPassword()">
                 
               </div>
               <!-- Password -->
               <div class="mb-3">
-                <label for="confirm-password" class="form-label">회원 비밀번호 확인</label>
-                <input type="password" id="confirmPassword" class="form-control" name="confirm-password" placeholder="" required oninput="checkPassword()">
+                <label for="confirmPassword" class="form-label">회원 비밀번호 확인</label>
+                <input type="password" id="confirmPassword" class="form-control" name="confirm-password" required oninput="checkPassword()">
                 
               </div>
               <p id="passwordCheck"></p>
               
               <!-- Email -->
               <div class="mb-3">
-                <label for="email" class="form-label">이메일</label>
-                <input type="email" id="userEmail" class="form-control" name="userEmail" placeholder="Email address here" required>
+                <label for="userEmail" class="form-label">이메일</label>
+                <input type="text" id="userEmail" class="form-control" name="userEmail" placeholder="Email address here" required>
               </div>
               
               <!-- nickname -->
@@ -117,7 +117,7 @@
               </div>
               
               <div class="mb-3">
-		           <label for="imageInput" class="form-label">
+		           <label for="imageName" class="form-label">
 		               <img id="preview" src="/project-gpmatching/resources/assets/images/avatar/anonymous.png" width="100" height="100">
 		           </label>
 		           <input type="file" id="imageInput" name="imageName" style="display: none;" accept="image/*" onchange="readURL(this);" />
@@ -130,11 +130,9 @@
               <div class="mb-3">
                 <div class="form-check custom-checkbox">
                   <input type="checkbox" class="form-check-input" id="agreeCheck">
-                  <label class="form-check-label" for="agreeCheck"><span
-                        class="fs-5">I agree to the <a
-                          href="terms-condition-page.html">Terms of
-                          Service </a>and
-                        <a href="terms-condition-page.html">Privacy Policy.</a></span></label>
+                  <label class="form-check-label" for="agreeCheck">
+                  	<span class="fs-5">I agree to the <a href="terms-condition-page.html">Terms of Service </a>and <a href="terms-condition-page.html">Privacy Policy.</a></span>
+                  </label>
                 </div>
               </div>
               <div>
@@ -158,16 +156,34 @@
                 </div>
               </div>
 
-            </form:form>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
   
-  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-  
-    <script>
+ 
+
+  <!-- Scripts -->
+  <!-- Libs JS -->
+<script src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+
+
+
+<!-- Theme JS -->
+<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
+
+   <script>
       //프로필 이미지 
 	  function readURL(input) {
     	  
@@ -225,6 +241,14 @@
 				return;
 			}
 			
+			const userEmail = $("#userEmail").val();
+			if(!userEmail){
+				alert('이메일을 입력하세요');
+				$('#userEmail').focus();
+				return;
+			}
+			
+				
 			$("#registerform").submit(); //중복검사 됐을때만 submit
 			
 		});
@@ -296,26 +320,6 @@
 		   }
 		}
 </script>
-
-  <!-- Scripts -->
-  <!-- Libs JS -->
-<script src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
-<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
-
-
-
-
-<!-- Theme JS -->
-<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
-
-
 
 </body>
 
