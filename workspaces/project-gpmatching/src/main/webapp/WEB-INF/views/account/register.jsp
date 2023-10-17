@@ -100,14 +100,16 @@
               
               <!-- Email -->
               <div class="mb-3">
-                <label for="email" class="form-label">이메일</label>
-                <input type="email" id="userEmail" class="form-control" name="userEmail" placeholder="Email address here" required="">
+                <label for="userEmail" class="form-label">이메일</label>
+                <input type="email" id="userEmail" class="form-control" name="userEmail" placeholder="Email address here" required />
               </div>
+              
               <!-- nickname -->
               <div class="mb-3">
                 <label for="nickname" class="form-label">닉네임</label>
-                <input type="text" id="nickname" class="form-control" name="nickname" placeholder="닉네임을넣어주세요" required="">
+                <input type="text" id="nickname" class="form-control" name="nickname" placeholder="닉네임을넣어주세요" required />
               </div>
+              
               <!-- userPhone -->
               <div class="mb-3">
                 <label for="userPhone" class="form-label">핸드폰 번호</label>

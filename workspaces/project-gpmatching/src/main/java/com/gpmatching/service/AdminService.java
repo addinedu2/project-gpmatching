@@ -14,11 +14,13 @@ public interface AdminService {
 
 	AdminDto getUserNo(int userNo);
 
-	List<AdminDto> searchUsers(String keyword, int from, int count);
+	
 
 	List<AdminDto> UserList();
 
 	List<AdminDto> listUserListByPage(int from, int count);
+
+	List<AdminDto> searchUsers(String keyword, int from, int count);
 
 	
 	

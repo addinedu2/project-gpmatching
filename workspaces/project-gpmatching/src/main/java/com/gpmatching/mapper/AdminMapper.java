@@ -28,7 +28,7 @@ public interface AdminMapper {
 	
 	@Select( "select userNo, userPwd, userId, userEmail, nickname, userPhone, userGrade, regDate, deletedUser "
 			+ "from User "
-			+ "wherer userNo = #{userNo} ")
+			+ "where userNo = #{userNo} ")
 	AdminDto getUserNo(int userNo);
 	
 	//신규회원
@@ -38,7 +38,7 @@ public interface AdminMapper {
 			//+ "where registration_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)")
 	List<AdminDto> getNewUsers();
 	
-	@Select ("select count(*) "
+	@Select ("select userNo, userPwd, userId, userEmail, nickname, userPhone, userGrade, regDate, deletedUser "
 			+ "from User "
 			+ "where userNo LIKE CONCAT('%', #{keyword}, '%') "
 			+ "OR userId LIKE CONCAT('%', #{keyword}, '%') "
@@ -46,7 +46,7 @@ public interface AdminMapper {
 			+ "OR nickname LIKE CONCAT('%', #{keyword}, '%') "
 			+ "OR userGrade LIKE CONCAT('%', #{keyword}, '%') "
 			+ "OR deletedUser LIKE CONCAT('%', #{keyword}, '%')")
-	List<AdminDto> searchUsers(@Param("keyword") String keyword, @Param("offset") int offset, @Param("limit") int limit);
+	List<AdminDto> searchUsers(@Param("keyword") String keyword, @Param("from") int from, @Param("count") int count);
 
 	//회원 총 명수
 	@Select( "select count(*) "
@@ -55,7 +55,7 @@ public interface AdminMapper {
 	
 	
 	//유저 글 전체 조회
-	@Select("select count(*) "
+	@Select("select * "
 	        + "from MatchingBoard mb "
 	        + "inner join CommonBoard cb "
 	        + "ON mb.userNo = cb.userNo "
@@ -63,7 +63,7 @@ public interface AdminMapper {
 	int countTotalPostsByUserNo(int userNo);
 	
 	//유저 글 페이지별 조회
-	@Select("select count(*) "
+	@Select("select * "
 	        + "from MatchingBoard mb "
 	        + "inner join CommonBoard cb "
 	        + "ON mb.userNo = cb.userNo "
@@ -73,7 +73,7 @@ public interface AdminMapper {
 	int countPagePostsByUserNo(int userNo);
 	
 	//유저 코멘트 전체 조회
-	@Select("select count(*) "
+	@Select("select * "
 	        + "from MatchingComment mc "
 	        + "inner join BoardComment bc "
 	        + "ON mb.userNo = cb.userNo "
@@ -81,7 +81,7 @@ public interface AdminMapper {
 	int countTotalCommentsByUserNo(int userNo);
 	
 	//유저 댓글 페이지별 조회
-	@Select("select count(*) "
+	@Select("select * "
 	        + "from MatchingComment mc "
 	        + "inner join BoardComment bc "
 	        + "ON mc.userNo = bc.userNo "
