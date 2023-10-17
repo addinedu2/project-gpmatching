@@ -13,5 +13,7 @@ public interface MatchingAlarmService {
 	
 	void deleteAlarmListByUserNo(int userNo);
 
+	int countMatchingAlarmNoByUserNo(int userNo);
+
 	
 }

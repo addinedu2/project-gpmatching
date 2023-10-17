@@ -32,8 +32,8 @@
           indicator-primary text-muted" href="#" role="button"
           id="dropdownNotification" data-bs-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false" data-userno="${loginuser.userNo}">
-          <!-- <i class="icon-xs" data-feather="bell"></i>원본 -->
-          <i id="notificationicon" class="icon-xs" data-feather="bell"></i>
+          
+          <i id="notificationicon" class="icon-xs" data-feather="bell-off" data-userno="${loginuser.userNo}"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end"
           aria-labelledby="dropdownNotification">
