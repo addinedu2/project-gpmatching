@@ -8,6 +8,9 @@
 </head>
 <body>
 
+<!-- 유효성검사에 써야함 -->
+
+
 <script>
 		//비밀번호, 비밀번호 확인 일치
 		var passwordField = document.getElementById('userPwd');

@@ -1,5 +1,8 @@
 package com.gpmatching.controller;
 
+import java.io.File;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +15,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.gpmatching.common.Util;
 import com.gpmatching.dto.UserDto;
 import com.gpmatching.service.AccountService;
-import com.gpmatching.service.BoardCommentService;
 import com.gpmatching.service.MatchingReviewService;
 
 import lombok.Setter;
+import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 @RequestMapping(path = { "/account" })
@@ -61,12 +65,44 @@ public class AccountController {
 //	}//회원가입 폼 한 후 홈으로 돌아오기
 
 	// 회원 가입
-	@PostMapping(path = { "/register" })
-	public String register(@ModelAttribute("user") UserDto user) {
-		// AccountService accountService = new AccountServiceImpl();
-		accountService.register(user);
-		return "redirect:/home";
-	}
+		@PostMapping(path = { "/register" })
+		public String register(@ModelAttribute("user") UserDto user, HttpSession session, HttpServletRequest req, 
+							   @RequestParam("imageName") MultipartFile userImage) {
+			
+			String uploadDir = req.getServletContext().getRealPath("/resources/upload/");
+			String uploadedImageFileName = handleUploadFile(userImage, uploadDir);
+
+			if (uploadedImageFileName != null) {
+		        user.setUserImage(uploadedImageFileName);
+		    }
+			
+			
+			//회원가입 회원정보 등록
+			accountService.register(user);
+			return "redirect:/home";
+
+			}
+
+			private String handleUploadFile(MultipartFile attach, String uploadDir) {
+			
+				if (!attach.isEmpty()) {
+					try {
+						String savedFileName = Util.makeUniqueFileName(attach.getOriginalFilename());
+						attach.transferTo(new File(uploadDir, savedFileName)); // 파일을 컴퓨터에 저장
+			
+						// 썸네일 생성
+						File thumbnailFile = new File(uploadDir, "thumbnail_" + savedFileName);
+						Thumbnails.of(new File(uploadDir, savedFileName))
+									.size(100, 100) // 썸네일 크기
+									.toFile(thumbnailFile);
+						return savedFileName;
+			
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+				return null;
+			}
 
 	// 로그인 버튼
 	@GetMapping(path = { "/login" })
