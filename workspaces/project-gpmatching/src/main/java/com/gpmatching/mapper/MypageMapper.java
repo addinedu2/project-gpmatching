@@ -14,7 +14,7 @@ public interface MypageMapper {
 
 	//내 정보 수정하는 메서드
 	@Update ( "UPDATE User "
-			+ "SET nickname = #{nickname}, userPhone = #{userPhone}, userEmail = #{userEmail}, userImage = #{userImage} "
+			+ "SET nickname = #{nickname}, userPhone = #{userPhone}, userEmail = #{userEmail}, userImage = #{userImage}, userIntro = #{userIntro} "
 			+ "WHERE userId = #{userId}") 
 	void updateUserProfile(UserDto loginuser);
 

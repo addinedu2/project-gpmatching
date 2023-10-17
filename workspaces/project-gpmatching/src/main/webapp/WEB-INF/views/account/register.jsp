@@ -75,7 +75,7 @@
               <div class="mb-3">
 					<label for="userId" class="form-label">회원 ID</label>
 					<div class="input-group">
-						<input type="text" id="userId" class="form-control" name="userId" placeholder="회원 ID" required="">
+						<input type="text" id="userId" class="form-control" name="userId" placeholder="회원 ID" required>
 						<button id="checkDup" class="btn btn-primary">중복검사</button>
 						<form:errors path="userId" cssClass="error"></form:errors>
 					</div>
@@ -87,13 +87,13 @@
               <!-- Password -->
               <div class="mb-3">
                 <label for="password" class="form-label">회원 비밀번호</label>
-                <input type="password" id="userPwd" class="form-control" name="userPwd" placeholder="" required="" oninput="checkPassword()">
+                <input type="password" id="userPwd" class="form-control" name="userPwd" placeholder="" required oninput="checkPassword()">
                 
               </div>
               <!-- Password -->
               <div class="mb-3">
                 <label for="confirm-password" class="form-label">회원 비밀번호 확인</label>
-                <input type="password" id="confirmPassword" class="form-control" name="confirm-password" placeholder="" required= oninput="checkPassword()">
+                <input type="password" id="confirmPassword" class="form-control" name="confirm-password" placeholder="" required oninput="checkPassword()">
                 
               </div>
               <p id="passwordCheck"></p>
@@ -101,19 +101,19 @@
               <!-- Email -->
               <div class="mb-3">
                 <label for="email" class="form-label">이메일</label>
-                <input type="email" id="userEmail" class="form-control" name="userEmail" placeholder="Email address here" required=>
+                <input type="email" id="userEmail" class="form-control" name="userEmail" placeholder="Email address here" required>
               </div>
               
               <!-- nickname -->
               <div class="mb-3">
                 <label for="nickname" class="form-label">닉네임</label>
-                <input type="text" id="nickname" class="form-control" name="nickname" placeholder="닉네임을넣어주세요" required=>
+                <input type="text" id="nickname" class="form-control" name="nickname" placeholder="닉네임을넣어주세요" required>
               </div>
               
               <!-- userPhone -->
               <div class="mb-3">
                 <label for="userPhone" class="form-label">핸드폰 번호</label>
-                <input type="text" id="userPhone" class="form-control" name="userPhone" placeholder="000-0000-0000" required=>
+                <input type="text" id="userPhone" class="form-control" name="userPhone" placeholder="000-0000-0000" required>
               </div>
               
               <div class="mb-3">
