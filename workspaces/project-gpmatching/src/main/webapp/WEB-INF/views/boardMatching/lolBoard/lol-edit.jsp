@@ -49,7 +49,7 @@
 <title>LOL 매칭 글 수정</title>
 </head>
 
-<body class="bg-light">
+<body class="bg-dark">
 	<div id="db-wrapper" class="toggled">
 		<!-- navbar vertical -->
 		<!-- Sidebar -->
@@ -62,36 +62,37 @@
 			<jsp:include page="/WEB-INF/views/modules/header.jsp" />	
 			
 			<!-- Container fluid -->
-
+			<br>
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 			<a href="/project-gpmatching/boardMatching/lolBoard/lol-list">
-				<button type="button" class="btn btn-primary mb-2">LoL 목록보기</button>
+				<button type="button" class="btn btn-primary me-2">LoL 목록보기</button>
 			</a>
 			<a href="/project-gpmatching/home">
-				<button type="button" class="btn btn-primary mb-2">홈으로</button>
+				<button type="button" class="btn btn-primary me-3">홈으로</button>
 			</a>
-				
-			<br>
+			</div>
+
 			<!-- Input -->
 			<form action="lol-edit" method="post">
 				<input name="gameNo" type="hidden" id="textInput" class="form-control" value="${ lolMatchingBoard.gameNo }">
 				<input name="boardNo" type="hidden" id="textInput" class="form-control" value="${ lolMatchingBoard.boardNo }">
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">제목</label>
+					<label class="form-label text-light" for="textInput">제목</label>
 					<input name="boardTitle" type="text" id="textInput" class="form-control" 
 							placeholder="시간은 꼭 포함해서 작성해주세요" value="${ lolMatchingBoard.boardTitle }">
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">작성자 : ${ loginuser.nickname }</label>
+					<label class="form-label text-light" for="textInput">작성자 : ${ loginuser.nickname }</label>
 					<input name="userNo" type="hidden" id="textInput" class="form-control" value="${ loginuser.userNo }">
 				</div>
 				<!-- Textarea -->
 				<div class="mb-3 txt-box">
-					<label for="textarea-input" class="form-label">내용</label>
+					<label for="textarea-input" class="form-label text-light">내용</label>
 					<textarea name="boardContent" class="form-control" id="textarea-input" rows="5">${ lolMatchingBoard.boardContent }</textarea>
 				</div>
 				<!-- Checks -->
-				<div class="txt-box">
-					<div class="form-check">
+				<div class="txt-box text-light">
+					<div class="form-check ">
 						<input name="mic" class="form-check-input" type="checkbox" 
 							id="flexCheckDefault"> <label class="form-check-label"
 							for="flexCheckDefault"> 마이크 사용 </label>
@@ -99,7 +100,7 @@
 				</div>
 				<!-- radio-->
 				<br>
-				<div class="txt-box">
+				<div class="txt-box text-light ">
 					<div class="form-check">
 						<input class="form-check-input" type="radio" value="anyone"
 							name="preferGender" id="flexRadioDefault1" checked> <label
@@ -116,14 +117,15 @@
 							class="form-check-label" for="flexRadioDefault2"> 여자만 </label>
 					</div>
 				</div>
+				<br>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">모집인원</label>
+					<label class="form-label text-light" for="textInput">모집인원</label>
 					<input name="headCount" type="text" id="textInput" class="form-control" value="${ lolMatchingBoard.headCount }">
 				</div>
 				
 				<!-- 롤 등록 -->
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="selectOne">롤주포지션</label>
+					<label class="form-label text-light" for="selectOne">롤주포지션</label>
 					<select name="lolPosition" id="lolPosition" class="form-select" aria-label="Default select example">
 						<option selected>포지션 전체</option>
 						<option value="top">탑</option>
@@ -134,16 +136,16 @@
 					</select>
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">롤서렌여부</label>
+					<label class="form-label text-light" for="textInput">롤서렌여부</label>
 					<input name="lolSur" type="text" id="textInput" class="form-control" value="${ lolMatchingBoard.lolSur }">
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">롤선호플레이</label>
+					<label class="form-label text-light" for="textInput">롤선호플레이</label>
 					<input name="lolPlay" type="text" id="textInput" class="form-control" value="${ lolMatchingBoard.lolPlay }">
 				</div>
 				<!-- Select Option -->
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="selectOne">티어<span
+					<label class="form-label text-light" for="selectOne">티어<span
 						class="text-secondary">(현재 티어)</span></label> 
 					<select name="lolTier" id="lolTier" class="form-select"
 						aria-label="Default select example">
