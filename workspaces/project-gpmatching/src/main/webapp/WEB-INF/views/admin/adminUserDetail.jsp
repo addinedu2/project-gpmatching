@@ -55,11 +55,11 @@
                                         <label for="userIntro">자기소개:</label>
                                         <input type="text" class="form-control" id="userIntro" name="userIntro" value="${ user.userIntro }">
                                     </div>
-                                   <%--  <div class="form-group">
+                                  <div class="form-group">
 								   <label for="regDate">가입일:</label>
 									    <fmt:formatDate value="${user.regDate}" pattern="yyyy-MM-dd" var="formattedDate" />
 									    <input type="text" class="form-control" id="regDate" name="regDate" value="${formattedDate}" readonly="true">
-									    </div>  --%>
+									    </div>  
 
                                 
                                     <div class="form-group">
