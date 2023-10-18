@@ -54,9 +54,10 @@
 		
 	});
 	
-	//알림리스트 아이콘 변경
+	//알림 생기면 종모양에 초록동그라미
 	$(function(){
-	    let userNo = $("#notificationicon").data("userno");
+	    //let userNo = $("#notificationicon").data("userno");원본
+	    let userNo = $("#dropdownNotification").data("userno");
 	    console.log(userNo);
 		
 		$.ajax({
@@ -68,11 +69,16 @@
 			   success: function(data){
 				   console.log(data); //여기 데이터 카운트 개수 넘어옴.
   
-				   if(data){
+				  /* if(data){
 						$("#notificationicon").attr('data-feather','bell'); 
+				   }원본*/
+				   
+				   if(data){
+						$("#dropdownNotification").addClass('avatar-online');
 				   }
 
-				   feather.replace();
+					
+				   //feather.replace();
 			   },
 			   error:function(xhr, status, error){
 				   console.log('알람 개수를 가져오는 중 오류 발생: ' + error);
@@ -146,9 +152,8 @@
 				"type": 'GET',
 				"data" : {"userNo":userNo},
 				"success": function(data, status, xhr){
-					if(data){
-						$("#notificationicon").attr('data-feather','bell-off');
-						feather.replace();
+					if(data){	
+						$("#dropdownNotification").removeClass('avatar-online');
 				   }
 				},
 				"error": function(xhr, status, err){
@@ -157,3 +162,4 @@
 			});
 		});
 	});
+

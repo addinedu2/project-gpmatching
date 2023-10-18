@@ -29,11 +29,11 @@
       </li>
       <li class="dropdown stopevent">
         <a class="btn btn-light btn-icon rounded-circle indicator
-          indicator-primary text-muted" href="#" role="button"
+          indicator-primary text-muted avatar-indicators" href="#" role="button"
           id="dropdownNotification" data-bs-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false" data-userno="${loginuser.userNo}">
           
-          <i id="notificationicon" class="icon-xs" data-feather="bell-off" data-userno="${loginuser.userNo}"></i>
+          <i id="notificationicon" class="icon-xs" data-feather="bell" data-userno="${loginuser.userNo}"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end"
           aria-labelledby="dropdownNotification">
@@ -76,7 +76,7 @@
       <li class="dropdown ms-2">
         <a class="rounded-circle" href="#" role="button" id="dropdownUser"
           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <div class="avatar avatar-md avatar-indicators avatar-online">
+          <div class="avatar avatar-md">
           		<c:choose>
           			<c:when test="${loginuser.userImage == null}">
            	    		<img alt="avatar" src="/project-gpmatching/resources/assets/images/avatar/anonymous.png" class="rounded-circle" />
