@@ -60,6 +60,7 @@
    <thead>
       <tr class="listCommon" >
              <th>제목</th>
+             <th>내용</th>
              <th>카테고리</th>
              <th>작성일</th>
              <th>삭제 여부</th>
@@ -69,7 +70,8 @@
    <c:forEach var="matchingBoardList"  items="${requestScope.matchingBoardList }" varStatus="loop">
       <tr>
          <td>${ matchingBoardList.boardTitle }</td>
-         <td>${ matchingBoardList.gameNo }</td>
+         <td>${ matchingBoardList.boardContent }</td>
+         <td>${ gameMap[matchingBoardList.gameNo] }</td>
          <td>
          	<fmt:formatDate value="${ matchingBoardList.regDate }"
          				    pattern="yyyy-MM-dd"/>

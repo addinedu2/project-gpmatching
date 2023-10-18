@@ -87,7 +87,7 @@ public interface AdminMapper {
 	
 	
 	//회원이 쓴 글만 보기(매칭게시판)
-	@Select("select mb.boardTitle, mb.regDate, mb.boardNo, mb.deleted, mb.gameNo "
+	@Select("select mb.boardTitle, mb.regDate, mb.boardNo, mb.deleted, mb.gameNo, mb.boardContent "
 	        + "from MatchingBoard mb "
 	        + "inner JOIN User u "
 	        + "on u.userNo = mb.userNo "

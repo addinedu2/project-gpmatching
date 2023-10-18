@@ -38,6 +38,7 @@ public class AdminDto {
 	private String boardTitle;
 	private int gameNo;
 	private boolean deleted;
+	private String boardContent;
 	
 //	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 //	private Date regDate;
