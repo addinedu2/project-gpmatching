@@ -13,7 +13,7 @@
 		
 		<a class="navbar-brand"
 			href="/project-gpmatching/home"> <img
-			src="/project-gpmatching/resources/assets/images/brand/logo/gps-side.png"
+			src="/project-gpmatching/resources/assets/images/brand/logo/gps-sidebar.png"
 			
 			alt="" />
 		</a>
