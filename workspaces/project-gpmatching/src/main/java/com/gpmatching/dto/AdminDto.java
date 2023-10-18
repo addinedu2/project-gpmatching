@@ -3,6 +3,8 @@ package com.gpmatching.dto;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 
@@ -21,23 +23,26 @@ public class AdminDto {
 	private String userPhone;
 	private String userGrade;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+	// @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date regDate;
 	private String userImage;
 	private String userIntro;
     private boolean	deletedUser;
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+    // @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date banEndDate;
 	
 	
+	private int boardNo;
+	private String boardTitle;
+	private int gameNo;
+	private boolean deleted;
 	
-	private List<CommonBoardDto> CommonBoardlist;
-	private List<MatchingBoardDto> MatchingBoardlist;
-	private List<BoardCommentDto> BoardCommentlist;
-	private List<MatchingCommentDto> MatchingCommentlist;
+//	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+//	private Date regDate;
 	
-	//private int totalPosts;
-    //private int totalComments;
+	private String boardType;
 	
     
 }

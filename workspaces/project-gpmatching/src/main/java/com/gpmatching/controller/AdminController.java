@@ -1,6 +1,8 @@
 package com.gpmatching.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,6 +43,7 @@ public class AdminController {
 		
 		int from = (pageNo -1) *pageSize;//첫번째 페이지 게시물 순서
 		List<AdminDto> listuser = adminService.listUserListByPage(from, pageSize);
+	
 
 		//페이지 번호 표시 부분
 		ThePager pager = 
@@ -106,13 +109,55 @@ public class AdminController {
 	    // 수정 후에 유저 목록 페이지로 리다이렉션 또는 다른 페이지로 리다이렉션할 수 있음
 	    return "/admin/adminUserDetail";
 	}
+	
+	//회원이 쓴 글(새창)로 가는 컨트롤러
+	@GetMapping(path = {"/userWrite/{userNo}"})
+	public String viewUserPosts(@PathVariable int userNo, @RequestParam(defaultValue="1") int pageNo, Model model) {
 
+		// 페이지별 게시물 조회
+		int pageSize = 10; // 한 페이지 표시 개수
+		int pagerSize = 5;// 표시 페이지 개수
+		String linkUrl = "/project-gpmatching/admin/adminUserWriteBoardList";
 	
+		int from = (pageNo - 1) * pageSize;// 첫번째 페이지 게시물 순서
+		List<AdminDto> listuser = adminService.listUserListByPage(from, pageSize);
 	
-	
-	
-	
+		 // 자유게시판 글 목록 및 페이징 정보 가져오기
+		List<AdminDto> commonBoardList = adminService.getUserCommonBoardByUserNo(userNo, pageNo, pageSize);
+		int countCommonBoardPosts = adminService.getcountCommonBoardPosts(userNo);
+		ThePager commonBoardPager = new ThePager(countCommonBoardPosts, pageNo, pageSize, pagerSize, linkUrl);
 		
+		// 매칭게시판 글 목록 및 페이징 정보 가져오기
+	    List<AdminDto> matchingBoardList = adminService.getUserMatchingBoardByUserNo(userNo, pageNo, pageSize);
+	    int countMatchingBoardPosts = adminService.getcountMatchingBoardPosts(userNo);
+	    ThePager matchingBoardPager = new ThePager(countMatchingBoardPosts, pageNo, pageSize, pagerSize, linkUrl);
+
+	    // 서비스나 컨트롤러에서 게임 번호와 게임 이름을 매핑한 Map을 생성하여 JSP에 전달하는 코드
+	    Map<Integer, String> gameMap = new HashMap<>();
+	    gameMap.put(4, "battle ground"); 
+	    gameMap.put(5, "league of legends"); 
+	    gameMap.put(7, "overwatch2"); 
+	    
+	    // 신고게시판 글 목록 및 페이징 정보 가져오기
+	    List<AdminDto> reportBoardList = adminService.getUserReportBoardByUserNo(userNo, pageNo, pageSize);
+	    int getcountReportBoardPosts = adminService.getcountReportBoardPosts(userNo);
+	    ThePager reportBoardPager = new ThePager(getcountReportBoardPosts, pageNo, pageSize, pagerSize, linkUrl);
+	    
+	    model.addAttribute("pagingUrl", linkUrl); //jsp에서 뽑아오기
+		model.addAttribute("listuser", listuser);
+	    model.addAttribute("commonBoardList", commonBoardList);
+	    model.addAttribute("commonBoardPager", commonBoardPager);
+	    model.addAttribute("matchingBoardList", matchingBoardList);
+	    model.addAttribute("matchingBoardPager", matchingBoardPager);
+	    model.addAttribute("reportBoardList", reportBoardList);
+	    model.addAttribute("reportBoardPager", reportBoardPager);
+	    model.addAttribute("pageNo",pageNo);
+	    model.addAttribute("gameMap", gameMap);
+	    
+	    
+	    return "admin/adminUserWriteBoardList";
+	}
+	
 }
 	
 	

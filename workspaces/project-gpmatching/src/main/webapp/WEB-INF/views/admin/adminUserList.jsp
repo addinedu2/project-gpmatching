@@ -53,7 +53,7 @@
         <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" target="_blank">${ userlist.userId }</td>
    	    <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" target="_blank">${ userlist.nickname }</td>
         <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" target="_blank">${ userlist.userGrade }</td>
-        <td>게시판 수</td>
+        <td><a href="<c:url value='/admin/userWrite/${userlist.userNo}' />" target="_blank">작성한 게시물</td></td>
         <td>댓글 수</td>
         <td><fmt:formatDate value="${ userlist.regDate }" pattern="yyyy-MM-dd"/>
         </td>
