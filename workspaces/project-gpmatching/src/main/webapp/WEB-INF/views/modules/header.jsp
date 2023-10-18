@@ -54,7 +54,7 @@
 					<li class="list-group-item border-bottom">
 						<a href="#" class="text-muted"> 
 							<c:forEach var="mAlarms" items="${matchingAlarms}">
-								<li>${mAlarms.nickname}님이 ${mAlarms.alarmContent }</li>
+								<li></li>
 
 								<hr>
 							</c:forEach>
@@ -63,10 +63,10 @@
 	            </ul>
             </div>
             <div class="border-top px-3 py-2 text-center">
-              <a href="/project-gpmatching/commonBoard/alarmList" class="text-inherit fw-semi-bold"
-              id="checkAlarm" data-userno="${loginuser.userNo}">
-                알림 확인(Reset)
-              </a>
+              
+              <span id="checkConfirm" class="badge bg-success" data-userno="${loginuser.userNo}">승인 확인</span>
+              <span id="checkAlarm" class="badge bg-dark" data-userno="${loginuser.userNo}">댓글 확인</span>
+              	
             </div>
           </div>
         </div>

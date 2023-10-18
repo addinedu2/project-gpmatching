@@ -39,5 +39,11 @@ public class MatchingAlarmServiceImpl implements MatchingAlarmService{
 		return mAlarmCount;
 	}
 	
+	@Override
+	public void deleteConfirmListByUserNo(int userNo) {
+		matchingAlarmMapper.deleteConfirmListByUserNo(userNo);
+		
+	}
+	
 	
 }
