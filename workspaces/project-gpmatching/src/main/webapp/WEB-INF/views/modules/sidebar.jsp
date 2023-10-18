@@ -22,10 +22,10 @@
 
 		<!-- Navbar nav -->
 		<ul class="navbar-nav flex-column" id="sideNavbar">
-			<li class="nav-item"><a class="nav-link has-arrow  active "
-				href="/project-gpmatching/home"> <i data-feather="home"
-					class="nav-icon icon-xs me-2"></i> Dashboard
-			</a></li>
+<!-- 			<li class="nav-item"><a class="nav-link has-arrow  active " -->
+<!-- 				href="/project-gpmatching/home"> <i data-feather="home" -->
+<!-- 					class="nav-icon icon-xs me-2"></i> Dashboard -->
+<!-- 			</a></li> -->
 
 
 			<!-- Nav item -->
