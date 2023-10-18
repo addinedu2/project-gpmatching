@@ -53,13 +53,43 @@
 		 });
 		
 	});
+	
+	//알림리스트 아이콘 변경
+	$(function(){
+	    let userNo = $("#notificationicon").data("userno");
+	    console.log(userNo);
+		
+		$.ajax({
+			   "url" : '/project-gpmatching/modules/header',
+			   "type" : 'GET',
+			   "dataType" : 'json',
+			   "data" : {"userNo": userNo},
+			   //"cache": false, //캐싱 비활성화
+			   success: function(data){
+				   console.log(data); //여기 데이터 카운트 개수 넘어옴.
+  
+				   if(data){
+						$("#notificationicon").attr('data-feather','bell'); 
+				   }
+
+				   feather.replace();
+			   },
+			   error:function(xhr, status, error){
+				   console.log('알람 개수를 가져오는 중 오류 발생: ' + error);
+			   }
+			   
+		   });
+	});
 
 	//임시 알람 클릭하면 마이페이지로 넘어감
 	$(function(event) {
-	    $("#dropdownNotification").on("mouseenter", function(event) {
+	    $("#dropdownNotification").on("click", function(event) {
 	        event.preventDefault();
-	        let loginUser = $(this).data("userno");
+	        //let loginUser = $(this).data("userno");
+	        let userNo = $(this).data("userno");//수정
+	        //const userNo = $(this).data("userno");//추가
 	
+			//알림리스트 시간 표시 - n분 전
 	        function calculateTime(regDate) {
 	            var regTime = new Date(regDate).getTime(); // 밀리초로 변환
 	            var now = new Date().getTime();
@@ -78,9 +108,10 @@
 	                return new Date(regTime).toLocaleDateString(undefined, options);
 	            }
 	        }
+     
 	
 	        $.ajax({
-	            url: '/project-gpmatching/modules/header',
+	            url: '/project-gpmatching/modules/header/matchingAlarms',
 	            type: 'get',
 	            dataType: 'json',
 	            success: function(data) {
@@ -98,7 +129,7 @@
 	                });
 	            },
 	            error: function(xhr, status, error) {
-	                console.error('댓글을 가져오는 중 오류 발생: ' + error);
+	                console.log('댓글을 가져오는 중 오류 발생: ' + error);
 	            }
 	        });
 	    });
@@ -115,7 +146,10 @@
 				"type": 'GET',
 				"data" : {"userNo":userNo},
 				"success": function(data, status, xhr){
-					
+					if(data){
+						$("#notificationicon").attr('data-feather','bell-off');
+						feather.replace();
+				   }
 				},
 				"error": function(xhr, status, err){
 					console.log("요청 실패");
@@ -123,79 +157,3 @@
 			});
 		});
 	});
-	
-	//아래 ToDo
-	
-	// 아이콘 변경 함수
-/*function updateNotificationIcon(increase) {
-  // 아이콘 요소 선택
-  const iconElement = document.getElementById("notificationIcon");
-
-  // 데이터가 1 증가하면 아이콘을 변경
-  if (increase) {
-    iconElement.setAttribute("data-feather", "bell-off");
-  } else {
-    iconElement.setAttribute("data-feather", "bell");
-  }
-
-  // 아이콘 새로 고침
-  feather.replace();
-}*/
-
-//5차
-/*$(function() {
-    let notificationCount = 0;
-    const notificationCountElement = $("#notificationCount");
-    const notificationIcon = $("#notificationicon");
-
-    // 함수를 사용하여 아이콘을 업데이트하는 기능
-    function updateNotificationIcon() {
-        if (notificationCount !== 0) {
-            // alarmCount가 0이 아닐 때 'bell-off' 클래스 추가
-            notificationIcon.addClass("bell-off").removeClass("bell");
-        } else {
-            // alarmCount가 0인 경우 'bell-off' 클래스를 제거하고 'bell' 클래스 추가
-            notificationIcon.removeClass("bell-off").addClass("bell");
-        }
-
-        // Feather Icons를 다시 로드하여 아이콘을 업데이트
-        feather.replace();
-    }
-
-    // 페이지 로딩시 아이콘 설정
-    updateNotificationIcon();
-
-    //$("#dropdownNotification").hover(function(event) {
-	$("#dropdownNotification").on("mouseenter",function(event) {
-        let loginUser = "${loginUser.userNo}";
-
-        $.ajax({
-            url: '/project-gpmatching/modules/header',
-            type: 'get',
-            dataType: 'json',
-            success: function(data) {
-                var alarmList = $('#alarm-list');
-                alarmList.empty();
-                
-                $.each(data, function(index, matchingAlarms) {
-                    var commentAlarm = '<li>&nbsp;&nbsp;' + matchingAlarms.nickname + '님이 댓글을 달았습니다</li>' + '<hr>';
-                    alarmList.append(commentAlarm);
-                    
-                    // 알림이 도착할 때마다 alarmCount 업데이트
-                    notificationCount = matchingAlarms.alarmCount;
-                    // 알람 카운트에 따라 아이콘 업데이트
-                    updateNotificationIcon();
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error('댓글을 가져오는 중 오류 발생: ' + error);
-            }
-        });
-        
-        $.ajax({
-			url: '컨펌카운트있는곳',
-			type: 'get',
-			data
-		})
-    });
-});*/

@@ -21,8 +21,13 @@ public class MypageServiceImpl implements MypageService{
 	//마이페이지 수정
 	@Override
 	public void editUser(UserDto user) {
+		
+		if(user.getUserImage() != null ) {
 		//데이터베이스 데이터 수정(mapper 사용)
-		mypageMapper.updateUserProfile(user);
+		mypageMapper.updateUserProfileWithImage(user);
+		}else {
+			mypageMapper.updateUserProfileWithoutImage(user);
+		}
 		
 	}
 	//마이페이지 조회
