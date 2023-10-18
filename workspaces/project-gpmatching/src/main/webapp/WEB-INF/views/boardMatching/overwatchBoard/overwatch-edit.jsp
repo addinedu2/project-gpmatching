@@ -49,7 +49,7 @@
 <title>오버워치 매칭 글 수정</title>
 </head>
 
-<body class="bg-light">
+<body class="bg-dark">
 	<div id="db-wrapper" class="toggled">
 		<!-- navbar vertical -->
 		<!-- Sidebar -->
@@ -62,44 +62,45 @@
 			<jsp:include page="/WEB-INF/views/modules/header.jsp" />	
 			
 			<!-- Container fluid -->
-
+			<br>
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 			<a href="/project-gpmatching/boardMatching/overwatchBoard/overwatch-list">
-				<button type="button" class="btn btn-primary mb-2">오버워치 목록보기</button>
+				<button type="button" class="btn btn-primary me-2">오버워치 목록보기</button>
 			</a>
 			<a href="/project-gpmatching/home">
-				<button type="button" class="btn btn-primary mb-2">홈으로</button>
+				<button type="button" class="btn btn-primary me-2">홈으로</button>
 			</a>
-				
-			<br>
+			</div>
+
 			<!-- Input -->
 			<form action="overwatch-edit" method="post">
 				<input name="gameNo" type="hidden" id="textInput" class="form-control" value="${ owMatchingBoard.gameNo }">
 				<input name="boardNo" type="hidden" id="textInput" class="form-control" value="${ owMatchingBoard.boardNo }">
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">제목</label>
+					<label class="form-label text-light" for="textInput">제목</label>
 					<input name="boardTitle" type="text" id="textInput" class="form-control" 
 							placeholder="시간은 꼭 포함해서 작성해주세요" value="${ owMatchingBoard.boardNo }">
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">작성자 : ${ loginuser.nickname }</label>
+					<label class="form-label text-light" for="textInput">작성자 : ${ loginuser.nickname }</label>
 					<input name="userNo" type="hidden" id="textInput" class="form-control" value="${ loginuser.userNo }">
 				</div>
 				<!-- Textarea -->
 				<div class="mb-3 txt-box">
-					<label for="textarea-input" class="form-label">내용</label>
+					<label for="textarea-input" class="form-label text-light">내용</label>
 					<textarea name="boardContent" class="form-control" id="textarea-input" rows="5">${ owMatchingBoard.boardContent }</textarea>
 				</div>
 				<!-- Checks -->
-				<div class="txt-box">
+				<div class="txt-box text-light">
 					<div class="form-check">
-						<input name="mic" class="form-check-input" type="checkbox" value=1
+						<input name="mic" class="form-check-input " type="checkbox" value=1
 							id="flexCheckDefault"> <label class="form-check-label"
 							for="flexCheckDefault"> 마이크 사용 </label>
 					</div>
 				</div>
 				<!-- radio-->
 				<br>
-				<div class="txt-box">
+				<div class="txt-box text-light">
 					<div class="form-check">
 						<input class="form-check-input" type="radio" value="anyone"
 							name="preferGender" id="flexRadioDefault1" checked> <label
@@ -116,18 +117,19 @@
 							class="form-check-label" for="flexRadioDefault2"> 여자만 </label>
 					</div>
 				</div>			
+				<br>
 				
 				<!-- 오버워치 등록 -->
-				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">옵티어목록</label>
+				<div class="mb-3 txt-box ">
+					<label class="form-label text-light" for="textInput ">옵티어목록</label>
 					<input name="owTier" type="text" id="textInput" class="form-control" value="${ owMatchingBoard.owTier }">
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">옵포지션</label>
+					<label class="form-label text-light" for="textInput">옵포지션</label>
 					<input name="owPosition" type="text" id="textInput" class="form-control" value="${ owMatchingBoard.owPosition }">
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label" for="textInput">옵선호플레이</label>
+					<label class="form-labe text-light"  for="textInput">옵선호플레이</label>
 					<input name="owPlay" type="text" id="textInput" class="form-control" value="${ owMatchingBoard.owPlay }">
 				</div>
 				<br>
