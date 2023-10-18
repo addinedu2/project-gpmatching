@@ -239,7 +239,7 @@ $(function(event) {
                         });
                         $row.append($titleColumn);
                         
-                        var $titleLink = $("<a>").attr("href", "#").addClass("text-inherit").text(result[i].boardTitle);
+                        var $titleLink = $("<a>").attr("href", result[i].boardURL).addClass("text-inherit").text(result[i].boardTitle);
                         $titleColumn.append($titleLink);
                         
                         var $dateCell = $("<td>").text(result[i].regDate).css("text-align", "right");

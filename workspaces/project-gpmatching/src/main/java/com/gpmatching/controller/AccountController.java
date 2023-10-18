@@ -131,6 +131,7 @@ public class AccountController {
 			return "redirect:/home";
 		} else {
 			model.addAttribute("loginfail", true); // 로그인 실패를 했으니 "loginfail"에 참 넣기
+			model.addAttribute("userId", user.getUserId());
 			return "account/login";
 		}
 	}

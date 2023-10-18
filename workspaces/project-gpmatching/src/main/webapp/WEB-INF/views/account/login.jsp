@@ -76,12 +76,12 @@
                 <div class="form-check custom-checkbox">
                   <input type="checkbox" class="form-check-input" id="rememberme">
                   <label class="form-check-label" for="rememberme">기억할까요?</label>
-                     
                 </div>
+                <p id="loginCheck"></p>
 
               </div>
               <div>
-                <!-- Button -->
+                <!-- 로그인Button -->
                 <div class="d-grid">
                   <button id="loginBtn" type="submit" class="btn btn-primary">로그인</button>
                 </div>
@@ -137,27 +137,77 @@
 			<!-- Theme JS -->
 			<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 			
+
+
 			<script>
-				$(function(event) {
+				<% Boolean loginFail = (Boolean)request.getAttribute("loginfail"); %>
+				<% if (loginFail != null && loginFail == true) { %>
+				var loginCheck = document.getElementById('loginCheck');
+				var idField = document.getElementById('userId');
+					alert("로그인 실패 : 아이디 또는 패스워드가 일치하지 않습니다.");
+					loginCheck.innerHTML = '아이디와 비밀번호가 일치하지 않습니다.';
+						   loginCheck.style.color = 'red';
+						   idField.value = '<%= request.getAttribute("userId") %>'
+				<% } %>
+			</script>
+			
+			<script>
+				/* $(function(event) {
 					$('#loginBtn').on('click', function(event){
 						
-						const enterUserId = ${"#userId"}.val();
-						const enterUserPwd = ${"#userPwd"}.val();
+						const enterUserId = $("#userId").val();
+						const enterUserPwd = $("#userPwd").val();
+						const userId = "${loginuser.userId}";
+						const userPwd = "${loginuser.userPwd}";
 						
-						const userId = "${loginUser.userId}";
-						const userPwd = "${loginUser.userPwd}";
 						
-						if (enterUserId != userId || enterUserPwd != userPwd) {
-							
-						}
-						
-						$("#loginForm").submit();
+						if(enterUserId.trim() === '' || enterUserPwd.trim() === ''){
+							alert("아이디와 비밀번호를 입력해주세요.")
+							event.preventDefault();
+						}else if(enterUserId !== userId || enterUserPwd !== userPwd){
+							alert("아이디와 비밀번호가 일치하지 않습니다.");
+							$('#userPwd').val('');
+							$('#userPwd').focus();
+							event.preventDefault();
+						}else{
+							$("#loginForm").submit();
+						}					
+					});
+				}); */
+		    </script>
+		    
+		    <script>
+		  	   document.getElementById('loginBtn').addEventListener('click', checkUserInfo);
+		  	  
+					var idField = document.getElementById('userId');
+					var passwordField = document.getElementById('userPwd');
+					var loginBtn = document.getElementById('loginBtn');
+				    var loginCheck = document.getElementById('loginCheck');
+					
+					function checkUserInfo(){
+					   var userId = idField.value;
+					   var userPwd = passwordField.value;
+					  
+					   /* if(userId.trim() === '' || userPwd.trim() === ''){
+						   loginCheck.innerHTML = '아이디와 비밀번호를 입력해주세요.';
+						   loginCheck.style.color = 'red';
+					   }else if(userId !== '${loginuser.userId}' && userPwd !== '${loginuser.userPwd}'){
+						   loginCheck.innerHTML = '아이디와 비밀번호가 일치하지 않습니다.';
+						   loginCheck.style.color = 'red';
+					   }else{
+						   loginCheck.innerHTML = '';
+						   $("#loginForm").submit();
+					   } */
+					   if(userId.trim() === '' || userPwd.trim() === ''){
+						   alert("아이디와 비밀번호를 입력해주세요.")
+						   loginCheck.innerHTML = '아이디와 비밀번호를 입력해주세요.';
+						   loginCheck.style.color = 'red';
+					   }else{
+						   loginCheck.innerHTML = '';
+						   $("#loginForm").submit();
+					   }
 					}
-				})
-				
-			</script>	
-			
-			
+			</script>
 			
 </body>
 
