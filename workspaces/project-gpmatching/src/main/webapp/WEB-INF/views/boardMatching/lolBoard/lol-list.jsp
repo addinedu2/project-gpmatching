@@ -71,6 +71,7 @@
 			<a href="/project-gpmatching/home">
 				<button type="button" class="btn btn-primary me-3">홈으로</button>
 			</a>
+			
 			</div>
 			
 			<div class="row mt-6">
@@ -117,7 +118,7 @@
 									</th>
 						         	
 							         	<th scope="col">주포지션</th>
-							         	<th scope="col">선호성별</th>
+							         	<th scope="col">게임시간</th>
 							         	<th scope="col">마이크사용</th>
 							         	<th scope="col">모집인원</th>
 							         	<th scope="col">마감여부</th>
@@ -130,9 +131,16 @@
 								<tbody id="lol-list">		
 									<c:forEach var="matchingBoard" items="${ requestScope.matchingLolList }">
 										<tr id="tr-${ matchingBoard.boardNo }" data-title="${ matchingBoard.boardTitle }">
-
-											<th scope="row">
-											<a href="https://www.op.gg/summoners/kr/${matchingBoard.nickname}">${ matchingBoard.nickname }</a>
+											<th>
+											<div class="dropdown dropstart">
+		                                        <a class="text-muted text-primary-hover" href="#" role="button" id="dropdownTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		                                            ${ matchingBoard.nickname }
+		                                        </a>
+		                                        <div class="dropdown-menu" aria-labelledby="dropdownTask">
+		                                            <a class="dropdown-item" href="https://www.op.gg/summoners/kr/${ matchingBoard.nickname }">전적검색</a>
+		                                            <a class="dropdown-item" href="/project-gpmatching/commonBoard/reportWrite">신고하기</a>
+		                                        </div>
+			                                </div>
 											</th>
 											<th>${ matchingBoard.boardTitle }</th>
 											<th>${ matchingBoard.boardContent }</th>
@@ -176,15 +184,36 @@
 												</c:otherwise>
 											</c:choose>
 											</td>
-											<th>${ matchingBoard.preferGender }</th>
-											<th>${ matchingBoard.mic }</th>
-											<th>${ matchingBoard.confirmCount + 1} / ${ matchingBoard.headCount + 1}</th>
-											<th>${ matchingBoard.matchingClose }</th>
-<!-- 											<th> -->
-<%-- 												<fmt:formatDate value="${ matchingBoard.regDate }" --%>
-<%--          				    						pattern="yyyy-MM-dd"/> --%>
-<!-- 											</th> -->
+											<th>${ matchingBoard.startTime } ~ ${ matchingBoard.endTime }</th>
+											<th>
 											<c:choose>
+												<c:when test = "${ matchingBoard.mic eq true}">
+													<div class="form-check form-switch">
+													    <input class="form-check-input" type="checkbox" role="switch" 
+													    id="flexSwitchCheckCheckedDisabled" checked onclick="return toggleSwitch()">
+													    <label class="form-check-label" for="flexSwitchCheckCheckedDisabled">ON</label>
+													</div>
+												</c:when>
+												<c:otherwise>
+													<div class="form-check form-switch mb-2">
+													    <input class="form-check-input" type="checkbox" role="switch" 
+													    id="flexSwitchCheckDefault" disabled>
+													    <label class="form-check-label" for="flexSwitchCheckDefault">OFF</label>
+													</div>
+												</c:otherwise>
+											</c:choose>
+											</th>
+											<th>${ matchingBoard.confirmCount + 1} / ${ matchingBoard.headCount + 1}</th>
+											<c:choose>
+												<c:when test="${matchingBoard.matchingClose == true}">
+													<th><i class="icon-sm text-success" data-feather="check-circle"></i></th>
+												</c:when>
+												<c:otherwise>
+													<th><div class="spinner-border" role="status">
+													<span class="visually-hidden">Loading...</span></div></th>
+												</c:otherwise>
+											</c:choose>
+												<c:choose>
 											    <c:when test="${empty matchingBoard.regDate}">
 											        <th>날짜 정보 없음</th>
 											    </c:when>
@@ -643,8 +672,12 @@
 			}); 
 		});
 	});
-
-
+	
+ 	function toggleSwitch() {
+        // 스위치 상태를 변경하지 않고 기존 상태를 유지
+        return false;
+    }
+ 	
 	</script>
 	
 	<script src="/project-gpmatching/resources/assets/js/common.js"></script>

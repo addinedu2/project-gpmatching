@@ -206,15 +206,10 @@ $(function() {
 				if (result != null) {
 	                // Create the first div with the specified styles
 	                var $div1 = $('<div style="width: 50%; border: 1px solid red; float: left;"></div>');
-
-	                // Create the second div with the specified styles
-	                var $div2 = $('<div style="width: 50%; border: 1px solid green; float: right;"></div>');
+					$div1.attr('id','need-review-list');
 
 	                // Append the first div to the modal
 	                $modal.append($div1);
-
-	                // Append the second div to the modal
-	                $modal.append($div2);
 	                
 	             	// Create the table element
 	                var $table = $('<table class="table text-nowrap mb-0"></table>');
@@ -253,32 +248,19 @@ $(function() {
 						$titleColumn1.append($title);
 						$row.append($titleColumn1);
 						
-						var $writer = $("<a>").attr("href", "#").addClass("text-inherit").text(result[i].writer);
+						var $writer = $("<a>").attr("href", "#").addClass("text-inherit").text(result[i].nickname);
 						$titleColumn2.append($writer);
 						$row.append($titleColumn2);
                     
 						var $viewCommentsButton = $("<button>")
 						.addClass("btn btn-primary btn-sm btn-show-comments")
-						.data('writer', result[i].writer)
-                        .data('commentWriter', result[i].commentWriter)
-                        .data('commentNo', result[i].commentNo)
                         .data('boardNo', result[i].boardNo)
-                     	.data('boardTitle', result[i].boardTitle)
                      	.text("목록")
                           
 	                    $titleColumn3.append($viewCommentsButton);
 	                    $row.append($titleColumn3);
 					}
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+                                      
 	                // Append the table to the div
 	                $div1.append($table);
 
@@ -287,8 +269,9 @@ $(function() {
 
 	                // Create the second div with the specified styles
 	                var $div2 = $('<div style="width: 50%; border: 1px solid green; float: right;"></div>');
-
-	                // Append the second div to the modal
+					$div2.attr('id','review-comment-list');
+	                
+					// Append the second div to the modal
 	                $modal.append($div2);
 	            }
 	            $('#review-modal').modal("show");
@@ -302,23 +285,86 @@ $(function() {
 		});
 	});
 	
-	$(document).on("click", ".btn-show-comments", function(event) {
+	$('#review-list').on("click", ".btn-show-comments", function(event) {
 		
 		const boardNo = $(this).data('boardNo');
 		alert(boardNo);
 		
 		$.ajax({
 			
-			"url": "ajax-show-comment",
+			"url": "/project-gpmatching/boardMatching/lolBoard/ajax-show-comment2",
 			"method": "get",
 			"data": { "boardNo" : boardNo },
 			
 			"success": function(result){
 				
-			}
+				var commentList = $('#review-comment-list');
+				commentList.empty();
+				if (result != null){
+					
+					var $table = $("<table>").addClass("table text-nowrap mb-0");
+                    $table.css({"table-layout": "fixed", "width": "100%"});
+                    commentList.append($table);
+
+                    var $thead = $("<thead>").addClass("table-light");
+                    $table.append($thead);
+                    
+                    var $headerRow = $("<tr>");
+                    $thead.append($headerRow);
+					
+                    $headerRow.append($("<th>").text("번호").css("width", "20%"));
+	                $headerRow.append($("<th>").text("댓글 내용").css("width", "30%"));
+	                $headerRow.append($("<th>").text("닉네임").css("width", "30%"));
+	                $headerRow.append($("<th>").text("").css("width", "20%"));
+	                	                
+	                var $tbody = $("<tbody>");
+                    $table.append($tbody);
+	                
+	                for(var i = 0; i < result.length; i++){
+						
+	                	var $row = $("<tr>");
+						$tbody.append($row);
+	                    
+						var $titleColumn1 = $("<td>").addClass("align-middle");
+						var $titleColumn2 = $("<td>").addClass("align-middle");
+						$titleColumn1.css({
+						    "overflow": "hidden",
+						    "text-overflow": "ellipsis",
+						    "white-space": "nowrap"
+						});				
+						var $titleColumn3 = $("<td>").addClass("align-middle");
+						var $titleColumn4 = $("<td>").addClass("align-middle");
+						
+						var $commentNo = $("<a>").attr("href", "#").addClass("text-inherit").text(result[i].commentNo);
+						$titleColumn1.append($commentNo);
+						$row.append($titleColumn1);
+						
+						var $content = $("<a>").attr("href", "#").addClass("text-inherit").text(result[i].mcommentContent);
+						$titleColumn2.append($content);
+						$row.append($titleColumn2);
+						
+						var $nickname = $("<a>").attr("href", "#").addClass("text-inherit").text(result[i].nickname);
+						$titleColumn3.append($nickname);
+						$row.append($titleColumn3);
+	                    
+	                    var $reviewButton = $("<button>")
+                        .addClass("btn btn-primary btn-sm btn-write-review")
+                        .data('nickname', result[i].nickname)
+                        .data('commentNo', result[i].commentNo)
+                        .data('boardNo', result[i].boardNo)
+                       	.text("리뷰");
+	                    
+	                    $titleColumn4.append($reviewButton);
+                        $row.append($titleColumn4);
+	                }
+				}
+				
+			},
 			"error" : function(xhr, status, err){
 				alert("실패");
 			}
+		});
+		
 	});
 	
 	
@@ -329,23 +375,21 @@ $(function() {
 	$('#review-list').on("click", '.btn-write-review', function(event) {
 		
 		const boardNo = $(this).data('boardNo');
-		const writer = $(this).data('writer');
-		const commentWriter = $(this).data('commentWriter');
+		const nickname = $(this).data('nickname');
 		const commentNo = $(this).data('commentNo');
-		alert("성공");
+		alert(nickname);
 		
 		$.ajax({
 			
 			"url": "/project-gpmatching/review/ajax-write-review",
 			"method": "get",
-			"data": { "commentWriter" : commentWriter , 
-					  "writer" : writer, 
+			"data": { "nickname" : nickname, 
 					  "boardNo" : boardNo,
 					  "commentNo" : commentNo
 			},
 			"success": function(result){
 				window.location.href = 
-					"/project-gpmatching/review/write?boardNo=" + boardNo + "&commentNo=" + commentNo + "&writer=" + writer + "&commentWriter=" + commentWriter;
+					"/project-gpmatching/review/write?boardNo=" + boardNo + "&commentNo=" + commentNo + "&nickname=" + nickname;
 				
 				
 			},

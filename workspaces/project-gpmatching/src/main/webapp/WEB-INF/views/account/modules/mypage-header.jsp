@@ -64,9 +64,9 @@
                 </div>
                 <div>
                   <a href="/project-gpmatching/account/editMypage" class="btn btn-outline-primary
-                      d-none d-md-block">회원정보 수정</a>
+                      d-none d-md-block">회원정보수정</a>
                   <a href="/project-gpmatching/commonBoard/reportWrite" class="btn btn-outline-primary
-                      d-none d-md-block">신고 하기</a>
+                      d-none d-md-block">신고하기</a>
                 </div>
               </div>
               <!-- nav -->

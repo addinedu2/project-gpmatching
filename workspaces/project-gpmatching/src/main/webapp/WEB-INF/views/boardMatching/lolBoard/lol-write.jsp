@@ -49,7 +49,7 @@
 <title>LOL 매칭 글 작성</title>
 </head>
 
-<body class="bg-dark">
+<body class="bg-dark" >
 	<div id="db-wrapper" class="toggled">
 		<!-- navbar vertical -->
 		<!-- Sidebar -->
@@ -161,12 +161,28 @@
 					</select>
 				</div>
 				<br>
-				<div class="btn-center">
+<!-- 				<div class="time"> -->
+<!-- 					<label for="customTimeRange" class="form-label text-light">Select Time</label> -->
+<!-- 					<input type="range" class="form-range" min="0" max="12" step="0.5" id="customTimeRange" value="0" oninput="document.getElementById('time-value').innerHTML=this.value;"> -->
+<!-- 					<span id="time-value"></span> -->
+<!-- 				</div> -->
+				<div class="time1">
+				    <label for="customStartTimeRange" class="form-label text-light" style="margin-right: 10px;">시작 시간 : </label><span id="start-time-value"></span>
+				    <input type="range" class="form-range" min="0" max="24" step="0.5" id="customStartTimeRange" value="0" oninput="updateSelectedTime('start-time', this.value);">
+				    <input type="hidden" name="startTime" id="startTime">
+				</div>
+				
+				<div class="time2">
+				    <label for="customEndTimeRange" class="form-label text-light" style="margin-right: 10px;">종료 시간 : </label><span id="end-time-value"></span>
+				    <input type="range" class="form-range" min="0" max="24" step="0.5" id="customEndTimeRange" value="0" oninput="updateSelectedTime('end-time', this.value);">
+				    <input type="hidden" name="endTime" id="endTime">
+				</div>
 					<!-- Primary Button -->
 					<button type="submit" class="btn btn-primary me-2 mb-2">등록</button>
 					<!-- Danger Button -->
 					<button type="button" id="btnCancel" class="btn btn-danger mb-2">취소</button>
 				</div>
+				
 			</form>
 		</div>
 
@@ -204,7 +220,30 @@
 					location.href = "lol-list"; // 브라우저의 주소 입력기에 주소를 입력하는 것과 같은 효과 ( 이동 )
 				});
 			});
+			
+		function updateSelectedTime(timeType, value) {
+		    var selectedTime = document.getElementById(timeType + "-value");
+		    var hours = Math.floor(value);
+		    var minutes = (value % 1) * 60;
+		    var ampm = hours >= 12 ? "오후" : "오전";
+		    var formattedHours = hours % 12 || 12;
+
+		    selectedTime.innerHTML = ampm + " " + formattedHours + ":" + (minutes < 10 ? "0" : "") + Math.round(minutes);
+		    
+		 	// 시작 시간 값을 가져와 hidden_start_time 필드에 설정
+			var startTimeValue = document.getElementById('start-time-value').textContent;
+			document.getElementById('startTime').value = startTimeValue;
+
+			// 종료 시간 값을 가져와 hidden_end_time 필드에 설정
+			var endTimeValue = document.getElementById('end-time-value').textContent;
+			document.getElementById('endTime').value = endTimeValue;
+		}
+		
+		
+		
 		</script>
+		
+		
 		<script src="/project-gpmatching/resources/assets/js/common.js"></script>
 		
 		

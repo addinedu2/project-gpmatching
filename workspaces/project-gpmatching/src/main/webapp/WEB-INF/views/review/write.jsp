@@ -57,18 +57,10 @@
 		   	  <input type="hidden" name="userNo" value="${ loginuser.userNo }" />
 		   	  <input type="hidden" name="commentNo" value="${ commentNo }" />
 			<input type="hidden" name="category"  value="review"> 
-		      <h5 class="card-title">글제목 : ${ boardNo }</h5>
+		      <h5 class="card-title">글번호 : ${ boardNo }</h5>
 		      <hr>
-		      <c:choose>
-				<c:when test="${ empty commentWriter }">
-					<span>리뷰 대상자 : ${ writer }</span>
-					<input type="hidden" name="reviewedUserNo" value="${ writerUserNo }" />
-				</c:when>
-				<c:otherwise>					
-					<span>리뷰 대상자 : ${ commentWriter }</span>
-					<input type="hidden" name="reviewedUserNo" value="${ commentUserNo }" />		
-				</c:otherwise>
-		      </c:choose>
+				<span>리뷰 대상자 : ${ nickname }</span>
+				<input type="hidden" name="reviewedUserNo" value="${ reviewedUserNo }" />
 		      <hr>
 		      <!-- Select Option -->
 			  <div class="mb-3">

@@ -9,7 +9,7 @@ public interface MatchingReviewService {
 
 	int getMatchingCloseByLoginUser(int userNo);
 	
-	List<MatchingBoardDto> getNotYetReviewList(int userNo);
+	List<MatchingBoardDto> getMatchingBoardsNeedToReview(int userNo);
 	
 	void setMatchingReview(MatchingReviewDto matchingReviewDto);
 

@@ -156,6 +156,14 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 		
 		return matchingAlarms;
 	}
+	
+	@Override
+	public List<MatchingCommentDto> getMatchingCommentForReview(int boardNo) {
+
+		List<MatchingCommentDto> comments = matchingCommentMapper.selectMatchingCommentListForReview(boardNo);
+		
+		return comments;
+	}
 
 //	@Override
 //	public int showCommentConfirmCount(int boardNo) {

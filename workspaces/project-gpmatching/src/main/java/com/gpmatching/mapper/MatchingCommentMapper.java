@@ -40,5 +40,13 @@ public interface MatchingCommentMapper {
 
 	@Select("select status from MatchingComment where commentNo = #{ commentNo}")
 	String selectStatusByCommentNo(int commentNo);
+	
+	@Select("select c.commentNo, c.boardNo, c.mCommentContent, u.nickname, c.status "
+			+ "from MatchingComment c "
+			+ "inner join User u "
+			+ "on c.userNo = u.userNo "
+			+ "where boardNo = #{ boardNo } "
+			+ "and c.status = 1 and c.commentNo not in (select commentNo from MatchingReview)")
+	List<MatchingCommentDto> selectMatchingCommentListForReview(int boardNo);
 
 }

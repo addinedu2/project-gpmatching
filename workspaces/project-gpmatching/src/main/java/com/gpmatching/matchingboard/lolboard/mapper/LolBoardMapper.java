@@ -20,9 +20,9 @@ public interface LolBoardMapper {
 	//mysql db 설정에 table명, 칼럼명 대소문자 구분 설정 가능 - 매칭 해주어야 한다.
 	
 	@Insert( "insert into MatchingBoard ( boardTitle, "
-			+ "boardContent, preferGender, mic, userNo, gameNo, headCount ) "
+			+ "boardContent, preferGender, mic, userNo, gameNo, headCount, startTime, endTime ) "
 			+ "values ( #{ boardTitle }, #{ boardContent }, #{ preferGender }, #{ mic }, "
-			+ "#{ userNo }, #{ gameNo }, #{ headCount } )")
+			+ "#{ userNo }, #{ gameNo }, #{ headCount }, #{ startTime }, #{ endTime } )")
 	@Options(useGeneratedKeys = true, keyProperty = "boardNo")
 	void insertMatchingBoard(MatchingBoardDto matchingBoardDto);
 	
@@ -68,7 +68,7 @@ public interface LolBoardMapper {
 	
 	//User 테이블, MatchingBoard 테이블, Lol 테이블 join해서 같이 보여주는 코드(게임명: "league of legends") 
 	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, "
-			+ "m.preferGender, m.mic, m.headCount, m.confirmCount, m.matchingClose, "
+			+ "m.preferGender, m.mic, m.headCount, m.confirmCount, m.matchingClose, m.startTime, m.endTime, "
 			+ "m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
 			+ "from MatchingBoard m "
 			+ "inner join Lol l "
@@ -102,7 +102,7 @@ public interface LolBoardMapper {
 
 	//선택한 티어에 해당하는 글만 보여줌 (나중에 동적 쿼리로 확장 예정 -허지웅)
 	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, "
-			+ "m.mic, m.headCount, m.confirmCount, m.matchingClose, m.regDate, m.readCount, "
+			+ "m.mic, m.headCount, m.confirmCount, m.matchingClose, m.regDate, m.readCount, m.startTime, m.endTime "
 			+ "l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
 			+ "from MatchingBoard m "
 			+ "inner join Lol l "
