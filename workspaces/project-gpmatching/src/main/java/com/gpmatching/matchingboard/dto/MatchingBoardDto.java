@@ -25,6 +25,8 @@ public class MatchingBoardDto {
 	boolean deleted;
 	int userNo;
 	int gameNo;
+	String startTime;
+	String endTime;
 	
 	//User
 	String nickname;

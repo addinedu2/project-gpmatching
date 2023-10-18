@@ -39,58 +39,105 @@
 	
 	</style>
  -->	
-    <title>commonList</title>
+  <style>
+        .table-container h2 {
+            color: white;
+        }
+    </style>
+ 
+ 
+    <title>회원이 쓴 글 리스트</title>
 </head>
 
 <body class="bg-dark">
-    <div id="db-wrapper" class="toggled">
-    <jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
-    <div id="page-content">
-	<jsp:include page="/WEB-INF/views/modules/header.jsp" />
+
              
              <!-- commonList -->
-             <br>
-             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-             <a href="/project-gpmatching/commonBoard/commonWrite">
-				<button type="button" class="btn btn-secondary me-2">글쓰기</button>
-			 </a>
-			<a href="/project-gpmatching/home">
-				<button type="button" class="btn btn-primary me-3">홈으로</button>
-			</a>	
-				
-			 </div>
-			 <br>
-             <!-- basic table -->
-<table class="table text-light" style="text-align: center">
+    
+<div class="table-container">
+    <h2>매칭 게시판</h2>
+    <table border="1" class="table text-light" style="text-align: center">
    <thead>
       <tr class="listCommon" >
-         <th>번호</th>
-         <th>제목</th>
-         <th>작성자</th>
-         <th>조회수</th>
-         <th>작성일자</th>
+             <th>제목</th>
+             <th>내용</th>
+             <th>카테고리</th>
+             <th>작성일</th>
+             <th>삭제 여부</th>
       </tr>
    </thead>
-   <!-- commonNo, commonTitle, userNo, readCount, regDate --> 
    <tbody>
-   <c:forEach var="commonBoard" items="${requestScope.commonBoardList }" varStatus="loop">
+   <c:forEach var="matchingBoardList"  items="${requestScope.matchingBoardList }" varStatus="loop">
       <tr>
-         <td>${commonBoard.commonNo }</td>
-         <td style="text-align:left; padding-left:10px">
-         <c:choose>
-         	<c:when test="${not commonBoard.deleted }">
-    	     	<a href="commonDetail?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}" style="text-decoration: none; color: inherit;">${commonBoard.commonTitle } </a>
-				<a href="commonDetail?commonNo=${commonBoard.commonNo}&pageNo=${pageNo}#comment-list"  style="text-decoration: none; color: inherit;"> [<c:out value="${commentCounts[loop.index]}"></c:out>]</a>         <!--  varStatus="loop"를 이용한 댓글 갯수 가져오기 -->
-         	</c:when>
-         	<c:otherwise>
-         	<span class="deleted" style="color:gray;">[삭제된 글]</span>
-         	</c:otherwise>
-         </c:choose>
-        
-         <td>${ commonBoard.nickname }</td>
-         <td>${ commonBoard.readCount }</td>
+         <td>${ matchingBoardList.boardTitle }</td>
+         <td>${ matchingBoardList.boardContent }</td>
+         <td>${ gameMap[matchingBoardList.gameNo] }</td>
+         <td>
+         	<fmt:formatDate value="${ matchingBoardList.regDate }"
+         				    pattern="yyyy-MM-dd"/>
+ 		 <td>${ matchingBoardList.deleted }</td>
+         </td>
+      </tr>
+      </c:forEach>
+   </tbody>
+</table>
+<br>
+             <div>
+             	<ul class="pagination justify-content-center mb-0">
+             	${ commonBoardPager }
+             	</ul>
+             </div>
+            </div>
+          </div>
+          
+<div class="table-container">
+    <h2>자유 게시판</h2>
+    <table border="1" class="table text-light" style="text-align: center">
+   <thead>
+      <tr class="listCommon" >
+             <th>제목</th>
+             <th>작성일</th>
+             <th>삭제 여부</th>
+      </tr>
+   </thead>
+   <tbody>
+   <c:forEach var="commonBoard"  items="${requestScope.commonBoardList }" varStatus="loop">
+      <tr>
+         <td>${ commonBoard.boardTitle }</td>
          <td>
          	<fmt:formatDate value="${ commonBoard.regDate }"
+         				    pattern="yyyy-MM-dd"/>
+ 		 <td>${ commonBoard.deleted }</td>
+         </td>
+      </tr>
+      </c:forEach>
+   </tbody>
+</table>
+<br>
+             <div>
+             	<ul class="pagination justify-content-center mb-0">
+             	${ commonBoardPager }
+             	</ul>
+             </div>
+            </div>
+          </div>
+          
+         
+<div class="table-container">
+    <h2>신고 게시판</h2> 
+    <table border="1" class="table text-light" style="text-align: center">
+   <thead>
+      <tr class="listCommon" >
+             <th>제목</th>
+             <th>작성일</th>
+      </tr>
+   </thead>
+   <tbody>
+   <c:forEach var="reportBoardList"  items="${requestScope.reportBoardList }" varStatus="loop">
+      <tr>
+         <td>${ reportBoardList.boardTitle }</td>
+         <td>
+         	<fmt:formatDate value="${ reportBoardList.regDate }"
          				    pattern="yyyy-MM-dd"/>
          </td>
       </tr>
@@ -100,12 +147,11 @@
 <br>
              <div>
              	<ul class="pagination justify-content-center mb-0">
-             	${ pager }
+             	${ reportBoardPager }
              	</ul>
              </div>
             </div>
           </div>
-
 	
 	<!-- Libs JS -->
 	<script

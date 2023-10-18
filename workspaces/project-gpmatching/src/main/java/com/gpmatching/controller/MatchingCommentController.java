@@ -53,7 +53,7 @@ public class MatchingCommentController {
 		return "success";
 	}
 	
-	@GetMapping(path = { "/ajax-show-comment" }, produces = "application/json;charset=utf-8")
+	@GetMapping(path = { "/ajax-show-comment-and-btn-matching" }, produces = "application/json;charset=utf-8")
 	@ResponseBody
     public List<MatchingCommentDto> ajaxShowMatchingComment(@RequestParam int boardNo) {
         
@@ -102,7 +102,23 @@ public class MatchingCommentController {
         return comments; 
 	}
 	
-	
+	@GetMapping(path = { "/ajax-show-comment2" }, produces = "application/json;charset=utf-8")
+	@ResponseBody
+    public List<MatchingCommentDto> ajaxShowMatchingComment2(@RequestParam int boardNo) {
+        
+	    System.out.println("Received boardNo: " + boardNo);
+
+        List<MatchingCommentDto> comments = matchingCommentService.getMatchingCommentForReview(boardNo);
+        
+        System.out.println(comments);
+        
+        for(MatchingCommentDto comment : comments) {
+        	comment.setBoardNo(boardNo);
+        }
+        
+        
+        return comments; 
+    }
 	
 
 //	@GetMapping(path = { "/lol-comment" })

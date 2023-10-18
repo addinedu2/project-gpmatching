@@ -8,7 +8,7 @@ import lombok.Data;
 public class MatchingAlarmDto {
 
 	private int alarmNo;
-	private int mCommentNo;
+	private int commentNo;
 	private String alarmContent;
 	private Date regDate;
 	

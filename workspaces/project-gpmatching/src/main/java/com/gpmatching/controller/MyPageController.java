@@ -51,8 +51,9 @@ public class MyPageController {
 	        } else {
 	            // 로그인한 사용자가 일반 사용자인 경우 마이페이지 표시
 	            List<MypageBoardDto> boardList = mypageService.findMyWriteMatchingBoardByUserNo(loginUser.getUserNo());
-
-
+	            int reviewPoint = mypageService.getMyReviewPoint(loginUser.getUserNo());
+	            
+	            model.addAttribute("reviewPoint", reviewPoint);
 	            model.addAttribute("loginuser", loginUser);
 	            model.addAttribute("boardList", boardList);
 
@@ -144,7 +145,6 @@ public class MyPageController {
 		
 		return boardList;
 	}
-	
 	
 
 

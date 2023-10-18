@@ -55,6 +55,13 @@ public class MypageServiceImpl implements MypageService{
 		return writeBoard;
 		
 	}
+	@Override
+	public int getMyReviewPoint(int userNo) {
+
+		int reviewPoint = mypageMapper.selectMyReviewPoint(userNo);
+		
+		return reviewPoint;
+	}
 
 
 

@@ -162,7 +162,7 @@
 				</div>
 
 				<!-- content -->
-				<div>여기가 시작</div>
+		
 				
 				
 		<div id="admincontent">

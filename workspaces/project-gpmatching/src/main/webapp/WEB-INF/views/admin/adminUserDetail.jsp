@@ -1,88 +1,135 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>adminUserDetail</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <!-- Striped rows -->
-            <div class="row mb-6">
-              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div id="striped-rows" class="mb-4">
-                  <h2>Striped rows</h2>
-                  <p>Use <code class="highlighter-rouge">.table-striped</code>
-                    to add
-                    zebra-striping to any table row within the <code
-                      class="highlighter-rouge">&lt;tbody&gt;</code>.
-                  </p>
-                </div>
-                <!-- Card -->
-                <div class="card">
-                  <ul class="nav nav-line-bottom"
-                    id="pills-tab-striped-rows" role="tablist">
-                    <li class="nav-item">
-                      <a class="nav-link active"
-                        id="pills-striped-rows-design-tab"
-                        data-bs-toggle="pill"
-                        href="#pills-striped-rows-design" role="tab"
-                        aria-controls="pills-striped-rows-design"
-                        aria-selected="true">회원 목록</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="pills-striped-rows-html-tab"
-                        data-bs-toggle="pill"
-                        href="#pills-striped-rows-html" role="tab"
-                        aria-controls="pills-striped-rows-html"
-                        aria-selected="false">HTML</a>
-                    </li>
-                  </ul>
-                  <!-- Tab content -->
-                  <div class="tab-content p-4"
-                    id="pills-tabContent-striped-rows">
-                    <div class="tab-pane tab-example-design fade show
-                      active" id="pills-striped-rows-design"
-                      role="tabpanel"
-                      aria-labelledby="pills-striped-rows-design-tab">
-                      <div class="table-responsive">
-                      <table class="table table-striped">
-                        <thead >
-                          <tr>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-bordered border-primary">
+                    <thead>
+                        <tr>
                             <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
+                            <th scope="col">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
                             <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      </div>
-                    </div>
-                    <div class="tab-pane tab-example-html fade"
-                      id="pills-striped-rows-html" role="tabpanel"
-                      aria-labelledby="pills-striped-rows-html-tab">
-                      <div class="copy-content copy-content-height">
-                        <div class="code-toolbar"></div>
-                          <pre><code class="language-markup"><span class="token tag"></span>
+                            <td>
+                                <form:form modelAttribute="user" action="/project-gpmatching/admin/user" method="post">
+                                     <div class="form-group">
+                                        <label for="userNo">UserNo:</label>
+                                        <input type="text" class="form-control" id="userNo" name="userNo" value="${ user.userNo }" readonly>
+                                    </div>
+                                        <div class="form-group">
+                                        <label for="userImage">Image URL:</label>
+                                        <input type="text" class="form-control" id="userImage" name="userImage" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="userId">User ID:</label>
+                                        <input type="text" class="form-control" id="userId" name="userId" value="${ user.userId }">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="userEmail">Email:</label>
+                                        <input type="email" class="form-control" id="userEmail" name="userEmail" value="${ user.userEmail }">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nickname">Nickname:</label>
+                                        <input type="text" class="form-control" id="nickname" name="nickname" value="${ user.nickname }">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="userPhone">Phone:</label>
+                                        <input type="text" class="form-control" id="userPhone" name="userPhone" value="${ user.userPhone }">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="userIntro">자기소개:</label>
+                                        <input type="text" class="form-control" id="userIntro" name="userIntro" value="${ user.userIntro }">
+                                    </div>
+                                  <div class="form-group">
+								   <label for="regDate">가입일:</label>
+									    <fmt:formatDate value="${user.regDate}" pattern="yyyy-MM-dd" var="formattedDate" />
+									    <input type="text" class="form-control" id="regDate" name="regDate" value="${formattedDate}" readonly="true">
+									    </div>  
+
+                                
+                                    <div class="form-group">
+                                        <label for="userGrade">Grade:</label>
+                                        <select class="form-control" id="userGrade" name="userGrade" value="${ user.userGrade }">
+                                         	<option value="normaluser" ${user.userGrade == 'normaluser' ? 'selected' : ''}>Normal User</option>
+     										<option value="VIP" ${user.userGrade == 'VIP' ? 'selected' : ''}>VIP</option>
+									        <option value="admin" ${user.userGrade == 'admin' ? 'selected' : ''}>Admin</option>
+									        <option value="BanUser" ${user.userGrade == 'BanUser' ? 'selected' : ''}>Ban User</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="deletedUser">Deleted User:</label>
+                                        <select class="form-control" id="deletedUser" name="deletedUser" value="${ user.deletedUser }">
+                                            <option value="false" ${user.deletedUser == 'false' ? 'selected' : ''}>유지</option>
+                                            <option value="true" ${user.deletedUser == 'true' ? 'selected' : ''}>삭제</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">수정</button>
+                                </form:form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+      	  var userUrl = '<c:url value="/${user.userNo}" />';
+            $.ajax({
+                 url: userUrl,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $('#userId').val(data.userId);
+                    $('#userEmail').val(data.userEmail);
+                    $('#nickname').val(data.nickname);
+                    $('#userPhone').val(data.userPhone);
+                    $('#userImage').val(data.userImage);
+                    $('#userGrade').val(data.userGrade);
+                    $('#deletedUser').val(data.deletedUser);
+                    
+                     },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+           
+    </script>
+            
+            
+            
+        });
+    </script>
+            
+            
+            
+            
+            
+        });
+        
+        
+        
+        
+        
+        
+        
+    </script>
 </body>
 </html>

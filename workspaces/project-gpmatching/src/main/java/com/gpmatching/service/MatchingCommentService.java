@@ -20,6 +20,8 @@ public interface MatchingCommentService {
 	int getBoardNoByCommentNo(int commentNo);
 
 	List<MatchingAlarmDto> getMatchingAlarmListByUserNo(int userNo);
+
+	List<MatchingCommentDto> getMatchingCommentForReview(int boardNo);
 	
 	//int showCommentConfirmCount(int boardNo);
 }

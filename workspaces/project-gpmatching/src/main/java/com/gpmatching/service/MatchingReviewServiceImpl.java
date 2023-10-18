@@ -1,4 +1,4 @@
-package com.gpmatching.service;
+ package com.gpmatching.service;
 
 import java.util.List;
 
@@ -22,9 +22,9 @@ public class MatchingReviewServiceImpl implements MatchingReviewService {
 	}
 
 	@Override
-	public List<MatchingBoardDto> getNotYetReviewList(int userNo) {
+	public List<MatchingBoardDto> getMatchingBoardsNeedToReview(int userNo) {
 
-		List<MatchingBoardDto> reviewList = matchingReviewMapper.selectNotYetReviewList(userNo);
+		List<MatchingBoardDto> reviewList = matchingReviewMapper.selectMatchingBoardsNeedToReview(userNo);
 		
 		return reviewList;
 	}

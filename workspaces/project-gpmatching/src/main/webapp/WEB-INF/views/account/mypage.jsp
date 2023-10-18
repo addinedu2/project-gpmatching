@@ -33,7 +33,7 @@
 
 <!-- Theme CSS -->
 <link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
-  <title>Profile Overview | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
+  <title>마이페이지</title>
 </head>
 
 <body class="bg-light"> 
@@ -75,9 +75,9 @@
                   <div class="row">
                     <div class="col-12 mb-5">
                       <!-- text -->
-                      <h6 class="text-uppercase fs-5 ls-2">Position
+                      <h6 class="text-uppercase fs-5 ls-2">review Point
                       </h6>
-                      <p class="mb-0">이거 어떻게 넣음</p>
+                      <p class="mb-0">${reviewPoint}</p>
                     </div>
                     
                     <div class="col-6 mb-5">

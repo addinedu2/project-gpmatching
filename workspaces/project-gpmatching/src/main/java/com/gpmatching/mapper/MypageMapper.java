@@ -51,7 +51,9 @@ public interface MypageMapper {
 	        + "order by boardNo desc "
 	        + "limit 6")
 	List<MypageBoardDto> selectMyWriteMatchingBoardByUserNo(int userNo);
-
+	
+	@Select("select COALESCE(sum(reviewPoint), 0) from MatchingReview where reviewedUserNo = #{userNo}")
+	int selectMyReviewPoint(int userNo);
 }
 
 

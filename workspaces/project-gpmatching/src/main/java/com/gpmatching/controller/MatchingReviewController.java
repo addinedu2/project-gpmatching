@@ -36,16 +36,14 @@ public class MatchingReviewController {
 	}
 	
 	@GetMapping(path = { "/write" })
-	public String ShowMatchingReviewForm2(@RequestParam int boardNo, @RequestParam String writer, 
-										  @RequestParam String commentWriter, @RequestParam int commentNo, Model model) {
+	public String ShowMatchingReviewForm2(@RequestParam int boardNo, @RequestParam String nickname, @RequestParam int commentNo, 
+										  Model model) {
 		
+		int reviewedUserNo = matchingReviewService.getUserNoByNickname(nickname);
 		
-		int commentUserNo = matchingReviewService.getUserNoByNickname(commentWriter);
-
-		model.addAttribute("commentWriter", commentWriter);
 		model.addAttribute("boardNo", boardNo);
-		model.addAttribute("writer", writer);
-		model.addAttribute("commentUserNo", commentUserNo);
+		model.addAttribute("reviewedUserNo", reviewedUserNo);
+		model.addAttribute("nickname", nickname);
 		model.addAttribute("commentNo", commentNo);
 		
 		return "/review/write";
@@ -65,7 +63,7 @@ public class MatchingReviewController {
 		UserDto loginUser = (UserDto) session.getAttribute("loginuser");
 		System.out.println(loginUser.getUserNo());
 
-		List<MatchingBoardDto> reviewList = matchingReviewService.getNotYetReviewList(loginUser.getUserNo());
+		List<MatchingBoardDto> reviewList = matchingReviewService.getMatchingBoardsNeedToReview(loginUser.getUserNo());
 		
 		System.out.println(reviewList);
 		return reviewList;
