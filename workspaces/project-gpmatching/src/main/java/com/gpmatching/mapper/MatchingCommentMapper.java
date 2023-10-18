@@ -19,14 +19,16 @@ public interface MatchingCommentMapper {
 	@Options(useGeneratedKeys = true, keyProperty = "commentNo")
 	void insertMatchingComment(MatchingCommentDto matchingComment);
 
-
-	@Select("select c.commentNo, c.boardNo, c.mCommentContent, u.nickname, c.status "
-			+ "from MatchingComment c "
+	//MatchingBoard 칼럼 join 추가 - 이현일
+	@Select("select mc.commentNo, mc.boardNo, mc.mCommentContent, "
+			+ "u.nickname, mc.status, mb.headCount, mb.confirmCount, mb.matchingClose "
+			+ "from MatchingComment mc "
+			+ "inner join MatchingBoard mb "
+			+ "on mc.boardNo = mb.boardNo "
 			+ "inner join User u "
-			+ "on c.userNo = u.userNo "
-			+ "where boardNo = #{ boardNo }")
+			+ "on mc.userNo = u.userNo "
+			+ "where mc.boardNo = #{ boardNo } ")
 	List<MatchingCommentDto> selectMatchingCommentListByBoardNo(int boardNo);
-	
 	
 	@Select("update MatchingComment set status = #{ status } "
 			+ "where commentNo = #{commentNo}")

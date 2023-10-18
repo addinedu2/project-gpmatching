@@ -32,6 +32,10 @@ public interface LolBoardService {
 	List<MatchingBoardDto> getMatchingBoardListByLolTier(String gameName, String lolTier);
 
 	void setNowConfirmCount(int confirmCount);
+
+	void setMatchingCloseTrue(int boardNo);
+
+	boolean isMatchingCloseCondition(int boardNo);
 	
 
 }

@@ -53,7 +53,7 @@ public class MatchingCommentController {
 		return "success";
 	}
 	
-	@GetMapping(path = { "/ajax-show-comment" }, produces = "application/json;charset=utf-8")
+	@GetMapping(path = { "/ajax-show-comment-and-btn-matching" }, produces = "application/json;charset=utf-8")
 	@ResponseBody
     public List<MatchingCommentDto> ajaxShowMatchingComment(@RequestParam int boardNo) {
         
