@@ -14,4 +14,6 @@ public interface MypageService {
 	List<MypageBoardDto>findMyWriteCommonBoardByUserNo(int userNo);
 	
 	List<MypageBoardDto>findMyWriteMatchingBoardByUserNo(int userNo);
+	
+	int getMyReviewPoint(int userNo);
 }

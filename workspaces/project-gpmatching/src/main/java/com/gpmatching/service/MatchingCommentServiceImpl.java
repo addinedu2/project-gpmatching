@@ -26,7 +26,7 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 		
 		matchingCommentMapper.insertMatchingComment(matchingComment);
 		
-		matchingAlarm.setMCommentNo(matchingComment.getCommentNo());
+		matchingAlarm.setCommentNo(matchingComment.getCommentNo());
 		matchingAlarmMapper.insertMatchingAlarm(matchingAlarm);
 	}
 
@@ -155,6 +155,14 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 		List<MatchingAlarmDto> matchingAlarms = matchingAlarmMapper.selectAlarmListByUserNo(userNo);
 		
 		return matchingAlarms;
+	}
+	
+	@Override
+	public List<MatchingCommentDto> getMatchingCommentForReview(int boardNo) {
+
+		List<MatchingCommentDto> comments = matchingCommentMapper.selectMatchingCommentListForReview(boardNo);
+		
+		return comments;
 	}
 
 //	@Override

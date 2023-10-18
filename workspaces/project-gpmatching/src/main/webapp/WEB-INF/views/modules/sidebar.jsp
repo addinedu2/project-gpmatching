@@ -5,11 +5,20 @@
 	<div class="nav-scroller">
 		<!-- Brand logo -->
 
-		<a class="navbar-brand"
+		<!-- <a class="navbar-brand"
 			href="/project-gpmatching/home"> <img
 			src="/project-gpmatching/resources/assets/images/brand/logo/opgglogo.svg"
 			alt="" />
+		</a> 원본-->
+		
+		<a class="navbar-brand"
+			href="/project-gpmatching/home"> <img
+			src="/project-gpmatching/resources/assets/images/brand/logo/gps-sidebar.png"
+			
+			alt="" />
 		</a>
+		
+		
 
 		<!-- Navbar nav -->
 		<ul class="navbar-nav flex-column" id="sideNavbar">

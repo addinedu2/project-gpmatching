@@ -2,61 +2,11 @@
  * 
  */
 
-	//리뷰
-	$(function() {
-		
-		$('.review-btn').on("click", function(event){
 	
-			$.ajax({
-				
-				"url": "ajax-show-review",
-				"method": "get",
-				"data": { "userNo" : userNo },
-				
-				"success": function(result){
-					
-					var reviewList = $('#review-list');
-					reviewList.empty();
-					if (result != null){
-						
-						// 테이블 헤더 추가
-		                var $headerRow = $("<tr>");
-		                
-		                $headerRow.append($("<th>").text("제목"));
-		                $headerRow.append($("<th>").text("파티장"));
-		                $headerRow.append($("<th>").text("파티원"));
-		                
-		                commentList.append($headerRow);
-		                
-	// 					for(var i = 0; i < result.length; i++){
-	// 						var $row = $("<tr>");
-		                    
-	// 	                    $row.append($("<td>").text(result[i].mcommentNo));
-	// 	                    $row.append($("<td>").text(result[i].nickname));
-	// 	                    $row.append($("<td>").text(result[i].mcommentContent));
-		                 
-	// 	                    commentList.append($row);
-		                    
-		                    
-	// 					}
-						$('#review-modal').modal('show');
-					}
-					
-					
-				},
-				"error": function(xhr, status, err){
-					alert("실패");
-				
-				}
-			
-			});
-		 });
-		
-	});
-	
-	//알림리스트 아이콘 변경
+	//알림 생기면 종모양에 초록동그라미
 	$(function(){
-	    let userNo = $("#notificationicon").data("userno");
+	    //let userNo = $("#notificationicon").data("userno");원본
+	    let userNo = $("#dropdownNotification").data("userno");
 	    console.log(userNo);
 		
 		$.ajax({
@@ -68,11 +18,16 @@
 			   success: function(data){
 				   console.log(data); //여기 데이터 카운트 개수 넘어옴.
   
-				   if(data){
+				  /* if(data){
 						$("#notificationicon").attr('data-feather','bell'); 
+				   }원본*/
+				   
+				   if(data){
+						$("#dropdownNotification").addClass('avatar-online');
 				   }
 
-				   feather.replace();
+					
+				   //feather.replace();
 			   },
 			   error:function(xhr, status, error){
 				   console.log('알람 개수를 가져오는 중 오류 발생: ' + error);
@@ -146,9 +101,8 @@
 				"type": 'GET',
 				"data" : {"userNo":userNo},
 				"success": function(data, status, xhr){
-					if(data){
-						$("#notificationicon").attr('data-feather','bell-off');
-						feather.replace();
+					if(data){	
+						$("#dropdownNotification").removeClass('avatar-online');
 				   }
 				},
 				"error": function(xhr, status, err){
@@ -157,3 +111,4 @@
 			});
 		});
 	});
+
