@@ -26,7 +26,7 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 		
 		matchingCommentMapper.insertMatchingComment(matchingComment);
 		
-		matchingAlarm.setMCommentNo(matchingComment.getCommentNo());
+		matchingAlarm.setCommentNo(matchingComment.getCommentNo());
 		matchingAlarmMapper.insertMatchingAlarm(matchingAlarm);
 	}
 

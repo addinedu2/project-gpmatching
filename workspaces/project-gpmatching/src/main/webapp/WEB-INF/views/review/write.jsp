@@ -49,14 +49,15 @@
 		
 		<!-- Container fluid -->
 		<!-- Basic -->
-		
+		<div style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; padding-top: 20px;">
 		<div class="card" style="width: 20rem;" >
 		<form id="reviewform" action="write-review" method="post">
 		   <div class="card-body">
 		   	  <input type="hidden" name="boardNo" value="${ boardNo }" />
 		   	  <input type="hidden" name="userNo" value="${ loginuser.userNo }" />
 		   	  <input type="hidden" name="commentNo" value="${ commentNo }" />
-			<input type="hidden" name="category"  value="review"> 
+			<input type="hidden" name="category"  value="review">
+			  <br> 
 		      <h5 class="card-title">글번호 : ${ boardNo }</h5>
 		      <hr>
 				<span>리뷰 대상자 : ${ nickname }</span>
@@ -82,6 +83,7 @@
 		      <button type="submit" class="btn btn-primary">등록</button>
 		   </div>
 		   </form>
+		</div>
 		</div>
 		</div>
 		</div>

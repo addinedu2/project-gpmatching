@@ -13,7 +13,6 @@ public class AlarmDto {
 	//-> private String commentContent;//댓글 본문 commentNo-commentContent
 
 	private int alramNo;//알람 번호
-	//private int mCommentNo; 나중에 사용할 매칭댓글
 	private int commentNo;
 	
 	private int userNo;

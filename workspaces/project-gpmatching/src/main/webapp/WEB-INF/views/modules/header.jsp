@@ -20,8 +20,7 @@
 		<c:choose>
 			<c:when test="${ not empty loginuser }">
 				${ loginuser.nickname }님, 환영합니다!<br>
-				<a href="/project-gpmatching/review/write">
-				리뷰를 작성해주세요 (${matchingCloseCount}개)</a>
+				<span>리뷰를 작성해주세요 →</span>
 				<button type="button" class="btn btn-primary btn-sm review-btn">클릭</button>		  
 			</c:when>
 		</c:choose>
@@ -173,7 +172,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
