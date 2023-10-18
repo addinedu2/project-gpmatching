@@ -43,7 +43,7 @@ public interface AdminMapper {
 	AdminDto getUserNo(int userNo);
 	
 	//회원 정보 수정하는 메서드
-	@Update("UPDATE user " +
+	@Update("UPDATE User " +
 	        "SET userId = #{userId}, " +
 	        "userEmail = #{userEmail}, " +
 	        "nickname = #{nickname}, " +
@@ -56,7 +56,7 @@ public interface AdminMapper {
 	void updateUser(AdminDto adminDto);
 	
 	//회원 이미지 수정하는 메서드
-	@Update("update user "
+	@Update("update User "
 			+ "set userImage = #{userImage} "
 			+ "WHERE userNo = #{userNo}")
 	void updateImage(AdminDto adminDto);

@@ -50,9 +50,9 @@
 <table class="table text-light" style="color: black; text-align: center;">
     <c:forEach var="userlist" items="${listuser}">
         <tr>
-        <td><a href="<c:url value='/user/${userlist.userNo}' />" target="_blank">${ userlist.userId }</td>
-   	    <td><a href="<c:url value='/user/${userlist.userNo}' /> target="_blank">${ userlist.nickname }</td>
-        <td><a href="<c:url value='/user/${userlist.userNo}' /> target="_blank">${ userlist.userGrade }</td>
+        <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" target="_blank">${ userlist.userId }</td>
+   	    <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" target="_blank">${ userlist.nickname }</td>
+        <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" target="_blank">${ userlist.userGrade }</td>
         <td>게시판 수</td>
         <td>댓글 수</td>
         <td><fmt:formatDate value="${ userlist.regDate }" pattern="yyyy-MM-dd"/>

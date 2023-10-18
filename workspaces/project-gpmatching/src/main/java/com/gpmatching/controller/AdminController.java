@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -73,13 +76,42 @@ public class AdminController {
 	
 	//링크 를릭하면 회원의 유저넘버 추출해서 상세정보 보기
 	@GetMapping(path = {"/user/{userNo}"})
-	public String viewUser(int userNo, Model model) {
+	public String viewUser(@PathVariable int userNo, Model model) {
 		AdminDto user = adminService.getUserNo(userNo);
 		if (user != null) {
 			model.addAttribute("user", user);
-		}
+			}
 		return "/admin/adminUserDetail";
 		}
+	
+	//회원 상세보기 수정
+	@PostMapping(path = {"/user"})
+	public String updateUser(@ModelAttribute("user") AdminDto updateUser) {
+	    // userNo를 기반으로 데이터베이스에서 해당 유저 정보를 가져온다.
+		AdminDto upUser = adminService.getUserNo(updateUser.getUserNo());
+
+	    // 가져온 유저 정보를 업데이트한다.
+		
+		upUser.setUserId(updateUser.getUserId());
+		upUser.setUserEmail(upUser.getUserEmail());
+		upUser.setNickname(updateUser.getNickname());
+		upUser.setUserPhone(updateUser.getUserPhone());
+		upUser.setUserIntro(updateUser.getUserIntro());
+		upUser.setUserGrade(updateUser.getUserGrade());    //선택식도 겟임
+		upUser.setDeletedUser(updateUser.isDeletedUser()); // boolean은 겟이 아닌 is
+		upUser.setBanEndDate(updateUser.getBanEndDate());
+	    // 업데이트된 정보를 데이터베이스에 저장한다.
+	    adminService.updateUser(upUser);
+
+	    // 수정 후에 유저 목록 페이지로 리다이렉션 또는 다른 페이지로 리다이렉션할 수 있음
+	    return "/admin/adminUserDetail";
+	}
+
+	
+	
+	
+	
+	
 		
 }
 	

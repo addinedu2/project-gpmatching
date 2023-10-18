@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,55 +26,60 @@
                         <tr>
                             <th scope="row">1</th>
                             <td>
-                                <form action="<c:url value='/user/${user.userNo}' />" method="post">
-                                    <input type="hidden" name="_method" value="put">
+                                <form:form modelAttribute="user" action="/project-gpmatching/admin/user" method="post">
                                      <div class="form-group">
                                         <label for="userNo">UserNo:</label>
-                                        <input type="text" class="form-control" id="userNo" name="userNo" readonly>
+                                        <input type="text" class="form-control" id="userNo" name="userNo" value="${ user.userNo }" readonly>
                                     </div>
                                         <div class="form-group">
                                         <label for="userImage">Image URL:</label>
-                                        <input type="text" class="form-control" id="userImage" name="userImage">
+                                        <input type="text" class="form-control" id="userImage" name="userImage" >
                                     </div>
                                     <div class="form-group">
                                         <label for="userId">User ID:</label>
-                                        <input type="text" class="form-control" id="userId" name="userId">
+                                        <input type="text" class="form-control" id="userId" name="userId" value="${ user.userId }">
                                     </div>
                                     <div class="form-group">
                                         <label for="userEmail">Email:</label>
-                                        <input type="email" class="form-control" id="userEmail" name="userEmail">
+                                        <input type="email" class="form-control" id="userEmail" name="userEmail" value="${ user.userEmail }">
                                     </div>
                                     <div class="form-group">
                                         <label for="nickname">Nickname:</label>
-                                        <input type="text" class="form-control" id="nickname" name="nickname">
+                                        <input type="text" class="form-control" id="nickname" name="nickname" value="${ user.nickname }">
                                     </div>
                                     <div class="form-group">
                                         <label for="userPhone">Phone:</label>
-                                        <input type="tel" class="form-control" id="userPhone" name="userPhone">
+                                        <input type="text" class="form-control" id="userPhone" name="userPhone" value="${ user.userPhone }">
                                     </div>
-                                     <div class="form-group">
-                                        <label for="regDate">UserNo:</label>
-                                        <input type="date" class="form-control" id="regDate" name="regDate" readonly>
+                                    <div class="form-group">
+                                        <label for="userIntro">자기소개:</label>
+                                        <input type="text" class="form-control" id="userIntro" name="userIntro" value="${ user.userIntro }">
                                     </div>
+                                   <%--  <div class="form-group">
+								   <label for="regDate">가입일:</label>
+									    <fmt:formatDate value="${user.regDate}" pattern="yyyy-MM-dd" var="formattedDate" />
+									    <input type="text" class="form-control" id="regDate" name="regDate" value="${formattedDate}" readonly="true">
+									    </div>  --%>
+
                                 
                                     <div class="form-group">
                                         <label for="userGrade">Grade:</label>
-                                        <select class="form-control" id="userGrade" name="userGrade">
-                                            <option value="normaluser">Normal User</option>
-                                            <option value="VIP">VIP</option>
-                                            <option value="admin">Admin</option>
-                                            <option value="BanUser">Ban User</option>
+                                        <select class="form-control" id="userGrade" name="userGrade" value="${ user.userGrade }">
+                                         	<option value="normaluser" ${user.userGrade == 'normaluser' ? 'selected' : ''}>Normal User</option>
+     										<option value="VIP" ${user.userGrade == 'VIP' ? 'selected' : ''}>VIP</option>
+									        <option value="admin" ${user.userGrade == 'admin' ? 'selected' : ''}>Admin</option>
+									        <option value="BanUser" ${user.userGrade == 'BanUser' ? 'selected' : ''}>Ban User</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="deletedUser">Deleted User:</label>
-                                        <select class="form-control" id="deletedUser" name="deletedUser">
-                                            <option value="false">유지</option>
-                                            <option value="true">삭제</option>
+                                        <select class="form-control" id="deletedUser" name="deletedUser" value="${ user.deletedUser }">
+                                            <option value="false" ${user.deletedUser == 'false' ? 'selected' : ''}>유지</option>
+                                            <option value="true" ${user.deletedUser == 'true' ? 'selected' : ''}>삭제</option>
                                         </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary">수정</button>
-                                </form>
+                                </form:form>
                             </td>
                         </tr>
                     </tbody>
@@ -83,8 +90,9 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+      	  var userUrl = '<c:url value="/${user.userNo}" />';
             $.ajax({
-                url: '<c:url value="/user/${user.userNo}" />',
+                 url: userUrl,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
@@ -94,19 +102,34 @@
                     $('#userPhone').val(data.userPhone);
                     $('#userImage').val(data.userImage);
                     $('#userGrade').val(data.userGrade);
-                    $('#deletedUser').val(data.deletedUser.toString());
-
-                    if (data.userGrade === 'BanUser') {
-                        $('#banInfo').text('금지 기간: ' + data.banEndDate);
-                    } else {
-                        $('#banInfo').hide();
-                    }
-                },
+                    $('#deletedUser').val(data.deletedUser);
+                    
+                     },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
                 }
             });
         });
+           
+    </script>
+            
+            
+            
+        });
+    </script>
+            
+            
+            
+            
+            
+        });
+        
+        
+        
+        
+        
+        
+        
     </script>
 </body>
 </html>
