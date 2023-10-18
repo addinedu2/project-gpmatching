@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -65,55 +68,51 @@ public class AdminController {
 			}
 	
 
-	
-	
-	
 	@GetMapping(path = {"/adminOverview"} )
 	public String showAdminOverview() {
 	    return "/admin/adminOverview";
+	    
 	}
+	
+	//링크 를릭하면 회원의 유저넘버 추출해서 상세정보 보기
+	@GetMapping(path = {"/user/{userNo}"})
+	public String viewUser(@PathVariable int userNo, Model model) {
+		AdminDto user = adminService.getUserNo(userNo);
+		if (user != null) {
+			model.addAttribute("user", user);
+			}
+		return "/admin/adminUserDetail";
+		}
+	
+	//회원 상세보기 수정
+	@PostMapping(path = {"/user"})
+	public String updateUser(@ModelAttribute("user") AdminDto updateUser) {
+	    // userNo를 기반으로 데이터베이스에서 해당 유저 정보를 가져온다.
+		AdminDto upUser = adminService.getUserNo(updateUser.getUserNo());
 
-
-   
+	    // 가져온 유저 정보를 업데이트한다.
 		
-	
-//	//신규 회원 리스트
-//	@GetMapping(path = {"/userHome"}, produces = "application/json;charset=utf-8")
-//	@ResponseBody
-//	public List<AdminDto> userHome(Model model) {
-//		List<AdminDto> newUsers = adminService.getNewUsers();
-//		model.addAttribute("newUsers", newUsers);
-//	    return newUsers;
-//	}
-//	
+		upUser.setUserId(updateUser.getUserId());
+		upUser.setUserEmail(upUser.getUserEmail());
+		upUser.setNickname(updateUser.getNickname());
+		upUser.setUserPhone(updateUser.getUserPhone());
+		upUser.setUserIntro(updateUser.getUserIntro());
+		upUser.setUserGrade(updateUser.getUserGrade());    //선택식도 겟임
+		upUser.setDeletedUser(updateUser.isDeletedUser()); // boolean은 겟이 아닌 is
+		upUser.setBanEndDate(updateUser.getBanEndDate());
+	    // 업데이트된 정보를 데이터베이스에 저장한다.
+	    adminService.updateUser(upUser);
 
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//	//링크 를릭하면 회원의 유저넘버 추출해서 상세정보 보기
-//	@GetMapping("/users/{userNo}")
-//	public String viewUser(@PathVariable int userNo, Model model) {
-//	    User user = userService.getUserByUserNo(userNo);
-//	    if (user != null) {
-//	        model.addAttribute("user", user);
-//	        return "userDetails";
-//	    } else {
-//	        // 사용자를 찾을 수 없는 경우에 대한 처리 (예: 에러 페이지로 리다이렉트)
-//	        return "error"; // 또는 다른 에러 페이지의 뷰 이름을 리턴할 수 있습니다.
-//	    }
+	    // 수정 후에 유저 목록 페이지로 리다이렉션 또는 다른 페이지로 리다이렉션할 수 있음
+	    return "/admin/adminUserDetail";
 	}
 
+	
+	
+	
+	
+	
+		
+}
+	
 	

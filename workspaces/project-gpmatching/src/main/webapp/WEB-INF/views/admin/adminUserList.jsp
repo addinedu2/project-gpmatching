@@ -48,16 +48,15 @@
 
 <!-- 검색 결과를 표시할 테이블 -->
 <table class="table text-light" style="color: black; text-align: center;">
-    <tbody id="admincontent">
     <c:forEach var="userlist" items="${listuser}">
         <tr>
-        <td>${ userlist.userId }</td>
-            <td>${ userlist.nickname }</td>
-            <td>${ userlist.userGrade }</td>
-            <td>게시판 수</td>
-            <td>댓글 수</td>
-            <td><fmt:formatDate value="${ userlist.regDate }" pattern="yyyy-MM-dd"/>
-            </td>
+        <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" target="_blank">${ userlist.userId }</td>
+   	    <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" target="_blank">${ userlist.nickname }</td>
+        <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" target="_blank">${ userlist.userGrade }</td>
+        <td>게시판 수</td>
+        <td>댓글 수</td>
+        <td><fmt:formatDate value="${ userlist.regDate }" pattern="yyyy-MM-dd"/>
+        </td>
         </tr>
     </c:forEach>
 

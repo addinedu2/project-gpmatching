@@ -14,11 +14,7 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	AdminMapper adminMapper;
 	
-	//신규회원
-	@Override
-	public List<AdminDto> getNewUsers() {
-		return adminMapper.getNewUsers();
-	}
+	
 	//회원 검색
 	@Override
 	public List<AdminDto> searchUsers(String keyword, int from, int count) {
@@ -29,12 +25,7 @@ public class AdminServiceImpl implements AdminService {
 	public int getUserCount() {
 		return adminMapper.getUserCount();
 	}
-	//회원 유저넘버 뽑기
-	@Override
-	public AdminDto getUserNo(int userNo) {
-		return adminMapper.getUserNo(userNo);
 	
-	}
 	//회원 전체 목록
 	@Override
 	public List<AdminDto> UserList() {
@@ -48,6 +39,25 @@ public class AdminServiceImpl implements AdminService {
 		List<AdminDto> listUserListByPage = adminMapper.selectUserList(from, count);
 		return listUserListByPage;
 	}
+	
+	//회원 유저넘버 뽑기
+	@Override
+	public AdminDto getUserNo(int userNo) {
+		return adminMapper.getUserNo(userNo);
+		}
+	
+	@Override
+	public void updateUser(AdminDto adminDto) {
+		adminMapper.updateUser(adminDto);
+	}
+	@Override
+	public void updateImage(AdminDto adminDto) {
+		adminMapper.updateImage(adminDto);
+	}
+	
+	
+	
+	
 	
 	//글, 댓글 번호로 링크 만들기
 	//	@Override

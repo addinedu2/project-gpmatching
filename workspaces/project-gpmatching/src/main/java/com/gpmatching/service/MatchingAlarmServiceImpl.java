@@ -33,6 +33,11 @@ public class MatchingAlarmServiceImpl implements MatchingAlarmService{
 		
 	}
 
+	@Override
+	public int countMatchingAlarmNoByUserNo(int userNo) {
+		int mAlarmCount = matchingAlarmMapper.countMatchingAlarmNo(userNo);
+		return mAlarmCount;
+	}
 	
 	
 }

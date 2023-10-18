@@ -79,7 +79,9 @@
 					<div class="card">
 						<!-- card header  -->
 						<div class="card-header bg-info  py-4">
-							<h4 class="mb-0">배틀그라운드</h4>
+							<div style="display: flex; align-items: center;">
+						        <img src="/project-gpmatching/resources/assets/images/pubg/pubg_logo_1.png" height="88px">
+						    </div>
 						</div>
 						<!-- table  -->
 						<div class="table-responsive">

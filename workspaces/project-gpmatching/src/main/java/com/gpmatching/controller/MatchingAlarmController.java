@@ -24,7 +24,7 @@ public class MatchingAlarmController {
 	@Autowired
 	private MatchingAlarmService matchingAlarmService;
 	
-	@GetMapping(path= {"/modules/header"})
+	@GetMapping(path= {"/modules/header/matchingAlarms"})
 	@ResponseBody
 	public List<MatchingAlarmDto> headerMatchingAlarmList(HttpSession session, Model model) {
 		
@@ -55,7 +55,15 @@ public class MatchingAlarmController {
 		
 		return "success";
 
+	}
+
+	@GetMapping(path= {"/modules/header"})
+	@ResponseBody
+	public int mCountAlarms(HttpSession session,int userNo) {
+		
+		int mCountAlarm = matchingAlarmService.countMatchingAlarmNoByUserNo(userNo);
+		
+		return mCountAlarm;
 		
 	}
-	
 }

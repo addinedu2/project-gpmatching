@@ -56,20 +56,20 @@
               
             </div>
             <!-- Form -->
-            <form action="login" method="post">
+            <form id="loginForm" action="login" method="post">
            
               <!-- Username -->
               <div class="mb-3">
                 <label for="userId" class="form-label">유저 ID</label>
-                <input type="text" id="userId" class="form-control" name="userId" placeholder="USER ID here" required="">
-                
-             
+                <input type="text" id="userId" class="form-control" name="userId" placeholder="아이디" required="">
               </div>
+              
               <!-- Password -->
               <div class="mb-3">
                 <label for="userPwd" class="form-label">비밀번호</label>
-                <input type="password" id="userPwd" class="form-control" name="userPwd" placeholder="**************" required="">
+                <input type="password" id="userPwd" class="form-control" name="userPwd" placeholder="비밀번호" required="">
               </div>
+              
               <!-- Checkbox -->
               <div class="d-lg-flex justify-content-between align-items-center
                   mb-4">
@@ -83,7 +83,7 @@
               <div>
                 <!-- Button -->
                 <div class="d-grid">
-                  <button type="submit" class="btn btn-primary">로그인</button>
+                  <button id="loginBtn" type="submit" class="btn btn-primary">로그인</button>
                 </div>
 
                 <div class="d-md-flex justify-content-between mt-4">
@@ -136,6 +136,29 @@
 
 			<!-- Theme JS -->
 			<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
+			
+			<script>
+				$(function(event) {
+					$('#loginBtn').on('click', function(event){
+						
+						const enterUserId = ${"#userId"}.val();
+						const enterUserPwd = ${"#userPwd"}.val();
+						
+						const userId = "${loginUser.userId}";
+						const userPwd = "${loginUser.userPwd}";
+						
+						if (enterUserId != userId || enterUserPwd != userPwd) {
+							
+						}
+						
+						$("#loginForm").submit();
+					}
+				})
+				
+			</script>	
+			
+			
+			
 </body>
 
 </html>

@@ -12,12 +12,18 @@ import com.gpmatching.dto.UserDto;
 @Mapper
 public interface MypageMapper {
 
-	//내 정보 수정하는 메서드
+	//내 정보 수정하는 메서드(이미지를 수정하지 않고 내정보를 수정하기-이미지컬럼없음)
 	@Update ( "UPDATE User "
-			+ "SET nickname = #{nickname}, userPhone = #{userPhone}, userEmail = #{userEmail}, userImage = #{userImage} "
+			+ "SET nickname = #{nickname}, userPhone = #{userPhone}, userEmail = #{userEmail}, userIntro = #{userIntro} "
 			+ "WHERE userId = #{userId}") 
-	void updateUserProfile(UserDto loginuser);
+	void updateUserProfileWithoutImage(UserDto loginuser);
 
+	//내 정보 수정하는 메서드(이미지 수정용)
+	@Update ( "UPDATE User "
+			+ "SET nickname = #{nickname}, userPhone = #{userPhone}, userEmail = #{userEmail}, userImage = #{userImage}, userIntro = #{userIntro} "
+			+ "WHERE userId = #{userId}") 
+	void updateUserProfileWithImage(UserDto loginuser);
+	
 	//프로필 조회
 	@Select(  "select * "
 			+ "from User "
