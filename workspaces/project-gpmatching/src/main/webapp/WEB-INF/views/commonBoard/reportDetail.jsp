@@ -134,78 +134,147 @@
 
 		        
 		<!-- write comment area -->
-		<form id="commentform" action="writeComment" method="post">
-			<input type="hidden" name="commonNo" value="${ reportBoard.commonNo }" />
-			<input type="hidden" name="pageNo" value="${ pageNo }" />
-			<input type="hidden" name="userNo" value="${ loginuser.userNo }" />
-			<table style="width:800px;margin:0 auto">
-				<tr>
-					<td style="width:750px">	                	
-						<textarea id="commentContent" name="commentContent" style="width:100%;resize: none;" rows="3"></textarea>	                    
-					</td>
-					<td style="width:50px;vertical-align:middle">
-						<a id="write-comment-lnk" href="javascript:" style="text-decoration:none">
-							댓글<br />등록
-						</a>
-					</td>
-				</tr>                    
-			</table>
-		</form>
-	
-		<!-- end of write comment area -->
-		<!-- comment list area -->
-		<br>
-		<hr style="width:800px;margin:0 auto">
-		<br>
-		<table id="comment-list" style="width:800px;margin:0 auto">
-			<c:forEach var="comment" items="${ reportBoard.boardCommentList }">				
-				<tr>
-					<td style="text-align:left;margin:5px;border-bottom: solid 1px;">					
-						<div id="comment-view-area-${ comment.commentNo }">
-						<c:choose>
-						<c:when test="${ comment.deleted }">
-							<br><br>
-							<span style='color:gray'>삭제된 글입니다.</span>
-							<br><br>
-						</c:when>
-						<c:otherwise>
-							${ comment.nickname } &nbsp;&nbsp;
-							[<fmt:formatDate value="${ reportBoard.regDate }" pattern="yyyy-MM-dd"/>]
-						    <br /><br />
-						    <span>${ fn:replace(comment.commentContent, enter, "<br>") }</span>
-							<br /><br />
-								<div style='display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'>
-						    	<a class="edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">수정</a>
-								&nbsp;
-								<a class="delete-comment" data-comment-no="${ comment.commentNo }" href="javascript:">삭제</a>
-							</div>
-							<!-- <a class="recomment-link btn btn-sm btn-success">댓글 쓰기</a>  -->
-						</c:otherwise>
-						</c:choose>
-						</div>	                
-						<div id="comment-edit-area-${ comment.commentNo }" style="display: none">
-							${ comment.userNo } &nbsp;&nbsp; [${ comment.regDate }]
-							<br /><br />
-							<form action="editComment" method="post"> <!-- BoardCommentController의 /editcomment에 연결 -->
-							<input type="hidden" name="commentNo" value="${ comment.commentNo }" />
+				<!-- card -->
+				<div class="card">
+					<!-- card body -->
+					<div class="card-body">
+
+						<form id="commentform" action="writeComment" method="post">
 							<input type="hidden" name="commonNo" value="${ reportBoard.commonNo }" />
 							<input type="hidden" name="pageNo" value="${ pageNo }" />
-							<textarea name="commentContent" style="width: 99%; resize: none" rows="3" 
-								maxlength="200">${ comment.commentContent }</textarea>
-							</form>
-							<br />
-							<div>
-								<a class="update-comment" data-comment-no="${ comment.commentNo }" href="javascript:">수정</a> 
-								&nbsp; 
-								<a class="cancel-edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">취소</a>
+							<input type="hidden" name="userNo" value="${ loginuser.userNo }" />
+							<table style="margin: 0 auto">
+								<tr>
+									<td style="width: 750px">
+										<div class="col-md-8 col-xxl-9  mt-0 mt-md-3"
+											style="width: 100%; resize: none;">
+											<textarea class="form-control" aria-describedby="name" id="commentContent" name="commentContent"
+													  style="width: 100%; resize: none;"></textarea>
+										</div>
+									</td>
+									<td style="vertical-align: middle">
+									<a id="write-comment-lnk" href="javascript:" style="text-decoration: none; resize: none;">
+											<button type="button" class="btn btn-primary">등록</button>
+									</a></td>
+								</tr>
+							</table>
+						</form>
+
+
+						<!-- end of write comment area -->
+						<!-- comment list area -->
+
+						<div class="col-xl-12 col-lg-12 col-md-12 col-12">
+							<div class="card h-100">
+								<br>
+								<!-- <hr style="width:100%;margin:0 auto"> -->
+								<div class="table-responsive">
+									<table class="table text-nowrap" id="comment-list">
+										<tbody>
+											<c:forEach var="comment"
+												items="${ reportBoard.boardCommentList }">
+												<tr>
+													<td class="align-middle">
+														<div id="comment-view-area-${ comment.commentNo }"
+															style="padding-left: ${comment.depth * 20}px;">
+															<!-- 여기에 패딩 left 넣어서 들어가는거 처리 -->
+															<c:choose>
+																<c:when test="${ comment.deleted }">
+																	<br><br>
+																	<span style='color: gray'>삭제된 댓글입니다.</span>
+																	<br><br>
+																</c:when>
+
+																<c:otherwise>
+																	<div style="float: left">
+																		${ comment.nickname } &nbsp;&nbsp; 
+																		[<fmt:formatDate value="${ comment.regDate }" pattern="yyyy-MM-dd" />]
+																		<br /> <br /> 
+																		<span>${ fn:replace(comment.commentContent, enter, "<br>") }</span>
+																	</div>
+																	<div class="dropdown dropstart " style="float: right; align: middle">
+																		<a class="text-muted text-primary-hover" href="#"
+																			role="button" id="dropdownTeam${ comment.commentNo }"
+																			data-bs-toggle="dropdown" aria-haspopup="true"
+																			aria-expanded="false"> <i class="icon-xxs"
+																			data-feather="more-vertical"></i>
+																		</a>
+																	<%-- <div class="dropdown-menu"
+																			aria-labelledby="dropdownTeam${ comment.commentNo }">
+																			<div class="dropdown-item"
+																				style='display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'>
+																				<a class="edit-comment"
+																					data-comment-no="${ comment.commentNo }"
+																					href="javascript:" style="color: inherit;">수정</a>
+
+																			</div>
+																			<div class="dropdown-item"
+																				style='display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'>
+																				<a class="delete-comment"
+																					data-comment-no="${ comment.commentNo }"
+																					href="javascript:" style="color: inherit;">삭제</a>
+
+																			</div>
+																			<span style="clear: both"></span>
+																		</div>
+																	</div>
+																	<div
+																		style='float:right;aligh:middle; display:${ not empty loginuser ? "" : "none" }'>
+																		<a class="write-recomment"
+																			data-comment-no="${ comment.commentNo }"
+																			href="javascript:" style="color: inherit;">답글</a>
+																		&nbsp;
+																	</div> --%>
+																	<span style="clear: both"></span>
+
+																</c:otherwise>
+															</c:choose>
+														</div>
+
+														<div id="comment-edit-area-${ comment.commentNo }"
+															style="display: none">
+															${ comment.nickname } &nbsp;&nbsp; [
+															<fmt:formatDate value="${ comment.regDate }"
+																pattern="yyyy-MM-dd" />
+															] <br />
+															<br />
+															<form action="editComment" method="post">
+																<input type="hidden" name="commentNo"
+																	value="${ comment.commentNo }"> <input
+																	type="hidden" name="commonNo"
+																	value="${ reportBoard.commonNo }"> <input
+																	type="hidden" name="pageNo" value="${ pageNo }">
+																<div class="col-md-8 col-xxl-9  mt-0 mt-md-3"
+																	style="width: 99%; resize: none;" rows="3">
+																	<textarea class="form-control" aria-describedby="name"
+																		name="commentContent" style="resize: none;" rows="3">${ comment.commentContent }</textarea>
+																</div>
+															</form>
+															<br />
+															<div>
+																<a class="update-comment"
+																	data-comment-no="${ comment.commentNo }"
+																	href="javascript:">수정</a> &nbsp; <a
+																	class="cancel-edit-comment"
+																	data-comment-no="${ comment.commentNo }"
+																	href="javascript:">취소</a>
+															</div>
+														</div>
+
+													</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+
+									</table>
+								</div>
 							</div>
-						</div> 
-				
-					</td>
-				</tr>
-			</c:forEach>        	
-		</table>
-		<!-- end of comment list area -->
+							<!-- end of comment list area -->
+
+						</div>
+
+					</div>
+				</div>
 		 
 		</div>
 

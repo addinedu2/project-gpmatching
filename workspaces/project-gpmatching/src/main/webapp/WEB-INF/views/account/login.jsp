@@ -28,7 +28,7 @@
   <title>Sign In | 로그인 </title>
 </head>
 
-<body class="bg-light">
+<body class="bg-dark">
 	<div id="db-wrapper" class="toggled">
 		<!-- navbar vertical -->
 		<!-- Sidebar -->
@@ -50,7 +50,7 @@
           <div class="card-body p-6">
             <div class="mb-4">
               <a href="/project-gpmatching/home">
-              	<img src="/project-gpmatching/resources/assets/images/brand/logo/gps-sidebar.png" class="mb-2" alt="">
+              	<img src="/project-gpmatching/resources/assets/images/brand/logo/gps-sidebar3.png" style="height:40px" class="mb-2" alt="">
               </a>
               <p class="mb-6">ID와 비밀 번호를 입력해주세요</p>
               
