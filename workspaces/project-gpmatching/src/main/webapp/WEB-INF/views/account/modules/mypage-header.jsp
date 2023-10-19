@@ -12,7 +12,7 @@
            
               <div class="border-bottom pb-4 mb-4 ">
                
-                  <h3 class="mb-0 fw-bold">Overview</h3>
+                  <h3 class="mb-0 fw-bold">마이페이지</h3>
               
            
             </div>
@@ -43,7 +43,8 @@
 			                    </a>
 	                    	</c:when>
 	                    	<c:otherwise> 
-	                    		<img src="${pageContext.request.contextPath}/resources/upload/${loginuser.userImage}" class="avatar-xxl rounded-circle border border-4 border-white-color-40" alt="Image" height="30" width="30" >
+	                    		<img src="${pageContext.request.contextPath}/resources/upload/${loginuser.userImage}" 
+	                    			 class="avatar-xxl rounded-circle border border-4 border-white-color-40" alt="Image" height="30" width="30" >
 	                    	</c:otherwise>
                     </c:choose>
                   </div>
@@ -73,20 +74,6 @@
                 <li class="nav-item">
                   <a class="nav-link" href="/project-gpmatching/review/list">Review</a>
                 </li>
-
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Files</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Teams</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                      Followers
-                    </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Activity</a>
                 </li>
               </ul>
             </div>

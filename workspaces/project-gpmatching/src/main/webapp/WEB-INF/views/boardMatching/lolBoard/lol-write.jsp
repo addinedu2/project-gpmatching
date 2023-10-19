@@ -177,6 +177,9 @@
 				    <input type="range" class="form-range" min="0" max="24" step="0.5" id="customEndTimeRange" value="0" oninput="updateSelectedTime('end-time', this.value);">
 				    <input type="hidden" name="endTime" id="endTime">
 				</div>
+						
+				<br>
+				<div class="btn-center">
 					<!-- Primary Button -->
 					<button type="submit" class="btn btn-primary me-2 mb-2">등록</button>
 					<!-- Danger Button -->

@@ -26,18 +26,17 @@ public class OverwatchBoardServiceImpl implements OverwatchBoardService {
 	}
 	
 	@Override
+	public void edit(MatchingBoardDto matchingBoardDto) {
+		mapper.updateMatchingBoard(matchingBoardDto);
+		
+	}
+	
+	@Override
 	public int getLastMatchingItemBoardNo() {
 		int boardNo = mapper.selectMatchingItemBoardNo();
 		
 		return boardNo;
 	}
-	
-//	@Override
-//	public List<MatchingBoardDto> getMatchingBoardListByGameNo(int gameNo) {
-//		List<MatchingBoardDto> boardMachingList = mapper.selectMatchingBoardListByGameNo(gameNo);
-//		
-//		return boardMachingList;
-//	}
 	
 	@Override
 	public List<MatchingBoardDto> getMatchingBoardListByGameName(String gameName) {
@@ -54,6 +53,30 @@ public class OverwatchBoardServiceImpl implements OverwatchBoardService {
 		return overwatchBoardList;
 	}
 	
+
+	@Override
+	public MatchingBoardDto findOwBoardByBoardNo(int boardNo) {
+		MatchingBoardDto overwatchBoard = mapper.selectOwBoardByBoardNo(boardNo);
+		return overwatchBoard;
+	}
+	
+	@Override
+	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {
+		
+		MatchingBoardDto overwatchBoard = mapper.selectMatchingBoardByBoardNo(boardNo);
+		
+		
+		
+		return overwatchBoard;
+	}
+	
+	
+	public void setNowConfirmCount(int boardNo) {
+		int confirmCount = matchingCommentMapper.commentConfirmCountByMatchingBoardNo(boardNo);
+		mapper.updateConfirmCount(confirmCount, boardNo);
+	}
+
+	
 	@Override
 	public void delete(int boardNo) {
 		mapper.deleteOverwatchBoard(boardNo);
@@ -61,34 +84,42 @@ public class OverwatchBoardServiceImpl implements OverwatchBoardService {
 	}
 
 	@Override
-	public void edit(MatchingBoardDto matchingBoardDto) {
-		mapper.updateMatchingBoard(matchingBoardDto);
-		
+	public boolean getMatchingCloseByBoardNo(int boardNo) {
+		boolean matchingClose = mapper.selectMatchingCloseByBoardNo(boardNo);
+		return matchingClose;
+	}
+	
+
+	@Override
+	public List<MatchingBoardDto> searchMatchingBoardListByTitle(String gameName, String keyword) {
+
+		List<MatchingBoardDto> list = mapper.selectOwBoardListByTitle(gameName, keyword);
+				
+		return list;
 	}
 
 	@Override
-	public MatchingBoardDto getSelectOwBoardByBoardNo(int boardNo) {
+	public boolean isMatchingCloseCondition(int boardNo) {
 		MatchingBoardDto overwatchBoard = mapper.selectOwBoardByBoardNo(boardNo);
-		return overwatchBoard;
+		int headCount = overwatchBoard.getHeadCount();
+		int confirmCount = overwatchBoard.getConfirmCount();
+		if(headCount == confirmCount) {
+			return true;
+		} else {
+			System.out.println("headCount 와 confirmCount 가 같지 않습니다.");
+			return false;
+		}
+		
 	}
 	
-	
-//	public MatchingBoardDto findMatchingBoardByBoardNo(int boardNo) {
-//		
-//		MatchingBoardDto matchingBoard = mapper.selectMatchingBoardByBoardNo(boardNo);
-//		
-//		List<MatchingCommentDto> matchingCommentList = matchingCommentMapper.selectMatchingCommentByBoardNo(boardNo);
-//		matchingBoard.setMatchingCommentList(matchingCommentList);
-//		
-//		return matchingBoard;
-//		
-//	}
-	
-//	@Override
-//	public String getMatchingBoardNickname() {
-//		
-//		String nickname = mapper.selectMatchingBoardNickname();
-//		
-//		return nickname;
-//	}
+	@Override
+	public void setMatchingCloseTrue(int boardNo) {
+		if(isMatchingCloseCondition(boardNo)) {
+			mapper.updateMatchingCloseTrueByBoardNo(boardNo);
+		}else {
+			System.out.println("headCount 와 confirmCount 가 같지 않아 matchingClose 값을 변경할수 없습니다.");
+			
+		}
+		
+	}
 }

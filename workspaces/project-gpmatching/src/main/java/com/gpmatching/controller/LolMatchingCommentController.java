@@ -20,7 +20,7 @@ import lombok.Setter;
 
 @Controller
 @RequestMapping(path = { "/boardMatching/lolBoard" })
-public class MatchingCommentController {
+public class LolMatchingCommentController {
 
 	@Setter(onMethod_ = { @Autowired })
 	private MatchingCommentService matchingCommentService;

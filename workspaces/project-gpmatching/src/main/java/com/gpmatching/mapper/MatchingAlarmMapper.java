@@ -59,12 +59,29 @@ public interface MatchingAlarmMapper {
 			  + "                    order by result.regDate desc")
 	List<MatchingAlarmDto> selectAlarmListByUserNo(int userNo);
 
-	@Select("select count(ma.alarmNo) as mAlarmCount "
-			  + "from MatchingComment mc "
-			  + "inner join MatchingAlarm ma on ma.commentNo = mc.commentNo "
-			  + "inner join User u on u.userNo = mc.userNo "
-			  + "where mc.userNo != ${userNo}")
-	int countMatchingAlarmNo(int userNo);
+	@Select("SELECT (SELECT COUNT(alarmNo) "
+			  + "FROM MatchingAlarm "
+			  + "WHERE commentNo IN "
+			  + "    ( SELECT mc.commentNo "
+			  + "      FROM MatchingComment mc "
+			  + "      INNER JOIN User u ON u.userNo = mc.userNo "
+			  + "      WHERE mc.userNo != ${userNo}) ) "
+			  + "      + (SELECT COUNT(confirmNo) "
+			  + "         FROM ConfirmAlarm "
+			  + "         WHERE commentNo IN "
+			  + "              ( SELECT mc.commentNo "
+			  + "                FROM MatchingComment mc "
+			  + "                INNER JOIN User u ON u.userNo = mc.userNo "
+			  + "                WHERE mc.userNo = ${userNo}) ) "
+			  + "                + (SELECT COUNT(closeNo) "
+			  + "                   FROM CloseAlarm "
+			  + "                   WHERE boardNo IN "
+			  + "                  ( SELECT mb.boardNo "
+			  + "                    FROM MatchingBoard mb "
+			  + "                    INNER JOIN User u ON u.userNo = mb.userNo "
+			  + "                    INNER JOIN MatchingComment mc ON mc.boardNo = mb.boardNo "
+			  + "                    WHERE mc.userNo = ${userNo}) ) AS TotalCount;")
+		int countMatchingAlarmNo(int userNo);
 	
 	@Delete("delete "
 		  + "from MatchingAlarm "
