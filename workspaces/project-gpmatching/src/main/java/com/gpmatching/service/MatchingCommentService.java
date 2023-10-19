@@ -24,5 +24,4 @@ public interface MatchingCommentService {
 
 	List<MatchingCommentDto> getMatchingCommentForReview(int boardNo);
 	
-	//int showCommentConfirmCount(int boardNo);
 }

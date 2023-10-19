@@ -162,12 +162,3 @@
 
 
 <script src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
-
-<script>
-
-
-
-
-	
-</script>
-	

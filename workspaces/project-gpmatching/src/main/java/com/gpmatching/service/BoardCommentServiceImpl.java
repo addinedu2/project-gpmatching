@@ -67,12 +67,6 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		boardCommentMapper.insertRecomment(boardComment);
 		
 	}
-	
-//	@Override
-//	public List<AlarmDto> getAlamListByUserNo(int userNo) {
-//		List<AlarmDto> alarms = alarmMapper.selectAlamListByUserNo(userNo);
-//		
-//		return alarms;
-//	}
+
 
 }

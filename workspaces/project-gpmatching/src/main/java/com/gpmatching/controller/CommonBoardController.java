@@ -28,7 +28,7 @@ import com.gpmatching.view.DownloadView;
 @Controller
 @RequestMapping(path= {"/commonBoard"})
 public class CommonBoardController {
-	//todo 지금은 테스트를 위해 방치했지만 나중에 매퍼 건들여서 공통만 보이게 할껏. 예시: ReportBoardMapper.java
+
 	@Autowired
 	private CommonBoardService commonBoardService;
 	@Autowired
@@ -36,8 +36,6 @@ public class CommonBoardController {
 
 	@GetMapping(path= {"/commonList"}) //게시물 목록 및 댓글 포함
 	public String commonList(@RequestParam(defaultValue="1") int pageNo, @RequestParam(defaultValue = "common") String category, Model model) {
-//		전체게시물조회
-//		List<CommonBoardDto> commonBoardList = commonBoardService.listCommonBoard();
 		
 		//페이지별 게시물 조회
 		int pageSize = 10; //한 페이지 표시 개수
@@ -72,9 +70,6 @@ public class CommonBoardController {
 	@GetMapping(path = {"/commonWrite"})
 	public String showCommonWriteForm(Model model,  @RequestParam(defaultValue = "common") String category) {
 		model.addAttribute("category", category);
-//		if(session.getAttribute("loginuser") == null) {
-//			return "redirect:/account/login";
-//		}
 		
 		return "/commonBoard/commonWrite";
 	}
@@ -116,10 +111,7 @@ public class CommonBoardController {
 	@GetMapping(path= {"/commonDetail"})
 	public String commonDetail(@RequestParam(defaultValue="-1") int commonNo,
 							   @RequestParam(defaultValue="-1") int pageNo, Model model) {
-//		if(commonNo == -1 || pageNo == -1) {
-//			return "redirect:commonList";
-//		}
-		
+
 		CommonBoardDto commonBoard = commonBoardService.findCommonBoardByCommonNo(commonNo);
 		
 		if(commonBoard == null) {//조회 글 없는 경우
@@ -202,13 +194,4 @@ public class CommonBoardController {
 		return downloadView;
 	}
 	
-	
-	///////////////////////////////////
-	//ToDo
-//	@GetMapping(path= {"/tipsList"}) 
-//	public String tipsList() {
-//		
-//		return "/commonBoard/tipsList";
-//	}
-//	
 }

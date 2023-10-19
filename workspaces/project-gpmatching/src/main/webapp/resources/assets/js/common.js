@@ -15,7 +15,6 @@
 			   "type" : 'GET',
 			   "dataType" : 'json',
 			   "data" : {"userNo": userNo},
-			   //"cache": false, //캐싱 비활성화
 			   success: function(data){
 				   console.log(data); //여기 데이터 카운트 개수 넘어옴.
 				   
