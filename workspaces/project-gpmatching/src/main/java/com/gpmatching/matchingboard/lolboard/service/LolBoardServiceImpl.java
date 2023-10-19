@@ -112,5 +112,31 @@ public class LolBoardServiceImpl implements LolBoardService {
 		return list;
 	}
 
+	@Override
+	public boolean isMatchingCloseCondition(int boardNo) {
+		MatchingBoardDto lolBoard = mapper.selectLolBoardByBoardNo(boardNo);
+		int headCount = lolBoard.getHeadCount();
+		int confirmCount = lolBoard.getConfirmCount();
+		if(headCount == confirmCount) {
+			return true;
+		} else {
+			System.out.println("headCount 와 confirmCount 가 같지 않습니다.");
+			return false;
+		}
+		
+	}
+	
+	@Override
+	public void setMatchingCloseTrue(int boardNo) {
+		if(isMatchingCloseCondition(boardNo)) {
+			mapper.updateMatchingCloseTrueByBoardNo(boardNo);
+		}else {
+			System.out.println("headCount 와 confirmCount 가 같지 않아 matchingClose 값을 변경할수 없습니다.");
+			
+		}
+		
+	}
+
+
 
 }

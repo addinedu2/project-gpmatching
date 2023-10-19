@@ -52,7 +52,12 @@
              <br>
              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
              <a href="/project-gpmatching/commonBoard/commonWrite">
-				<button type="button" class="btn btn-secondary me-3">글쓰기</button></a>
+				<button type="button" class="btn btn-secondary me-2">글쓰기</button>
+			 </a>
+			<a href="/project-gpmatching/home">
+				<button type="button" class="btn btn-primary me-3">홈으로</button>
+			</a>	
+				
 			 </div>
 			 <br>
              <!-- basic table -->

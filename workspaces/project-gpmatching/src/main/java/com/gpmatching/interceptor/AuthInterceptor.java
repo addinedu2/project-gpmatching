@@ -11,6 +11,8 @@
 
 package com.gpmatching.interceptor;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -34,12 +36,19 @@ public class AuthInterceptor implements HandlerInterceptor{
 		UserDto user = (UserDto) session.getAttribute("loginuser");
 		// 컨트롤러 호출 여부 결정 가능 (반환 값이 true : 호출, 반환 값이 false이면 호출 생략)
 		if (user == null) { // 로그인 하지 않은 경우
-			response.sendRedirect("/project-gpmatching/account/login");
+			String currentUrl = request.getRequestURI();
+			if(currentUrl.contains("ajax-writeComment")) {
+				response.setContentType("text/plain;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.print("unauthorized");
+			}else {
+				currentUrl = currentUrl.replace("/project-gpmatching", "");
+				response.sendRedirect("/project-gpmatching/account/login?returnUrl=" + currentUrl);
+			}
 			return false;
 		} else {
 			return true;
 		}
-		
 	}
 	
 	@Override

@@ -188,4 +188,17 @@ public class LolBoardController {
 		return "/boardMatching/lolBoard/lol-list";
 	}
 	
+	
+	@GetMapping(path = { "/matchingCloseTrue"})
+	public String MatchingClose(int boardNo) {
+		if(lolBoardService.isMatchingCloseCondition(boardNo)) {
+			lolBoardService.setMatchingCloseTrue(boardNo);
+			return "redirect:lol-list";
+		}else {
+			return "redirect:lol-list";
+		}
+		
+	}
+	
+	
 }

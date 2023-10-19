@@ -33,7 +33,7 @@
 
 <!-- Theme CSS -->
 <link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
-  <title>Profile Overview | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
+  <title>마이페이지</title>
 </head>
 
 <body class="bg-light"> 

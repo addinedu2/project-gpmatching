@@ -33,7 +33,7 @@
 
 <!-- Theme CSS -->
 <link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
-  <title>Profile Overview | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
+  <title>마이페이지</title>
 </head>
 
 <body class="bg-light"> 
@@ -239,7 +239,7 @@ $(function(event) {
                         });
                         $row.append($titleColumn);
                         
-                        var $titleLink = $("<a>").attr("href", "#").addClass("text-inherit").text(result[i].boardTitle);
+                        var $titleLink = $("<a>").attr("href", result[i].boardURL).addClass("text-inherit").text(result[i].boardTitle);
                         $titleColumn.append($titleLink);
                         
                         var $dateCell = $("<td>").text(result[i].regDate).css("text-align", "right");

@@ -392,7 +392,14 @@
 				"method" : "post",
 				"data" : formData,
 				"success": function(data, status, xhr){
-
+					if (data =='unauthorized'){
+						const yn = confirm('로그인한 사용자만 댓글을 작성할 수 있습니다.');
+						if (yn){
+							returnUrl = '/commonBoard/commonDetail?commonNo=${ commonBoard.commonNo }!pageNo=${ pageNo }';
+							location.href = '/project-gpmatching/account/login?returnUrl=' + returnUrl;
+						}
+					}
+					
 					$('#comment-list').load('commentList?commonNo=${commonBoard.commonNo}');
 					$('#commentContent').val("");
 				},

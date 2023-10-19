@@ -300,9 +300,8 @@
 			            <div id="comment-list" class="modal-body" >
 							
 			            </div>
-			            <div class="modal-footer">
-			                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-			                <button type="button" class="btn btn-primary">Save changes</button>
+			            <div id="dynamic-button-area" class="modal-body" >
+			            
 			            </div>
 			            <!-- card : 댓글 ui는 나중에 이런 형식으로 구현할 예정입니다 -->
 			              <div class="card mb-4">
@@ -327,9 +326,9 @@
 			                      </div>
 			                    </div>
 			                    <div>
-			                      <a href="/누르면매칭수락" class="text-muted text-primary-hover"><i
+			                      <a href="#" class="text-muted text-primary-hover"><i
 			                            class="me-4 icon-xs" data-feather="phone-call"></i></a>
-			                      <a href="/누르면매칭거절" class="text-muted text-primary-hover"><i
+			                      <a href="#" class="text-muted text-primary-hover"><i
 			                            class="icon-xs" data-feather="video"></i></a>
 			                    </div>
 			                  </div>
@@ -422,6 +421,38 @@
 	});
 	
 	
+	// 닫기 버튼 - 잘 동작함
+	$(function() {
+		$('#dynamic-button-area').on("click", '.btn-matching-modal-close', function(event) {
+			location.href = "lol-list";
+
+		});
+	});
+	
+	
+	
+	// 매칭 마감 버튼 
+	$(function() {
+		$('#dynamic-button-area').on("click", '.btn-matching-close', function(event) {
+			const boardNo = $(this).data('boardno');
+			const matchingClose = $(this).data('matchingclose');
+			if(matchingClose){
+				alert("매칭을 마감할 수 없습니다.")
+			}else {
+				var confirmflag = confirm("매칭을 마감하시겠습니까?");
+				
+				if(confirmflag){
+					location.href = "matchingCloseTrue?boardNo=" + boardNo;
+				}
+				
+			}
+			
+
+		});
+	});
+	
+
+
 	// 버튼을 누르면 해당 글의 댓글 보기 (-허지웅)
 	$(function() {
 		$('#lol-list').on("click", '.btn-show-commentList-modal', function(event) {
@@ -432,11 +463,18 @@
 			
 			$.ajax({
 				
-				"url": "ajax-show-comment",
+				"url": "ajax-show-comment-and-btn-matching",
 				"method": "get",
 				"data": { "boardNo" : boardNo },
 				
 				"success": function(result){
+					
+					var sHeadCount = 0;
+  					var sConfirmCount = 0;
+  					var headCount = 0;
+  					var confirmCount = 0;
+  					var matchingClose = 0;
+	                
 					
 					var commentList = $('#comment-list');
 					commentList.empty();
@@ -487,12 +525,33 @@
 
 							var $buttonColumn = $("<td>").append($acceptButton, $rejectButton);
 	                        $row.append($buttonColumn);
-		                    
+	                        
+	                        sHeadCount = result[i].headCount;
+	      					sConfirmCount = result[i].confirmCount;
+	      					headCount = parseInt(sHeadCount);
+	      					confirmCount = parseInt(sConfirmCount);
+	      					matchingClose = result[i].matchingClose;
+	    	                
+	                      
 						}
 					}
 					
 					console.log(commentList);
 					$('#commentList-modal').modal('show');
+					
+					
+					if( (commentList != null ) && (matchingClose == false) && (headCount == confirmCount ) ){
+						
+						
+						var matchingCloseBtn = '<input type="button" class="btn-matching-close" background-color="#AE302E" data-boardno=' + boardNo + ' data-matchingclose=' + matchingClose + ' value="매칭 마감"/><input type="button" class="btn-matching-modal-close" value="닫기"/>';
+							$("#dynamic-button-area").html(matchingCloseBtn)
+					} else {
+						var closeBtn = '<input type="button" class="btn-matching-modal-close" background-color="#AE302E" value="닫기"/>';
+							$("#dynamic-button-area").html(closeBtn).data('boardno', boardNo)
+					}
+					
+					
+					
 				},
 				"error": function(xhr, status, err){
 					alert("실패");
@@ -504,13 +563,13 @@
 	});
 	
 	
+	
 	// 수락 버튼을 누르면 화면이 변하지 않고 글의 댓글 목록 보기 유지 (-이현일)
 	$(function() {
 		$('#comment-list').on("click", '.btn-accept-comment', function(event) {
 			
 			const commentNo = $(this).data('commentno');
 			const boardNo = $(this).data('boardno');
-			const MatchingCloseButton = $(this).data('matchingclosebutton');
 			const currentTr = $('#tr-' + boardNo);
 			$('#title2-in-modal').text("(" + boardNo + ") " + currentTr.data('title'));
 			
@@ -521,6 +580,12 @@
 				"data": { "commentNo" : commentNo },
 				
 				"success": function showcommentlist(result){
+					
+					var sHeadCount = 0;
+  					var sConfirmCount = 0;
+  					var headCount = 0;
+  					var confirmCount = 0;
+  					var matchingClose = 0;
 					
 					var commentList = $('#comment-list');
 					commentList.empty();
@@ -572,12 +637,34 @@
 
 	                     	var $buttonColumn = $("<td>").append($acceptButton, $rejectButton);
 	                        $row.append($buttonColumn);
+	                        
+	                       
+	                        sHeadCount = result[i].headCount;
+	      					sConfirmCount = result[i].confirmCount;
+	      					headCount = parseInt(sHeadCount);
+	      					confirmCount = parseInt(sConfirmCount);
+	      					matchingClose = result[i].matchingClose;
+	                    
 		                    
 						}
+						
+    					
 					}
 					
 					console.log(commentList);
 					$('#commentList-modal').modal('show');
+					
+					
+					if( (commentList != null ) && (matchingClose == false) && (headCount == confirmCount ) ){
+						
+						
+						var matchingCloseBtn = '<input type="button" class="btn-matching-close" data-boardno=' + boardNo + ' data-matchingclose=' + matchingClose + ' value="매칭 마감"/><input type="button" class="btn-matching-modal-close" value="닫기"/>';
+							$("#dynamic-button-area").html(matchingCloseBtn)
+					} else {
+						var closeBtn = '<input type="button" class="btn-matching-modal-close" value="닫기"/>';
+							$("#dynamic-button-area").html(closeBtn)
+					}
+
 				},
 				"error": function(xhr, status, err){
 					alert("실패");
@@ -657,12 +744,33 @@
 	
 	                     	var $buttonColumn = $("<td>").append($acceptButton, $rejectButton);
 	                        $row.append($buttonColumn);
-		                    
+		                 
+	                        
+	                        sHeadCount = result[i].headCount;
+	      					sConfirmCount = result[i].confirmCount;
+	      					headCount = parseInt(sHeadCount);
+	      					confirmCount = parseInt(sConfirmCount);
+	      					matchingClose = result[i].matchingClose;
+	    	                
+	                      
 						}
 					}
 					
 					console.log(commentList);
 					$('#commentList-modal').modal('show');
+					
+					
+					if( (commentList != null ) && (matchingClose == false) && (headCount == confirmCount ) ){
+						
+						
+						var matchingCloseBtn = '<input type="button" class="btn-matching-close" data-boardno=' + boardNo + ' data-matchingclose=' + matchingClose + ' value="매칭 마감"/><input type="button" class="btn-matching-modal-close" value="닫기"/>';
+							$("#dynamic-button-area").html(matchingCloseBtn)
+					} else {
+						var closeBtn = '<input type="button" class="btn-matching-modal-close" value="닫기"/>';
+							$("#dynamic-button-area").html(closeBtn).data('boardno', boardNo)
+					}
+					
+					
 				},
 				"error": function(xhr, status, err){
 					alert("실패");
@@ -672,6 +780,9 @@
 			}); 
 		});
 	});
+
+
+
 	
  	function toggleSwitch() {
         // 스위치 상태를 변경하지 않고 기존 상태를 유지

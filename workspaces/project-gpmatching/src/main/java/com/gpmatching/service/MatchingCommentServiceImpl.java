@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gpmatching.dto.ConfirmAlarmDto;
 import com.gpmatching.dto.MatchingAlarmDto;
 import com.gpmatching.dto.MatchingCommentDto;
 import com.gpmatching.mapper.MatchingAlarmMapper;
@@ -72,13 +73,15 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 	 */
 	
 	@Override
-	public void setCommentStatusConfirm(int commentNo) {
+	public void setCommentStatusConfirm(int commentNo, ConfirmAlarmDto confirmAlarm) {
 		//System.out.println(commentNo);
 		int boardNo = matchingCommentMapper.selectBoardNoByCommentNo(commentNo);
 		int confirmCount = matchingCommentMapper.commentConfirmCountByMatchingBoardNo(boardNo);
 		int headCount = lolBoardMapper.matchingBoardheadCountByBoardNo(boardNo);
 		String status = matchingCommentMapper.selectStatusByCommentNo(commentNo);
 		
+		//승인 알림용
+		matchingAlarmMapper.insertConfirmAlarm(confirmAlarm);
 		
 		if(status.equals("1")) { // 신청승인된 글
 			System.out.println("신청승인된 글입니다.");
@@ -93,15 +96,15 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 		} else if( confirmCount + 1 == headCount ) {
 			matchingCommentMapper.updateMatchingCommentStatus( commentNo , "1" );
 			lolBoardMapper.updateConfirmCount(confirmCount+1, boardNo);
-			lolBoardMapper.updateMatchingCloseTrueByBoardNo(boardNo);
+			//lolBoardMapper.updateMatchingCloseTrueByBoardNo(boardNo);
 			System.out.println("신청승인합니다.");
-			System.out.println("마감합니다.");
+			//System.out.println("마감합니다.");
 			return;
 		
 		//confirmCount 가 모집인원보다 같거나 클때
 		} else if (headCount == confirmCount || headCount < confirmCount ) {
-			lolBoardMapper.updateMatchingCloseTrueByBoardNo(boardNo);
-			System.out.println("마감된 글입니다.");
+			//lolBoardMapper.updateMatchingCloseTrueByBoardNo(boardNo);
+			//System.out.println("마감된 글입니다.");
 			return;
 			
 		} 
@@ -156,15 +159,25 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 		
 		return matchingAlarms;
 	}
-	
+
+
 	@Override
 	public List<MatchingCommentDto> getMatchingCommentForReview(int boardNo) {
 
-		List<MatchingCommentDto> comments = matchingCommentMapper.selectMatchingCommentListForReview(boardNo);
-		
-		return comments;
+		List<MatchingCommentDto> review = matchingCommentMapper.selectMatchingCommentListForReview(boardNo);
+		return review;
 	}
 
+
+	
+
+
+	
+
+
+	
+	
+	
 //	@Override
 //	public int showCommentConfirmCount(int boardNo) {
 //		
