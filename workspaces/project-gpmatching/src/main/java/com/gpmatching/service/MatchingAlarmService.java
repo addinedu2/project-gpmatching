@@ -2,7 +2,6 @@ package com.gpmatching.service;
 
 import java.util.List;
 
-import com.gpmatching.dto.AlarmDto;
 import com.gpmatching.dto.MatchingAlarmDto;
 
 public interface MatchingAlarmService {

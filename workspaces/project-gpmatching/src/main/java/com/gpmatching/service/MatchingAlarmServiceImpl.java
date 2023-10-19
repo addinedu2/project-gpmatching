@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gpmatching.dto.AlarmDto;
 import com.gpmatching.dto.MatchingAlarmDto;
 import com.gpmatching.mapper.MatchingAlarmMapper;
 
