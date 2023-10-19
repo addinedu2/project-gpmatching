@@ -12,6 +12,7 @@ public interface AccountService {
 	
 	boolean isUserIdValid(String userId);  //로그인 중복검사
 	UserDto findUserByPhoneAndEmail(String userPhone, String userEmail);
+	boolean isNickNameValid(String nickname);
 
 	
 

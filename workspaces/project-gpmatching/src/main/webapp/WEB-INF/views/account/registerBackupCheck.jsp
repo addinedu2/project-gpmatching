@@ -109,7 +109,6 @@
                 <label for="nickname" class="form-label">닉네임</label>
                 <input type="text" id="nickname" class="form-control" name="nickname" placeholder="닉네임을넣어주세요" required>
               </div>
-              <p id="nicknameCheck"></p>
               
               <!-- userPhone -->
               <div class="mb-3">
@@ -196,28 +195,21 @@
 	  }
   </script>
   
- <script>
+  <script>
 	
 	$(function () {
 		
-		let idDupChecked = false;   // 중복검사 실행여부를 저장하는 변수
-		let nicknameDupChecked = false;
-		  
+		let dupChecked = false;		// 중복검사 실행여부를 저장하는 변수
+		
 		$("#checkDup").on("click", function(event) {
 			event.preventDefault(); // 이벤트 발생 객체의 원래 동작 실행 막기. 그냥 넣어주면됨
 			
-			const getIdCheck = RegExp(/^[a-zA-Z0-9]{6,12}$/);
 			const userId = $("#userId").val();
-			
 			if (!userId){ // !userId : null or "" 인 경우 true -> 사용자가 입력하지 않은경우
 				alert('아이디를 입력하세요');
 				$('#userId').focus();
 				return;
-			}else if (!getIdCheck.test(userId)) {
-				alert('아이디는 영문과 숫자를 포함해 6~12자입니다');
-				$('#userId').focus();
-				return;
-		    }
+			}
 			
 			$.ajax({
 				"url": "check-id-dup",
@@ -226,10 +218,10 @@
 				"async" : true,
 				"success": function(data, status, xhr) {   //"success" 정상적으로 처리됐을때 호출
 					if(data == "true"){
-						idDupChecked = true;  //중복체크
+						dupChecked = true;  //중복체크
 						alert("사용 가능한 아이디 입니다");
 					}else{
-						idDupChecked = false;
+						dupChecked = false;
 						alert("이미 사용중");
 					}
 				},
@@ -239,87 +231,36 @@
 			});
 		});
 		
-		
-		const nicknameField = $('#nickname');
-		const nicknameCheck = $('#nicknameCheck');
-		
-		nicknameField.on('input', function(){
-		nicknameDupChecked = false;
-		});
-		
-		nicknameField.on('blur', function(){
-			const nickname = nicknameField.val();
-			
-			$.ajax({
-				url: "check-nickname-dup",
-				method: "get",
-				data: {"nickname": nickname },
-				async: true,
-				success: function(data, status, xhr){
-					if(data == "true"){
-						idDupChecked = true;
-						nicknameCheck.html('사용 가능한 닉네임 입니다.').css('color', 'green');
-					}else {
-				          idDupChecked = false;
-				          nicknameCheck.html('중복된 닉네임입니다').css('color', 'red');
-			        }
-				},
-				error: function(xhr, status, err){
-					alert("오류발생");
-				}
-			});
-		});
-		
-		
 		$('#registerComplete').on('click', function(event){
 			event.preventDefault(); //이벤트 발생 객체의 원래 동작 실행 막기 
 			
-			if(!idDupChecked){
-				alert("아이디 중복검사를 해주세요");
+			if(!dupChecked){
+				const userId = $("#userId").val();
+				alert("아이디를 입력하세요");
 				$('#userId').focus();
 				return;
 			}
 			
-			const userPwd = document.getElementById('userPwd').value;
-		    const passwordConfirmField = document.getElementById('confirmPassword').value;
-		    const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$!%])[A-Za-z\d@#$!%]{8,16}$/;
-			
-			if(userPwd === ''){
+			const userPwd = $("#userPwd").val();
+			if(!userPwd){
 				alert('비밀번호를 입력하세요');
 				$('#userPwd').focus();
 				return;
 			}
 			
-			if(confirmPassword === ''){
+			const confirmPassword = $("#confirmPassword").val();
+			if(!confirmPassword){
 				alert('비밀번호를 확인하세요');
 				$('#confirmPassword').focus();
 				return;
 			}
 			
-			if (userPwd !== passwordConfirmField) {
-				alert('비밀번호가 일치하지 않습니다. 다시 확인해 주세요');
+			const userEmail = $("#userEmail").val();
+			if(!userEmail){
+				alert('이메일을 입력하세요');
+				$('#userEmail').focus();
 				return;
-		    }
-			
-		    if (!userPwd.match(regex)) {
-		        alert('비밀번호 형식이 잘못되었습니다. 다시 확인해 주세요');
-		        $('#userPwd').focus();
-		        return;
-		      }
-			
-		    var emailField = document.getElementById('userEmail');
-
-		    if (!emailRegex.test(emailField.value)) {
-		      alert('올바른 이메일 형식이 아닙니다. 다시 확인해 주세요');
-		      $('#userEmail').focus();
-		      return;
-		    }
-
-		    if (emailField.value === "") {
-		      alert('이메일을 입력해주세요');
-		      $('#userEmail').focus();
-		      return;
-		    }
+			}
 			
 			const nickname = $("#nickname").val();
 			if(!nickname){
@@ -327,74 +268,83 @@
 				$('#nickname').focus();
 				return;
 			}
-
+			
+			if (userPwd != confirmPassword) {
+		        alert('비밀번호와 비밀번호 확인이 일치하지 않습니다');
+		        $('#confirmPassword').focus();
+		        return;
+			}
+			
 			$("#registerform").submit(); //중복검사 됐을때만 submit
 			
 		});
 		
 		$('#userId').on('keyup', function(){  //키보드를 손대면 다시 중복검사 ,( keyup, keydown )
-			idDupChecked = false;
+			dupChecked = false;
 		});
 		
-		var emailField = document.getElementById('userEmail');
-		var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
-		
-		  function checkEmail() {
-		    var userEmail = emailField.value;
-		    var emailCheck = document.getElementById('emailCheck');
-		    
-
-		    if (userEmail !== '') {
-		      if (!userNameRegex.test(userEmail)) {
-		        emailCheck.innerHTML = '올바른 이메일을 입력해주세요.';
-		        emailCheck.style.color = 'red';
-		      }
-		    } else {
-		      emailCheck.innerHTML = '이메일을 입력해주세요';
-		      emailCheck.style.color = 'red';
-		    }
-		  }
-		  
-			var passwordField = document.getElementById('userPwd');
-			var passwordConfirmField = document.getElementById('confirmPassword');
-			
-			function checkPassword(){
-				var userPwd = passwordField.value;
-				var confirmPassword = passwordConfirmField.value;
-				var passwordCheck = document.getElementById('passwordCheck')
-				var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$!%])[A-Za-z\d@#$!%]{8,16}$/;
-		
-				if (userPwd !== '') {
-				    if (userPwd.match(regex)) {
-				      passwordCheck.innerHTML = '비밀번호가 유효합니다.';
-				      passwordCheck.style.color = 'green';
-				    } else {
-				      passwordCheck.innerHTML = '영문, 숫자, 특수 문자(@, #, $, !, %)를 포함해 8~16자';
-				      passwordCheck.style.color = 'red';
-				    }
-				  } else {
-				    passwordCheck.innerHTML = '비밀번호를 입력해주세요';
-				    passwordCheck.style.color = 'red';
-				  }
-				
-				if (userPwd !== '' && confirmPassword !== '') {
-			      if (userPwd === confirmPassword) {
-			        passwordCheck.innerHTML = '비밀번호가 일치합니다.';
-			        passwordCheck.style.color = 'green';
-			        if (!userPwd.match(regex)) {
-			          passwordCheck.innerHTML = '일치하나 형식이 잘못되었습니다.';
-			          passwordCheck.style.color = 'red';
-			        }
-			      } else {
-			        passwordCheck.innerHTML = '비밀번호가 일치하지 않습니다.';
-			        passwordCheck.style.color = 'red';
-			      }
-			    }
-			}
-			passwordField.addEventListener("input", checkPassword);
-			passwordConfirmField.addEventListener("input", checkPassword);
 	});
 	
+</script>
+	
+<script>
+		//비밀번호, 비밀번호 확인 일치
+		var passwordField = document.getElementById('userPwd');
+		var passwordConfirmField = document.getElementById('confirmPassword');
+		var registerButton = document.getElementById('registerComplete');
+		
+		function checkPassword(){
+		   var userPwd = passwordField.value;
+		   var confirmPassword = passwordConfirmField.value;
+		   var passwordCheck = document.getElementById('passwordCheck')
+		   
+		   
+		   
+/* 		   var pwdOption = document.getElementById('pwdOption')
+		   var SpecialChar = ["!","@","#","$","%"];
+		   var checkSpecialChar = 0;
+		   
+		   if(userPwd.length < 6 || userPwd.length>16) {
+			   pwdOption.innerHTML = '비밀번호는 6글자 이상, 16글자 이하만 이용 가능합니다.';
+			   pwdOption.style.color = 'red';          
+		   }
+		   
+		   for(var i=0; i<SpecialChar.length; i++){
+		      if(userPwd.indexOf(SpecialChar[i]) != -1){
+		         checkSpecialChar = 1;            
+		      }          
+		   }
+		   if(checkSpecialChar == 0){
+			   pwdOption.innerHTML = '!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.'  
+		   }  
+		 
+		    $('#register').on('click', function(event){
+		    event.preventDefault();
+		   
+		    if (userPwd != confirmPassword){
+		       alert("비밀번호가 일치하지 않습니다");
+		       $('#userPwd').focus();
+		       return
+		    }
+		   });  */
+		   
+		   
+		   
+		   
+		   if(userPwd !== '' && confirmPassword !== ''){
+		      if(userPwd === confirmPassword){
+		    	 passwordCheck.innerHTML = '비밀번호가 일치합니다.'
+		    	 passwordCheck.style.color = 'green';
+		         //return true;
+		         registerButton.disabled = false;
+		      } else {
+		    	 passwordCheck.innerHTML = '비밀번호가 일치하지 않습니다.';
+		    	 passwordCheck.style.color = 'red';
+		         //return false;
+		         registerButton.disabled = false;
+		        }
+		   }
+		}
 </script>
 
 </body>

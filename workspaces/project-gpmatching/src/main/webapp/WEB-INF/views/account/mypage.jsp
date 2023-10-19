@@ -192,8 +192,10 @@
 <!-- 테스트코드(공통게시판) -->
 <script>
 $(function(event) {
+	//btnradio2 자유게시판, btnradio 매칭게시판
     $("#btnradio2, #btnradio1").on('click', function(event) {
         let loginUser = "${loginUser.userNo}";
+        console.log(event.target.id)
         
         //<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" data-board="common"> 여기에서 data-board="common" 이부분임
         const board = $(this).data("board"); // data-board속성의 값 읽기
@@ -239,7 +241,20 @@ $(function(event) {
                         });
                         $row.append($titleColumn);
                         
-                        var $titleLink = $("<a>").attr("href", result[i].boardURL).addClass("text-inherit").text(result[i].boardTitle);
+                        //1. radio1 or radio2 중 어느것이 클릭 되었는지 출력해보기
+                        console.log(event.target.id === 'btnradio1');
+                        console.log(event.target.id === 'btnradio2');
+                        
+                        
+                        
+                        //project-gpmatching/commonBoard/commonDetail
+                        var $titleLink = ""
+                        if(event.target.id === 'btnradio1') {//매칭게시판
+                        	$titleLink = $("<a>").attr("href", '/project-gpmatching/boardMatching/lolBoard/lol-list#tr-' + result[i].boardNo).addClass("text-inherit").text(result[i].boardTitle);
+                        	
+                        } else{//자유게시판
+                        	$titleLink = $("<a>").attr("href", "/project-gpmatching/commonBoard/commonDetail?commonNo=" + result[i].boardNo + "&pageNo=1").addClass("text-inherit").text(result[i].boardTitle);
+                        }
                         $titleColumn.append($titleLink);
                         
                         var $dateCell = $("<td>").text(result[i].regDate).css("text-align", "right");
@@ -254,6 +269,9 @@ $(function(event) {
         });
     });
     
+	
+	
+	
 //     //마이페이지 내 nav바 활성화 (-허지웅)()
 //     $('.nav-link').click(function(event) {
 // 	    // 모든 nav-link에서 'active' 클래스 제거
