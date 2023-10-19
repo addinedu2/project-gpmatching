@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gpmatching.dto.ConfirmAlarmDto;
 import com.gpmatching.dto.MatchingAlarmDto;
 import com.gpmatching.dto.MatchingCommentDto;
 import com.gpmatching.service.MatchingAlarmService;
@@ -73,9 +74,9 @@ public class OwMatchingCommentController {
 	
 	@GetMapping(path = { "/commentConfirm" }, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public List<MatchingCommentDto> commentConfirm(@RequestParam int commentNo) {
+	public List<MatchingCommentDto> commentConfirm(@RequestParam int commentNo, ConfirmAlarmDto confirmAlarmDto) {
 		System.out.println("수락버튼클릭");
-		matchingCommentService.setCommentStatusConfirm( commentNo);
+		matchingCommentService.setCommentStatusConfirm( commentNo , confirmAlarmDto);
 
 		int boardNo = matchingCommentService.getBoardNoByCommentNo(commentNo);
 
