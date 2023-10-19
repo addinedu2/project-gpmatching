@@ -131,6 +131,28 @@
 		});
 	});
 	
+	//마감 확인하면 알림 삭제
+	$(function (event){
+		$('#checkClose').on("click",function(event){
+			event.preventDefault();
+			const userNo = $(this).data("userno");
+			
+			$.ajax({
+				"url": '/project-gpmatching/modules/header/checkClose',
+				"type": 'GET',
+				"data" : {"userNo":userNo},
+				"success": function(data, status, xhr){
+					if(data){	
+						$("#dropdownNotification").removeClass('avatar-online');
+				   }
+				},
+				"error": function(xhr, status, err){
+					console.log("요청 실패");
+				}
+			});
+		});
+	});
+	
 	//// code from header.jsp
 	
 	$(function() {

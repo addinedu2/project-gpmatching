@@ -64,6 +64,7 @@
             </div>
             <div class="border-top px-3 py-2 text-center">
               
+              <span id="checkClose" class="badge bg-primary" data-userno="${loginuser.userNo}">마감 확인</span>
               <span id="checkConfirm" class="badge bg-success" data-userno="${loginuser.userNo}">승인 확인</span>
               <span id="checkAlarm" class="badge bg-dark" data-userno="${loginuser.userNo}">댓글 확인</span>
               	
