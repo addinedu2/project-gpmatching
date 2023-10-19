@@ -115,9 +115,10 @@ public class AdminController {
 	public String viewUserPosts(@PathVariable int userNo, @RequestParam(defaultValue="1") int pageNo, Model model) {
 
 		// 페이지별 게시물 조회
-		int pageSize = 10; // 한 페이지 표시 개수
+		int pageSize = 5; // 한 페이지 표시 개수
 		int pagerSize = 5;// 표시 페이지 개수
-		String linkUrl = "/project-gpmatching/admin/adminUserWriteBoardList";
+		//String linkUrl = "/project-gpmatching/admin/adminUserWriteBoardList";
+		String linkUrl = "/project-gpmatching/admin/userWrite/{userNo}";
 	
 		int from = (pageNo - 1) * pageSize;// 첫번째 페이지 게시물 순서
 		List<AdminDto> listuser = adminService.listUserListByPage(from, pageSize);
@@ -154,9 +155,11 @@ public class AdminController {
 	    model.addAttribute("pageNo",pageNo);
 	    model.addAttribute("gameMap", gameMap);
 	    
-	    
+	     
 	    return "admin/adminUserWriteBoardList";
 	}
+	
+
 	
 }
 	

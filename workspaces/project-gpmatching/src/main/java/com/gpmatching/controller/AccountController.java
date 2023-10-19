@@ -106,18 +106,37 @@ public class AccountController {
 
 	// 로그인 버튼
 	@GetMapping(path = { "/login" })
-	public String loginForm(HttpSession session, Model model) {
-		// 이미 로그인된 사용자가 있을 경우 마이 페이지로 리디렉션
-		if (session.getAttribute("loginuser") != null) {
-			return "account/mypage";
-		} else {
-			return "account/login";
-		}
+	public String loginForm(@RequestParam(defaultValue = "/home") String returnUrl, Model model) {
+		
+		model.addAttribute("returnUrl", returnUrl.replace("!", "&"));
+		return "account/login";
+		
 	}
 
-	// 로그인 성공/실패
+//	// 로그인 성공/실패(수정전)
+//	@PostMapping(path = { "/login" })
+//	public String login(UserDto user, HttpSession session, Model model) {
+//		
+//		UserDto loginUser = accountService.findLoginUser(user);
+//		
+//		if (loginUser != null) { // loginUser가 비지 않았다=데이터베이스에 id와 pw가 일치한다=로그인 하기
+//			session.setAttribute("loginuser", loginUser); // loginUser 정보를 "loginuser"에 넣기
+//			
+//			//작성이 필요한 리뷰 개수 헤더에 출력
+//			int matchingCloseCount = matchingReviewService.getMatchingCloseByLoginUser(loginUser.getUserNo()); 
+//			session.setAttribute("matchingCloseCount", matchingCloseCount);
+//			
+//			return "redirect:/home";
+//		} else {
+//			model.addAttribute("loginfail", true); // 로그인 실패를 했으니 "loginfail"에 참 넣기
+//			model.addAttribute("userId", user.getUserId());
+//			return "account/login";
+//		}
+//	}
+	
+	// 로그인 성공/실패(수정후) - 리다이렉트
 	@PostMapping(path = { "/login" })
-	public String login(UserDto user, HttpSession session, Model model) {
+	public String login(UserDto user, String returnUrl, HttpSession session, Model model) {
 		
 		UserDto loginUser = accountService.findLoginUser(user);
 		
@@ -128,10 +147,11 @@ public class AccountController {
 			int matchingCloseCount = matchingReviewService.getMatchingCloseByLoginUser(loginUser.getUserNo()); 
 			session.setAttribute("matchingCloseCount", matchingCloseCount);
 			
-			return "redirect:/home";
+			return "redirect:" + returnUrl; 
 		} else {
 			model.addAttribute("loginfail", true); // 로그인 실패를 했으니 "loginfail"에 참 넣기
 			model.addAttribute("userId", user.getUserId());
+			model.addAttribute("returnUrl", returnUrl);
 			return "account/login";
 		}
 	}
@@ -192,7 +212,17 @@ public class AccountController {
 		boolean valid = accountService.isUserIdValid(userId);
 		
 		return String.valueOf(valid); 
+	}
+	
+	
+	//회원가입 닉네임 중복검사
+	@GetMapping(path = {"/check-nickname-dup"}) 
+	@ResponseBody 
+	public String checkMemberNickNameDuplication(String nickname) {
 		
+		boolean valid = accountService.isNickNameValid(nickname);
+		
+		return String.valueOf(valid); 
 	}
 
 }

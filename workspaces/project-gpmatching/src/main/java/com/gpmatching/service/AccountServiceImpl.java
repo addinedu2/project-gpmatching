@@ -54,7 +54,13 @@ public class AccountServiceImpl implements AccountService {
 		int count = userMapper.selectUserCountMyUserId(userId);
 		return count == 0;
 	}
-	
+	//로그인 닉네임 중복검사
+	@Override
+	public boolean isNickNameValid(String nickname) {
+		
+		int count = userMapper.selsectUserCountMyNickName(nickname);
+		return count == 0;
+	}
 	
 	@Override
 	public UserDto	findUserByPhoneAndEmail(String userPhone, String userEmail) {

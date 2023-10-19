@@ -23,34 +23,29 @@
 
 																<c:otherwise>
 																	<div style="float: left">
-																		${ comment.nickname } &nbsp;&nbsp; [
-																		<fmt:formatDate value="${ comment.regDate }"
-																			pattern="yyyy-MM-dd" />
-																		] <br />
-																		<br /> <span>${ fn:replace(comment.commentContent, enter, "<br>") }</span>
+																		${ comment.nickname }
+																		&nbsp;&nbsp;
+																		[<fmt:formatDate value="${ comment.regDate }" pattern="yyyy-MM-dd" />]
+																		<br /> <br />
+																		<span>${ fn:replace(comment.commentContent, enter, "<br>") }</span>
 																	</div>
-																	<div class="dropdown dropstart "
-																		style="float: right; align: middle">
+																	<div class="dropdown dropstart " style="float: right; align: middle">
 																		<a class="text-muted text-primary-hover dropdown-toggle" href="#"
 																			role="button" id="dropdownTeam${ comment.commentNo }"
-																			data-bs-toggle="dropdown" aria-haspopup="true"
-																			aria-expanded="false"> 
+																			data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
 																		</a>
 
 
-																		<div class="dropdown-menu"
-																			aria-labelledby="dropdownTeam${ comment.commentNo }">
+																		<div class="dropdown-menu" aria-labelledby="dropdownTeam${ comment.commentNo }">
 																			<div class="dropdown-item"
 																				style='display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'>
-																				<a class="edit-comment"
-																					data-comment-no="${ comment.commentNo }"
+																				<a class="edit-comment" data-comment-no="${ comment.commentNo }"
 																					href="javascript:" style="color: inherit;">수정</a>
 
 																			</div>
 																			<div class="dropdown-item"
 																				style='display:${ (not empty loginuser and loginuser.userNo == comment.userNo) ? "block" : "none" }'>
-																				<a class="delete-comment"
-																					data-comment-no="${ comment.commentNo }"
+																				<a class="delete-comment" data-comment-no="${ comment.commentNo }"
 																					href="javascript:" style="color: inherit;">삭제</a>
 
 																			</div>
@@ -59,8 +54,7 @@
 																	</div>
 																	<div
 																		style='float:right;aligh:middle; display:${ not empty loginuser ? "" : "none" }'>
-																		<a class="write-recomment"
-																			data-comment-no="${ comment.commentNo }"
+																		<a class="write-recomment" data-comment-no="${ comment.commentNo }"
 																			href="javascript:" style="color: inherit;">답글</a>
 																		&nbsp;
 																	</div>
@@ -70,33 +64,25 @@
 															</c:choose>
 														</div>
 
-														<div id="comment-edit-area-${ comment.commentNo }"
-															style="display: none">
-															${ comment.nickname } &nbsp;&nbsp; [
-															<fmt:formatDate value="${ comment.regDate }"
-																pattern="yyyy-MM-dd" />
-															] <br />
-															<br />
-															<form action="editComment" method="post">
-																<input type="hidden" name="commentNo"
-																	value="${ comment.commentNo }"> <input
-																	type="hidden" name="commonNo"
-																	value="${ commonBoard.commonNo }"> <input
-																	type="hidden" name="pageNo" value="${ pageNo }">
-																<div class="col-md-8 col-xxl-9  mt-0 mt-md-3"
-																	style="width: 99%; resize: none;" rows="3">
-																	<textarea class="form-control" aria-describedby="name"
-																		name="commentContent" style="resize: none;" rows="3">${ comment.commentContent }</textarea>
+														<div id="comment-edit-area-${ comment.commentNo }" style="display: none">
+														${ comment.nickname }
+														&nbsp;&nbsp;
+														[<fmt:formatDate value="${ comment.regDate }" pattern="yyyy-MM-dd" />]
+														<br /> <br />
+														<form action="editComment" method="post">
+															<input type="hidden" name="commentNo" value="${ comment.commentNo }">
+															<input type="hidden" name="commonNo" value="${ commonBoard.commonNo }">
+															<input type="hidden" name="pageNo" value="${ pageNo }">
+															<div class="col-md-8 col-xxl-9  mt-0 mt-md-3" style="width: 99%; resize: none;" rows="3">
+																<textarea class="form-control" aria-describedby="name"
+																		  name="commentContent" style="resize: none;" rows="3">${ comment.commentContent }</textarea>
 																</div>
 															</form>
 															<br />
 															<div>
-																<a class="update-comment"
-																	data-comment-no="${ comment.commentNo }"
-																	href="javascript:">수정</a> &nbsp; <a
-																	class="cancel-edit-comment"
-																	data-comment-no="${ comment.commentNo }"
-																	href="javascript:">취소</a>
+																<a class="update-comment" data-comment-no="${ comment.commentNo }" href="javascript:">수정</a>
+																&nbsp;
+																<a class="cancel-edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">취소</a>
 															</div>
 														</div>
 

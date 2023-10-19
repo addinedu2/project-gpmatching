@@ -44,6 +44,12 @@ public interface UserMapper {
 			+ "where userId = #{ userId }")
 	int selectUserCountMyUserId(String userId);
 	
+	//닉네임 중복검사
+	@Select(  "select count(*) "
+			+ "from User "
+			+ "where nickname = #{ nickname }")
+	int selsectUserCountMyNickName(String nickname);
+	
 	//아이디 찾을 때 핸드폰와 이메일 찾는 메서드	
 	@Select ("select userId "
 	         + "from User "

@@ -44,25 +44,39 @@ public class MyPageController {
 	public String mypage(HttpSession session, Model model) {
 		UserDto loginUser = (UserDto) session.getAttribute("loginuser");  //현재 로그인한 사용자의 정보를 세션에서 가져오기
 		
-	    if (loginUser != null) {
-	    	// 로그인한 사용자가 관리자인 경우 어드민 페이지로 리디렉션
-	        if (loginUser.getUserGrade().equals("admin")) {
-	            return "admin/adminpage";
-	        } else {
-	            // 로그인한 사용자가 일반 사용자인 경우 마이페이지 표시
-	            List<MypageBoardDto> boardList = mypageService.findMyWriteMatchingBoardByUserNo(loginUser.getUserNo());
-	            int reviewPoint = mypageService.getMyReviewPoint(loginUser.getUserNo());
-	            
-	            model.addAttribute("reviewPoint", reviewPoint);
-	            model.addAttribute("loginuser", loginUser);
-	            model.addAttribute("boardList", boardList);
+//		//인터셉터, 리다이렉트 처리해야해서 주석 걸어놈		
+//	    if (loginUser != null) {
+//	    	// 로그인한 사용자가 관리자인 경우 어드민 페이지로 리디렉션
+//	        if (loginUser.getUserGrade().equals("admin")) {
+//	            return "admin/adminpage";
+//	        } else {
+//	            // 로그인한 사용자가 일반 사용자인 경우 마이페이지 표시
+//	            List<MypageBoardDto> boardList = mypageService.findMyWriteMatchingBoardByUserNo(loginUser.getUserNo());
+//	            int reviewPoint = mypageService.getMyReviewPoint(loginUser.getUserNo());
+//	            
+//	            model.addAttribute("reviewPoint", reviewPoint);
+//	            model.addAttribute("loginuser", loginUser);
+//	            model.addAttribute("boardList", boardList);
+//
+//	            return "account/mypage";
+//	        }
+//	    } else {
+//	        // 로그인하지 않은 경우 로그인 페이지로 리디렉션
+//	        return "account/login";
+//	    }
+	    if (loginUser.getUserGrade().equals("admin")) {
+            return "admin/adminpage";
+        } else {
+            // 로그인한 사용자가 일반 사용자인 경우 마이페이지 표시
+            List<MypageBoardDto> boardList = mypageService.findMyWriteMatchingBoardByUserNo(loginUser.getUserNo());
+            int reviewPoint = mypageService.getMyReviewPoint(loginUser.getUserNo());
+            
+            model.addAttribute("reviewPoint", reviewPoint);
+            model.addAttribute("loginuser", loginUser);
+            model.addAttribute("boardList", boardList);
 
-	            return "account/mypage";
-	        }
-	    } else {
-	        // 로그인하지 않은 경우 로그인 페이지로 리디렉션
-	        return "account/login";
-	    }
+            return "account/mypage";
+        }
 	}
 	
 	// 마이페이지 수정 버튼(로그인 하고 들어갈 수 있는 컨트롤러)
