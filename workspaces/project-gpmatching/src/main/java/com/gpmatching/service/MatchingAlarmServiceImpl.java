@@ -44,5 +44,10 @@ public class MatchingAlarmServiceImpl implements MatchingAlarmService{
 		
 	}
 	
+	@Override
+	public void deleteCloseListByUserNo(int userNo) {
+		matchingAlarmMapper.deleteCloseListByUserNo(userNo);
+		
+	}
 	
 }
