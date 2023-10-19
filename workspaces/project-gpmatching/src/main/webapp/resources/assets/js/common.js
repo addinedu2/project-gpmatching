@@ -3,9 +3,8 @@
  */
 
 	
-	//알림 생기면 종모양에 초록동그라미
+	//댓글 알림 생기면 종모양에 초록동그라미
 	$(function(){
-	    //let userNo = $("#notificationicon").data("userno");원본
 	    let userNo = $("#dropdownNotification").data("userno");
 	    // console.log(userNo);
 	    if (!userNo) {
@@ -32,6 +31,9 @@
 			   
 		   });
 	});
+	
+	//마감되면 종 색깔 바꾸기 #notificationicon
+	
 
 	//임시 알람 클릭하면 마이페이지로 넘어감
 	$(function(event) {
@@ -143,7 +145,7 @@
 				"data" : {"userNo":userNo},
 				"success": function(data, status, xhr){
 					if(data){	
-						$("#dropdownNotification").removeClass('avatar-online');
+						$("#dropdownNotification").removeClass('bg-primary');
 				   }
 				},
 				"error": function(xhr, status, err){
