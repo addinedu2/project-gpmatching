@@ -47,7 +47,7 @@ public interface MatchingAlarmMapper {
 			  + "             inner join ConfirmAlarm ca on ca.commentNo = mc.commentNo "
 			  + "             inner join User u on u.userNo = mc.userNo "
 			  + "             inner join MatchingBoard mb on mb.boardNo = mc.boardNo "
-			  + "             where (mc.status = 1 and u.userNo = 14) "
+			  + "             where (mc.status = 1 and u.userNo = ${userNo}) "
 			  + "             union "
 			  + "             select cla.closeNo, cla.boardNo, cla.closeContent, cla.regDate, "
 			  + "                   (select u.nickname "
