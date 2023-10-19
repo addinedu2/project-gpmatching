@@ -58,7 +58,8 @@
 		<!-- page content -->
 		<div id="page-content">
 			<div class="header @@classList">
-
+				
+				<jsp:include page="/WEB-INF/views/modules/header.jsp" />
 				<jsp:include page="/WEB-INF/views/modules/adminHeader.jsp" />
 
 

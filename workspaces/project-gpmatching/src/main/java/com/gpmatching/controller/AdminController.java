@@ -118,7 +118,7 @@ public class AdminController {
 		int pageSize = 5; // 한 페이지 표시 개수
 		int pagerSize = 5;// 표시 페이지 개수
 		//String linkUrl = "/project-gpmatching/admin/adminUserWriteBoardList";
-		String linkUrl = "/project-gpmatching/admin/userWrite";
+		String linkUrl = "/project-gpmatching/admin/userWrite/{userNo}";
 	
 		int from = (pageNo - 1) * pageSize;// 첫번째 페이지 게시물 순서
 		List<AdminDto> listuser = adminService.listUserListByPage(from, pageSize);
@@ -155,10 +155,7 @@ public class AdminController {
 	    model.addAttribute("pageNo",pageNo);
 	    model.addAttribute("gameMap", gameMap);
 	    
-	    
-	    System.out.println(getcountReportBoardPosts);
-	    System.out.println(reportBoardPager);
-	    
+	     
 	    return "admin/adminUserWriteBoardList";
 	}
 	

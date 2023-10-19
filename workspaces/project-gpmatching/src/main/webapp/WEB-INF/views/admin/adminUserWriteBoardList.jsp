@@ -34,10 +34,13 @@
 	rel="stylesheet">
 
 <style>
-body, .gameboard-link, .board-link, .listCommon {
+
+.gameboard-link, .board-link, .listCommon {
     color: white;
 }
-
+h2 {
+    color: white;
+}
 </style>
 
 
