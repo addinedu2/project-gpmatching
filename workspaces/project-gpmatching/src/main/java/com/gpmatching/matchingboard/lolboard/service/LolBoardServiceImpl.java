@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gpmatching.dto.CloseAlarmDto;
+import com.gpmatching.dto.MatchingCommentDto;
 import com.gpmatching.mapper.MatchingAlarmMapper;
 import com.gpmatching.mapper.MatchingCommentMapper;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;

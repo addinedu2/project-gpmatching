@@ -3,6 +3,7 @@ package com.gpmatching.matchingboard.lolboard.service;
 import java.util.List;
 
 import com.gpmatching.dto.CloseAlarmDto;
+import com.gpmatching.dto.MatchingCommentDto;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 
 

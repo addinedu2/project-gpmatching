@@ -78,7 +78,7 @@ public interface LolBoardMapper {
 			+ "on m.userNo = u.userNo "
 			+ "where m.gameNo =  (select gameNo "
 			+ "from GameList where gameName = #{ gameName} ) "
-			+ "and deleted = false "
+			+ "and m.deleted = false "
 			+ "order by m.boardNo desc" )
 	List<MatchingBoardDto> selectLolBoardListByGameName(String gameName);
 	
