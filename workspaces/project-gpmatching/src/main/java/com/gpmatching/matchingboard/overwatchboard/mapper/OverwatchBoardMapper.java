@@ -76,7 +76,7 @@ public interface OverwatchBoardMapper {
 			+ "on m.userNo = u.userNo "
 			+ "where m.gameNo =  (select gameNo "
 			+ "from GameList where gameName = #{ gameName} ) "
-			+ "and deleted = false "
+			+ "and m.deleted = false "
 			+ "order by m.boardNo desc" )
 	List<MatchingBoardDto> selectOwBoardListByGameName(String gameName);
 	
@@ -115,7 +115,7 @@ public interface OverwatchBoardMapper {
 			+ "where m.boardTitle like concat('%',#{keyword},'%') "
 			+ "and m.gameNo = (select gameNo "
 			+ "from GameList where gameName = #{gameName} ) "
-			+ "and deleted = false "
+			+ "and m.deleted = false "
 			+ "order by m.boardNo desc" )
 	List<MatchingBoardDto> selectOwBoardListByTitle(@Param("gameName")String gameName, @Param("keyword")String keyword);
 

@@ -31,11 +31,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gpmatching.dto.CloseAlarmDto;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 import com.gpmatching.matchingboard.dto.PubgDto;
 import com.gpmatching.matchingboard.pubgboard.service.PubgBoardService;
 import com.gpmatching.matchingboard.pubgboard.service.PubgService;
+import com.gpmatching.service.MatchingCommentService;
 
 import lombok.Setter;
 
@@ -51,25 +54,8 @@ public class PubgBoardController {
 	private PubgService pubgService;
 	
 
-	/**
-	 * 베틀그라운드 매칭 게시판 보기
-	 * 
-	 * @param model 뷰에 전달할 모델정보
-	 * @return 베틀그라운드 게시판 뷰
-	 */
-	
-
-	@GetMapping(path = { "/battleground-list"})
-	public String bgMatchingBoardList(Model model) {
-		
-		
-		List<MatchingBoardDto> matchingPubgList = pubgBoardService.getSelectPubgBoardListByGameName("battle ground");
-		
-		model.addAttribute("matchingPubgList", matchingPubgList);
-		
-		return "/boardMatching/pubgBoard/battleground-list";
-	}
-	
+	@Setter(onMethod_ = { @Autowired }) 
+	private MatchingCommentService matchingCommentService;
 
 	
 	/**
@@ -107,7 +93,15 @@ public class PubgBoardController {
 	}
 
 	@GetMapping(path = { "/battleground-edit"})
-	public String showLolEditForm(HttpSession session, int boardNo, Model model) {
+	public String showPubgEditForm(HttpSession session, int boardNo, Model model) {
+		
+		boolean matchingClose = pubgBoardService.getMatchingCloseByBoardNo(boardNo);
+		
+		if(matchingClose) {
+			return "redirect:battleground-list";
+			
+		}
+		
 		
 		MatchingBoardDto pubgMatchingBoard = pubgBoardService.findPubgBoardByBoardNo(boardNo);
 		
@@ -122,13 +116,13 @@ public class PubgBoardController {
 	 * 베틀그라운드 매칭 게시판 글수정 form 요청
 	 * 
 	 * @param matchingBoardDto 매칭게시판 matchingBoard 테이블
-	 * @param lolDto 롤 Lol 테이블 
-	 * @return 롤 게시판 뷰 리다이렉트 요청
+	 * @param PubgDto 베틀그라운드 테이블 
+	 * @return 베틀그라운드 게시판 뷰 리다이렉트 요청
 	 */
 	
 	
 	@PostMapping(path = { "/battleground-edit"})
-	public String editLolMatchingBoard(MatchingBoardDto matchingBoardDto, PubgDto pubgDto) {
+	public String editPubgMatchingBoard(MatchingBoardDto matchingBoardDto, PubgDto pubgDto) {
 		
 		pubgBoardService.edit(matchingBoardDto);
 		pubgService.edit(pubgDto);
@@ -151,6 +145,50 @@ public class PubgBoardController {
 
 		return "redirect:battleground-list";	
 	}
+	
+	/**
+	 * 베틀그라운드 매칭 게시판 보기
+	 * 
+	 * @param model 뷰에 전달할 모델정보
+	 * @return 베틀그라운드 게시판 뷰
+	 */
+	
+	// 게시판 검색 기능 + 특정 컬럼 필터가 포함된 battleground-list 경로 입니다 (-허지웅)
+	@GetMapping(path = { "/battleground-list"})
+	public String pubgMatchingBoardList(@RequestParam(name = "searchType", required = false) String searchType,
+											 @RequestParam(name = "keyword", required = false) String keyword, Model model) {
+		
+		List<MatchingBoardDto> matchingPubgList;
+		
+		
+		if ("t".equals(searchType)){
+			
+			matchingPubgList = pubgBoardService.searchMatchingBoardListByTitle("battle ground", keyword);
+			
+		} else {
+			matchingPubgList = pubgBoardService.getSelectPubgBoardListByGameName("battle ground");
+			
+		}
+			
+		model.addAttribute("matchingPubgList", matchingPubgList);
+			
+		return "/boardMatching/pubgBoard/battleground-list";
+	}
+	
+	
+	@GetMapping(path = { "/matchingCloseTrue"})
+	public String MatchingClose(int boardNo, CloseAlarmDto closeAlarm) {
+		if(pubgBoardService.isMatchingCloseCondition(boardNo)) {
+			pubgBoardService.setMatchingCloseTrue(boardNo, closeAlarm);
+			return "redirect:battleground-list";
+		}else {
+			return "redirect:battleground-list";
+		}
+		
+	}
+	
+	
+	
 	
 
 }
