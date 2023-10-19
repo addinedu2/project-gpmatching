@@ -18,8 +18,8 @@ import com.gpmatching.service.MatchingCommentService;
 import lombok.Setter;
 
 @Controller
-@RequestMapping(path = { "/boardMatching/lolBoard" })
-public class MatchingCommentController {
+@RequestMapping(path = { "/boardMatching/overwatchBoard" })
+public class OwMatchingCommentController {
 
 	@Setter(onMethod_ = { @Autowired })
 	private MatchingCommentService matchingCommentService;
@@ -36,7 +36,7 @@ public class MatchingCommentController {
 //		// 댓글이 작성될때 알림 테이블에 정보 저장 (미완성)
 //		matchingAlarmService.saveMatchingAlarm(matchingAlarmDto);
 		
-		return "redirect:lol-list";
+		return "redirect:overwatch-list";
 	}
 	
 	@PostMapping(path = { "/ajax-write-comment" })
@@ -121,12 +121,4 @@ public class MatchingCommentController {
     }
 	
 
-//	@GetMapping(path = { "/lol-comment" })
-//	public String showMatchingCommentList(int boardNo, Model model) {
-//		
-//		List<MatchingCommentDto> mComments = matchingCommentService.getMatchingCommentByBoardNo(boardNo);
-//		model.addAttribute("mComments", mComments);
-//		
-//		return "boardMatching/lolBoard/lol-comment";
-//	}
 }
