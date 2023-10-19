@@ -38,7 +38,13 @@
             display: flex;
             justify-content: space-between;
         }
-    </style>
+    	</style>
+    	
+		<style>
+			.d-md-flex {
+			  flex-wrap: wrap;
+			}
+		</style>
     
 </head>
 
@@ -111,11 +117,11 @@
               </div>
               <p id="nicknameCheck"></p>
               
-              <!-- userPhone -->
-              <div class="mb-3">
-                <label for="userPhone" class="form-label">핸드폰 번호</label>
-                <input type="text" id="userPhone" class="form-control" name="userPhone" placeholder="000-0000-0000" required>
-              </div>
+<!--               userPhone -->
+<!--               <div class="mb-3"> -->
+<!--                 <label for="userPhone" class="form-label">핸드폰 번호</label> -->
+<!--                 <input type="text" id="userPhone" class="form-control" name="userPhone" placeholder="000-0000-0000" required> -->
+<!--               </div> -->
               
               <div class="mb-3">
 		           <label for="imageInput" class="form-label">
@@ -123,19 +129,19 @@
 		           </label>
 		           <input type="file" id="imageInput" name="imageName" style="display: none;" accept="image/*" onchange="readURL(this);" />
        	       </div>   
+              <p>프로필 이미지</p>
               
               
               
-              
-              <!-- Checkbox -->
-              <div class="mb-3">
-                <div class="form-check custom-checkbox">
-                  <input type="checkbox" class="form-check-input" id="agreeCheck">
-                  <label class="form-check-label" for="agreeCheck">
-                  	<span class="fs-5">I agree to the <a href="terms-condition-page.html">Terms of Service </a>and <a href="terms-condition-page.html">Privacy Policy.</a></span>
-                  </label>
-                </div>
-              </div>
+              <!-- 동의 비동의 -->
+<!--               <div class="mb-3"> -->
+<!--                 <div class="form-check custom-checkbox"> -->
+<!--                   <input type="checkbox" class="form-check-input" id="agreeCheck"> -->
+<!--                   <label class="form-check-label" for="agreeCheck"> -->
+<!--                   	<span class="fs-5">I agree to the <a href="terms-condition-page.html">Terms of Service </a>and <a href="terms-condition-page.html">Privacy Policy.</a></span> -->
+<!--                   </label> -->
+<!--                 </div> -->
+<!--               </div> -->
               <div>
                 <!-- Button -->
                 <div class="d-grid">
@@ -147,6 +153,7 @@
                 <div class="d-md-flex justify-content-between mt-4">
                   <div class="mb-2 mb-md-0">
                     <a href="/project-gpmatching/account/login" class="fs-5">이미 가입하셨나요? 로그인 해주세요 </a>
+                    <br>
                   </div>
                   <div>
                     <a href="/project-gpmatching/account/forgetPassword" class="text-inherit
@@ -154,6 +161,7 @@
                          <!-- 비밀번호 찾기 -->
                   </div>
                 </div>
+                
               </div>
             </form>
           </div>

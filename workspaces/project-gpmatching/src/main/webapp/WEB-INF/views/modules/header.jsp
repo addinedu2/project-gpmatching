@@ -114,33 +114,14 @@
                 <i class="me-2 icon-xxs dropdown-item-icon" data-feather="user"></i>회원정보 수정
               </a>
             </li>
-            <li>
-              <a class="dropdown-item"
-                href="#">
-                <i class="me-2 icon-xxs dropdown-item-icon"
-                  data-feather="activity"></i>Activity Log
-              </a>
 
 
-            </li>
 
-            <li>
-              <a class="dropdown-item text-primary" href="#">
-                <i class="me-2 icon-xxs text-primary dropdown-item-icon"
-                  data-feather="star"></i>Go Pro
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">
-                <i class="me-2 icon-xxs dropdown-item-icon"
-                  data-feather="settings"></i>Account Settings
-              </a>
-            </li>
             <li>
             <c:choose>
             	<c:when test="${ loginuser eq null }">
-					<a class="dropdown-item" href="/project-gpmatching/account/login">
-					  <i class="me-2 icon-xxs dropdown-item-icon" data-feather="power"></i>로그인
+					<a class="dropdown-item" href="/project-gpmatching/account/register">
+					  <i class="me-2 icon-xxs dropdown-item-icon" data-feather="power"></i>회원가입
 					</a>
 			    </c:when>
 			    <c:otherwise>
