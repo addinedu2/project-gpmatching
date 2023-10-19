@@ -2,8 +2,6 @@ package com.gpmatching.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,17 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gpmatching.dto.ConfirmAlarmDto;
 import com.gpmatching.dto.MatchingAlarmDto;
 import com.gpmatching.dto.MatchingCommentDto;
-import com.gpmatching.dto.UserDto;
 import com.gpmatching.service.MatchingAlarmService;
 import com.gpmatching.service.MatchingCommentService;
 
 import lombok.Setter;
 
 @Controller
-@RequestMapping(path = { "/boardMatching/lolBoard" })
-public class MatchingCommentController {
+@RequestMapping(path = { "/boardMatching/overwatchBoard" })
+public class OwMatchingCommentController {
 
 	@Setter(onMethod_ = { @Autowired })
 	private MatchingCommentService matchingCommentService;
@@ -32,11 +30,14 @@ public class MatchingCommentController {
 	
 	@PostMapping(path = { "/write-comment" })
 	public String writeMatchingComment(MatchingCommentDto matchingComment, MatchingAlarmDto matchingAlarm, 
-									   @RequestParam(defaultValue = "-1") int boardNo) {		
-		
+									   @RequestParam(defaultValue = "-1") int boardNo) {
+				
 		matchingCommentService.writeMatchingComment(matchingComment, matchingAlarm);
-		return "redirect:lol-list";
 		
+//		// 댓글이 작성될때 알림 테이블에 정보 저장 (미완성)
+//		matchingAlarmService.saveMatchingAlarm(matchingAlarmDto);
+		
+		return "redirect:overwatch-list";
 	}
 	
 	@PostMapping(path = { "/ajax-write-comment" })
@@ -47,7 +48,8 @@ public class MatchingCommentController {
 		
 		matchingCommentService.writeMatchingComment(matchingComment, matchingAlarm);
 		
-
+//		// 댓글이 작성될때 알림 테이블에 정보 저장 (미완성)
+//		matchingAlarmService.saveMatchingAlarm(matchingAlarmDto);
 		
 		return "success";
 	}
@@ -72,9 +74,9 @@ public class MatchingCommentController {
 	
 	@GetMapping(path = { "/commentConfirm" }, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public List<MatchingCommentDto> commentConfirm(@RequestParam int commentNo) {
+	public List<MatchingCommentDto> commentConfirm(@RequestParam int commentNo, ConfirmAlarmDto confirmAlarmDto) {
 		System.out.println("수락버튼클릭");
-		matchingCommentService.setCommentStatusConfirm( commentNo);
+		matchingCommentService.setCommentStatusConfirm( commentNo , confirmAlarmDto);
 
 		int boardNo = matchingCommentService.getBoardNoByCommentNo(commentNo);
 
@@ -120,12 +122,4 @@ public class MatchingCommentController {
     }
 	
 
-//	@GetMapping(path = { "/lol-comment" })
-//	public String showMatchingCommentList(int boardNo, Model model) {
-//		
-//		List<MatchingCommentDto> mComments = matchingCommentService.getMatchingCommentByBoardNo(boardNo);
-//		model.addAttribute("mComments", mComments);
-//		
-//		return "boardMatching/lolBoard/lol-comment";
-//	}
 }

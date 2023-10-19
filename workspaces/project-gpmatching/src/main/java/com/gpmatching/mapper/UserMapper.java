@@ -24,6 +24,7 @@ public interface UserMapper {
 	void insertUser(UserDto user);
 
 	
+	
 	//로그인할때 아이디와 비번 찾는 메서드	
 	@Select ("select userId, userPwd, userEmail, nickname, userPhone, userGrade, regDate, deletedUser, userNo, userImage "
              + "from User "
@@ -43,6 +44,12 @@ public interface UserMapper {
 			+ "where userId = #{ userId }")
 	int selectUserCountMyUserId(String userId);
 	
+	//닉네임 중복검사
+	@Select(  "select count(*) "
+			+ "from User "
+			+ "where nickname = #{ nickname }")
+	int selsectUserCountMyNickName(String nickname);
+	
 	//아이디 찾을 때 핸드폰와 이메일 찾는 메서드	
 	@Select ("select userId "
 	         + "from User "
@@ -59,19 +66,6 @@ public interface UserMapper {
 
 
 	
-	
-//	//내가 작성한 글만 보기(미완성코드
-//	@Select(  "select commonNo, commonTitle, commonContent, userNo, readCount, regDate, deleted "
-//			+ "from CommonBoard "
-//			+ "where "
-//			+ "order by commonNo desc")
-//	List<CommonBoardDto> selectAllBoard();
-
-
-	
-	
-	
-
 //	@Update("UPDATE User SET deletedUser = true " //  delelted 값을 참으로 돌린다
 //			+ "WHERE userId = #{userId} ")
 //	void deleteUser(@Param("userId") String userId);

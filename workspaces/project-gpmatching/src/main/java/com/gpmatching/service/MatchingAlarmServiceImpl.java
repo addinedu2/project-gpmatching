@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gpmatching.dto.AlarmDto;
 import com.gpmatching.dto.MatchingAlarmDto;
 import com.gpmatching.mapper.MatchingAlarmMapper;
 
@@ -39,5 +38,16 @@ public class MatchingAlarmServiceImpl implements MatchingAlarmService{
 		return mAlarmCount;
 	}
 	
+	@Override
+	public void deleteConfirmListByUserNo(int userNo) {
+		matchingAlarmMapper.deleteConfirmListByUserNo(userNo);
+		
+	}
+	
+	@Override
+	public void deleteCloseListByUserNo(int userNo) {
+		matchingAlarmMapper.deleteCloseListByUserNo(userNo);
+		
+	}
 	
 }

@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gpmatching.dto.AlarmDto;
 import com.gpmatching.dto.BoardCommentDto;
-import com.gpmatching.mapper.AlarmMapper;
 import com.gpmatching.mapper.BoardCommentMapper;
 
 import lombok.Setter;
@@ -15,9 +13,6 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 	
 	@Setter(onMethod_ = { @Autowired })
 	private BoardCommentMapper boardCommentMapper;
-	
-	@Setter(onMethod_ = { @Autowired })
-	private AlarmMapper alarmMapper;
 	
 	@Override
 	public List<BoardCommentDto> getCommentListByCommonNo(int commonNo) {
@@ -32,9 +27,6 @@ public class BoardCommentServiceImpl implements BoardCommentService {
  	public void writeComment(BoardCommentDto boardComment) {
 		boardCommentMapper.insertComment(boardComment);	
 		boardCommentMapper.updateGroupNo(boardComment.getCommentNo(), boardComment.getCommentNo());
-	
-		//alarm.setCommentNo(boardComment.getCommentNo());//이렇게 받아와야지..
-		//alarmMapper.insertAlarm(alarm);
 		
 	}
 	
@@ -75,12 +67,6 @@ public class BoardCommentServiceImpl implements BoardCommentService {
 		boardCommentMapper.insertRecomment(boardComment);
 		
 	}
-	
-//	@Override
-//	public List<AlarmDto> getAlamListByUserNo(int userNo) {
-//		List<AlarmDto> alarms = alarmMapper.selectAlamListByUserNo(userNo);
-//		
-//		return alarms;
-//	}
+
 
 }

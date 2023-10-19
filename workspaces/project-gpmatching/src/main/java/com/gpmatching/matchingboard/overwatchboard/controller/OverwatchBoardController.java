@@ -31,8 +31,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gpmatching.matchingboard.overwatchboard.service.OverwatchService;
+import com.gpmatching.service.MatchingCommentService;
+import com.gpmatching.dto.CloseAlarmDto;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 import com.gpmatching.matchingboard.dto.OverwatchDto;
 import com.gpmatching.matchingboard.overwatchboard.service.OverwatchBoardService;
@@ -49,24 +52,8 @@ public class OverwatchBoardController {
 	@Setter(onMethod_ = { @Autowired }) 	
 	private OverwatchService overwatchService;
 	
-
-	/**
-	 * 오버워치 매칭 게시판 보기
-	 * 
-	 * @param model 뷰에 전달할 모델정보
-	 * @return 오버워치 게시판 뷰
-	 */
-	
-	@GetMapping(path = { "/overwatch-list"})
-	public String owMatchingBoardList(Model model) {
-		
-		List<MatchingBoardDto> matchingOwList = overwatchBoardService.getSelectOwBoardListByGameName("overwatch2");
-		
-		model.addAttribute("matchingOwList", matchingOwList);
-		
-		return "/boardMatching/overwatchBoard/overwatch-list";
-	}
-	
+	@Setter(onMethod_ = { @Autowired }) 
+	private MatchingCommentService matchingCommentService;
 	
 
 	/**
@@ -112,7 +99,14 @@ public class OverwatchBoardController {
 	
 	@GetMapping(path = { "/overwatch-edit"})
 	public String showOverwatchEditForm(HttpSession session, int boardNo, Model model) {
-		MatchingBoardDto overwatchBoard = overwatchBoardService.getSelectOwBoardByBoardNo(boardNo);
+		
+		boolean matchingClose = overwatchBoardService.getMatchingCloseByBoardNo(boardNo);
+		if(matchingClose) {
+			return "redirect:overwatch-list";
+			
+		}
+		
+		MatchingBoardDto overwatchBoard = overwatchBoardService.findOwBoardByBoardNo(boardNo);
 		
 		model.addAttribute("owMatchingBoard", overwatchBoard);
 		
@@ -152,6 +146,45 @@ public class OverwatchBoardController {
 		overwatchBoardService.delete(boardNo);
 
 		return "redirect:overwatch-list";	
+	}
+	
+	/**
+	 * 오버워치 매칭 게시판 보기
+	 * 
+	 * @param model 뷰에 전달할 모델정보
+	 * @return 오버워치 게시판 뷰
+	 */
+	
+	// 게시판 검색 기능이 포함된 overwatch-list 경로 입니다 (-허지웅)
+	@GetMapping(path = { "/overwatch-list"})
+	public String owMatchingBoardList(@RequestParam(name = "searchType", required = false) String searchType,
+			 							@RequestParam(name = "keyword", required = false) String keyword, Model model) {
+		
+		List<MatchingBoardDto> matchingOwList ;
+		
+		if ("t".equals(searchType)){
+			
+			matchingOwList = overwatchBoardService.searchMatchingBoardListByTitle("overwatch2", keyword);
+			
+		} else {
+			matchingOwList = overwatchBoardService.getSelectOwBoardListByGameName("overwatch2");
+			
+		}
+		
+		model.addAttribute("matchingOwList", matchingOwList);
+		
+		return "/boardMatching/overwatchBoard/overwatch-list";
+	}
+	
+	@GetMapping(path = { "/matchingCloseTrue"})
+	public String MatchingClose(int boardNo, CloseAlarmDto closeAlarm) {
+		if(overwatchBoardService.isMatchingCloseCondition(boardNo)) {
+			overwatchBoardService.setMatchingCloseTrue(boardNo, closeAlarm);
+			return "redirect:overwatch-list";
+		}else {
+			return "redirect:overwatch-list";
+		}
+		
 	}
 
 }

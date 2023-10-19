@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gpmatching.dto.ConfirmAlarmDto;
 import com.gpmatching.dto.MatchingAlarmDto;
 import com.gpmatching.dto.MatchingCommentDto;
 import com.gpmatching.mapper.MatchingAlarmMapper;
@@ -72,13 +73,15 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 	 */
 	
 	@Override
-	public void setCommentStatusConfirm(int commentNo) {
+	public void setCommentStatusConfirm(int commentNo, ConfirmAlarmDto confirmAlarm) {
 		//System.out.println(commentNo);
 		int boardNo = matchingCommentMapper.selectBoardNoByCommentNo(commentNo);
 		int confirmCount = matchingCommentMapper.commentConfirmCountByMatchingBoardNo(boardNo);
 		int headCount = lolBoardMapper.matchingBoardheadCountByBoardNo(boardNo);
 		String status = matchingCommentMapper.selectStatusByCommentNo(commentNo);
 		
+		//승인 알림용
+		matchingAlarmMapper.insertConfirmAlarm(confirmAlarm);
 		
 		if(status.equals("1")) { // 신청승인된 글
 			System.out.println("신청승인된 글입니다.");

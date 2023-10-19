@@ -20,11 +20,32 @@
              <br>
              <div class="d-grid gap-2 d-md-flex justify-content-md-end"></div>
 			 <br>
-             <!-- basic table -->
-<table class="table text-light" style="color: black; text-align: center;">
+
+<!-- 검색창 -->
+<form id="searchForm">
+	<table style="text-align: center;" class="table text-light">
+	<td>
+	<label for="searchInput" class="form-label">회원 검색</label>
+	</td>
+	<td>
+    <div class="col-md-8 col-xxl-9 ms-2 ">
+        <input type="text" class="form-control" id="searchInput" name="keyword" style="width: 750px; text-decoration: none; resize: none;">
+    </div>
+    </td>
+    <td style="vertical-align: middle">
+    <a style="text-decoration: none; resize: none;">
+    <button type="button" class="btn btn-primary ms-2" onclick="searchUsers()">검색</button>
+    </a>
+    </td>
+    </table>
+    <br>
+</form>
+
+
+<!-- basic table -->
+<table class="table text-light" style="text-align: center; ">
    <thead>
       <tr class="userList" >
-  
          <th>아이디</th>
          <th>닉네임</th>
          <th>회원 등급</th>
@@ -34,26 +55,15 @@
       </tr>
    </thead>
    <!-- userId, nickname, regDate, userGrade, regDate --> 
-   
-
-<!-- 검색창 -->
-<form id="searchForm">
-    <div class="mb-3">
-        <label for="searchInput" class="form-label">회원 검색</label>
-        <input type="text" class="form-control" id="searchInput" name="keyword">
-    </div>
-    <button type="button" class="btn btn-primary" onclick="searchUsers()">검색</button>
-</form>
-
 
 <!-- 검색 결과를 표시할 테이블 -->
-<table class="table text-light" style="color: black; text-align: center;">
+	<tbody style="text-decoration: none; color: inherit;">
     <c:forEach var="userlist" items="${listuser}">
         <tr>
-        <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" target="_blank">${ userlist.userId }</td>
-   	    <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" target="_blank">${ userlist.nickname }</td>
-        <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" target="_blank">${ userlist.userGrade }</td>
-        <td><a href="<c:url value='/admin/userWrite/${userlist.userNo}' />" target="_blank">작성한 게시물</td></td>
+        <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" target="_blank">${ userlist.userId }</a></td>
+   	    <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" target="_blank">${ userlist.nickname }</a></td>
+        <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" target="_blank">${ userlist.userGrade }</a></td>
+        <td><a href="<c:url value='/admin/userWrite/${userlist.userNo}' />" target="_blank">작성한 게시물</a></td>
         <td>댓글 수</td>
         <td><fmt:formatDate value="${ userlist.regDate }" pattern="yyyy-MM-dd"/>
         </td>
@@ -63,35 +73,23 @@
    </tbody>
 </table>
 <br>
-             <div>
-
-             	<ul class="pagination justify-content-center mb-0 pager-ul">
-             	${ pager }
-             	</ul>
-             </div>
-            </div>
-          </div>
+<div>
+	<ul class="pagination justify-content-center mb-0 pager-ul">
+	${ pager }
+	</ul>
+</div>
 
 	
 	<!-- Libs JS -->
-	<script
-		src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+	<script src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
+	<script src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
+	<script src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
+	<script src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+	<script src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+	<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+	<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
 
 

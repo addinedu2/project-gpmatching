@@ -10,10 +10,10 @@ public interface CommonBoardService {
 	void writeCommonBoard(CommonBoardDto commonBoardDto);
 
 	List<CommonBoardDto> listCommonBoard();
-	List<CommonBoardDto> listCommonBoardByPage(int from, int count, String category);//특정 페이지 가져오기
+	List<CommonBoardDto> listCommonBoardByPage(int from, int count, String category);
 	int getCommonBoardCount();
 	
-	CommonBoardDto findCommonBoardByCommonNo(int commonNo);//commonNo찾고 Dto반환
+	CommonBoardDto findCommonBoardByCommonNo(int commonNo);
 
 	void deleteCommon(int commonNo);
 

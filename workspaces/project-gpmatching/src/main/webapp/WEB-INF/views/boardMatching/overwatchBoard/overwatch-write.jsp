@@ -100,32 +100,62 @@
 				<!-- radio-->
 				<br>
 				<div class="txt-box text-light">
+			 		<label class="form-label text-light" for="textInput">성별</label>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" value=0
+						<input class="form-check-input" type="radio" value="anyone"
 							name="preferGender" id="flexRadioDefault1" checked> <label
-							class="form-check-label" for="flexRadioDefault1"> 남자 </label>
+							class="form-check-label" for="flexRadioDefault1"> 상관없음 </label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" value=1
+						<input class="form-check-input" type="radio" value="M"
+							name="preferGender" id="flexRadioDefault1"> <label
+							class="form-check-label" for="flexRadioDefault1"> 남자만 </label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" value="F"
 							name="preferGender" id="flexRadioDefault2"> <label
-							class="form-check-label" for="flexRadioDefault2"> 여자 </label>
+							class="form-check-label" for="flexRadioDefault2"> 여자만 </label>
 					</div>
 				</div>
 				<br>
 				
 				<!-- 오버워치 등록 -->
 				<div class="mb-3 txt-box">
-					<label class="form-label text-light" for="textInput">옵티어목록</label>
-					<input name="owTier" type="text" id="textInput" class="form-control" >
+					<label class="form-label text-light" for="textInput">모집인원 <span class="text-secondary">(최대 4인)</span></label>
+					<select class="form-select" name="headCount" aria-label="Default select example">
+						<option value="" selected>인원을 선택하세요</option>
+						<option value=1>2</option>
+						<option value=2>3</option>
+						<option value=3>4</option>
+						<option value=4>5</option>
+					</select>
+				</div>					
+				<!-- 오버워치 등록 -->
+				<div class="mb-3 txt-box ">
+					<label class="form-label text-light" for="textInput ">옵티어</label>
+					<input name="owTier" type="text" id="textInput" class="form-control" value="${ owMatchingBoard.owTier }">
 				</div>
 				<div class="mb-3 txt-box">
 					<label class="form-label text-light" for="textInput">옵포지션</label>
-					<input name="owPosition" type="text" id="textInput" class="form-control" >
+					<input name="owPosition" type="text" id="textInput" class="form-control" value="${ owMatchingBoard.owPosition }">
 				</div>
+				
 				<div class="mb-3 txt-box">
-					<label class="form-label text-light" for="textInput">옵선호플레이</label>
-					<input name="owPlay" type="text" id="textInput" class="form-control" >
+					<label class="form-labe text-light"  for="textInput">옵선호플레이</label>
+					<input name="owPlay" type="text" id="textInput" class="form-control" value="${ owMatchingBoard.owPlay }">
 				</div>
+				<div class="time1">
+				    <label for="customStartTimeRange" class="form-label text-light" style="margin-right: 10px;">시작 시간 : </label><span id="start-time-value"></span>
+				    <input type="range" class="form-range" min="0" max="24" step="0.5" id="customStartTimeRange" value="0" oninput="updateSelectedTime('start-time', this.value);">
+				    <input type="hidden" name="startTime" id="startTime">
+				</div>
+				
+				<div class="time2">
+				    <label for="customEndTimeRange" class="form-label text-light" style="margin-right: 10px;">종료 시간 : </label><span id="end-time-value"></span>
+				    <input type="range" class="form-range" min="0" max="24" step="0.5" id="customEndTimeRange" value="0" oninput="updateSelectedTime('end-time', this.value);">
+				    <input type="hidden" name="endTime" id="endTime">
+				</div>
+				
 				<br>
 				<div class="btn-center">
 					<!-- Primary Button -->
@@ -170,6 +200,27 @@
 					location.href = "overwatch-list"; // 브라우저의 주소 입력기에 주소를 입력하는 것과 같은 효과 ( 이동 )
 				});
 			});
+			
+			function updateSelectedTime(timeType, value) {
+			    var selectedTime = document.getElementById(timeType + "-value");
+			    var hours = Math.floor(value);
+			    var minutes = (value % 1) * 60;
+			    var ampm = hours >= 12 ? "오후" : "오전";
+			    var formattedHours = hours % 12 || 12;
+
+			    selectedTime.innerHTML = ampm + " " + formattedHours + ":" + (minutes < 10 ? "0" : "") + Math.round(minutes);
+			    
+			 	// 시작 시간 값을 가져와 hidden_start_time 필드에 설정
+				var startTimeValue = document.getElementById('start-time-value').textContent;
+				document.getElementById('startTime').value = startTimeValue;
+
+				// 종료 시간 값을 가져와 hidden_end_time 필드에 설정
+				var endTimeValue = document.getElementById('end-time-value').textContent;
+				document.getElementById('endTime').value = endTimeValue;
+			}
+			
+			
+			
 		</script>
 
 		<script src="/project-gpmatching/resources/assets/js/common.js"></script>

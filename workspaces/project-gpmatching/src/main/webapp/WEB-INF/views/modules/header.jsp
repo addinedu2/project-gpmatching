@@ -54,7 +54,7 @@
 					<li class="list-group-item border-bottom">
 						<a href="#" class="text-muted"> 
 							<c:forEach var="mAlarms" items="${matchingAlarms}">
-								<li>${mAlarms.nickname}님이 ${mAlarms.alarmContent }</li>
+								<li></li>
 
 								<hr>
 							</c:forEach>
@@ -63,10 +63,11 @@
 	            </ul>
             </div>
             <div class="border-top px-3 py-2 text-center">
-              <a href="/project-gpmatching/commonBoard/alarmList" class="text-inherit fw-semi-bold"
-              id="checkAlarm" data-userno="${loginuser.userNo}">
-                알림 확인(Reset)
-              </a>
+              
+              <span id="checkClose" class="badge bg-primary" data-userno="${loginuser.userNo}">마감 확인</span>
+              <span id="checkConfirm" class="badge bg-success" data-userno="${loginuser.userNo}">승인 확인</span>
+              <span id="checkAlarm" class="badge bg-dark" data-userno="${loginuser.userNo}">댓글 확인</span>
+              	
             </div>
           </div>
         </div>
@@ -113,33 +114,14 @@
                 <i class="me-2 icon-xxs dropdown-item-icon" data-feather="user"></i>회원정보 수정
               </a>
             </li>
-            <li>
-              <a class="dropdown-item"
-                href="#">
-                <i class="me-2 icon-xxs dropdown-item-icon"
-                  data-feather="activity"></i>Activity Log
-              </a>
 
 
-            </li>
 
-            <li>
-              <a class="dropdown-item text-primary" href="#">
-                <i class="me-2 icon-xxs text-primary dropdown-item-icon"
-                  data-feather="star"></i>Go Pro
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">
-                <i class="me-2 icon-xxs dropdown-item-icon"
-                  data-feather="settings"></i>Account Settings
-              </a>
-            </li>
             <li>
             <c:choose>
             	<c:when test="${ loginuser eq null }">
-					<a class="dropdown-item" href="/project-gpmatching/account/login">
-					  <i class="me-2 icon-xxs dropdown-item-icon" data-feather="power"></i>로그인
+					<a class="dropdown-item" href="/project-gpmatching/account/register">
+					  <i class="me-2 icon-xxs dropdown-item-icon" data-feather="power"></i>회원가입
 					</a>
 			    </c:when>
 			    <c:otherwise>
@@ -180,12 +162,3 @@
 
 
 <script src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
-
-<script>
-
-
-
-
-	
-</script>
-	

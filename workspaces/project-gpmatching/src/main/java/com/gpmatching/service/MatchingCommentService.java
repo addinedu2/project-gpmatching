@@ -2,6 +2,7 @@ package com.gpmatching.service;
 
 import java.util.List;
 
+import com.gpmatching.dto.ConfirmAlarmDto;
 import com.gpmatching.dto.MatchingAlarmDto;
 import com.gpmatching.dto.MatchingCommentDto;
 
@@ -11,7 +12,7 @@ public interface MatchingCommentService {
 
 	List<MatchingCommentDto> getMatchingCommentByBoardNo(int boardNo);
 
-	void setCommentStatusConfirm( int commentNo);
+	void setCommentStatusConfirm( int commentNo, ConfirmAlarmDto confirmAlarm);
 
 	void setCommentStatusReject(int commentNo);
 
@@ -23,5 +24,4 @@ public interface MatchingCommentService {
 
 	List<MatchingCommentDto> getMatchingCommentForReview(int boardNo);
 	
-	//int showCommentConfirmCount(int boardNo);
 }

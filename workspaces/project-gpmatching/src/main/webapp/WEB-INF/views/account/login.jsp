@@ -28,7 +28,7 @@
   <title>Sign In | 로그인 </title>
 </head>
 
-<body class="bg-light">
+<body class="bg-dark">
 	<div id="db-wrapper" class="toggled">
 		<!-- navbar vertical -->
 		<!-- Sidebar -->
@@ -50,13 +50,14 @@
           <div class="card-body p-6">
             <div class="mb-4">
               <a href="/project-gpmatching/home">
-              	<img src="/project-gpmatching/resources/assets/images/brand/logo/gps-sidebar.png" class="mb-2" alt="">
+              	<img src="/project-gpmatching/resources/assets/images/brand/logo/gps-sidebar3.png" style="height:40px" class="mb-2" alt="">
               </a>
               <p class="mb-6">ID와 비밀 번호를 입력해주세요</p>
               
             </div>
             <!-- Form -->
             <form id="loginForm" action="login" method="post">
+           <input type="hidden" name="returnUrl" value="${ returnUrl }">
            
               <!-- Username -->
               <div class="mb-3">
@@ -71,17 +72,16 @@
               </div>
               
               <!-- Checkbox -->
-              <div class="d-lg-flex justify-content-between align-items-center
-                  mb-4">
+              <div class="d-lg-flex justify-content-between align-items-center mb-4">
                 <div class="form-check custom-checkbox">
                   <input type="checkbox" class="form-check-input" id="rememberme">
                   <label class="form-check-label" for="rememberme">기억할까요?</label>
-                     
                 </div>
+                <p id="loginCheck"></p>
 
               </div>
               <div>
-                <!-- Button -->
+                <!-- 로그인Button -->
                 <div class="d-grid">
                   <button id="loginBtn" type="submit" class="btn btn-primary">로그인</button>
                 </div>
@@ -91,8 +91,7 @@
                     <a href="/project-gpmatching/account/register" class="fs-5">회원 가입 </a>
                   </div>
                   <div>
-                    <a href="/project-gpmatching/account/forgetPassword" class="text-inherit
-                        fs-5">비밀번호를 잊으셨나요?</a>
+                    <a href="/project-gpmatching/account/forgetPassword" class="text-inherit fs-5">비밀번호 찾기</a>
                          <!-- 비밀번호 찾기 -->
                   </div>
 
@@ -111,53 +110,60 @@
 
 
 
-			<!-- Scripts -->
-			<!-- Libs JS -->
-			<script
-				src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
-			<script
-				src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-			<script
-				src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-			<script
-				src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
-			<script src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
-			<script
-				src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-			<script
-				src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
-			<script
-				src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
-			<script
-				src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+<!-- Scripts -->
+<!-- Libs JS -->
+<script src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
 
 
 
-			<!-- Theme JS -->
-			<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
-			
-			<script>
-				$(function(event) {
-					$('#loginBtn').on('click', function(event){
-						
-						const enterUserId = ${"#userId"}.val();
-						const enterUserPwd = ${"#userPwd"}.val();
-						
-						const userId = "${loginUser.userId}";
-						const userPwd = "${loginUser.userPwd}";
-						
-						if (enterUserId != userId || enterUserPwd != userPwd) {
-							
-						}
-						
-						$("#loginForm").submit();
-					}
-				})
-				
-			</script>	
-			
-			
+<!-- Theme JS -->
+<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
+
+
+
+<script>
+	<% Boolean loginFail = (Boolean)request.getAttribute("loginfail"); %>
+	<% if (loginFail != null && loginFail == true) { %>
+	var loginCheck = document.getElementById('loginCheck');
+	var idField = document.getElementById('userId');
+		alert("로그인 실패 : 아이디 또는 패스워드가 일치하지 않습니다.");
+		loginCheck.innerHTML = '아이디와 비밀번호가 일치하지 않습니다.';
+			   loginCheck.style.color = 'red';
+			   idField.value = '<%= request.getAttribute("userId") %>'
+	<% } %>
+</script>
+   
+ <script>
+	document.getElementById('loginBtn').addEventListener('click', checkUserInfo);
+	  
+	var idField = document.getElementById('userId');
+	var passwordField = document.getElementById('userPwd');
+	var loginBtn = document.getElementById('loginBtn');
+    var loginCheck = document.getElementById('loginCheck');
+	
+	function checkUserInfo(){
+	   var userId = idField.value;
+	   var userPwd = passwordField.value;
+	  
+	   if(userId.trim() === '' || userPwd.trim() === ''){
+		   alert("아이디와 비밀번호를 입력해주세요.")
+		   loginCheck.innerHTML = '아이디와 비밀번호를 입력해주세요.';
+		   loginCheck.style.color = 'red';
+	   }else{
+		   loginCheck.innerHTML = '';
+		   $("#loginForm").submit();
+	   }
+	}
+</script>
 			
 </body>
 

@@ -56,7 +56,27 @@ public class MatchingAlarmController {
 		return "success";
 
 	}
+	
+	@GetMapping(path= {"/modules/header/checkConfirm"})
+	@ResponseBody
+	public String checkConfirmList(HttpSession session, int userNo) {
+		
+		matchingAlarmService.deleteConfirmListByUserNo(userNo);
+		
+		return "success";
 
+	}
+
+	@GetMapping(path= {"/modules/header/checkClose"})
+	@ResponseBody
+	public String checkCloseList(HttpSession session, int userNo) {
+		
+		matchingAlarmService.deleteCloseListByUserNo(userNo);
+		
+		return "success";
+
+	}
+	
 	@GetMapping(path= {"/modules/header"})
 	@ResponseBody
 	public int mCountAlarms(HttpSession session,int userNo) {

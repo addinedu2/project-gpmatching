@@ -1,9 +1,8 @@
 package com.gpmatching.matchingboard.lolboard.service;
 
 import java.util.List;
-import java.util.Map;
 
-import com.gpmatching.dto.MatchingCommentDto;
+import com.gpmatching.dto.CloseAlarmDto;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 
 
@@ -33,7 +32,7 @@ public interface LolBoardService {
 
 	void setNowConfirmCount(int confirmCount);
 
-	void setMatchingCloseTrue(int boardNo);
+	void setMatchingCloseTrue(int boardNo, CloseAlarmDto closeAlarm);
 
 	boolean isMatchingCloseCondition(int boardNo);
 	
