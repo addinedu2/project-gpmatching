@@ -66,7 +66,7 @@
 					items="${requestScope.matchingBoardList }" varStatus="loop">
 					<tr>
 						<%-- <td>${ matchingBoardList.boardTitle }</td> --%>
-						<td><a href="project-gpmatching/boardMatching/lolBoard/lol-list#tr-${matchingBoardList.boardNo}">${ matchingBoardList.boardTitle }</a></td>
+						<td><a href="#" class="gameboard-link" data-gameNo="${matchingBoardList.gameNo}" data-boardNo="${matchingBoardList.boardNo}">${ matchingBoardList.boardTitle }</a></td>
 						
 						<td>${ matchingBoardList.boardContent }</td>
 						<td>${ gameMap[matchingBoardList.gameNo] }</td>
@@ -165,6 +165,52 @@
 	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 
 	<script src="/project-gpmatching/resources/assets/js/common.js"></script>
+
+<script type="text/javascript">
+	document.addEventListener("")
+
+
+</script>
+
+
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        var gameboardLinks = document.querySelectorAll('.gameboard-link');
+
+        for (var i = 0; i < gameboardLinks.length; i++) {
+        	gameboardLinks[i].addEventListener('click', function(event) {
+                event.preventDefault(); // 기본 동작을 중지합니다.
+
+                var gameNo = this.getAttribute('data-gameNo');
+                var boardNo = this.getAttribute('data-boardNo');
+                var gamePath = '';
+
+                // 게임 번호에 따라 기본 링크를 설정합니다.
+                if (gameNo == '4') {
+                    gamePath = 'pubgBoard/battleground-list';
+                } else if (gameNo == '5') {
+                    gamePath = 'lolBoard/lol-list';
+                } else if (gameNo == '7') {
+                    gamePath = 'overwatchBoard/overwatch-list';
+                } else {
+                    // 예외 처리: 다른 게임 번호에 대한 경로를 설정하거나 기본 경로를 지정할 수 있습니다.
+                    gamePath = 'default-path';
+                }
+                
+                // 동적으로 생성된 URL을 만듭니다.
+                var dynamicURL = '/project-gpmatching/boardMatching/' + gamePath + '#' + 'tr-' + boardNo;
+
+                // 동적으로 생성된 URL로 이동합니다.
+                window.location.href = dynamicURL;
+            });
+        }
+    });
+</script>
+
+
+
+
 
 </body>
 

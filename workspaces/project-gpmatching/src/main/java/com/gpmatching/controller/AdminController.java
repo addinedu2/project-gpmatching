@@ -156,9 +156,13 @@ public class AdminController {
 	    model.addAttribute("gameMap", gameMap);
 	    
 	    
+	    System.out.println(getcountReportBoardPosts);
+	    System.out.println(reportBoardPager);
+	    
 	    return "admin/adminUserWriteBoardList";
 	}
 	
+
 	
 }
 	
