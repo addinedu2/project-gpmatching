@@ -21,7 +21,6 @@
 package com.gpmatching.matchingboard.lolboard.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -33,8 +32,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gpmatching.dto.MatchingAlarmDto;
-import com.gpmatching.dto.MatchingCommentDto;
+import com.gpmatching.dto.CloseAlarmDto;
 import com.gpmatching.matchingboard.dto.LolDto;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 import com.gpmatching.matchingboard.lolboard.service.LolBoardService;
@@ -190,9 +188,9 @@ public class LolBoardController {
 	
 	
 	@GetMapping(path = { "/matchingCloseTrue"})
-	public String MatchingClose(int boardNo) {
+	public String MatchingClose(int boardNo, CloseAlarmDto closeAlarm) {
 		if(lolBoardService.isMatchingCloseCondition(boardNo)) {
-			lolBoardService.setMatchingCloseTrue(boardNo);
+			lolBoardService.setMatchingCloseTrue(boardNo, closeAlarm);
 			return "redirect:lol-list";
 		}else {
 			return "redirect:lol-list";
