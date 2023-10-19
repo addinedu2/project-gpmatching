@@ -72,8 +72,7 @@
               </div>
               
               <!-- Checkbox -->
-              <div class="d-lg-flex justify-content-between align-items-center
-                  mb-4">
+              <div class="d-lg-flex justify-content-between align-items-center mb-4">
                 <div class="form-check custom-checkbox">
                   <input type="checkbox" class="form-check-input" id="rememberme">
                   <label class="form-check-label" for="rememberme">기억할까요?</label>
@@ -92,8 +91,7 @@
                     <a href="/project-gpmatching/account/register" class="fs-5">회원 가입 </a>
                   </div>
                   <div>
-                    <a href="/project-gpmatching/account/forgetPassword" class="text-inherit
-                        fs-5">비밀번호를 잊으셨나요?</a>
+                    <a href="/project-gpmatching/account/forgetPassword" class="text-inherit fs-5">비밀번호 찾기</a>
                          <!-- 비밀번호 찾기 -->
                   </div>
 
@@ -112,68 +110,60 @@
 
 
 
-			<!-- Scripts -->
-			<!-- Libs JS -->
-			<script
-				src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
-			<script
-				src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-			<script
-				src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-			<script
-				src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
-			<script src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
-			<script
-				src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-			<script
-				src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
-			<script
-				src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
-			<script
-				src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+<!-- Scripts -->
+<!-- Libs JS -->
+<script src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
 
 
 
-			<!-- Theme JS -->
-			<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
-			
+<!-- Theme JS -->
+<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
 
 
-			<script>
-				<% Boolean loginFail = (Boolean)request.getAttribute("loginfail"); %>
-				<% if (loginFail != null && loginFail == true) { %>
-				var loginCheck = document.getElementById('loginCheck');
-				var idField = document.getElementById('userId');
-					alert("로그인 실패 : 아이디 또는 패스워드가 일치하지 않습니다.");
-					loginCheck.innerHTML = '아이디와 비밀번호가 일치하지 않습니다.';
-						   loginCheck.style.color = 'red';
-						   idField.value = '<%= request.getAttribute("userId") %>'
-				<% } %>
-			</script>
-		    
-		    <script>
-		  	   document.getElementById('loginBtn').addEventListener('click', checkUserInfo);
-		  	  
-					var idField = document.getElementById('userId');
-					var passwordField = document.getElementById('userPwd');
-					var loginBtn = document.getElementById('loginBtn');
-				    var loginCheck = document.getElementById('loginCheck');
-					
-					function checkUserInfo(){
-					   var userId = idField.value;
-					   var userPwd = passwordField.value;
-					  
-					   if(userId.trim() === '' || userPwd.trim() === ''){
-						   alert("아이디와 비밀번호를 입력해주세요.")
-						   loginCheck.innerHTML = '아이디와 비밀번호를 입력해주세요.';
-						   loginCheck.style.color = 'red';
-					   }else{
-						   loginCheck.innerHTML = '';
-						   $("#loginForm").submit();
-					   }
-					}
-			</script>
+
+<script>
+	<% Boolean loginFail = (Boolean)request.getAttribute("loginfail"); %>
+	<% if (loginFail != null && loginFail == true) { %>
+	var loginCheck = document.getElementById('loginCheck');
+	var idField = document.getElementById('userId');
+		alert("로그인 실패 : 아이디 또는 패스워드가 일치하지 않습니다.");
+		loginCheck.innerHTML = '아이디와 비밀번호가 일치하지 않습니다.';
+			   loginCheck.style.color = 'red';
+			   idField.value = '<%= request.getAttribute("userId") %>'
+	<% } %>
+</script>
+   
+ <script>
+	document.getElementById('loginBtn').addEventListener('click', checkUserInfo);
+	  
+	var idField = document.getElementById('userId');
+	var passwordField = document.getElementById('userPwd');
+	var loginBtn = document.getElementById('loginBtn');
+    var loginCheck = document.getElementById('loginCheck');
+	
+	function checkUserInfo(){
+	   var userId = idField.value;
+	   var userPwd = passwordField.value;
+	  
+	   if(userId.trim() === '' || userPwd.trim() === ''){
+		   alert("아이디와 비밀번호를 입력해주세요.")
+		   loginCheck.innerHTML = '아이디와 비밀번호를 입력해주세요.';
+		   loginCheck.style.color = 'red';
+	   }else{
+		   loginCheck.innerHTML = '';
+		   $("#loginForm").submit();
+	   }
+	}
+</script>
 			
 </body>
 

@@ -12,7 +12,7 @@
            
               <div class="border-bottom pb-4 mb-4 ">
                
-                  <h3 class="mb-0 fw-bold">Overview</h3>
+                  <h3 class="mb-0 fw-bold">관리자 페이지</h3>
               
            
             </div>
@@ -27,14 +27,12 @@
                 background-size: cover;">
             </div>
             <div class="bg-white rounded-bottom smooth-shadow-sm ">
-              <div class="d-flex align-items-center justify-content-between
-                  pt-4 pb-6 px-4">
+              <div class="d-flex align-items-center justify-content-between pt-4 pb-6 px-4">
                 <div class="d-flex align-items-center">
                  
                   <!-- avatar -->
                   <div class="avatar-xxl avatar-indicators avatar-online me-2
-                      position-relative d-flex justify-content-end
-                      align-items-end mt-n10">
+                      position-relative d-flex justify-content-end align-items-end mt-n10">
                     	<c:choose> 
 	                    	<c:when test="${loginuser.userImage == null}">
 			                    <img src="/project-gpmatching/resources/assets/images/avatar/anonymous.png" class="avatar-xxl
@@ -58,15 +56,13 @@
                       </a>
                     </h2>
 
-                    <p class="mb-0 d-block">@${loginuser.userId} <!-- 원래 유저 아이디 인데 userNo 넘어오는거 테스트용--></p>
+                    <p class="mb-0 d-block">@${loginuser.userId}</p>
 
                   </div>
                 </div>
                 <div>
-                  <a href="/project-gpmatching/account/editMypage" class="btn btn-outline-primary
-                      d-none d-md-block">회원정보수정</a>
-                  <a href="/project-gpmatching/commonBoard/reportWrite" class="btn btn-outline-primary
-                      d-none d-md-block">신고하기</a>
+                  <a href="/project-gpmatching/account/editMypage" class="btn btn-outline-primary d-none d-md-block">회원정보수정</a>
+                  <a href="/project-gpmatching/commonBoard/reportWrite" class="btn btn-outline-primary d-none d-md-block">신고하기</a>
                 </div>
               </div>
               <!-- nav -->
@@ -75,10 +71,10 @@
                   <a class="nav-link" href="#">Overview</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" href="/project-gpmatching/admin/adminUserList" id="UserListLink">회원목록</a>
+                  <a class="nav-link" href="/project-gpmatching/admin/adminUserList" id="UserListLink">회원 목록</a>
                 </li>
 
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a class="nav-link" href="#">Files</a>
                 </li>
                 <li class="nav-item">
@@ -91,7 +87,7 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Activity</a>
-                </li>
+                </li> -->
               </ul>
             </div>
           </div>
