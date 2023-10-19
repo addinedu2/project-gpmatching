@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.gpmatching.dto.MatchingCommentDto;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 
 @Mapper
@@ -67,7 +68,7 @@ public interface LolBoardMapper {
 	
 	
 	//User 테이블, MatchingBoard 테이블, Lol 테이블 join해서 같이 보여주는 코드(게임명: "league of legends") 
-	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, "
+	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.userNo, "
 			+ "m.preferGender, m.mic, m.headCount, m.confirmCount, m.matchingClose, m.startTime, m.endTime, "
 			+ "m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
 			+ "from MatchingBoard m "
@@ -101,7 +102,7 @@ public interface LolBoardMapper {
 	
 
 	//선택한 티어에 해당하는 글만 보여줌 (나중에 동적 쿼리로 확장 예정 -허지웅)
-	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, "
+	@Select( "select u.nickname, m.userNo, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, "
 			+ "m.mic, m.headCount, m.confirmCount, m.matchingClose, m.regDate, m.readCount, m.startTime, m.endTime "
 			+ "l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
 			+ "from MatchingBoard m "
@@ -118,7 +119,7 @@ public interface LolBoardMapper {
 
 
 	//게시판 검색 기능인데 제목만 (-허지웅)
-	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, "
+	@Select( "select u.nickname, m.boardNo, m.boardTitle, m.boardContent, m.preferGender, m.userNo, "
 			+ "m.mic, m.headCount, m.confirmCount, m.matchingClose, m.regDate, m.readCount, l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
 
 			+ "from MatchingBoard m "
@@ -142,4 +143,10 @@ public interface LolBoardMapper {
 			+ "where boardNo = #{boardNo}")
 	int updateMatchingCloseTrueByBoardNo(int boardNo);
 	
+	//삭제 할수도 있음 (-허지웅)
+	@Select("select * from MatchingComment where boardNo = #{ boardNo }")
+	List<MatchingCommentDto> selectCommentListByBoardNo(int boardNo);
+	
+	@Select("select count(*) from MatchingComment where boardNo = #{ boardNo } and userNo = #{ userNo }")
+	int selectCommentCountByBoardNoAndUserNo(@Param("boardNo") int boardNo, @Param("userNo") int userNo);
 }

@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gpmatching.dto.MatchingAlarmDto;
 import com.gpmatching.dto.MatchingCommentDto;
@@ -169,7 +170,6 @@ public class LolBoardController {
 		
 		List<MatchingBoardDto> matchingLolList;
 		
-		
 		if (lolTier != null) {
 			
 			matchingLolList = lolBoardService.getMatchingBoardListByLolTier("league of legends", lolTier);
@@ -182,7 +182,7 @@ public class LolBoardController {
 			matchingLolList = lolBoardService.getSelectLolBoardListByGameName("league of legends");
 			
 		}
-			
+		
 		model.addAttribute("matchingLolList", matchingLolList);
 			
 		return "/boardMatching/lolBoard/lol-list";
@@ -200,5 +200,13 @@ public class LolBoardController {
 		
 	}
 	
+	@GetMapping(path = { "/check-comment-dup" }, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String checkCommentDuplication(int boardNo, int userNo) {
+		
+		boolean valid = lolBoardService.isExistMatchingComment(boardNo, userNo);
+		return String.valueOf(valid);
+	}
+
 	
 }

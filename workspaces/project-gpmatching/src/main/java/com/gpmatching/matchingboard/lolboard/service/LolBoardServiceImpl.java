@@ -137,6 +137,22 @@ public class LolBoardServiceImpl implements LolBoardService {
 		
 	}
 
+	@Override
+	public List<MatchingCommentDto> getMatchingCommentListByBoardNo(int boardNo) {
+
+		List<MatchingCommentDto> comments = matchingCommentMapper.selectMatchingCommentListByBoardNo(boardNo);
+		
+		return comments;
+	}
+
+	@Override
+	public boolean isExistMatchingComment(int boardNo, int userNo) {
+
+		int count = mapper.selectCommentCountByBoardNoAndUserNo(boardNo, userNo);
+		
+		return count == 0;
+	}
+
 
 
 }

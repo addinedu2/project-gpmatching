@@ -37,5 +37,9 @@ public interface LolBoardService {
 
 	boolean isMatchingCloseCondition(int boardNo);
 	
+	List<MatchingCommentDto> getMatchingCommentListByBoardNo(int boardNo);
+	
+	boolean isExistMatchingComment(int boardNo, int userNo);
+	
 
 }

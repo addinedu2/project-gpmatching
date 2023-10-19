@@ -164,15 +164,6 @@ public class MatchingCommentServiceImpl implements MatchingCommentService{
 		List<MatchingCommentDto> review = matchingCommentMapper.selectMatchingCommentListForReview(boardNo);
 		return review;
 	}
-
-
-	
-
-
-	
-
-
-	
 	
 	
 //	@Override

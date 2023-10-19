@@ -2,6 +2,8 @@ package com.gpmatching.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gpmatching.dto.MatchingAlarmDto;
 import com.gpmatching.dto.MatchingCommentDto;
+import com.gpmatching.dto.UserDto;
 import com.gpmatching.service.MatchingAlarmService;
 import com.gpmatching.service.MatchingCommentService;
 
@@ -29,14 +32,11 @@ public class MatchingCommentController {
 	
 	@PostMapping(path = { "/write-comment" })
 	public String writeMatchingComment(MatchingCommentDto matchingComment, MatchingAlarmDto matchingAlarm, 
-									   @RequestParam(defaultValue = "-1") int boardNo) {
-				
+									   @RequestParam(defaultValue = "-1") int boardNo) {		
+		
 		matchingCommentService.writeMatchingComment(matchingComment, matchingAlarm);
-		
-//		// 댓글이 작성될때 알림 테이블에 정보 저장 (미완성)
-//		matchingAlarmService.saveMatchingAlarm(matchingAlarmDto);
-		
 		return "redirect:lol-list";
+		
 	}
 	
 	@PostMapping(path = { "/ajax-write-comment" })
@@ -47,8 +47,7 @@ public class MatchingCommentController {
 		
 		matchingCommentService.writeMatchingComment(matchingComment, matchingAlarm);
 		
-//		// 댓글이 작성될때 알림 테이블에 정보 저장 (미완성)
-//		matchingAlarmService.saveMatchingAlarm(matchingAlarmDto);
+
 		
 		return "success";
 	}
