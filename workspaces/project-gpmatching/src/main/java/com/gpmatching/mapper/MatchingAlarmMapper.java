@@ -24,46 +24,35 @@ public interface MatchingAlarmMapper {
 	@Options(useGeneratedKeys = true, keyProperty = "confirmNo")
 	void insertConfirmAlarm(ConfirmAlarmDto confirmAlarm);
 	
-	//원본 19일에 확인
-//	@Select("select ma.alarmNo, ma.commentNo, ma.alarmContent, ma.regDate, mc.boardNo, u.nickname "
-//			  + "from MatchingComment mc "
-//			  + "inner join MatchingAlarm ma on ma.commentNo = mc.commentNo "
-//			  + "inner join User u on u.userNo = mc.userNo "
-//			  + "where mc.userNo != ${userNo} "
-//			  + "order by ma.commentNo desc")
-//	List<MatchingAlarmDto> selectAlarmListByUserNo(int userNo);
 	
-//	@Select("select * "
-//	      + "from (select ma.alarmNo, ma.commentNo, ma.alarmContent, ma.regDate, mc.boardNo, u.nickname "
-//		  + "      from MatchingComment mc "
-//		  + "      inner join MatchingAlarm ma on ma.commentNo = mc.commentNo "
-//		  + "      inner join User u on u.userNo = mc.userNo "
-//		  + "      where mc.userNo != ${userNo} "
-//		  + "      union "
-//	  	  + "      select ca.confirmNo, ca.commentNo, ca.confirmContent, ca.regDate, mc.boardNo, u.nickname "
-//		  + "      from MatchingComment mc inner join ConfirmAlarm ca on ca.commentNo = mc.commentNo "
-//		  + "      inner join User u on u.userNo = mc.userNo "
-//		  + "      where mc.status = 1 AND u.userNo = ${userNo}) as combined_result "
-//		  + "      order by regDate desc")
-//	List<MatchingAlarmDto> selectAlarmListByUserNo(int userNo);//승인+댓글
-
-	
-	@Select("SELECT ma.alarmNo, ma.commentNo, ma.alarmContent, ma.regDate, mc.boardNo, u.nickname "
-		  + "FROM MatchingComment mc "
-		  + "INNER JOIN MatchingAlarm ma ON ma.commentNo = mc.commentNo "
-		  + "INNER JOIN User u ON u.userNo = mc.userNo "
-		  + "WHERE mc.userNo != ${userNo} "
-		  + "UNION "
-		  + "SELECT ca.confirmNo, ca.commentNo, ca.confirmContent, ca.regDate, mc.boardNo, "
-		  + "      (SELECT u.nickname "
-		  + "       FROM User u "
-		  + "       WHERE u.userNo = mb.userNo) AS nickname "
-		  + "       FROM MatchingComment mc "
-		  + "       INNER JOIN ConfirmAlarm ca ON ca.commentNo = mc.commentNo "
-		  + "       INNER JOIN User u ON u.userNo = mc.userNo "
-		  + "       INNER JOIN MatchingBoard mb ON mb.boardNo = mc.boardNo "
-		  + "       WHERE mc.status = 1 AND u.userNo = ${userNo} "
-		  + "       ORDER BY regDate DESC;")
+	@Select("SELECT result.alarmNo, result.commentNo, result.alarmContent, result.regDate, result.nickname "
+			  + "FROM ("
+			  + "      SELECT ma.alarmNo, ma.commentNo, ma.alarmContent, ma.regDate, u.nickname "
+			  + "      FROM MatchingComment mc "
+			  + "      INNER JOIN MatchingAlarm ma ON ma.commentNo = mc.commentNo "
+			  + "      INNER JOIN User u ON u.userNo = mc.userNo "
+			  + "      WHERE mc.userNo != 14 "
+			  + "      UNION "
+			  + "      SELECT ca.confirmNo, ca.commentNo, ca.confirmContent, ca.regDate, "
+			  + "            (SELECT u.nickname "
+			  + "             FROM User u "
+			  + "             WHERE u.userNo = mb.userNo) AS nickname "
+			  + "             FROM MatchingComment mc "
+			  + "             INNER JOIN ConfirmAlarm ca ON ca.commentNo = mc.commentNo "
+			  + "             INNER JOIN User u ON u.userNo = mc.userNo "
+			  + "             INNER JOIN MatchingBoard mb ON mb.boardNo = mc.boardNo "
+			  + "             WHERE (mc.status = 1 AND u.userNo = 14) "
+			  + "             UNION "
+			  + "             SELECT cla.closeNo, cla.boardNo, cla.closeContent, cla.regDate, "
+			  + "                   (SELECT u.nickname "
+			  + "                    FROM User u "
+			  + "                    WHERE u.userNo = mc.userNo) AS nickname "
+			  + "                    FROM MatchingBoard mb "
+			  + "                    INNER JOIN CloseAlarm cla ON cla.boardNo = mb.boardNo "
+			  + "                    INNER JOIN MatchingComment mc ON mc.boardNo = mb.boardNo "
+			  + "                    WHERE (mb.matchingClose = 1 AND mc.userNo = 14)"
+			  + "                   ) AS result "
+			  + "                     ORDER BY result.regDate DESC")
 	List<MatchingAlarmDto> selectAlarmListByUserNo(int userNo);
 
 	@Delete("delete "
