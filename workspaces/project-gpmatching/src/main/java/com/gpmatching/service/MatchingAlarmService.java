@@ -15,4 +15,6 @@ public interface MatchingAlarmService {
 	int countMatchingAlarmNoByUserNo(int userNo);
 
 	void deleteConfirmListByUserNo(int userNo);
+
+	void deleteCloseListByUserNo(int userNo);
 }

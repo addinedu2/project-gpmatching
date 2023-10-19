@@ -7,34 +7,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
 
 
 <!-- Favicon icon-->
-<link rel="shortcut icon" type="image/x-icon"
-	href="/project-gpmatching/resources/assets/images/favicon/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="/project-gpmatching/resources/assets/images/favicon/favicon.ico">
 <!-- Theme CSS -->
-<link rel="stylesheet"
-	href="/project-gpmatching/resources/assets/css/theme.min.css">
-	<link rel="stylesheet"
-	href="/project-gpmatching/resources/assets/css/theme.css">
+<link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
+<link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.css">
 
 <!-- Libs CSS -->
-<link
-	href="/project-gpmatching/resources/assets/libs/bootstrap-icons/font/bootstrap-icons.css"
-	rel="stylesheet">
-<link
-	href="/project-gpmatching/resources/assets/libs/dropzone/dist/dropzone.css"
-	rel="stylesheet">
-<link
-	href="/project-gpmatching/resources/assets/libs/@mdi/font/css/materialdesignicons.min.css"
-	rel="stylesheet" />
-<link
-	href="/project-gpmatching/resources/assets/libs/prismjs/themes/prism-okaidia.css"
-	rel="stylesheet">
-	<title>게시판글쓰기</title>
+<link href="/project-gpmatching/resources/assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="/project-gpmatching/resources/assets/libs/dropzone/dist/dropzone.css" rel="stylesheet">
+<link href="/project-gpmatching/resources/assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
+<link href="/project-gpmatching/resources/assets/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet">
+
+<title>게시판글쓰기</title>
 	
 </head>
 <body class="bg-dark">
@@ -175,8 +164,7 @@
 												items="${ reportBoard.boardCommentList }">
 												<tr>
 													<td class="align-middle">
-														<div id="comment-view-area-${ comment.commentNo }"
-															style="padding-left: ${comment.depth * 20}px;">
+														<div id="comment-view-area-${ comment.commentNo }" style="padding-left: ${comment.depth * 20}px;">
 															<!-- 여기에 패딩 left 넣어서 들어가는거 처리 -->
 															<c:choose>
 																<c:when test="${ comment.deleted }">
@@ -233,31 +221,22 @@
 
 														<div id="comment-edit-area-${ comment.commentNo }"
 															style="display: none">
-															${ comment.nickname } &nbsp;&nbsp; [
-															<fmt:formatDate value="${ comment.regDate }"
-																pattern="yyyy-MM-dd" />
-															] <br />
-															<br />
+															${ comment.nickname } &nbsp;&nbsp; 
+															[<fmt:formatDate value="${ comment.regDate }" pattern="yyyy-MM-dd" />]
+															<br /> <br />
 															<form action="editComment" method="post">
-																<input type="hidden" name="commentNo"
-																	value="${ comment.commentNo }"> <input
-																	type="hidden" name="commonNo"
-																	value="${ reportBoard.commonNo }"> <input
-																	type="hidden" name="pageNo" value="${ pageNo }">
-																<div class="col-md-8 col-xxl-9  mt-0 mt-md-3"
-																	style="width: 99%; resize: none;" rows="3">
+																<input type="hidden" name="commentNo" value="${ comment.commentNo }">
+																<input type="hidden" name="commonNo" value="${ reportBoard.commonNo }">
+																<input type="hidden" name="pageNo" value="${ pageNo }">
+																<div class="col-md-8 col-xxl-9  mt-0 mt-md-3" style="width: 99%; resize: none;" rows="3">
 																	<textarea class="form-control" aria-describedby="name"
-																		name="commentContent" style="resize: none;" rows="3">${ comment.commentContent }</textarea>
+																			  name="commentContent" style="resize: none;" rows="3">${ comment.commentContent }</textarea>
 																</div>
 															</form>
 															<br />
 															<div>
-																<a class="update-comment"
-																	data-comment-no="${ comment.commentNo }"
-																	href="javascript:">수정</a> &nbsp; <a
-																	class="cancel-edit-comment"
-																	data-comment-no="${ comment.commentNo }"
-																	href="javascript:">취소</a>
+																<a class="update-comment" data-comment-no="${ comment.commentNo }" href="javascript:">수정</a> &nbsp;
+																<a class="cancel-edit-comment" data-comment-no="${ comment.commentNo }" href="javascript:">취소</a>
 															</div>
 														</div>
 
@@ -282,98 +261,90 @@
 
 	
 	
-	<!-- Libs JS -->
-	<script
-		src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+<!-- Libs JS -->
+<script src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
 
-	<script>
-	 $(function(event) {
-		
-		$('#delete-board-lnk').on('click', function(event) {
-			const yes = confirm(${ commonBoard.commonNo } + "번 게시물을 삭제할까요?");
-			if (yes) {
-				location.href = 'deleteCommon/' + ${ commonBoard.commonNo } + "?pageNo=" + ${ pageNo };
-			}
-		});
-		
-		// 댓글 쓰기 이벤트 처리
-		$("#write-comment-lnk").on("click", function(event) {
-			$('#commentform').submit(); // <input type="submit"을 클릭한 것과 같은 효과 --> form을 submit
-		});
-		
-		// 댓글 삭제 이벤트 처리
-		$(".delete-comment").on('click', function(event) {
-			const commentNo = $(this).attr("data-comment-no");			
-			const yn = confirm(commentNo + "번 댓글을 삭제할까요?");
-			if (yn) { /* 여기서 BoardCommentController.java 의 /deleteComment에 연결시킬 것 */
-				location.href = 'deleteComment?commentNo=' + commentNo + 
-											  '&commonNo=' + ${ commonBoard.commonNo } + 
-											  '&pageNo=' + ${ pageNo };
-			}
-		});
-
-		
-		let currentEditCommentNo = null;
-		
-		// 편집 링크 클릭 이벤트 처리
-		$(".edit-comment").on('click', function(event) {
-			const commentNo = $(this).attr("data-comment-no");
-			
-			$('#comment-edit-area-' + commentNo).css('display', '');
-			$('#comment-view-area-' + commentNo).css('display', 'none');
-			
-			if (currentEditCommentNo) { // 이전에 편집하던 요소의 표시 상태 변경 (복원)
-				$('#comment-edit-area-' + currentEditCommentNo).css('display', 'none');
-				$('#comment-view-area-' + currentEditCommentNo).css('display', '');
-			}
-			currentEditCommentNo = commentNo;
-			
-		}); // end of addEventListener
-
-		
-		// 편집 취소 링크 클릭 이벤트 처리
-		$(".cancel-edit-comment").on('click', function(event) {
-			const commentNo = $(this).attr("data-comment-no");
-			
-			$('#comment-edit-area-' + commentNo).css('display', 'none');
-			$('#comment-view-area-' + commentNo).css('display', '');
-			
-			currentEditCommentNo = null;
-			
-		}); // end of addEventListener
-		
-		// 댓글 수정 이벤트 처리
-		$(".update-comment").click(function(event) {
-
-			// const commentNo = $(this).attr("data-comment-no");
-			const commentNo = $(this).data('comment-no'); // data-속성이름="값" 으로 표현된 속성의 값 읽기
-			$('#comment-edit-area-' + commentNo + ' form').submit();
-			
-		});
-
-	});</script>
+<script>
+ $(function(event) {
 	
+	$('#delete-board-lnk').on('click', function(event) {
+		const yes = confirm(${ commonBoard.commonNo } + "번 게시물을 삭제할까요?");
+		if (yes) {
+			location.href = 'deleteCommon/' + ${ commonBoard.commonNo } + "?pageNo=" + ${ pageNo };
+		}
+	});
+	
+	// 댓글 쓰기 이벤트 처리
+	$("#write-comment-lnk").on("click", function(event) {
+		$('#commentform').submit(); // <input type="submit"을 클릭한 것과 같은 효과 --> form을 submit
+	});
+	
+	// 댓글 삭제 이벤트 처리
+	$(".delete-comment").on('click', function(event) {
+		const commentNo = $(this).attr("data-comment-no");			
+		const yn = confirm(commentNo + "번 댓글을 삭제할까요?");
+		if (yn) { /* 여기서 BoardCommentController.java 의 /deleteComment에 연결시킬 것 */
+			location.href = 'deleteComment?commentNo=' + commentNo + 
+										  '&commonNo=' + ${ commonBoard.commonNo } + 
+										  '&pageNo=' + ${ pageNo };
+		}
+	});
 
-	<!-- Theme JS -->
-	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
-	<script src="/project-gpmatching/resources/assets/js/common.js"></script>
+	
+	let currentEditCommentNo = null;
+	
+	// 편집 링크 클릭 이벤트 처리
+	$(".edit-comment").on('click', function(event) {
+		const commentNo = $(this).attr("data-comment-no");
+		
+		$('#comment-edit-area-' + commentNo).css('display', '');
+		$('#comment-view-area-' + commentNo).css('display', 'none');
+		
+		if (currentEditCommentNo) { // 이전에 편집하던 요소의 표시 상태 변경 (복원)
+			$('#comment-edit-area-' + currentEditCommentNo).css('display', 'none');
+			$('#comment-view-area-' + currentEditCommentNo).css('display', '');
+		}
+		currentEditCommentNo = commentNo;
+		
+	}); // end of addEventListener
+
+	
+	// 편집 취소 링크 클릭 이벤트 처리
+	$(".cancel-edit-comment").on('click', function(event) {
+		const commentNo = $(this).attr("data-comment-no");
+		
+		$('#comment-edit-area-' + commentNo).css('display', 'none');
+		$('#comment-view-area-' + commentNo).css('display', '');
+		
+		currentEditCommentNo = null;
+		
+	}); // end of addEventListener
+	
+	// 댓글 수정 이벤트 처리
+	$(".update-comment").click(function(event) {
+
+		// const commentNo = $(this).attr("data-comment-no");
+		const commentNo = $(this).data('comment-no'); // data-속성이름="값" 으로 표현된 속성의 값 읽기
+		$('#comment-edit-area-' + commentNo + ' form').submit();
+		
+	});
+
+});
+ </script>
+
+
+<!-- Theme JS -->
+<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
+<script src="/project-gpmatching/resources/assets/js/common.js"></script>
 
 </body>
 </html>

@@ -34,8 +34,12 @@
 	rel="stylesheet">
 
 <style>
-.table-container h2 {
-	color: white;
+
+.gameboard-link, .board-link, .listCommon {
+    color: white;
+}
+h2 {
+    color: white;
 }
 </style>
 
@@ -47,7 +51,7 @@
 
 
 	<!-- commonList -->
-
+	<br>
 	<div class="table-container">
 		</>
 		<h2>매칭 게시판</h2>
@@ -82,7 +86,8 @@
 			<ul class="pagination justify-content-center mb-0">${ matchingBoardPager }</ul>
 		</div>
 	</div>
-
+<br>
+<br>
 	<div class="table-container">
 		<h2>자유 게시판</h2>
 		<table border="1" class="table text-light" style="text-align: center">
@@ -98,7 +103,7 @@
 					items="${requestScope.commonBoardList }" varStatus="loop">
 					<tr>
 
-						<td><a href="/project-gpmatching/commonBoard/commonDetail?commonNo=${commonBoard.boardNo}&pageNo=1">${commonBoard.boardTitle}</a></td>
+						<td><a class="board-link" href="/project-gpmatching/commonBoard/commonDetail?commonNo=${commonBoard.boardNo}&pageNo=1">${commonBoard.boardTitle}</a></td>
 						<td><fmt:formatDate value="${ commonBoard.regDate }"
 								pattern="yyyy-MM-dd" />
 						<td>${ commonBoard.deleted }</td>
@@ -111,7 +116,8 @@
 			<ul class="pagination justify-content-center mb-0">${ commonBoardPager }</ul>
 		</div>
 	</div>
-
+<br>
+<br>
 
 
 	<div class="table-container">
@@ -127,7 +133,7 @@
 				<c:forEach var="reportBoard"
 					items="${requestScope.reportBoardList }" varStatus="loop">
 					<tr>
-						<td><a href="/project-gpmatching/commonBoard/reportDetail?commonNo=${reportBoard.boardNo}&pageNo=1">${ reportBoard.boardTitle }</td>
+						<td><a class="board-link" href="/project-gpmatching/commonBoard/reportDetail?commonNo=${reportBoard.boardNo}&pageNo=1">${ reportBoard.boardTitle }</td>
 						<td><fmt:formatDate value="${ reportBoard.regDate }"
 								pattern="yyyy-MM-dd" /></td>
 					</tr>

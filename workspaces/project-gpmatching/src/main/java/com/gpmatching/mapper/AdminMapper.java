@@ -116,4 +116,14 @@ public interface AdminMapper {
 			+ "from CommonBoard "
 			+ "where userNo = #{ userNo } and category = 'report'")
 	int getcountReportBoardPosts(int userNo);
+	
+	
+//	//회원이 쓴 글 페이지별 조회
+//	@Select( "select userNo, userPwd, userId, userEmail, nickname, userPhone, userGrade, regDate, deletedUser, userImage " +
+//			"from User " +
+//			"ORDER BY regDate DESC " +
+//			"LIMIT #{from}, #{count}")
+//	List<AdminDto> selectUserList(@Param("from") int from, @Param("count") int count);
+	
+	
 }
