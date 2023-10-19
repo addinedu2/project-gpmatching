@@ -107,14 +107,14 @@ public interface AdminMapper {
 		 	  + "from CommonBoard cb "
 		 	  + "inner join User u "
 		 	  + "on u.userNo = cb.userNo "
-			  + "where u.userNo = #{ userNo } and cb.category = 'review' "   //여기서 데이터에서 공통만 뽑아냄, 위에서 데이터 가져오는거, 아래서 데이터 가져갈 것도 신경 쓸 것
+			  + "where u.userNo = #{ userNo } and cb.category = 'report' "   //여기서 데이터에서 공통만 뽑아냄, 위에서 데이터 가져오는거, 아래서 데이터 가져갈 것도 신경 쓸 것
 			  + "order by commonNo desc "
 			  + "LIMIT #{from}, #{count}")
 	List<AdminDto> selectUserReportBoardByUserNo(@Param("userNo") int userNo, @Param("from") int from, @Param("count") int count);
 
 	@Select("Select count(*) "
 			+ "from CommonBoard "
-			+ "where userNo = #{ userNo } and category = 'review'")
+			+ "where userNo = #{ userNo } and category = 'report'")
 	int getcountReportBoardPosts(int userNo);
 	
 

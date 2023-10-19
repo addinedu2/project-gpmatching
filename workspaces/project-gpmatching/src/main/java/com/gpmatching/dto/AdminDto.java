@@ -34,7 +34,7 @@ public class AdminDto {
     private Date banEndDate;
 	
 	
-	private int boardNo;
+	private int boardNo; 
 	private String boardTitle;
 	private int gameNo;
 	private boolean deleted;
