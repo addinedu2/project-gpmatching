@@ -47,7 +47,7 @@
 <!-- Theme CSS -->
 <link rel="stylesheet"
 	href="/project-gpmatching/resources/assets/css/theme.min.css">
-<title>관리자 | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
+<title>관리자 페이지</title>
 </head>
 
 <body class="bg-light">
@@ -59,107 +59,12 @@
 		<div id="page-content">
 			<div class="header @@classList">
 
-				<jsp:include page="/WEB-INF/views/modules/header.jsp" />
+				<jsp:include page="/WEB-INF/views/modules/adminHeader.jsp" />
 
 
 
-			</div>
-			<!-- Container fluid -->
-			<div class="container-fluid p-6">
-				<div class="row">
-					<div class="col-lg-12 col-md-12 col-12">
-						<!-- Page header -->
-
-						<div class="border-bottom pb-4 mb-4 ">
-
-							<h3 class="mb-0 fw-bold">Overview</h3>
 
 
-						</div>
-					</div>
-				</div>
-				<div class="row align-items-center">
-					<div class="col-xl-12 col-lg-12 col-md-12 col-12">
-						<!-- Bg -->
-						<div class="pt-20 rounded-top"
-							style="background: url(/project-gpmatching/resources/assets/images/background/profile-cover.jpg) no-repeat; background-size: cover;">
-						</div>
-						<div class="bg-white rounded-bottom smooth-shadow-sm ">
-							<div
-								class="d-flex align-items-center justify-content-between
-                  pt-4 pb-6 px-4">
-								<div class="d-flex align-items-center">
-									<!-- avatar -->
-									<div
-										class="avatar-xxl avatar-indicators avatar-online me-2
-                      position-relative d-flex justify-content-end
-                      align-items-end mt-n10">
-										<img
-											src="/project-gpmatching/resources/assets/images/avatar/avatar-1.jpg"
-											class="avatar-xxl
-                        rounded-circle border border-4 border-white-color-40"
-											alt=""> <a href="#!"
-											class="position-absolute top-0 right-0 me-2"
-											data-bs-toggle="tooltip" data-placement="top" title=""
-											data-original-title="Verified"> <img
-											src="/project-gpmatching/resources/assets/images/svg/checked-mark.svg"
-											alt="" height="30" width="30">
-										</a>
-									</div>
-									<!-- text -->
-									<div class="lh-1">
-										<h2 class="mb-0">
-											${loginuser.nickname}
-											<!-- 닉네임 -->
-											<a href="#!" class="text-decoration-none"
-												data-bs-toggle="tooltip" data-placement="top" title=""
-												data-original-title="Beginner"> </a>
-										</h2>
-
-										<p class="mb-0 d-block">
-											@${loginuser.userNo}
-											<!-- 원래 유저 아이디 인데 userNo 넘어오는거 테스트용-->
-										</p>
-
-									</div>
-								</div>
-								<div>
-									<a href="/project-gpmatching/account/editMypage"
-										class="btn btn-outline-primary
-                      d-none d-md-block">회원정보
-										수정</a> <a href="/project-gpmatching/commonBoard/reportWrite"
-										class="btn btn-outline-primary
-                      d-none d-md-block">신고
-										하기</a> <a href="/project-gpmatching/commonBoard/reviewtestList"
-										class="btn btn-outline-primary
-                      d-none d-md-block">리뷰
-										게시판</a>
-								</div>
-							</div>
-							<!-- nav -->
-							<ul class="nav nav-lt-tab px-4" id="pills-tab" role="tablist">
-								<li class="nav-item"><a class="nav-link active" 
-								href="/project-gpmatching/admin/adminOverview" id="overview">Overview</a>
-								</li>
-								<li class="nav-item">
-								<c:url value="/admin/adminUserList" var="adminUserListUrl"><c:param name="pageNo" value="${param.pageNo }"/>
-								</c:url>
-								
-								<a class="nav-link"
-									href="/project-gpmatching/admin/adminUserList" id="UserListLink">UserList</a></li>
-
-								<li class="nav-item"><a class="nav-link" href="#">회원이 쓴 글</a>
-								</li>
-								<li class="nav-item"><a class="nav-link" href="#">차트(롤/배그/오버/전체/전체 사용량</a>
-								</li>
-								<li class="nav-item"><a class="nav-link" href="#">
-										기타 </a></li>
-								<li class="nav-item"><a class="nav-link" href="#">Activity</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
 
 				<!-- content -->
 		
