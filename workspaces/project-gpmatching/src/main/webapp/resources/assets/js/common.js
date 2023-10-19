@@ -20,17 +20,11 @@
 			   //"cache": false, //캐싱 비활성화
 			   success: function(data){
 				   console.log(data); //여기 데이터 카운트 개수 넘어옴.
-  
-				  /* if(data){
-						$("#notificationicon").attr('data-feather','bell'); 
-				   }원본*/
 				   
 				   if(data){
 						$("#dropdownNotification").addClass('avatar-online');
 				   }
 
-					
-				   //feather.replace();
 			   },
 			   error:function(xhr, status, error){
 				   console.log('알람 개수를 가져오는 중 오류 발생: ' + error);
@@ -80,7 +74,7 @@
 	                    var timeAgo = calculateTime(matchingAlarms.regDate);
 	
 	                    var commentAlarm =
-	                        '<li><a href="/project-gpmatching/account/mypage">&nbsp;&nbsp;' + matchingAlarms.nickname + '님이 댓글을 달았습니다</a></li>' +
+	                        '<li><a href="/project-gpmatching/account/mypage">&nbsp;&nbsp;' + matchingAlarms.nickname +'님이&nbsp;&nbsp;'+ matchingAlarms.alarmContent +'</a></li>' +
 	                        '<li>&nbsp;&nbsp;' + timeAgo + '</li>' +
 	                        '<hr>';
 	                    alarmList.append(commentAlarm);
@@ -101,6 +95,28 @@
 			
 			$.ajax({
 				"url": '/project-gpmatching/modules/header/checkAlarm',
+				"type": 'GET',
+				"data" : {"userNo":userNo},
+				"success": function(data, status, xhr){
+					if(data){	
+						$("#dropdownNotification").removeClass('avatar-online');
+				   }
+				},
+				"error": function(xhr, status, err){
+					console.log("요청 실패");
+				}
+			});
+		});
+	});
+	
+	//클릭하면 승인 알림 삭제
+	$(function (event){
+		$('#checkConfirm').on("click",function(event){
+			event.preventDefault();
+			const userNo = $(this).data("userno");
+			
+			$.ajax({
+				"url": '/project-gpmatching/modules/header/checkConfirm',
 				"type": 'GET',
 				"data" : {"userNo":userNo},
 				"success": function(data, status, xhr){
