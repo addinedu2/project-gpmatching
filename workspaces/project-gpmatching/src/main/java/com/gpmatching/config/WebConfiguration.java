@@ -68,7 +68,7 @@ public class WebConfiguration implements WebMvcConfigurer {
 				.excludePathPatterns("/boardMatching/lolBoard/lol-list", "/boardMatching/pubgBoard/battleground-list", 
 						"/boardMatching/overwatchBoard/overwatch-list", 
 						"/boardMatching/lolBoard/ajax-show-comment-and-btn-matching", 
-						"/boardMatching/overwarchBoard/ajax-show-comment-and-btn-matching",
+						"/boardMatching/overwatchBoard/ajax-show-comment-and-btn-matching",
 						"/boardMatching/pubgBoard/ajax-show-comment-and-btn-matching",
 						"/commonBoard/commonList", "/commonBoard/commonDetail"); // 게시물 보기는 로그인 없이 가능 
 		registry.addInterceptor(alarmInterceptor());	// 알림 인터셉터 추가

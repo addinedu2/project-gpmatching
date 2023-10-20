@@ -406,7 +406,7 @@
 			        passwordCheck.innerHTML = '비밀번호가 일치합니다.';
 			        passwordCheck.style.color = 'green';
 			        if (!userPwd.match(regex)) {
-			          passwordCheck.innerHTML = '일치하나 형식이 잘못되었습니다.';
+			          passwordCheck.innerHTML = '영문, 숫자, 특수문자(@,#,!,$,%)를 포함해 8~16자.';
 			          passwordCheck.style.color = 'red';
 			        }
 			      } else {
