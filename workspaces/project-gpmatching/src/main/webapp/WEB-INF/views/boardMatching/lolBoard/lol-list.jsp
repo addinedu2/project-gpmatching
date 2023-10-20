@@ -79,7 +79,7 @@
 					<!-- card  -->
 					<div class="card">
 						<!-- card header  -->
-						<div class="card-header bg-info py-4" style="display: flex; align-items: center; justify-content: space-between;">
+						<div class="card-header bg-gray-800 py-4" style="display: flex; align-items: center; justify-content: space-between;">
 						    <div style="display: flex; align-items: center;">
 						        <img src="/project-gpmatching/resources/assets/images/lol/logo.png" width="200px">
 						    </div>
@@ -91,7 +91,7 @@
 						            <option value="n">닉네임</option>
 						        </select>
 						        <input name="keyword" style="width: 200px; margin-left: 10px; margin-right: 10px;" class="form-control" type="search" id="search-input" placeholder="검색어를 입력하세요">
-						        <button id="search-btn" type="button" class="btn btn-light mb-2">검색</button>
+						        <button id="search-btn" type="button" class="btn btn-light">검색</button>
 						    </div>
 						</div>
 						<!-- table  -->
