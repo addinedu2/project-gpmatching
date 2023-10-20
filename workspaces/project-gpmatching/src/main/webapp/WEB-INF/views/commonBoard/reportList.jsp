@@ -11,7 +11,7 @@
 
 <!-- Favicon icon-->
 <link rel="shortcut icon" type="image/x-icon"
-	href="/project-gpmatching/resources/assets/images/favicon/favicon.ico">
+	href="/project-gpmatching/resources/assets/images/favicon/gps-ico.ico">
 <!-- Theme CSS -->
 <link rel="stylesheet"
 	href="/project-gpmatching/resources/assets/css/theme.min.css">
