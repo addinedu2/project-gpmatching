@@ -90,13 +90,13 @@ height : 200px;
 	                                      </li>
 	                                  </ol>
 	                                  <div class="carousel-inner">
-	                                      <div class="carousel-item active">
+	                                      <div class="carousel-item active" onClick="location.href='/project-gpmatching/boardMatching/lolBoard/lol-list'">
 	                                          <img src="/project-gpmatching/resources/assets/images/home/lol_1.jpg" class="d-block w-100 " alt="">
 	                                      </div>
-	                                      <div class="carousel-item">
+	                                      <div class="carousel-item" onClick="location.href='/project-gpmatching/boardMatching/pubgBoard/battleground-list'">
 	                                          <img src="/project-gpmatching/resources/assets/images/home/pubg_2.jpg" class="d-block w-100 " alt="">
 	                                      </div>
-	                                      <div class="carousel-item">
+	                                      <div class="carousel-item" onClick="location.href='/project-gpmatching/boardMatching/overwatchBoard/overwatch-list'">
 	                                          <img src="/project-gpmatching/resources/assets/images/brand/logo/over_logo2.png" class="d-block w-100 " alt="">
 	                                      </div>
 	                                  </div>
