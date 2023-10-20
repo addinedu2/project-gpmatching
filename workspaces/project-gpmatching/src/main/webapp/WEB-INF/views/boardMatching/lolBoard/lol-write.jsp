@@ -134,7 +134,7 @@
 				<div class="mb-3 txt-box">
 					<label class="form-label text-light" for="selectOne">내 포지션</label>
 					<select name="lolPosition" class="form-select" aria-label="Default select example">
-						<option selected>포지션 전체</option>
+						<option selected value="all">포지션 전체</option>
 						<option value="top">탑</option>
 						<option value="jungle">정글</option>
 						<option value="mid">미드</option>

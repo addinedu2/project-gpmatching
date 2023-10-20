@@ -36,6 +36,10 @@ public class UserDto {
 	private Date regDate;
 	private String userImage;
 	private String userIntro;
+	
+	private String lolnickname;
+	private String bgnickname;
+	private String ownickname;
 
 }
 

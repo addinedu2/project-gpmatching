@@ -96,7 +96,7 @@
                 <input type="password" id="userPwd" class="form-control" name="userPwd" required oninput="checkPassword()">
                 
               </div>
-              <!-- Password -->
+              <!-- PasswordCheck -->
               <div class="mb-3">
                 <label for="confirmPassword" class="form-label">회원 비밀번호 확인</label>
                 <input type="password" id="confirmPassword" class="form-control" name="confirm-password" required oninput="checkPassword()">
@@ -116,6 +116,21 @@
                 <input type="text" id="nickname" class="form-control" name="nickname" placeholder="닉네임을넣어주세요" required>
               </div>
               <p id="nicknameCheck"></p>
+              
+              <div class="mb-3">
+                <label for="lolnickname" class="form-label">롤 닉네임</label>
+                <input type="text" id="lolnickname" class="form-control" name="lolnickname" placeholder="롤 닉네임을 넣어주세요" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="bgnickname" class="form-label">배틀그라운드 닉네임</label>
+                <input type="text" id="bgnickname" class="form-control" name="bgnickname" placeholder="배틀그라운드 닉네임을 넣어주세요" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="ownickname" class="form-label">오버워치 닉네임</label>
+                <input type="text" id="ownickname" class="form-control" name="ownickname" placeholder="오버워치 닉네임을 넣어주세요" required>
+              </div>
               
 <!--               userPhone -->
 <!--               <div class="mb-3"> -->
