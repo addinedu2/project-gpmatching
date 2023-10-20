@@ -34,7 +34,7 @@
   <title>Forget Password | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
 </head>
 
-<body class="bg-light">
+<body class="bg-dark">
 	<div id="db-wrapper" class="toggled">
 		<!-- navbar vertical -->
 		<!-- Sidebar -->
@@ -55,7 +55,7 @@
           <div class="card-body p-6">
             <div class="mb-4">
               <a href="/project-gpmatching/home">
-              	<img src="/project-gpmatching/resources/assets/images/brand/logo/opgglogo-primary.png" class="mb-2" alt="">
+              	<img src="/project-gpmatching/resources/assets/images/brand/logo/gps-logo1.png" style="height: 60px" class="mb-2" alt="">
               </a>
               <p class="mb-6">비밀 번호를 잊으셨다고 걱정하지 마세요.
               				<br>임시 비밀번호를 이메일로 보내드립니다 

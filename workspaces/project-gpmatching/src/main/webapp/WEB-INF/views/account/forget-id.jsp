@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
   <!-- Required meta tags -->
@@ -31,10 +31,10 @@
 
 <!-- Theme CSS -->
 <link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
-  <title>Forget Password | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
+  <title>ID 찾기</title>
 </head>
 
-<body class="bg-light">
+<body class="bg-dark">
 	<div id="db-wrapper" class="toggled">
 		<!-- navbar vertical -->
 		<!-- Sidebar -->
@@ -55,15 +55,15 @@
           <div class="card-body p-6">
             <div class="mb-4">
               <a href="/project-gpmatching/home">
-              	<img src="/project-gpmatching/resources/assets/images/brand/logo/opgglogo-primary.png" class="mb-2" alt="">
+              	<img src="/project-gpmatching/resources/assets/images/brand/logo/gps-logo1.png" style="height: 60px" class="mb-2" alt="">
               </a>
-              <p class="mb-6">ID를 잊으셨다고 걱정하지 마세요.
+              <p class="mb-6">ID 찾기
             </div>
             <!-- Form -->
             <form action="forgetId" method="post">
               <!-- Email -->
               <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
+                <label for="email" class="form-label">이메일</label>
                 <input type="email" id="userEmail" class="form-control" name="userEmail" placeholder="가입시 등록한 이메일를 적어주세요" required="">
               </div>
                 <!-- userPhone -->
@@ -74,10 +74,10 @@
               <!-- Button -->
               <div class="mb-3 d-grid">
                 <button type="submit" class="btn btn-primary">
-                    Reset Password
+                    아이디 찾기
                   </button>
               </div>
-              <span>Don't have an account? <a href="/project-gpmatching/account/login">sign in</a></span>
+              <span>아직 회원이 아니시라면? <a href="/project-gpmatching/account/login">가입 하기</a></span>
             </form>
             
             <h3>${ message }</h3>

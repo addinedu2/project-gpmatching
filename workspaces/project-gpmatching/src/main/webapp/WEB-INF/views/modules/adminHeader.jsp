@@ -12,7 +12,7 @@
            
               <div class="border-bottom pb-4 mb-4 ">
                
-                  <h3 class="mb-0 fw-bold">관리자 페이지</h3>
+                  <h3 class="mb-0 fw-bold text-light">관리자 페이지</h3>
               
            
             </div>

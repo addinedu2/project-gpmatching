@@ -38,9 +38,7 @@
                     	<c:choose> 
 	                    	<c:when test="${loginuser.userImage == null}">
 			                    <img src="/project-gpmatching/resources/assets/images/avatar/anonymous.png" class="avatar-xxl rounded-circle border border-4 border-white-color-40" alt="">
-			                    <a href="#!" class="position-absolute top-0 right-0 me-2" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="Verified">
-			                      <img src="/project-gpmatching/resources/assets/images/svg/checked-mark.svg" alt="" height="30" width="30">
-			                    </a>
+			                    
 	                    	</c:when>
 	                    	<c:otherwise> 
 	                    		<img src="${pageContext.request.contextPath}/resources/upload/${loginuser.userImage}" 
@@ -69,7 +67,7 @@
               <!-- nav -->
               <ul class="nav nav-lt-tab px-4" id="pills-tab" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" href="#">Overview</a>
+                  <a class="nav-link active" href="#">기본 정보</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/project-gpmatching/review/list">Review</a>

@@ -7,31 +7,19 @@
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Favicon icon-->
-<link rel="shortcut icon" type="image/x-icon"
-	href="/project-gpmatching/resources/assets/images/favicon/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="/project-gpmatching/resources/assets/images/favicon/favicon.ico">
 <!-- Theme CSS -->
-<link rel="stylesheet"
-	href="/project-gpmatching/resources/assets/css/theme.min.css">
-<link rel="stylesheet"
-	href="/project-gpmatching/resources/assets/css/theme.css">
+<link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
+<link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.css">
 
 <!-- Libs CSS -->
-<link
-	href="/project-gpmatching/resources/assets/libs/bootstrap-icons/font/bootstrap-icons.css"
-	rel="stylesheet">
-<link
-	href="/project-gpmatching/resources/assets/libs/dropzone/dist/dropzone.css"
-	rel="stylesheet">
-<link
-	href="/project-gpmatching/resources/assets/libs/@mdi/font/css/materialdesignicons.min.css"
-	rel="stylesheet" />
-<link
-	href="/project-gpmatching/resources/assets/libs/prismjs/themes/prism-okaidia.css"
-	rel="stylesheet">
+<link href="/project-gpmatching/resources/assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="/project-gpmatching/resources/assets/libs/dropzone/dist/dropzone.css" rel="stylesheet">
+<link href="/project-gpmatching/resources/assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
+<link href="/project-gpmatching/resources/assets/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet">
 
 <style>
 
@@ -53,7 +41,7 @@ h2 {
 	<!-- commonList -->
 	<br>
 	<div class="table-container">
-		</>
+		<>
 		<h2>매칭 게시판</h2>
 		<table border="1" class="table text-light" style="text-align: center">
 			<thead>
@@ -148,24 +136,15 @@ h2 {
 
 
 	<!-- Libs JS -->
-	<script
-		src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
-	<script
-		src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+	<script src="/project-gpmatching/resources/assets/libs/jquery/dist/jquery.min.js"></script>
+	<script src="/project-gpmatching/resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/project-gpmatching/resources/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="/project-gpmatching/resources/assets/libs/feather-icons/dist/feather.min.js"></script>
+	<script src="/project-gpmatching/resources/assets/libs/prismjs/prism.js"></script>
+	<script src="/project-gpmatching/resources/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+	<script src="/project-gpmatching/resources/assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+	<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+	<script src="/project-gpmatching/resources/assets/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
 	<!-- Theme JS -->
 	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>

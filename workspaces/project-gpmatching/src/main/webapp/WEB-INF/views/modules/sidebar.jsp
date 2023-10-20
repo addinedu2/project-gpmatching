@@ -5,16 +5,8 @@
 	<div class="nav-scroller">
 		<!-- Brand logo -->
 
-		<!-- <a class="navbar-brand"
-			href="/project-gpmatching/home"> <img
-			src="/project-gpmatching/resources/assets/images/brand/logo/opgglogo.svg"
-			alt="" />
-		</a> 원본-->
-		
-		<a class="navbar-brand"
-			href="/project-gpmatching/home"> <img
-			src="/project-gpmatching/resources/assets/images/brand/logo/gps-sidebar.png"
-			
+		<a class="navbar-brand" href="/project-gpmatching/home">
+			<img src="/project-gpmatching/resources/assets/images/brand/logo/gps-logo2.png" style="height: 60px"
 			alt="" />
 		</a>
 		
@@ -22,16 +14,7 @@
 
 		<!-- Navbar nav -->
 		<ul class="navbar-nav flex-column" id="sideNavbar">
-<!-- 			<li class="nav-item"><a class="nav-link has-arrow  active " -->
-<!-- 				href="/project-gpmatching/home"> <i data-feather="home" -->
-<!-- 					class="nav-icon icon-xs me-2"></i> Dashboard -->
-<!-- 			</a></li> -->
 
-
-			<!-- Nav item -->
-			<li class="nav-item">
-				<div class="navbar-heading">Layouts & Pages</div>
-			</li>
 
 
 			<!-- Nav item -->
@@ -109,12 +92,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link has-arrow" href="/project-gpmatching/commonBoard/reportList"> 신고게시판 </a>
                                     </li>
-                                     <li class="nav-item">
-                                        <a class="nav-link has-arrow" href="/project-gpmatching/commonBoard/tipsList"> Tips </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link has-arrow" href="/project-gpmatching/commonBoard/alarmList"> 알람 </a>
-                                    </li>
+                                     
                                 </ul>
                             </div>
                         </li>

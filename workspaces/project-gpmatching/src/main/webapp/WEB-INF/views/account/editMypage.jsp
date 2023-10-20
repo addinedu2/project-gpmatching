@@ -31,10 +31,10 @@
 
 <!-- Theme CSS -->
 <link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
-  <title>Setting | Dash Ui - Bootstrap 5 Admin Dashboard Template</title>
+  <title>마이페이지 수정</title>
 </head>
 
-<body class="bg-light">
+<body class="bg-dark">
   <div id="db-wrapper">
     <!-- navbar vertical -->
      <!-- Sidebar -->
@@ -52,8 +52,8 @@
           <div class="col-lg-12 col-md-12 col-12">
             <!-- Page header -->
          
-              <div class="border-bottom pb-4 mb-4">              
-                  <h3 class="mb-0 fw-bold">마이 페이지 수정!</h3>             
+              <div class="border-bottom pb-4 mb-4 text-light">              
+                  <h3 class="mb-0 fw-bold text-light">마이페이지 수정</h3>             
                 
               </div>
            
@@ -64,7 +64,7 @@
         <div class="row mb-8">
           <div class="col-xl-3 col-lg-4 col-md-12 col-12">
             <div class="mb-4 mb-lg-0">
-              <h4 class="mb-1" style="font-weight: bold;">회원정보 수정</h4>
+              <h4 class="mb-1 text-light" style="font-weight: bold;">회원정보 수정</h4>
             </div>
 
           </div>
@@ -83,7 +83,7 @@
                 <!-- 프로필사진 -->
 	                <div class="row align-items-center mb-8">
 	                  <div class="col-md-3 mb-3 mb-md-0">
-	                    <h5 class="mb-0">Avatar</h5>
+	                    <h5 class="mb-0">프로필 사진</h5>
 	                  </div>
 	                  <div class="col-md-9">
 	                  
@@ -119,7 +119,7 @@
                 <div class="row mb-8">
                   <div class="col-md-3 mb-3 mb-md-0">
                     <!-- heading -->
-                    <h5 class="mb-0">Cover photo</h5>
+                    <h5 class="mb-0">프로필 커버</h5>
                   </div>
                   <div class="col-md-9">
                     <!-- dropzone input -->
@@ -129,14 +129,14 @@
                           <input name="file" type="file" multiple />
                         </div>
                       </form>
-                      <button type="submit" class="btn btn-outline-white">Change</button>
+                      <button type="submit" class="btn btn-outline-white">수정</button>
                     </div>
                   </div>
                 </div>
                 <div>
                   <!-- border -->
                   <div class="mb-6">
-                    <h4 class="mb-1">Basic information</h4>
+                    <h4 class="mb-1">기본 정보</h4>
 
                   </div>
            
@@ -154,7 +154,7 @@
                     <!-- row -->
                     <div class="mb-3 row">
                       <label for="phone" class="col-sm-4 col-form-label
-                          form-label">핸드폰 <span class="text-muted">(Optional)</span></label>
+                          form-label">핸드폰 <span class="text-muted">(선택)</span></label>
                       <div class="col-md-8 col-12">
                         <input type="text" class="form-control" name="userPhone" placeholder="${loginuser.userPhone}" id="userPhone">
                       </div>
@@ -166,12 +166,7 @@
                           form-label">닉네임</label>
                       <div class="col-md-8 col-12">
                   <input type="text" class="form-control" name="nickname" placeholder="${loginuser.nickname}" id="nickname">
-                   <!--      <select class="form-select" id="newnickname">
-                        <option selected>Select Country</option>
-                            <option value="1">India</option>
-                            <option value="2">UK</option>
-                            <option value="3">USA</option> 
-                          </select> -->  <!-- 데이터 선택이라 일단 주석으로 남겨놓는다 -->
+                  
                       </div>
                     </div>
                     
@@ -188,7 +183,7 @@
                     <!-- row -->
                     <div class="row align-items-center">
                       <div class="offset-md-4 col-md-8 mt-4">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary ">
                         	회원정보 수정
                         </button>
                       </div>
@@ -204,8 +199,8 @@
         
         <div class="row">
           <div class="col-xl-3 col-lg-4 col-md-12 col-12">
-            <div class="mb-4 mb-lg-0">
-              <h4 class="mb-1" style="font-weight: bold;">회원탈퇴</h4>
+            <div class="mb-4 mb-lg-0 text-light">
+              <h4 class="mb-1 text-light" style="font-weight: bold;">회원탈퇴</h4>
             </div>
 
           </div>
@@ -265,17 +260,6 @@
 
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
-<!-- <script>
-	$(function(event) {
-	    $("#imageUpdateButton").click(function() {
-	        alert("수정 버튼을 클릭했습니다.");
-	    });
-	
-	    $("#imageDeleteButton").click(function() {
-	        alert("삭제 버튼을 클릭했습니다.");
-	    });
-	});
-</script> -->
 
 
 <script>
@@ -310,13 +294,6 @@
 				return;
 			}
 			
-// 			if (userPwd != confirmPassword) {
-// 				alert('비밀번호를 확인해주세요');
-// 				$('#confirmPassword').focus();
-// 				return;
-// 			}else{
-// 				alert('탈퇴하시겠습니까?');
-// 			}
 			if (userPwd != confirmPassword) {
 				alert('비밀번호를 확인해주세요');
 				$('#confirmPassword').focus();

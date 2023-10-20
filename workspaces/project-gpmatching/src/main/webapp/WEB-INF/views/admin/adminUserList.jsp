@@ -10,6 +10,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
   .table.text-light th, .table.text-light td { color: black;  } /* jsp 글자 검은색 */
+  a {
+  style="text-decoration:none"
+  }
 </style>
     <title>유저 목록</title>
 </head>
@@ -20,58 +23,63 @@
              <br>
              <div class="d-grid gap-2 d-md-flex justify-content-md-end"></div>
 			 <br>
-
-<!-- 검색창 -->
-<form id="searchForm">
-	<table style="text-align: center;" class="table text-light">
-	<td>
-	<label for="searchInput" class="form-label">회원 검색</label>
-	</td>
-	<td>
-    <div class="col-md-8 col-xxl-9 ms-2 ">
-        <input type="text" class="form-control" id="searchInput" name="keyword" style="width: 750px; text-decoration: none; resize: none;">
-    </div>
-    </td>
-    <td style="vertical-align: middle">
-    <a style="text-decoration: none; resize: none;">
-    <button type="button" class="btn btn-primary ms-2" onclick="searchUsers()">검색</button>
-    </a>
-    </td>
-    </table>
-    <br>
-</form>
-
-
-<!-- basic table -->
-<table class="table text-light" style="text-align: center; ">
-   <thead>
-      <tr class="userList" >
-         <th>아이디</th>
-         <th>닉네임</th>
-         <th>회원 등급</th>
-         <th>게시글 수</th>
-         <th>댓글 수</th>
-      	<th>가입일</th>
-      </tr>
-   </thead>
-   <!-- userId, nickname, regDate, userGrade, regDate --> 
-
-<!-- 검색 결과를 표시할 테이블 -->
-	<tbody style="text-decoration: none; color: inherit;">
-    <c:forEach var="userlist" items="${listuser}">
-        <tr>
-        <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" target="_blank">${ userlist.userId }</a></td>
-   	    <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" target="_blank">${ userlist.nickname }</a></td>
-        <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" target="_blank">${ userlist.userGrade }</a></td>
-        <td><a href="<c:url value='/admin/userWrite/${userlist.userNo}' />" target="_blank">작성한 게시물</a></td>
-        <td>댓글 수</td>
-        <td><fmt:formatDate value="${ userlist.regDate }" pattern="yyyy-MM-dd"/>
-        </td>
-        </tr>
-    </c:forEach>
-
-   </tbody>
-</table>
+<!-- card -->
+<div class="card">
+	<!-- card body -->
+	<div class="card-body">
+		<!-- 검색창 -->
+		<form id="searchForm">
+			<table style="text-align: center;" class="table text-light">
+			<td>
+			<label for="searchInput" class="form-label">회원 검색</label>
+			</td>
+			<td>
+		    <div class="col-md-8 col-xxl-9 ms-2 ">
+		        <input type="text" class="form-control" id="searchInput" name="keyword" style="width: 750px; text-decoration: none; resize: none;">
+		    </div>
+		    </td>
+		    <td style="vertical-align: middle">
+		    <a style="text-decoration: none; resize: none;">
+		    <button type="button" class="btn btn-primary " onclick="searchUsers()">검색</button>
+		    </a>
+		    </td>
+		    </table>
+		    <br>
+		</form>
+		
+		
+		<!-- basic table -->
+		<table class="table text-light" style="text-align: center; ">
+		   <thead>
+		      <tr class="userList" >
+		         <th>아이디</th>
+		         <th>닉네임</th>
+		         <th>회원 등급</th>
+		         <th>게시글 수</th>
+		         <th>댓글 수</th>
+		      	<th>가입일</th>
+		      </tr>
+		   </thead>
+		   <!-- userId, nickname, regDate, userGrade, regDate --> 
+		
+		<!-- 검색 결과를 표시할 테이블 -->
+			<tbody style="text-decoration: none; color: inherit;">
+		    <c:forEach var="userlist" items="${listuser}">
+		        <tr>
+		        <td><a href="<c:url value='/admin/user/${userlist.userNo}' style="text-decoration:none" />" target="_blank">${ userlist.userId }</a></td>
+		   	    <td><a href="<c:url value='/admin/user/${userlist.userNo}' style="text-decoration:none" />" target="_blank">${ userlist.nickname }</a></td>
+		        <td><a href="<c:url value='/admin/user/${userlist.userNo}' style="text-decoration:none" />" target="_blank">${ userlist.userGrade }</a></td>
+		        <td><a href="<c:url value='/admin/userWrite/${userlist.userNo}' style="text-decoration:none" />" target="_blank">작성한 게시물</a></td>
+		        <td>댓글 수</td>
+		        <td><fmt:formatDate value="${ userlist.regDate }" pattern="yyyy-MM-dd"/>
+		        </td>
+		        </tr>
+		    </c:forEach>
+		
+		   </tbody>
+		</table>
+	</div>
+</div>
 <br>
 <div>
 	<ul class="pagination justify-content-center mb-0 pager-ul">

@@ -34,7 +34,7 @@
 
 </head>
 
-<body class="bg-light">
+<body class="bg-dark">
 	<div id="db-wrapper">
 		<!-- navbar vertical -->
 		<jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />

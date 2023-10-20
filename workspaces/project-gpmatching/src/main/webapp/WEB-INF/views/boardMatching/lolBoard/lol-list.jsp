@@ -10,30 +10,20 @@
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
 
 <!-- Favicon icon-->
-<link rel="shortcut icon" type="image/x-icon"
-	href="/project-gpmatching/resources/assets/images/favicon/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="/project-gpmatching/resources/assets/images/favicon/favicon.ico">
 
 <!-- Libs CSS -->
 
 
-<link
-	href="/project-gpmatching/resources/assets/libs/bootstrap-icons/font/bootstrap-icons.css"
-	rel="stylesheet">
-<link
-	href="/project-gpmatching/resources/assets/libs/dropzone/dist/dropzone.css"
-	rel="stylesheet">
-<link
-	href="/project-gpmatching/resources/assets/libs/@mdi/font/css/materialdesignicons.min.css"
-	rel="stylesheet" />
-<link
-	href="/project-gpmatching/resources/assets/libs/prismjs/themes/prism-okaidia.css"
-	rel="stylesheet">
+<link href="/project-gpmatching/resources/assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="/project-gpmatching/resources/assets/libs/dropzone/dist/dropzone.css" rel="stylesheet">
+<link href="/project-gpmatching/resources/assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
+<link href="/project-gpmatching/resources/assets/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet">
 
 
 
@@ -43,8 +33,7 @@
 
 
 <!-- Theme CSS -->
-<link rel="stylesheet"
-	href="/project-gpmatching/resources/assets/css/theme.css">
+<link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.css">
 <link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
 
 <title>LOL 매칭 게시판</title>
@@ -71,9 +60,7 @@
 			<a href="/project-gpmatching/home">
 				<button type="button" class="btn btn-primary me-3">홈으로</button>
 			</a>
-			
-			</div>
-			
+			</div> 
 			<div class="row mt-6">
 				<div class="col-md-12 col-12">
 					<!-- card  -->
