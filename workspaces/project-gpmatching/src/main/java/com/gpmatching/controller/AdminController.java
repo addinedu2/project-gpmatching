@@ -175,11 +175,8 @@ public class AdminController {
 	    adminDto.setMatchingBoardCountBattlegroundForWeek(adminService.getMatchingBoardCountBattlegroundForWeek());
 	    adminDto.setMatchingBoardCountLolForWeek(adminService.getMatchingBoardCountLolForWeek());
 	    adminDto.setMatchingBoardCountOverwatchForWeek(adminService.getMatchingBoardCountOverwatchForWeek());
-
-	    // 그래프 데이터를 모델에 추가
-	    model.addAttribute("AdminDto", adminDto);
-	    System.out.println(adminDto);
-	    return "admin/adminOverview";
+	    
+	   return "admin/adminOverview";
 	}
         
         

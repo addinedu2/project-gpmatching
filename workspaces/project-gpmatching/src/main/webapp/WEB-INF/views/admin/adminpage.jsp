@@ -104,14 +104,14 @@ $(document).ready(function() {
     // Overview를 동적으로 로드하는 함수 (이 부분을 주석 처리하면 초기에 Overview가 로딩되지 않습니다)
     // loadOverview();
 });
-$('.nav-link').click(function() {
+/* $('.nav-link').click(function() {
     if ( $(this).hasClass('active') ) {
         $(this).removeClass('active')
     }
     else {
         $(this).addClass('active')
     }
-});
+}); */
 
 	
 	
