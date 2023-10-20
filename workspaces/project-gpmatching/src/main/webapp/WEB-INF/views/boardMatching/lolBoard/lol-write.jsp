@@ -134,7 +134,7 @@
 				<div class="mb-3 txt-box">
 					<label class="form-label text-light" for="selectOne">내 포지션</label>
 					<select name="lolPosition" class="form-select" aria-label="Default select example">
-						<option selected>포지션 전체</option>
+						<option selected value="all">포지션 전체</option>
 						<option value="top">탑</option>
 						<option value="jungle">정글</option>
 						<option value="mid">미드</option>
@@ -162,10 +162,10 @@
 					</select>
 				</div>
 				<br>
-				<div>
-			        <label for="enableTimeSelection">시간 선택 활성화</label>
-					<input type="checkbox" id="enableTimeSelection" onchange="toggleTimeSelection()" checked>
-			    </div>
+<!-- 				<div> -->
+<!-- 			        <label for="enableTimeSelection">시간 선택 활성화</label> -->
+<!-- 					<input type="checkbox" id="enableTimeSelection" onchange="toggleTimeSelection()" checked> -->
+<!-- 			    </div> -->
 				
 				<div class="time1">
 				    <label for="customStartTimeRange" class="form-label text-light" style="margin-right: 10px;">시작 시간 : </label><span id="start-time-value"></span>
@@ -226,13 +226,25 @@
 			});
 			
 		function updateSelectedTime(timeType, value) {
-		    var selectedTime = document.getElementById(timeType + "-value");
+			
+			var selectedTime = document.getElementById(timeType + "-value");
 		    var hours = Math.floor(value);
 		    var minutes = (value % 1) * 60;
-		    var ampm = hours >= 12 ? "오후" : "오전";
-		    var formattedHours = hours % 12 || 12;
 
-		    selectedTime.innerHTML = ampm + " " + formattedHours + ":" + (minutes < 10 ? "0" : "") + Math.round(minutes);
+		    // 시간을 "00:00"부터 "24:00" 형식으로 변환
+		    var formattedHours = (hours < 10 ? "0" : "") + hours;
+		    var formattedMinutes = (minutes < 10 ? "0" : "") + Math.round(minutes);
+
+		    selectedTime.innerHTML = formattedHours + ":" + formattedMinutes;
+		    
+// 			// 오전오후 시간 형식으로 변경
+// 		    var selectedTime = document.getElementById(timeType + "-value");
+// 		    var hours = Math.floor(value);
+// 		    var minutes = (value % 1) * 60;
+// 		    var ampm = hours >= 12 ? "오후" : "오전";
+// 		    var formattedHours = hours % 12 || 12;
+
+// 		    selectedTime.innerHTML = ampm + " " + formattedHours + ":" + (minutes < 10 ? "0" : "") + Math.round(minutes);
 		    
 		 	// 시작 시간 값을 가져와 hidden_start_time 필드에 설정
 			var startTimeValue = document.getElementById('start-time-value').textContent;
@@ -243,32 +255,38 @@
 			document.getElementById('endTime').value = endTimeValue;
 		}
 		
-	    function toggleTimeSelection() {
-	    	var enableTimeSelection = document.getElementById('enableTimeSelection');
-	        var startTimeInput = document.getElementById('customStartTimeRange');
-	        var endTimeInput = document.getElementById('customEndTimeRange');
+// 		// 시간 설정 활성화 버튼 비활성화 (-허지웅)
+// 	    function toggleTimeSelection() {
+// 	    	var enableTimeSelection = document.getElementById('enableTimeSelection');
+// 	        var startTimeInput = document.getElementById('customStartTimeRange');
+// 	        var endTimeInput = document.getElementById('customEndTimeRange');
+// 	        var startTimeHidden = document.getElementById('startTime');
+// 	        var endTimeHidden = document.getElementById('endTime');
 	        
-	        if (enableTimeSelection.checked) {
-	            // 스위치가 활성화된 경우
-	            startTimeInput.disabled = false;
-	            endTimeInput.disabled = false;
-	         	// 값 변경 이벤트를 듣고 hidden 필드 업데이트
-	            startTimeInput.addEventListener('input', function() {
-	                document.getElementById('startTime').value = startTimeInput.value;
-	            });
-	            endTimeInput.addEventListener('input', function() {
-	                document.getElementById('endTime').value = endTimeInput.value;
-	            });
-	        } else {
-	            // 스위치가 비활성화된 경우
-	            startTimeInput.disabled = true;
-	            endTimeInput.disabled = true;
-	         	// hidden 필드에도 값을 초기화
-	            document.getElementById('startTime').value = "";
-	            document.getElementById('endTime').value = "";
-	        }
 	        
-		}
+// 	        if (enableTimeSelection.checked) {
+// 	            // 스위치가 활성화된 경우
+// 	            startTimeInput.disabled = false;
+// 	            endTimeInput.disabled = false;
+// 	         	// 값 변경 이벤트를 듣고 hidden 필드 업데이트
+// 	            startTimeInput.addEventListener('input', function() {
+// 	            	startTimeHidden.value = startTimeInput.value;
+// 	           	});
+// 	            endTimeInput.addEventListener('input', function() {
+// 	            	endTimeHidden.value = endTimeInput.value;
+// 	            });
+// 	        } else {
+// 	            // 스위치가 비활성화된 경우
+// 	            startTimeInput.disabled = true;
+// 	            endTimeInput.disabled = true;
+// 	         	// hidden 필드에도 값을 초기화
+// 	         	preStartTimeHidden = document.getElementById('startTime');
+// 	        	preEndTimeHidden = document.getElementById('endTime');
+// 	            startTimeHidden.value = "";
+// 	            endTimeHidden.value = "";
+// 	        }
+	        
+// 		}
 	    
 		</script>
 		

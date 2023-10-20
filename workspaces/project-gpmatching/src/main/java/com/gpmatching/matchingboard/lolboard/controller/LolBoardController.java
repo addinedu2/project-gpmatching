@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gpmatching.dto.CloseAlarmDto;
+import com.gpmatching.dto.UserDto;
 import com.gpmatching.matchingboard.dto.LolDto;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 import com.gpmatching.matchingboard.lolboard.service.LolBoardService;
@@ -110,6 +111,7 @@ public class LolBoardController {
 			
 		}
 		
+				
 		MatchingBoardDto lolMatchingBoard = lolBoardService.findLolBoardByBoardNo(boardNo);
 		
 		model.addAttribute("lolMatchingBoard", lolMatchingBoard);

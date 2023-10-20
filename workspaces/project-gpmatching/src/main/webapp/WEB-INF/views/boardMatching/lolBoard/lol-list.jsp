@@ -79,7 +79,7 @@
 					<!-- card  -->
 					<div class="card">
 						<!-- card header  -->
-						<div class="card-header bg-info py-4" style="display: flex; align-items: center; justify-content: space-between;">
+						<div class="card-header bg-gray-800 py-4" style="display: flex; align-items: center; justify-content: space-between;">
 						    <div style="display: flex; align-items: center;">
 						        <img src="/project-gpmatching/resources/assets/images/lol/logo.png" width="200px">
 						    </div>
@@ -91,19 +91,19 @@
 						            <option value="n">닉네임</option>
 						        </select>
 						        <input name="keyword" style="width: 200px; margin-left: 10px; margin-right: 10px;" class="form-control" type="search" id="search-input" placeholder="검색어를 입력하세요">
-						        <button id="search-btn" type="button" class="btn btn-light mb-2">검색</button>
+						        <button id="search-btn" type="button" class="btn btn-light">검색</button>
 						    </div>
 						</div>
 						<!-- table  -->
 						<table id="matching-list" class="table table-sm table-dark table-hover">
-							<thead>
+							<thead style="vertical-align: middle;">
 										
 								<tr>
-									<th scope="col">소환사이름</th>
+									<th scope="col" style="width:100px;">소환사이름</th>
 									<th scope="col">제목</th>
 									<th scope="col">내용</th>
 									<th>
-									<div class="dropdown">
+									<div class="dropdown" style="width:110px; text-align:center;">
 										<button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										티어											
 										</button>
@@ -117,21 +117,21 @@
 									</div>
 									</th>
 						         	
-							         	<th scope="col">주포지션</th>
-							         	<th scope="col">게임시간</th>
+							         	<th scope="col" style="width:110px; vertical-align: middle;">주포지션</th>
+							         	<th scope="col" style="width:110px;" >게임시간</th>
 							         	<th scope="col">마이크사용</th>
-							         	<th scope="col">모집인원</th>
-							         	<th scope="col">마감여부</th>
-							        	<th scope="col">등록일시</th>
-							         	<th scope="col">댓글</th>
+							         	<th scope="col" style="width:80px;">모집인원</th>
+							         	<th scope="col" style="width:80px;">마감여부</th>
+							        	<th scope="col" style="width:80px;">등록일시</th>
+							         	<th scope="col" style="text-align: center">댓글</th>
 							         	<th scope="col"></th>
 									</tr>
 								</thead>
 				 
-								<tbody id="lol-list">		
+								<tbody id="lol-list"  style="vertical-align: middle;">		
 									<c:forEach var="matchingBoard" items="${ requestScope.matchingLolList }">
 										<tr id="tr-${ matchingBoard.boardNo }" data-title="${ matchingBoard.boardTitle }">
-											<th>
+											<th style="text-align:center; vertical-align: middle;">
 											<div class="dropdown dropstart">
 		                                        <a class="text-muted text-primary-hover" href="#" role="button" id="dropdownTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		                                            ${ matchingBoard.nickname }
@@ -144,7 +144,7 @@
 											</th>
 											<th>${ matchingBoard.boardTitle }</th>
 											<th>${ matchingBoard.boardContent }</th>
-											<td>
+											<td style="text-align:center;">
 											<c:set var="lolTier" value="${ matchingBoard.lolTier }" />
 											<c:choose>
 												<c:when test = "${ lolTier eq 'bronze'}">
@@ -162,9 +162,12 @@
 												</c:otherwise>
 											</c:choose>
 											</td>
-											<td>
+											<td style="text-align:center;">
 											<c:set var="lolPosition" value="${ matchingBoard.lolPosition }" />
 											<c:choose>
+												<c:when test = "${ lolPosition eq 'all'}">
+													<img src="/project-gpmatching/resources/assets/images/lol/all.png" width=24px>
+												</c:when>
 												<c:when test = "${ lolPosition eq 'top'}">
 													<img src="/project-gpmatching/resources/assets/images/lol/top.svg" width=24px>
 												</c:when>
@@ -185,8 +188,19 @@
 												</c:otherwise>
 											</c:choose>
 											</td>
-											<th>${ matchingBoard.startTime } ~ ${ matchingBoard.endTime }</th>
-											<th>
+											<th style="text-align:center;">
+											<c:choose>
+											<c:when test = "${ empty(matchingBoard.startTime) && empty(matchingBoard.endTime) }">
+											미정
+											</c:when>
+											<c:otherwise>
+											${ matchingBoard.startTime } ~ ${ matchingBoard.endTime }
+											</c:otherwise>
+											</c:choose>
+											
+											</th>
+											
+											<th style="text-align:center;">
 											<c:choose>
 												<c:when test = "${ matchingBoard.mic eq true}">
 													<div class="form-check form-switch">
@@ -204,13 +218,13 @@
 												</c:otherwise>
 											</c:choose>
 											</th>
-											<th>${ matchingBoard.confirmCount + 1} / ${ matchingBoard.headCount + 1}</th>
+											<th style="text-align:center;">${ matchingBoard.confirmCount + 1} / ${ matchingBoard.headCount + 1}</th>
 											<c:choose>
 												<c:when test="${matchingBoard.matchingClose == true}">
-													<th><i class="icon-sm text-success" data-feather="check-circle"></i></th>
+													<th style="text-align:center;"><i class="icon-sm text-success" data-feather="check-circle"></i></th>
 												</c:when>
 												<c:otherwise>
-													<th><div class="spinner-border" role="status">
+													<th style="text-align:center;"><div class="spinner-border" role="status">
 													<span class="visually-hidden">Loading...</span></div></th>
 												</c:otherwise>
 											</c:choose>
@@ -219,15 +233,15 @@
 											        <th>날짜 정보 없음</th>
 											    </c:when>
 											    <c:otherwise>
-											        <th>
+											        <th style="text-align:center;">
 											    <c:set var="regDate" value="${matchingBoard.regDate}" scope="page" />
 											    <%= Time.calculateTime((java.util.Date) pageContext.getAttribute("regDate")) %>
 											</th>
 											    </c:otherwise>
 											</c:choose>
-											<th class="align-middle">
+											<th class="align-middle" style="width:110px;">
 												<!-- Varying modal -->
-
+<div>
 												<button type="button" class="btn btn-primary btn-sm btn-show-comment-modal" 
 														data-boardno="${ matchingBoard.boardNo }"
 														data-nickname="${ matchingBoard.nickname }"
@@ -238,14 +252,18 @@
 														data-nickname="${ matchingBoard.nickname }">목록</button>
 											</th>
 											<th>
-												<div class="dropdown dropstart">
+												<div class="dropdown dropstart" >
+													<c:choose>
+													<c:when test = "${ loginuser.nickname eq matchingBoard.nickname }">
 			                                        <a class="text-muted text-primary-hover" href="#" role="button" id="dropdownTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			                                            <i class="icon-xxs" data-feather="more-vertical"></i>
+			                                            <i class="icon-xxs" data-feather="more-vertical" ></i>
 			                                        </a>
 			                                        <div class="dropdown-menu" aria-labelledby="dropdownTask">
 			                                            <a class="dropdown-item" href="lol-edit?boardNo=${matchingBoard.boardNo}">수정</a>
 			                                            <a class="dropdown-item" href="lol-delete?boardNo=${matchingBoard.boardNo}">삭제</a>
 			                                        </div>
+			                                        </c:when>
+			                                        </c:choose>
 			                                    </div>
 											</th>
 											
@@ -831,9 +849,21 @@
 		});
 	});
 
+ 	// 수정 링크를 클릭할 때의 동작
+ 	document.getElementById("dropdownTask-check").addEventListener("click", function() {
+ 	    
+ 		const writerNickname = $(this).data('nickname');
+ 		const loginNickname = "${ loginuser.nickname }"; 
+ 		if (writerNickname === loginNickname) {
+ 	        return;
+ 	    } else {
+ 	        // 권한이 없는 사용자에게 경고 또는 에러 메시지를 표시
+ 	       alert("수정 및 삭제할 권한이 없습니다.");
+ 	       event.preventDefault();
+ 	       	
+ 	    }
+ 	});
 
-
-	
  	function toggleSwitch() {
         // 스위치 상태를 변경하지 않고 기존 상태를 유지
         return false;
