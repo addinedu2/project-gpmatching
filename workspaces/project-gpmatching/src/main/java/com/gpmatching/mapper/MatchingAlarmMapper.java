@@ -16,11 +16,12 @@ import com.gpmatching.dto.MatchingAlarmDto;
 @Mapper
 public interface MatchingAlarmMapper {
 
+	//댓글 알림 테이블 insert
 	@Insert("insert into MatchingAlarm (alarmContent, commentNo) values ('댓글을 달았습니다', #{ commentNo })")
 	@Options(useGeneratedKeys = true, keyProperty = "alarmNo")
 	void insertMatchingAlarm(MatchingAlarmDto matchingAlarmDto);
 
-	//승인 테이블 insert
+	//승인 알림 테이블 insert
 	@Insert("insert into ConfirmAlarm (commentNo, confirmContent) values (#{commentNo},'승인을 했습니다')")
 	@Options(useGeneratedKeys = true, keyProperty = "confirmNo")
 	void insertConfirmAlarm(ConfirmAlarmDto confirmAlarm);
@@ -30,7 +31,7 @@ public interface MatchingAlarmMapper {
 	@Options(useGeneratedKeys = true, keyProperty = "closeNo")
 	void insertCloseAlarm(CloseAlarmDto closeAlarm);
 	
-	
+	//알림리스트 댓글+승인+마감
 	@Select("select result.alarmNo, result.commentNo, result.alarmContent, result.regDate, result.nickname "
 			  + "from "
 			  + "     (select ma.alarmNo, ma.commentNo, ma.alarmContent, ma.regDate, u.nickname "
@@ -59,6 +60,7 @@ public interface MatchingAlarmMapper {
 			  + "                    order by result.regDate desc")
 	List<MatchingAlarmDto> selectAlarmListByUserNo(int userNo);
 
+	//알림리스트 총 개수(댓글+승인+알림) 가져오기
 	@Select("SELECT (SELECT COUNT(alarmNo) "
 			  + "FROM MatchingAlarm "
 			  + "WHERE commentNo IN "
@@ -81,7 +83,7 @@ public interface MatchingAlarmMapper {
 			  + "                    INNER JOIN User u ON u.userNo = mb.userNo "
 			  + "                    INNER JOIN MatchingComment mc ON mc.boardNo = mb.boardNo "
 			  + "                    WHERE mc.userNo = ${userNo}) ) AS TotalCount;")
-		int countMatchingAlarmNo(int userNo);
+	int countMatchingAlarmNo(int userNo);
 	
 	@Delete("delete "
 		  + "from MatchingAlarm "

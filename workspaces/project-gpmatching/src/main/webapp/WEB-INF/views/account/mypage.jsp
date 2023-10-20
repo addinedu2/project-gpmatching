@@ -36,7 +36,7 @@
   <title>마이페이지</title>
 </head>
 
-<body class="bg-light"> 
+<body class="bg-dark"> 
   <div id="db-wrapper">
     <!-- navbar vertical -->
      <jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
@@ -66,8 +66,7 @@
                   <div>
                   <!-- card title -->
                   <h3 class="card-title"><strong>내 정보</strong></h3>
-                  <span class="text-uppercase fw-medium text-dark
-                      fs-5 ls-2"><strong>소개</strong></span>
+                  <span class="text-uppercase fw-medium text-dark fs-5 ls-2"><strong>소개</strong></span>
                   <!-- text -->
                   <p class="mt-2 mb-6">${loginuser.userIntro}</p>
                   </div>

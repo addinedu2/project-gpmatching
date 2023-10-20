@@ -43,10 +43,6 @@
 	<div class="mb-3 txt-box">
 	  <label class="form-label" for="textInput">제목</label>
 	  <input type="text" name="commonTitle" id="commonTitle" class="form-control" value="${commonBoard.commonTitle }">
-	  
-<%-- 	  <div>
-	  	작성자 ${ commonBoard.userNo }
-	  </div> --%>
 	
 	</div>
 	

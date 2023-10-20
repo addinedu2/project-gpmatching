@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gpmatching.dto.CloseAlarmDto;
+import com.gpmatching.mapper.MatchingAlarmMapper;
 import com.gpmatching.mapper.MatchingCommentMapper;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 import com.gpmatching.matchingboard.overwatchboard.mapper.OverwatchBoardMapper;
@@ -18,6 +20,9 @@ public class OverwatchBoardServiceImpl implements OverwatchBoardService {
 	
 	@Autowired
 	MatchingCommentMapper matchingCommentMapper;
+	
+	@Setter(onMethod_ = { @Autowired }) 
+	MatchingAlarmMapper matchingAlarmMapper;
 	
 	public void write(MatchingBoardDto matchingBoardDto) {
 		mapper.insertMatchingBoard(matchingBoardDto);
@@ -113,9 +118,10 @@ public class OverwatchBoardServiceImpl implements OverwatchBoardService {
 	}
 	
 	@Override
-	public void setMatchingCloseTrue(int boardNo) {
+	public void setMatchingCloseTrue(int boardNo, CloseAlarmDto closeAlarm) {
 		if(isMatchingCloseCondition(boardNo)) {
 			mapper.updateMatchingCloseTrueByBoardNo(boardNo);
+			matchingAlarmMapper.insertCloseAlarm(closeAlarm);
 		}else {
 			System.out.println("headCount 와 confirmCount 가 같지 않아 matchingClose 값을 변경할수 없습니다.");
 			

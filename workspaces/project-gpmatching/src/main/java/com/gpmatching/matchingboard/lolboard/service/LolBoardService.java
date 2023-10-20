@@ -3,6 +3,7 @@ package com.gpmatching.matchingboard.lolboard.service;
 import java.util.List;
 
 import com.gpmatching.dto.CloseAlarmDto;
+import com.gpmatching.dto.MatchingCommentDto;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 
 
@@ -35,6 +36,10 @@ public interface LolBoardService {
 	void setMatchingCloseTrue(int boardNo, CloseAlarmDto closeAlarm);
 
 	boolean isMatchingCloseCondition(int boardNo);
+	
+	List<MatchingCommentDto> getMatchingCommentListByBoardNo(int boardNo);
+	
+	boolean isExistMatchingComment(int boardNo, int userNo);
 	
 
 }

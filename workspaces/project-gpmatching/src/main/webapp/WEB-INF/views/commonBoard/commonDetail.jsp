@@ -65,9 +65,7 @@
 									<h4 class="card-title">${commonBoard.commonTitle }</h4>
 
 									<div class="d-flex align-items-center">
-										<!-- <div>
-		                        <img src="../assets/images/avatar/avatar-1.jpg" alt="" class="avatar avatar-md rounded-circle">
-		                      </div> -->
+									
 										<div>
 											<h5 class="mb-0 fw-bold">${commonBoard.nickname }</h5>
 											<p class="mb-0">
@@ -156,32 +154,18 @@
 
 						<!-- end of write comment area -->
 						<!-- comment list area -->
-						<!-- <br>
-		<hr style="width:825px;margin:0 auto">
-		<br> -->
-
 
 						<!-- 추가삽입 댓글 테이블 -->
 						<div class="col-xl-12 col-lg-12 col-md-12 col-12">
 							<div class="card h-100">
 								<!-- card header  -->
-								<!-- <div class="card-header bg-white py-4">
-	                <h4 class="mb-0">Teams </h4>
-	            </div> -->
+	
 								<!-- table  -->
 								<br>
 								<!-- <hr style="width:100%;margin:0 auto"> -->
 								<div class="table-responsive">
 									<table class="table text-nowrap" id="comment-list">
 
-										<!-- <thead class="table-light">
-	                        <tr>
-	                            <th>Name</th>
-	                            <th>Role</th>
-	                            <th>Last Activity</th>
-	                            <th></th>
-	                        </tr>
-	                    </thead> -->
 										<tbody>
 											<c:forEach var="comment" items="${ commonBoard.boardCommentList }">
 												<tr>

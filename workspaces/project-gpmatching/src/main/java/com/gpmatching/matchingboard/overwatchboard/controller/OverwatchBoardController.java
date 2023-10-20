@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gpmatching.matchingboard.overwatchboard.service.OverwatchService;
 import com.gpmatching.service.MatchingCommentService;
+import com.gpmatching.dto.CloseAlarmDto;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 import com.gpmatching.matchingboard.dto.OverwatchDto;
 import com.gpmatching.matchingboard.overwatchboard.service.OverwatchBoardService;
@@ -176,9 +177,9 @@ public class OverwatchBoardController {
 	}
 	
 	@GetMapping(path = { "/matchingCloseTrue"})
-	public String MatchingClose(int boardNo) {
+	public String MatchingClose(int boardNo, CloseAlarmDto closeAlarm) {
 		if(overwatchBoardService.isMatchingCloseCondition(boardNo)) {
-			overwatchBoardService.setMatchingCloseTrue(boardNo);
+			overwatchBoardService.setMatchingCloseTrue(boardNo, closeAlarm);
 			return "redirect:overwatch-list";
 		}else {
 			return "redirect:overwatch-list";

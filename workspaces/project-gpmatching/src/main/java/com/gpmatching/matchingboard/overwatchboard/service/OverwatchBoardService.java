@@ -3,6 +3,7 @@ package com.gpmatching.matchingboard.overwatchboard.service;
 import java.util.List;
 import java.util.Map;
 
+import com.gpmatching.dto.CloseAlarmDto;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 
 public interface OverwatchBoardService {
@@ -23,10 +24,9 @@ public interface OverwatchBoardService {
 
 	List<MatchingBoardDto> searchMatchingBoardListByTitle(String gameName, String keyword);
 
-
 	void setNowConfirmCount(int confirmCount);
 
-	void setMatchingCloseTrue(int boardNo);
+	void setMatchingCloseTrue(int boardNo, CloseAlarmDto closeAlarm);
 
 	boolean isMatchingCloseCondition(int boardNo);
 	

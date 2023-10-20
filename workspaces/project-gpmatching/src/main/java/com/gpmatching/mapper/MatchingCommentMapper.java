@@ -51,4 +51,5 @@ public interface MatchingCommentMapper {
 			+ "and c.status = 1 and c.commentNo not in (select commentNo from MatchingReview)")
 	List<MatchingCommentDto> selectMatchingCommentListForReview(int boardNo);
 
+	
 }

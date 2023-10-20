@@ -153,6 +153,7 @@
 												<c:when test = "${ lolTier eq 'silver'}">
 													<span class="badge rounded-pill bg-light text-dark">${ matchingBoard.lolTier }</span>
 												</c:when>	
+												
 												<c:when test = "${ lolTier eq 'gold'}">
 													<span class="badge bg-warning">${ matchingBoard.lolTier }</span>
 												</c:when>
@@ -228,10 +229,13 @@
 												<!-- Varying modal -->
 
 												<button type="button" class="btn btn-primary btn-sm btn-show-comment-modal" 
-														data-boardno="${ matchingBoard.boardNo }">${ matchingBoard.boardNo }
+														data-boardno="${ matchingBoard.boardNo }"
+														data-nickname="${ matchingBoard.nickname }"
+														data-close="${ matchingBoard.matchingClose }">${ matchingBoard.boardNo }
 												</button>											
 												<button type="button" class="btn btn-primary btn-sm btn-show-commentList-modal"
-														data-boardno="${ matchingBoard.boardNo }">목록</button>
+														data-boardno="${ matchingBoard.boardNo }"
+														data-nickname="${ matchingBoard.nickname }">목록</button>
 											</th>
 											<th>
 												<div class="dropdown dropstart">
@@ -267,7 +271,7 @@
 			                </button>
 			            </div>
 						<form id="commentform" action="write-comment" method="post">
-							<input type="hidden" id="boardno-in-modal" name="boardNo" value="${ matchingBoard.boardNo }" /> 
+							<input type="hidden" id="boardno-in-modal" name="boardNo" value="${ matchingBoard.boardNo }" />
 							<input type="hidden" name="userNo" value="${ loginuser.userNo }" /> 
 			            <div class="modal-body">
 			                <div class="mb-3">
@@ -369,41 +373,76 @@
 	<script>
 	
 	
-	// 글번호(댓글쓰기) 버튼을 누르면 해당 행의 데이터를 포함한 모달창을 보여줌 (-허지웅)
+	// 글번호(댓글쓰기) 버튼을 누르면 모달창을 보여줌 (-허지웅)
 	$(function() {
+		
 		$('#lol-list').on("click", '.btn-show-comment-modal', function(event) {
-			const boardNo = $(this).data('boardno');
-			const currentTr = $('#tr-' + boardNo);
 			
-
-			$('#title-in-modal').text("(" + boardNo + ") " + currentTr.data('title'));
-			$('#boardno-in-modal').val(boardNo);
-			$('#comment-modal').modal('show');
+			const boardNo = $(this).data('boardno');
+			const userNo = "${ loginuser.userNo }";
+			const currentTr = $('#tr-' + boardNo);
+			const writerNickname = $(this).data('nickname');
+			const loginNickname = "${ loginuser.nickname }";
+			const close = $(this).data('close');
+			
+			if (writerNickname === loginNickname) {
+				alert("자신의 글에 댓글을 달 수 없습니다");
+				return; 
+			
+			} else if (close){
+				alert("이미 마감된 글에 댓글을 작성할 수 없습니다");
+				return;
+			}
+			
+			$.ajax({
+				"url": "check-comment-dup",
+				"method": "get",
+				"data": { "userNo" : userNo , "boardNo" : boardNo },
+				"success": function(data){
+					
+					const dupCheck = $.trim(data);
+					if(dupCheck == "false"){
+						
+						alert("이미 댓글을 작성하셨습니다");
+						return;
+					} else {
+						
+						$('#title-in-modal').text("(" + boardNo + ") " + currentTr.data('title'));
+						$('#boardno-in-modal').val(boardNo);
+						$('#comment-modal').modal('show');
+						
+ 					}
+				},
+				"error": function(xhr, status, err){
+					alert("실패");
+				}
+				
+			});
+			
+		});
+	
+			
+		// 댓글쓰기 모달창의 등록 버튼을 누르면 데이터가 전송됨
+		$('#write-comment-lnk').on('click', function(event){
+			
+			const formData = $('#commentform').serialize();	// <form> 에 포함된 입력요소의 값을 뽑아서 전송가능한 문자열로 반환
+			alert(formData);
+			
+			$.ajax({
+				"url": "write-comment",
+				"method": "post",
+				"data": formData,
+				"success": function(data, status, xhr){
+					alert('지원이 완료되었습니다!');
+					$('#comment-modal').modal("hide");
+				},
+				"error": function(xhr, status, err){
+					alert('지원 실패!');
+					
+				}
+			});	 
 		});
 	});
-	
-
-
-	// 댓글쓰기 모달창의 등록 버튼을 누르면 데이터가 전송됨
-	$('#write-comment-lnk').on('click', function(event){
-		
-		const formData = $('#commentform').serialize();	// <form> 에 포함된 입력요소의 값을 뽑아서 전송가능한 문자열로 반환
-		
-		$.ajax({
-			"url": "write-comment",
-			"method": "post",
-			"data": formData,
-			"success": function(data, status, xhr){
-				alert('지원이 완료되었습니다!');
-				$('#comment-modal').modal("hide");
-			},
-			"error": function(xhr, status, err){
-				alert('지원 실패!');
-				
-			}
-		});	 
-	});
-	
 
 	// 검색어를 입력하고 검색 버튼을 누르면 해당되는 게시글을 보여줌 (-허지웅)
 	$(function(){
@@ -460,7 +499,9 @@
 			const boardNo = $(this).data('boardno');
 			const currentTr = $('#tr-' + boardNo);
 			$('#title2-in-modal').text("(" + boardNo + ") " + currentTr.data('title'));
-			
+			const writerNickname = $(this).data("nickname");
+			const loginNickname = "${ loginuser.nickname }";
+
 			$.ajax({
 				
 				"url": "ajax-show-comment-and-btn-matching",
@@ -474,8 +515,9 @@
   					var headCount = 0;
   					var confirmCount = 0;
   					var matchingClose = 0;
+  					
 	                
-					
+  					
 					var commentList = $('#comment-list');
 					commentList.empty();
 					if (result != null){
@@ -491,7 +533,7 @@
 		                
 		                commentList.append($headerRow);
 		                
-						for(var i = 0; i < result.length; i++){
+		                for(var i = 0; i < result.length; i++){
 							var $row = $("<tr>");
 		                    
 		                    $row.append($("<td>").text(result[i].commentNo));
@@ -526,6 +568,14 @@
 							var $buttonColumn = $("<td>").append($acceptButton, $rejectButton);
 	                        $row.append($buttonColumn);
 	                        
+	                        // 추가: 글작성자와 로그인 사용자를 비교하여 버튼 숨기기
+		                    if (loginNickname !== writerNickname) {
+		                        $acceptButton.hide();
+		                        $rejectButton.hide();
+		                    }
+		
+		                    commentList.append($row);
+
 	                        sHeadCount = result[i].headCount;
 	      					sConfirmCount = result[i].confirmCount;
 	      					headCount = parseInt(sHeadCount);
@@ -540,7 +590,7 @@
 					$('#commentList-modal').modal('show');
 					
 					
-					if( (commentList != null ) && (matchingClose == false) && (headCount == confirmCount ) ){
+					if( (commentList != null ) && (matchingClose == false) && (headCount == confirmCount ) && (writerNickname == loginNickname)){
 						
 						
 						var matchingCloseBtn = '<input type="button" class="btn-matching-close" background-color="#AE302E" data-boardno=' + boardNo + ' data-matchingclose=' + matchingClose + ' value="매칭 마감"/><input type="button" class="btn-matching-modal-close" value="닫기"/>';

@@ -248,6 +248,7 @@
 				"data" : { "userId" : userId },
 				"async" : true,
 				"success": function(data, status, xhr) {   //"success" 정상적으로 처리됐을때 호출
+					
 					if(data == "true"){
 						idDupChecked = true;  //중복체크
 						alert("사용 가능한 아이디 입니다");
