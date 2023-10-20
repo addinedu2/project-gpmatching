@@ -66,13 +66,12 @@
 			<tbody style="text-decoration: none; color: inherit;">
 		    <c:forEach var="userlist" items="${listuser}">
 		        <tr>
-		        <td><a href="<c:url value='/admin/user/${userlist.userNo}' style="text-decoration:none" />" target="_blank">${ userlist.userId }</a></td>
-		   	    <td><a href="<c:url value='/admin/user/${userlist.userNo}' style="text-decoration:none" />" target="_blank">${ userlist.nickname }</a></td>
-		        <td><a href="<c:url value='/admin/user/${userlist.userNo}' style="text-decoration:none" />" target="_blank">${ userlist.userGrade }</a></td>
-		        <td><a href="<c:url value='/admin/userWrite/${userlist.userNo}' style="text-decoration:none" />" target="_blank">작성한 게시물</a></td>
-		        <td>댓글 수</td>
-		        <td><fmt:formatDate value="${ userlist.regDate }" pattern="yyyy-MM-dd"/>
-		        </td>
+		        <td><a href="<c:url value='/admin/user/${userlist.userNo}' />" style="text-decoration:none" target="_blank">${ userlist.userId }</a></td>
+				<td><a href="<c:url value='/admin/user/${userlist.userNo}' />" style="text-decoration:none" target="_blank">${ userlist.nickname }</a></td>
+				<td><a href="<c:url value='/admin/user/${userlist.userNo}' />" style="text-decoration:none" target="_blank">${ userlist.userGrade }</a></td>
+				<td><a href="<c:url value='/admin/userWrite/${userlist.userNo}' />" style="text-decoration:none" target="_blank">작성한 게시물</a></td>
+				<td>댓글 수</td>
+				<td><fmt:formatDate value="${ userlist.regDate }" pattern="yyyy-MM-dd"/></td>
 		        </tr>
 		    </c:forEach>
 		
