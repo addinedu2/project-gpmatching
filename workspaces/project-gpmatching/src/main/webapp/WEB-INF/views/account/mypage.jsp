@@ -119,6 +119,12 @@
 				
 				  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" data-board="common">
 				  <label class="btn btn-outline-primary" for="btnradio2">자유게시판</label>
+				  
+<!-- 				  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" data-board="common"> -->
+<!-- 				  <label class="btn btn-outline-primary" for="btnradio3">오버워치</label> -->
+				  
+<!-- 				  <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" data-board="common"> -->
+<!-- 				  <label class="btn btn-outline-primary" for="btnradio4">배틀그라운드</label> -->
 				
 				  
 				</div>
@@ -244,6 +250,8 @@ $(function(event) {
                         // radio1 or radio2 중 어느것이 클릭 되었는지 출력해보기
                         console.log(event.target.id === 'btnradio1');
                         console.log(event.target.id === 'btnradio2');
+                        console.log(event.target.id === 'btnradio3');
+                        console.log(event.target.id === 'btnradio4');
                         
                         // 출력한걸 토대로 if문으로 버튼구분해서 링크걸기 - 배그, 옵치게시판추가시 else if로 구현
                         var $titleLink = ""
@@ -252,7 +260,14 @@ $(function(event) {
                         	
                         } else{//자유게시판
                         	$titleLink = $("<a>").attr("href", "/project-gpmatching/commonBoard/commonDetail?commonNo=" + result[i].boardNo + "&pageNo=1").addClass("text-inherit").text(result[i].boardTitle);
-                        }
+                        } 
+                        
+//                         else if{ //오버워치
+//                         	$titleLink = $("<a>").attr("href", '/project-gpmatching/boardMatching/overwatchBoard/overwatch-list#tr-' + result[i].boardNo).addClass("text-inherit").text(result[i].boardTitle);
+//                         } else{
+// 							$titleLink = $("<a>").attr("href", '/project-gpmatching/boardMatching/pubgBoard/battleground-list#tr-' + result[i].boardNo).addClass("text-inherit").text(result[i].boardTitle);
+// }
+                        
                         $titleColumn.append($titleLink);
                         
                         var $dateCell = $("<td>").text(result[i].regDate).css("text-align", "right");
