@@ -239,13 +239,13 @@
 											</th>
 											    </c:otherwise>
 											</c:choose>
-											<th class="align-middle" style="width:110px;">
+											<th class="align-middle" style="width:120px;">
 												<!-- Varying modal -->
 <div>
 												<button type="button" class="btn btn-primary btn-sm btn-show-comment-modal" 
 														data-boardno="${ matchingBoard.boardNo }"
 														data-nickname="${ matchingBoard.nickname }"
-														data-close="${ matchingBoard.matchingClose }">${ matchingBoard.boardNo }
+														data-close="${ matchingBoard.matchingClose }">지원
 												</button>											
 												<button type="button" class="btn btn-primary btn-sm btn-show-commentList-modal"
 														data-boardno="${ matchingBoard.boardNo }"
