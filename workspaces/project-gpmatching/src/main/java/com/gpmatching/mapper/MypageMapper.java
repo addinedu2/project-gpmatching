@@ -43,7 +43,7 @@ public interface MypageMapper {
 	
 	
 	//마이페이지 내가 쓴 글만 보기(매칭게시판)
-	@Select("select mb.boardTitle, mb.regDate, mb.boardNo, 'matching' boardType "
+	@Select("select mb.boardTitle, mb.regDate, mb.boardNo, gameNo, 'matching' boardType "
 	        + "from MatchingBoard mb "
 	        + "inner JOIN User u "
 	        + "on u.userNo = mb.userNo "
