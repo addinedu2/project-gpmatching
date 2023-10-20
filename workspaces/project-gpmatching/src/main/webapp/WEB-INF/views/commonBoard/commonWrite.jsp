@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Favicon icon-->
-<link rel="shortcut icon" type="image/x-icon" href="/project-gpmatching/resources/assets/images/favicon/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="/project-gpmatching/resources/assets/images/favicon/gps-ico.ico">
 <!-- Theme CSS -->
 <link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.min.css">
 <link rel="stylesheet" href="/project-gpmatching/resources/assets/css/theme.css">
