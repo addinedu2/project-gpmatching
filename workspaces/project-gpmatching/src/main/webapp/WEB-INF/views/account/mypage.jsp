@@ -119,13 +119,19 @@
 				
 				  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" data-board="common">
 				  <label class="btn btn-outline-primary" for="btnradio2">자유게시판</label>
+				  
+<!-- 				  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" data-board="common"> -->
+<!-- 				  <label class="btn btn-outline-primary" for="btnradio3">오버워치</label> -->
+				  
+<!-- 				  <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" data-board="common"> -->
+<!-- 				  <label class="btn btn-outline-primary" for="btnradio4">배틀그라운드</label> -->
 				
 				  
 				</div>
                 <div id="write-Board-List">
                 
                   	
-					<table class="table text-nowrap mb-0" style="table-layout: fixed; width: 100%">
+					<%-- <table class="table text-nowrap mb-0" style="table-layout: fixed; width: 100%">
 					   <thead class="table-light">
 					      <tr>
 					         <th style="width: 70%">제목</th>
@@ -152,7 +158,7 @@
                        </c:forEach>
 					   </tbody>
 					   
-					</table>
+					</table> --%>
 					
                 </div>
                 <!-- 내가쓴글만보기 -->
@@ -191,15 +197,10 @@
 <!-- 테스트코드(공통게시판) -->
 <script>
 $(function(event) {
-	//btnradio2 자유게시판, btnradio 매칭게시판
-    $("#btnradio2, #btnradio1").on('click', function(event) {
-        let loginUser = "${loginUser.userNo}";
-        console.log(event.target.id)
-        
-        //<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" data-board="common"> 여기에서 data-board="common" 이부분임
-        const board = $(this).data("board"); // data-board속성의 값 읽기
-
-        $.ajax({
+	const loginUser = "${loginUser.userNo}";
+	function loadBoardList(board, id) {
+		
+		$.ajax({
             "url": "boardSelect",
             "method": "get",
             "data": { "loginUser": loginUser, "board": board },
@@ -240,20 +241,24 @@ $(function(event) {
                         });
                         $row.append($titleColumn);
                         
-                        //1. radio1 or radio2 중 어느것이 클릭 되었는지 출력해보기
-                        console.log(event.target.id === 'btnradio1');
-                        console.log(event.target.id === 'btnradio2');
                         
+                        // radio1 or radio2 중 어느것이 클릭 되었는지 출력해보기
                         
-                        
-                        //project-gpmatching/commonBoard/commonDetail
+                        // 출력한걸 토대로 if문으로 버튼구분해서 링크걸기 - 배그, 옵치게시판추가시 else if로 구현
                         var $titleLink = ""
-                        if(event.target.id === 'btnradio1') {//매칭게시판
-                        	$titleLink = $("<a>").attr("href", '/project-gpmatching/boardMatching/lolBoard/lol-list#tr-' + result[i].boardNo).addClass("text-inherit").text(result[i].boardTitle);
+                        if(id === 'btnradio1') {//매칭게시판
+                        	if (result[i].gameNo == 4) {
+                        		$titleLink = $("<a>").attr("href", '/project-gpmatching/boardMatching/overwatchBoard/overwatch-list#tr-' + result[i].boardNo).addClass("text-inherit").html(result[i].boardTitle + "&nbsp;&nbsp;(오버워치)");
+                        	} else if (result[i].gameNo == 5) {
+                        		$titleLink = $("<a>").attr("href", '/project-gpmatching/boardMatching/lolBoard/lol-list#tr-' + result[i].boardNo).addClass("text-inherit").html(result[i].boardTitle + "&nbsp;&nbsp;(LoL)");
+                        	} else if (result[i].gameNo == 7) {
+                        		$titleLink = $("<a>").attr("href", '/project-gpmatching/boardMatching/pubgBoard/battleground-list#tr-' + result[i].boardNo).addClass("text-inherit").html(result[i].boardTitle + "&nbsp;&nbsp;(배틀그라운드)");
+                        	}
                         	
                         } else{//자유게시판
                         	$titleLink = $("<a>").attr("href", "/project-gpmatching/commonBoard/commonDetail?commonNo=" + result[i].boardNo + "&pageNo=1").addClass("text-inherit").text(result[i].boardTitle);
-                        }
+                        } 
+                        
                         $titleColumn.append($titleLink);
                         
                         var $dateCell = $("<td>").text(result[i].regDate).css("text-align", "right");
@@ -265,8 +270,21 @@ $(function(event) {
             "error": function(xhr, status, err) {
                 alert("게시글을 불러오지 못했습니다.");
             }
-        });
+        });	
+	}
+	
+	//btnradio2 자유게시판, btnradio 매칭게시판
+    $("#btnradio2, #btnradio1").on('click', function(event) {
+        
+        //<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" data-board="common"> 여기에서 data-board="common" 이부분임
+        const board = $(this).data("board"); // data-board속성의 값 읽기
+
+        loadBoardList(board, event.target.id);
     });
+	
+	loadBoardList("matching", "btnradio1");
+	
+	
     
 	
 	

@@ -19,24 +19,18 @@ public interface UserMapper {
 	
 	
 	//회원 가입
-	@Insert("insert into User ( userPwd, userId, userEmail, nickname, userPhone, userImage ) "
-			+ "values (#{userPwd}, #{userId}, #{userEmail}, #{nickname}, #{userPhone}, #{userImage}) ")
+	@Insert("insert into User ( userPwd, userId, userEmail, nickname, userPhone, userImage, lolnickname, ownickname, bgnickname ) "
+			+ "values (#{userPwd}, #{userId}, #{userEmail}, #{nickname}, #{userPhone}, #{userImage}, #{lolnickname}, #{ownickname}, #{bgnickname}) ")
 	void insertUser(UserDto user);
 
 	
-	
 	//로그인할때 아이디와 비번 찾는 메서드	
-	@Select ("select userId, userPwd, userEmail, nickname, userPhone, userGrade, regDate, deletedUser, userNo, userImage "
+	@Select ("select userId, userPwd, userEmail, nickname, userPhone, userGrade, regDate, deletedUser, userNo, userImage, userIntro "
              + "from User "
-			+ "where userId = #{userId} and userPwd = #{userPwd} ")
+			+ "where userId = #{userId} and userPwd = #{userPwd} and deletedUser = false ")
 	UserDto selectUserByIdAnduserPwd(@Param("userId") String userId, @Param("userPwd") String userPwd);
 	
-//	//내 정보 수정하는 메서드
-//	@Update ("UPDATE User "
-//			+ "SET nickname = #{nickname}, userPhone = #{userPhone}, userEmail = #{userEmail} "
-//			+ "WHERE userId = #{userId}") 
-//	void updateUserProfile(UserDto user);
-	
+
 
 	//로그인 중복검사
 	@Select(  "select count(*) "
@@ -56,6 +50,20 @@ public interface UserMapper {
 	         + "where userPhone = #{userPhone} and userEmail = #{userEmail} ")
 	UserDto findUserByPhoneAndEmail(@Param("userPhone") String userPhone, @Param("userEmail") String userEmail);
 
+	
+	
+//	//회원탈퇴 비밀번호 
+//	@Select(  "select userPwd "
+//			+ "from User "
+//			+ "where userPwd = #{ userPwd }")
+//	UserDto findUserByPwd(@Param("userPwd") String userPwd);
+	
+	//회원탈퇴 진행
+	@Update(  "update User "
+			+ "set deletedUser = 1 "
+			//+ "where userId = #{userId}")
+			+ "where userPwd = #{userPwd}")
+	void deleteUser(String userPwd);
 	
 	
 	//비번 찾을 때 아이디와 이메일 찾는 메서드	

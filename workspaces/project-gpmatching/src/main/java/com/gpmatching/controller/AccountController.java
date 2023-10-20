@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -103,6 +104,38 @@ public class AccountController {
 				}
 				return null;
 			}
+			
+	// 회원가입 탈퇴버튼
+	@GetMapping(path = { "/deleteUser" })
+	public String deleteForm(@RequestParam(defaultValue = "/home") HttpSession session, Model model) {
+		
+		return "/home";
+	}		
+			
+	// 회원탈퇴
+	@PostMapping(path = { "/deleteUser" })
+	public String delete(UserDto user, String returnUrl, HttpSession session, Model model) {
+		
+		
+		UserDto loginUser = (UserDto)session.getAttribute("loginuser");
+		String userPwd = loginUser.getUserPwd();
+		String checkUserPwd = user.getUserPwd();
+		
+		System.out.println(userPwd);
+		System.out.println(checkUserPwd);
+			
+//		if(loginUser != null) {
+//			session.setAttribute("loginuser", loginUser);
+//			//model.addAttribute("userPwd", user.getUserPwd());
+//		}
+		
+		accountService.deleteUser(checkUserPwd);
+		session.removeAttribute("loginuser");
+		
+		
+		
+		return "redirect:/home";
+	}
 
 	// 로그인 버튼
 	@GetMapping(path = { "/login" })

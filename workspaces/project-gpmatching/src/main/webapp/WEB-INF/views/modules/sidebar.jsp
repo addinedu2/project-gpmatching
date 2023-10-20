@@ -1,6 +1,6 @@
 ﻿﻿<%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar-vertical navbar">
 	<div class="nav-scroller">
 		<!-- Brand logo -->
@@ -65,12 +65,26 @@
 				<div id="navAuthentication" class="collapse "
 					data-bs-parent="#sideNavbar">
 					<ul class="nav flex-column">
-						<li class="nav-item"><a class="nav-link "
-							href="/project-gpmatching/account/login"> 로그인</a></li>
+					
+					
+		
+						<li>
+						     <c:choose>
+						     	<c:when test="${ loginuser eq null }">
+								<li class="nav-item"><a class="nav-link " href="/project-gpmatching/account/login" class="text-inherit fs-6">로그인</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="nav-item"><a class="nav-link " href="/project-gpmatching/account/mypage" class="text-inherit fs-6">마이페이지</a></li>
+							</c:otherwise>
+						</c:choose>  
+						</li>
+													
+							
+							
+							
+							
 						<li class="nav-item"><a class="nav-link  "
 							href="/project-gpmatching/account/register"> 회원가입</a></li>
-						<li class="nav-item"><a class="nav-link "
-							href="/project-gpmatching/account/mypage"> 마이페이지</a></li>
 						<li class="nav-item">
 								<li class="nav-item"><a class="nav-link  "
 							href="/project-gpmatching/account/forgetId"> ID 찾기</a></li>

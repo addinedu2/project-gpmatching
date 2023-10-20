@@ -64,8 +64,7 @@
         <div class="row mb-8">
           <div class="col-xl-3 col-lg-4 col-md-12 col-12">
             <div class="mb-4 mb-lg-0">
-              <h4 class="mb-1">General Setting</h4>
-              <p class="mb-0 fs-5 text-muted">Profile configuration settings </p>
+              <h4 class="mb-1" style="font-weight: bold;">회원정보 수정</h4>
             </div>
 
           </div>
@@ -76,9 +75,9 @@
             <div class="card">
               <!-- card body -->
               <div class="card-body">
-                <div class=" mb-6">
-                  <h4 class="mb-1">General Settings</h4>
-                </div>
+<!--                 <div class=" mb-6"> -->
+<!--                   <h4 class="mb-1">General Settings</h4> -->
+<!--                 </div> -->
                 
                 
                 <!-- 프로필사진 -->
@@ -206,34 +205,41 @@
         <div class="row">
           <div class="col-xl-3 col-lg-4 col-md-12 col-12">
             <div class="mb-4 mb-lg-0">
-              <h4 class="mb-1">Delete Account</h4>
-              <p class="mb-0 fs-5 text-muted">Easily set up social media accounts</p>
+              <h4 class="mb-1" style="font-weight: bold;">회원탈퇴</h4>
             </div>
 
           </div>
 
           <div class="col-xl-9 col-lg-8 col-md-12 col-12">
-            <!-- card -->
-
+          
+            <!-- 회원탈퇴 폼 -->
+			<form id="deleteForm" action="deleteUser" method="post">
             <div class="card mb-6">
               <!-- card body -->
               <div class="card-body">
                 <div class="mb-6">
-                  <h4 class="mb-1">Danger Zone </h4>
-
-                </div>
-                <div>
-                  <!-- text -->
-                  <p>Delete any and all content you have, such as articles, comments, your reading list or chat messages. Allow your username to become available to anyone.</p>
-                  <a href="#" class="btn btn-danger">Delete Account</a>
-                  <p class="small mb-0 mt-3">Feel free to contact with any <a href="#">dashui@example.com</a> questions.
-                  </p>
-                </div>
-              </div>
+				<div class="mb-3">
+					<label for="userPwd" class="form-label">비밀번호</label>
+					<input type="password" id="userPwd" class="form-control" name="userPwd" required>
+				</div>
+				
+				<div class="mb-3">
+					 <label for="confirmPassword" class="form-label">비밀번호 확인</label>
+					 <input type="password" id="confirmPassword" class="form-control" name="confirm-password" required>
+				</div>
+				<div>
+				<div>
+					<button id="deleteComplete" type="submit" class="btn btn-danger">
+					회원탈퇴
+					</button>
+          	    </div>
+          	    </div>
+          	   </div>
+          	  </div>
             </div>
-
+          </form>
+          
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -283,6 +289,47 @@
           reader.readAsDataURL(input.files[0]);
       }
   }
+  </script>
+  
+  <script>
+	$(function () {
+		$('#deleteComplete').on('click', function(event){
+			event.preventDefault(); //이벤트 발생 객체의 원래 동작 실행 막기 
+		
+			const userPwd = $("#userPwd").val();
+			if(!userPwd){
+				alert('비밀번호를 입력하세요');
+				$('#userPwd').focus();
+				return;
+			}
+		
+			const confirmPassword = $("#confirmPassword").val();
+			if(!confirmPassword){
+				alert('비밀번호를 확인하세요');
+				$('#confirmPassword').focus();
+				return;
+			}
+			
+// 			if (userPwd != confirmPassword) {
+// 				alert('비밀번호를 확인해주세요');
+// 				$('#confirmPassword').focus();
+// 				return;
+// 			}else{
+// 				alert('탈퇴하시겠습니까?');
+// 			}
+			if (userPwd != confirmPassword) {
+				alert('비밀번호를 확인해주세요');
+				$('#confirmPassword').focus();
+				return;
+			}else{
+				alert('탈퇴하시겠습니까?');
+			}
+			
+			
+			$("#deleteForm").submit(); //중복검사 됐을때만 submit
+			
+		});
+	});
   </script>
   
   
