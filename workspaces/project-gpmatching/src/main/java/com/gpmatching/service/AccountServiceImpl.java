@@ -3,6 +3,7 @@ package com.gpmatching.service;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.gpmatching.common.Util;
 import com.gpmatching.dto.UserDto;
 import com.gpmatching.mapper.UserMapper;
 
@@ -17,8 +18,9 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public void register(UserDto user) { //회원 가입을 할 거다
 		
-//		String hashPasswd = Util.getHashedString(user.getUserPwd(), "SHA-256" ); //입력한 비번 암호화
-//		user.setUserPwd(hashPasswd); //암호화 된 비번으로 넣기
+		//DB에 비밀번호 암호화
+		String hashPasswd = Util.getHashedString(user.getUserPwd(), "SHA-256" ); //입력한 비번 암호화
+		user.setUserPwd(hashPasswd); //암호화 된 비번으로 넣기
 						
 		userMapper.insertUser(user);
 	}

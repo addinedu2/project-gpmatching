@@ -88,30 +88,41 @@ public class AdminServiceImpl implements AdminService {
 		return adminMapper.getcountReportBoardPosts(userNo);
 	}
     
-	//글, 댓글 번호로 링크 만들기
-	//	@Override
-//	public List<AdminDto> getUserList(int pageNum, int pageSize) {
-//		//페이징 처리
-//		int startRow = (pageNum - 1) * pageSize;
-//		int endPow = pageNum * pageSize;
-//		
-//		//회원 목록 조회
-//		List<AdminDto> userList = adminMapper.getUserList(startRow, endPow);
-//		
-//		for (AdminDto user : userList ) {
-//			user.setTotalPosts(adminMapper.countTotalPostsByUserNo(user.getUserNo()));	
-//			user.setTotalComments(adminMapper.countTotalCommentsByUserNo(user.getUserNo()));
-//		}	
-//    return userList;
-
-
+	//원형 그래프 하루치
 	
-	
-	
-	
-	
-	
-	
+	@Override
+	public int getCommonBoardCountForDay() {
+        return adminMapper.getCommonBoardCountForDay();
+    }
+	@Override
+    public int getMatchingBoardCountBattlegroundForDay() {
+        return adminMapper.getMatchingBoardCountBattlegroundForDay();
+    }
+	@Override
+    public int getMatchingBoardCountLolForDay() {
+        return adminMapper.getMatchingBoardCountLolForDay();
+    }
+	@Override
+    public int getMatchingBoardCountOverwatchForDay() {
+        return adminMapper.getMatchingBoardCountOverwatchForDay();
+    }
+	//원형 그래프 일주일치
+	@Override
+    public int getCommonBoardCountForWeek() {
+        return adminMapper.getCommonBoardCountForWeek();
+    }
+	@Override
+    public int getMatchingBoardCountBattlegroundForWeek() {
+        return adminMapper.getMatchingBoardCountBattlegroundForWeek();
+    }
+	@Override
+    public int getMatchingBoardCountLolForWeek() {
+        return adminMapper.getMatchingBoardCountLolForWeek();
+    }
+	@Override
+    public int getMatchingBoardCountOverwatchForWeek() {
+        return adminMapper.getMatchingBoardCountOverwatchForWeek();
+    }
 	
 	
 	

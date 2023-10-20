@@ -112,14 +112,16 @@ public class AdminController {
 	
 	//회원이 쓴 글(새창)로 가는 컨트롤러
 	@GetMapping(path = {"/userWrite/{userNo}"})
-	public String viewUserPosts(@PathVariable int userNo, @RequestParam(defaultValue="1") int pageNo, Model model) {
+	public String viewUserPosts(@PathVariable("userNo")int userNo, @RequestParam(defaultValue="1") int pageNo, Model model) {
 
 		// 페이지별 게시물 조회
 		int pageSize = 5; // 한 페이지 표시 개수
 		int pagerSize = 5;// 표시 페이지 개수
 		//String linkUrl = "/project-gpmatching/admin/adminUserWriteBoardList";
 		String linkUrl = "/project-gpmatching/admin/userWrite/{userNo}";
-	
+		
+		System.out.println(userNo);
+		
 		int from = (pageNo - 1) * pageSize;// 첫번째 페이지 게시물 순서
 		List<AdminDto> listuser = adminService.listUserListByPage(from, pageSize);
 	
@@ -159,8 +161,28 @@ public class AdminController {
 	    return "admin/adminUserWriteBoardList";
 	}
 	
+	//원형 그래프	
+	@GetMapping(path = {"/admin/adminOverview"})
+    public String BoardChart(Model model) {
+		AdminDto adminDto = new AdminDto();
+		
+	    adminDto.setCommonBoardCountForDay(adminService.getCommonBoardCountForDay());
+	    adminDto.setMatchingBoardCountBattlegroundForDay(adminService.getMatchingBoardCountBattlegroundForDay());
+	    adminDto.setMatchingBoardCountLolForDay(adminService.getMatchingBoardCountLolForDay());
+	    adminDto.setMatchingBoardCountOverwatchForDay(adminService.getMatchingBoardCountOverwatchForDay());
 
+	    adminDto.setCommonBoardCountForWeek(adminService.getCommonBoardCountForWeek());
+	    adminDto.setMatchingBoardCountBattlegroundForWeek(adminService.getMatchingBoardCountBattlegroundForWeek());
+	    adminDto.setMatchingBoardCountLolForWeek(adminService.getMatchingBoardCountLolForWeek());
+	    adminDto.setMatchingBoardCountOverwatchForWeek(adminService.getMatchingBoardCountOverwatchForWeek());
+	    
+	   return "admin/adminOverview";
+	}
+        
+        
 	
 }
+	
+
 	
 	

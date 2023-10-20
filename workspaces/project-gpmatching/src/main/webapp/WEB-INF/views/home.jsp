@@ -27,7 +27,7 @@
 
 <style type="text/css">
 
-.row, .col-xl-4, .col-xl-5 {
+.row, .col-xl-4, .col-xl-6 {
 
 float: none;
 margin: 0 auto;
@@ -35,17 +35,14 @@ cursor : pointer;
 
 }
 
-.card-img-top {
-
-height : 250px;
-
-}
 
 .card-img {
-/* width : 300px; */
-height : 300px;
+
+height : 150px;
 
 }
+
+
 
 </style>
 
@@ -68,48 +65,56 @@ height : 300px;
 		
 		<div class="py-6">   
 		<div class="row row-cols-1 g-3" >
-		<div class="col-xl-5 col-lg-6 col-md-6 col-6 mb-6">
+		<div class="col-xl-4 col-lg-6 col-md-6 col-6 mb-3">
 		        <div  onClick="location.href='/project-gpmatching/commonBoard/commonList'">
 		          <div>
-		          <img src="/project-gpmatching/resources/assets/images/brand/logo/gps_logo_home.png"
+		          <img src="/project-gpmatching/resources/assets/images/brand/logo/GPS_logo_home2.png"
 		          	   class="card-img img-fluid" alt="...">
 		          	   <!-- 로고이미지 추가 제작 후 수정 필요 -->
 		          </div>
 		        </div>
 		      </div>
 		      </div>
-		      <br>
-		    <div class="row row-cols-2 g-3" >
 
-		      <div class="col-xl-4 col-lg-6 col-md-6 col-6 mb-6 ">
-		        <div class="card " onClick="location.href='/project-gpmatching/boardMatching/lolBoard/lol-list'"> 
-		          <div class="card-body" >
-		          <img src="/project-gpmatching/resources/assets/images/home/lol_1.jpg" class="card-img-top img-fluid" alt="..." > 
-		            </div>
-		        </div>
-		      </div>
-		
-		      <div class="col-xl-4 col-lg-6 col-md-6 col-6 mb-6 ">
-		        <div class="card" onClick="location.href='/project-gpmatching/boardMatching/pubgBoard/battleground-list'">
-		          <div class="card-body">
-		          <img src="/project-gpmatching/resources/assets/images/home/pubg_2.jpg" class="card-img-top img-fluid" alt="...">
-		            </div>
-		        </div>
-		      </div>
-		
-		      <div class="col-xl-4 col-lg-6 col-md-6 col-6 mb-6">
-		        <div class="card" onClick="location.href='/project-gpmatching/boardMatching/overwatchBoard/overwatch-list'">
-		          <div class="card-body">
-		          <img src="/project-gpmatching/resources/assets/images/brand/logo/over_logo2.png" 
-		          	   class="card-img-top img-fluid" alt="...">
-		          </div>
-		        </div>
-		      </div>
 		      
-		      
-
-
-		</div>
+	      <!-- carousel -->
+	      <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                      <div class="tab-content p-4" id="pills-tabContent-with-indicators-slide">
+                          <div class="tab-pane tab-example-design fade show active" id="pills-with-indicators-slide-design" role="tabpanel" aria-labelledby="pills-with-indicators-slide-design-tab">
+                              <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                  <ol class="carousel-indicators">
+                                      <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+                                      <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1">
+                                      </li>
+                                      <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2">
+                                      </li>
+                                  </ol>
+                                  <div class="carousel-inner">
+                                      <div class="carousel-item active" onClick="location.href='/project-gpmatching/boardMatching/lolBoard/lol-list'">
+                                          <img src="/project-gpmatching/resources/assets/images/home/lol_1.jpg" class="d-block w-100 " alt="">
+                                      </div>
+                                      <div class="carousel-item" onClick="location.href='/project-gpmatching/boardMatching/pubgBoard/battleground-list'">
+                                          <img src="/project-gpmatching/resources/assets/images/home/pubg_2.jpg" class="d-block w-100 " alt="">
+                                      </div>
+                                      <div class="carousel-item" onClick="location.href='/project-gpmatching/boardMatching/overwatchBoard/overwatch-list'">
+                                          <img src="/project-gpmatching/resources/assets/images/brand/logo/over_logo2.png" class="d-block w-100 " alt="">
+                                      </div>
+                                  </div>
+                                  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                      <span class="visually-hidden">Previous</span>
+                                  </a>
+                                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                      <span class="visually-hidden">Next</span>
+                                  </a>
+                              </div>
+                          </div>
+                       </div>
+                 	</div>
+                </div>
+		    
 	</div>
 
 <!-- Scripts -->

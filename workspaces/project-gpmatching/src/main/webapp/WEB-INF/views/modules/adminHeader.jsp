@@ -68,7 +68,7 @@
               <!-- nav -->
               <ul class="nav nav-lt-tab px-4" id="pills-tab" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Overview</a>
+                  <a class="nav-link" href="/project-gpmatching/admin/adminOverview" id="overview">Overview</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/project-gpmatching/admin/adminUserList" id="UserListLink">회원 목록</a>

@@ -54,8 +54,9 @@ public interface LolBoardMapper {
 			+ "where boardNo = #{ boardNo }")
 	MatchingBoardDto selectMatchingBoardByBoardNo(@Param("boardNo")int boardNo);
 	
+
 	@Select("select u.nickname, u.lolnickname, m.boardNo,m.boardTitle, m.boardContent, "
-			+ "m.preferGender, m.mic, m.headCount, m.confirmCount, m.matchingClose, "
+			+ "m.preferGender, m.mic, m.headCount, m.confirmCount, m.matchingClose, m.startTime, m.endTime, "
 			+ "m.regDate, m.readCount, m.gameNo, "
 			+ "l.lolTier, l.lolPosition, l.lolSur, l.lolPlay "
 			+ "from MatchingBoard m "
