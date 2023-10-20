@@ -271,14 +271,44 @@
 			                </button>
 			            </div>
 						<form id="commentform" action="write-comment" method="post">
-							<input type="hidden" id="boardno-in-modal" name="boardNo" value="${ matchingBoard.boardNo }" />
+							<input type="hidden" id="boardno-in-modal" name="boardNo" value="${ matchingBoard.boardNo }" /> 
 							<input type="hidden" name="userNo" value="${ loginuser.userNo }" /> 
 			            <div class="modal-body">
-			                <div class="mb-3">
-								<label for="recipient-name" class="col-form-label">닉네임 : ${ loginuser.nickname }</label> 
-								<input type="text" class="form-control" id="recipient-name-in-modal" 
-								placeholder="게임 아이디를 입력해주세요">
-							</div>
+			            	<div class="d-flex justify-content-between
+			                      align-items-center mb-4">
+			                    <div class="d-flex align-items-center">
+			                      <!-- img -->
+			                      <div>
+			                        <a class="rounded-circle" href="#" role="button" id="dropdownUser"
+							          data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							          <div class="avatar avatar-md">
+							          		<c:choose>
+							          			<c:when test="${loginuser.userImage == null}">
+							           	    		<img alt="avatar" src="/project-gpmatching/resources/assets/images/avatar/anonymous.png" class="rounded-circle" />
+							           	    	</c:when>
+							                   	<c:otherwise> 
+							                   		<img src="${pageContext.request.contextPath}/resources/upload/${loginuser.userImage}" class="rounded-circle" alt="Image" height="30" width="30" >
+							                   	</c:otherwise>
+							           	    </c:choose>
+							          </div>
+							        </a>
+
+			                      </div>
+			                      <!-- text -->
+			                      <div class="ms-3 ">
+			                        <h5 class="mb-1">${ loginuser.nickname }</h5>
+			                        <p class="text-muted mb-0 fs-5 text-muted">${ loginuser.lolnickname }
+			                        </p>
+			                      </div>
+			                    </div>
+			                    <div>
+			                      <a href="#" class="text-muted text-primary-hover"><i
+			                            class="me-4 icon-xs" data-feather="phone-call"></i></a>
+			                      <a href="#" class="text-muted text-primary-hover"><i
+			                            class="icon-xs" data-feather="video"></i></a>
+			                    </div>
+			                  </div>
+			            	
 							<div class="mb-3">
 								<label for="message-text" class="col-form-label">파티장에게 알려줄 내용</label>
 								<textarea name="mCommentContent" class="form-control" id="message-text-in-modal"></textarea>
@@ -292,6 +322,7 @@
 			        </div>
 			    </div>
 			</div>
+			
 			<!-- 댓글 목록 보기 -->
 			<div class="modal fade" id="commentList-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			    <div class="modal-dialog" role="document">
@@ -307,29 +338,41 @@
 			            <div id="dynamic-button-area" class="modal-body" >
 			            
 			            </div>
-			            <!-- card : 댓글 ui는 나중에 이런 형식으로 구현할 예정입니다 -->
+			            
 			              <div class="card mb-4">
 			                <!-- card body -->
 			                <div class="card-body">
 			                  <!-- card title -->
-			                  <h4 class="card-title">나중에 댓글 ui 이런식으로 어때요?</h4>
+			                  
 			                  <div class="d-flex justify-content-between
 			                      align-items-center mb-4">
 			                    <div class="d-flex align-items-center">
 			                      <!-- img -->
 			                      <div>
-
-			                        <img src="/project-gpmatching/resources/assets/images/avatar/avatar-1.jpg" class="rounded-circle avatar-md" alt="">
+			                        <a class="rounded-circle" href="#" role="button" id="dropdownUser"
+							          data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							          <div class="avatar avatar-md">
+							          		<c:choose>
+							          			<c:when test="${loginuser.userImage == null}">
+							           	    		<img alt="avatar" src="/project-gpmatching/resources/assets/images/avatar/anonymous.png" class="rounded-circle" />
+							           	    	</c:when>
+							                   	<c:otherwise> 
+							                   		<img src="${pageContext.request.contextPath}/resources/upload/${loginuser.userImage}" class="rounded-circle" alt="Image" height="30" width="30" >
+							                   	</c:otherwise>
+							           	    </c:choose>
+							          </div>
+							        </a>
 
 			                      </div>
 			                      <!-- text -->
 			                      <div class="ms-3 ">
-			                        <h5 class="mb-1">여기는 지원자 닉네임</h5>
-			                        <p class="text-muted mb-0 fs-5 text-muted">여기는 간단한 내용
+			                        <h5 class="mb-1">${ loginuser.nickname }</h5>
+			                        <p class="text-muted mb-0 fs-5 text-muted">${ loginuser.lolnickname }
 			                        </p>
 			                      </div>
 			                    </div>
 			                    <div>
+			                      
 			                      <a href="#" class="text-muted text-primary-hover"><i
 			                            class="me-4 icon-xs" data-feather="phone-call"></i></a>
 			                      <a href="#" class="text-muted text-primary-hover"><i
@@ -526,10 +569,11 @@
 						// 테이블 헤더 추가
 		                var $headerRow = $("<tr>");
 		                
-		                $headerRow.append($("<th>").text("댓글 번호"));
-		                $headerRow.append($("<th>").text("닉네임"));
-		                $headerRow.append($("<th>").text("댓글 내용"));
-						$headerRow.append($("<th>").text("승인여부"));;
+		                $headerRow.append($("<th>").text("댓글번호  "));
+		                $headerRow.append($("<th>").text("닉네임   "));
+		                $headerRow.append($("<th>").text("롤닉네임  "));
+		                $headerRow.append($("<th>").text("댓글내용  "));
+						$headerRow.append($("<th>").text("승인여부  "));;
 		                
 		                commentList.append($headerRow);
 		                
@@ -538,6 +582,7 @@
 		                    
 		                    $row.append($("<td>").text(result[i].commentNo));
 		                    $row.append($("<td>").text(result[i].nickname));
+		                    $row.append($("<td>").text(result[i].lolnickname));
 		                    $row.append($("<td>").text(result[i].mcommentContent));
 		                    
 		                    // 댓글 승인여부 상태 표시
@@ -645,10 +690,11 @@
 						// 테이블 헤더 추가
 		                var $headerRow = $("<tr>");
 		                
-		                $headerRow.append($("<th>").text("댓글 번호"));
-		                $headerRow.append($("<th>").text("닉네임"));
-		                $headerRow.append($("<th>").text("댓글 내용"));
-						$headerRow.append($("<th>").text("승인여부"));;
+		                $headerRow.append($("<th>").text("댓글번호  "));
+		                $headerRow.append($("<th>").text("닉네임   "));
+		                $headerRow.append($("<th>").text("롤닉네임  "));
+		                $headerRow.append($("<th>").text("댓글내용  "));
+						$headerRow.append($("<th>").text("승인여부  "));;
 		                
 		                commentList.append($headerRow);
 		                
@@ -657,6 +703,7 @@
 		                    
 		                    $row.append($("<td>").text(result[i].commentNo));
 		                    $row.append($("<td>").text(result[i].nickname));
+		                    $row.append($("<td>").text(result[i].lolnickname));
 		                    $row.append($("<td>").text(result[i].mcommentContent));
 		                    if(result[i].status == "0"){
 		                    	$row.append($("<td>").text("미승인"));
@@ -752,10 +799,11 @@
 						// 테이블 헤더 추가
 		                var $headerRow = $("<tr>");
 		                
-		                $headerRow.append($("<th>").text("댓글 번호"));
-		                $headerRow.append($("<th>").text("닉네임"));
-		                $headerRow.append($("<th>").text("댓글 내용"));
-						$headerRow.append($("<th>").text("승인여부"));;
+		                $headerRow.append($("<th>").text("댓글번호  "));
+		                $headerRow.append($("<th>").text("닉네임   "));
+		                $headerRow.append($("<th>").text("롤닉네임  "));
+		                $headerRow.append($("<th>").text("댓글내용  "));
+						$headerRow.append($("<th>").text("승인여부  "));
 		                
 		                commentList.append($headerRow);
 		                
@@ -764,6 +812,7 @@
 		                    
 		                    $row.append($("<td>").text(result[i].commentNo));
 		                    $row.append($("<td>").text(result[i].nickname));
+		                    $row.append($("<td>").text(result[i].lolnickname));
 		                    $row.append($("<td>").text(result[i].mcommentContent));
 		                    if(result[i].status == "0"){
 		                    	$row.append($("<td>").text("미승인"));

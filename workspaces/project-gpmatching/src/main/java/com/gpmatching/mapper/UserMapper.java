@@ -25,11 +25,12 @@ public interface UserMapper {
 
 	
 	//로그인할때 아이디와 비번 찾는 메서드	
-	@Select ("select userId, userPwd, userEmail, nickname, userPhone, userGrade, regDate, deletedUser, userNo, userImage "
-             + "from User "
-			+ "where userId = #{userId} and userPwd = #{userPwd} and deletedUser = false ")
+	@Select ("select userId, userPwd, userEmail, nickname, userPhone, userGrade, regDate, "
+			+ "deletedUser, userNo, lolnickname, ownickname, bgnickname, userImage "
+	        + "from User "
+	        + "where userId = #{userId} and userPwd = #{userPwd} and deletedUser = false ")
 	UserDto selectUserByIdAnduserPwd(@Param("userId") String userId, @Param("userPwd") String userPwd);
-	
+		
 
 
 	//로그인 중복검사
