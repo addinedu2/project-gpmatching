@@ -3,6 +3,7 @@ package com.gpmatching.matchingboard.pubgboard.service;
 import java.util.List;
 import java.util.Map;
 
+import com.gpmatching.dto.CloseAlarmDto;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 
 
@@ -17,9 +18,18 @@ public interface PubgBoardService {
 	
 	List<MatchingBoardDto> getSelectPubgBoardListByGameName(String gameName);
 	
-	MatchingBoardDto findMatchingBoardByBoardNo(int boardNo);
-	
 	MatchingBoardDto findPubgBoardByBoardNo(int boardNo);
+	
+	boolean getMatchingCloseByBoardNo(int boardNo);
+
+	List<MatchingBoardDto> searchMatchingBoardListByTitle(String gameName, String keyword);
+
+
+	void setNowConfirmCount(int confirmCount);
+
+	void setMatchingCloseTrue(int boardNo, CloseAlarmDto closeAlarm);
+
+	boolean isMatchingCloseCondition(int boardNo);
 	
 	void edit(MatchingBoardDto matchingBoardDto);
 

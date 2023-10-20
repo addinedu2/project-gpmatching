@@ -74,11 +74,11 @@
 			
 			<br>
 			<!-- Input -->
-			<form action="lol-write" method="post">
+			<form action="lol-write" method="post" id="lol-write">
 				<div class="mb-3 txt-box">
 					<label class="form-label text-light" for="textInput">제목</label>
 					<input name="boardTitle" type="text" id="textInput" class="form-control" 
-							placeholder="시간은 꼭 포함해서 작성해주세요">
+							placeholder="제목은 필수입니다!" required> 
 				</div>
 				<div class="mb-3 txt-box">
 					<label class="form-label text-light" for="textInput">작성자 : ${ loginuser.nickname }</label>
@@ -87,7 +87,8 @@
 				<!-- Textarea -->
 				<div class="mb-3 txt-box">
 					<label for="textarea-input" class="form-label text-light">내용</label>
-					<textarea name="boardContent" class="form-control" id="textarea-input" rows="5"></textarea>
+					<textarea name="boardContent" class="form-control" id="textarea-input" rows="5" 
+					placeholder="추가 정보가 필요하다면, 자유롭게 작성해주세요!"></textarea>
 				</div>
 				<!-- Checks -->
 				<div class="txt-box">
@@ -119,9 +120,9 @@
 				</div>
 				<br>
 				<div class="mb-3 txt-box">
-					<label class="form-label text-light" for="textInput">모집인원 <span class="text-secondary">(최대 4인)</span></label>
-					<select class="form-select" name="headCount" aria-label="Default select example">
-						<option value="" selected>인원을 선택하세요</option>
+					<label class="form-label text-light" for="textInput">모집인원 <span class="text-secondary">(최대 5인)</span></label>
+					<select class="form-select" name="headCount" aria-label="Default select example" required>
+						<option value="" selected disabled hidden>인원을 선택하세요</option>
 						<option value=1>2</option>
 						<option value=2>3</option>
 						<option value=3>4</option>
@@ -131,7 +132,7 @@
 				<br>
 				<!-- 롤 등록 -->
 				<div class="mb-3 txt-box">
-					<label class="form-label text-light" for="selectOne">롤주포지션</label>
+					<label class="form-label text-light" for="selectOne">내 포지션</label>
 					<select name="lolPosition" class="form-select" aria-label="Default select example">
 						<option selected>포지션 전체</option>
 						<option value="top">탑</option>
@@ -142,30 +143,30 @@
 					</select>
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label text-light" for="textInput">롤서렌여부</label>
+					<label class="form-label text-light" for="textInput">서렌여부</label>
 					<input name="lolSur" type="text" id="textInput" class="form-control" >
 				</div>
 				<div class="mb-3 txt-box">
-					<label class="form-label text-light" for="textInput">롤선호플레이</label>
+					<label class="form-label text-light" for="textInput">선호플레이</label>
 					<input name="lolPlay" type="text" id="textInput" class="form-control" >
 				</div>
 				<!-- Select Option -->
 				<div class="mb-3 txt-box">
 					<label class="form-label text-light" for="selectOne">티어<span
 						class="text-secondary">(현재 티어)</span></label> <select name="lolTier" class="form-select"
-						aria-label="Default select example">
-						<option selected>티어를 선택하세요</option>
+						aria-label="Default select example" required>
+						<option value="" selected disabled hidden>티어를 선택하세요</option>
 						<option value="bronze">브론즈</option>
 						<option value="silver">실버</option>
 						<option value="gold">골드</option>
 					</select>
 				</div>
 				<br>
-<!-- 				<div class="time"> -->
-<!-- 					<label for="customTimeRange" class="form-label text-light">Select Time</label> -->
-<!-- 					<input type="range" class="form-range" min="0" max="12" step="0.5" id="customTimeRange" value="0" oninput="document.getElementById('time-value').innerHTML=this.value;"> -->
-<!-- 					<span id="time-value"></span> -->
-<!-- 				</div> -->
+				<div>
+			        <label for="enableTimeSelection">시간 선택 활성화</label>
+					<input type="checkbox" id="enableTimeSelection" onchange="toggleTimeSelection()" checked>
+			    </div>
+				
 				<div class="time1">
 				    <label for="customStartTimeRange" class="form-label text-light" style="margin-right: 10px;">시작 시간 : </label><span id="start-time-value"></span>
 				    <input type="range" class="form-range" min="0" max="24" step="0.5" id="customStartTimeRange" value="0" oninput="updateSelectedTime('start-time', this.value);">
@@ -177,14 +178,17 @@
 				    <input type="range" class="form-range" min="0" max="24" step="0.5" id="customEndTimeRange" value="0" oninput="updateSelectedTime('end-time', this.value);">
 				    <input type="hidden" name="endTime" id="endTime">
 				</div>
+		
+				<br>
+				<div class="btn-center">
 					<!-- Primary Button -->
 					<button type="submit" class="btn btn-primary me-2 mb-2">등록</button>
 					<!-- Danger Button -->
 					<button type="button" id="btnCancel" class="btn btn-danger mb-2">취소</button>
-				</div>
-				
+				</div>			
 			</form>
 		</div>
+		
 
 
 		<!-- Libs JS -->
@@ -239,8 +243,33 @@
 			document.getElementById('endTime').value = endTimeValue;
 		}
 		
-		
-		
+	    function toggleTimeSelection() {
+	    	var enableTimeSelection = document.getElementById('enableTimeSelection');
+	        var startTimeInput = document.getElementById('customStartTimeRange');
+	        var endTimeInput = document.getElementById('customEndTimeRange');
+	        
+	        if (enableTimeSelection.checked) {
+	            // 스위치가 활성화된 경우
+	            startTimeInput.disabled = false;
+	            endTimeInput.disabled = false;
+	         	// 값 변경 이벤트를 듣고 hidden 필드 업데이트
+	            startTimeInput.addEventListener('input', function() {
+	                document.getElementById('startTime').value = startTimeInput.value;
+	            });
+	            endTimeInput.addEventListener('input', function() {
+	                document.getElementById('endTime').value = endTimeInput.value;
+	            });
+	        } else {
+	            // 스위치가 비활성화된 경우
+	            startTimeInput.disabled = true;
+	            endTimeInput.disabled = true;
+	         	// hidden 필드에도 값을 초기화
+	            document.getElementById('startTime').value = "";
+	            document.getElementById('endTime').value = "";
+	        }
+	        
+		}
+	    
 		</script>
 		
 		

@@ -16,11 +16,12 @@ import com.gpmatching.dto.MatchingAlarmDto;
 @Mapper
 public interface MatchingAlarmMapper {
 
+	//댓글 알림 테이블 insert
 	@Insert("insert into MatchingAlarm (alarmContent, commentNo) values ('댓글을 달았습니다', #{ commentNo })")
 	@Options(useGeneratedKeys = true, keyProperty = "alarmNo")
 	void insertMatchingAlarm(MatchingAlarmDto matchingAlarmDto);
 
-	//승인 테이블 insert
+	//승인 알림 테이블 insert
 	@Insert("insert into ConfirmAlarm (commentNo, confirmContent) values (#{commentNo},'승인을 했습니다')")
 	@Options(useGeneratedKeys = true, keyProperty = "confirmNo")
 	void insertConfirmAlarm(ConfirmAlarmDto confirmAlarm);
@@ -30,15 +31,58 @@ public interface MatchingAlarmMapper {
 	@Options(useGeneratedKeys = true, keyProperty = "closeNo")
 	void insertCloseAlarm(CloseAlarmDto closeAlarm);
 	
-	
-	@Select("SELECT result.alarmNo, result.commentNo, result.alarmContent, result.regDate, result.nickname FROM (SELECT ma.alarmNo, ma.commentNo, ma.alarmContent, ma.regDate, u.nickname FROM MatchingComment mc INNER JOIN MatchingAlarm ma ON ma.commentNo = mc.commentNo INNER JOIN User u ON u.userNo = mc.userNo WHERE mc.userNo != ${userNo} UNION SELECT ca.confirmNo, ca.commentNo, ca.confirmContent, ca.regDate, (SELECT u.nickname FROM User u WHERE u.userNo = mb.userNo) AS nickname FROM MatchingComment mc INNER JOIN ConfirmAlarm ca ON ca.commentNo = mc.commentNo INNER JOIN User u ON u.userNo = mc.userNo INNER JOIN MatchingBoard mb ON mb.boardNo = mc.boardNo WHERE (mc.status = 1 AND u.userNo = ${userNo}) UNION SELECT cla.closeNo, cla.boardNo, cla.closeContent, cla.regDate, (SELECT u.nickname FROM User u WHERE u.userNo = mc.userNo) AS nickname FROM MatchingBoard mb INNER JOIN CloseAlarm cla ON cla.boardNo = mb.boardNo INNER JOIN MatchingComment mc ON mc.boardNo = mb.boardNo WHERE (mb.matchingClose = 1 AND mc.userNo = ${userNo})) AS result ORDER BY result.regDate DESC")
+	//알림리스트 댓글+승인+마감
+	@Select("select result.alarmNo, result.commentNo, result.alarmContent, result.regDate, result.nickname "
+			  + "from "
+			  + "     (select ma.alarmNo, ma.commentNo, ma.alarmContent, ma.regDate, u.nickname "
+			  + "      from MatchingComment mc "
+			  + "      inner join MatchingAlarm ma on ma.commentNo = mc.commentNo "
+			  + "      inner join User u on u.userNo = mc.userNo "
+			  + "      where mc.userNo != ${userNo} "
+			  + "      union "
+			  + "      select ca.confirmNo, ca.commentNo, ca.confirmContent, ca.regDate, "
+			  + "            (select u.nickname "
+			  + "             from User u "
+			  + "             where u.userNo = mb.userNo) as nickname "
+			  + "             from MatchingComment mc "
+			  + "             inner join ConfirmAlarm ca on ca.commentNo = mc.commentNo "
+			  + "             inner join User u on u.userNo = mc.userNo "
+			  + "             inner join MatchingBoard mb on mb.boardNo = mc.boardNo "
+			  + "             where (mc.status = 1 and u.userNo = ${userNo}) "
+			  + "             union "
+			  + "             select cla.closeNo, cla.boardNo, cla.closeContent, cla.regDate, "
+			  + "                   (select u.nickname "
+			  + "                    from User u where u.userNo = mc.userNo) as nickname "
+			  + "                    from MatchingBoard mb "
+			  + "                    inner join CloseAlarm cla on cla.boardNo = mb.boardNo "
+			  + "                    inner join MatchingComment mc on mc.boardNo = mb.boardNo "
+			  + "                    where (mb.matchingClose = 1 and mc.userNo = ${userNo})) as result "
+			  + "                    order by result.regDate desc")
 	List<MatchingAlarmDto> selectAlarmListByUserNo(int userNo);
 
-	@Select("select count(ma.alarmNo) as mAlarmCount "
-			  + "from MatchingComment mc "
-			  + "inner join MatchingAlarm ma on ma.commentNo = mc.commentNo "
-			  + "inner join User u on u.userNo = mc.userNo "
-			  + "where mc.userNo != ${userNo}")
+	//알림리스트 총 개수(댓글+승인+알림) 가져오기
+	@Select("SELECT (SELECT COUNT(alarmNo) "
+			  + "FROM MatchingAlarm "
+			  + "WHERE commentNo IN "
+			  + "    ( SELECT mc.commentNo "
+			  + "      FROM MatchingComment mc "
+			  + "      INNER JOIN User u ON u.userNo = mc.userNo "
+			  + "      WHERE mc.userNo != ${userNo}) ) "
+			  + "      + (SELECT COUNT(confirmNo) "
+			  + "         FROM ConfirmAlarm "
+			  + "         WHERE commentNo IN "
+			  + "              ( SELECT mc.commentNo "
+			  + "                FROM MatchingComment mc "
+			  + "                INNER JOIN User u ON u.userNo = mc.userNo "
+			  + "                WHERE mc.userNo = ${userNo}) ) "
+			  + "                + (SELECT COUNT(closeNo) "
+			  + "                   FROM CloseAlarm "
+			  + "                   WHERE boardNo IN "
+			  + "                  ( SELECT mb.boardNo "
+			  + "                    FROM MatchingBoard mb "
+			  + "                    INNER JOIN User u ON u.userNo = mb.userNo "
+			  + "                    INNER JOIN MatchingComment mc ON mc.boardNo = mb.boardNo "
+			  + "                    WHERE mc.userNo = ${userNo}) ) AS TotalCount;")
 	int countMatchingAlarmNo(int userNo);
 	
 	@Delete("delete "

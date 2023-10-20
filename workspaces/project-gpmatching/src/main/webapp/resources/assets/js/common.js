@@ -3,11 +3,9 @@
  */
 
 	
-	//알림 생기면 종모양에 초록동그라미
+	//댓글 알림 생기면 종모양에 초록동그라미
 	$(function(){
-	    //let userNo = $("#notificationicon").data("userno");원본
 	    let userNo = $("#dropdownNotification").data("userno");
-	    // console.log(userNo);
 	    if (!userNo) {
 			return;
 		}
@@ -17,12 +15,13 @@
 			   "type" : 'GET',
 			   "dataType" : 'json',
 			   "data" : {"userNo": userNo},
-			   //"cache": false, //캐싱 비활성화
 			   success: function(data){
 				   console.log(data); //여기 데이터 카운트 개수 넘어옴.
 				   
 				   if(data){
 						$("#dropdownNotification").addClass('avatar-online');
+				   }else{
+					   $("#dropdownNotification").removeClass('avatar-online');
 				   }
 
 			   },
@@ -37,9 +36,8 @@
 	$(function(event) {
 	    $("#dropdownNotification").on("click", function(event) {
 	        event.preventDefault();
-	        //let loginUser = $(this).data("userno");
 	        let userNo = $(this).data("userno");//수정
-	        //const userNo = $(this).data("userno");//추가
+	       
 	
 			//알림리스트 시간 표시 - n분 전
 	        function calculateTime(regDate) {
@@ -61,7 +59,7 @@
 	            }
 	        }
      
-	
+			//전체 알림리스트 표시
 	        $.ajax({
 	            url: '/project-gpmatching/modules/header/matchingAlarms',
 	            type: 'get',
@@ -87,7 +85,7 @@
 	    });
 	});
 	
-	//알림 확인하면 데이터 삭제
+	//댓글확인 클릭하면 댓글 알림 삭제
 	$(function (event){
 		$('#checkAlarm').on("click",function(event){
 			event.preventDefault();
@@ -100,7 +98,8 @@
 				"success": function(data, status, xhr){
 					if(data){	
 						$("#dropdownNotification").removeClass('avatar-online');
-				   }
+						window.location.reload();
+				   }	
 				},
 				"error": function(xhr, status, err){
 					console.log("요청 실패");
@@ -109,7 +108,7 @@
 		});
 	});
 	
-	//클릭하면 승인 알림 삭제
+	//승인확인 클릭하면 승인 알림 삭제
 	$(function (event){
 		$('#checkConfirm').on("click",function(event){
 			event.preventDefault();
@@ -120,8 +119,10 @@
 				"type": 'GET',
 				"data" : {"userNo":userNo},
 				"success": function(data, status, xhr){
+					
 					if(data){	
 						$("#dropdownNotification").removeClass('avatar-online');
+						window.location.reload();
 				   }
 				},
 				"error": function(xhr, status, err){
@@ -131,7 +132,7 @@
 		});
 	});
 	
-	//마감 확인하면 알림 삭제
+	//마감확인 클릭하면 마감 알림 삭제
 	$(function (event){
 		$('#checkClose').on("click",function(event){
 			event.preventDefault();
@@ -144,6 +145,7 @@
 				"success": function(data, status, xhr){
 					if(data){	
 						$("#dropdownNotification").removeClass('avatar-online');
+						window.location.reload();
 				   }
 				},
 				"error": function(xhr, status, err){

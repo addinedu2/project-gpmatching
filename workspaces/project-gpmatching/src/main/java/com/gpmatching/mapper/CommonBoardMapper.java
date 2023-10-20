@@ -34,7 +34,7 @@ public interface CommonBoardMapper {
 	 	  + "from CommonBoard cb "
 		  + "inner join User u "
 		  + "on u.userNo = cb.userNo "
-		  + "where cb.category = 'common' and cb.deleted = false "   //여기서 데이터에서 공통만 뽑아냄, 위에서 데이터 가져오는거, 아래서 데이터 가져갈 것도 신경 쓸 것
+		  + "where cb.category = 'common' and cb.deleted = false "  
 		  + "order by commonNo desc")
 	List<CommonBoardDto> selectAllBoard();
 	
@@ -43,7 +43,7 @@ public interface CommonBoardMapper {
 		  + "from CommonBoard cb "
 	      + "inner join User u "
 		  + "on u.userNo = cb.userNo "
-		  + "where cb.category = 'common' and cb.deleted = false "   //여기서 데이터에서 공통만 뽑아냄, 위에서 데이터 가져오는거, 아래서 데이터 가져갈 것도 신경 쓸 것
+		  + "where cb.category = 'common' and cb.deleted = false " 
 		  + "order by commonNo desc "
 		  + "limit #{from}, #{count}")
 	List<CommonBoardDto> selectBoardByPage(@Param("from")int from, @Param("count")int count, @Param("category")String category );

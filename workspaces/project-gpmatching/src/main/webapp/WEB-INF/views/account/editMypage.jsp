@@ -185,31 +185,16 @@
                       </div>
                     </div>
                     
-                    <!-- row -->
-                    <div class="mb-3 row">
-                      <label for="addressLineTwo" class="col-sm-4
-                          col-form-label form-label">position</label>
-                      <div class="col-md-8 col-12">
-                        <input type="text" class="form-control" placeholder="placeholder" id="addressLineTwo">
-                      </div>
-                    </div>
+
                     <!-- row -->
                     <div class="row align-items-center">
-                      <label for="zipcode" class="col-sm-4 col-form-label
-                          form-label">Zip code <i data-feather="info"
-                            class="me-2 icon-xs"></i></label>
-
-                      <div class="col-md-8 col-12">
-                        <input type="text" class="form-control" placeholder="placeholder" id="zipcode">
-                      </div>
                       <div class="offset-md-4 col-md-8 mt-4">
-                      
                         <button type="submit" class="btn btn-primary">
                         	회원정보 수정
                         </button>
-                       
                       </div>
                     </div>
+                    
                 </div>
               </div>
             </div>

@@ -12,7 +12,7 @@
            
               <div class="border-bottom pb-4 mb-4 ">
                
-                  <h3 class="mb-0 fw-bold">Overview</h3>
+                  <h3 class="mb-0 fw-bold">마이페이지</h3>
               
            
             </div>
@@ -37,15 +37,14 @@
                       align-items-end mt-n10">
                     	<c:choose> 
 	                    	<c:when test="${loginuser.userImage == null}">
-			                    <img src="/project-gpmatching/resources/assets/images/avatar/anonymous.png" class="avatar-xxl
-			                        rounded-circle border border-4 border-white-color-40" alt="">
+			                    <img src="/project-gpmatching/resources/assets/images/avatar/anonymous.png" class="avatar-xxl rounded-circle border border-4 border-white-color-40" alt="">
 			                    <a href="#!" class="position-absolute top-0 right-0 me-2" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="Verified">
 			                      <img src="/project-gpmatching/resources/assets/images/svg/checked-mark.svg" alt="" height="30" width="30">
 			                    </a>
 	                    	</c:when>
 	                    	<c:otherwise> 
-	                    		<img src="${pageContext.request.contextPath}/resources/upload/${loginuser.userImage}" class="avatar-xxl
-			                        rounded-circle border border-4 border-white-color-40" alt="Image" height="30" width="30" >
+	                    		<img src="${pageContext.request.contextPath}/resources/upload/${loginuser.userImage}" 
+	                    			 class="avatar-xxl rounded-circle border border-4 border-white-color-40" alt="Image" height="30" width="30" >
 	                    	</c:otherwise>
                     </c:choose>
                   </div>
@@ -63,10 +62,8 @@
                   </div>
                 </div>
                 <div>
-                  <a href="/project-gpmatching/account/editMypage" class="btn btn-outline-primary
-                      d-none d-md-block">회원정보수정</a>
-                  <a href="/project-gpmatching/commonBoard/reportWrite" class="btn btn-outline-primary
-                      d-none d-md-block">신고하기</a>
+                  <a href="/project-gpmatching/account/editMypage" class="btn btn-outline-primary d-none d-md-block">회원정보수정</a>
+                  <a href="/project-gpmatching/commonBoard/reportWrite" class="btn btn-outline-primary d-none d-md-block">신고하기</a>
                 </div>
               </div>
               <!-- nav -->
@@ -77,20 +74,6 @@
                 <li class="nav-item">
                   <a class="nav-link" href="/project-gpmatching/review/list">Review</a>
                 </li>
-
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Files</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Teams</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                      Followers
-                    </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Activity</a>
                 </li>
               </ul>
             </div>

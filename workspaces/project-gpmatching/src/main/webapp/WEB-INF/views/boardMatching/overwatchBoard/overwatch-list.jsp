@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="com.gpmatching.common.Time" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -71,118 +71,222 @@
 			<a href="/project-gpmatching/home">
 				<button type="button" class="btn btn-primary me-3">홈으로</button>
 			</a>
+			
 			</div>
-	
+			
 			<div class="row mt-6">
 				<div class="col-md-12 col-12">
 					<!-- card  -->
 					<div class="card">
 						<!-- card header  -->
-						<div class="card-header bg-info py-4">
-							<div style="display: flex; align-items: center;">
+						<div class="card-header bg-info py-4" style="display: flex; align-items: center; justify-content: space-between;">
+						    <div style="display: flex; align-items: center;">
 						        <img src="/project-gpmatching/resources/assets/images/overwatch/logo.png" height="88px">
+						    </div>
+						    <div style="display: flex; align-items: center;">
+						        <select name="searchType" style="width: 150px;" class="form-select form-select">
+						            <option value="" selected>-- 옵션 --</option>
+						            <option value="t">제목</option>
+						            <option value="c">내용</option>
+						            <option value="n">닉네임</option>
+						        </select>
+						        <input name="keyword" style="width: 200px; margin-left: 10px; margin-right: 10px;" class="form-control" type="search" id="search-input" placeholder="검색어를 입력하세요">
+						        <button id="search-btn" type="button" class="btn btn-light mb-2">검색</button>
 						    </div>
 						</div>
 						<!-- table  -->
-						<div class="table-responsive">
-							<table class="table table-sm table-dark table-hover">
-								<thead>
-									<tr>
-										<th scope="col">플레이어이름</th>
+						<table id="matching-list" class="table table-sm table-dark table-hover">
+							<thead>
+										
+								<tr>
+									<th scope="col">플레이어이름</th>
 										<th scope="col">제목</th>
 										<th scope="col">내용</th>
 										<th scope="col">옵티어</th>
-										<th scope="col">주포지션</th>
-										<th scope="col">옵플레이</th>
-										<th scope="col">선호성별</th>
-										<th scope="col">마이크사용</th>
-										<th scope="col">마감여부</th>
-										<th scope="col">등록일시</th>
-										<th scope="col">댓글</th>
-										<th scope="col"></th>
+							         	<th scope="col">주포지션</th>
+							         	<th scope="col">게임시간</th>
+							         	<th scope="col">마이크사용</th>
+							         	<th scope="col">모집인원</th>
+							         	<th scope="col">마감여부</th>
+							        	<th scope="col">등록일시</th>
+							         	<th scope="col">댓글</th>
+							         	<th scope="col"></th>
 									</tr>
 								</thead>
-								<tbody>
-									<c:forEach var="matchingBoard" items="${ requestScope.matchingOwList }" varStatus="vs">
-										 <tr>
-
-											<th>${ matchingBoard.nickname }</th>
+				 
+								<tbody id="overwatch-list">		
+									<c:forEach var="matchingBoard" items="${ requestScope.matchingOwList }">
+										<tr id="tr-${ matchingBoard.boardNo }" data-title="${ matchingBoard.boardTitle }">
+											<th>
+											<div class="dropdown dropstart">
+		                                        <a class="text-muted text-primary-hover" href="#" role="button" id="dropdownTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		                                            ${ matchingBoard.nickname }
+		                                        </a>
+		                                        <div class="dropdown-menu" aria-labelledby="dropdownTask">
+		                                            <a class="dropdown-item" href="https://www.op.gg/summoners/kr/${ matchingBoard.nickname }">전적검색</a>
+		                                            <a class="dropdown-item" href="/project-gpmatching/commonBoard/reportWrite">신고하기</a>
+		                                        </div>
+			                                </div>
+											</th>
 											<th>${ matchingBoard.boardTitle }</th>
 											<th>${ matchingBoard.boardContent }</th>
 											<th>${ matchingBoard.owTier }</th>
 											<th>${ matchingBoard.owPosition }</th>
-											<th>${ matchingBoard.owPlay }</th>
-											<th>${ matchingBoard.preferGender }</th>
-											<th>${ matchingBoard.mic }</th>
-											<th>${ matchingBoard.matchingClose }</th>
+											<th>${ matchingBoard.startTime } ~ ${ matchingBoard.endTime }</th>
 											<th>
-												<fmt:formatDate value="${ matchingBoard.regDate }"
-         				    						pattern="yyyy-MM-dd"/>
+											<c:choose>
+												<c:when test = "${ matchingBoard.mic eq true}">
+													<div class="form-check form-switch">
+													    <input class="form-check-input" type="checkbox" role="switch" 
+													    id="flexSwitchCheckCheckedDisabled" checked onclick="return toggleSwitch()">
+													    <label class="form-check-label" for="flexSwitchCheckCheckedDisabled">ON</label>
+													</div>
+												</c:when>
+												<c:otherwise>
+													<div class="form-check form-switch mb-2">
+													    <input class="form-check-input" type="checkbox" role="switch" 
+													    id="flexSwitchCheckDefault" disabled>
+													    <label class="form-check-label" for="flexSwitchCheckDefault">OFF</label>
+													</div>
+												</c:otherwise>
+											</c:choose>
 											</th>
+											<th>${ matchingBoard.confirmCount + 1} / ${ matchingBoard.headCount + 1}</th>
+											<c:choose>
+												<c:when test="${matchingBoard.matchingClose == true}">
+													<th><i class="icon-sm text-success" data-feather="check-circle"></i></th>
+												</c:when>
+												<c:otherwise>
+													<th><div class="spinner-border" role="status">
+													<span class="visually-hidden">Loading...</span></div></th>
+												</c:otherwise>
+											</c:choose>
+												<c:choose>
+											    <c:when test="${empty matchingBoard.regDate}">
+											        <th>날짜 정보 없음</th>
+											    </c:when>
+											    <c:otherwise>
+											        <th>
+											    <c:set var="regDate" value="${matchingBoard.regDate}" scope="page" />
+											    <%= Time.calculateTime((java.util.Date) pageContext.getAttribute("regDate")) %>
+											</th>
+											    </c:otherwise>
+											</c:choose>
 											<th class="align-middle">
 												<!-- Varying modal -->
-												<button type="button" class="btn btn-primary btn-show-comment-modal" 
-														data-boardno="${ matchingBoard.boardNo }">
-														${ matchingBoard.boardNo }
-												</button>
+
+												<button type="button" class="btn btn-primary btn-sm btn-show-comment-modal" 
+														data-boardno="${ matchingBoard.boardNo }">${ matchingBoard.boardNo }
+												</button>											
+												<button type="button" class="btn btn-primary btn-sm btn-show-commentList-modal"
+														data-boardno="${ matchingBoard.boardNo }">목록</button>
 											</th>
 											<th>
-											  <!-- collapse -->
-											  <div class="dropdown">
-											  	<button type="button" id="dropdownMenuButton" class="btn btn-icon btn-white border border-2 rounded-circle btn-dashed ms-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-												      +
-												</button>
-											   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-													<a class="dropdown-item" href="overwatch-edit?boardNo=${matchingBoard.boardNo}">수정</a>
-													<a class="dropdown-item" href="overwatch-delete?boardNo=${matchingBoard.boardNo}">삭제</a>
-											   </div>
-											 </div>
+												<div class="dropdown dropstart">
+			                                        <a class="text-muted text-primary-hover" href="#" role="button" id="dropdownTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			                                            <i class="icon-xxs" data-feather="more-vertical"></i>
+			                                        </a>
+			                                        <div class="dropdown-menu" aria-labelledby="dropdownTask">
+			                                            <a class="dropdown-item" href="overwatch-edit?boardNo=${matchingBoard.boardNo}">수정</a>
+			                                            <a class="dropdown-item" href="overwatch-delete?boardNo=${matchingBoard.boardNo}">삭제</a>
+			                                        </div>
+			                                    </div>
 											</th>
+											
 										</tr>
 
 									</c:forEach>
 								</tbody>
 							</table>
 						</div>
+
 					</div>
 				</div>
 			</div>
-			
-			<div class="modal fade" id="comment-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelOne" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="title-in-modal"></h5>
-							<button type="button" class="btn-close"
-								data-bs-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
+			</div>
+			<!-- 댓글 쓰기 모달 -->
+			<div class="modal fade" id="comment-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			    <div class="modal-dialog" role="document">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <h5 class="modal-title" id="title-in-modal">${ matchingBoard.boardTitle }</h5>
+			                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+			                    <!-- <span aria-hidden="true">&times;</span> -->
+			                </button>
+			            </div>
 						<form id="commentform" action="write-comment" method="post">
 							<input type="hidden" id="boardno-in-modal" name="boardNo" value="${ matchingBoard.boardNo }" /> 
-							<div class="modal-body">
-			
-								<div class="mb-3">
-									<label for="recipient-name" class="col-form-label">게임 닉네임</label> 
-									<input type="text" class="form-control" id="recipient-name-in-modal">
-								</div>
-								<div class="mb-3">
-									<label for="message-text" class="col-form-label">파티장에게 알려줄 내용</label>
-									<textarea name="mCommentContent" class="form-control" id="message-text-in-modal"></textarea>
-								</div>
-			
+							<input type="hidden" name="userNo" value="${ loginuser.userNo }" /> 
+			            <div class="modal-body">
+			                <div class="mb-3">
+								<label for="recipient-name" class="col-form-label">닉네임 : ${ loginuser.nickname }</label> 
+								<input type="text" class="form-control" id="recipient-name-in-modal" 
+								placeholder="게임 아이디를 입력해주세요">
 							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-bs-dismiss="modal">닫기</button>
-								<button type="submit" class="btn btn-primary">등록</button>
+							<div class="mb-3">
+								<label for="message-text" class="col-form-label">파티장에게 알려줄 내용</label>
+								<textarea name="mCommentContent" class="form-control" id="message-text-in-modal"></textarea>
 							</div>
+						</div>
+			            <div class="modal-footer">
+			                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+			                <button type="button" id="write-comment-lnk" class="btn btn-primary">등록</button>
+			            </div>
 						</form>
+			        </div>
+			    </div>
+			</div>
+			<!-- 댓글 목록 보기 -->
+			<div class="modal fade" id="commentList-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			    <div class="modal-dialog" role="document">
+			        <div class="modal-content">
+			            <div class="modal-header">			            
+			                <h5 class="modal-title" id="title2-in-modal"></h5>
+			                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+			                </button>
+			            </div>
+			            <div id="comment-list" class="modal-body" >
+							
+			            </div>
+			            <div id="dynamic-button-area" class="modal-body" >
+			            
+			            </div>
+			            <!-- card : 댓글 ui는 나중에 이런 형식으로 구현할 예정입니다 -->
+			              <div class="card mb-4">
+			                <!-- card body -->
+			                <div class="card-body">
+			                  <!-- card title -->
+			                  <h4 class="card-title">나중에 댓글 ui 이런식으로 어때요?</h4>
+			                  <div class="d-flex justify-content-between
+			                      align-items-center mb-4">
+			                    <div class="d-flex align-items-center">
+			                      <!-- img -->
+			                      <div>
+
+			                        <img src="/project-gpmatching/resources/assets/images/avatar/avatar-1.jpg" class="rounded-circle avatar-md" alt="">
+
+			                      </div>
+			                      <!-- text -->
+			                      <div class="ms-3 ">
+			                        <h5 class="mb-1">여기는 지원자 닉네임</h5>
+			                        <p class="text-muted mb-0 fs-5 text-muted">여기는 간단한 내용
+			                        </p>
+			                      </div>
+			                    </div>
+			                    <div>
+			                      <a href="#" class="text-muted text-primary-hover"><i
+			                            class="me-4 icon-xs" data-feather="phone-call"></i></a>
+			                      <a href="#" class="text-muted text-primary-hover"><i
+			                            class="icon-xs" data-feather="video"></i></a>
+			                    </div>
+			                  </div>
+						        </div>
+						    </div>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+	
+	
 	<!-- Scripts -->
 	<!-- Libs JS -->
 	<script
@@ -209,20 +313,432 @@
 
 	<!-- Theme JS -->
 	<script src="/project-gpmatching/resources/assets/js/theme.min.js"></script>
-	
+
 	<script>
 	
+	
+	// 글번호(댓글쓰기) 버튼을 누르면 해당 행의 데이터를 포함한 모달창을 보여줌 (-허지웅)
 	$(function() {
-		$('.btn-show-comment-modal').on("click", function(event) {
+		$('#overwatch-list').on("click", '.btn-show-comment-modal', function(event) {
 			const boardNo = $(this).data('boardno');
 			const currentTr = $('#tr-' + boardNo);
-			$('#title-in-modal').text(currentTr.data('title'));
+			
+
+			$('#title-in-modal').text("(" + boardNo + ") " + currentTr.data('title'));
 			$('#boardno-in-modal').val(boardNo);
 			$('#comment-modal').modal('show');
 		});
 	});
 	
+
+
+	// 댓글쓰기 모달창의 등록 버튼을 누르면 데이터가 전송됨
+	$('#write-comment-lnk').on('click', function(event){
+		
+		const formData = $('#commentform').serialize();	// <form> 에 포함된 입력요소의 값을 뽑아서 전송가능한 문자열로 반환
+		
+		$.ajax({
+			"url": "write-comment",
+			"method": "post",
+			"data": formData,
+			"success": function(data, status, xhr){
+				alert('지원이 완료되었습니다!');
+				$('#comment-modal').modal("hide");
+			},
+			"error": function(xhr, status, err){
+				alert('지원 실패!');
+				
+			}
+		});	 
+	});
+	
+
+	// 검색어를 입력하고 검색 버튼을 누르면 해당되는 게시글을 보여줌 (-허지웅)
+	$(function(){
+		
+		$('#search-btn').on("click", function(event){
+			
+			var searchType = $("select[name = searchType]").val();
+			var keyword = $("input[name = keyword]").val();
+			
+			self.location = "/project-gpmatching/boardMatching/overwatchBoard/overwatch-list?searchType=" + searchType + "&keyword=" + keyword;
+			
+			console.log("searchType : " + searchType);
+			console.log("keyword : " + keyword);
+		})
+	});
+	
+	
+	// 닫기 버튼 - 잘 동작함
+	$(function() {
+		$('#dynamic-button-area').on("click", '.btn-matching-modal-close', function(event) {
+			location.href = "overwatch-list";
+
+		});
+	});
+	
+	
+	
+	// 매칭 마감 버튼 
+	$(function() {
+		$('#dynamic-button-area').on("click", '.btn-matching-close', function(event) {
+			const boardNo = $(this).data('boardno');
+			const matchingClose = $(this).data('matchingclose');
+			if(matchingClose){
+				alert("매칭을 마감할 수 없습니다.")
+			}else {
+				var confirmflag = confirm("매칭을 마감하시겠습니까?");
+				
+				if(confirmflag){
+					location.href = "matchingCloseTrue?boardNo=" + boardNo;
+				}
+				
+			}
+			
+
+		});
+	});
+	
+
+
+	// 버튼을 누르면 해당 글의 댓글 보기 (-허지웅)
+	$(function() {
+		$('#overwatch-list').on("click", '.btn-show-commentList-modal', function(event) {
+			
+			const boardNo = $(this).data('boardno');
+			const currentTr = $('#tr-' + boardNo);
+			$('#title2-in-modal').text("(" + boardNo + ") " + currentTr.data('title'));
+			
+			$.ajax({
+				
+				"url": "ajax-show-comment-and-btn-matching",
+				"method": "get",
+				"data": { "boardNo" : boardNo },
+				
+				"success": function(result){
+					
+					var sHeadCount = 0;
+  					var sConfirmCount = 0;
+  					var headCount = 0;
+  					var confirmCount = 0;
+  					var matchingClose = 0;
+	                
+					
+					var commentList = $('#comment-list');
+					commentList.empty();
+					if (result != null){
+						console.log(result);
+						
+						// 테이블 헤더 추가
+		                var $headerRow = $("<tr>");
+		                
+		                $headerRow.append($("<th>").text("댓글 번호"));
+		                $headerRow.append($("<th>").text("닉네임"));
+		                $headerRow.append($("<th>").text("댓글 내용"));
+						$headerRow.append($("<th>").text("승인여부"));;
+		                
+		                commentList.append($headerRow);
+		                
+						for(var i = 0; i < result.length; i++){
+							var $row = $("<tr>");
+		                    
+		                    $row.append($("<td>").text(result[i].commentNo));
+		                    $row.append($("<td>").text(result[i].nickname));
+		                    $row.append($("<td>").text(result[i].mcommentContent));
+		                    
+		                    // 댓글 승인여부 상태 표시
+		                    if(result[i].status == "0"){
+		                    	$row.append($("<td>").text("미승인"));
+							}else if (result[i].status == "1"){
+								$row.append($("<td>").text("승인"));
+							}else if (result[i].status == "2"){
+								$row.append($("<td>").text("거절"));
+							}
+		                    
+		                    commentList.append($row);
+		                    
+		                    // 수락 버튼 추가
+	                        var $acceptButton = $("<button>")
+	                            .addClass("btn btn-primary btn-sm btn-accept-comment")
+	                            .data('commentno', result[i].commentNo)
+	                            .data('boardno', result[i].boardNo)
+	                            .text("수락");
+		                    
+	                     	// 거절 버튼 추가
+	                        var $rejectButton = $("<button>")
+	                            .addClass("btn btn-danger btn-sm btn-reject-comment")
+	                            .data('commentno', result[i].commentNo)
+	                            .data('boardno', result[i].boardNo)
+	                            .text("거절");
+
+							var $buttonColumn = $("<td>").append($acceptButton, $rejectButton);
+	                        $row.append($buttonColumn);
+	                        
+	                        sHeadCount = result[i].headCount;
+	      					sConfirmCount = result[i].confirmCount;
+	      					headCount = parseInt(sHeadCount);
+	      					confirmCount = parseInt(sConfirmCount);
+	      					matchingClose = result[i].matchingClose;
+	    	                
+	                      
+						}
+					}
+					
+					console.log(commentList);
+					$('#commentList-modal').modal('show');
+					
+					
+					if( (commentList != null ) && (matchingClose == false) && (headCount == confirmCount ) ){
+						
+						
+						var matchingCloseBtn = '<input type="button" class="btn-matching-close" background-color="#AE302E" data-boardno=' + boardNo + ' data-matchingclose=' + matchingClose + ' value="매칭 마감"/><input type="button" class="btn-matching-modal-close" value="닫기"/>';
+							$("#dynamic-button-area").html(matchingCloseBtn)
+					} else {
+						var closeBtn = '<input type="button" class="btn-matching-modal-close" background-color="#AE302E" value="닫기"/>';
+							$("#dynamic-button-area").html(closeBtn).data('boardno', boardNo)
+					}
+					
+					
+					
+				},
+				"error": function(xhr, status, err){
+					alert("실패");
+				
+				} 
+				
+			}); 
+		});
+	});
+	
+	
+	
+	// 수락 버튼을 누르면 화면이 변하지 않고 글의 댓글 목록 보기 유지 (-이현일)
+	$(function() {
+		$('#comment-list').on("click", '.btn-accept-comment', function(event) {
+			
+			const commentNo = $(this).data('commentno');
+			const boardNo = $(this).data('boardno');
+			const currentTr = $('#tr-' + boardNo);
+			$('#title2-in-modal').text("(" + boardNo + ") " + currentTr.data('title'));
+			
+			$.ajax({
+				
+				"url": "commentConfirm",
+				"method": "get",
+				"data": { "commentNo" : commentNo },
+				
+				"success": function showcommentlist(result){
+					
+					var sHeadCount = 0;
+  					var sConfirmCount = 0;
+  					var headCount = 0;
+  					var confirmCount = 0;
+  					var matchingClose = 0;
+					
+					var commentList = $('#comment-list');
+					commentList.empty();
+					if (result != null){
+						console.log(result);
+						
+						// 테이블 헤더 추가
+		                var $headerRow = $("<tr>");
+		                
+		                $headerRow.append($("<th>").text("댓글 번호"));
+		                $headerRow.append($("<th>").text("닉네임"));
+		                $headerRow.append($("<th>").text("댓글 내용"));
+						$headerRow.append($("<th>").text("승인여부"));;
+		                
+		                commentList.append($headerRow);
+		                
+						for(var i = 0; i < result.length; i++){
+							var $row = $("<tr>");
+		                    
+		                    $row.append($("<td>").text(result[i].commentNo));
+		                    $row.append($("<td>").text(result[i].nickname));
+		                    $row.append($("<td>").text(result[i].mcommentContent));
+		                    if(result[i].status == "0"){
+		                    	$row.append($("<td>").text("미승인"));
+							}else if (result[i].status == "1"){
+								$row.append($("<td>").text("승인"));
+							}else if (result[i].status == "2"){
+								$row.append($("<td>").text("거절"));
+							}
+		                    
+		                    commentList.append($row);
+		                    
+		                    // 수락 버튼 추가
+	                        var $acceptButton = $("<button>")
+	                            .addClass("btn btn-primary btn-sm btn-accept-comment")
+	                            .attr('id', 'btn-accept-comment')
+	                            .data('commentno', result[i].commentNo)
+	                            .data('boardno', result[i].boardNo)
+	                            .text("수락");
+		                    
+	                     	// 거절 버튼 추가
+	                        var $rejectButton = $("<button>")
+	                            .addClass("btn btn-danger btn-sm btn-reject-comment")
+	                            .attr('id', 'btn-reject-comment')
+	                            .data('commentno', result[i].commentNo)
+	                            .data('boardno', result[i].boardNo)
+	                            .text("거절");
+
+
+	                     	var $buttonColumn = $("<td>").append($acceptButton, $rejectButton);
+	                        $row.append($buttonColumn);
+	                        
+	                       
+	                        sHeadCount = result[i].headCount;
+	      					sConfirmCount = result[i].confirmCount;
+	      					headCount = parseInt(sHeadCount);
+	      					confirmCount = parseInt(sConfirmCount);
+	      					matchingClose = result[i].matchingClose;
+	                    
+		                    
+						}
+						
+    					
+					}
+					
+					console.log(commentList);
+					$('#commentList-modal').modal('show');
+					
+					
+					if( (commentList != null ) && (matchingClose == false) && (headCount == confirmCount ) ){
+						
+						
+						var matchingCloseBtn = '<input type="button" class="btn-matching-close" data-boardno=' + boardNo + ' data-matchingclose=' + matchingClose + ' value="매칭 마감"/><input type="button" class="btn-matching-modal-close" value="닫기"/>';
+							$("#dynamic-button-area").html(matchingCloseBtn)
+					} else {
+						var closeBtn = '<input type="button" class="btn-matching-modal-close" value="닫기"/>';
+							$("#dynamic-button-area").html(closeBtn)
+					}
+
+				},
+				"error": function(xhr, status, err){
+					alert("실패");
+				
+				} 
+				
+			}); 
+		});
+	});
+
+ 	
+ 	
+	// 거절 버튼을 누르면 화면이 변하지 않고 글의 댓글 목록 보기 유지 (-이현일)
+ 	$(function() {
+	    $('#comment-list').on("click", '.btn-reject-comment', function(event) {
+	    	
+	    	const commentNo = $(this).data('commentno');
+			const boardNo = $(this).data('boardno');
+			const currentTr = $('#tr-' + boardNo);
+			$('#title2-in-modal').text("(" + boardNo + ") " + currentTr.data('title'));
+			
+			$.ajax({
+				
+				"url": "commentReject",
+				"method": "get",
+				"data": { "commentNo" : commentNo },
+				
+				"success": function showcommentlist(result){
+					
+					var commentList = $('#comment-list');
+					commentList.empty();
+					if (result != null){
+						console.log(result);
+						
+						// 테이블 헤더 추가
+		                var $headerRow = $("<tr>");
+		                
+		                $headerRow.append($("<th>").text("댓글 번호"));
+		                $headerRow.append($("<th>").text("닉네임"));
+		                $headerRow.append($("<th>").text("댓글 내용"));
+						$headerRow.append($("<th>").text("승인여부"));;
+		                
+		                commentList.append($headerRow);
+		                
+						for(var i = 0; i < result.length; i++){
+							var $row = $("<tr>");
+		                    
+		                    $row.append($("<td>").text(result[i].commentNo));
+		                    $row.append($("<td>").text(result[i].nickname));
+		                    $row.append($("<td>").text(result[i].mcommentContent));
+		                    if(result[i].status == "0"){
+		                    	$row.append($("<td>").text("미승인"));
+							}else if (result[i].status == "1"){
+								$row.append($("<td>").text("승인"));
+							}else if (result[i].status == "2"){
+								$row.append($("<td>").text("거절"));
+							}
+		                    
+		                    commentList.append($row);
+		                    
+		                    // 수락 버튼 추가
+	                        var $acceptButton = $("<button>")
+	                            .addClass("btn btn-primary btn-sm btn-accept-comment")
+	                            .attr('id', 'btn-accept-comment')
+	                            .data('commentno', result[i].commentNo)
+	                            .data('boardno', result[i].boardNo)
+	                            .text("수락");
+		                    
+	                     	// 거절 버튼 추가
+	                        var $rejectButton = $("<button>")
+	                            .addClass("btn btn-danger btn-sm btn-reject-comment")
+	                            .attr('id', 'btn-reject-comment')
+	                            .data('commentno', result[i].commentNo)
+	                            .data('boardno', result[i].boardNo)
+	                            .text("거절");
+	
+	
+	                     	var $buttonColumn = $("<td>").append($acceptButton, $rejectButton);
+	                        $row.append($buttonColumn);
+		                 
+	                        
+	                        sHeadCount = result[i].headCount;
+	      					sConfirmCount = result[i].confirmCount;
+	      					headCount = parseInt(sHeadCount);
+	      					confirmCount = parseInt(sConfirmCount);
+	      					matchingClose = result[i].matchingClose;
+	    	                
+	                      
+						}
+					}
+					
+					console.log(commentList);
+					$('#commentList-modal').modal('show');
+					
+					
+					if( (commentList != null ) && (matchingClose == false) && (headCount == confirmCount ) ){
+						
+						
+						var matchingCloseBtn = '<input type="button" class="btn-matching-close" data-boardno=' + boardNo + ' data-matchingclose=' + matchingClose + ' value="매칭 마감"/><input type="button" class="btn-matching-modal-close" value="닫기"/>';
+							$("#dynamic-button-area").html(matchingCloseBtn)
+					} else {
+						var closeBtn = '<input type="button" class="btn-matching-modal-close" value="닫기"/>';
+							$("#dynamic-button-area").html(closeBtn).data('boardno', boardNo)
+					}
+					
+					
+				},
+				"error": function(xhr, status, err){
+					alert("실패");
+				
+				} 
+				
+			}); 
+		});
+	});
+
+
+
+	
+ 	function toggleSwitch() {
+        // 스위치 상태를 변경하지 않고 기존 상태를 유지
+        return false;
+    }
+ 	
 	</script>
+	
 	<script src="/project-gpmatching/resources/assets/js/common.js"></script>
 	
 </body>

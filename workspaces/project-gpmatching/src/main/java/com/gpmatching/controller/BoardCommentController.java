@@ -39,7 +39,6 @@ public class BoardCommentController {
 	
 		boardCommentService.writeComment(boardComment);
 
-		//return "redirect:commonDetail";
 		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d", boardComment.getCommonNo(), pageNo);
 	}
 	
@@ -82,7 +81,7 @@ public class BoardCommentController {
 	public String deleteComment(int commentNo, int commonNo, int pageNo) {
 		
 		boardCommentService.deleteComment(commentNo);
-		//return "redirect:commonDetail";
+
 		return String.format("redirect:commonDetail?commonNo=%d&pageNo=%d", commonNo, pageNo);
 	}  
 	

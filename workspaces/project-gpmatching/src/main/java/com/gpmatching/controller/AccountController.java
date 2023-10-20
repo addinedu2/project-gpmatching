@@ -215,16 +215,15 @@ public class AccountController {
 	}
 	
 	
-//	//회원가입 닉네임 중복검사
-//	@GetMapping(path = {"/check-nickname-dup"}) 
-//	@ResponseBody 
-//	public String checkMemberNickNameDuplication(String nickname) {
-//		
-//		boolean valid = accountService.isNickNameValid(nickname);
-//		
-//		return String.valueOf(valid); 
-//		
-//	}
+	//회원가입 닉네임 중복검사
+	@GetMapping(path = {"/check-nickname-dup"}) 
+	@ResponseBody 
+	public String checkMemberNickNameDuplication(String nickname) {
+		
+		boolean valid = accountService.isNickNameValid(nickname);
+		
+		return String.valueOf(valid); 
+	}
 
 }
 	
