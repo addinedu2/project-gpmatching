@@ -444,7 +444,6 @@
 		$('#write-comment-lnk').on('click', function(event){
 			
 			const formData = $('#commentform').serialize();	// <form> 에 포함된 입력요소의 값을 뽑아서 전송가능한 문자열로 반환
-			alert(formData);
 			
 			$.ajax({
 				"url": "write-comment",
