@@ -3,7 +3,7 @@
  */
 
 	
-	//댓글 알림 생기면 종모양에 초록동그라미
+	//댓글, 승인, 마감 알림 생기면 종모양에 초록동그라미
 	$(function(){
 	    let userNo = $("#dropdownNotification").data("userno");
 	    if (!userNo) {

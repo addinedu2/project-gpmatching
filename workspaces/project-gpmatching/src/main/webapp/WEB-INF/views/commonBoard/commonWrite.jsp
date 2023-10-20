@@ -60,8 +60,8 @@
 
 	<!-- submit&reset -->
     <div class="btn-center">
-		<button type="submit" class="btn btn-primary me-2 mb-2">submit</button> 
-		<button type="button" id="btnCancel" class="btn btn-secondary mb-2">reset</button>
+		<button type="submit" class="btn btn-primary me-2 mb-2">등록</button> 
+		<button type="button" id="btnCancel" class="btn btn-secondary mb-2">취소</button>
 	</div>
 </form>
 
