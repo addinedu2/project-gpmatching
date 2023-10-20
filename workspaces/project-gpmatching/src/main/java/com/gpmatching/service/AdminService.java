@@ -40,6 +40,26 @@ public interface AdminService {
 
 	List<AdminDto> getUserMatchingBoardByUserNo(int userNo, int from, int count);
 
+	//원형 그래프
+
+	int getCommonBoardCountForDay();
+
+	int getMatchingBoardCountBattlegroundForDay();
+
+	int getMatchingBoardCountLolForDay();
+
+	int getMatchingBoardCountOverwatchForDay();
+
+	int getCommonBoardCountForWeek();
+
+	int getMatchingBoardCountBattlegroundForWeek();
+
+	int getMatchingBoardCountLolForWeek();
+
+	int getMatchingBoardCountOverwatchForWeek();
+
+
+
 	
 
 	

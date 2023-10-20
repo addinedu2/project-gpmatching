@@ -117,13 +117,55 @@ public interface AdminMapper {
 			+ "where userNo = #{ userNo } and category = 'report'")
 	int getcountReportBoardPosts(int userNo);
 	
+	//원형 그래프 작성 
+	@Select("SELECT COUNT(*) "
+			+ "FROM CommonBoard "
+			+ "WHERE category = 'common' "
+			+ "AND DATE(reg_date) = CURDATE()")
+	int getCommonBoardCountForDay();
+
+	@Select("SELECT COUNT(*) "
+			+ "FROM MatchingBoard "
+			+ "WHERE gameNo = 4 AND "
+			+ "DATE(reg_date) = CURDATE()")
+	int getMatchingBoardCountBattlegroundForDay();
+
+	@Select("SELECT COUNT(*) "
+			+ "FROM MatchingBoard "
+			+ "WHERE gameNo = 5 "
+			+ "AND DATE(reg_date) = CURDATE()")
+	int getMatchingBoardCountLolForDay();
+
+	@Select("SELECT COUNT(*) "
+			+ "FROM MatchingBoard. "
+			+ "WHERE gameNo = 7 "
+			+ "AND DATE(reg_date) = CURDATE()")
+	int getMatchingBoardCountOverwatchForDay();
+
+	@Select("SELECT COUNT(*) "
+			+ "FROM CommonBoard "
+			+ "WHERE category = 'common' "
+			+ "AND DATE(reg_date) BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE()")
+	int getCommonBoardCountForWeek();
+
+	@Select("SELECT COUNT(*) "
+			+ "FROM MatchingBoard "
+			+ "WHERE gameNo = 4 "
+			+ "AND DATE(reg_date) BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE()")
+	int getMatchingBoardCountBattlegroundForWeek();
+
+	@Select("SELECT COUNT(*) "
+			+ "FROM MatchingBoard "
+			+ "WHERE gameNo = 5 "
+			+ "AND DATE(reg_date) BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE()")
+	int getMatchingBoardCountLolForWeek();
+
+	@Select("SELECT COUNT(*) "
+			+ "FROM matching_board "
+			+ "WHERE gameNo = 7 "
+			+ "AND DATE(reg_date) BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE()")
+	int getMatchingBoardCountOverwatchForWeek();
 	
-//	//회원이 쓴 글 페이지별 조회
-//	@Select( "select userNo, userPwd, userId, userEmail, nickname, userPhone, userGrade, regDate, deletedUser, userImage " +
-//			"from User " +
-//			"ORDER BY regDate DESC " +
-//			"LIMIT #{from}, #{count}")
-//	List<AdminDto> selectUserList(@Param("from") int from, @Param("count") int count);
 	
 	
 }

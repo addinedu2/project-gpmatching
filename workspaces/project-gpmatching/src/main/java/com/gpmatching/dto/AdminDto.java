@@ -8,13 +8,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gpmatching.matchingboard.dto.MatchingBoardDto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 public class AdminDto {
 	
 	//회원 목록 정보들
 	
+
 	private int userNo;
 	private String userId;
 	private String userPwd;
@@ -37,13 +40,23 @@ public class AdminDto {
 	private int boardNo; 
 	private String boardTitle;
 	private int gameNo;
+	private String category;
 	private boolean deleted;
 	private String boardContent;
+	private int count;
 	
 //	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 //	private Date regDate;
 	
-	private String boardType;
-	
+	// 원형 그래프 1일치 일주일치
+	private int commonBoardCountForDay;
+	private int matchingBoardCountBattlegroundForDay;
+	private int matchingBoardCountLolForDay;
+	private int matchingBoardCountOverwatchForDay;
+
+	private int commonBoardCountForWeek;
+	private int matchingBoardCountBattlegroundForWeek;
+	private int matchingBoardCountLolForWeek;
+	private int matchingBoardCountOverwatchForWeek;
     
 }
