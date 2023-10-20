@@ -66,6 +66,12 @@ public class AccountServiceImpl implements AccountService {
 	public UserDto	findUserByPhoneAndEmail(String userPhone, String userEmail) {
 		return userMapper.findUserByPhoneAndEmail(userPhone, userEmail);
 	}
+
+	@Override
+	public void deleteUser(String userPwd) {
+		userMapper.deleteUser(userPwd);
+		
+	}
 	
 
 }

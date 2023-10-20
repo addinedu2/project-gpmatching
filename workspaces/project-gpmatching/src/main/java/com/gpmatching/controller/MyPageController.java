@@ -68,7 +68,7 @@ public class MyPageController {
             return "admin/adminpage";
         } else {
             // 로그인한 사용자가 일반 사용자인 경우 마이페이지 표시
-            List<MypageBoardDto> boardList = mypageService.findMyWriteMatchingBoardByUserNo(loginUser.getUserNo());
+            List<MypageBoardDto> boardList = mypageService.findMyWriteMatchingBoardByUserNo(loginUser.getUserNo()); //내가쓴글만 보기
             int reviewPoint = mypageService.getMyReviewPoint(loginUser.getUserNo());
             
             model.addAttribute("reviewPoint", reviewPoint);

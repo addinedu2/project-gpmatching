@@ -14,7 +14,7 @@ public interface AccountService {
 	UserDto findUserByPhoneAndEmail(String userPhone, String userEmail);
 	boolean isNickNameValid(String nickname);
 
-	
+	void deleteUser(String userPwd);
 
 	
 }

@@ -241,13 +241,12 @@ $(function(event) {
                         });
                         $row.append($titleColumn);
                         
-                        //1. radio1 or radio2 중 어느것이 클릭 되었는지 출력해보기
+                        
+                        // radio1 or radio2 중 어느것이 클릭 되었는지 출력해보기
                         console.log(event.target.id === 'btnradio1');
                         console.log(event.target.id === 'btnradio2');
                         
-                        
-                        
-                        //project-gpmatching/commonBoard/commonDetail
+                        // 출력한걸 토대로 if문으로 버튼구분해서 링크걸기 - 배그, 옵치게시판추가시 else if로 구현
                         var $titleLink = ""
                         if(event.target.id === 'btnradio1') {//매칭게시판
                         	$titleLink = $("<a>").attr("href", '/project-gpmatching/boardMatching/lolBoard/lol-list#tr-' + result[i].boardNo).addClass("text-inherit").text(result[i].boardTitle);
