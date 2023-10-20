@@ -98,7 +98,7 @@
 				"success": function(data, status, xhr){
 					if(data){	
 						$("#dropdownNotification").removeClass('avatar-online');
-						window.location.reload();
+						//window.location.reload();
 				   }	
 				},
 				"error": function(xhr, status, err){

@@ -96,14 +96,14 @@
 						</div>
 						<!-- table  -->
 						<table id="matching-list" class="table table-sm table-dark table-hover">
-							<thead>
+							<thead style="vertical-align: middle;">
 										
 								<tr>
-									<th scope="col">소환사이름</th>
+									<th scope="col" style="width:100px;">소환사이름</th>
 									<th scope="col">제목</th>
 									<th scope="col">내용</th>
 									<th>
-									<div class="dropdown">
+									<div class="dropdown" style="width:110px; text-align:center;">
 										<button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										티어											
 										</button>
@@ -117,21 +117,21 @@
 									</div>
 									</th>
 						         	
-							         	<th scope="col">주포지션</th>
-							         	<th scope="col">게임시간</th>
+							         	<th scope="col" style="width:110px; vertical-align: middle;">주포지션</th>
+							         	<th scope="col" style="width:110px;" >게임시간</th>
 							         	<th scope="col">마이크사용</th>
-							         	<th scope="col">모집인원</th>
-							         	<th scope="col">마감여부</th>
-							        	<th scope="col">등록일시</th>
-							         	<th scope="col">댓글</th>
+							         	<th scope="col" style="width:80px;">모집인원</th>
+							         	<th scope="col" style="width:80px;">마감여부</th>
+							        	<th scope="col" style="width:80px;">등록일시</th>
+							         	<th scope="col" style="text-align: center">댓글</th>
 							         	<th scope="col"></th>
 									</tr>
 								</thead>
 				 
-								<tbody id="lol-list">		
+								<tbody id="lol-list"  style="vertical-align: middle;">		
 									<c:forEach var="matchingBoard" items="${ requestScope.matchingLolList }">
 										<tr id="tr-${ matchingBoard.boardNo }" data-title="${ matchingBoard.boardTitle }">
-											<th>
+											<th style="text-align:center; vertical-align: middle;">
 											<div class="dropdown dropstart">
 		                                        <a class="text-muted text-primary-hover" href="#" role="button" id="dropdownTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		                                            ${ matchingBoard.nickname }
@@ -144,7 +144,7 @@
 											</th>
 											<th>${ matchingBoard.boardTitle }</th>
 											<th>${ matchingBoard.boardContent }</th>
-											<td>
+											<td style="text-align:center;">
 											<c:set var="lolTier" value="${ matchingBoard.lolTier }" />
 											<c:choose>
 												<c:when test = "${ lolTier eq 'bronze'}">
@@ -162,9 +162,12 @@
 												</c:otherwise>
 											</c:choose>
 											</td>
-											<td>
+											<td style="text-align:center;">
 											<c:set var="lolPosition" value="${ matchingBoard.lolPosition }" />
 											<c:choose>
+												<c:when test = "${ lolPosition eq 'all'}">
+													<img src="/project-gpmatching/resources/assets/images/lol/all.png" width=24px>
+												</c:when>
 												<c:when test = "${ lolPosition eq 'top'}">
 													<img src="/project-gpmatching/resources/assets/images/lol/top.svg" width=24px>
 												</c:when>
@@ -185,8 +188,8 @@
 												</c:otherwise>
 											</c:choose>
 											</td>
-											<th>${ matchingBoard.startTime } ~ ${ matchingBoard.endTime }</th>
-											<th>
+											<th style="text-align:center;">${ matchingBoard.startTime } ~ ${ matchingBoard.endTime }</th>
+											<th style="text-align:center;">
 											<c:choose>
 												<c:when test = "${ matchingBoard.mic eq true}">
 													<div class="form-check form-switch">
@@ -204,13 +207,13 @@
 												</c:otherwise>
 											</c:choose>
 											</th>
-											<th>${ matchingBoard.confirmCount + 1} / ${ matchingBoard.headCount + 1}</th>
+											<th style="text-align:center;">${ matchingBoard.confirmCount + 1} / ${ matchingBoard.headCount + 1}</th>
 											<c:choose>
 												<c:when test="${matchingBoard.matchingClose == true}">
-													<th><i class="icon-sm text-success" data-feather="check-circle"></i></th>
+													<th style="text-align:center;"><i class="icon-sm text-success" data-feather="check-circle"></i></th>
 												</c:when>
 												<c:otherwise>
-													<th><div class="spinner-border" role="status">
+													<th style="text-align:center;"><div class="spinner-border" role="status">
 													<span class="visually-hidden">Loading...</span></div></th>
 												</c:otherwise>
 											</c:choose>
@@ -219,15 +222,15 @@
 											        <th>날짜 정보 없음</th>
 											    </c:when>
 											    <c:otherwise>
-											        <th>
+											        <th style="text-align:center;">
 											    <c:set var="regDate" value="${matchingBoard.regDate}" scope="page" />
 											    <%= Time.calculateTime((java.util.Date) pageContext.getAttribute("regDate")) %>
 											</th>
 											    </c:otherwise>
 											</c:choose>
-											<th class="align-middle">
+											<th class="align-middle" style="width:110px;">
 												<!-- Varying modal -->
-
+<div>
 												<button type="button" class="btn btn-primary btn-sm btn-show-comment-modal" 
 														data-boardno="${ matchingBoard.boardNo }"
 														data-nickname="${ matchingBoard.nickname }"
