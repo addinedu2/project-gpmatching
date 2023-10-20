@@ -163,15 +163,13 @@
 				</div>
 				
 				<div class="time1">
-				    <label for="customStartTimeRange" class="form-label text-light" style="margin-right: 10px;">시작 시간 : </label><span id="start-time-value"></span>
-				    <input type="range" class="form-range" min="0" max="24" step="0.5" id="customStartTimeRange" value="0" oninput="updateSelectedTime('start-time', this.value);">
-				    <input type="hidden" name="startTime" id="startTime">
+				    <label for="customStartTimeRange" class="form-label text-light" style="margin-right: 10px;">시작 시간 : ${ lolMatchingBoard.startTime }</label><span id="start-time-value"></span>
+				    
 				</div>
 				
 				<div class="time2">
-				    <label for="customEndTimeRange" class="form-label text-light" style="margin-right: 10px;">종료 시간 : </label><span id="end-time-value"></span>
-				    <input type="range" class="form-range" min="0" max="24" step="0.5" id="customEndTimeRange" value="0" oninput="updateSelectedTime('end-time', this.value);">
-				    <input type="hidden" name="endTime" id="endTime">
+				    <label for="customEndTimeRange" class="form-label text-light" style="margin-right: 10px;">종료 시간 : ${ lolMatchingBoard.endTime }</label><span id="end-time-value"></span>
+				    
 				</div>
 
 				
@@ -225,23 +223,7 @@
 				});
 			});
 			
-			function updateSelectedTime(timeType, value) {
-			    var selectedTime = document.getElementById(timeType + "-value");
-			    var hours = Math.floor(value);
-			    var minutes = (value % 1) * 60;
-			    var ampm = hours >= 12 ? "오후" : "오전";
-			    var formattedHours = hours % 12 || 12;
-
-			    selectedTime.innerHTML = ampm + " " + formattedHours + ":" + (minutes < 10 ? "0" : "") + Math.round(minutes);
-			    
-			 	// 시작 시간 값을 가져와 hidden_start_time 필드에 설정
-				var startTimeValue = document.getElementById('start-time-value').textContent;
-				document.getElementById('startTime').value = startTimeValue;
-
-				// 종료 시간 값을 가져와 hidden_end_time 필드에 설정
-				var endTimeValue = document.getElementById('end-time-value').textContent;
-				document.getElementById('endTime').value = endTimeValue;
-			}
+			
 			
 			
 			

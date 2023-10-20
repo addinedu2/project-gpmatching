@@ -185,7 +185,17 @@
 												</c:otherwise>
 											</c:choose>
 											</td>
-											<th>${ matchingBoard.startTime } ~ ${ matchingBoard.endTime }</th>
+											<th>
+											<c:choose>
+											<c:when test = "${ empty(matchingBoard.startTime) && empty(matchingBoard.endTime) }">
+											미정
+											</c:when>
+											<c:otherwise>
+											${ matchingBoard.startTime } ~ ${ matchingBoard.endTime }
+											</c:otherwise>
+											</c:choose>
+											
+											</th>
 											<th>
 											<c:choose>
 												<c:when test = "${ matchingBoard.mic eq true}">
@@ -238,14 +248,18 @@
 														data-nickname="${ matchingBoard.nickname }">목록</button>
 											</th>
 											<th>
-												<div class="dropdown dropstart">
+												<div class="dropdown dropstart" >
+													<c:choose>
+													<c:when test = "${ loginuser.nickname eq matchingBoard.nickname }">
 			                                        <a class="text-muted text-primary-hover" href="#" role="button" id="dropdownTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			                                            <i class="icon-xxs" data-feather="more-vertical"></i>
+			                                            <i class="icon-xxs" data-feather="more-vertical" ></i>
 			                                        </a>
 			                                        <div class="dropdown-menu" aria-labelledby="dropdownTask">
 			                                            <a class="dropdown-item" href="lol-edit?boardNo=${matchingBoard.boardNo}">수정</a>
 			                                            <a class="dropdown-item" href="lol-delete?boardNo=${matchingBoard.boardNo}">삭제</a>
 			                                        </div>
+			                                        </c:when>
+			                                        </c:choose>
 			                                    </div>
 											</th>
 											
@@ -831,9 +845,21 @@
 		});
 	});
 
+ 	// 수정 링크를 클릭할 때의 동작
+ 	document.getElementById("dropdownTask-check").addEventListener("click", function() {
+ 	    
+ 		const writerNickname = $(this).data('nickname');
+ 		const loginNickname = "${ loginuser.nickname }"; 
+ 		if (writerNickname === loginNickname) {
+ 	        return;
+ 	    } else {
+ 	        // 권한이 없는 사용자에게 경고 또는 에러 메시지를 표시
+ 	       alert("수정 및 삭제할 권한이 없습니다.");
+ 	       event.preventDefault();
+ 	       	
+ 	    }
+ 	});
 
-
-	
  	function toggleSwitch() {
         // 스위치 상태를 변경하지 않고 기존 상태를 유지
         return false;
