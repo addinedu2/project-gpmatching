@@ -29,8 +29,8 @@ public class AccountServiceImpl implements AccountService {
 	//로그인한 유저 저장
 	public UserDto findLoginUser(UserDto user) {
 
-//		String hashedPasswd = Util.getHashedString(user.getUserPwd(), "SHA-256");
-//		user.setUserPwd(hashedPasswd);
+		String hashedPasswd = Util.getHashedString(user.getUserPwd(), "SHA-256");
+		user.setUserPwd(hashedPasswd);
 
 
 		UserDto loginUser = userMapper.selectUserByIdAnduserPwd(user.getUserId(), user.getUserPwd());
