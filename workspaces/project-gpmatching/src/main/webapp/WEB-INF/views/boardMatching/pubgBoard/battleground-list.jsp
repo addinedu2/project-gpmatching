@@ -79,7 +79,7 @@
 					<!-- card  -->
 					<div class="card">
 						<!-- card header  -->
-						<div class="card-header bg-info py-4" style="display: flex; align-items: center; justify-content: space-between;">
+						<div class="card-header bg-gray-800 py-4" style="display: flex; align-items: center; justify-content: space-between;">
 						    <div style="display: flex; align-items: center;">
 						        <img src="/project-gpmatching/resources/assets/images/pubg/pubg_logo_1.png" height="88px">
 						    </div>
