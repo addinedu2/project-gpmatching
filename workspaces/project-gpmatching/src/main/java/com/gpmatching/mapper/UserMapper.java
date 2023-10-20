@@ -29,7 +29,7 @@ public interface UserMapper {
              + "from User "
 			+ "where userId = #{userId} and userPwd = #{userPwd} and deletedUser = false ")
 	UserDto selectUserByIdAnduserPwd(@Param("userId") String userId, @Param("userPwd") String userPwd);
-	
+		
 
 
 	//로그인 중복검사

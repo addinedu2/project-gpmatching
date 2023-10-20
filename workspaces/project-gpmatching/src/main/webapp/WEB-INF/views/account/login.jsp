@@ -136,6 +136,7 @@
 	var loginCheck = document.getElementById('loginCheck');
 	var idField = document.getElementById('userId');
 		alert("로그인 실패 : 아이디 또는 패스워드가 일치하지 않습니다.");
+		$('#userPwd').focus();
 		loginCheck.innerHTML = '아이디와 비밀번호가 일치하지 않습니다.';
 			   loginCheck.style.color = 'red';
 			   idField.value = '<%= request.getAttribute("userId") %>'
@@ -153,7 +154,7 @@
 	function checkUserInfo(){
 	   var userId = idField.value;
 	   var userPwd = passwordField.value;
-	  
+	   
 	   if(userId.trim() === '' || userPwd.trim() === ''){
 		   alert("아이디와 비밀번호를 입력해주세요.")
 		   loginCheck.innerHTML = '아이디와 비밀번호를 입력해주세요.';
